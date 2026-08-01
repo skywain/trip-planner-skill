@@ -7,60 +7,67 @@ the sample trip — the deliverable always follows the user's own language.
 
 ## §city-block — what each city researcher returns (fan-out or sequential)
 
-Return exactly this structure so blocks merge cleanly into the final plan:
+Return **plan-JSON fragments, not a parallel dialect**. The assembler inserts your
+`days` array elements into the plan file verbatim — on the first real multi-city run
+the researchers returned YAML with different field names (`theme` for `label`,
+`anchors` beside `timeline`, `book_ahead_list` for checklist rows) and every block had
+to be transcribed by hand, which is exactly where errors breed. The day objects below
+follow `scripts/render_plan.py`'s schema field-for-field.
 
-Field names match the plan JSON the scripts consume, so transcribing a block is a
-rename-free copy: the block's `city` becomes each day's `city`, and a day's `theme`
-becomes the plan JSON's `label`.
-
-```yaml
-city: Kyoto
-dates: 2026-10-04 → 2026-10-07 (3 nights)
-transit_note: bus day-pass ¥700 wins on temple days (est. 4+ rides); ICOCA otherwise
-days:
-  - date: 2026-10-05
-    theme: East Kyoto classics
-    anchors:
-      - name: Kiyomizu-dera
-        hours: "06:00-18:00, no closures that week — official site, checked 2026-08-01"
-        price: "¥500"
-        book_ahead: no
-        cluster: Higashiyama
-      # ≤ pace + 1 anchors per day
-    route_order: Kiyomizu → Sannenzaka → Yasaka → Gion (walkable, one line)
-    food_area: Nishiki side streets (lunch) / Pontocho (dinner)
-    rain_alt: Sanjusangendo (open daily, indoor hall — verified for this date)
-    timing_flags: "last entry Kiyomizu 17:30"
-    sun: "☀ 05:53 / 🌇 17:38"
-    timeline:                      # hour-level, per references/scheduling.md
-      # kind: anchor|hop|meal|free
-      # anchors/meals carry `tag` (pinned|opener|skippable|swap→X); hops carry
-      # `verify` (verified|est) — never mix the two, or parallel blocks merge dirty
-      - {t: "09:00-11:00", what: "Kiyomizu-dera", kind: anchor, price: "¥500",
-         note: "at opening beats the queue; last entry 17:30", tag: opener}
-      - {t: "11:00-11:25", what: "步行 清水寺→二年坂 1.2 km · 25分", kind: hop,
-         link: "https://www.google.com/maps/dir/?api=1&…", verify: est}
-      - {t: "12:00-13:15", what: "lunch · Nishiki side streets", kind: meal,
-         tag: "swap→Pontocho"}
-      - {t: "13:15-13:45", what: "地铁 乌丸线(往竹田方向) 4站/9分 ¥260 · 四条→京都 · 出口2",
-         kind: hop, link: "https://www.google.com/maps/dir/?api=1&…", verify: verified}
-    late_cut: "running >1 h late → drop Yasaka Shrine"
-    travel_day: false          # true on a base-change day — rendered differently
-    day_map: "https://www.google.com/maps/dir/?api=1&…&waypoints=…"  # route_tools links
-    ribbon: "清水寺 →步行10′→ 高台寺 →步行5′→ 八坂神社 →巴士25′→ 银阁寺"
-    walking_km: 5.4   # HONEST total: check's figure ×1.3 + strolls + in-venue —
-                      # never the raw check number, which understates it several-fold
-    stops: [{name: 清水寺, query: "Kiyomizu-dera, Kyoto, Japan"},
-            {name: 银阁寺, query: "...", mode: transit}, ...]
-                      # mirrors this day's anchors + modelled strolls in visit order;
-                      # every map artifact is computed from it. `mode` marks a ridden
-                      # hop so it leaves the walking total and gets transit directions
-book_ahead_list:
-  - {item: "...", lead_time: "...", where: official|Klook|GYG, note: "..."}
-unverified:
-  - "anything that survived 2 searches unverified"
-searches_used: 7   # must be ≤ 8
+```json
+{
+ "days": [
+  {"date": "2026-10-05", "city": "Kyoto", "label": "East Kyoto classics",
+   "sun": "☀ 05:53 / 🌇 17:38",
+   "travel_day": false,
+   "rain_alt": "Sanjusangendo (open daily, indoor — closure-checked for THIS date)",
+   "late_cut": "running >1 h late → drop Yasaka Shrine",
+   "ribbon": "清水寺 →步行10′→ 八坂神社 →巴士25′→ 银阁寺",
+   "walking_km": {"total": 5.4, "how": "on-foot 2.4×1.3 + 散步 1.5 + 馆内 ~0.8"},
+   "timeline": [
+    {"t": "09:00-11:00", "what": "清水寺", "kind": "anchor", "price": "¥500",
+     "note": "开门即到避人流;最晚入场 17:30 — 官网核 2026-08-01", "tag": "opener"},
+    {"t": "11:00-11:25", "what": "步行 清水寺→二年坂 1.2 km · 25分", "kind": "hop",
+     "verify": "est"},
+    {"t": "12:00-13:15", "what": "午餐 · 锦市场周边", "kind": "meal",
+     "tag": "swap→先斗町"},
+    {"t": "13:15-13:45", "what": "地铁 乌丸线(往竹田方向) 4站/9分 ¥260 · 四条→京都 · 出口2",
+     "kind": "hop", "verify": "verified"},
+    {"t": "15:55", "what": "JAL 起飞 → …", "kind": "hop", "verify": "verified",
+     "map": false}
+   ],
+   "stops": [
+    {"name": "清水寺", "query": "Kiyomizu-dera, Kyoto, Japan"},
+    {"name": "银阁寺", "query": "Ginkaku-ji, Kyoto, Japan", "mode": "transit"}
+   ]}
+ ],
+ "hotels": [
+  {"base": "Kyoto 3 晚", "area": "四条乌丸", "why": "…",
+   "options": [{"name": "…", "band": "…", "link": "…带日期深链…"}]}
+ ],
+ "tour_options": [
+  {"name": "…", "price": "…含单房差/门票包/非居民费/小费口径…", "schedule": "班期 —
+    静态可核则给核实结论,JS 日历给链接标 unverified", "pickup": "…", "link": "…"}
+ ],
+ "checklist_items": [
+  {"item": "…", "deadline": "…", "price": "…", "link": "…", "note": "…"}
+ ],
+ "unverified": ["anything that survived 2 searches unverified"],
+ "searches_used": 7
+}
 ```
+
+Field discipline (the merge breaks without it):
+- `timeline` rows: `kind` = anchor|hop|meal|free;anchors/meals carry `tag`
+  (pinned|opener|skippable|swap→X);hops carry `verify` (verified|est);flight/rail
+  hops already covered by the legs table carry `"map": false`. Never mix tag/verify.
+- N mapped `stops` ⇒ N−1 hop rows without `map:false` — that alignment is what lets
+  `links --write` place every URL automatically.
+- `walking_km` is the honest total (`{"total", "how"}` form preferred).
+- Do NOT run geocoding — the assembler runs route_tools once, centrally (five agents
+  in parallel would break Nominatim's 1 req/s policy).
+- Verified facts carry source + as-of date in `note`; everything else is `est` and,
+  if load-bearing, also listed in `unverified`.
 
 ## Final deliverable
 
@@ -78,7 +85,7 @@ order:
    the rest. Each row: item · deadline/lead time · price + as-of date · deep link ·
    checkbox.
 4. **Flights & intercity table**: pick + backup per leg with all Phase 3 fields.
-5. **Day-by-day cards**: one card per day — header (date/city/theme + sunrise/sunset),
+5. **Day-by-day cards**: one card per day — header (date/city/label + sunrise/sunset),
    then the hour-level timeline as a two-column table: 时间 · 内容. Hops are their own
    rows, styled dimmer, written in the canonical hop-row format from navigation.md
    (mode, line + direction, stops/duration, fare, boarding→alighting station, exit

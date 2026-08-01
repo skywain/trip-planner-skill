@@ -15,6 +15,11 @@ deep link marked "verify on click". Statuses marked ✓ were live-tested 2026-08
   `--nights`. Prices are Google's cache — comparison grade; the deep link printed with
   each row is the source of truth. It sleeps between fetches and retries once on the
   transient throttling Google does to repeat callers.
+  **Cheapest-by-price hides usable flights**: the low rows are red-eyes and next-day
+  arrivals. For any leg feeding a pinned event or a tour pickup window, scan with
+  `--arr-before HH:MM` (and `--dep-after`) — "cheapest USABLE flight" is the number
+  the plan needs (live case: CMH→SLC sticker floor $132 was an overnight horror;
+  the usable floor was $207).
 - **Browser**: `https://www.google.com/travel/flights?q=` + URL-encoded natural
   language, e.g. `Flights from PVG to KIX on 2026-10-02 returning from NRT 2026-10-14
   for 2 adults` — the q= parser understands open-jaw phrasing. Currency follows the
@@ -23,11 +28,35 @@ deep link marked "verify on click". Statuses marked ✓ were live-tested 2026-08
   in the browser pane. Also check one LCC direct (Spring 春秋, Peach, Scoot, AirAsia…).
 - **Never** curl airline/OTA sites — instant bot-block, wasted call.
 
+## Group tours(跟团)— when the traveller prefers not to self-drive
+The tour product replaces flights+car+hotel for its days, so research it FIRST — its
+schedule dictates the surrounding legs, not the other way around.
+- **Where to look**: operator sites first (prices/terms authoritative), then
+  aggregators (Viator = often the only statically readable price; GetYourGuide;
+  TakeTours), and Chinese-language operators (走四方 usitrip / 途风 Tours4fun / 悦禾
+  joytrav) for 中文团 — often cheaper, pages usually JS-only.
+- **班期 is life-or-death**: multi-day tours run fixed weekdays, and the product you
+  want may simply not exist (learned live: no 2-day Yellowstone tour departs SLC at
+  all — shortest is 3-day, and only a "Day 1 = airport-pickup day" 4-day structure
+  preserved the onward flight). JS booking calendars cannot be verified statically:
+  ship the calendar link + mark 班期 unverified, never guess it.
+- **Price anatomy** (quote ALL of it, not the sticker): double-occupancy base;
+  single supplement ×1.3-1.6 or listed at checkout; mandatory fee package
+  ($90-140 门票包 on US park tours); **non-resident surcharges** (US parks +$100/park
+  from 2026, operator-collected); driver-guide tips $10-15/person/day (often cash).
+- **Structure quirks to check**: which day is a pickup/dropoff day (not a touring
+  day); what time it returns on the last day (operators state "book flights after
+  X:00" — obey it); overnight-bag-only luggage rules on 2-day tours; whether the
+  advertised sight is a stop or a drive-by.
+
 ## Hotels
 No good keyless API exists — use browser + deep links; recommend neighborhoods and
 2-3 properties with a price band, and let the user's click show live prices.
-- Google Hotels (browser): https://www.google.com/travel/hotels — search the city, set
-  dates, read the price histogram for the band.
+- Google Hotels (browser): https://www.google.com/travel/hotels — search the city,
+  **set the dates in the page UI and confirm they display before reading prices**:
+  URL date parameters are silently ignored, and the default view shows near-term
+  base rates that look plausible (caught live — the first read was 8月 prices
+  wearing a 9月 URL).
 - Booking deep link with dates baked in:
   `https://www.booking.com/searchresults.html?ss={CITY}&checkin={YYYY-MM-DD}&checkout={YYYY-MM-DD}&group_adults={N}&order=review_score_and_price`
 - Agoda often beats Booking in Asia — search in browser, copy property links.

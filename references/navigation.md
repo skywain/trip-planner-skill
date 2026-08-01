@@ -21,7 +21,7 @@ together with scheduling.md before Phase 4 timeline assembly.
                         {"name": "锦市场", "lat": 35.005, "lon": 135.764}]}]}
    ```
    `query` defaults to `name`; pre-filled `lat`/`lon` skip geocoding; `label` is the
-   same thing the city-block calls `theme`. Add `"mode": "walk"|"transit"` to a stop
+   day's theme line, same field name everywhere. Add `"mode": "walk"|"transit"` to a stop
    whenever the hop **into** it is ridden (or walked against the distance guess) —
    1.4 km can be a two-stop metro ride or a pleasant walk, and only the plan knows
    which; the field decides both the walking total and which directions the tappable
@@ -77,10 +77,11 @@ Walking hops shorten to `步行 {from}→{to} {km} · {min}分`.
 
 Exit numbers matter: in Tokyo/Seoul/Taipei the wrong exit costs 10 minutes. Capture
 the exit when you browser-verify a hop. Every hop carries a verification marker —
-`(verified)` or `(est.)` — in its own `verify` field in the city-block YAML
-(`verify: verified|est`), never mixed into the `tag` field, which holds only
-pinned/opener/skippable/swap→X. Keeping them separate is what lets parallel city
-blocks merge without hand-editing.
+`(verified)` or `(est.)` — in its own `verify` field in the day object
+(`"verify": "verified"|"est"`), never mixed into the `tag` field, which holds only
+pinned/opener/skippable/swap→X; flight/rail hops covered by the legs table carry
+`"map": false` so `links --write` skips them. Keeping these separate is what lets
+parallel city blocks merge without hand-editing.
 
 ## Verify vs estimate
 
@@ -123,3 +124,10 @@ never call Nominatim in parallel and never strip the throttle. Resolved stops ar
 cached, so re-running is nearly free; misses are deliberately **not** cached, because
 a miss is almost always a fixable query string and caching it would make the retry
 impossible.
+
+Expect **national-park POIs to miss** (Old Faithful, Artist Point, Tunnel View…):
+OSM names them inconsistently. For world-famous landmarks, hand-filling coordinates
+from general knowledge is acceptable — the schematic map and KML need ±100 m, not
+survey grade — mark the day's map `est` and only chase exact coordinates when a hop
+calculation actually depends on them. City venues stay on the re-query-then-browser
+path.

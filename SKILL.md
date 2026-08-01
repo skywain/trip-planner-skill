@@ -152,9 +152,14 @@ date, bag included?, refund/change class, deep link. Output 1 pick + 1 backup pe
 ## Phase 4 — City day-plans
 
 When ≥3 cities and subagents are available, fan out one agent per city; each prompt
-must include: the dates, the user's interests + pace, **search budget ≤8**, and the
-exact return format from references/output-template.md §city-block. Otherwise do the
-cities sequentially with the same structure.
+must include: the dates, the user's interests + pace, **search budget ≤8**, an
+explicit **"do not run geocoding"** line (parallel agents would break Nominatim's
+1 req/s policy — the assembler geocodes once, centrally), and the exact return
+format from references/output-template.md §city-block — **plan-JSON day objects,
+insertable verbatim**, not a summary. Otherwise do the cities sequentially with the
+same structure. When the user prefers group tours, the city agent's first job is
+finding real in-sale products with departure schedules (data-sources.md §Group
+tours) — the tour's schedule then dictates the surrounding legs.
 
 Per city:
 1. Anchors per interest-fit, ≤ pace + 1 optional per day. Cluster by geography per day;

@@ -114,6 +114,18 @@ packed ×0.8, kids or mobility flags ×1.3.
 - **Departure day** — zero sightseeing unless the flight leaves after 18:00. Work
   backwards from the airport-arrival deadline (3 h international) through the real
   city→airport transfer time, and put the luggage solution in writing again.
+- **Tour day (跟团日)** — the pickup is `[pinned]` with a 10-15 min margin, and the
+  operator owns the clock: no `late_cut` authority inside the tour, so the day's
+  degradation plan covers only what the traveller controls (meals, the evening, the
+  next morning's buffer). The evening BEFORE a tour day carries its own pins: buy
+  provisions, pack per the tour's luggage rule (2-day tours are often
+  overnight-bag-only), sleep early enough for the pickup. A "free activity" block
+  inside a tour = the bus waits for latecomers — schedule an alarm, not an itinerary.
+- **Dateline day** — a westbound trans-Pacific return to East Asia consumes **two
+  calendar days** (depart HNL Oct 5 → land Oct 7); eastbound you land the same day
+  you left. Lock the return leg FIRST and allocate the final city's days from it —
+  planned the other way round, the dateline silently deletes a day from the last
+  stop (learned live: it cost Hawaii its circle-island day).
 
 ## Traps that break otherwise-correct timelines
 
