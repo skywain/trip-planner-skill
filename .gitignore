@@ -15,3 +15,6 @@ venv/
 
 # macOS
 .DS_Store
+
+# Personal trip data — never committed
+trips/
