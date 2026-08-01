@@ -1,0 +1,258 @@
+{
+ "trip": "日本关西 12 天 (渲染测试)",
+ "meta": {
+  "dates": "2026-10-01 → 2026-10-13",
+  "party": "2 adults",
+  "route": "上海 → 东京 → 京都 → 大阪 → 上海 (open-jaw)",
+  "budget_total": "¥18,500 / 人",
+  "fx": "1 CNY = 23.73 JPY (ECB via frankfurter.dev, 2026-07-31)",
+  "generated": "2026-08-01",
+  "self_check": "自检: 发现并修复 6 处"
+ },
+ "decisions": [
+  "开口程 KIX 进 / NRT 出 —— 省掉一天回头路,票价差 <$40",
+  "不买全国 JR Pass:黄金线单程 Smart-EX 合计更便宜(已算)",
+  "京都住 3 晚而非 2 晚 —— 换酒店每次损失半天"
+ ],
+ "checklist": [
+  {
+   "item": "吉卜力美术馆门票",
+   "deadline": "9月10日 10:00 JST 开售",
+   "price": "¥1000",
+   "link": "https://www.ghibli-museum.jp/en/",
+   "note": "开售即抢,售完无补"
+  },
+  {
+   "item": "国际机票 PVG→KIX",
+   "deadline": "尽早,价格随舱位上涨",
+   "price": "$636",
+   "link": "https://www.google.com/travel/flights"
+  },
+  {
+   "item": "可退酒店 (京都)",
+   "deadline": "现在订可退,出发前2-3周复查",
+   "price": "¥900-1400/晚",
+   "link": "https://www.booking.com/searchresults.html?ss=Kyoto",
+   "link_text": "查看"
+  }
+ ],
+ "legs": [
+  {
+   "type": "国际航班",
+   "date": "2026-10-01",
+   "carrier": "China Southern",
+   "from": "PVG",
+   "to": "KIX",
+   "dep": "18:20",
+   "arr": "次日 13:40",
+   "price": "$636",
+   "bags": "含23kg",
+   "link": "https://www.google.com/travel/flights",
+   "backup": "Cathay $665 / 10h45m 更快"
+  },
+  {
+   "type": "新干线",
+   "date": "2026-10-07",
+   "carrier": "JR Nozomi",
+   "from": "京都",
+   "to": "东京",
+   "dep": "09:15",
+   "arr": "11:31",
+   "price": "¥13,320",
+   "link": "https://smart-ex.jp/",
+   "note": "指定席,提前1-3天足够"
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-10-05",
+   "city": "京都",
+   "label": "东山经典线",
+   "sun": "☀ 05:53 / 🌇 17:38",
+   "walking_km": {
+    "total": 5.6,
+    "how": "步行段 2.4 ×1.3 + 鸭川散步 1.5 + 馆内 ~1.0"
+   },
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=34.994303%2C135.784439&destination=35.014167%2C135.748333&travelmode=walking&waypoints=35.003611%2C135.778611%7C35.005024%2C135.765570",
+   "rain_alt": "三十三间堂(全年无休 — 已核实)",
+   "late_cut": "迟到 >1h → 砍八坂神社",
+   "timeline": [
+    {
+     "t": "09:00-11:00",
+     "what": "清水寺",
+     "kind": "anchor",
+     "price": "¥500",
+     "note": "开门即到避人流;最晚入场 17:30",
+     "tag": "opener"
+    },
+    {
+     "t": "11:00-11:20",
+     "what": "步行 清水寺→八坂神社(经三年坂/二年坂) 1.2 km · 15分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.994303%2C135.784439&destination=35.003611%2C135.778611&travelmode=walking"
+    },
+    {
+     "t": "11:20-11:50",
+     "what": "八坂神社",
+     "kind": "anchor",
+     "price": "免费",
+     "tag": "skippable"
+    },
+    {
+     "t": "11:50-12:10",
+     "what": "步行 八坂神社→锦市场 1.2 km · 15分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.003611%2C135.778611&destination=35.005024%2C135.765570&travelmode=walking"
+    },
+    {
+     "t": "12:10-13:20",
+     "what": "午餐 · 锦市场周边",
+     "kind": "meal",
+     "tag": "swap→先斗町"
+    },
+    {
+     "t": "13:20-13:50",
+     "what": "地铁 乌丸线(往竹田方向) 4站/9分 ¥260 · 四条→二条城前 · 出口2",
+     "kind": "hop",
+     "verify": "verified",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.005024%2C135.765570&destination=35.014167%2C135.748333&travelmode=transit"
+    },
+    {
+     "t": "14:00-16:00",
+     "what": "二条城",
+     "kind": "anchor",
+     "price": "¥1300",
+     "note": "最晚入场 16:00,14:00 到达 ✓"
+    },
+    {
+     "t": "16:30-17:30",
+     "what": "鸭川河岸散步 → 黄金时刻",
+     "kind": "free",
+     "tag": "skippable"
+    }
+   ],
+   "stops": [
+    {
+     "name": "清水寺",
+     "lat": 34.994303,
+     "lon": 135.784439
+    },
+    {
+     "name": "八坂神社",
+     "lat": 35.003611,
+     "lon": 135.778611
+    },
+    {
+     "name": "锦市场",
+     "lat": 35.005024,
+     "lon": 135.76557
+    },
+    {
+     "name": "二条城",
+     "lat": 35.014167,
+     "lon": 135.748333,
+     "mode": "transit"
+    }
+   ],
+   "ribbon": "清水寺 →步行15′→ 八坂神社 →步行15′→ 锦市场 →地铁9′→ 二条城",
+   "hop_links": [
+    "https://www.google.com/maps/dir/?api=1&origin=34.994303%2C135.784439&destination=35.003611%2C135.778611&travelmode=walking",
+    "https://www.google.com/maps/dir/?api=1&origin=35.003611%2C135.778611&destination=35.005024%2C135.765570&travelmode=walking",
+    "https://www.google.com/maps/dir/?api=1&origin=35.005024%2C135.765570&destination=35.014167%2C135.748333&travelmode=transit"
+   ]
+  },
+  {
+   "date": "2026-10-07",
+   "city": "京都 → 东京",
+   "label": "移动日",
+   "travel_day": true,
+   "sun": "☀ 05:55 / 🌇 17:35",
+   "late_cut": "行李未寄存则取消唯一景点",
+   "timeline": [
+    {
+     "t": "08:00-09:00",
+     "what": "退房 · 行李存京都站大型投币柜(备选:酒店寄存后折返)",
+     "kind": "free",
+     "note": "大柜峰季 10:00 前满",
+     "tag": "pinned"
+    },
+    {
+     "t": "09:15-11:31",
+     "what": "新干线 のぞみ(往东京方向) ¥13,320 · 京都→东京 · 中央口",
+     "kind": "hop",
+     "verify": "verified",
+     "link": "https://smart-ex.jp/"
+    },
+    {
+     "t": "12:00-13:00",
+     "what": "午餐 · 东京站一番街",
+     "kind": "meal"
+    },
+    {
+     "t": "15:00",
+     "what": "入住酒店(移动日只排 1 个景点)",
+     "kind": "free",
+     "tag": "pinned"
+    }
+   ],
+   "stops": []
+  }
+ ],
+ "hotels": [
+  {
+   "base": "京都 3 晚",
+   "area": "四条乌丸 / 京都站北",
+   "why": "地铁乌丸线直达、夜间安全、拖箱路面平整",
+   "options": [
+    {
+     "name": "示例酒店 A",
+     "band": "¥900-1200/晚",
+     "link": "https://www.booking.com/searchresults.html?ss=Kyoto&checkin=2026-10-04&checkout=2026-10-07"
+    },
+    {
+     "name": "示例酒店 B",
+     "band": "¥1300-1600/晚",
+     "link": "https://www.booking.com/searchresults.html?ss=Kyoto"
+    }
+   ]
+  }
+ ],
+ "budget": [
+  {
+   "cat": "国际机票",
+   "per_person": "¥4,600",
+   "total": "¥9,200",
+   "note": "南航,含行李"
+  },
+  {
+   "cat": "住宿",
+   "per_person": "¥5,400",
+   "total": "¥10,800",
+   "note": "11 晚均价"
+  },
+  {
+   "cat": "城际交通",
+   "per_person": "¥1,300",
+   "total": "¥2,600",
+   "note": "新干线单程×2"
+  },
+  {
+   "cat": "缓冲 (12%)",
+   "per_person": "¥1,980",
+   "total": "¥3,960",
+   "note": "汇率与涨价"
+  }
+ ],
+ "brief": {
+  "visa": "中国护照赴日需签证,单次约 15 个工作日,交由代办",
+  "holidays": "10月12日 体育之日(周一)— 景点人流与住宿上涨",
+  "weather": "10月京都 14-24°C,降雨概率中等,日落约 17:38",
+  "money": "小店与神社仍需现金,7-11 ATM 可取",
+  "connectivity": "eSIM 约 ¥50/10天"
+ },
+ "unverified": [
+  "八坂神社夜间点灯时间未核实 — 到场确认"
+ ]
+}

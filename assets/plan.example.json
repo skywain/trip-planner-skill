@@ -1,0 +1,107 @@
+{
+ "_readme": "Runnable schema example — copy it to plan.geo.json, replace everything, keep the shape. The .geo stem matters: geocode then edits the file in place, so check/links/kml/render all read one file. The same file feeds scripts/route_tools.py (days[].stops) and scripts/render_plan.py (everything else). INVARIANT: days[].stops mirrors that day's anchors + modelled strolls in visit order — the maps and the walking total are computed from it. Two stops deliberately ship without lat/lon so `check` reports them and exits 2 until you run `geocode`; that is the intended first step, not a defect. All prices, hours and links are PLACEHOLDERS: never ship them unverified.",
+ "trip": "Example trip — 2 days",
+ "meta": {
+  "dates": "2026-10-05 → 2026-10-07",
+  "party": "1 adult",
+  "route": "City A → City B",
+  "budget_total": "PLACEHOLDER",
+  "fx": "1 CNY = 23.73 JPY (ECB via frankfurter.dev, 2026-07-31)",
+  "generated": "2026-08-01",
+  "self_check": "自检: 发现并修复 N 处"
+ },
+ "decisions": [
+  "One line per decision you made on the traveller's behalf — each one vetoable"
+ ],
+ "checklist": [
+  {"item": "Timed-entry ticket X", "deadline": "opens 10th of prior month",
+   "price": "PLACEHOLDER", "link": "https://example.org/tickets",
+   "note": "sells out same day"},
+  {"item": "Re-confirm opening hours + fees", "deadline": "2 weeks before travel",
+   "note": "dates >3 months out only have a seasonal pattern, not published hours"}
+ ],
+ "legs": [
+  {"type": "international flight", "date": "2026-10-05", "carrier": "PLACEHOLDER",
+   "from": "AAA", "to": "BBB", "dep": "18:20", "arr": "next day 13:40",
+   "price": "PLACEHOLDER", "bags": "23 kg included",
+   "link": "https://www.google.com/travel/flights", "backup": "second-best option"}
+ ],
+ "days": [
+  {"date": "2026-10-05", "city": "Kyoto", "label": "East Kyoto",
+   "sun": "☀ 05:53 / 🌇 17:38",
+   "walking_km": {"total": 5.4,
+                  "how": "on foot 1.7 ×1.3 + 散步 1.5 + 馆内 ~1.7"},
+   "ribbon": "Anchor 1 →步行10′→ Anchor 2 →步行8′→ lunch →巴士25′→ Anchor 3 →步行→ stroll",
+   "day_map": "PLACEHOLDER — the DAY CHAIN url from route_tools links",
+   "rain_alt": "indoor alternative — closure-checked for THIS date",
+   "late_cut": "running >1 h late → cut the stroll, then Anchor 2",
+   "timeline": [
+    {"t": "08:00-09:15", "what": "Anchor 1", "kind": "anchor", "price": "PLACEHOLDER",
+     "note": "opens 06:00, first hour is empty", "tag": "opener"},
+    {"t": "09:15-09:45", "what": "步行 Anchor 1→Anchor 2 0.7 km · 10分(+缓冲)",
+     "kind": "hop", "verify": "est",
+     "link": "PLACEHOLDER — per-hop url from route_tools links"},
+    {"t": "09:45-10:45", "what": "Anchor 2", "kind": "anchor", "price": "PLACEHOLDER",
+     "note": "last entry 17:00"},
+    {"t": "10:45-11:00", "what": "步行 Anchor 2→lunch area 0.5 km · 8分", "kind": "hop",
+     "verify": "est", "link": "PLACEHOLDER"},
+    {"t": "11:00-12:15", "what": "lunch · food area, not a named restaurant",
+     "kind": "meal", "tag": "swap→second food area"},
+    {"t": "12:15-13:00",
+     "what": "巴士 203(往銀閣寺道) ~25分 ¥230 · 祇園→銀閣寺道 · 下车步行8分",
+     "kind": "hop", "verify": "est", "link": "PLACEHOLDER"},
+    {"t": "13:00-14:30", "what": "Anchor 3", "kind": "anchor", "price": "PLACEHOLDER"},
+    {"t": "14:30-14:40", "what": "步行 Anchor 3→stroll start 0.6 km · 10分",
+     "kind": "hop", "verify": "est", "link": "PLACEHOLDER"},
+    {"t": "14:40-15:40", "what": "stroll ~1.5 km — modelled as a stop so it counts",
+     "kind": "free", "tag": "skippable"}
+   ],
+   "stops": [
+    {"name": "Anchor 1", "query": "Kiyomizu-dera, Kyoto, Japan",
+     "lat": 34.994303, "lon": 135.784439},
+    {"name": "Anchor 2", "query": "Kodai-ji, Kyoto, Japan"},
+    {"name": "lunch area", "query": "八坂神社, 京都市東山区"},
+    {"name": "Anchor 3", "lat": 35.0269, "lon": 135.7984, "mode": "transit"},
+    {"name": "stroll midpoint", "lat": 35.0227, "lon": 135.7949}
+   ]},
+  {"date": "2026-10-06", "city": "Kyoto → Osaka", "label": "移动日",
+   "travel_day": true,
+   "late_cut": "bags not stored → drop the single anchor",
+   "timeline": [
+    {"t": "08:00-09:00",
+     "what": "checkout · bags to station lockers (fallback: hotel storage + loop back)",
+     "kind": "free", "note": "large lockers gone by mid-morning in peak season",
+     "tag": "pinned"},
+    {"t": "09:15-11:31", "what": "特急/新干线 (往…方向) · A→B · 出口N", "kind": "hop",
+     "verify": "verified", "note": "verified timetable keeps its exact minutes",
+     "link": "PLACEHOLDER"},
+    {"t": "15:00", "what": "check-in — a move day carries at most one anchor",
+     "kind": "free", "tag": "pinned"}
+   ],
+   "stops": []}
+ ],
+ "hotels": [
+  {"base": "Kyoto 3 nights", "area": "neighborhood name",
+   "why": "on the line you actually use · safe after dark · flat pavement for luggage",
+   "options": [
+    {"name": "Property 1", "band": "PLACEHOLDER/night",
+     "link": "https://www.booking.com/searchresults.html?ss=Kyoto&checkin=2026-10-05&checkout=2026-10-08"}
+   ]}
+ ],
+ "budget": [
+  {"cat": "flights", "per_person": "PLACEHOLDER", "total": "PLACEHOLDER",
+   "note": "as of 2026-08-01"},
+  {"cat": "buffer (10-15%)", "per_person": "PLACEHOLDER", "total": "PLACEHOLDER",
+   "note": "FX drift + price moves"}
+ ],
+ "brief": {
+  "visa": "type · fee · processing days · passport-validity rule",
+  "holidays": "collisions from date.nager.at + local festivals",
+  "weather": "temps · rain odds · daylight",
+  "money": "card vs cash norms",
+  "connectivity": "eSIM ballpark"
+ },
+ "unverified": [
+  "everything that survived two searches unverified goes here, visibly"
+ ]
+}

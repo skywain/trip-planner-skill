@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Generated while planning a real trip — the plan JSON is yours, not the repo's.
+# Anything under examples/ is deliberately tracked (see the negations below).
+/geocache.json
+/plan.geo.json
+/trip.html
+/trip.kml
+**/geocache.json
+!examples/**
+
+# macOS
+.DS_Store

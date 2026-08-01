@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document>
+<name>日本关西 12 天 (渲染测试)</name>
+<Folder><name>Day 1 2026-10-05 — 东山经典线</name>
+<Placemark><name>1. 清水寺</name><Point><coordinates>135.784439,34.994303,0</coordinates></Point></Placemark>
+<Placemark><name>2. 八坂神社</name><Point><coordinates>135.778611,35.003611,0</coordinates></Point></Placemark>
+<Placemark><name>3. 锦市场</name><Point><coordinates>135.765570,35.005024,0</coordinates></Point></Placemark>
+<Placemark><name>4. 二条城</name><Point><coordinates>135.748333,35.014167,0</coordinates></Point></Placemark>
+<Placemark><name>Day 1 route</name><Style><LineStyle><color>ff0000ff</color><width>3</width></LineStyle></Style><LineString><coordinates>135.784439,34.994303,0 135.778611,35.003611,0 135.765570,35.005024,0 135.748333,35.014167,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 2 2026-10-07 — 移动日</name>
+</Folder>
+</Document></kml>
