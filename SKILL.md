@@ -86,6 +86,13 @@ pace (2/3/4 anchors per day) · passport nationality (visa!) · locked must-sees
   shutdowns of headliners, and Ramadan dates in Muslim-majority destinations (daytime
   food logistics, shifted hours, packed evenings). A local festival closes streets and
   triples hotel rates while every holiday feed says the day is ordinary.
+- **User-named events get verified before anything else is planned.** A match,
+  concert or festival in the request is the hardest pin in the whole trip — confirm
+  team/venue/city, date, local kickoff time and ticket on-sale status FIRST, because
+  the skeleton hangs off it ("Columbus vs Miami" is a home game in Ohio, and a route
+  built around the wrong coast is a 13-day bug). US listings put the home side first
+  in "A vs B" — but verify, never parse. Kickoff times can move for TV ⚡: re-check
+  close to travel.
 - **Weather for those dates**: Open-Meteo recipes in data-sources.md (first call can
   take ~10 s). One line: temps, rain odds, daylight.
 - **Money & connectivity one-liners**: card vs cash norms, eSIM ballpark, plug type.
@@ -125,6 +132,19 @@ pace (2/3/4 anchors per day) · passport nationality (visa!) · locked must-sees
   shoestring budgets.
 - Price on the **operator's** site — resellers add fees. Country-quick-notes.md lists
   the operators and their booking-window rules (high-speed fares rise as buckets sell).
+
+**Driving legs (parks and car-first destinations):**
+- A national park without a car is a bus-tour compromise — decide that explicitly with
+  the user, never by default. A rental is its own leg: pick-up/drop-off at airports,
+  one-way drop fees noted, and the airport↔park drive budgeted honestly (Bozeman→Old
+  Faithful ≈ 2.5 h, Fresno→Yosemite Valley ≈ 2.5 h — the map's "nearby airport" is
+  half a day of driving).
+- Record per driving leg: pick-up/drop point + counter hours, car class, price +
+  as-of date, insurance note, fuel estimate, park entrance fee (per **vehicle** in the
+  US; 3+ parks → the annual pass wins), and the license requirement for the driver's
+  passport (see country notes).
+- Gateway towns run out of cars and rooms in season — the rental and the first night
+  go on the booking checklist, not the "later" pile.
 
 **Record for every leg**: carrier, date, dep/arr local times, price + currency + as-of
 date, bag included?, refund/change class, deep link. Output 1 pick + 1 backup per leg.

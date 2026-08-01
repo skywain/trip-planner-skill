@@ -44,9 +44,19 @@ point, not a source: it saves searches by telling you what to search for.
 - August: locals on holiday — Paris/Madrid partially shut, coasts jammed ⚡.
 
 ## USA
-- ESTA/visa lead time ⚡; distances are the trap — one region per 10-15 days.
-- Car essential outside NYC/SF/Boston/Chicago/DC; city-center parking $40-70/night.
-- National parks: several need timed-entry reservations ⚡ (recreation.gov).
+- Entry: VWP/ESTA covers treaty passports only — **Chinese passports need a B1/B2
+  visa** (Beijing interview waits run weeks-months ⚡) **plus current EVUS enrollment**
+  on 10-year visas ⚡. On any US trip, visa status is the first intake question.
+- Driving: China has no IDP treaty — carry the license + a notarized English
+  translation; major rental chains and most states accept that (verify the specific
+  state ⚡). Car essential outside NYC/SF/Boston/Chicago/DC; city parking $40-70/night.
+- Parks: entrance fees are per **vehicle** (~$35); 3+ parks → America the Beautiful
+  annual pass ($80) wins. Timed-entry policy changes per park per year ⚡ (Yosemite
+  dropped its system for 2026; Yellowstone has never had one — check each park).
+  In-park lodges and gateway towns sell out and close seasonally ⚡.
+- Sports tickets: team site first, then SeatGeek/StubHub resale — marquee fixtures
+  (Messi, playoffs) run 3-10× ⚡; kickoff times can shift for TV after on-sale ⚡.
+- Distances are the trap — one region per 10-15 days.
 
 ## General route math
 - 10-15 days ≈ 8-13 usable days ≈ 2-4 bases; 2-3 bases beats 4 for almost everyone.
