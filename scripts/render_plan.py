@@ -24,7 +24,12 @@ Schema (all keys optional except days[].date):
            "travel_day": true,
            "timeline": [{"t","what","kind":"anchor|hop|meal|free","price","note",
                          "tag":"pinned|opener|skippable|swap→X",
-                         "verify":"verified|est","link"}],
+                         "verify":"verified|est","link",
+                         "map": false}],   // map:false = flight/rail hop covered by
+                                           // legs — excluded from links --write
+           "hop_links": ["url", ...],      // parked by route_tools when rows and
+                                           // mapped hops don't align; rendered as
+                                           // a 逐跳导航 row under the day card
            "stops": [{"name","query","lat","lon"}]}],   // mirrors the timeline's
                                                         // places, in visit order
  "hotels": [{"base","area","why","options":[{"name","band","link"}]}],
@@ -260,6 +265,10 @@ def render(p):
             foot = []
             if d.get("day_map"):
                 foot.append(link(d["day_map"], "整日路线图"))
+            if d.get("hop_links"):
+                foot.append("逐跳导航: " + " ".join(
+                    link(u, "第{}跳".format(i + 1))
+                    for i, u in enumerate(d["hop_links"])))
             wk = d.get("walking_km")
             if isinstance(wk, dict):
                 foot.append("步行约 {} km<span class=\"note\"> — {}</span>".format(

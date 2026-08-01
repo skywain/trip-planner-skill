@@ -323,12 +323,14 @@ def cmd_links(args):
             print("  {} -> {}  [{} {:.1f} km {}]\n    {}".format(
                 na, nb, mode, km, dur or verdict, url))
         if args.write and hop_urls:
-            # Hop rows in the timeline correspond 1:1, in order, with the
-            # stop-to-stop hops — that is the stops-mirror-the-timeline invariant.
-            # Writing the URLs in removes the single most error-prone manual step
-            # in the whole pipeline (transcribing 180-character links by hand).
+            # Hop rows correspond 1:1, in order, with the stop-to-stop hops — the
+            # stops-mirror-the-timeline invariant. Flight/rail rows already covered
+            # by the legs table carry "map": false and sit outside that invariant
+            # (a day with a flight plus 3 ground hops has 4 hop rows but only 3
+            # mapped hops — learned on the first real multi-city trip).
             rows = [it for it in (day.get("timeline") or [])
-                    if isinstance(it, dict) and it.get("kind") == "hop"]
+                    if isinstance(it, dict) and it.get("kind") == "hop"
+                    and it.get("map") is not False]
             if len(rows) == len(hop_urls):
                 for row, url in zip(rows, hop_urls):
                     row["link"] = url
@@ -336,10 +338,11 @@ def cmd_links(args):
                     len(rows)))
             else:
                 day["hop_links"] = hop_urls
-                print("  ✎ {} hop rows in the timeline vs {} mapped hops — links "
-                      "parked in day['hop_links'] instead; align stops with the "
-                      "timeline to get them placed automatically".format(
-                          len(rows), len(hop_urls)))
+                print("  ✎ {} mappable hop rows vs {} mapped hops — links parked "
+                      "in day['hop_links'] (render_plan shows them as a 逐跳导航 "
+                      "row). To place them on rows: give every stop-to-stop "
+                      "transition its own hop row and mark flight/rail rows "
+                      '"map": false.'.format(len(rows), len(hop_urls)))
         if len(pts) < 2:
             continue
         # Whole-day overview chains. Google ignores waypoints in transit mode (and

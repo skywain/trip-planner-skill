@@ -35,6 +35,36 @@ def price_num(p):
     return int(digits) if digits else 0
 
 
+def clock_min(s):
+    m = re.search(r"(\d{1,2}):(\d{2})\s*(AM|PM)", s or "")
+    if not m:
+        return None
+    h = int(m.group(1)) % 12 + (12 if m.group(3) == "PM" else 0)
+    return h * 60 + int(m.group(2))
+
+
+MONTHS = {m: i + 1 for i, m in enumerate(
+    ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])}
+
+
+def month_day(s):
+    m = re.search(r"([A-Z][a-z]{2})\s+(\d{1,2})", s or "")
+    if not m or m.group(1) not in MONTHS:
+        return None
+    return (MONTHS[m.group(1)], int(m.group(2)))
+
+
+def hhmm(s):
+    m = re.match(r"^(\d{1,2}):(\d{2})$", s)
+    if not m:
+        raise argparse.ArgumentTypeError("time must be HH:MM (24h), e.g. 08:30")
+    v = int(m.group(1)) * 60 + int(m.group(2))
+    if not 0 <= v < 1440:
+        raise argparse.ArgumentTypeError("time out of range")
+    return v
+
+
 def gflights_link(orig, dest, dep, ret=None, adults=1):
     if ret:
         q = "Flights from {} to {} on {} returning {} for {} adults".format(
@@ -61,6 +91,16 @@ def main():
     ap.add_argument("--top", type=int, default=5,
                     help="show N cheapest options per date combo")
     ap.add_argument("--max-fetches", type=int, default=12)
+    # Sorting by price alone surfaces red-eyes and next-day arrivals first — the
+    # cheapest rows are often exactly the flights a schedule can't use. These
+    # windows make "cheapest USABLE flight" a one-command answer.
+    ap.add_argument("--dep-after", type=hhmm, default=None, metavar="HH:MM",
+                    help="keep departures at/after this local time (24h)")
+    ap.add_argument("--dep-before", type=hhmm, default=None, metavar="HH:MM",
+                    help="keep departures at/before this local time")
+    ap.add_argument("--arr-before", type=hhmm, default=None, metavar="HH:MM",
+                    help="keep SAME-DAY arrivals at/before this local time "
+                         "(next-day arrivals are dropped)")
     args = ap.parse_args()
 
     if not args.oneway and not args.nights:
@@ -147,6 +187,34 @@ def main():
                 seen.add(k)
                 deduped.append(f)
         flights = deduped
+
+        if args.dep_after is not None or args.dep_before is not None \
+                or args.arr_before is not None:
+            def in_window(f):
+                dm = clock_min(getattr(f, "departure", ""))
+                if args.dep_after is not None and dm is not None \
+                        and dm < args.dep_after:
+                    return False
+                if args.dep_before is not None and dm is not None \
+                        and dm > args.dep_before:
+                    return False
+                if args.arr_before is not None:
+                    arr = getattr(f, "arrival", "")
+                    md = month_day(arr)
+                    if md is not None and md != (d.month, d.day):
+                        return False          # next-day arrival
+                    am = clock_min(arr)
+                    if am is not None and am > args.arr_before:
+                        return False
+                return True
+            kept = [f for f in flights if in_window(f)]
+            if len(kept) != len(flights):
+                print("  (time window kept {} of {} options)".format(
+                    len(kept), len(flights)))
+            flights = kept
+            if not flights:
+                print("  no options inside the time window — widen it or "
+                      "check the link below")
         level = getattr(res, "current_price", "?")
         print("\n== {}  [price level: {}] ==".format(hdr, level))
         for f in flights[: args.top]:
