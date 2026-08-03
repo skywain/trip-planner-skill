@@ -83,6 +83,12 @@ packed ×0.8, kids or mobility flags ×1.3.
    FX rather than waiting on stop-level geocoding:
    `curl -s "https://api.sunrise-sunset.org/json?lat={lat}&lng={lon}&date={YYYY-MM-DD}&formatted=0&tzid={Area/City}"`
    (credit sunrise-sunset.org in the footer; once per city, not per day).
+   The same response carries `civil_twilight_begin/end` — that is 天亮/天黑 as a
+   traveller experiences it, ~25-30 min outside sunrise/sunset. Pre-dawn departures
+   and sunrise hikes schedule against **civil dawn**, not sunrise: a 06:00 trailhead
+   entry for an 06:22 sunrise is a dark-start (headlamp) only if civil dawn is 06:01.
+   Any day that starts before civil dawn gets the 天亮 time printed in its header and
+   a "prebooked car, no street-hailing in the dark" note.
    Photography interest → schedule one viewpoint or walk at golden hour. Always check
    evening blocks against sunset: an unlit garden at 19:30 in November is a bug; a
    night-view deck is a feature — know which one you scheduled.

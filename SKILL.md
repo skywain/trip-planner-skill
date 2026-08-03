@@ -96,6 +96,12 @@ pace (2/3/4 anchors per day) · passport nationality (visa!) · locked must-sees
 - **Weather for those dates**: Open-Meteo recipes in data-sources.md (first call can
   take ~10 s). One line: temps, rain odds, daylight.
 - **Money & connectivity one-liners**: card vs cash norms, eSIM ballpark, plug type.
+- **Insurance line**: travel-medical insurance with destination-appropriate coverage
+  goes on the checklist (US target: ≥$100k medical + medical evacuation — an ER visit
+  is four figures before insurance). Tours never substitute for it.
+- **Safety paragraph, one per base**: which areas to avoid after dark, and — more
+  useful than warnings — design the plan so night movement is door-to-door by car.
+  A route that never needs a dark walk beats a list of cautions.
 
 ## Phase 2 — Route skeleton → checkpoint (a)
 
@@ -147,7 +153,12 @@ pace (2/3/4 anchors per day) · passport nationality (visa!) · locked must-sees
   go on the booking checklist, not the "later" pile.
 
 **Record for every leg**: carrier, date, dep/arr local times, price + currency + as-of
-date, bag included?, refund/change class, deep link. Output 1 pick + 1 backup per leg.
+date, **checked-bag fee** (US domestic: $35-40/leg on every major since Southwest
+ended free bags in 2025 — 4 legs is a real budget line; UA Basic Economy excludes
+even a full-size carry-on), refund/change class, deep link. Multi-leg trips get a
+**baggage walkthrough**: where the big bag physically is on every tour/venue day
+(day tours = bag stays at hotel; stadiums ban bags; 2-day tours are often
+overnight-bag-only). Output 1 pick + 1 backup per leg.
 
 ## Phase 4 — City day-plans
 
