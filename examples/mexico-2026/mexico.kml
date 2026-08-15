@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document>
+<name>Mexico 2026 — Mexico City · Teotihuacán · Oaxaca (Día de Muertos)</name>
+<Folder><name>Day 1 2026-10-28 — Berlin → Mexico City · landing night</name>
+<Placemark><name>1. AICM Terminal 1</name><Point><coordinates>-99.071900,19.436100,0</coordinates></Point></Placemark>
+<Placemark><name>2. Hotel · Roma Norte</name><Point><coordinates>-99.162000,19.418500,0</coordinates></Point></Placemark>
+<Placemark><name>Day 1 route</name><Style><LineStyle><color>ff0000ff</color><width>3</width></LineStyle></Style><LineString><coordinates>-99.071900,19.436100,0 -99.162000,19.418500,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 2 2026-10-29 — Centro Histórico — the Aztec city under the murals</name>
+<Placemark><name>1. Hotel · Roma Norte</name><Point><coordinates>-99.162000,19.418500,0</coordinates></Point></Placemark>
+<Placemark><name>2. Templo Mayor</name><Point><coordinates>-99.131600,19.434600,0</coordinates></Point></Placemark>
+<Placemark><name>3. Museo Vivo del Muralismo (SEP)</name><Point><coordinates>-99.131800,19.437200,0</coordinates></Point></Placemark>
+<Placemark><name>4. Palacio de Bellas Artes</name><Point><coordinates>-99.141200,19.435200,0</coordinates></Point></Placemark>
+<Placemark><name>5. Mercado de San Juan</name><Point><coordinates>-99.145000,19.431000,0</coordinates></Point></Placemark>
+<Placemark><name>6. Museo Mural Diego Rivera</name><Point><coordinates>-99.146700,19.436200,0</coordinates></Point></Placemark>
+<Placemark><name>7. Hotel · Roma Norte</name><Point><coordinates>-99.162000,19.418500,0</coordinates></Point></Placemark>
+<Placemark><name>Day 2 route</name><Style><LineStyle><color>ffff0000</color><width>3</width></LineStyle></Style><LineString><coordinates>-99.162000,19.418500,0 -99.131600,19.434600,0 -99.131800,19.437200,0 -99.141200,19.435200,0 -99.145000,19.431000,0 -99.146700,19.436200,0 -99.162000,19.418500,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 3 2026-10-30 — Teotihuacán, then the flower market at dusk</name>
+<Placemark><name>1. Hotel · Roma Norte</name><Point><coordinates>-99.162000,19.418500,0</coordinates></Point></Placemark>
+<Placemark><name>2. Terminal de Autobuses del Norte</name><Point><coordinates>-99.141600,19.484400,0</coordinates></Point></Placemark>
+<Placemark><name>3. Teotihuacán Puerta 1</name><Point><coordinates>-98.862000,19.680000,0</coordinates></Point></Placemark>
+<Placemark><name>4. Mercado de Jamaica</name><Point><coordinates>-99.127600,19.409300,0</coordinates></Point></Placemark>
+<Placemark><name>5. Hotel · Roma Norte</name><Point><coordinates>-99.162000,19.418500,0</coordinates></Point></Placemark>
+<Placemark><name>Day 3 route</name><Style><LineStyle><color>ff00aa00</color><width>3</width></LineStyle></Style><LineString><coordinates>-99.162000,19.418500,0 -99.141600,19.484400,0 -98.862000,19.680000,0 -99.127600,19.409300,0 -99.162000,19.418500,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 4 2026-10-31 — Coyoacán, Frida, and the parade that may or may not be today</name>
+<Placemark><name>1. Hotel · Roma Norte</name><Point><coordinates>-99.162000,19.418500,0</coordinates></Point></Placemark>
+<Placemark><name>2. Mercado de Coyoacán</name><Point><coordinates>-99.162600,19.350600,0</coordinates></Point></Placemark>
+<Placemark><name>3. Museo Frida Kahlo</name><Point><coordinates>-99.162500,19.355400,0</coordinates></Point></Placemark>
+<Placemark><name>4. Glorieta del Ángel de la Independencia</name><Point><coordinates>-99.167700,19.427000,0</coordinates></Point></Placemark>
+<Placemark><name>5. Plaza Río de Janeiro</name><Point><coordinates>-99.160800,19.421300,0</coordinates></Point></Placemark>
+<Placemark><name>6. Hotel · Roma Norte</name><Point><coordinates>-99.162000,19.418500,0</coordinates></Point></Placemark>
+<Placemark><name>Day 4 route</name><Style><LineStyle><color>ff00aaff</color><width>3</width></LineStyle></Style><LineString><coordinates>-99.162000,19.418500,0 -99.162600,19.350600,0 -99.162500,19.355400,0 -99.167700,19.427000,0 -99.160800,19.421300,0 -99.162000,19.418500,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 5 2026-11-01 — Fly south · Día de los Angelitos, and the first vigil</name>
+<Placemark><name>1. Hotel · Roma Norte</name><Point><coordinates>-99.162000,19.418500,0</coordinates></Point></Placemark>
+<Placemark><name>2. AICM Terminal 1</name><Point><coordinates>-99.071900,19.436100,0</coordinates></Point></Placemark>
+<Placemark><name>3. Aeropuerto de Oaxaca (OAX)</name><Point><coordinates>-96.726600,16.999000,0</coordinates></Point></Placemark>
+<Placemark><name>4. Hotel · Oaxaca centro</name><Point><coordinates>-96.724000,17.064000,0</coordinates></Point></Placemark>
+<Placemark><name>5. Mercado 20 de Noviembre</name><Point><coordinates>-96.726400,17.058100,0</coordinates></Point></Placemark>
+<Placemark><name>6. Panteón General de Oaxaca</name><Point><coordinates>-96.709500,17.064000,0</coordinates></Point></Placemark>
+<Placemark><name>7. Hotel · Oaxaca centro</name><Point><coordinates>-96.724000,17.064000,0</coordinates></Point></Placemark>
+<Placemark><name>Day 5 route</name><Style><LineStyle><color>ffaa00aa</color><width>3</width></LineStyle></Style><LineString><coordinates>-99.162000,19.418500,0 -99.071900,19.436100,0 -96.726600,16.999000,0 -96.724000,17.064000,0 -96.726400,17.058100,0 -96.709500,17.064000,0 -96.724000,17.064000,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 6 2026-11-02 — Día de Muertos — the market, the hill of graves, the comparsa</name>
+<Placemark><name>1. Hotel · Oaxaca centro</name><Point><coordinates>-96.724000,17.064000,0</coordinates></Point></Placemark>
+<Placemark><name>2. Mercado de Abastos</name><Point><coordinates>-96.737300,17.053700,0</coordinates></Point></Placemark>
+<Placemark><name>3. Panteón de Santa Cruz Xoxocotlán</name><Point><coordinates>-96.735000,17.017000,0</coordinates></Point></Placemark>
+<Placemark><name>4. Macedonio Alcalá · Oaxaca centro</name><Point><coordinates>-96.724500,17.063100,0</coordinates></Point></Placemark>
+<Placemark><name>5. Zócalo de Oaxaca</name><Point><coordinates>-96.725500,17.060600,0</coordinates></Point></Placemark>
+<Placemark><name>6. Hotel · Oaxaca centro</name><Point><coordinates>-96.724000,17.064000,0</coordinates></Point></Placemark>
+<Placemark><name>Day 6 route</name><Style><LineStyle><color>ff777777</color><width>3</width></LineStyle></Style><LineString><coordinates>-96.724000,17.064000,0 -96.737300,17.053700,0 -96.735000,17.017000,0 -96.724500,17.063100,0 -96.725500,17.060600,0 -96.724000,17.064000,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 7 2026-11-03 — Monte Albán above the valley, textiles below it</name>
+<Placemark><name>1. Hotel · Oaxaca centro</name><Point><coordinates>-96.724000,17.064000,0</coordinates></Point></Placemark>
+<Placemark><name>2. Monte Albán</name><Point><coordinates>-96.767700,17.043900,0</coordinates></Point></Placemark>
+<Placemark><name>3. Mercado 20 de Noviembre</name><Point><coordinates>-96.726400,17.058100,0</coordinates></Point></Placemark>
+<Placemark><name>4. Museo Textil de Oaxaca</name><Point><coordinates>-96.725500,17.061600,0</coordinates></Point></Placemark>
+<Placemark><name>5. Centro Cultural San Pablo</name><Point><coordinates>-96.724500,17.062000,0</coordinates></Point></Placemark>
+<Placemark><name>6. Hotel · Oaxaca centro</name><Point><coordinates>-96.724000,17.064000,0</coordinates></Point></Placemark>
+<Placemark><name>Day 7 route</name><Style><LineStyle><color>ff0000ff</color><width>3</width></LineStyle></Style><LineString><coordinates>-96.724000,17.064000,0 -96.767700,17.043900,0 -96.726400,17.058100,0 -96.725500,17.061600,0 -96.724500,17.062000,0 -96.724000,17.064000,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 8 2026-11-04 — Tlacolula valley — the loom, the mosaic tombs, the still</name>
+<Placemark><name>1. Hotel · Oaxaca centro</name><Point><coordinates>-96.724000,17.064000,0</coordinates></Point></Placemark>
+<Placemark><name>2. Árbol del Tule</name><Point><coordinates>-96.636300,17.046800,0</coordinates></Point></Placemark>
+<Placemark><name>3. Teotitlán del Valle</name><Point><coordinates>-96.523000,17.029000,0</coordinates></Point></Placemark>
+<Placemark><name>4. Mitla — Zona Arqueológica</name><Point><coordinates>-96.359600,16.922400,0</coordinates></Point></Placemark>
+<Placemark><name>5. Hierve el Agua</name><Point><coordinates>-96.276000,16.866100,0</coordinates></Point></Placemark>
+<Placemark><name>6. Hotel · Oaxaca centro</name><Point><coordinates>-96.724000,17.064000,0</coordinates></Point></Placemark>
+<Placemark><name>Day 8 route</name><Style><LineStyle><color>ffff0000</color><width>3</width></LineStyle></Style><LineString><coordinates>-96.724000,17.064000,0 -96.636300,17.046800,0 -96.523000,17.029000,0 -96.359600,16.922400,0 -96.276000,16.866100,0 -96.724000,17.064000,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 9 2026-11-05 — Painted walls in Jalatlaco, then north again</name>
+<Placemark><name>1. Hotel · Oaxaca centro</name><Point><coordinates>-96.724000,17.064000,0</coordinates></Point></Placemark>
+<Placemark><name>2. Barrio de Jalatlaco</name><Point><coordinates>-96.717800,17.062500,0</coordinates></Point></Placemark>
+<Placemark><name>3. Mercado Benito Juárez</name><Point><coordinates>-96.726600,17.058800,0</coordinates></Point></Placemark>
+<Placemark><name>4. Aeropuerto de Oaxaca (OAX)</name><Point><coordinates>-96.726600,16.999000,0</coordinates></Point></Placemark>
+<Placemark><name>5. AICM Terminal 1</name><Point><coordinates>-99.071900,19.436100,0</coordinates></Point></Placemark>
+<Placemark><name>6. Hotel · Roma Norte</name><Point><coordinates>-99.162000,19.418500,0</coordinates></Point></Placemark>
+<Placemark><name>Day 9 route</name><Style><LineStyle><color>ff00aa00</color><width>3</width></LineStyle></Style><LineString><coordinates>-96.724000,17.064000,0 -96.717800,17.062500,0 -96.726600,17.058800,0 -96.726600,16.999000,0 -99.071900,19.436100,0 -99.162000,19.418500,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 10 2026-11-06 — One last room in the Anthropology museum, then home</name>
+<Placemark><name>1. Hotel · Roma Norte</name><Point><coordinates>-99.162000,19.418500,0</coordinates></Point></Placemark>
+<Placemark><name>2. Museo Nacional de Antropología</name><Point><coordinates>-99.186300,19.426000,0</coordinates></Point></Placemark>
+<Placemark><name>3. Polanco · Campos Elíseos</name><Point><coordinates>-99.193000,19.429000,0</coordinates></Point></Placemark>
+<Placemark><name>4. Hotel · Roma Norte</name><Point><coordinates>-99.162000,19.418500,0</coordinates></Point></Placemark>
+<Placemark><name>5. AICM Terminal 1</name><Point><coordinates>-99.071900,19.436100,0</coordinates></Point></Placemark>
+<Placemark><name>Day 10 route</name><Style><LineStyle><color>ff00aaff</color><width>3</width></LineStyle></Style><LineString><coordinates>-99.162000,19.418500,0 -99.186300,19.426000,0 -99.193000,19.429000,0 -99.162000,19.418500,0 -99.071900,19.436100,0</coordinates></LineString></Placemark>
+</Folder>
+</Document></kml>

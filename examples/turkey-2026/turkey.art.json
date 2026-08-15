@@ -1,0 +1,86 @@
+{
+ "schema": 1,
+ "cover": {
+  "kick": "土耳其行",
+  "kick_en": "TURKEY 2026",
+  "postmark_date": "2026-10-01"
+ },
+ "home": {"city": "上海", "iata": "PVG"},
+ "end": {
+  "date": "2026-10-10",
+  "mark": "SHANGHAI",
+  "line": "上海,到家了。",
+  "fine": "10-10 週六 午后落地浦东 —— 往东飞,时钟拨回五小时,一天只过了一半。",
+  "farewell": "GÖRÜŞÜRÜZ, TÜRKİYE"
+ },
+ "brief_titles": {
+  "visa": "入境 · 免签",
+  "holidays": "黄金周与人流",
+  "baggage": "行李动线"
+ },
+ "days": {
+  "2026-10-01": {"theme": "跨洋夜航", "en": "Shanghai → Istanbul", "mark": "SHANGHAI"},
+  "2026-10-02": {"theme": "圣索菲亚", "en": "Sultanahmet, Istanbul", "mark": "ISTANBUL"},
+  "2026-10-03": {"theme": "宫殿巴扎", "en": "Topkapi & the Bazaars", "mark": "BAZAAR"},
+  "2026-10-04": {"theme": "岩窟之国", "en": "Goreme, Cappadocia", "mark": "GOREME"},
+  "2026-10-05": {"theme": "破晓升空", "en": "Balloons at Dawn", "mark": "BALLOON"},
+  "2026-10-06": {"theme": "地下之城", "en": "Derinkuyu & the Night Bus", "mark": "DERINKUYU"},
+  "2026-10-07": {"theme": "白棉之丘", "en": "Pamukkale & Hierapolis", "mark": "PAMUKKALE"},
+  "2026-10-08": {"theme": "金角湾畔", "en": "Suleymaniye & Balat", "mark": "BALAT"},
+  "2026-10-09": {"theme": "归程万里", "en": "Istanbul → Shanghai", "mark": "HOME"}
+ },
+ "themes": {
+  "illustrated": {
+   "cover": {
+    "zh": "天接云涛",
+    "en": "SEA OF CLOUDS AT DAYBREAK",
+    "credit": "「天接云涛连晓雾,星河欲转千帆舞」—— 李清照《渔家傲》",
+    "sub": "伊斯坦布尔 · 卡帕多奇亚 · 棉花堡",
+    "hero": "turkey-cover-hero"
+   },
+   "end": {
+    "hero": "turkey-shanghai",
+    "fine": "2026-10-10 週六 午后落地浦东 —— 往东飞,时钟拨回五小时,一天只过了一半。"
+   },
+   "days": {
+    "2026-10-01": {"hero": "plane"},
+    "2026-10-02": {"hero": "turkey-hagia"},
+    "2026-10-03": {"hero": "turkey-bazaar", "feature": true},
+    "2026-10-04": {"hero": "turkey-chimney"},
+    "2026-10-05": {"hero": "turkey-balloon", "feature": true},
+    "2026-10-06": {"hero": "turkey-underground"},
+    "2026-10-07": {"hero": "turkey-pamukkale", "feature": true},
+    "2026-10-08": {"hero": "turkey-ferry"},
+    "2026-10-09": {"hero": "plane"}
+   }
+  },
+  "clay": {
+   "cover": {
+    "zh": "九万里风",
+    "en": "NINETY THOUSAND MILES OF WIND",
+    "credit": "「九万里风鹏正举」—— 李清照《渔家傲》(与插画版同出一阕)",
+    "sub": "上海 → 伊斯坦布尔 → 卡帕多奇亚 → 棉花堡 → 上海",
+    "title_stem": "turkey-clay-title"
+   },
+   "zones": [
+    {"from_day": "2026-10-01", "kind": "custom", "band": "turkey-strip-istanbul",
+     "to": "#bfe0e6", "decor": ["clay-signpost", "turkey-clay-tea"]},
+    {"from_day": "2026-10-04", "kind": "custom", "band": "turkey-strip-cappadocia",
+     "to": "#f0cba4", "decor": ["clay-balloon", "clay-pines"]},
+    {"from_day": "2026-10-07", "kind": "custom", "band": "turkey-strip-pamukkale",
+     "to": "#cfe7ea", "decor": ["clay-pines", "clay-cloud-b"]}
+   ],
+   "days": {
+    "2026-10-01": {"figurine": "clay-plane"},
+    "2026-10-02": {"figurine": "turkey-clay-hagia"},
+    "2026-10-03": {"figurine": "turkey-clay-bazaar"},
+    "2026-10-04": {"figurine": "turkey-clay-chimney"},
+    "2026-10-05": {"figurine": "clay-balloon"},
+    "2026-10-06": {"figurine": "clay-bus-solo"},
+    "2026-10-07": {"figurine": "turkey-clay-pamukkale"},
+    "2026-10-08": {"figurine": "turkey-clay-mosque"},
+    "2026-10-09": {"figurine": "clay-luggage"}
+   }
+  }
+ }
+}

@@ -3,7 +3,58 @@
 Two formats, two jobs: **§city-block** is the machine hand-off from a city researcher
 to the assembler, and the scheduling.md block is the human-facing rendering of the
 same day. Both examples are written in mixed Chinese/English purely because that is
-the sample trip — the deliverable always follows the user's own language.
+the sample trip — the deliverable always follows the user's own language. The
+assembled file itself follows the **§Top-level plan skeleton** just below.
+
+## §Top-level plan skeleton — the assembled `plan.geo.json`
+
+`assets/plan.example.json` is the single source of truth for these keys (it runs
+through every script as-is); the shape below is copied from it and from the schema
+comment at the top of `scripts/render_plan.py`, which reads exactly these names.
+Every key is optional except `days[].date` — an unfilled section simply does not
+render — but a section of the **wrong shape** is not "optional": it renders as an
+empty table with a WARN on stderr pointing here (the Vietnam test wrote `budget` as
+`{note, rows[{item,pp,total}]}` and `legs` with invented keys — both renderers used
+to crash on it, and `legs` still prints every cell blank).
+
+```json
+{
+ "trip": "Japan 12 days",
+ "lang": "zh",                                  // zh | en — see §Plan language
+ "meta": {"dates", "party", "route", "budget_total", "fx", "generated", "self_check"},
+ "decisions": ["one line per decision made for the traveller — each vetoable", ...],
+ "checklist": [{"item", "deadline", "price", "link", "link_text", "note"}],
+ "legs":      [{"type", "date", "carrier", "from", "to", "dep", "arr", "price", "bags",
+                "link", "note", "backup"}],
+ "days": [{"date", "city", "label", "sun", "sun_stop", "day_map", "ribbon", "rain_alt",
+           "late_cut", "walking_km", "travel_day", "tz",
+           "timeline": [{"t", "what", "kind", "price", "note", "tag", "verify",
+                         "link", "map"}],
+           "hop_links": ["url", ...],           // written by links --write when parked
+           "stops": [{"name", "query", "lat", "lon", "mode"}]}],
+ "hotels": [{"base", "area", "why", "options": [{"name", "band", "link"}]}],
+ "budget": [{"cat", "per_person", "total", "note"}],   // a LIST of rows, not {rows:[]}
+ "brief":  {"visa", "holidays", "weather", "money", "connectivity"},
+ "unverified": ["anything that survived two searches unverified", ...]
+}
+```
+
+- `budget` rows are `{cat, per_person, total, note}` (strings, already in the home
+  currency; the buffer line is a row like any other). `legs` rows spell the airports
+  `from`/`to` and the clock `dep`/`arr`; `backup` is a free-text second choice.
+- `checklist` (top level, `{item, deadline, price, link, link_text, note}`) is the
+  merged, urgency-sorted list; the city block's `checklist_items` (same row shape,
+  minus `link_text`) is its **input** — the assembler copies those rows into
+  `checklist` (renderers never read `checklist_items`), so both names are correct,
+  each in its own file. Visa rows never come from a city block (SKILL Phase 1/4).
+- `days[].sun_stop` (optional) — the `name` or 0-based index of the stop `sun --write`
+  should key the day on, overriding its default (first stop; last stop on a moving
+  day). Set it on a moving day whose sunrise anchor is at the *first* stop
+  (Chefchaouen sunrise → fly to Casablanca; Erg Chebbi sunrise → Fes).
+- `days[].tz` (optional, IANA name) overrides the plan-level `tz` for `sun`.
+- Field-level meaning of the `days[]` object (timeline `kind`/`tag`/`verify`,
+  `map:false`, `stops` ↔ hop rows) is in §city-block right below — the day objects
+  are byte-identical in both places.
 
 ## §city-block — what each city researcher returns (fan-out or sequential)
 
@@ -18,7 +69,7 @@ follow `scripts/render_plan.py`'s schema field-for-field.
 {
  "days": [
   {"date": "2026-10-05", "city": "Kyoto", "label": "East Kyoto classics",
-   "sun": "☀ 05:53 / 🌇 17:38",
+   "sun": "天亮 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org",
    "travel_day": false,
    "rain_alt": "Sanjusangendo (open daily, indoor — closure-checked for THIS date)",
    "late_cut": "running >1 h late → drop Yasaka Shrine",
@@ -58,16 +109,49 @@ follow `scripts/render_plan.py`'s schema field-for-field.
 ```
 
 Field discipline (the merge breaks without it):
+- `checklist_items` = sell-outs, timed tickets, date-locked rail, tours — things the
+  city researcher verified. **No visa / entry / e-visa rows**: the assembler owns that
+  fact (SKILL Phase 1) and overwrites any city-block claim about it (two Turkey city
+  agents shipped an outdated "visa required" as item #1). The assembler merges these
+  rows into the top-level `checklist` (§Top-level plan skeleton).
+- `sun` is filled by the assembler's `sun --write`, not by you; if the day's sunrise
+  anchor is at its first stop on a moving day, add `"sun_stop": "<that stop's name>"`
+  so the assembler's run keys the day there.
 - `timeline` rows: `kind` = anchor|hop|meal|free;anchors/meals carry `tag`
   (pinned|opener|skippable|swap→X);hops carry `verify` (verified|est);flight/rail
   hops already covered by the legs table carry `"map": false`. Never mix tag/verify.
 - N mapped `stops` ⇒ N−1 hop rows without `map:false` — that alignment is what lets
-  `links --write` place every URL automatically.
+  `links --write` place every URL automatically. Lodging→first-stop and
+  last-stop→lodging rows, and rides that are themselves the sight (cruise, scenic
+  train, ferry) are the two places this slips — see navigation.md step 1.
+- `sun` is written by `route_tools.py sun --write` in the canonical shape
+  `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]` — for an `en` plan
+  (`plan.lang`, or `sun --lang en`) the dawn word is `dawn`:
+  `dawn HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]`; the renderers accept
+  either spelling. If you hand-write it, keep a space after every time (no
+  `18:00(AEST`).
 - `walking_km` is the honest total (`{"total", "how"}` form preferred).
 - Do NOT run geocoding — the assembler runs route_tools once, centrally (five agents
   in parallel would break Nominatim's 1 req/s policy).
 - Verified facts carry source + as-of date in `note`; everything else is `est` and,
   if load-bearing, also listed in `unverified`.
+
+## Plan language — top-level `"lang"`
+
+The assembled plan JSON carries one top-level key `"lang": "zh" | "en"` (default
+`zh` when absent; `meta.lang` is read as a fallback). It is a **plan fact**: set it
+in Phase 0 from the language the user asked in, and never mix it with the content —
+`lang` only says which language the rendered page's own chrome speaks (section names,
+buttons, tags, weekdays, the "天亮/dawn" word, `<html lang>`), while every string you
+wrote into the plan (labels, notes, stops, brief) is printed exactly as written.
+`scripts/render_plan.py`, every `themes/render_*.py` and `route_tools.py sun --write`
+read it (`--lang zh|en` overrides per run); the shared word table lives in
+`themes/theme_common.STRINGS`. An `en` plan whose `sun` was written by hand uses the
+`dawn …` form (see the `sun` bullet above).
+
+```json
+{"trip": "Japan 12 days", "lang": "en", "meta": {"dates": "…", "route": "…"}, "days": [ … ]}
+```
 
 ## Final deliverable
 

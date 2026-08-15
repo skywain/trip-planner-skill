@@ -1,5 +1,5 @@
 ---
-name: travel-planner
+name: trip-planner
 description: >-
   End-to-end international trip planning: turns "I want to go to X for N days" into a
   verified, bookable plan — route skeleton across cities, flight price scans
@@ -9,13 +9,15 @@ description: >-
   neighborhood, budget rollup, and a booking checklist with deep links. Use this
   whenever the user asks to plan a trip, vacation, itinerary or honeymoon, compare
   flight dates/prices, pick between cities or routes, schedule a travel day hour by
-  hour, fill a spare block of time ("I'm near X with 2 free hours"), or asks
-  旅行规划/行程安排/机票比价/去某国玩N天怎么安排/现在有空档干嘛 — even if they only
+  hour, fill a spare block of time ("I'm near X with 2 free hours"), turn a finished
+  plan into a designed page (eight themed renders: illustrated / clay / noir / glass /
+  journal / zine / splash / portal — 插画/黏土/夜航/玻璃/手账/Zine/闪屏/穿越版), or asks
+  旅行规划/行程安排/机票比价/去某国玩N天怎么安排/现在有空档干嘛/把行程做成好看的网页 — even if they only
   mention one piece (just flights, just hotels, or just navigation), the playbook and
   verification rules here still apply.
 ---
 
-# Travel Planner
+# Trip Planner
 
 Turn a fuzzy trip idea into a plan the user can book link-by-link. The deliverable is
 **verified and bookable**, not inspirational: every price and opening time carries a
@@ -39,7 +41,12 @@ data, not on prose — fixing exactly that is this skill's job, so verification 
    hang and burn money, so the cap goes in the prompt every time. Budget exhausted →
    ship with the least-verified items flagged rather than digging further.
 5. Reply in the language the user asked in. Report money in the user's home currency
-   (infer from origin), stating the FX rate + date used once (source: frankfurter.dev).
+   (infer from origin), stating the FX rate + date used once. FX source:
+   frankfurter.dev first — but it only carries ~30 major currencies, and **closed or
+   minor ones (MAD / VND / EGP …) are not "unsupported", they are silently dropped
+   from a 200 response** (`symbols=VND,USD` comes back with USD alone). For those use
+   `https://open.er-api.com/v6/latest/<BASE>` and **check the returned object has the
+   key you asked for**; the plan states which source it used (data-sources.md §FX).
 6. Track the phases as todos so a long plan survives interruptions and stays visible.
 
 ## Interaction contract
@@ -72,11 +79,20 @@ origin airport/city · destination country or shortlist · date window + flexibi
 nights (a range like 10-15 is fine) · party size & mobility · budget style or number ·
 interests ranked (food/history/nature/anime/hiking/shopping/photography/nightlife) ·
 pace (2/3/4 anchors per day) · passport nationality (visa!) · locked must-sees, if any.
+Set the plan's top-level `"lang"` (`zh` | `en`, output-template.md §Plan language) from
+the language the user asked in — the rendered pages' UI follows it; `--lang` overrides.
 
 ## Phase 1 — Country brief (once per destination, ≤10 lines of output)
 
+Read the destination's section of references/country-quick-notes.md first. **Destination
+not in that file (Mexico, Morocco, Turkey and Vietnam all weren't)** → work through its
+"Destination not listed? — the checklist" section instead of improvising: it is the
+list of things every new country costs a first planner 6-9 searches to rediscover.
+
 - **Visa/entry** for that passport: official government/embassy sources only; put the
   processing lead time on the booking checklist. Rules change — never answer from memory.
+  **This judgement is the assembler's alone**: city subagents (Phase 4) do not make
+  visa/entry calls, and anything they say about it is overwritten by this line.
 - **Holidays colliding with the window**:
   `curl -s "https://date.nager.at/api/v3/PublicHolidays/{year}/{ISO2}"` (keyless ✓).
   A national holiday means closures + crowds + hotel spikes — annotate affected days.
@@ -119,6 +135,14 @@ pace (2/3/4 anchors per day) · passport nationality (visa!) · locked must-sees
    base, intercity legs with rough mode + duration, one-line pace verdict. Recommend one.
 
 ## Phase 3 — Flights & intercity legs
+
+From here on you are writing `plan.geo.json`. **`assets/plan.example.json` is the single
+source of truth for the plan's top-level shape** — `legs`, `checklist`, `budget`,
+`hotels`, `brief`, `days[]`… — so open it (or output-template.md §Top-level plan
+skeleton, copied from it) before writing a field. `budget` is a list of
+`{cat, per_person, total, note}` rows, not `{note, rows}`; `legs` rows use
+`from/to/dep/arr`. A wrong shape does not fail loudly: the renderers WARN and print an
+empty section (they used to crash — the Vietnam test lost both themed pages to it).
 
 **International:**
 - Run `scripts/flight_scan.py` (Google Flights data, keyless; `--help` for usage) to
@@ -167,7 +191,12 @@ must include: the dates, the user's interests + pace, **search budget ≤8**, an
 explicit **"do not run geocoding"** line (parallel agents would break Nominatim's
 1 req/s policy — the assembler geocodes once, centrally), and the exact return
 format from references/output-template.md §city-block — **plan-JSON day objects,
-insertable verbatim**, not a summary. Otherwise do the cities sequentially with the
+insertable verbatim**, not a summary. Hard rule for the prompt: **city agents do not
+make visa/entry judgements** — no visa rows in their `checklist_items`, no "you need
+a visa" in notes. Visa/entry facts are the assembler's Phase 1 job and override
+anything a city block says (Turkey test: both city agents put an outdated "visa
+required" as checklist item #1; entry had been visa-free since 2026-01-02).
+Otherwise do the cities sequentially with the
 same structure. When the user prefers group tours, the city agent's first job is
 finding real in-sale products with departure schedules (data-sources.md §Group
 tours) — the tour's schedule then dictates the surrounding legs.
@@ -198,9 +227,20 @@ Per city:
    format, exit numbers, verify-vs-estimate rules), then run scripts/route_tools.py
    in this order: **geocode → check → links --write → kml**, so every hop carries a
    distance-sane duration and a tappable map link written into the plan for you.
-   (Sunrise/sunset is a city-level fact — fetch it back in Phase 1 with the holidays
-   and FX; it does not need stop coordinates.) Mark ridden hops `"mode": "transit"`
-   on the arriving stop, or the walking total and the links will both be wrong.
+   Then `sun --write` once the stops carry coordinates: it fills every day's
+   `sun` (civil dawn · sunrise / sunset) in one canonical string and refuses data
+   that fails a solar sanity check — never hand-copy sunrise numbers, and **run it
+   before writing any sunrise / golden-hour / dark-start prose**: tz changes live in
+   tzdata, not in your head (Morocco moves to UTC+0 on 2026-09-20 — the tester's
+   hand-written times were an hour off on all ten days, and neither `check` nor
+   `qc.py` compares prose against `sun`). A moving day defaults to the last stop;
+   when the day's sunrise anchor is at the *first* stop, set the day's `sun_stop`
+   (scheduling.md rule 7). **Non-zero exit = at least one day was skipped or
+   rejected**: the written days are fine, re-run `--only DATE` for the ones it
+   names before writing prose for them. Mark ridden
+   hops with a `mode` on the arriving stop (`transit`/`train`/`bus`/`drive`/`boat`/
+   `fly`; long signature walks `walk`), or the walking total and the links will
+   both be wrong — `check` says (guessed) next to anything you left it to infer.
    Transit durations come back as ranges — keep them ranges unless you
    browser-verified the hop. Deliver day-level granularity only if the user asks for
    a rough cut.
@@ -219,6 +259,12 @@ Assemble per references/output-template.md: overview → decisions made for the 
 booking checklist → flights/intercity table → day-by-day cards → hotels → budget
 rollup → country brief.
 
+**Cover title (bilingual)**: when the deliverable is a rendered page, pick or adapt a
+poetic display title from references/cover-titles.md — zh 2-6 characters + an English
+line, matched to the trip archetype (road-trip / island / mountain / city / coast).
+Never ship a literal placeholder like "X国行"; never use the clichés on that file's
+blacklist. Cite the allusion honestly (原句 in the subtitle or a small credit line).
+
 **Adversarial self-check** — run this list against the finished plan, fix what it
 catches, then append "self-checked: N issues found and fixed":
 - Closure scan: every anchor's closed-days vs its scheduled date (Mondays! holidays
@@ -235,9 +281,13 @@ catches, then append "self-checked: N issues found and fixed":
 - Last-entry time vs planned arrival for each anchor
 - Timeline checks from scheduling.md §verification: chain arithmetic (block start ≥
   prev end + hop + buffer), day walking totals ≤ 8 km, late hops vs last departures,
-  golden-hour blocks vs actual sunset
+  golden-hour blocks vs actual sunset — and every sunrise / sunset / dark-start time
+  in the prose was written **after** `sun --write`, matching `days[].sun` (the
+  script exited 0; any `sun_stop` override is on the right day)
 - Red-eye / timezone day-number arithmetic
-- No day exceeds pace; no day mixes an intercity move with >2 anchors
+- No day exceeds pace; **an intercity moving day carries ≤2 anchors, and only when
+  the bags are solved before the first anchor (checked / stored / hotel-held);
+  otherwise 1** (same sentence in scheduling.md §Day types)
 - Every price has source + as-of date; every bookable line has a link
 
 **Deliver**: a chat summary (route one-liner, total budget, the 3 biggest decisions
@@ -248,7 +298,51 @@ available, else SendUserFile, else save and give the path. Ship the trip KML
 (`scripts/route_tools.py kml plan.geo.json -o trip.kml`) alongside for offline map
 apps. **`plan.geo.json` is the single editable source** for all of it — every command
 above reads that one file — so a later "move day 3 to Nara" is a JSON edit plus
-geocode → check → links → kml → render, not a rewrite.
+geocode → check → links → kml → render, not a rewrite. The page chrome (section
+names, buttons, pills, weekdays) speaks `plan.lang` (set in Phase 0, `zh` default);
+`--lang zh|en` on any renderer overrides it, plan content prints as written.
+
+**Themed renders** (optional, on top of the plain page): when the user wants a
+"good-looking / shareable" version, render the same `plan.geo.json` through one of
+the eight themes in `themes/` — the plain `render_plan.py` page stays the default
+deliverable. Themes: **illustrated 插画** (a painted book on paper) · **clay 黏土**
+(one continuous clay landscape with a road) · **noir 夜航** (a single night-negative
+tracking shot) · **glass 玻璃** (liquid-glass panes over crossfading photos) ·
+**journal 手账** (a vintage travel journal: tape, stamps, polaroids) · **zine** (torn
+riso-poster collage) · **splash 闪屏** (game-splash floating islands, chained sky
+gradients) · **portal 穿越** (scroll-scrubbed video fly-through — needs footage, see
+below). `render_picker.py` renders a one-page style chooser of all of them. Flow:
+1. Write `<plan>.art.json` next to the plan (contract: `themes/ART-SCHEMA.md`) — the
+   **common** block first (cover poem title from references/cover-titles.md, `kick`,
+   `home`, `end`, and per day `theme` 4 chars / `en` / `mark`), then one block per
+   theme you render. Pictures: **the cover / hero / title sticker / terrain bands
+   are destination scenery and are ALWAYS generated for this trip, in the theme's
+   own style** — priority: the trip's actual sights (Xi'an city wall, the Great
+   Wall) > a national landmark > a neutral scene, but never blank and never
+   another trip's band (a China page once opened on the New York skyline because a
+   default band was reused). The same ladder applies to `end.hero` / the tail cover,
+   with one twist: that picture is the **return to the departure city** (home
+   skyline at landing, not another destination view) — generated for this trip
+   too, never a stock tail. "Reuse first" applies only to generic props: `themes/assets/IMAGE-LIBRARY.md` §通用件 lists what any trip may use;
+   generate the rest — **with the agent's own native image/video generation if it has
+   one (no key to configure; same specs, same prompts-as-style-anchors, same
+   split/cutout/webp/manifest steps — ART-SCHEMA.md 「生成器选择」), otherwise
+   `gen.py` / `genvideo.py` over OpenRouter** — using the sheet recipe in ART-SCHEMA.md (title
+   stickers: one centred sticker, symmetric lines, no icons inside the letters),
+   then `towebp.py`, and keep the webp beside the plan (or pass `--assets DIR`).
+2. `python3 themes/render_<theme>.py plan.geo.json -o trip-<theme>.html`
+   (`--art F|none`, `--assets DIR`, `--lang zh|en`); a missing art file must still
+   render. All eight themes and the picker render in **en** as well as zh: the UI
+   shell (buttons, tags, section names, weekdays, cover fallbacks) follows
+   `plan.lang` / `--lang`, art copy renders in whatever language it was written
+   (ART-SCHEMA.md §language; English cover titles: references/cover-titles.md).
+3. `python3 themes/qc.py trip-<theme>.html` must exit 0, then
+   `themes/xprobe.sh trip-<theme>.html module '#d5' out.png` and **look at the PNG**
+   — a green probe title is not proof; blank icons and cropped tails only show visually.
+Every themed page carries its own share buttons (保存这一天 / 保存附录 / 生成长图 —
+Save this day / Save appendix / Save long image in en), offline, no dependencies. Portal is the "only when footage exists" theme: it needs the
+19 mp4 clips in `themes/assets/portal/` (or a trip's own chain) beside the HTML.
+Details, per-theme limits and the new-theme manual: references/themes.md.
 
 ## When things fail
 
@@ -268,17 +362,40 @@ directory is not the skill directory and shell cwd does not persist between call
 - `references/data-sources.md` — read before Phase 1: every API/URL recipe + fallback
   chain (flights, hotels, rail, venues, weather, FX, holidays, geocoding).
 - `references/country-quick-notes.md` — read the destination's section before Phase 2:
-  passes, sell-outs, closure patterns, transit apps per country.
+  passes, sell-outs, closure patterns, transit apps per country; destination absent →
+  its "Destination not listed? — the checklist" section.
 - `references/output-template.md` — read before Phase 4 fan-out (city-block format)
   and Phase 6 (deliverable structure).
 - `references/scheduling.md` — read before building any hour-level timeline: dwell
   times, buffers, meals, energy curve, degradation tags, timeline verification.
 - `references/navigation.md` — read with it: hop-link recipes, transit-row format,
   exit numbers, verify-vs-estimate policy, offline-maps (KML) workflow.
+- `references/cover-titles.md` — bilingual poetic cover-title case library (诗词/散文/
+  名著出处 + trip-archetype fit + cliché blacklist); read at Phase 6 when rendering.
 - `scripts/flight_scan.py` — Google Flights grid scanner; run with `--help` first.
 - `scripts/route_tools.py` — geocode stops, distance-check clustering, emit per-hop +
-  whole-day map links and the trip KML; subcommands geocode / check / links / kml.
+  whole-day map links and the trip KML; subcommands geocode / check / links / kml /
+  sun (civil dawn + sunrise/sunset per day from sunrise-sunset.org, sanity-checked,
+  written into `days[].sun` in the canonical format; point = first stop, last stop
+  on a moving day, or the day's `sun_stop` when set; non-zero exit = a day was
+  skipped/rejected).
 - `scripts/render_plan.py` — turn the plan JSON into the final self-contained HTML.
   It reads the same file route_tools does, so write the plan once and render often.
-- `assets/plan.example.json` — runnable schema example: copy it, replace the
-  placeholders, and both scripts work on it immediately.
+- `assets/plan.example.json` — runnable schema example **and the single source of
+  truth for the plan's top-level keys** (`budget`/`legs`/`checklist`/`hotels`/
+  `brief`/`days[]`… shapes; output-template.md §Top-level plan skeleton mirrors it):
+  copy it, replace the placeholders, and both scripts work on it immediately.
+- `references/themes.md` — the themed-render manual: what each of the eight themes
+  is, its art fields and known limits, how to add a theme, the recurring-defect
+  checklist and the verification discipline. Read before rendering any theme.
+- `themes/` — the themed renderers (`render_journal.py`, `render_noir2.py`,
+  `render_theme2.py` = illustrated, `render_clay2.py`, `render_glass2.py`,
+  `render_zine.py`, `render_splash.py`, `render_portal.py`, `render_picker.py`)
+  plus `theme_common.py`, `qc.py` (static QC, exit code = FAIL count),
+  `xprobe.sh` / `xt.sh` (headless export probes), `towebp.py` / `gen.py` /
+  `split_sheet.py` / `cutout.py` (asset pipeline), `ART-SCHEMA.md` (the one
+  authoritative art.json contract) and `themes/README.md`.
+- `themes/assets/` — the shared picture library: all embeddable webp, the Caveat
+  webfont, `manifest.json` (prompt/cost per generated asset), `IMAGE-LIBRARY.md`
+  (index by subject — check its 通用件 section before generating anything) and
+  `portal/*.mp4` (the portal theme's footage).

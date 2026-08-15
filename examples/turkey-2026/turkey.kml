@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document>
+<name>土耳其 9 天 · 上海往返(2026 十一黄金周)</name>
+<Folder><name>Day 1 2026-10-01 — 出发日 · 黄金周首日的浦东</name>
+<Placemark><name>1. 上海浦东机场 T2</name><Point><coordinates>121.808300,31.144300,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Day 2 2026-10-02 — 落地即老城:圣索菲亚 · 水宫 · 蓝色清真寺(周五主麻避坑版)</name>
+<Placemark><name>1. 伊斯坦布尔新机场 IST</name><Point><coordinates>28.751900,41.275300,0</coordinates></Point></Placemark>
+<Placemark><name>2. 老城住宿</name><Point><coordinates>28.977000,41.005500,0</coordinates></Point></Placemark>
+<Placemark><name>3. 圣索菲亚</name><Point><coordinates>28.980200,41.008600,0</coordinates></Point></Placemark>
+<Placemark><name>4. 地下水宫</name><Point><coordinates>28.977900,41.008400,0</coordinates></Point></Placemark>
+<Placemark><name>5. 苏丹艾哈迈德广场·古竞技场</name><Point><coordinates>28.975200,41.006200,0</coordinates></Point></Placemark>
+<Placemark><name>6. 蓝色清真寺</name><Point><coordinates>28.976800,41.005400,0</coordinates></Point></Placemark>
+<Placemark><name>Day 2 route</name><Style><LineStyle><color>ffff0000</color><width>3</width></LineStyle></Style><LineString><coordinates>28.751900,41.275300,0 28.977000,41.005500,0 28.980200,41.008600,0 28.977900,41.008400,0 28.975200,41.006200,0 28.976800,41.005400,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 3 2026-10-03 — 托普卡帕宫 + 双巴扎 + 博斯普鲁斯日落</name>
+<Placemark><name>1. 老城住宿</name><Point><coordinates>28.977000,41.005500,0</coordinates></Point></Placemark>
+<Placemark><name>2. 托普卡帕宫</name><Point><coordinates>28.983400,41.011500,0</coordinates></Point></Placemark>
+<Placemark><name>3. 大巴扎</name><Point><coordinates>28.968000,41.010700,0</coordinates></Point></Placemark>
+<Placemark><name>4. 埃及香料市场</name><Point><coordinates>28.970500,41.016500,0</coordinates></Point></Placemark>
+<Placemark><name>5. 艾米诺努渡口</name><Point><coordinates>28.973300,41.017500,0</coordinates></Point></Placemark>
+<Placemark><name>Day 3 route</name><Style><LineStyle><color>ff00aa00</color><width>3</width></LineStyle></Style><LineString><coordinates>28.977000,41.005500,0 28.983400,41.011500,0 28.968000,41.010700,0 28.970500,41.016500,0 28.973300,41.017500,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 4 2026-10-04 — 飞进岩窟之国:格雷梅露天博物馆 + 乌奇希萨尔日落</name>
+<Placemark><name>1. 老城住宿</name><Point><coordinates>28.977000,41.005500,0</coordinates></Point></Placemark>
+<Placemark><name>2. 伊斯坦布尔新机场 IST</name><Point><coordinates>28.751900,41.275300,0</coordinates></Point></Placemark>
+<Placemark><name>3. 内夫谢希尔卡帕多奇亚机场 NAV</name><Point><coordinates>34.534500,38.771900,0</coordinates></Point></Placemark>
+<Placemark><name>4. 格雷梅镇中心</name><Point><coordinates>34.828900,38.643100,0</coordinates></Point></Placemark>
+<Placemark><name>5. 格雷梅露天博物馆</name><Point><coordinates>34.845100,38.643200,0</coordinates></Point></Placemark>
+<Placemark><name>6. 乌奇希萨尔城堡</name><Point><coordinates>34.806000,38.630400,0</coordinates></Point></Placemark>
+<Placemark><name>Day 4 route</name><Style><LineStyle><color>ff00aaff</color><width>3</width></LineStyle></Style><LineString><coordinates>28.977000,41.005500,0 28.751900,41.275300,0 34.534500,38.771900,0 34.828900,38.643100,0 34.845100,38.643200,0 34.806000,38.630400,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 5 2026-10-05 — 日出热气球 + 红线团 + 红谷日落</name>
+<Placemark><name>1. 格雷梅镇中心</name><Point><coordinates>34.828900,38.643100,0</coordinates></Point></Placemark>
+<Placemark><name>2. 德夫伦特谷</name><Point><coordinates>34.860000,38.673300,0</coordinates></Point></Placemark>
+<Placemark><name>3. 帕夏贝</name><Point><coordinates>34.842000,38.665600,0</coordinates></Point></Placemark>
+<Placemark><name>4. 阿瓦诺斯</name><Point><coordinates>34.846000,38.715400,0</coordinates></Point></Placemark>
+<Placemark><name>5. 红谷日落点</name><Point><coordinates>34.873000,38.660000,0</coordinates></Point></Placemark>
+<Placemark><name>Day 5 route</name><Style><LineStyle><color>ffaa00aa</color><width>3</width></LineStyle></Style><LineString><coordinates>34.828900,38.643100,0 34.860000,38.673300,0 34.842000,38.665600,0 34.846000,38.715400,0 34.873000,38.660000,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 6 2026-10-06 — 热气球候补 + 代林库尤地下城 + 20:00 上夜巴</name>
+<Placemark><name>1. 格雷梅镇中心</name><Point><coordinates>34.828900,38.643100,0</coordinates></Point></Placemark>
+<Placemark><name>2. 代林库尤地下城</name><Point><coordinates>34.734500,38.374200,0</coordinates></Point></Placemark>
+<Placemark><name>3. 鸽子谷观景台</name><Point><coordinates>34.818000,38.635000,0</coordinates></Point></Placemark>
+<Placemark><name>4. 于尔居普</name><Point><coordinates>34.913000,38.631700,0</coordinates></Point></Placemark>
+<Placemark><name>5. 格雷梅长途车站</name><Point><coordinates>34.830500,38.641500,0</coordinates></Point></Placemark>
+<Placemark><name>Day 6 route</name><Style><LineStyle><color>ff777777</color><width>3</width></LineStyle></Style><LineString><coordinates>34.828900,38.643100,0 34.734500,38.374200,0 34.818000,38.635000,0 34.913000,38.631700,0 34.830500,38.641500,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 7 2026-10-07 — 白棉之丘:钙华台 + 希拉波利斯 → 夜飞伊斯坦布尔</name>
+<Placemark><name>1. 代尼兹利车站</name><Point><coordinates>29.087600,37.783300,0</coordinates></Point></Placemark>
+<Placemark><name>2. 棉花堡钙华台</name><Point><coordinates>29.120600,37.920300,0</coordinates></Point></Placemark>
+<Placemark><name>3. 克利奥帕特拉古温泉池</name><Point><coordinates>29.126400,37.925600,0</coordinates></Point></Placemark>
+<Placemark><name>4. 希拉波利斯大剧院</name><Point><coordinates>29.132000,37.927000,0</coordinates></Point></Placemark>
+<Placemark><name>5. Çardak 机场(DNZ)</name><Point><coordinates>29.701300,37.785600,0</coordinates></Point></Placemark>
+<Placemark><name>Day 7 route</name><Style><LineStyle><color>ff0000ff</color><width>3</width></LineStyle></Style><LineString><coordinates>29.087600,37.783300,0 29.120600,37.920300,0 29.126400,37.925600,0 29.132000,37.927000,0 29.701300,37.785600,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 8 2026-10-08 — 老城外:苏莱曼尼耶 + 卡里耶 + 巴拉特 + 亚洲区晚餐</name>
+<Placemark><name>1. Karaköy 住宿</name><Point><coordinates>28.977000,41.023400,0</coordinates></Point></Placemark>
+<Placemark><name>2. 苏莱曼尼耶清真寺</name><Point><coordinates>28.963900,41.016500,0</coordinates></Point></Placemark>
+<Placemark><name>3. 卡里耶清真寺</name><Point><coordinates>28.939400,41.031200,0</coordinates></Point></Placemark>
+<Placemark><name>4. 巴拉特</name><Point><coordinates>28.949000,41.029400,0</coordinates></Point></Placemark>
+<Placemark><name>5. 卡德柯伊市集</name><Point><coordinates>29.025700,40.990300,0</coordinates></Point></Placemark>
+<Placemark><name>Day 8 route</name><Style><LineStyle><color>ffff0000</color><width>3</width></LineStyle></Style><LineString><coordinates>28.977000,41.023400,0 28.963900,41.016500,0 28.939400,41.031200,0 28.949000,41.029400,0 29.025700,40.990300,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 9 2026-10-09 — 离开日:香料市场补货 + 加拉塔,回机场</name>
+<Placemark><name>1. Karaköy 住宿</name><Point><coordinates>28.977000,41.023400,0</coordinates></Point></Placemark>
+<Placemark><name>2. 埃及香料市场</name><Point><coordinates>28.970500,41.016500,0</coordinates></Point></Placemark>
+<Placemark><name>3. 加拉塔塔</name><Point><coordinates>28.974400,41.025600,0</coordinates></Point></Placemark>
+<Placemark><name>4. 伊斯坦布尔新机场 IST</name><Point><coordinates>28.751900,41.275300,0</coordinates></Point></Placemark>
+<Placemark><name>Day 9 route</name><Style><LineStyle><color>ff00aa00</color><width>3</width></LineStyle></Style><LineString><coordinates>28.977000,41.023400,0 28.970500,41.016500,0 28.974400,41.025600,0 28.751900,41.275300,0</coordinates></LineString></Placemark>
+</Folder>
+</Document></kml>

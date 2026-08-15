@@ -75,7 +75,7 @@
     {"t": "09:15-11:31", "what": "特急/新干线 (往…方向) · A→B · 出口N", "kind": "hop",
      "verify": "verified", "note": "verified timetable keeps its exact minutes",
      "link": "PLACEHOLDER"},
-    {"t": "15:00", "what": "check-in — a move day carries at most one anchor",
+    {"t": "15:00", "what": "check-in — a move day carries ≤2 anchors only if bags are handled before the first; otherwise 1",
      "kind": "free", "tag": "pinned"}
    ],
    "stops": []}

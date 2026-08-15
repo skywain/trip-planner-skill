@@ -1,0 +1,1491 @@
+{
+  "trip": "Morocco 2026 · Marrakech · Atlas · Sahara · Fes · Chefchaouen",
+  "lang": "en",
+  "tz": "Africa/Casablanca",
+  "meta": {
+    "dates": "2026-11-06 → 2026-11-15",
+    "party": "2 adults · Canadian passports · no self-drive",
+    "route": "Toronto → Marrakech (2 nts) → Aït Benhaddou / Skoura (1) → Merzouga desert camp (1) → Fes (2) → Chefchaouen (1) → Casablanca (1) → Toronto",
+    "budget_total": "≈ CA$7,500 / 2 people (excl. shopping; see the budget table)",
+    "fx": "1 CAD = 6.696 MAD · 1 CAD = 0.721 USD (open.er-api.com, 2026-08-15 — frankfurter.dev, the skill's default FX source, does not carry MAD)",
+    "generated": "2026-08-15",
+    "self_check": "self-checked: 11 issues found and fixed — ① Green March (Nov 6) is a national holiday, but it only touches the day we are in the air ② Bou Inania in Fes closes to non-Muslims around Friday midday prayer, so the Fes medina day was pinned to Thursday 11-12 and the Friday became the CTM bus day ③ the Merzouga→Fes drive was written as 6 h; the real road is 7.5–8 h, so Ifrane was demoted to a leg-stretch and the day now carries 2 anchors ④ Hassan II Mosque runs no 13:00/14:00 tour, so the departure-day visit is pinned to the 09:00 slot ⑤ the CMN→YYZ airport buffer was 2 h 10 m, raised to 3 h 15 m ⑥ the D3 rain alternative was Jardin Majorelle, which is an open garden — swapped for the Musée Yves Saint Laurent next door ⑦ D9 originally left Chefchaouen at 05:00 for a morning TNG flight; the flight moved to the evening bank and the Spanish Mosque sunrise was kept ⑧ every sunrise/sunset in the day text was an hour off against route_tools `sun` (Morocco sits on UTC+0 from 2026-09-20 in tzdata 2026c) — all ten days reconciled against the API values ⑨ the Chefchaouen sunset block ran to 18:15 against a 17:18 sunset; the whole afternoon shifted 30 minutes earlier ⑩ two days had a hop with no timeline row (the airport→Casa-Voyageurs change, and the 100 m Blue Gate→Bou Inania walk), which silently broke every later map link on those days ⑪ the TNG→CMN flight row was marked map:false although both airports are in stops[], which is exactly the case route_tools says to leave mappable."
+  },
+  "decisions": [
+    "Headless run — no checkpoint question was asked. Skeleton chosen for you: one line, no backtracking (Marrakech → Atlas → Sahara → Fes → Chefchaouen → Casablanca), open-jaw on the ground rather than in the air.",
+    "Open-jaw in and out of Casablanca, not Marrakech: Royal Air Maroc flies YYZ↔CMN nonstop in both directions (7 h 20 out, 8 h 40 back), and every alternative is a 2-stop 13–33 h routing through Lisbon or Madrid. The nonstop costs ≈CA$200/person more and buys back the better part of two days.",
+    "Casablanca → Marrakech by ONCF train on arrival day instead of a connecting flight: the airport sits on the rail line, the train is ≈CA$20/person against ≈CA$100/person for a private transfer, and a 09:45 landing still puts you on a Marrakech roof terrace before sunset.",
+    "One domestic flight, spent at the end: Tangier → Casablanca. Chefchaouen has no airport and no rail; the alternative is a 6-hour bus to Casablanca on the last full day. Flying it turns a lost day into a Cap Spartel afternoon.",
+    "Marrakech → Fes across the desert by private driver (3 days / 2 nights), not the shared minibus: for two people the private car is roughly €80/person more but sets its own clock — the Tizi n'Tichka viewpoints, the Dades hairpins and the Erg Chebbi sunrise are all photography stops that a 17-seat group tour drives past.",
+    "Two nights in Marrakech and two in Fes, one night everywhere else: the desert crossing is inherently a chain of one-night stops. Bases are Marrakech and Fes; nothing else is unpacked.",
+    "Anchors are clustered so no evening needs a dark walk outside the medina you are sleeping in — Jemaa el-Fna, Fes el-Bali and the Chefchaouen plaza are all within 10 minutes of the beds picked below."
+  ],
+  "checklist": [
+    {
+      "item": "Passport valid ≥6 months beyond departure from Morocco (i.e. beyond 2026-11-15)",
+      "deadline": "Check now; renewal takes 4–6 weeks",
+      "price": "CA$0 if already valid",
+      "link": "https://travel.gc.ca/destinations/morocco",
+      "note": "No visa for Canadians for stays under 90 days — confirmed on travel.gc.ca (Government of Canada), 2026-08-15. Nothing to apply for; the only failure mode is a passport that expires too soon."
+    },
+    {
+      "item": "Travel-medical insurance with medical evacuation",
+      "deadline": "Same day you buy the flights",
+      "price": "≈CA$120–180 / 2 people / 10 days",
+      "note": "travel.gc.ca is explicit that Moroccan doctors and hospitals expect immediate cash payment; evacuation cover matters more than usual because two of your nights are 4+ hours from a major hospital (Merzouga, Chefchaouen)."
+    },
+    {
+      "item": "International flights YYZ→CMN and CMN→YYZ (Royal Air Maroc nonstop)",
+      "deadline": "Book now — November is Morocco's high season and the nonstop is one aircraft a day",
+      "price": "CA$944 + CA$741 = CA$1,685 / person ⚠️ Google-cache price, 2026-08-15",
+      "link": "https://www.google.com/travel/flights?q=One%20way%20flights%20from%20YYZ%20to%20CMN%20on%202026-11-06%20for%202%20adults",
+      "note": "Backup, ≈CA$400/person cheaper: TAP via Lisbon (1 stop, 12 h 15). Compare after adding the checked-bag fee."
+    },
+    {
+      "item": "3-day private desert transfer, Marrakech → Fes via Aït Benhaddou / Dades / Merzouga",
+      "deadline": "4–6 weeks out; the good desert camps sell out in the November peak",
+      "price": "€200–280 / person (private car + driver, 2 nights, half board) ⚠️ band, not a quote",
+      "link": "https://www.getyourguide.com/marrakesh-l208/marrakech-to-merzouga-3-day-desert-adventure-t482521/",
+      "note": "Ask for three things in writing: (a) it ENDS in Fes, not back in Marrakech; (b) a private vehicle, not a seat-in-coach; (c) which camp — 'luxury camp' means an ensuite tent, 'standard' means a shared shower block."
+    },
+    {
+      "item": "Tangier (TNG) → Casablanca (CMN) domestic flight, 2026-11-14 evening",
+      "deadline": "6–8 weeks out",
+      "price": "—, check link ⚠️ not price-verified in this run",
+      "link": "https://www.royalairmaroc.com/",
+      "note": "Royal Air Maroc runs several TNG–CMN rotations a day; you need one in the 17:00–21:00 bank. Book it on the same PNR as the CMN→YYZ flight if the fare allows — a separate ticket means no protection if it slips."
+    },
+    {
+      "item": "CTM bus Fes → Chefchaouen, 2026-11-13 08:00",
+      "deadline": "3–7 days ahead online, or at the Fes CTM counter the day before",
+      "price": "MAD 110–140 / person ≈ CA$16–21",
+      "link": "https://www.ctm.ma/",
+      "note": "CTM is the reserved-seat operator with a luggage hold; the cheaper 'Supratours'/local buses do not reserve. Get seats on the left going north for the Rif views."
+    },
+    {
+      "item": "Jardin Majorelle timed ticket (08:00 slot)",
+      "deadline": "2–3 weeks out",
+      "price": "MAD 170 / person garden only ≈ CA$25",
+      "link": "https://www.jardinmajorelle.com/en/",
+      "note": "Sold as a timed entry; the 08:00 opening is the only hour the blue walls are photographable without a queue in frame."
+    },
+    {
+      "item": "Hassan II Mosque guided visit, 2026-11-15 09:00",
+      "deadline": "Buy on arrival at the ticket office, 30–45 min early",
+      "price": "MAD 130–140 / person ≈ CA$19–21",
+      "link": "https://hassan2mosque.com/",
+      "note": "Non-Muslims enter only on the guided tour; Sat–Thu slots at 09:00 / 10:00 / 11:00 / 12:00 / 15:00. The 09:00 is the only one that clears your 15:30 flight with margin."
+    },
+    {
+      "item": "eSIM (INWI or Maroc Telecom coverage)",
+      "deadline": "Install before leaving; activate on landing",
+      "price": "US$11–29 for 10–20 GB ≈ CA$15–40 / person",
+      "note": "INWI and Maroc Telecom have the usable coverage in the Atlas and around Merzouga; Orange is fine only in the cities."
+    },
+    {
+      "item": "Re-confirm every opening hour and admission fee 2 weeks before travel",
+      "deadline": "2026-11-01",
+      "price": "free",
+      "note": "Nothing in Morocco publishes a specific November-2026 timetable this far out. Everything below is the seasonal pattern as of 2026-08-15."
+    }
+  ],
+  "legs": [
+    {
+      "type": "International flight (outbound)",
+      "date": "2026-11-06",
+      "carrier": "Royal Air Maroc (nonstop)",
+      "from": "YYZ Toronto Pearson",
+      "to": "CMN Casablanca Mohammed V",
+      "dep": "21:25",
+      "arr": "09:45 next day",
+      "duration": "7 h 20 · nonstop",
+      "price": "CA$944 / person (CA$1,888 for 2) ⚠️ Google-cache price, 2026-08-15, not re-checked on the airline site",
+      "bags": "RAM economy normally includes 1 × 23 kg checked to Africa — confirm on the fare rules; a basic fare may not",
+      "link": "https://www.google.com/travel/flights?q=One%20way%20flights%20from%20YYZ%20to%20CMN%20on%202026-11-06%20for%202%20adults",
+      "backup": "TAP Air Portugal via Lisbon, 22:45 → 16:00+1, 12 h 15, CA$824/person — cheaper, but it eats the Marrakech afternoon"
+    },
+    {
+      "type": "Rail (arrival transfer)",
+      "date": "2026-11-07",
+      "carrier": "ONCF",
+      "from": "Casablanca Aéroport Mohammed V",
+      "to": "Marrakech",
+      "dep": "11:15",
+      "arr": "15:35",
+      "duration": "≈4 h 20 incl. a change at Casa-Voyageurs",
+      "price": "MAD 130–190 / person 2nd class ≈ CA$19–28 ⚠️ pattern, buy at the station or on the app",
+      "link": "https://www.oncf-voyages.ma/",
+      "backup": "Private transfer CMN → Marrakech, ≈MAD 1,400 / car (2 h 30 door to door) — worth it if the flight lands late"
+    },
+    {
+      "type": "Private car + driver (3-day desert crossing)",
+      "date": "2026-11-09 → 2026-11-11",
+      "carrier": "Local operator, private 4×4 / minivan",
+      "from": "Marrakech",
+      "to": "Fes (via Aït Benhaddou · Dades · Todra · Merzouga)",
+      "dep": "08:00 on 11-09",
+      "arr": "≈19:30 on 11-11",
+      "duration": "≈22 h of driving over 3 days",
+      "price": "€200–280 / person incl. 2 nights half board ≈ CA$345–480 ⚠️ band from operator listings, not a quote",
+      "link": "https://www.getyourguide.com/marrakesh-l208/marrakech-to-merzouga-3-day-desert-adventure-t482521/",
+      "backup": "Shared minibus version of the same route, €95–140 / person — same stops, none of them long enough to photograph"
+    },
+    {
+      "type": "Intercity bus",
+      "date": "2026-11-13",
+      "carrier": "CTM",
+      "from": "Fes CTM station",
+      "to": "Chefchaouen CTM station",
+      "dep": "08:00",
+      "arr": "12:10",
+      "duration": "4 h 10 · one 15–20 min rest stop near Ouazzane",
+      "price": "MAD 110–140 / person ≈ CA$16–21",
+      "link": "https://www.ctm.ma/",
+      "backup": "Grand taxi Fes → Chefchaouen, ≈MAD 1,000 / car, 3 h 30 — faster, no fixed schedule"
+    },
+    {
+      "type": "Private transfer",
+      "date": "2026-11-14",
+      "carrier": "Local driver",
+      "from": "Chefchaouen",
+      "to": "Tangier (Cap Spartel, then TNG)",
+      "dep": "11:30",
+      "arr": "≈14:00 at Cap Spartel",
+      "duration": "2 h 15 driving + the cape detour",
+      "price": "≈MAD 1,200–1,500 / car ≈ CA$180–225 for the two of you ⚠️ band",
+      "link": "https://www.google.com/maps/dir/?api=1&origin=35.170000%2C-5.264000&destination=35.794200%2C-5.923600&travelmode=driving",
+      "backup": "CTM Chefchaouen → Tangier 4 departures/day, MAD 45/person, 3 h — but it lands you downtown, not at the cape"
+    },
+    {
+      "type": "Domestic flight",
+      "date": "2026-11-14",
+      "carrier": "Royal Air Maroc",
+      "from": "TNG Tangier Ibn Battouta",
+      "to": "CMN Casablanca Mohammed V",
+      "dep": "evening bank ⚠️ exact time to confirm",
+      "arr": "≈1 h 05 later",
+      "duration": "1 h 05",
+      "price": "—, check link ⚠️ not price-verified in this run",
+      "bags": "1 × 23 kg on a standard RAM domestic fare; the light fare is cabin-only",
+      "link": "https://www.royalairmaroc.com/",
+      "backup": "If nothing in the evening bank works: overnight in Tangier and take the 07:00 Al Boraq high-speed train to Casablanca (2 h 10) on the 15th — it still clears the 15:30 departure, but it costs you the Hassan II Mosque"
+    },
+    {
+      "type": "International flight (return)",
+      "date": "2026-11-15",
+      "carrier": "Royal Air Maroc (nonstop)",
+      "from": "CMN Casablanca Mohammed V",
+      "to": "YYZ Toronto Pearson",
+      "dep": "15:30",
+      "arr": "19:10 same day",
+      "duration": "8 h 40 · nonstop",
+      "price": "CA$741 / person (CA$1,483 for 2) ⚠️ Google-cache price, 2026-08-15",
+      "bags": "as outbound",
+      "link": "https://www.google.com/travel/flights?q=One%20way%20flights%20from%20CMN%20to%20YYZ%20on%202026-11-15%20for%202%20adults",
+      "backup": "TAP via Lisbon 12:15 → 21:15, CA$679/person — cheaper, but the 12:15 departure kills the mosque visit"
+    }
+  ],
+  "days": [
+    {
+      "date": "2026-11-06",
+      "city": "Toronto",
+      "tz": "America/Toronto",
+      "label": "Departure day: nothing to see, everything to not forget",
+      "rain_alt": "Not applicable — the whole day is indoors and in the air.",
+      "late_cut": "If the UP Express is disrupted, a taxi from downtown to YYZ is 35–50 min and ≈CA$70; leave the extra hour in rather than trim the airport buffer.",
+      "timeline": [
+        {
+          "t": "15:00-17:00",
+          "what": "Final packing. Layers, not warm clothes: 26 °C in the Marrakech afternoon and 7 °C in a Chefchaouen dawn are the same trip.",
+          "kind": "free",
+          "note": "Type C / E plug adapter (two round pins, same as continental Europe), 220 V. A head-torch for the desert camp; a scarf that can cover shoulders for the mosque on the last morning."
+        },
+        {
+          "t": "17:30-18:15",
+          "what": "UP Express Union Station → Toronto Pearson T1 · 25 min · CA$12.35/person",
+          "kind": "hop",
+          "verify": "est",
+          "map": false,
+          "note": "Royal Air Maroc uses T3 at YYZ ⚠️ confirm on the boarding pass; the inter-terminal LINK train adds 10 min"
+        },
+        {
+          "t": "18:15-21:25",
+          "what": "Check-in, security, and a real meal before the flight — RAM serves late and light",
+          "kind": "free",
+          "tag": "pinned",
+          "note": "3 h international buffer, per the plan's own rule. This is also the moment to withdraw nothing: Moroccan dirham is a closed currency and you cannot buy it in Canada — get it from an ATM in the CMN arrivals hall tomorrow."
+        },
+        {
+          "t": "21:25",
+          "what": "Royal Air Maroc YYZ → CMN, nonstop, 7 h 20 · arrives 09:45 local (Morocco is UTC+1 in November, +5 h from Toronto)",
+          "kind": "anchor",
+          "tag": "pinned",
+          "price": "CA$944/person ⚠️ Google-cache price",
+          "note": "Short overnight — 7 h 20 gate to gate means maybe 5 h of sleep. Set the watch to Morocco time at the gate, not on landing."
+        }
+      ],
+      "stops": [
+        {
+          "name": "Toronto Pearson (YYZ)",
+          "lat": 43.6777,
+          "lon": -79.6248
+        }
+      ],
+      "sun": "dawn 06:31 · ☀ 06:59 / 🌇 17:04 · EST · sunrise-sunset.org"
+    },
+    {
+      "date": "2026-11-07",
+      "city": "Marrakech",
+      "label": "Land, ride south, and walk into the smoke of Jemaa el-Fna",
+      "rain_alt": "November rain in Marrakech comes in 30-minute bursts. If it is falling at 17:00, swap the Koutoubia walk for mint tea on a covered terrace on the square's south side and go down into the food stalls when it stops — they set up rain or shine.",
+      "late_cut": "Flight >90 min late → skip the Koutoubia loop, go straight to the riad, and give the whole evening to the square.",
+      "timeline": [
+        {
+          "t": "09:45-10:55",
+          "what": "Land CMN · immigration, bags, and an ATM in arrivals (take MAD 2,000–3,000; dirham cannot be bought outside Morocco)",
+          "kind": "free",
+          "tag": "pinned",
+          "note": "Passport control at CMN is slow on a Saturday morning bank of arrivals — an hour is realistic, not pessimistic."
+        },
+        {
+          "t": "11:15-15:35",
+          "what": "ONCF train Casablanca Airport → Casa-Voyageurs → Marrakech · ≈4 h 20 with one change · MAD 130–190/person",
+          "kind": "hop",
+          "verify": "est",
+          "note": "The airport station is directly under the terminal. Buy both legs at the counter; 2nd class is fine, 1st class is MAD 60 more and gets you a reserved seat on the Marrakech leg — worth it with luggage."
+        },
+        {
+          "t": "15:35-16:15",
+          "what": "Taxi Marrakech station → the medina · 3.5 km · 15 min · MAD 30–50 (agree the price before the door closes)",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Cars cannot reach most riads; the driver stops at the nearest gate and a porter with a barrow takes the bags the last 200 m for MAD 20.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.630400%2C-8.017700&destination=31.627000%2C-7.985600&travelmode=driving"
+        },
+        {
+          "t": "16:15-17:00",
+          "what": "Check in, drop bags, mint tea on the roof",
+          "kind": "free"
+        },
+        {
+          "t": "17:00-17:25",
+          "what": "Walk riad → Koutoubia Mosque · 0.9 km · 14 min",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.627000%2C-7.985600&destination=31.623600%2C-7.993400&travelmode=walking"
+        },
+        {
+          "t": "17:25-18:10",
+          "what": "Koutoubia Mosque and its gardens at last light",
+          "kind": "anchor",
+          "price": "free (exterior and gardens; non-Muslims do not enter)",
+          "tag": "opener",
+          "note": "Sunset is 17:39 on 11-07 (Morocco runs on UTC+0 from 2026-09-20 — see the brief) — the minaret goes copper for about twelve minutes and then the floodlights take over. The best angle is from the rose garden on the south-west side, not from the road."
+        },
+        {
+          "t": "18:10-18:25",
+          "what": "Walk Koutoubia → Jemaa el-Fna · 0.5 km · 8 min",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.623600%2C-7.993400&destination=31.625800%2C-7.989100&travelmode=walking"
+        },
+        {
+          "t": "18:25-21:00",
+          "what": "Jemaa el-Fna after dark — the food stalls, the gnaoua drums, the smoke",
+          "kind": "meal",
+          "price": "MAD 80–150/person for a full stall dinner",
+          "note": "The square is a different place after 18:00 than at noon. Rules that make it fun: walk a full lap before choosing; eat where Moroccan families are eating; agree the price of anything handed to you; the numbered stalls in the 30s–90s are the local end. Snake charmers and monkey handlers charge for photographs — do not raise a camera unless you intend to pay."
+        }
+      ],
+      "stops": [
+        {
+          "name": "Casablanca Mohammed V Airport (CMN)",
+          "lat": 33.3675,
+          "lon": -7.5898
+        },
+        {
+          "name": "Marrakech Railway Station",
+          "lat": 31.6304,
+          "lon": -8.0177,
+          "mode": "train"
+        },
+        {
+          "name": "Riad · Marrakech Medina",
+          "lat": 31.627,
+          "lon": -7.9856,
+          "mode": "drive"
+        },
+        {
+          "name": "Koutoubia Mosque",
+          "lat": 31.6236,
+          "lon": -7.9934,
+          "mode": "walk"
+        },
+        {
+          "name": "Jemaa el-Fna",
+          "lat": 31.6258,
+          "lon": -7.9891,
+          "mode": "walk"
+        }
+      ],
+      "walking_km": {
+        "total": 2.6,
+        "how": "street 1.4 (straight-line 1.1 × 1.3 for medina lanes) + Koutoubia gardens ~0.4 + laps of Jemaa el-Fna ~0.8"
+      },
+      "ribbon": "CMN →ONCF 4h20→ Marrakech →taxi 15′→ Riad →walk 14′→ Koutoubia →walk 8′→ Jemaa el-Fna (dinner)",
+      "sun": "dawn 06:27 · ☀ 06:51 / 🌇 17:39 · +00 · sunrise-sunset.org"
+    },
+    {
+      "date": "2026-11-08",
+      "city": "Marrakech",
+      "label": "Blue garden at opening, then the medina from the madrasa down to the tombs",
+      "rain_alt": "Musée Yves Saint Laurent, next door to Majorelle and entirely indoors (MAD 100); in the medina, Bahia Palace and Ben Youssef are both roofed courtyards that read better in flat light than in hard sun.",
+      "late_cut": "Behind by more than an hour after lunch → drop the Saadian Tombs and keep Bahia; the tombs are 15 minutes of looking and a 40-minute queue.",
+      "timeline": [
+        {
+          "t": "07:20-07:50",
+          "what": "Taxi riad → Jardin Majorelle · 3.0 km · 15 min · MAD 40–60",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Leave in the dark. Civil dawn is 06:28 and sunrise 06:52; the gate opens at 08:00.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.627000%2C-7.985600&destination=31.641700%2C-8.003300&travelmode=driving"
+        },
+        {
+          "t": "08:00-09:30",
+          "what": "Jardin Majorelle (+ Berber Museum if the queue is short)",
+          "kind": "anchor",
+          "price": "MAD 170/person garden · MAD 230 with the Berber Museum ≈ CA$25–34",
+          "tag": "opener",
+          "note": "Open daily 08:00–18:30, last entry 18:00 (pattern as of 2026-08-15). The point of the 08:00 slot is photographic: for about 40 minutes the cobalt walls and the bamboo alley are empty. By 10:00 there is a permanent queue in every frame."
+        },
+        {
+          "t": "09:30-09:55",
+          "what": "Taxi Majorelle → Ben Youssef Madrasa · 2.2 km · 15 min · MAD 40–60",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.641700%2C-8.003300&destination=31.632100%2C-7.986100&travelmode=driving"
+        },
+        {
+          "t": "10:00-11:15",
+          "what": "Ben Youssef Madrasa — the cedar, stucco and zellij courtyard, and the student cells upstairs",
+          "kind": "anchor",
+          "price": "MAD 50/person ≈ CA$7.50",
+          "note": "Open daily 09:00–19:00 (pattern as of 2026-08-15). Reopened after a long restoration; the courtyard reflecting pool is the shot, and it is cleanest before the tour groups arrive at 11:00. The upstairs cells look down into it."
+        },
+        {
+          "t": "11:15-11:35",
+          "what": "Walk Ben Youssef Madrasa → Souk Semmarine · 0.6 km · 12 min through the souks",
+          "kind": "hop",
+          "verify": "est",
+          "note": "This is the walk where you get lost. That is the point — but drop a pin on the riad before you start, because GPS drifts badly under the reed roofs.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.632100%2C-7.986100&destination=31.628500%2C-7.988400&travelmode=walking"
+        },
+        {
+          "t": "11:35-13:30",
+          "what": "Souks and lunch — Semmarine, the dyers' lane, the metalworkers' quarter",
+          "kind": "meal",
+          "price": "MAD 70–120/person for a rooftop lunch",
+          "note": "Food area, not a named restaurant: the terraces around Rahba Kedima (the spice square) all have roughly the same tagine and a view over the baskets. Bargaining is expected; a third of the opening price is a normal landing point."
+        },
+        {
+          "t": "13:30-13:50",
+          "what": "Walk Souk Semmarine → Bahia Palace · 1.0 km · 18 min",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.628500%2C-7.988400&destination=31.621600%2C-7.983200&travelmode=walking"
+        },
+        {
+          "t": "14:00-15:30",
+          "what": "Bahia Palace — the marquetry ceilings, the Grand Riad, the harem courtyards",
+          "kind": "anchor",
+          "price": "MAD 100/person ≈ CA$15",
+          "note": "Open daily 09:00–17:00 (pattern as of 2026-08-15); the ticket office closes before the palace does, so do not arrive after 16:15. The painted cedar ceilings are the thing to photograph and they need the mid-afternoon light coming in sideways."
+        },
+        {
+          "t": "15:30-15:50",
+          "what": "Walk Bahia Palace → Saadian Tombs · 1.1 km · 20 min",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.621600%2C-7.983200&destination=31.617800%2C-7.989200&travelmode=walking"
+        },
+        {
+          "t": "15:50-16:40",
+          "what": "Saadian Tombs — the Chamber of Twelve Columns",
+          "kind": "anchor",
+          "price": "MAD 100/person ≈ CA$15",
+          "tag": "skippable",
+          "note": "Small, and the queue into the main chamber is single-file. Fifteen minutes of extraordinary Carrara-and-cedar work behind forty minutes of shuffling. If the queue is out to the alley, skip it without regret."
+        },
+        {
+          "t": "16:40-17:05",
+          "what": "Walk Saadian Tombs → Jemaa el-Fna · 1.0 km · 18 min",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.617800%2C-7.989200&destination=31.625800%2C-7.989100&travelmode=walking"
+        },
+        {
+          "t": "17:05-19:00",
+          "what": "Sunset from a café terrace on the north edge of Jemaa el-Fna, then back into the square",
+          "kind": "free",
+          "note": "Sunset is 17:38, so golden hour runs 17:05–17:38. The terraces charge MAD 30–50 for a tea you are really paying for the balcony — take it, it is the only elevated view of the square."
+        },
+        {
+          "t": "19:30-21:00",
+          "what": "Dinner in the Mouassine / Dar el Bacha quarter",
+          "kind": "meal",
+          "price": "MAD 150–250/person",
+          "tag": "swap→a second night at the food stalls if last night's was good",
+          "note": "Quieter and more local than the square, and it is a 10-minute walk home through lit lanes rather than a taxi."
+        }
+      ],
+      "stops": [
+        {
+          "name": "Riad · Marrakech Medina",
+          "lat": 31.627,
+          "lon": -7.9856
+        },
+        {
+          "name": "Jardin Majorelle",
+          "lat": 31.6417,
+          "lon": -8.0033,
+          "mode": "drive"
+        },
+        {
+          "name": "Ben Youssef Madrasa",
+          "lat": 31.6321,
+          "lon": -7.9861,
+          "mode": "drive"
+        },
+        {
+          "name": "Souk Semmarine",
+          "lat": 31.6285,
+          "lon": -7.9884,
+          "mode": "walk"
+        },
+        {
+          "name": "Bahia Palace",
+          "lat": 31.6216,
+          "lon": -7.9832,
+          "mode": "walk"
+        },
+        {
+          "name": "Saadian Tombs",
+          "lat": 31.6178,
+          "lon": -7.9892,
+          "mode": "walk"
+        },
+        {
+          "name": "Jemaa el-Fna",
+          "lat": 31.6258,
+          "lon": -7.9891,
+          "mode": "walk"
+        }
+      ],
+      "walking_km": {
+        "total": 7.4,
+        "how": "street 4.8 (straight-line 3.7 × 1.3) + Majorelle ~0.8 + Bahia ~0.6 + souks and the square ~1.2"
+      },
+      "ribbon": "Riad →taxi 15′→ Jardin Majorelle →taxi 15′→ Ben Youssef Madrasa →walk 12′→ Souks (lunch) →walk 18′→ Bahia Palace →walk 20′→ Saadian Tombs →walk 18′→ Jemaa el-Fna (sunset)",
+      "day_map": "https://www.google.com/maps/dir/?api=1&origin=31.627000%2C-7.985600&destination=31.625800%2C-7.989100&travelmode=walking&waypoints=31.641700%2C-8.003300%7C31.632100%2C-7.986100%7C31.628500%2C-7.988400%7C31.621600%2C-7.983200%7C31.617800%2C-7.989200",
+      "sun": "dawn 06:28 · ☀ 06:52 / 🌇 17:38 · +00 · sunrise-sunset.org"
+    },
+    {
+      "date": "2026-11-09",
+      "city": "Aït Benhaddou · Skoura",
+      "label": "Over the High Atlas: the pass, the ksar, and a night in a palm-grove kasbah",
+      "rain_alt": "Rain on the Tichka side turns the pass into cloud with no view; the fix is time, not a substitute — tell the driver to push through and give the extra hour to Aït Benhaddou, which is better in cloud anyway (the mud walls stop being blown out).",
+      "late_cut": "Leaving Marrakech after 09:00 → cut Taourirt Kasbah in Ouarzazate and go straight from lunch to Skoura, arriving before dark.",
+      "timeline": [
+        {
+          "t": "08:00-08:15",
+          "what": "Driver pickup at the medina gate nearest the riad; bags in the car",
+          "kind": "free",
+          "tag": "pinned",
+          "note": "Confirm the day before which gate. Cars cannot come to the door."
+        },
+        {
+          "t": "08:15-11:00",
+          "what": "Drive Marrakech → Tizi n'Tichka pass · 105 km · 2 h 45 (mountain road, 2,260 m)",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Continuous switchbacks for the last hour. Sit in the front if either of you is prone to car sickness, and say so at 08:00 rather than at 10:30.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.627000%2C-7.985600&destination=31.291900%2C-7.383300&travelmode=driving"
+        },
+        {
+          "t": "11:00-11:30",
+          "what": "Tizi n'Tichka pass — the summit viewpoint back over the Atlas",
+          "kind": "free",
+          "note": "Free, roadside, and worth the 30 minutes: this is where the green side of Morocco ends and the red side starts, and you can see both from one spot. There are argan-oil stalls at the top; the honest ones let you watch the pressing."
+        },
+        {
+          "t": "11:30-12:45",
+          "what": "Drive Tizi n'Tichka → Aït Benhaddou · 70 km · 1 h 15",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.291900%2C-7.383300&destination=31.047200%2C-7.131900&travelmode=driving"
+        },
+        {
+          "t": "12:45-15:15",
+          "what": "Ksar of Aït Benhaddou — cross the riverbed, climb through the ksar to the agadir on the summit",
+          "kind": "anchor",
+          "price": "free to enter the ksar · MAD 20–30 to some private houses · MAD 100–150 for a local guide (worth it)",
+          "tag": "pinned",
+          "note": "UNESCO since 1987 and still lived in by a handful of families. The climb to the granary at the top is 20–25 minutes on uneven earth steps — the whole valley opens up from there and that is the photograph. Lunch is at one of the terraces on the far bank, facing the ksar; eat after the climb so you get the walls in low sun on the way down."
+        },
+        {
+          "t": "15:15-15:50",
+          "what": "Drive Aït Benhaddou → Ouarzazate (Taourirt Kasbah) · 32 km · 35 min",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.047200%2C-7.131900&destination=30.918900%2C-6.893400&travelmode=driving"
+        },
+        {
+          "t": "15:50-16:50",
+          "what": "Taourirt Kasbah, Ouarzazate — the Glaoui pashas' town fortress",
+          "kind": "anchor",
+          "price": "MAD 60/person ≈ CA$9",
+          "tag": "skippable",
+          "note": "Open daily ≈08:00–18:00 (pattern as of 2026-08-15). A smaller, restored counterpoint to Aït Benhaddou with better-preserved painted rooms. If the ksar ran long, this is the thing to drop — Atlas Studios across town is a film-set tour and not worth an hour of daylight."
+        },
+        {
+          "t": "16:50-17:45",
+          "what": "Drive Ouarzazate → Skoura palm grove · 42 km · 55 min",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Sunset is 17:38 out here; the last 20 minutes of this drive along the Valley of the Roses road is the best light of the day. Ask the driver to stop once.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=30.918900%2C-6.893400&destination=31.061100%2C-6.555600&travelmode=driving"
+        },
+        {
+          "t": "17:45-19:00",
+          "what": "Check into a kasbah guesthouse in the Skoura palmeraie",
+          "kind": "free",
+          "note": "Skoura is 30,000 palms and about six streets. This is a night of no wifi and a very dark sky — the first of two."
+        },
+        {
+          "t": "19:30-21:00",
+          "what": "Dinner at the guesthouse (half board is standard out here)",
+          "kind": "meal",
+          "price": "included in the tour price / MAD 150–200 if separate"
+        }
+      ],
+      "stops": [
+        {
+          "name": "Riad · Marrakech Medina",
+          "lat": 31.627,
+          "lon": -7.9856
+        },
+        {
+          "name": "Tizi n'Tichka Pass",
+          "lat": 31.2919,
+          "lon": -7.3833,
+          "mode": "drive"
+        },
+        {
+          "name": "Ksar of Aït Benhaddou",
+          "lat": 31.0472,
+          "lon": -7.1319,
+          "mode": "drive"
+        },
+        {
+          "name": "Taourirt Kasbah, Ouarzazate",
+          "lat": 30.9189,
+          "lon": -6.8934,
+          "mode": "drive"
+        },
+        {
+          "name": "Skoura Palm Grove (Kasbah Amridil)",
+          "lat": 31.0611,
+          "lon": -6.5556,
+          "mode": "drive"
+        }
+      ],
+      "walking_km": {
+        "total": 3.4,
+        "how": "the ksar climb and descent ~2.2 (uneven, earth steps) + Taourirt Kasbah ~0.7 + the palmeraie at dusk ~0.5"
+      },
+      "ribbon": "Marrakech →drive 2h45→ Tizi n'Tichka →drive 1h15→ Aït Benhaddou (lunch) →drive 35′→ Ouarzazate →drive 55′→ Skoura (night)",
+      "sun": "dawn 06:29 · ☀ 06:53 / 🌇 17:38 · +00 · sunrise-sunset.org"
+    },
+    {
+      "date": "2026-11-10",
+      "city": "Merzouga",
+      "label": "Two gorges, then the camels at sunset and a camp under the Erg Chebbi",
+      "rain_alt": "Rain in the pre-Sahara is rare (0.2 mm over the same ten days last year) but flash flooding closes the Todra road; if it does, the driver reroutes via Tinghir town and you lose the gorge, not the day. The desert camp itself is weather-proof — the tents are Berber wool.",
+      "late_cut": "Not negotiable: the camel trek must leave Merzouga by 16:15 to reach the camp in light. Behind schedule → cut Todra to a 20-minute stop and eat in the car.",
+      "timeline": [
+        {
+          "t": "08:00-09:30",
+          "what": "Drive Skoura → Dades Gorge hairpins (Tissdrine) · 95 km · 1 h 30",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.061100%2C-6.555600&destination=31.533300%2C-5.933300&travelmode=driving"
+        },
+        {
+          "t": "09:30-10:15",
+          "what": "Dades hairpins viewpoint — the switchback road stacked up the canyon wall",
+          "kind": "free",
+          "note": "The famous frame is from the café terrace above the bends, not from the road. Free; buy a coffee. Morning light comes down the canyon and the road reads as a ribbon; by afternoon it is flat."
+        },
+        {
+          "t": "10:15-11:30",
+          "what": "Drive Dades → Todra Gorge · 65 km · 1 h 15",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.533300%2C-5.933300&destination=31.589200%2C-5.596400&travelmode=driving"
+        },
+        {
+          "t": "11:30-13:00",
+          "what": "Todra Gorge — walk the flat kilometre between the 300 m walls where the canyon narrows to 10 m",
+          "kind": "anchor",
+          "price": "free (parking MAD 10–20)",
+          "note": "Open canyon, no hours. The narrows are a level, easy walk on tarmac beside the stream, so it costs nothing in energy. Climbers are usually on the left wall. This is a midday stop by design — it is one of the few places where overhead sun works, because the light comes down the slot."
+        },
+        {
+          "t": "13:00-14:00",
+          "what": "Lunch in Tinghir",
+          "kind": "meal",
+          "price": "MAD 70–110/person"
+        },
+        {
+          "t": "14:00-16:00",
+          "what": "Drive Tinghir → Merzouga · 190 km · 2 h 30 via Erfoud and Rissani",
+          "kind": "hop",
+          "verify": "est",
+          "note": "The landscape empties out completely on this stretch — hammada, then the first dunes on the horizon about 20 minutes before Merzouga."
+        },
+        {
+          "t": "16:00-16:20",
+          "what": "Drop the big bags at the trailhead auberge; overnight bag only from here",
+          "kind": "free",
+          "tag": "pinned",
+          "note": "Baggage walkthrough: the suitcases stay locked at the auberge in Merzouga tonight and travel on with the driver tomorrow morning. Take only what fits in a daypack onto the camel — head-torch, water, warm layer, camera, charger battery (there is no mains power at most camps)."
+        },
+        {
+          "t": "16:20-17:40",
+          "what": "Camel trek Merzouga → Erg Chebbi camp · ≈3 km · 1 h 20 — timed so the crest is under you at sunset",
+          "kind": "hop",
+          "price": "included in the tour price",
+          "tag": "pinned",
+          "note": "Sunset is 17:22 and the trek is timed so that you are on the dune crest for it. It is genuinely uncomfortable after 40 minutes — that is normal and it is only 80. Wear long trousers. The guide will stop at the high dune for the sunset; that stop is the photograph of the whole trip.",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.099400%2C-4.011700&destination=31.116700%2C-3.983300&travelmode=walking"
+        },
+        {
+          "t": "17:40-19:30",
+          "what": "Arrive camp, climb the dune behind it for the last light and the blue hour",
+          "kind": "anchor",
+          "note": "Sand cools fast: 27 °C at 16:00 and 14 °C by 21:00 in mid-November. The warm layer is not optional.",
+          "price": "included",
+          "tag": "pinned"
+        },
+        {
+          "t": "19:30-22:00",
+          "what": "Dinner at the camp, then drums and the sky",
+          "kind": "meal",
+          "price": "included",
+          "note": "The moon is a day-old crescent that sets right after the sun ⚠️ lunar phase not tool-verified, so expect a genuinely dark sky — the Milky Way is up in the early evening in November. For photographs: 15–20 s at f/2.8, ISO 3200, focus manually on a bright star, and put a dune crest in the bottom third."
+        }
+      ],
+      "stops": [
+        {
+          "name": "Skoura Palm Grove (Kasbah Amridil)",
+          "lat": 31.0611,
+          "lon": -6.5556
+        },
+        {
+          "name": "Dades Gorge hairpins (Tissdrine)",
+          "lat": 31.5333,
+          "lon": -5.9333,
+          "mode": "drive"
+        },
+        {
+          "name": "Todra Gorge",
+          "lat": 31.5892,
+          "lon": -5.5964,
+          "mode": "drive"
+        },
+        {
+          "name": "Merzouga (Erg Chebbi trailhead)",
+          "lat": 31.0994,
+          "lon": -4.0117,
+          "mode": "drive"
+        },
+        {
+          "name": "Desert camp · Erg Chebbi",
+          "lat": 31.1167,
+          "lon": -3.9833,
+          "mode": "walk"
+        }
+      ],
+      "walking_km": {
+        "total": 5.6,
+        "how": "Todra narrows out and back ~1.6 + Dades viewpoint ~0.3 + camel trek 3.2 (ridden, but it is the day's distance) + the dune behind the camp ~0.5"
+      },
+      "ribbon": "Skoura →drive 1h30→ Dades hairpins →drive 1h15→ Todra Gorge →drive 2h30→ Merzouga →camel 1h20→ Erg Chebbi camp (night)",
+      "sun": "dawn 06:13 · ☀ 06:37 / 🌇 17:22 · +00 · sunrise-sunset.org"
+    },
+    {
+      "date": "2026-11-11",
+      "city": "Fes",
+      "label": "Sunrise on the erg, then the long haul north over the Middle Atlas into Fes",
+      "rain_alt": "The Ifrane stretch can be genuinely cold and wet in November — if it is, skip the cedar forest walk and take the coffee stop in Ifrane town instead. Nothing else today is outdoors.",
+      "late_cut": "Behind after Midelt → drop Ifrane entirely and drive straight through; arriving in Fes after 20:00 means finding your riad in the medina in the dark, which is the one thing worth paying to avoid.",
+      "timeline": [
+        {
+          "t": "06:00-07:30",
+          "what": "Sunrise from the dune above camp",
+          "kind": "anchor",
+          "price": "included",
+          "tag": "opener",
+          "note": "At Erg Chebbi civil dawn is 06:14 and sunrise 06:38 — note the day's `sun` line below is Fes, where you end up, not the dune you wake on. Get up 30 minutes before you think you need to: the good light is on the sand ridges for about 25 minutes and the camp cook will have tea out. This and the camel silhouette at sunset are the two frames people come here for."
+        },
+        {
+          "t": "07:30-08:30",
+          "what": "Camel or 4×4 back to Merzouga · ≈3 km · breakfast at the auberge, collect the big bags",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Ask for the 4×4 on the way out — an hour of camel before a 7-hour drive is a poor trade.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=31.116700%2C-3.983300&destination=31.099400%2C-4.011700&travelmode=walking"
+        },
+        {
+          "t": "08:30-11:30",
+          "what": "Drive Merzouga → Ziz Valley viewpoint · 170 km · 3 h via Erfoud and Errachidia",
+          "kind": "hop",
+          "verify": "est"
+        },
+        {
+          "t": "11:30-12:00",
+          "what": "Ziz Valley panorama — a green canyon of date palms cut into red rock",
+          "kind": "free",
+          "note": "Roadside viewpoint above the gorge, free, ten minutes of standing and looking. The contrast between the palm strip and the desert plateau is the photograph."
+        },
+        {
+          "t": "12:00-15:30",
+          "what": "Drive Ziz Valley → Ifrane · 240 km · 3 h 30 over the Middle Atlas, with a lunch stop at Midelt",
+          "kind": "hop",
+          "verify": "est",
+          "note": "The climb out of the desert is the longest single stretch of the trip. Midelt (apple country, ≈13:30) is the standard lunch halt."
+        },
+        {
+          "t": "15:30-16:30",
+          "what": "Ifrane and the cedar forest — the Barbary macaques at Azrou if the light holds",
+          "kind": "anchor",
+          "price": "free · MAD 20 parking at the cedar stand",
+          "tag": "skippable",
+          "note": "Ifrane is an Alpine-looking town at 1,665 m, built by the French in the 1930s; the surprise is the point. The macaques 15 km south at Azrou are wild — do not feed them and keep bags zipped. Cut this without hesitation if the day has slipped."
+        },
+        {
+          "t": "16:30-18:00",
+          "what": "Drive Ifrane → Fes, Bab Bou Jeloud · 65 km · 1 h 30",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=33.522800%2C-5.110600&destination=34.061900%2C-4.982500&travelmode=driving"
+        },
+        {
+          "t": "18:00-19:00",
+          "what": "Check into a riad inside Fes el-Bali — a porter meets the car at the gate",
+          "kind": "free",
+          "tag": "pinned",
+          "note": "Arrange the porter with the riad in the morning. Fes el-Bali has 9,000 lanes and no cars; arriving after dark without someone waiting is the classic first-night mistake."
+        },
+        {
+          "t": "19:30-21:00",
+          "what": "Dinner at the riad on the first night",
+          "kind": "meal",
+          "price": "MAD 150–250/person",
+          "note": "Deliberate: after eleven hours in a car, do not go looking for a restaurant in the medina."
+        }
+      ],
+      "stops": [
+        {
+          "name": "Desert camp · Erg Chebbi",
+          "lat": 31.1167,
+          "lon": -3.9833
+        },
+        {
+          "name": "Merzouga (Erg Chebbi trailhead)",
+          "lat": 31.0994,
+          "lon": -4.0117,
+          "mode": "walk"
+        },
+        {
+          "name": "Ziz Valley viewpoint",
+          "lat": 31.9333,
+          "lon": -4.4167,
+          "mode": "drive"
+        },
+        {
+          "name": "Ifrane",
+          "lat": 33.5228,
+          "lon": -5.1106,
+          "mode": "drive"
+        },
+        {
+          "name": "Fes · Bab Bou Jeloud",
+          "lat": 34.0619,
+          "lon": -4.9825,
+          "mode": "drive"
+        }
+      ],
+      "walking_km": {
+        "total": 3.1,
+        "how": "the sunrise dune out and back ~1.2 + camel/4×4 route on foot at the ends ~0.4 + Ifrane and the cedar stand ~1.0 + the walk in to the riad ~0.5"
+      },
+      "ribbon": "Erg Chebbi camp →sunrise→ Merzouga →drive 3h→ Ziz Valley →drive 3h30→ Ifrane →drive 1h30→ Fes el-Bali (night)",
+      "sun": "dawn 06:22 · ☀ 06:47 / 🌇 17:20 · +00 · sunrise-sunset.org"
+    },
+    {
+      "date": "2026-11-12",
+      "city": "Fes",
+      "label": "Fes el-Bali on foot: two madrasas, the tanneries, and the walls from above at sunset",
+      "rain_alt": "Almost all of today is under cover — the medina lanes are roofed in reeds and both madrasas are courtyards with arcades. If it rains hard, the tannery terraces close (the pits flood and the smell is worse); swap in the Nejjarine Museum of Wooden Arts (MAD 20) and the Dar Batha ceramics collection.",
+      "late_cut": "Running late → drop the Merenid Tombs taxi and take the sunset from the riad roof instead; every riad in Fes has one.",
+      "timeline": [
+        {
+          "t": "08:00-08:45",
+          "what": "Breakfast on the riad roof over the medina",
+          "kind": "meal",
+          "note": "Worth doing slowly. This is the only morning of the trip with nowhere to be at a fixed hour."
+        },
+        {
+          "t": "08:45-09:05",
+          "what": "Walk riad → Bab Bou Jeloud (the Blue Gate) · 0.7 km · 15 min",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=34.064000%2C-4.976000&destination=34.061900%2C-4.982500&travelmode=walking"
+        },
+        {
+          "t": "09:05-09:30",
+          "what": "Bab Bou Jeloud — blue on the outside, green on the inside, and the start of the Talaa Kebira",
+          "kind": "free",
+          "note": "The gate is 1913, not medieval, and it is the only orientation point that everybody knows. From here the medina runs downhill: the two main arteries, Talaa Kebira and Talaa Seghira, both end near the Qarawiyyin. Downhill is into the medina, uphill is out."
+        },
+        {
+          "t": "09:30-09:35",
+          "what": "Walk Bab Bou Jeloud → Bou Inania Madrasa · 0.1 km · 2 min (it is the first door on the left inside the gate)",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=34.061900%2C-4.982500&destination=34.062500%2C-4.981700&travelmode=walking"
+        },
+        {
+          "t": "09:35-10:30",
+          "what": "Bou Inania Madrasa — the only madrasa in Fes with a working minaret, and the finest carved cedar in the city",
+          "kind": "anchor",
+          "price": "MAD 20/person ≈ CA$3",
+          "tag": "opener",
+          "note": "≈09:00–17:00, but it closes to non-Muslims around midday prayer, and on Fridays for much of the middle of the day (pattern as of 2026-08-15 ⚠️ re-confirm). Thursday morning is the safe slot — which is exactly why the Fes day sits on a Thursday. The 14th-century water clock is across the lane, permanently under scaffolding, and still worth two minutes."
+        },
+        {
+          "t": "10:30-11:00",
+          "what": "Walk Bou Inania → Al-Attarine Madrasa, down the Talaa Kebira · 0.9 km · 25 min with stops",
+          "kind": "hop",
+          "verify": "est",
+          "note": "This is the walk, not a transfer: coppersmiths, the spice market, donkeys with right of way. Flatten yourself against a wall when someone shouts 'balak'.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=34.062500%2C-4.981700&destination=34.065000%2C-4.973900&travelmode=walking"
+        },
+        {
+          "t": "11:00-12:15",
+          "what": "Al-Attarine Madrasa and the outside of the Qarawiyyin — the oldest continuously operating university in the world (859 CE)",
+          "kind": "anchor",
+          "price": "MAD 20/person ≈ CA$3",
+          "note": "≈09:00–17:00 (pattern as of 2026-08-15). Al-Attarine is small and almost entirely surface — zellij to eye level, carved plaster above it, cedar above that. The Qarawiyyin itself is closed to non-Muslims; from the doorways opposite you can see the courtyard, and the rooftop of the neighbouring shops is the standard (paid, MAD 20) view."
+        },
+        {
+          "t": "12:15-13:30",
+          "what": "Lunch around the Nejjarine / Souk el-Attarine quarter",
+          "kind": "meal",
+          "price": "MAD 80–140/person",
+          "note": "Food area rather than a name: the lanes behind the Nejjarine fountain have a dozen small places doing bissara, harira and grilled kefta. Fes is where you eat pastilla — sweet-savoury pigeon or chicken pie — if you eat it anywhere."
+        },
+        {
+          "t": "13:30-13:50",
+          "what": "Walk Nejjarine → Chouara Tannery · 0.5 km · 15 min",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=34.065000%2C-4.973900&destination=34.066400%2C-4.969400&travelmode=walking"
+        },
+        {
+          "t": "13:50-15:00",
+          "what": "Chouara Tannery from a leather-shop terrace",
+          "kind": "anchor",
+          "price": "no ticket · MAD 20–50/person expected as a tip to the shop",
+          "note": "≈09:00–19:00; the dyers work hardest 09:30–14:00, so early afternoon still has movement in the pits (pattern as of 2026-08-15). How it actually works: every terrace belongs to a leather shop, you are handed a sprig of mint for the smell, and you are expected either to buy or to tip. Agree the tip before you climb. There is no official entrance and anyone demanding MAD 200 at street level is freelancing."
+        },
+        {
+          "t": "15:00-16:15",
+          "what": "Wander back up through the medina · dyers' souk, the Seffarine metal square",
+          "kind": "free",
+          "tag": "skippable"
+        },
+        {
+          "t": "16:15-16:40",
+          "what": "Taxi medina → Merenid Tombs viewpoint · 2.4 km · 20 min (uphill, outside the walls)",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Petit taxi, MAD 25–40. Ask the driver to wait — it is a bare hillside and taxis do not cruise up there after dark.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=34.066400%2C-4.969400&destination=34.071400%2C-4.980300&travelmode=driving"
+        },
+        {
+          "t": "16:40-17:45",
+          "what": "Merenid Tombs — the whole of Fes el-Bali laid out below at sunset",
+          "kind": "anchor",
+          "price": "free",
+          "note": "Sunset is 17:19. Ruined 14th-century tombs on the north hill; the point is the panorama and the call to prayer starting in one minaret and spreading across the medina. Go with the taxi waiting and come down before full dark."
+        },
+        {
+          "t": "18:15-20:00",
+          "what": "Dinner in the medina",
+          "kind": "meal",
+          "price": "MAD 150–250/person",
+          "tag": "swap→a rooftop in the Batha quarter if the medina lanes feel like too much"
+        }
+      ],
+      "stops": [
+        {
+          "name": "Riad · Fes el-Bali",
+          "lat": 34.064,
+          "lon": -4.976
+        },
+        {
+          "name": "Bab Bou Jeloud (Blue Gate)",
+          "lat": 34.0619,
+          "lon": -4.9825,
+          "mode": "walk"
+        },
+        {
+          "name": "Bou Inania Madrasa",
+          "lat": 34.0625,
+          "lon": -4.9817,
+          "mode": "walk"
+        },
+        {
+          "name": "Al-Attarine Madrasa",
+          "lat": 34.065,
+          "lon": -4.9739,
+          "mode": "walk"
+        },
+        {
+          "name": "Chouara Tannery",
+          "lat": 34.0664,
+          "lon": -4.9694,
+          "mode": "walk"
+        },
+        {
+          "name": "Merenid Tombs viewpoint",
+          "lat": 34.0714,
+          "lon": -4.9803,
+          "mode": "drive"
+        }
+      ],
+      "walking_km": {
+        "total": 6.8,
+        "how": "street 3.5 (straight-line 2.7 × 1.3 for the medina's switchbacks) + the madrasas ~0.8 + the tannery terraces and stairs ~0.5 + the wander back uphill ~2.0"
+      },
+      "ribbon": "Riad →walk 15′→ Bab Bou Jeloud →walk 5′→ Bou Inania →walk 25′→ Al-Attarine →walk 15′→ Chouara Tannery →taxi 20′→ Merenid Tombs (sunset)",
+      "day_map": "https://www.google.com/maps/dir/?api=1&origin=34.064000%2C-4.976000&destination=34.071400%2C-4.980300&travelmode=walking&waypoints=34.061900%2C-4.982500%7C34.062500%2C-4.981700%7C34.065000%2C-4.973900%7C34.066400%2C-4.969400",
+      "sun": "dawn 06:23 · ☀ 06:48 / 🌇 17:19 · +00 · sunrise-sunset.org"
+    },
+    {
+      "date": "2026-11-13",
+      "city": "Chefchaouen",
+      "label": "CTM north through the Rif, and an afternoon in the blue town",
+      "rain_alt": "Chefchaouen is the wettest place on this route in November (47 mm over the same ten days last year, 4 days with rain). Wet blue walls actually photograph better — deeper colour, no glare. If it is heavy, the Kasbah Museum and its Andalusian garden are the indoor hour.",
+      "late_cut": "If the bus runs late, drop Ras El Maa and go straight to the plaza — the medina lanes are lit and the plaza cafés run until 22:00.",
+      "timeline": [
+        {
+          "t": "06:45-07:15",
+          "what": "Early breakfast at the riad, porter to the gate",
+          "kind": "free",
+          "tag": "pinned"
+        },
+        {
+          "t": "07:15-07:45",
+          "what": "Taxi riad gate → Fes CTM station · 3.6 km · 20 min · MAD 30–50",
+          "kind": "hop",
+          "verify": "est",
+          "note": "CTM has its own terminal, not the big Gare Routière next to Bab Mahrouk — tell the driver 'CTM' explicitly. Be there 30 minutes before departure; the hold closes early.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=34.064000%2C-4.976000&destination=34.036100%2C-4.999200&travelmode=driving"
+        },
+        {
+          "t": "08:00-12:10",
+          "what": "CTM bus Fes → Chefchaouen · 4 h 10 · MAD 110–140/person · one 15–20 min stop near Ouazzane",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Reserved seats, luggage hold, air conditioning. The road climbs into the Rif for the last hour and the views are on the left going north."
+        },
+        {
+          "t": "12:10-12:45",
+          "what": "Petit taxi CTM station → the medina · 1.5 km · 10 min · MAD 20–30 (the station is below the town and it is a steep walk up)",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=35.160000%2C-5.270000&destination=35.169900%2C-5.263600&travelmode=driving"
+        },
+        {
+          "t": "12:45-14:00",
+          "what": "Check in, then lunch on Plaza Uta el-Hammam",
+          "kind": "meal",
+          "price": "MAD 70–120/person",
+          "note": "The plaza is the centre of everything: the kasbah on one side, the Grand Mosque's octagonal minaret on the other, cafés under the trees all around."
+        },
+        {
+          "t": "14:00-15:00",
+          "what": "Kasbah Museum and its garden — the 15th-century citadel on the plaza",
+          "kind": "anchor",
+          "price": "MAD 60/person ≈ CA$9",
+          "note": "≈09:00–18:00, often closed Tuesdays (pattern as of 2026-08-15 ⚠️ re-confirm; today is a Friday so it should be open, though it may close 12:00–14:30 for prayer). Climb the tower — it is the only elevated view from inside the medina and it shows you how completely blue the town is."
+        },
+        {
+          "t": "15:00-16:30",
+          "what": "The blue lanes — Rue Bin Souaki, the stepped alleys above the plaza, the cat photographs",
+          "kind": "anchor",
+          "price": "free",
+          "tag": "opener",
+          "note": "This is the reason you came, and mid-afternoon is when the walls glow rather than glare. Two practical notes: the famous flowerpot staircases are on private houses and their owners increasingly ask MAD 10–20 for a photograph — pay it or move on; and the north-east lanes climb steeply, so do this before dinner, not after."
+        },
+        {
+          "t": "16:30-16:45",
+          "what": "Walk medina → Ras El Maa waterfall · 0.6 km · 15 min uphill",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=35.169900%2C-5.263600&destination=35.171700%2C-5.260000&travelmode=walking"
+        },
+        {
+          "t": "16:45-17:45",
+          "what": "Ras El Maa — the spring where the town's water comes out of the mountain, and the women still washing rugs in it",
+          "kind": "anchor",
+          "price": "free",
+          "note": "Sunset is 17:18 here. Ten minutes past it, the path continues up to the Spanish Mosque — do not do that walk in the dark tonight; it is tomorrow's sunrise."
+        },
+        {
+          "t": "19:00-20:30",
+          "what": "Dinner on or just off Plaza Uta el-Hammam",
+          "kind": "meal",
+          "price": "MAD 100–180/person",
+          "note": "Rif cooking is goat cheese, mountain honey, bissara and tagines heavier on olives than the south. Chefchaouen is small and quiet after 21:00; there is no nightlife and that is the appeal."
+        }
+      ],
+      "stops": [
+        {
+          "name": "Riad · Fes el-Bali",
+          "lat": 34.064,
+          "lon": -4.976
+        },
+        {
+          "name": "Fes CTM Station",
+          "lat": 34.0361,
+          "lon": -4.9992,
+          "mode": "drive"
+        },
+        {
+          "name": "Chefchaouen CTM Station",
+          "lat": 35.16,
+          "lon": -5.27,
+          "mode": "bus"
+        },
+        {
+          "name": "Plaza Uta el-Hammam",
+          "lat": 35.1699,
+          "lon": -5.2636,
+          "mode": "drive"
+        },
+        {
+          "name": "Ras El Maa",
+          "lat": 35.1717,
+          "lon": -5.26,
+          "mode": "walk"
+        }
+      ],
+      "walking_km": {
+        "total": 5.2,
+        "how": "the blue lanes ~3.0 (all of it stepped) + kasbah and tower ~0.6 + plaza to Ras El Maa and back ~1.2 + evening ~0.4"
+      },
+      "ribbon": "Fes riad →taxi 20′→ Fes CTM →bus 4h10→ Chefchaouen →taxi 10′→ Plaza Uta el-Hammam (lunch) →walk→ Kasbah Museum →walk→ blue lanes →walk 15′→ Ras El Maa (sunset)",
+      "sun": "dawn 06:24 · ☀ 06:49 / 🌇 17:19 · +00 · sunrise-sunset.org"
+    },
+    {
+      "date": "2026-11-14",
+      "city": "Tangier · Casablanca",
+      "label": "Blue dawn from the Spanish Mosque, the Atlantic at Cap Spartel, and a flight south",
+      "rain_alt": "If dawn is socked in, skip the mosque climb (the whole point is the view) and take the extra hour in the medina with wet blue walls; at Cap Spartel, the Caves of Hercules are a roofed alternative to the headland.",
+      "late_cut": "The flight is the hard stop. Behind at 11:30 → cut Cap Spartel to a 30-minute stop at the lighthouse and go straight to TNG.",
+      "timeline": [
+        {
+          "t": "05:55-06:25",
+          "what": "Walk medina → Spanish Mosque (Bouzaafar) · 1.1 km · 30 min, steady uphill on a stone path",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Take a head-torch for the first fifteen minutes; the path is unlit and uneven but obvious. Civil dawn in Chefchaouen is 06:28.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=35.170000%2C-5.264000&destination=35.170600%2C-5.254900&travelmode=walking"
+        },
+        {
+          "t": "06:25-07:40",
+          "what": "Sunrise from the Spanish Mosque — the whole blue town below with the Rif behind it",
+          "kind": "anchor",
+          "price": "free",
+          "tag": "opener",
+          "note": "Sunrise is 06:53 in Chefchaouen. ⚠️ The `sun` line printed on this day is Casablanca (route_tools takes the LAST stop on a moving day) — for this block use 06:28 / 06:53. A disused 1920s Spanish mosque on the ridge east of town; nobody is there at dawn and everybody is there at sunset. The town turns from grey-blue to lit-blue over about twenty minutes as the sun clears the ridge behind you. This is the last frame of the trip and it is the best one."
+        },
+        {
+          "t": "07:40-08:05",
+          "what": "Walk back down to the medina · 1.1 km · 25 min",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=35.170600%2C-5.254900&destination=35.794200%2C-5.923600&travelmode=driving",
+          "map": false
+        },
+        {
+          "t": "08:05-11:15",
+          "what": "Breakfast, pack, and one slow last lap of the lanes while the shops open",
+          "kind": "free",
+          "note": "Chefchaouen is the best place on this route to actually buy something: wool blankets, striped djellabas, goat cheese. Prices are lower and the pressure is far gentler than in Marrakech or Fes."
+        },
+        {
+          "t": "11:30-14:00",
+          "what": "Private transfer, medina pickup below the Spanish Mosque → Cap Spartel · 130 km · 2 h 30 (with a coffee stop)",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Confirm the driver the night before, and confirm that he goes to the cape and then to TNG, not to Tangier city centre.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=35.170600%2C-5.254900&destination=35.794200%2C-5.923600&travelmode=driving"
+        },
+        {
+          "t": "14:00-15:45",
+          "what": "Cap Spartel — the lighthouse where the Atlantic meets the Mediterranean, and the Caves of Hercules",
+          "kind": "anchor",
+          "price": "lighthouse grounds free · Caves of Hercules MAD 60/person ≈ CA$9",
+          "note": "Caves ≈09:00–19:00 (pattern as of 2026-08-15). The sea-facing cave mouth is famously shaped like a map of Africa, and it is a five-minute look, not an hour. The headland itself, with Spain visible across the strait on a clear day, is the reason to come. Late lunch at one of the cliff cafés on the road down."
+        },
+        {
+          "t": "15:45-16:20",
+          "what": "Drive Cap Spartel → Tangier Ibn Battouta Airport (TNG) · 22 km · 35 min",
+          "kind": "hop",
+          "verify": "est",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=35.794200%2C-5.923600&destination=35.726900%2C-5.916900&travelmode=driving"
+        },
+        {
+          "t": "16:20-18:30",
+          "what": "TNG · check in for the Royal Air Maroc evening flight to Casablanca",
+          "kind": "free",
+          "tag": "pinned",
+          "note": "⚠️ Exact departure time unverified in this run — book a rotation in the 17:00–21:00 bank and set this block to 2 h before it. TNG is small; two hours is generous, but it is the leg that protects tomorrow's international flight and it is not the place to cut margin."
+        },
+        {
+          "t": "18:30-19:40",
+          "what": "Royal Air Maroc TNG → CMN · 1 h 05 ⚠️ schedule to confirm",
+          "kind": "hop",
+          "verify": "est"
+        },
+        {
+          "t": "19:40-20:30",
+          "what": "Shuttle/taxi CMN → hotel near the Hassan II Mosque · 32 km · 40 min · MAD 300–350",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Alternative: stay at an airport hotel and taxi in at 08:00 tomorrow. Staying near the mosque is better — the 09:00 tour is then a ten-minute walk instead of a 40-minute drive against the morning traffic.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=33.367500%2C-7.589800&destination=33.605000%2C-7.628000&travelmode=driving"
+        },
+        {
+          "t": "21:00-22:15",
+          "what": "Late dinner in the Casablanca corniche / Habous quarter",
+          "kind": "meal",
+          "price": "MAD 150–250/person",
+          "tag": "skippable"
+        }
+      ],
+      "stops": [
+        {
+          "name": "Riad · Chefchaouen Medina",
+          "lat": 35.17,
+          "lon": -5.264
+        },
+        {
+          "name": "Spanish Mosque (Bouzaafar)",
+          "lat": 35.1706,
+          "lon": -5.2549,
+          "mode": "walk"
+        },
+        {
+          "name": "Cap Spartel",
+          "lat": 35.7942,
+          "lon": -5.9236,
+          "mode": "drive"
+        },
+        {
+          "name": "Tangier Ibn Battouta Airport (TNG)",
+          "lat": 35.7269,
+          "lon": -5.9169,
+          "mode": "drive"
+        },
+        {
+          "name": "Casablanca Mohammed V Airport (CMN)",
+          "lat": 33.3675,
+          "lon": -7.5898,
+          "mode": "fly"
+        },
+        {
+          "name": "Hotel · Casablanca (near Hassan II Mosque)",
+          "lat": 33.605,
+          "lon": -7.628,
+          "mode": "drive"
+        }
+      ],
+      "walking_km": {
+        "total": 4.4,
+        "how": "the Spanish Mosque climb and descent 2.2 + the last lap of the medina ~1.4 + Cap Spartel headland and the caves ~0.8"
+      },
+      "ribbon": "Chefchaouen →walk 30′→ Spanish Mosque (sunrise) →drive 2h30→ Cap Spartel →drive 35′→ TNG →fly 1h05→ CMN →taxi 40′→ Casablanca",
+      "sun": "dawn 06:35 · ☀ 07:00 / 🌇 17:29 · +00 · sunrise-sunset.org"
+    },
+    {
+      "date": "2026-11-15",
+      "city": "Casablanca",
+      "label": "One mosque on the ocean, then home",
+      "rain_alt": "The mosque tour is almost entirely indoors and runs in any weather; the esplanade over the water is the only wet part.",
+      "late_cut": "Miss the 09:00 tour → take the 10:00 one, skip the hammam level, and leave for the airport at 11:30. Below that, skip the mosque and photograph it from the esplanade for free.",
+      "timeline": [
+        {
+          "t": "07:30-08:15",
+          "what": "Breakfast, check out, bags with the hotel",
+          "kind": "free"
+        },
+        {
+          "t": "08:15-08:35",
+          "what": "Walk hotel → Hassan II Mosque ticket office · 0.9 km · 15 min along the corniche",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Be at the ticket office by 08:20 for the 09:00 tour — it is first-come and the November cruise arrivals fill it.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=33.605000%2C-7.628000&destination=33.608600%2C-7.632700&travelmode=walking"
+        },
+        {
+          "t": "09:00-10:15",
+          "what": "Hassan II Mosque — guided visit (prayer hall, the retractable roof, the underground hammam)",
+          "kind": "anchor",
+          "price": "MAD 130–140/person ≈ CA$19–21",
+          "tag": "pinned",
+          "note": "Sat–Thu tours at 09:00 / 10:00 / 11:00 / 12:00 / 15:00; Fri 09:00 / 10:00 / 15:00 (pattern as of 2026-08-15). One of only two mosques in Morocco open to non-Muslims. Shoulders and knees covered, shoes off inside, no head covering required for women. 210 m minaret, and a third of the floor is built over the Atlantic — the glass floor section looking down at the water is the thing nobody expects."
+        },
+        {
+          "t": "10:15-11:00",
+          "what": "The esplanade and the sea wall — the exterior is the better photograph, and it is free",
+          "kind": "free",
+          "note": "Waves break against the terrace at high tide. Wide angle from the north-west corner gets the whole minaret with the ocean."
+        },
+        {
+          "t": "11:00-11:15",
+          "what": "Walk esplanade → hotel to collect bags · 0.9 km · 15 min",
+          "kind": "hop",
+          "verify": "est",
+          "map": false
+        },
+        {
+          "t": "11:30-12:15",
+          "what": "Taxi hotel → CMN · 32 km · 45 min · MAD 300–350 fixed",
+          "kind": "hop",
+          "verify": "est",
+          "note": "Alternative: the ONCF airport train from Casa-Voyageurs, MAD 45/person, 35 min, twice an hour — but with luggage the taxi is the right call on a departure day.",
+          "link": "https://www.google.com/maps/dir/?api=1&origin=33.608600%2C-7.632700&destination=33.367500%2C-7.589800&travelmode=driving"
+        },
+        {
+          "t": "12:15-15:30",
+          "what": "CMN · check in, security, and the last of the dirham (spend it — MAD is a closed currency and cannot be exchanged outside Morocco)",
+          "kind": "free",
+          "tag": "pinned",
+          "note": "3 h 15 at the airport. CMN's departure hall is slow and the duty-free is poor; buy the argan oil and the spices in the medina, not here."
+        },
+        {
+          "t": "15:30",
+          "what": "Royal Air Maroc CMN → YYZ, nonstop, 8 h 40 · lands 19:10 the same day (clocks go back 5 h)",
+          "kind": "anchor",
+          "tag": "pinned",
+          "price": "CA$741/person ⚠️ Google-cache price",
+          "note": "A daylight westbound crossing — arrive Toronto at 19:10 on the 15th, so the calendar loses nothing and you sleep at home."
+        }
+      ],
+      "stops": [
+        {
+          "name": "Hotel · Casablanca (near Hassan II Mosque)",
+          "lat": 33.605,
+          "lon": -7.628
+        },
+        {
+          "name": "Hassan II Mosque",
+          "lat": 33.6086,
+          "lon": -7.6327,
+          "mode": "walk"
+        },
+        {
+          "name": "Casablanca Mohammed V Airport (CMN)",
+          "lat": 33.3675,
+          "lon": -7.5898,
+          "mode": "drive"
+        }
+      ],
+      "walking_km": {
+        "total": 2.9,
+        "how": "hotel to mosque and back 1.8 + inside the mosque ~0.6 + the esplanade ~0.5"
+      },
+      "ribbon": "Hotel →walk 15′→ Hassan II Mosque (09:00 tour) →walk→ esplanade →taxi 45′→ CMN →RAM 8h40→ Toronto",
+      "sun": "dawn 06:35 · ☀ 07:00 / 🌇 17:29 · +00 · sunrise-sunset.org"
+    }
+  ],
+  "hotels": [
+    {
+      "base": "Marrakech · 2 nights (11-07 → 11-09)",
+      "area": "Medina, in the triangle between Jemaa el-Fna, Bahia Palace and Dar el Bacha",
+      "why": "Everything on day 2 and day 3 is inside a 15-minute walk, so no evening ends in a taxi · the lanes here are busy and lit until late, unlike the medina's north-east quarter · porters and taxis both know these gates",
+      "options": [
+        {
+          "name": "Mid-range riad, Mouassine / Kasbah quarter (band)",
+          "band": "MAD 800–1,300 / night ≈ CA$120–195 ⚠️ band, not browser-verified",
+          "link": "https://www.booking.com/searchresults.html?ss=Marrakech%20Medina&checkin=2026-11-07&checkout=2026-11-09&group_adults=2&no_rooms=1"
+        },
+        {
+          "name": "Alternative area: Gueliz (the new town)",
+          "band": "MAD 700–1,100 / night ≈ CA$105–165 ⚠️ band, not browser-verified",
+          "link": "https://www.booking.com/searchresults.html?ss=Gueliz%2C%20Marrakech&checkin=2026-11-07&checkout=2026-11-09&group_adults=2&no_rooms=1",
+          "note": "Modern hotels, cars to the door, walkable to Majorelle — but every medina evening becomes a taxi ride back"
+        }
+      ]
+    },
+    {
+      "base": "Skoura · 1 night (11-09) and Erg Chebbi · 1 night (11-10)",
+      "area": "Booked inside the desert tour",
+      "why": "Both nights come with the private-driver package; you are choosing a tier, not a property",
+      "options": [
+        {
+          "name": "Skoura: kasbah guesthouse in the palmeraie",
+          "band": "included in the €200–280/person tour price",
+          "link": "https://www.getyourguide.com/marrakesh-l208/marrakech-to-merzouga-3-day-desert-adventure-t482521/",
+          "note": "Ask which one and look it up — the range from mud-brick charm to concrete roadside is wide"
+        },
+        {
+          "name": "Erg Chebbi: 'luxury' desert camp (ensuite tent)",
+          "band": "usually +€30–60/person over the standard camp",
+          "note": "The upgrade buys a private bathroom and a solid bed. Worth it in November — nights drop to about 12 °C and a shared block means walking out into it."
+        }
+      ]
+    },
+    {
+      "base": "Fes · 2 nights (11-11 → 11-13)",
+      "area": "Fes el-Bali, in the Batha / Talaa Kebira upper medina",
+      "why": "Uphill end of the medina, so you walk down to everything and taxi back up · a car can reach Bab Bou Jeloud or Bab Boujloud parking, which matters arriving at 18:00 with luggage · quieter than the Qarawiyyin core but still 10 minutes from it",
+      "options": [
+        {
+          "name": "Restored riad / dar, Batha or Talaa Kebira (band)",
+          "band": "MAD 650–1,100 / night ≈ CA$97–165 ⚠️ band, not browser-verified",
+          "link": "https://www.booking.com/searchresults.html?ss=Fes%20el%20Bali%2C%20Fes&checkin=2026-11-11&checkout=2026-11-13&group_adults=2&no_rooms=1",
+          "note": "Fes runs 20–30% cheaper than Marrakech for the same quality. Confirm the riad sends a porter to the gate — this is not optional in Fes el-Bali."
+        },
+        {
+          "name": "Alternative area: Ville Nouvelle",
+          "band": "MAD 500–800 / night ≈ CA$75–120 ⚠️ band",
+          "link": "https://www.booking.com/searchresults.html?ss=Fes%20Ville%20Nouvelle&checkin=2026-11-11&checkout=2026-11-13&group_adults=2&no_rooms=1",
+          "note": "Cheaper and car-accessible, but it puts a taxi between you and the medina at both ends of every day"
+        }
+      ]
+    },
+    {
+      "base": "Chefchaouen · 1 night (11-13 → 11-14)",
+      "area": "Inside the medina, uphill from Plaza Uta el-Hammam",
+      "why": "The Spanish Mosque path starts from the medina's east gate, and you are walking it at 06:20 · the plaza is 3 minutes away for dinner · the town is small and safe, but the lanes are steep and unlit — being near the top saves the climb with luggage",
+      "options": [
+        {
+          "name": "Blue-medina guesthouse with a roof terrace (band)",
+          "band": "MAD 450–800 / night ≈ CA$67–120 ⚠️ band, not browser-verified",
+          "link": "https://www.booking.com/searchresults.html?ss=Chefchaouen%20Medina&checkin=2026-11-13&checkout=2026-11-14&group_adults=2&no_rooms=1",
+          "note": "Book 4–6 weeks out: Chefchaouen is small and November is shoulder-to-peak. Ask for a room with a view over the blue roofs, it is the whole reason to sleep here."
+        }
+      ]
+    },
+    {
+      "base": "Casablanca · 1 night (11-14 → 11-15)",
+      "area": "Corniche / Hassan II Mosque quarter",
+      "why": "Puts the only anchor of the last morning within a 15-minute walk and removes a 40-minute rush-hour drive from a departure day · the corniche is the part of Casablanca worth an evening",
+      "options": [
+        {
+          "name": "Mid-range hotel near the mosque (band)",
+          "band": "MAD 700–1,200 / night ≈ CA$105–180 ⚠️ band, not browser-verified",
+          "link": "https://www.booking.com/searchresults.html?ss=Hassan%20II%20Mosque%2C%20Casablanca&checkin=2026-11-14&checkout=2026-11-15&group_adults=2&no_rooms=1"
+        },
+        {
+          "name": "Alternative: CMN airport hotel",
+          "band": "MAD 800–1,100 / night ≈ CA$120–165 ⚠️ band",
+          "link": "https://www.booking.com/searchresults.html?ss=Mohammed%20V%20Airport%2C%20Casablanca&checkin=2026-11-14&checkout=2026-11-15&group_adults=2&no_rooms=1",
+          "note": "Only if the TNG flight turns out to land after 22:00 — it costs you the mosque"
+        }
+      ]
+    }
+  ],
+  "budget": [
+    {
+      "cat": "International flights (YYZ→CMN / CMN→YYZ, Royal Air Maroc nonstop)",
+      "per_person": "CA$1,685",
+      "total": "CA$3,370",
+      "note": "Google-cache prices 2026-08-15 ⚠️ not re-checked on the airline site. The TAP 1-stop backup saves ≈CA$400/person."
+    },
+    {
+      "cat": "Domestic flight TNG→CMN",
+      "per_person": "CA$120",
+      "total": "CA$240",
+      "note": "⚠️ estimate only — this leg was not price-verified"
+    },
+    {
+      "cat": "3-day private desert transfer Marrakech→Fes (2 nights half board included)",
+      "per_person": "CA$410",
+      "total": "CA$820",
+      "note": "Mid-point of the €200–280/person band for a private car; the shared minibus would be ≈CA$180/person"
+    },
+    {
+      "cat": "Hotels 6 nights (Marrakech 2 · Fes 2 · Chefchaouen 1 · Casablanca 1)",
+      "per_person": "CA$355",
+      "total": "CA$710",
+      "note": "Band mid-points: MAD 1,000 × 2 + 850 × 2 + 600 + 900 ≈ MAD 4,750 ⚠️ bands not browser-verified"
+    },
+    {
+      "cat": "Ground transport (ONCF trains, CTM bus, Chefchaouen→Tangier transfer, petit taxis)",
+      "per_person": "CA$135",
+      "total": "CA$270"
+    },
+    {
+      "cat": "Admissions and guides (Majorelle, Ben Youssef, Bahia, Saadian, Taourirt, Aït Benhaddou guide, Bou Inania, Al-Attarine, tannery, Kasbah Museum, Caves of Hercules, Hassan II)",
+      "per_person": "CA$120",
+      "total": "CA$240",
+      "note": "≈MAD 800/person including the tips that function as entry fees"
+    },
+    {
+      "cat": "Food (8 days; 3 of them largely covered by the tour's half board)",
+      "per_person": "CA$395",
+      "total": "CA$790",
+      "note": "≈CA$50/day where you are paying: breakfast usually included, lunch MAD 100, dinner MAD 200"
+    },
+    {
+      "cat": "Insurance + eSIM",
+      "per_person": "CA$105",
+      "total": "CA$210"
+    },
+    {
+      "cat": "Cash buffer and tips (12%)",
+      "per_person": "CA$400",
+      "total": "CA$800",
+      "note": "Morocco runs on small cash tips — porters, guides, terrace access, the driver at the end (MAD 300–500 for three days is normal). Budget it rather than being surprised by it."
+    }
+  ],
+  "brief": {
+    "visa": "Canadian passports need no visa for stays under 90 days, for tourism or business — confirmed on travel.gc.ca (Government of Canada), 2026-08-15. The passport must be valid for at least 6 months beyond the date you leave Morocco, so beyond 2026-05-15 at the very least; renew now if it is close. Nothing to apply for and nothing to pay: the only entry paperwork is the arrival card handed out on the aircraft. Overstaying 90 days without permission from the local police 'Service to Foreigners' is prosecuted, which is irrelevant to a 9-night trip but is the reason the stamp matters — check that you actually get one.",
+    "holidays": "date.nager.at lists two Moroccan national holidays near this window: Green March on 2026-11-06 (you are in the air) and Independence Day on 2026-11-18 (after you leave). Neither touches a sightseeing day. ⚠️ Note the feed's blind spot: it returns only fixed-date secular holidays for Morocco and lists no Islamic feast at all — those had to be checked separately. In 2026 Ramadan runs ≈Feb 17 – Mar 18, Eid al-Adha ≈May 26–27, the Islamic New Year ≈Jun 16 and Mawlid ≈Aug 24–25, so nothing religious falls in November. The one festival that could have collided is the Marrakech International Film Festival, 2026-11-20 → 11-28 — nine days after you fly home; had the trip been a fortnight later, Marrakech hotel rates would have doubled. What does affect you weekly rather than annually: Friday midday prayer, which closes Bou Inania in Fes to visitors and slows everything from about 12:00 to 14:30. The Fes medina day is therefore pinned to Thursday 11-12.",
+    "weather": "Early-to-mid November, measured over the same dates in 2025: Marrakech 26°/14° with 2 rain days; Merzouga 27°/14° and effectively dry (0.2 mm over ten days); Fes 24°/12°, 2 rain days; Chefchaouen 20°/10° with 4 rain days and 47 mm — the Rif is where the weather is; Casablanca 23°/14°. Daylight is short and the swing is large: sunrise 06:37–07:00, sunset 17:18–17:39, so plan for golden hour from about 16:50 and full dark by 18:05. The desert night drops to about 12 °C. Pack layers rather than warm clothes, plus one waterproof shell for Chefchaouen. ⚠️ Clock note that changes every time in this plan: tzdata 2026c has Morocco leaving permanent UTC+1 and sitting on UTC+0 from 2026-09-20 onward, which is what every sun line here is computed on. It is a recent change — re-check the local time before you build a sunrise alarm on it.",
+    "money": "Moroccan dirham (MAD), a closed currency — you cannot buy it before you go and you cannot exchange it after you leave, so draw cash from an ATM in the CMN arrivals hall and spend the last of it at the airport. 1 CAD ≈ 6.70 MAD (open.er-api.com, 2026-08-15); MAD 100 ≈ CA$15. Cards work in city hotels, larger restaurants and Majorelle; everything else on this itinerary is cash — souks, petit taxis, terrace access at the tannery, the camel guides, the photograph you take of somebody's staircase. Carry MAD 500–800 in small notes. Tipping is structural, not optional: MAD 10–20 for a porter, MAD 20–50 for a terrace, MAD 100–150 for a half-day guide, MAD 300–500 for the desert driver at the end. Always in cash and always in dirham. Bargaining is expected in souks and not in shops with marked prices.",
+    "connectivity": "eSIM is the simple answer: US$11–29 buys 10–20 GB for the ten days. Choose a plan riding INWI or Maroc Telecom — both cover the Atlas road and Merzouga; Orange is fast in cities and thin everywhere else. There is usually no mains power and no signal at the desert camp, so charge everything in Merzouga and carry a battery pack. Plugs are Type C / E (two round pins, same as continental Europe) at 220 V, so Canadian devices need an adapter but not a converter. Download offline maps for Marrakech and Fes before you go: GPS drifts badly under the reed-roofed souks, and this trip's KML (morocco.kml) loads into Maps.me or Organic Maps for the whole route.",
+    "safety": "travel.gc.ca advises 'exercise a high degree of caution' for Morocco overall (terrorism), and 'avoid all travel' only to the Algerian border strip and the Western Sahara berm — nowhere on this route is near either. Day-to-day, the real risks are petty: pickpocketing in Jemaa el-Fna after dark, aggressive unofficial 'guides' at Fes's medina gates and at the tanneries, and the standard taxi-meter argument (agree the price first, or insist on the meter). Handling it: a firm 'la, shukran' and continuing to walk works; engaging does not. Every evening in this plan ends inside the medina you are sleeping in — Jemaa el-Fna to a Mouassine riad, the Fes riad's own dining room, the Chefchaouen plaza three minutes from the door — so no night movement needs a car or a dark walk. The two exceptions are deliberate and both are at dawn, not at night: the Merzouga sunrise (you are with the camp) and the Spanish Mosque climb at 06:20 (take a head-torch and go together). Women travelling in Morocco get comment in the street; it is nearly always verbal and it stops at a closed door. Solo night walks outside the medinas are the one thing not to do.",
+    "baggage": "Where the big bag physically is, day by day: 11-06 checked to Casablanca · 11-07 with you on the train, then the riad · 11-08 riad · 11-09 in the driver's car all day, then Skoura · 11-10 in the car, then LEFT AT THE MERZOUGA AUBERGE overnight — only a daypack goes onto the camel · 11-11 collected at the auberge, in the car all day, then the Fes riad · 11-12 riad · 11-13 in the CTM hold (reserved-seat buses have one; local buses may not) · 11-14 in the transfer car, then checked TNG→CMN · 11-15 with the hotel until 11:15, then checked home. The only night you are separated from it is the desert camp, which is why it is worth a small padlock."
+  },
+  "unverified": [
+    "Flight prices are Google-cache comparison grade (flight_scan.py, 2026-08-15) and were not re-checked on royalairmaroc.com. The nonstop RAM fares in particular move a lot; verify at the links before booking.",
+    "The TNG→CMN domestic flight has neither a confirmed departure time nor a price in this plan — only that RAM runs several rotations a day. This is the single weakest link in the itinerary: confirm it first, because the last two days hang off it.",
+    "All hotel prices are seasonal bands from published ranges, not browser-verified quotes for these dates.",
+    "The desert-tour price is an operator listing band, not a quote. Private-vehicle pricing for two people varies by 40% between operators for the same route.",
+    "Every opening hour and admission fee below is the published seasonal pattern as of 2026-08-15, not a November-2026 timetable — nobody publishes those three months out. Re-confirm two weeks before travel, and re-check the fees as well as the hours (Moroccan monument fees rose across the board in 2024 and again in 2026).",
+    "Kasbah Museum Chefchaouen: the weekly closing day (commonly Tuesday) and the midday prayer break were not confirmed for November 2026. It falls on a Friday in this plan, which is safe from the weekly closure but not from a 12:00–14:30 break.",
+    "All driving times are operator/route estimates, not Google Maps browser-verified hop times; route_tools check marks them (est). The Merzouga→Fes day in particular is quoted anywhere between 7 and 9 hours depending on stops.",
+    "The ONCF airport→Marrakech connection assumes a change at Casa-Voyageurs with a ≈25-minute wait; the exact 11-07 timetable was not pulled from oncf.ma.",
+    "Morocco's UTC offset: this plan uses tzdata 2026c, which puts the country on UTC+0 from 2026-09-20 (the end of its permanent-UTC+1 era). Every sunrise/sunset in the plan follows that. If the change is reversed before November, every clock time in the brief shifts an hour — verify on arrival, and note that the day plans are built on daylight, not on wall clock."
+  ]
+}

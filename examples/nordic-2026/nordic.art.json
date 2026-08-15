@@ -1,0 +1,358 @@
+{
+ "schema": 1,
+ "cover": {
+  "kick": "北欧行",
+  "kick_en": "NORDIC 2026",
+  "postmark_date": "2026-10-01"
+ },
+ "home": {
+  "city": "北京",
+  "iata": "PEK"
+ },
+ "end": {
+  "date": "2026-10-09",
+  "mark": "BEIJING",
+  "line": "北京,到家了。",
+  "fine": "10-09 週五 04:20 落地 —— 向东飞,日历上少掉的那个夜晚还在云里。",
+  "farewell": "SEE YOU, NORWAY"
+ },
+ "days": {
+  "2026-10-01": {
+   "theme": "晨光落地",
+   "en": "Oslo, Norway",
+   "mark": "OSLO"
+  },
+  "2026-10-02": {
+   "theme": "石与呐喊",
+   "en": "Oslo, Norway",
+   "mark": "OSLO"
+  },
+  "2026-10-03": {
+   "theme": "翻越山脊",
+   "en": "Oslo → Myrdal → Flåm",
+   "mark": "FLÅMSBANA"
+  },
+  "2026-10-04": {
+   "theme": "峡湾静水",
+   "en": "Nærøyfjord, Aurland",
+   "mark": "NÆRØYFJORD"
+  },
+  "2026-10-05": {
+   "theme": "出山入海",
+   "en": "Flåm → Voss → Bergen",
+   "mark": "BERGEN"
+  },
+  "2026-10-06": {
+   "theme": "木屋与雨",
+   "en": "Bergen, Norway",
+   "mark": "BRYGGEN"
+  },
+  "2026-10-07": {
+   "theme": "潮水回航",
+   "en": "Osterfjord → Oslo",
+   "mark": "MOSTRAUMEN"
+  },
+  "2026-10-08": {
+   "theme": "云上归途",
+   "en": "Oslo → Beijing",
+   "mark": "HOMEWARD"
+  }
+ },
+ "brief_titles": {
+  "visa": "签证 · 申根(挪威主签)",
+  "holidays": "假期 · 挪威秋假撞车",
+  "weather": "天气 · 日照与极光诚实口径"
+ },
+ "themes": {
+  "journal": {
+   "cover": {
+    "zh": "秋水长天",
+    "en": "WHERE WATER MEETS SKY",
+    "sub": "十月的峡湾,水和天是同一种颜色。",
+    "credit": "「落霞与孤鹜齐飞,秋水共长天一色」—— 王勃《滕王阁序》",
+    "photo": {
+     "stem": "nordic-journal-ph-fjordferry",
+     "alt": "纳柔伊峡湾,渡轮船头望向崖壁",
+     "caption": [
+      "纳柔伊峡湾,静水无声",
+      "Nærøyfjord, Norway"
+     ]
+    }
+   },
+   "cover_stamps": [
+    {
+     "cls": "st-lib",
+     "rot": -2.4
+    },
+    {
+     "cls": "st-bis",
+     "rot": 1.8
+    }
+   ],
+   "stamps": {
+    "st-lib": "nordic-journal-stamp-fjord",
+    "st-gg": "nordic-journal-stamp-stave",
+    "st-bis": "nordic-journal-stamp-aurora"
+   },
+   "days": {
+    "2026-10-01": {
+     "photo": "journal-ph-wing",
+     "caption": [
+      "九小时后,舷窗外天亮了两次",
+      "PEK → OSL, 9h25"
+     ],
+     "annot": "凌晨三点二十从北京起飞,落地奥斯陆才早上六点四十 —— 向西飞是白赚的一天。走出航站楼冷得清醒,秋天在这里已经开场很久了。",
+     "props": [
+      {
+       "kind": "img",
+       "stem": "journal-boarding",
+       "w": 190,
+       "rot": -2.6
+      },
+      {
+       "kind": "stamp",
+       "cls": "st-lib",
+       "rot": 2.2
+      }
+     ],
+     "doodle": {
+      "sketch": "skyline",
+      "note": "ROOFTOP\n可以走上去",
+      "font": "hand",
+      "rot": -1.8
+     }
+    },
+    "2026-10-02": {
+     "photo": "nordic-journal-ph-opera",
+     "caption": [
+      "歌剧院的白色斜坡直接沉进海里",
+      "Oslo Opera House"
+     ],
+     "annot": "维格兰公园里二百多个石头人,没有一个穿衣服,也没有一个在笑得客气。下午在蒙克美术馆爬到第十三层,《呐喊》前面围了三层人,窗外的峡湾倒是空的。",
+     "props": [
+      {
+       "kind": "vtk",
+       "tone": "green",
+       "lines": [
+        "MUNCH",
+        "OSLO · 13 FLOORS",
+        "NOK 280",
+        "No. 10-02"
+       ],
+       "rot": 1.4
+      },
+      {
+       "kind": "flora"
+      }
+     ],
+     "doodle": {
+      "sketch": "skyline",
+      "note": "Scream\nis here!",
+      "font": "cur",
+      "rot": 2.0
+     }
+    },
+    "2026-10-03": {
+     "photo": "nordic-journal-ph-flamtrain",
+     "caption": [
+      "弗洛姆铁路,一小时下降八百米",
+      "Flåmsbana, 20 km"
+     ],
+     "annot": "卑尔根铁路开了快五个钟头,窗外从黄叶换成苔原再换成雪。在 Myrdal 站台上换车,海拔八百六,风像刀。然后小红火车一路往下钻,峡湾就在谷底等着。",
+     "props": [
+      {
+       "kind": "vtk",
+       "tone": "brown",
+       "lines": [
+        "FLÅMSBANA",
+        "MYRDAL — FLÅM",
+        "NOK 450",
+        "No. 1043"
+       ],
+       "rot": -1.6
+      },
+      {
+       "kind": "stamp",
+       "cls": "st-gg",
+       "rot": 2.4
+      }
+     ],
+     "doodle": {
+      "sketch": "waves",
+      "note": "KJOSFOSSEN\n停车 5 分",
+      "font": "hand",
+      "rot": -2.2
+     }
+    },
+    "2026-10-04": {
+     "photo": "nordic-journal-ph-stegastein",
+     "caption": [
+      "斯泰加斯坦,木栈道伸出去三十米",
+      "Stegastein, 650 m"
+     ],
+     "annot": "电动船开进纳柔伊峡湾的时候是真的安静 —— 没有引擎声,只有两侧崖壁上的瀑布。最窄处只有二百五十米宽,抬头看不到峡谷口。下午上到六百五十米的观景台,峡湾从上面看是一条深蓝色的裂缝。",
+     "photos2": [
+      {
+       "stem": "nordic-journal-ph-fjordferry",
+       "en": "Nærøyfjord from the bow",
+       "alt": "从船头看纳柔伊峡湾"
+      }
+     ],
+     "props": [
+      {
+       "kind": "img",
+       "stem": "nordic-journal-ticket-ferry",
+       "w": 130,
+       "rot": 2.8
+      },
+      {
+       "kind": "stamp",
+       "cls": "st-bis",
+       "rot": -1.5
+      },
+      {
+       "kind": "img",
+       "stem": "nordic-journal-flora-heather",
+       "w": 105,
+       "rot": -3.0
+      }
+     ],
+     "doodle": {
+      "sketch": "waves",
+      "note": "AURORA?\n没等到",
+      "font": "hand",
+      "rot": 1.6
+     }
+    },
+    "2026-10-05": {
+     "photo": "nordic-journal-ph-bryggen",
+     "caption": [
+      "布吕根的木头房子歪了六百年",
+      "Bryggen, Bergen"
+     ],
+     "annot": "峡湾巴士翻过 Stalheim 的盘山路,再换火车下到海边。卑尔根一下车就在下雨 —— 后来才知道这里一年下雨两百三十天。布吕根的彩色立面人人都拍,真正好看的是绕到背后那些歪斜的木廊。",
+     "props": [
+      {
+       "kind": "bagtag",
+       "lines": [
+        "FLÅM → BERGEN",
+        "NW13 + VOSSEBANEN",
+        "10-05 · 2h30"
+       ],
+       "rot": -2.0
+      }
+     ],
+     "doodle": {
+      "sketch": "skyline",
+      "note": "RAIN 230\n天 / 年",
+      "font": "hand",
+      "rot": -1.4
+     }
+    },
+    "2026-10-06": {
+     "photo": "nordic-journal-ph-floyen",
+     "caption": [
+      "弗洛伊恩山顶,三百二十米俯瞰七山",
+      "Fløyen, Bergen"
+     ],
+     "annot": "缆车八分钟到山顶,云压得很低,城市在云底下亮着。下午在 KODE 看蒙克 —— 原来他一辈子画的不只是那张叫喊的脸。傍晚回布吕根,雨停了半小时,立面被侧光照成橙红色。",
+     "props": [
+      {
+       "kind": "vtk",
+       "tone": "green",
+       "lines": [
+        "FLØIBANEN",
+        "BERGEN · RETUR",
+        "NOK 145",
+        "No. 10-06"
+       ],
+       "rot": 2.2
+      },
+      {
+       "kind": "img",
+       "stem": "nordic-journal-flora-fern",
+       "w": 115,
+       "rot": 3.2
+      }
+     ],
+     "doodle": {
+      "sketch": "bridge",
+      "note": "7 FJORDS\n七座山",
+      "font": "hand",
+      "rot": -2.4
+     }
+    },
+    "2026-10-07": {
+     "annot": "最后一段峡湾:Rødne 的船顺着奥斯特峡湾开二十七公里,到 Mostraumen 的窄口时水流急得像河。船头顶到瀑布底下,甲板上的人一起躲。下午飞回奥斯陆,住机场旁边 —— 明天的国际航班不能赌。",
+     "props": [
+      {
+       "kind": "img",
+       "stem": "journal-ticket",
+       "w": 150,
+       "rot": -2.8
+      },
+      {
+       "kind": "seal",
+       "rot": 1.2
+      }
+     ],
+     "doodle": {
+      "sketch": "waves",
+      "note": "SPRAY!\n躲不掉",
+      "font": "hand",
+      "rot": 2.6
+     }
+    },
+    "2026-10-08": {
+     "annot": "值机、退税、过关。挪威克朗的硬币花不掉,留了两枚在口袋里。中午起飞,向东追着夜色飞回去 —— 落地是十月九号凌晨四点二十,十月八号的那个晚上就这么没了。",
+     "props": [
+      {
+       "kind": "bagtag",
+       "lines": [
+        "OSL → PEK",
+        "HAINAN · 9h25",
+        "10-08 · 向东"
+       ],
+       "rot": 1.8
+      },
+      {
+       "kind": "stamp",
+       "cls": "st-gg",
+       "rot": -2.2
+      }
+     ],
+     "doodle": {
+      "sketch": "skyline",
+      "note": "SEE YOU,\nNORWAY",
+      "font": "cur",
+      "rot": -1.6
+     }
+    }
+   }
+  },
+  "noir": {
+   "cover": {
+    "zh": "天接云涛",
+    "en": "SEA OF CLOUDS",
+    "credit": "「天接云涛连晓雾,星河欲转千帆舞」—— 李清照《渔家傲》"
+   },
+   "plates": [
+    "nordic-noir-hero",
+    "nordic-noir-oslo",
+    "nordic-noir-fjord",
+    "nordic-noir-aurora",
+    "nordic-noir-bergen"
+   ],
+   "day_plate": {
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 3,
+    "5": 4,
+    "6": 4,
+    "7": 4,
+    "8": 0
+   }
+  }
+ }
+}

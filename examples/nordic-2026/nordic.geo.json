@@ -1,0 +1,1354 @@
+{
+ "trip": "北欧峡湾 8 天 · 奥斯陆-弗洛姆-卑尔根",
+ "meta": {
+  "dates": "2026-10-01 → 10-08(10-09 清晨到京)",
+  "party": "1 成人 · 中国护照 · 不租车",
+  "route": "北京 PEK ✈ 奥斯陆 →卑尔根铁路+弗洛姆铁路→ 弗洛姆(纳柔伊峡湾) →峡湾巴士+火车→ 卑尔根 ✈ 奥斯陆 ✈ 北京",
+  "budget_total": "≈ ¥29,100(含 12% 缓冲;单人,中等预算)",
+  "fx": "1 NOK = 0.7133 CNY · 1 USD = 6.7413 CNY(ECB via frankfurter.dev, 2026-08-14)",
+  "generated": "2026-08-15",
+  "self_check": "自检:发现并修复 6 处(见页脚)"
+ },
+ "decisions": [
+  "【无人问询模式】用户要求「一次到位」,故跳过路线骨架确认,直接采用「峡湾核心 + 城市各一天」骨架:奥斯陆 2 晚 → 弗洛姆 2 晚 → 卑尔根 2 晚 → 奥斯陆机场 1 晚。理由:7 晚只够 3 个基地,峡湾是主诉求,弗洛姆是唯一能不租车吃到「铁路+峡湾船+观景台」三件套的支点。",
+  "往返程选 10-01 出 / 10-08 回,而不是 10-07 回:10-01→10-08 有海航 PEK-OSL 直飞 9h25、$1,436(Google 缓存价 2026-08-15),而 10-07 回只剩 1 stop 且贵约 $330。代价是 10-08 中午从奥斯陆起飞、10-09 清晨才落地北京,比「10-08 到家」晚一天 —— 若必须 10-08 到家,改订 10-07 返程(见备选)。",
+  "不去特罗姆瑟看极光。7 天塞进 69°N 会把峡湾砍成一天。本行程纬度 59.9-60.9°N,10 月初极光需 Kp≥6,单晚概率约 5-10%,写进行程是不诚实的 —— 只在弗洛姆(光害最低)标了观察窗口,当彩蛋不当承诺。",
+  "不租车。卑尔根铁路 + 弗洛姆铁路 + 纳柔伊峡湾电动船 + NW13 峡湾巴士这条「Norway in a Nutshell」骨架本来就是为无车旅客设计的,且 10 月山路有雪风险,租车反而是负分。",
+  "10-07 下午飞回奥斯陆并在机场住一晚,而不是 10-08 当天从卑尔根赶国际航班。BGO→OSL 与 OSL→PEK 是两张分开的票,中转自理需 ≥4 小时;当天早班机只留 2.5 小时,一次延误就丢掉国际段。",
+  "奥斯陆卡(Oslo Pass 24h NOK 595)在本行程「赢」:10-01 15:00 激活 → 覆盖国家博物馆 200 + 次日 Fram 140 + MUNCH 280 + 市内交通约 120 = NOK 740 > 595。但机场段(Flytoget)不含,另计。",
+  "10-06(周二)才安排卑尔根的室内馆,10-05(周一)只走布吕根+鱼市:挪威博物馆普遍周一闭馆,把移动日放周一正好躲开。"
+ ],
+ "checklist": [
+  {
+   "item": "申根签证(挪威主签 —— 全程只停留挪威)· VFS 北京送签",
+   "deadline": "最迟 2026-08-25 前递交(建议提前 4 周以上;使馆口径最长 45 天)",
+   "price": "签证费 EUR 90 + VFS 服务费 EUR 6.5/RMB 53(2026-03-01 起)",
+   "link": "https://visa.vfsglobal.com/one-pager/norway/china/beijing/english/",
+   "note": "十一前是申根送签高峰,45 天口径要当真。护照离境后需有效 ≥3 个月、近 10 年内签发。行程/机酒订单/保险为必备材料 —— 所以先订可退机酒再送签。"
+  },
+  {
+   "item": "申根旅行医疗保险(保额 ≥ EUR 30,000,含医疗遣返)",
+   "deadline": "送签前(是签证必备材料)",
+   "price": "≈ ¥250-350 / 8 天",
+   "note": "签证要求的硬指标,不是可选项。挪威医疗自费极贵。"
+  },
+  {
+   "item": "国际机票 PEK⇄OSL(海南航空直飞)",
+   "deadline": "越早越好 —— 十一黄金周国内出发段溢价明显",
+   "price": "$1,436 ≈ ¥9,680(Google 缓存价,2026-08-15;仅比价级)",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20PEK%20to%20OSL%20on%202026-10-01%20returning%202026-10-08%20for%201%20adults",
+   "note": "⚠️ 去程 03:20 北京起飞 —— 意味着 9-30 晚上就要到机场。此为 flight_scan 抓到的最便宜「可用」组合;返程时刻未核实。"
+  },
+  {
+   "item": "弗洛姆住宿(2 晚,10-03 / 10-04)",
+   "deadline": "立刻 —— 这是全程最紧的一环",
+   "price": "band NOK 1,500-2,200/晚 ⚠️ 未核价",
+   "link": "https://www.booking.com/searchresults.html?ss=Fl%C3%A5m&checkin=2026-10-03&checkout=2026-10-05&group_adults=1&order=review_score_and_price",
+   "note": "弗洛姆全村床位极少,且 10-03/04 正卡在挪威东部秋假(week 40)与西部秋假(week 41)之间的周末。订不到就退而求其次住 Aurland(6 km,有巴士)。"
+  },
+  {
+   "item": "卑尔根铁路 Oslo S → Myrdal 车票(Vy minipris)",
+   "deadline": "开售即抢 —— Vy 提前 90 天开卖,minipris 档位卖完就涨",
+   "price": "minipris 自 NOK 299 起;常规 NOK 599-899 ⚠️ 具体车次未核",
+   "link": "https://www.vy.no/en/train/oslo-to-bergen",
+   "note": "10-03 是周六 + 秋假季,靠窗座位要选。也可买到 Bergen 全程后中途下车,但分段买通常更便宜。"
+  },
+  {
+   "item": "弗洛姆铁路 Flåmsbana(Myrdal → Flåm)",
+   "deadline": "10 月为淡季,可提前 1 天或当天在窗口买;但与卑尔根铁路接续的那班建议先订",
+   "price": "≈ NOK 450 单程 ⚠️ 未核",
+   "link": "https://en.flamsbana.no/rutetider",
+   "note": "官网时刻表是 JS 日历,静态读不到 —— 出行前按此链接自查接续班次。"
+  },
+  {
+   "item": "纳柔伊峡湾游船 Flåm → Gudvangen(10-04)",
+   "deadline": "提前 1-2 周",
+   "price": "≈ NOK 600 单程 ⚠️ 未核",
+   "link": "https://www.norwaysbest.com/en/flam/things-to-do/fjord-cruise-naeroyfjord",
+   "note": "⚠️ 季节尾巴:9-01 至 10-15 为减班期,班次可能只剩每天 1-2 班,且冬季海况可临时改航。务必先定船班再定当天其他安排。"
+  },
+  {
+   "item": "BGO → OSL 国内航段(10-07 下午)",
+   "deadline": "提前 1 个月",
+   "price": "band NOK 600-1,200 ⚠️ 未核价",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20BGO%20to%20OSL%20on%202026-10-07%20for%201%20adults",
+   "note": "SAS / Norwegian 每天多班,~55 分钟。托运行李费另计(Norwegian 基础票不含)。"
+  },
+  {
+   "item": "奥斯陆机场酒店(10-07 一晚)",
+   "deadline": "与国内航段一起订",
+   "price": "band NOK 1,100-1,600 ⚠️ 未核价",
+   "link": "https://www.booking.com/searchresults.html?ss=Oslo%20Gardermoen%20Airport&checkin=2026-10-07&checkout=2026-10-08&group_adults=1&order=review_score_and_price",
+   "note": "选可步行到航站楼的(Radisson Blu Airport / Park Inn),别选需摆渡车的。"
+  },
+  {
+   "item": "Mostraumen 峡湾巡航(10-07 上午)",
+   "deadline": "提前几天",
+   "price": "≈ NOK 750 ⚠️ 未核",
+   "link": "https://rodne.no/en/fjord-experiences/bergen/fjordcruise-mostraumen/",
+   "note": "⚠️ 10 月班次时刻未核实(冬季通常每天 1 班,10:00 前后)。若首班晚于 10:30 就放弃它、改 Ulriken 缆车,否则赶不上下午的飞机。"
+  },
+  {
+   "item": "出行前两周复查所有开放时间与票价",
+   "deadline": "2026-09-17 前后",
+   "note": "本行程距出行 >3 个月,venue 尚未发布当日时刻 —— 表中所有时间均为「季节性规律」,pattern as of 2026-08-15。"
+  },
+  {
+   "item": "eSIM / 挪威上网",
+   "deadline": "出发前一周",
+   "price": "≈ ¥60-100 / 8 天 5-10GB",
+   "note": "挪威几乎全境 4G/5G,峡湾深处与火车穿山段会断。离线地图先下好。"
+  }
+ ],
+ "legs": [
+  {
+   "type": "国际航班(去程)",
+   "date": "2026-10-01",
+   "carrier": "海南航空 Hainan(直飞)",
+   "from": "北京 PEK",
+   "to": "奥斯陆 OSL",
+   "dep": "03:20",
+   "arr": "06:45(当日,+9h25)",
+   "price": "$1,436 ≈ ¥9,680(往返含税,Google 缓存 2026-08-15)⚠️ 比价级",
+   "bags": "国航系长途通常含 1×23kg 托运 ⚠️ 以出票条款为准",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20PEK%20to%20OSL%20on%202026-10-01%20returning%202026-10-08%20for%201%20adults",
+   "note": "全程唯一直飞。03:20 起飞 = 9-30 深夜到机场,请把 9-30 当出发日安排。",
+   "backup": "土耳其航空 PEK-IST-OSL 16h40 $1,464(10-02 出发档)/ 汉莎 PEK-FRA-OSL $1,601"
+  },
+  {
+   "type": "机场快线",
+   "date": "2026-10-01",
+   "carrier": "Flytoget 机场快线",
+   "from": "Oslo Lufthavn OSL",
+   "to": "Oslo S 中央站",
+   "dep": "约每 10 分一班",
+   "arr": "19-23 分",
+   "price": "NOK 240 ≈ ¥171 ⚠️ 未核",
+   "link": "https://flytoget.no/en/",
+   "note": "备选:Vy 区域列车 R11,约 23 分、NOK 121,便宜一半,班次少些。",
+   "backup": "Vy R11 区域列车"
+  },
+  {
+   "type": "铁路(景观段)",
+   "date": "2026-10-03",
+   "carrier": "Vy 卑尔根铁路 Bergensbanen",
+   "from": "Oslo S",
+   "to": "Myrdal",
+   "dep": "约 08:25 ⚠️ 未核",
+   "arr": "约 13:20(约 4h55)⚠️ 未核",
+   "price": "minipris 自 NOK 299;常规 NOK 599-899 ⚠️ 未核",
+   "bags": "随身,车厢有行李架",
+   "link": "https://www.vy.no/en/train/oslo-to-bergen",
+   "note": "全欧最高海拔干线之一,Finse 站 1,222 m,10 月山顶通常已有雪。左侧座位视野略好。",
+   "backup": "晚一班次(约 10:30 发)—— 但会把弗洛姆铁路挤到天黑"
+  },
+  {
+   "type": "铁路(景观段)",
+   "date": "2026-10-03",
+   "carrier": "Flåmsbana 弗洛姆铁路",
+   "from": "Myrdal",
+   "to": "Flåm",
+   "dep": "约 13:50(接续卑尔根铁路)⚠️ 未核",
+   "arr": "约 14:50(约 1h,20 km)",
+   "price": "≈ NOK 450 单程 ⚠️ 未核",
+   "link": "https://en.flamsbana.no/rutetider",
+   "note": "全年运行、每天多班;中途在 Kjosfossen 瀑布停车 5 分钟下车拍照。10 月为淡季,可当天窗口买票。",
+   "backup": "Myrdal 站等下一班(约每 1-2 小时)"
+  },
+  {
+   "type": "峡湾船",
+   "date": "2026-10-04",
+   "carrier": "纳柔伊峡湾游船(电动船)",
+   "from": "Flåm",
+   "to": "Gudvangen",
+   "dep": "约 09:00 ⚠️ 班次未核",
+   "arr": "约 11:00(约 2h)",
+   "price": "≈ NOK 600 ⚠️ 未核",
+   "link": "https://www.norwaysbest.com/en/flam/things-to-do/fjord-cruise-naeroyfjord",
+   "note": "纳柔伊峡湾是 UNESCO 世界遗产,最窄处 250 m。⚠️ 9-01~10-15 为减班期。",
+   "backup": "Flåm↔Gudvangen 往返船票(不下船),或改 Flåm 谷地徒步"
+  },
+  {
+   "type": "峡湾巴士",
+   "date": "2026-10-05",
+   "carrier": "NW13 / Skyss 峡湾巴士",
+   "from": "Flåm",
+   "to": "Voss",
+   "dep": "上午班次 ⚠️ 未核",
+   "arr": "约 1h15",
+   "price": "≈ NOK 330 ⚠️ 未核",
+   "link": "https://www.vy.no/en/train/flam-to-bergen",
+   "note": "经 Gudvangen 与 Stalheimskleiva 山路,本身就是景观段。",
+   "backup": "Flåm→Myrdal 弗洛姆铁路 + Myrdal→Bergen 火车(更贵,但全程铁路)"
+  },
+  {
+   "type": "铁路",
+   "date": "2026-10-05",
+   "carrier": "Vy Vossebanen",
+   "from": "Voss",
+   "to": "Bergen",
+   "dep": "下午班次 ⚠️ 未核",
+   "arr": "约 1h15",
+   "price": "≈ NOK 250 ⚠️ 未核",
+   "link": "https://www.vy.no/en/train/flam-to-bergen",
+   "note": "Bergen–Voss–Myrdal 段 2026-05-01 至 2026-12-12 正常运行(已核)。",
+   "backup": "Skyss 950 路巴士 Voss→Bergen,约 1h40"
+  },
+  {
+   "type": "国内航班",
+   "date": "2026-10-07",
+   "carrier": "SAS / Norwegian",
+   "from": "卑尔根 BGO",
+   "to": "奥斯陆 OSL",
+   "dep": "下午班次(建议 15:30-17:00)⚠️ 未核",
+   "arr": "约 55 分",
+   "price": "band NOK 600-1,200 ⚠️ 未核价",
+   "bags": "Norwegian 基础票不含托运,+NOK 300 起",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20BGO%20to%20OSL%20on%202026-10-07%20for%201%20adults",
+   "note": "与次日国际段是分开的票,故住机场酒店留整夜缓冲。",
+   "backup": "Widerøe;或放弃当天巡航、改坐卑尔根铁路全程回奥斯陆(7h,景观重复)"
+  },
+  {
+   "type": "国际航班(返程)",
+   "date": "2026-10-08",
+   "carrier": "海南航空 Hainan(直飞)",
+   "from": "奥斯陆 OSL",
+   "to": "北京 PEK",
+   "dep": "中午前后 ⚠️ 时刻未核",
+   "arr": "2026-10-09 清晨(约 9h25 + 6h 时差)",
+   "price": "含在往返票价内",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20PEK%20to%20OSL%20on%202026-10-01%20returning%202026-10-08%20for%201%20adults",
+   "note": "向东飞,日历上吃掉一个夜晚,10-09 清晨落地。国际段提前 3 小时到航站楼。",
+   "backup": "10-07 返程(1 stop,贵约 $330)—— 若必须 10-08 到家"
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-10-01",
+   "city": "奥斯陆 Oslo",
+   "label": "落地即城市 · 峡湾之城的第一眼",
+   "sun": "☀ 07:20 / 🌇 18:52(天亮 06:41)",
+   "travel_day": true,
+   "rain_alt": "国家博物馆本来就是室内;雨大就把歌剧院屋顶换成室内导览,阿克斯胡斯要塞换成诺贝尔和平中心(周二-周日 11:00-17:00 ⚠️ 未核)",
+   "late_cut": "落地即误点 >1h → 砍阿克斯胡斯要塞;国家博物馆必须 16:00 前进场",
+   "ribbon": "OSL 机场 →机场快线19′→ Oslo S →步行10′→ 歌剧院 →步行20′→ 阿克斯胡斯要塞 →步行12′→ Aker Brygge 午餐 →步行8′→ 国家博物馆",
+   "walking_km": {
+    "total": 4.6,
+    "how": "check 步行段 2.2 ×1.3 = 2.8 + 国家博物馆馆内 ~1.5 + 要塞区内 ~0.3"
+   },
+   "timeline": [
+    {
+     "t": "06:45",
+     "what": "海南航空落地 奥斯陆 OSL(北京 03:20 起飞,9h25)",
+     "kind": "hop",
+     "verify": "est",
+     "map": false
+    },
+    {
+     "t": "06:45-08:00",
+     "what": "申根外部边境入境 + 提取行李",
+     "kind": "free",
+     "note": "首次入申根,边检可能排队;OSL 边检高峰在早班机波峰。别把 08:00 之前的任何事排进来。"
+    },
+    {
+     "t": "08:00-08:25",
+     "what": "机场快线 Flytoget(往 Oslo S 方向) 19分 NOK 240 · Oslo Lufthavn→Oslo S · 出站即中央大厅",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.193900%2C11.100400&destination=59.911000%2C10.750300&travelmode=transit"
+    },
+    {
+     "t": "08:30-09:45",
+     "what": "酒店寄存行李 + 早餐 · Oslo S / Sentrum 一带",
+     "kind": "meal",
+     "note": "房间要 15:00 才能入住,先寄存。挪威早餐店 07:00 就开。",
+     "tag": "swap→Grünerløkka 咖啡馆"
+    },
+    {
+     "t": "09:45-09:55",
+     "what": "步行 Oslo S→奥斯陆歌剧院 0.6 km · 10分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=59.911000%2C10.750300&destination=59.907500%2C10.753300&travelmode=walking"
+    },
+    {
+     "t": "09:55-11:00",
+     "what": "奥斯陆歌剧院 Operahuset(屋顶斜坡)",
+     "kind": "anchor",
+     "price": "屋顶免费",
+     "note": "白色大理石屋顶可直接走上去,是城市最好的免费观景台;室内导览另收费。屋顶全天开放。pattern as of 2026-08-15",
+     "tag": "opener"
+    },
+    {
+     "t": "11:00-11:20",
+     "what": "步行 歌剧院→阿克斯胡斯要塞 1.4 km · 20分(沿海滨)",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=59.907500%2C10.753300&destination=59.907500%2C10.736500&travelmode=walking"
+    },
+    {
+     "t": "11:20-12:20",
+     "what": "阿克斯胡斯要塞 Akershus festning",
+     "kind": "anchor",
+     "price": "要塞外区免费(城堡内部另票)",
+     "note": "中世纪要塞 + 峡湾口视野。外区常年 06:00-21:00 开放 ⚠️ 未核",
+     "tag": "skippable"
+    },
+    {
+     "t": "12:20-12:32",
+     "what": "步行 阿克斯胡斯→Aker Brygge 海滨 0.8 km · 12分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=59.907500%2C10.736500&destination=59.911000%2C10.729000&travelmode=walking"
+    },
+    {
+     "t": "12:32-13:45",
+     "what": "午餐 · Aker Brygge / Tjuvholmen 海滨食区",
+     "kind": "meal",
+     "note": "海鲜为主,价位偏高;想省钱走 Mathallen 或超市热食。",
+     "tag": "swap→Mathallen 食堂"
+    },
+    {
+     "t": "13:45-13:55",
+     "what": "步行 Aker Brygge→国家博物馆 0.5 km · 8分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=59.911000%2C10.729000&destination=59.911800%2C10.732600&travelmode=walking"
+    },
+    {
+     "t": "14:00-16:30",
+     "what": "挪威国家博物馆 Nasjonalmuseet(《呐喊》原作在此)",
+     "kind": "anchor",
+     "price": "NOK 200(含在 Oslo Pass)⚠️ 未核",
+     "note": "北欧最大艺术馆。周一闭馆 —— 10-01 是周四,周四通常延长到 20:00 ⚠️ 未核。建议 15:00 前激活 Oslo Pass 让 24h 覆盖到明天的 MUNCH。",
+     "tag": "skippable"
+    },
+    {
+     "t": "17:00-18:00",
+     "what": "酒店入住 + 倒时差(北京时间已是深夜)",
+     "kind": "free",
+     "note": "身体时钟此刻 23:00-24:00,别硬撑。"
+    },
+    {
+     "t": "18:00-19:30",
+     "what": "晚餐 · 酒店步行范围内",
+     "kind": "meal",
+     "note": "落地日不安排需订位的餐厅。",
+     "tag": "skippable"
+    }
+   ],
+   "stops": [
+    {
+     "name": "奥斯陆机场 OSL",
+     "query": "Oslo Lufthavn Gardermoen, Norway",
+     "lat": 60.1939,
+     "lon": 11.1004
+    },
+    {
+     "name": "奥斯陆中央站 Oslo S",
+     "query": "Oslo Sentralstasjon, Norway",
+     "lat": 59.911,
+     "lon": 10.7503,
+     "mode": "transit"
+    },
+    {
+     "name": "奥斯陆歌剧院",
+     "query": "Operahuset, Oslo, Norway",
+     "lat": 59.9075,
+     "lon": 10.7533
+    },
+    {
+     "name": "阿克斯胡斯要塞",
+     "query": "Akershus festning, Oslo, Norway",
+     "lat": 59.9075,
+     "lon": 10.7365
+    },
+    {
+     "name": "Aker Brygge 海滨",
+     "query": "Aker Brygge, Oslo, Norway",
+     "lat": 59.911,
+     "lon": 10.729
+    },
+    {
+     "name": "挪威国家博物馆",
+     "query": "Nasjonalmuseet, Oslo, Norway",
+     "lat": 59.9118,
+     "lon": 10.7326
+    }
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "city": "奥斯陆 Oslo",
+   "label": "石头与呐喊 · 雕塑公园、极地船、蒙克",
+   "sun": "☀ 07:23 / 🌇 18:50",
+   "travel_day": false,
+   "rain_alt": "维格兰公园换成 Fram 隔壁的康提基博物馆(室内,10:00-17:00 ⚠️ 未核);MUNCH 与国家博物馆本就室内",
+   "late_cut": "落后 >1h → 砍 Fram 博物馆(比格迪半岛来回吃掉 1.5h),把时间留给 MUNCH",
+   "ribbon": "Oslo S →地铁+步行25′→ 维格兰雕塑公园 →巴士30路 35′→ Fram 极地船博物馆 →巴士+地铁 45′→ MUNCH →步行10′→ Bjørvika 晚餐",
+   "walking_km": {
+    "total": 4.8,
+    "how": "check 步行段 0.5 ×1.3 = 0.7 + 维格兰公园内 ~1.6 + Fram 馆内 ~0.7 + MUNCH 十三层竖向 ~1.8"
+   },
+   "timeline": [
+    {
+     "t": "08:30-09:00",
+     "what": "早餐 · 酒店",
+     "kind": "meal"
+    },
+    {
+     "t": "09:00-09:25",
+     "what": "地铁 T-bane 3 号线(往 Kolsås 方向) ~12分 NOK 44 · Jernbanetorget→Majorstuen · 出站步行 8分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=59.911000%2C10.750300&destination=59.927000%2C10.700000&travelmode=transit"
+    },
+    {
+     "t": "09:25-11:15",
+     "what": "维格兰雕塑公园 Vigelandsparken",
+     "kind": "anchor",
+     "price": "免费 · 全天开放",
+     "note": "212 座裸体人像,挪威最多人来的景点;上午光线从东侧打在生命之柱上最好。10 月无排队。",
+     "tag": "opener"
+    },
+    {
+     "t": "11:15-11:50",
+     "what": "巴士 30 路(往 Bygdøy 方向) ~25分 NOK 44 · Frogner plass→Bygdøynes · 下车步行 5分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=59.927000%2C10.700000&destination=59.902600%2C10.698900&travelmode=transit"
+    },
+    {
+     "t": "11:50-13:20",
+     "what": "Fram 极地船博物馆",
+     "kind": "anchor",
+     "price": "NOK ~140(含在 Oslo Pass)⚠️ 未核",
+     "note": "10-01 至 04-30 开放 10:00-17:00(官网已核 2026-08-15)。可以走进南森那条真船的船舱。",
+     "tag": "skippable"
+    },
+    {
+     "t": "13:20-14:20",
+     "what": "午餐 · 比格迪半岛博物馆区 / 或带回市区",
+     "kind": "meal",
+     "note": "半岛上餐饮选择少且贵,10 月部分季节性餐点已关 ⚠️。备选:回市区 Vippa 海滨食堂。",
+     "tag": "swap→Vippa 海滨食堂"
+    },
+    {
+     "t": "14:20-15:15",
+     "what": "巴士 30 路 + 地铁 ~40分 NOK 44 · Bygdøynes→Jernbanetorget→步行 · 换乘一次",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=59.902600%2C10.698900&destination=59.906000%2C10.755600&travelmode=transit"
+    },
+    {
+     "t": "15:15-17:45",
+     "what": "MUNCH 蒙克美术馆",
+     "kind": "anchor",
+     "price": "NOK 280(18:00 后 NOK 200;含在 Oslo Pass)· 已核 munch.no 2026-08-15",
+     "note": "周日-周二 10:00-18:00、周三-周六 10:00-21:00 —— 10-02 是周五,开到 21:00,不赶。13 层竖向动线,顶层观景台看峡湾。",
+     "tag": "pinned"
+    },
+    {
+     "t": "17:45-17:55",
+     "what": "步行 MUNCH→Bjørvika / Barcode 街区 0.5 km · 10分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=59.906000%2C10.755600&destination=59.904600%2C10.746600&travelmode=walking"
+    },
+    {
+     "t": "18:00-19:30",
+     "what": "晚餐 · Bjørvika / Vippa 海滨食堂一带",
+     "kind": "meal",
+     "note": "Vippa 是集装箱式国际小吃堂,单人友好、价位是奥斯陆里少见的合理。⚠️ 营业日未核。",
+     "tag": "swap→Grünerløkka"
+    }
+   ],
+   "stops": [
+    {
+     "name": "奥斯陆中央站 Oslo S(酒店区)",
+     "query": "Oslo Sentralstasjon, Norway",
+     "lat": 59.911,
+     "lon": 10.7503
+    },
+    {
+     "name": "维格兰雕塑公园",
+     "query": "Vigelandsparken, Oslo, Norway",
+     "lat": 59.927,
+     "lon": 10.7,
+     "mode": "transit"
+    },
+    {
+     "name": "Fram 极地船博物馆",
+     "query": "Frammuseet, Oslo, Norway",
+     "lat": 59.9026,
+     "lon": 10.6989,
+     "mode": "transit"
+    },
+    {
+     "name": "MUNCH 蒙克美术馆",
+     "query": "Munchmuseet, Oslo, Norway",
+     "lat": 59.906,
+     "lon": 10.7556,
+     "mode": "transit"
+    },
+    {
+     "name": "Bjørvika 海滨食区",
+     "query": "Vippa, Oslo, Norway",
+     "lat": 59.9046,
+     "lon": 10.7466
+    }
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=59.911000%2C10.750300&destination=59.904600%2C10.746600&travelmode=walking&waypoints=59.927000%2C10.700000%7C59.902600%2C10.698900%7C59.906000%2C10.755600"
+  },
+  {
+   "date": "2026-10-03",
+   "city": "奥斯陆 → 弗洛姆 Flåm",
+   "label": "翻越山脊 · 卑尔根铁路 + 弗洛姆铁路",
+   "sun": "☀ 07:40 / 🌇 19:00(弗洛姆)",
+   "travel_day": true,
+   "rain_alt": "本日主体在车厢里,雨天不影响;抵达后若下雨,把村内散步换成弗洛姆铁路博物馆(免费,室内)",
+   "late_cut": "卑尔根铁路误点 → Myrdal 换乘可能赶不上接续班,弗洛姆铁路每 1-2h 一班,最坏情况晚 2h 到弗洛姆;当天不再安排任何需要预约的事,就是为了这个",
+   "ribbon": "Oslo S →卑尔根铁路 4h55→ Myrdal →弗洛姆铁路 1h→ 弗洛姆 →步行5′→ 弗洛姆铁路博物馆",
+   "walking_km": {
+    "total": 1.3,
+    "how": "check 步行段 0.1 ×1.3 = 0.1 + 车站换乘与弗洛姆村内走动 ~1.2 —— 移动日,刻意压低"
+   },
+   "timeline": [
+    {
+     "t": "07:00-07:40",
+     "what": "早餐 + 退房(行李随身)",
+     "kind": "meal",
+     "note": "移动日:全天带箱。卑尔根铁路车厢门口有大件行李架,不必托运。"
+    },
+    {
+     "t": "08:25-13:20",
+     "what": "卑尔根铁路 Bergensbanen(往 Bergen 方向) ~4h55 · Oslo S→Myrdal · minipris 自 NOK 299",
+     "kind": "hop",
+     "verify": "est",
+     "note": "⚠️ 车次时刻未核,以 vy.no 为准。经 Finse(1,222 m,全欧最高干线站之一),10 月山顶通常已见雪。",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=59.911000%2C10.750300&destination=60.735171%2C7.122829&travelmode=transit"
+    },
+    {
+     "t": "13:20-13:50",
+     "what": "Myrdal 站换乘(站台间平面换乘,约 30 分接续)",
+     "kind": "free",
+     "note": "Myrdal 只有一个小站台和一间候车室,海拔 866 m,10 月体感接近 0°C —— 换乘前把外套拿出来。"
+    },
+    {
+     "t": "13:50-14:50",
+     "what": "弗洛姆铁路 Flåmsbana(往 Flåm 方向) 20 km / ~1h · Myrdal→Flåm · ≈NOK 450",
+     "kind": "hop",
+     "verify": "est",
+     "note": "坡度 1:18,世界最陡的常规黏着铁路之一。中途 Kjosfossen 瀑布停 5 分钟,可下车 —— 靠右侧坐。",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.735171%2C7.122829&destination=60.863100%2C7.113600&travelmode=transit"
+    },
+    {
+     "t": "15:00-15:40",
+     "what": "入住 + 卸行李 · 弗洛姆村",
+     "kind": "free"
+    },
+    {
+     "t": "15:40-15:45",
+     "what": "步行 住宿→弗洛姆铁路博物馆 0.3 km · 5分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.863100%2C7.113600&destination=60.863600%2C7.112800&travelmode=walking"
+    },
+    {
+     "t": "15:45-17:00",
+     "what": "弗洛姆铁路博物馆 + 峡湾尽头码头散步",
+     "kind": "anchor",
+     "price": "博物馆免费",
+     "note": "小而好的一间;村子本身十分钟走完。10 月游轮季末,村里很安静。",
+     "tag": "skippable"
+    },
+    {
+     "t": "18:30-20:00",
+     "what": "晚餐 · Ægir 酿酒坊(维京长屋造型)一带",
+     "kind": "meal",
+     "note": "弗洛姆餐饮选择极少且 10 月起陆续关门 ⚠️ 未核 —— 到店先问明天营业时间,并在超市备一份应急口粮。",
+     "tag": "swap→住宿自带餐厅"
+    }
+   ],
+   "stops": [
+    {
+     "name": "奥斯陆中央站 Oslo S",
+     "query": "Oslo Sentralstasjon, Norway",
+     "lat": 59.911,
+     "lon": 10.7503
+    },
+    {
+     "name": "Myrdal 站",
+     "query": "Myrdal stasjon, Norway",
+     "mode": "transit",
+     "lat": 60.7351714,
+     "lon": 7.1228288
+    },
+    {
+     "name": "弗洛姆站 / 码头",
+     "query": "Flåm stasjon, Norway",
+     "lat": 60.8631,
+     "lon": 7.1136,
+     "mode": "transit"
+    },
+    {
+     "name": "弗洛姆铁路博物馆",
+     "query": "Flåmsbana Museum, Flåm, Norway",
+     "lat": 60.8636,
+     "lon": 7.1128
+    }
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "city": "弗洛姆 Flåm",
+   "label": "峡湾静水 · 纳柔伊峡湾与斯泰加斯坦",
+   "sun": "☀ 07:43 / 🌇 18:57(天文暗夜 21:19 起)",
+   "travel_day": false,
+   "rain_alt": "峡湾船照常开(有室内客舱,雨中峡湾反而更有气氛);斯泰加斯坦大雨则无意义 —— 换成 Otternes 古农庄或村内 Ægir 长屋久坐",
+   "late_cut": "船班晚点 >1h → 砍斯泰加斯坦(它是唯一可再约的);Brekkefossen 徒步天黑前必须下山,18:00 是折返死线",
+   "ribbon": "弗洛姆码头 →电动船 2h→ Gudvangen →巴士25′→ 弗洛姆村 →观景巴士 40′→ 斯泰加斯坦 →巴士+步行→ Brekkefossen 瀑布步道",
+   "walking_km": {
+    "total": 5.8,
+    "how": "check 步行段 0.0(全部为船/巴士段)+ Gudvangen 村内 0.6 + 斯泰加斯坦平台 0.4 + 弗洛姆村内 0.8 + Brekkefossen 徒步往返 ~4.0(陡)"
+   },
+   "timeline": [
+    {
+     "t": "08:00-08:45",
+     "what": "早餐",
+     "kind": "meal"
+    },
+    {
+     "t": "09:00-11:00",
+     "what": "电动游船 纳柔伊峡湾航线(往 Gudvangen 方向) ~2h ≈NOK 600 · 弗洛姆码头→Gudvangen 码头 · 下船即村口",
+     "kind": "hop",
+     "verify": "est",
+     "note": "这一段「交通」就是今天的主景:UNESCO 世界遗产纳柔伊峡湾,最窄处仅 250 m、崖壁高 1,400 m。电动船无噪音,甲板上能听见瀑布。⚠️ 9-01~10-15 为减班期,班次以官网为准 —— 本行程按 09:00 首班排,务必先确认。全程在露天甲板会很冷:羽绒+防风。",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.863100%2C7.113600&destination=60.879109%2C6.839630&travelmode=transit"
+    },
+    {
+     "t": "11:00-11:50",
+     "what": "Gudvangen 村 · 维京村 Njardarheimr 外围与峡湾尽头",
+     "kind": "anchor",
+     "price": "维京村另票 ≈ NOK 250 ⚠️ 季节性开放未核",
+     "note": "船靠岸即是村子。10 月可能已闭园 —— 闭园就在码头喝杯咖啡等巴士。",
+     "tag": "skippable"
+    },
+    {
+     "t": "11:50-12:15",
+     "what": "巴士 NW13(往 Flåm 方向) ~25分 ≈NOK 150 · Gudvangen→Flåm · 下车即码头",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.879109%2C6.839630&destination=60.862500%2C7.114000&travelmode=transit"
+    },
+    {
+     "t": "12:15-13:30",
+     "what": "午餐 · 弗洛姆码头一带",
+     "kind": "meal"
+    },
+    {
+     "t": "13:45-14:25",
+     "what": "观景巴士(往 Stegastein 方向) ~40分 ≈NOK 350 含往返 · 弗洛姆村→斯泰加斯坦 · 山路窄,大车禁行",
+     "kind": "hop",
+     "verify": "est",
+     "note": "⚠️ 10 月中旬后视天气可能停运 —— 出行前确认。",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.862500%2C7.114000&destination=60.908176%2C7.213120&travelmode=transit"
+    },
+    {
+     "t": "14:25-15:05",
+     "what": "斯泰加斯坦观景台 Stegastein",
+     "kind": "anchor",
+     "price": "含在往返巴士票内",
+     "tag": "skippable",
+     "note": "海拔 650 m,木栈道悬挑 30 m 伸出奥兰峡湾之上,是全挪威最上镜的观景台。停留约 30-40 分钟后原车返回。"
+    },
+    {
+     "t": "15:45-16:00",
+     "what": "步行 弗洛姆村→Brekkefossen 步道口 0.8 km · 15分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.908176%2C7.213120&destination=60.869700%2C7.118600&travelmode=transit"
+    },
+    {
+     "t": "16:00-17:45",
+     "what": "Brekkefossen 瀑布步道(往返约 1.5-2h,陡)",
+     "kind": "anchor",
+     "price": "免费",
+     "note": "村后一条上坡土路直达瀑布正面,落差可观。10 月落叶湿滑,需防滑鞋。日落 18:57,17:45 前必须开始下撤。",
+     "tag": "skippable"
+    },
+    {
+     "t": "18:30-20:00",
+     "what": "晚餐 · 弗洛姆",
+     "kind": "meal"
+    },
+    {
+     "t": "21:20-22:30",
+     "what": "极光观察窗口(码头方向,背对村灯)",
+     "kind": "free",
+     "note": "⚠️ 诚实口径:此处 60.9°N,10 月初需 Kp≥6 才有肉眼机会,单晚概率约 5-10%。当彩蛋,不当行程。出发前看 NOAA 30 分钟预报再决定要不要站在外面挨冻。",
+     "tag": "skippable"
+    }
+   ],
+   "stops": [
+    {
+     "name": "弗洛姆码头",
+     "query": "Flåm havn, Norway",
+     "lat": 60.8631,
+     "lon": 7.1136
+    },
+    {
+     "name": "Gudvangen",
+     "query": "Gudvangen, Aurland, Norway",
+     "mode": "transit",
+     "lat": 60.8791085,
+     "lon": 6.8396298
+    },
+    {
+     "name": "弗洛姆村中心",
+     "query": "Flåm, Aurland, Norway",
+     "lat": 60.8625,
+     "lon": 7.114,
+     "mode": "transit"
+    },
+    {
+     "name": "斯泰加斯坦观景台",
+     "query": "Stegastein utsiktspunkt, Aurland, Norway",
+     "mode": "transit",
+     "lat": 60.908176,
+     "lon": 7.21312
+    },
+    {
+     "name": "Brekkefossen 瀑布步道",
+     "query": "Brekkefossen, Flåm, Norway",
+     "lat": 60.8697,
+     "lon": 7.1186,
+     "mode": "transit"
+    }
+   ],
+   "hop_links": [
+    "https://www.google.com/maps/dir/?api=1&origin=60.863100%2C7.113600&destination=60.879109%2C6.839630&travelmode=transit",
+    "https://www.google.com/maps/dir/?api=1&origin=60.879109%2C6.839630&destination=60.862500%2C7.114000&travelmode=transit",
+    "https://www.google.com/maps/dir/?api=1&origin=60.862500%2C7.114000&destination=60.908176%2C7.213120&travelmode=transit",
+    "https://www.google.com/maps/dir/?api=1&origin=60.908176%2C7.213120&destination=60.869700%2C7.118600&travelmode=transit"
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "city": "弗洛姆 → 卑尔根 Bergen",
+   "label": "出山入海 · 峡湾巴士与汉萨码头",
+   "sun": "☀ 07:52 / 🌇 19:01(卑尔根)",
+   "travel_day": true,
+   "rain_alt": "卑尔根 10 月雨是常态(去年同期 8 天里 6 天有雨)——布吕根窄巷本来就适合躲雨,且露天街区不关门;需要屋顶就进鱼市室内馆 Mathallen(全年营业)。⚠️ 不要把汉萨博物馆当今天的雨备:10-05 是周一,挪威博物馆普遍周一闭馆 —— 它排在明天(周二)。",
+   "late_cut": "巴士/火车误点 >1h → 砍鱼市,只留布吕根黄昏散步(布吕根是露天街区,不会关门)",
+   "ribbon": "弗洛姆 →NW13 巴士 1h15→ Voss →Vossebanen 火车 1h15→ 卑尔根站 →步行15′→ 布吕根 →步行5′→ 鱼市",
+   "walking_km": {
+    "total": 3.9,
+    "how": "check 步行段 1.3 ×1.3 = 1.7 + 布吕根巷弄穿行 ~1.5 + 鱼市 ~0.7 —— 移动日,只有 1 个锚点"
+   },
+   "timeline": [
+    {
+     "t": "08:30-09:30",
+     "what": "早餐 + 退房(行李随身)",
+     "kind": "meal",
+     "note": "移动日:巴士行李舱可放大箱;Voss 站换乘是露天站台,雨天要有心理准备。"
+    },
+    {
+     "t": "10:00-11:15",
+     "what": "巴士 NW13(往 Voss 方向) ~1h15 ≈NOK 330 · 弗洛姆→Voss · 经 Gudvangen 与 Stalheim 山路",
+     "kind": "hop",
+     "verify": "est",
+     "note": "⚠️ 班次未核。这段山路本身是景观段,坐右侧。",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.863100%2C7.113600&destination=60.629105%2C6.410115&travelmode=transit"
+    },
+    {
+     "t": "11:15-12:30",
+     "what": "午餐 + Voss 站周边走动",
+     "kind": "meal",
+     "note": "Voss 是极限运动小镇,站前就有食堂。换乘留 1h 以上,是为了吸收巴士晚点。",
+     "tag": "skippable"
+    },
+    {
+     "t": "12:35-13:50",
+     "what": "火车 Vossebanen(往 Bergen 方向) ~1h15 ≈NOK 250 · Voss→Bergen · 终点站下",
+     "kind": "hop",
+     "verify": "est",
+     "note": "Bergen–Voss–Myrdal 段 2026-05-01 至 2026-12-12 运行(已核)。",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.629105%2C6.410115&destination=60.390000%2C5.333000&travelmode=transit"
+    },
+    {
+     "t": "14:00-15:00",
+     "what": "入住 · 卑尔根市中心",
+     "kind": "free"
+    },
+    {
+     "t": "15:00-15:15",
+     "what": "步行 卑尔根站→布吕根 1.1 km · 15分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.390000%2C5.333000&destination=60.397500%2C5.324200&travelmode=walking"
+    },
+    {
+     "t": "15:15-17:30",
+     "what": "布吕根 Bryggen 汉萨木屋区(UNESCO)",
+     "kind": "anchor",
+     "price": "街区免费(汉萨博物馆另票)",
+     "note": "露天街区全天可走。真正好看的是彩色立面背后那些歪斜的木廊巷弄 —— 从正面绕进去。10-05 是周一,挪威博物馆普遍闭馆,所以今天只走街区、把室内馆留给明天。",
+     "tag": "opener"
+    },
+    {
+     "t": "17:30-17:35",
+     "what": "步行 布吕根→鱼市 Fisketorget 0.3 km · 5分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.397500%2C5.324200&destination=60.394400%2C5.324300&travelmode=walking"
+    },
+    {
+     "t": "17:35-18:30",
+     "what": "鱼市 Fisketorget",
+     "kind": "anchor",
+     "price": "免费逛;吃海鲜 NOK 250-500",
+     "note": "室内馆 Mathallen 全年营业;露天摊位 10 月起收缩 ⚠️ 时间未核。价格对游客不友好,当景点看、当饭吃要有心理准备。",
+     "tag": "skippable"
+    },
+    {
+     "t": "19:00-20:30",
+     "what": "晚餐 · 布吕根背巷 / Torget 一带",
+     "kind": "meal",
+     "tag": "swap→住宿附近"
+    }
+   ],
+   "stops": [
+    {
+     "name": "弗洛姆巴士站",
+     "query": "Flåm, Aurland, Norway",
+     "lat": 60.8631,
+     "lon": 7.1136
+    },
+    {
+     "name": "Voss 站",
+     "query": "Voss stasjon, Norway",
+     "mode": "transit",
+     "lat": 60.6291046,
+     "lon": 6.4101148
+    },
+    {
+     "name": "卑尔根站",
+     "query": "Bergen stasjon, Norway",
+     "lat": 60.39,
+     "lon": 5.333,
+     "mode": "transit"
+    },
+    {
+     "name": "布吕根 Bryggen",
+     "query": "Bryggen, Bergen, Norway",
+     "lat": 60.3975,
+     "lon": 5.3242
+    },
+    {
+     "name": "鱼市 Fisketorget",
+     "query": "Fisketorget, Bergen, Norway",
+     "lat": 60.3944,
+     "lon": 5.3243
+    }
+   ]
+  },
+  {
+   "date": "2026-10-06",
+   "city": "卑尔根 Bergen",
+   "label": "木屋与雨 · 缆车、艺术馆、汉萨旧巷",
+   "sun": "☀ 07:55 / 🌇 18:59",
+   "travel_day": false,
+   "rain_alt": "弗洛伊恩山顶大雾就没意义 —— 换成 KODE 多逛一馆 + 汉萨博物馆;卑尔根的雨天方案本来就是「全部室内」",
+   "late_cut": "落后 >1h → 砍汉萨博物馆;KODE 最晚入场约闭馆前 30 分",
+   "ribbon": "弗洛伊恩缆车下站 →缆车8′→ 弗洛伊恩山顶 →缆车+步行 20′→ 鱼市午餐 →步行8′→ KODE 艺术馆 →步行12′→ 布吕根",
+   "walking_km": {
+    "total": 6.6,
+    "how": "check 步行段 1.2 ×1.3 = 1.5 + 弗洛伊恩山顶环道 ~2.5 + KODE 馆内 ~1.6 + 布吕根巷弄 ~1.0"
+   },
+   "timeline": [
+    {
+     "t": "08:00-08:45",
+     "what": "早餐",
+     "kind": "meal"
+    },
+    {
+     "t": "08:45-09:00",
+     "what": "步行 住宿→弗洛伊恩缆车下站 0.5 km · 10分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.393600%2C5.326000&destination=60.396000%2C5.330000&travelmode=walking"
+    },
+    {
+     "t": "09:00-09:10",
+     "what": "弗洛伊恩缆车 Fløibanen 上行 ~8分 · 往返 NOK 145(已核 floyen.no 2026-08-15)",
+     "kind": "hop",
+     "verify": "est",
+     "note": "10-01 至 12-31 为冬季票价。平日 07:30-24:00 运行,每 10-15 分一班。",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.396000%2C5.330000&destination=60.396000%2C5.352000&travelmode=transit"
+    },
+    {
+     "t": "09:10-11:15",
+     "what": "弗洛伊恩山顶 Fløyen 观景 + 林间环道",
+     "kind": "anchor",
+     "price": "缆车往返 NOK 145",
+     "note": "320 m 俯瞰全城与七山七峡湾。上午云低时反而有云海。山顶有一圈铺装步道,雨天可走。",
+     "tag": "opener"
+    },
+    {
+     "t": "11:15-11:35",
+     "what": "弗洛伊恩缆车下行 + 步行至鱼市 ~20分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.396000%2C5.352000&destination=60.394400%2C5.324300&travelmode=transit"
+    },
+    {
+     "t": "11:45-13:00",
+     "what": "午餐 · 鱼市 Mathallen 室内馆",
+     "kind": "meal",
+     "tag": "swap→Torgallmenningen 街边"
+    },
+    {
+     "t": "13:00-13:10",
+     "what": "步行 鱼市→KODE 艺术馆群 0.6 km · 10分(沿 Lille Lungegårdsvann 湖)",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.394400%2C5.324300&destination=60.391500%2C5.330000&travelmode=walking"
+    },
+    {
+     "t": "13:15-15:30",
+     "what": "KODE 艺术馆(KODE 3 蒙克与达尔藏品)",
+     "kind": "anchor",
+     "price": "≈ NOK 200 通票 ⚠️ 未核",
+     "note": "北欧最大的艺术馆群之一,四栋楼一张票。KODE 3 有挪威国内仅次于奥斯陆的蒙克收藏。10-06 是周二,不撞周一闭馆 ✓",
+     "tag": "pinned"
+    },
+    {
+     "t": "15:30-15:42",
+     "what": "步行 KODE→布吕根 0.9 km · 12分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.391500%2C5.330000&destination=60.397500%2C5.324200&travelmode=walking"
+    },
+    {
+     "t": "15:45-17:15",
+     "what": "布吕根背巷 + 汉萨博物馆 / 圣玛丽教堂外观",
+     "kind": "anchor",
+     "price": "汉萨博物馆 ≈ NOK 180 ⚠️ 未核",
+     "note": "⚠️ 汉萨博物馆主楼长期修缮,展览在临时馆 —— 出行前复查。日落 18:59,17:00 前后是布吕根立面最好的光。",
+     "tag": "skippable"
+    },
+    {
+     "t": "18:30-20:00",
+     "what": "晚餐 · 布吕根 / Nordnes 一带",
+     "kind": "meal"
+    }
+   ],
+   "stops": [
+    {
+     "name": "卑尔根市中心住宿区(Torget)",
+     "query": "Torget, Bergen, Norway",
+     "lat": 60.3936,
+     "lon": 5.326
+    },
+    {
+     "name": "弗洛伊恩缆车下站",
+     "query": "Fløibanen, Bergen, Norway",
+     "lat": 60.396,
+     "lon": 5.33
+    },
+    {
+     "name": "弗洛伊恩山顶",
+     "query": "Fløyen, Bergen, Norway",
+     "lat": 60.396,
+     "lon": 5.352,
+     "mode": "transit"
+    },
+    {
+     "name": "鱼市 Fisketorget",
+     "query": "Fisketorget, Bergen, Norway",
+     "lat": 60.3944,
+     "lon": 5.3243,
+     "mode": "transit"
+    },
+    {
+     "name": "KODE 艺术馆",
+     "query": "KODE Kunstmuseer, Bergen, Norway",
+     "lat": 60.3915,
+     "lon": 5.33
+    },
+    {
+     "name": "布吕根 Bryggen",
+     "query": "Bryggen, Bergen, Norway",
+     "lat": 60.3975,
+     "lon": 5.3242
+    }
+   ],
+   "hop_links": [
+    "https://www.google.com/maps/dir/?api=1&origin=60.396000%2C5.330000&destination=60.396000%2C5.352000&travelmode=transit",
+    "https://www.google.com/maps/dir/?api=1&origin=60.396000%2C5.352000&destination=60.394400%2C5.324300&travelmode=transit",
+    "https://www.google.com/maps/dir/?api=1&origin=60.394400%2C5.324300&destination=60.391500%2C5.330000&travelmode=walking",
+    "https://www.google.com/maps/dir/?api=1&origin=60.391500%2C5.330000&destination=60.397500%2C5.324200&travelmode=walking"
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=60.393600%2C5.326000&destination=60.397500%2C5.324200&travelmode=walking&waypoints=60.396000%2C5.330000%7C60.396000%2C5.352000%7C60.394400%2C5.324300%7C60.391500%2C5.330000"
+  },
+  {
+   "date": "2026-10-07",
+   "city": "卑尔根 → 奥斯陆(机场)",
+   "label": "潮水回航 · 最后一段峡湾,然后北上转机",
+   "sun": "☀ 07:57 / 🌇 18:55",
+   "travel_day": true,
+   "rain_alt": "巡航照常(有室内舱);若巡航停运,改乌尔里肯缆车 Ulriken643 或 KODE 未看完的馆",
+   "late_cut": "巡航晚归 >30 分 → 直接放弃午餐,提前去机场;14:30 是去机场的死线",
+   "ribbon": "Zachariasbryggen 码头 →巡航 3h→ 返回码头 →步行5′→ Torgallmenningen 午餐 →轻轨 45′→ 卑尔根机场 BGO →飞 55′→ 奥斯陆机场",
+   "walking_km": {
+    "total": 1.9,
+    "how": "check 步行段 0.2 ×1.3 = 0.3 + 船上甲板走动 ~0.6 + 机场航站楼 ~1.0 —— 离开日,刻意压低"
+   },
+   "timeline": [
+    {
+     "t": "08:00-09:00",
+     "what": "早餐 + 退房(行李寄存在住宿)",
+     "kind": "meal",
+     "note": "行李解决方案:寄存在住宿前台,巡航回来取。⚠️ 订房时确认前台是否接受当日退房后寄存 —— 小型公寓式住宿常常不行,那就寄存在卑尔根火车站的储物柜。"
+    },
+    {
+     "t": "09:00-09:10",
+     "what": "步行 住宿→Zachariasbryggen 码头 0.4 km · 8分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.393600%2C5.326000&destination=60.394700%2C5.323500&travelmode=walking"
+    },
+    {
+     "t": "10:00-13:00",
+     "what": "Mostraumen 峡湾巡航(Rødne,奥斯特峡湾往返)",
+     "kind": "anchor",
+     "price": "≈ NOK 750 ⚠️ 未核",
+     "note": "3-3.5h,沿 27 km 的 Osterfjord 深入到 Mostraumen 窄口,船头会顶到瀑布下让人淋一脸水。⚠️ 10 月班次时刻未核 —— 若首班晚于 10:30 就放弃,改乌尔里肯缆车,否则赶不上飞机。",
+     "tag": "pinned"
+    },
+    {
+     "t": "13:00-13:10",
+     "what": "步行 码头→Torgallmenningen 0.3 km · 5分",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.394700%2C5.323500&destination=60.392500%2C5.324000&travelmode=walking"
+    },
+    {
+     "t": "13:10-14:10",
+     "what": "午餐 + 取行李 · 市中心",
+     "kind": "meal",
+     "tag": "skippable"
+    },
+    {
+     "t": "14:20-15:05",
+     "what": "轻轨 Bybanen 1 号线(往 Bergen lufthavn 方向) ~45分 NOK 42 · Byparken→Bergen lufthavn · 终点站直达航站楼",
+     "kind": "hop",
+     "verify": "est",
+     "note": "轻轨直通航站楼,是卑尔根去机场最省心的方式。带大箱也够宽。",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.392500%2C5.324000&destination=60.293400%2C5.218100&travelmode=transit"
+    },
+    {
+     "t": "15:05-16:30",
+     "what": "卑尔根机场 BGO 值机 + 安检(国内段)",
+     "kind": "free",
+     "note": "国内段提前 1.5h 足够。"
+    },
+    {
+     "t": "16:30-17:30",
+     "what": "SAS / Norwegian BGO→OSL ~55分",
+     "kind": "hop",
+     "verify": "est",
+     "map": false,
+     "note": "⚠️ 具体班次未订 —— 建议选 15:30-17:00 之间起飞的。"
+    },
+    {
+     "t": "18:00-18:30",
+     "what": "入住奥斯陆机场酒店(步行可达航站楼)",
+     "kind": "free",
+     "note": "选 Radisson Blu Airport 或 Park Inn Gardermoen —— 都能走过去,不用摆渡车。"
+    },
+    {
+     "t": "19:00-20:30",
+     "what": "晚餐 · 酒店 / 航站楼",
+     "kind": "meal",
+     "note": "最后一晚,把挪威克朗现金花掉。"
+    }
+   ],
+   "stops": [
+    {
+     "name": "卑尔根市中心住宿区(Torget)",
+     "query": "Torget, Bergen, Norway",
+     "lat": 60.3936,
+     "lon": 5.326
+    },
+    {
+     "name": "Zachariasbryggen 码头",
+     "query": "Zachariasbryggen, Bergen, Norway",
+     "lat": 60.3947,
+     "lon": 5.3235
+    },
+    {
+     "name": "Torgallmenningen 市中心",
+     "query": "Torgallmenningen, Bergen, Norway",
+     "lat": 60.3925,
+     "lon": 5.324
+    },
+    {
+     "name": "卑尔根机场 BGO",
+     "query": "Bergen lufthavn Flesland, Norway",
+     "lat": 60.2934,
+     "lon": 5.2181,
+     "mode": "transit"
+    }
+   ],
+   "hop_links": [
+    "https://www.google.com/maps/dir/?api=1&origin=60.394700%2C5.323500&destination=60.392500%2C5.324000&travelmode=walking",
+    "https://www.google.com/maps/dir/?api=1&origin=60.392500%2C5.324000&destination=60.293400%2C5.218100&travelmode=transit"
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "city": "奥斯陆 → 北京",
+   "label": "云上归途 · 向东飞,吃掉一个夜晚",
+   "sun": "☀ 07:37 / 🌇 18:31(奥斯陆)",
+   "travel_day": true,
+   "rain_alt": "全天在航站楼,无关天气",
+   "late_cut": "无可砍项 —— 这天只有一件事",
+   "ribbon": "机场酒店 →步行10′→ 奥斯陆机场 OSL 航站楼 →国际值机 3h→ 起飞",
+   "walking_km": {
+    "total": 1.3,
+    "how": "check 步行段 0.3 ×1.3 = 0.4 + 航站楼内 ~0.9"
+   },
+   "timeline": [
+    {
+     "t": "07:30-08:30",
+     "what": "早餐 + 退房",
+     "kind": "meal"
+    },
+    {
+     "t": "08:30-08:40",
+     "what": "步行 机场酒店→OSL 航站楼 0.5 km · 10分(有连廊)",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=60.195800%2C11.095900&destination=60.193900%2C11.100400&travelmode=walking"
+    },
+    {
+     "t": "09:00-09:45",
+     "what": "值机 + 托运 · 海南航空柜台",
+     "kind": "free",
+     "note": "国际段规矩:提前 3 小时到航站楼。"
+    },
+    {
+     "t": "09:45-10:45",
+     "what": "退税(免税额门槛 NOK 315/单店)+ 申根离境边检",
+     "kind": "free",
+     "note": "退税柜台在安检前,先办退税再过边检。挪威不是欧盟,退税走 Global Blue / Norwegian Tax Free,机场即可现金退。"
+    },
+    {
+     "t": "10:45-12:30",
+     "what": "候机 · 免税区",
+     "kind": "free",
+     "tag": "skippable"
+    },
+    {
+     "t": "约 12:55",
+     "what": "海南航空 OSL→PEK 起飞(~9h25)⚠️ 时刻未核",
+     "kind": "hop",
+     "verify": "est",
+     "map": false
+    },
+    {
+     "t": "2026-10-09 约 04:20",
+     "what": "落地北京 PEK",
+     "kind": "hop",
+     "verify": "est",
+     "map": false,
+     "note": "向东飞 + 6 小时时差 = 日历上少掉一个夜晚。10-09 是周五,落地即工作日 —— 请预留一天缓冲或直接请假。"
+    }
+   ],
+   "stops": [
+    {
+     "name": "奥斯陆机场酒店",
+     "query": "Radisson Blu Airport Hotel Oslo Gardermoen, Norway",
+     "lat": 60.1958,
+     "lon": 11.0959
+    },
+    {
+     "name": "奥斯陆机场 OSL 航站楼",
+     "query": "Oslo Lufthavn Gardermoen, Norway",
+     "lat": 60.1939,
+     "lon": 11.1004
+    }
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=60.195800%2C11.095900&destination=60.193900%2C11.100400&travelmode=walking"
+  }
+ ],
+ "hotels": [
+  {
+   "base": "奥斯陆 2 晚(10-01 / 10-02)",
+   "area": "Sentrum / Oslo S 中央站周边",
+   "why": "机场快线终点就在这里,10-03 早上还要从 Oslo S 出发坐卑尔根铁路 —— 住站边省掉两次拖箱。Grünerløkka 更有生活感但离站远,移动日会后悔。夜间沿 Karl Johans gate 一线人流稳定;Oslo S 东侧(Grønland)夜里较杂,订房时看清是哪一侧。",
+   "options": [
+    {
+     "name": "Comfort Hotel Xpress Youngstorget(精简连锁,单人友好)",
+     "band": "NOK 1,100-1,500/晚 ⚠️ 未核价",
+     "link": "https://www.booking.com/searchresults.html?ss=Oslo%20Sentrum&checkin=2026-10-01&checkout=2026-10-03&group_adults=1&order=review_score_and_price"
+    },
+    {
+     "name": "Thon Hotel Opera(紧贴 Oslo S 与歌剧院)",
+     "band": "NOK 1,500-2,100/晚 ⚠️ 未核价",
+     "link": "https://www.booking.com/searchresults.html?ss=Thon%20Hotel%20Opera%20Oslo&checkin=2026-10-01&checkout=2026-10-03&group_adults=1"
+    },
+    {
+     "name": "Citybox Oslo(自助入住,性价比)",
+     "band": "NOK 900-1,300/晚 ⚠️ 未核价",
+     "link": "https://www.booking.com/searchresults.html?ss=Citybox%20Oslo&checkin=2026-10-01&checkout=2026-10-03&group_adults=1"
+    }
+   ]
+  },
+  {
+   "base": "弗洛姆 2 晚(10-03 / 10-04)",
+   "area": "弗洛姆村内(码头 500 m 半径)或 Aurland(6 km)",
+   "why": "全村床位以百计,10 月还有挪威西部秋假(week 41)在抢 —— 这是全程最该先订的一晚。住村内的好处是船班、巴士、火车都在同一个 300 m 半径里,拖箱不超过 5 分钟。村内订不到就退到 Aurland,有巴士接驳但夜里班次很少。",
+   "options": [
+    {
+     "name": "Flåmsbrygga Hotel(码头边,Ægir 酿酒坊同址)",
+     "band": "NOK 1,800-2,400/晚 ⚠️ 未核价",
+     "link": "https://www.booking.com/searchresults.html?ss=Fl%C3%A5m&checkin=2026-10-03&checkout=2026-10-05&group_adults=1&order=review_score_and_price"
+    },
+    {
+     "name": "Fretheim Hotel(1870 年老楼,弗洛姆地标)",
+     "band": "NOK 1,700-2,300/晚 ⚠️ 未核价",
+     "link": "https://www.booking.com/searchresults.html?ss=Fretheim%20Hotel%20Fl%C3%A5m&checkin=2026-10-03&checkout=2026-10-05&group_adults=1"
+    },
+    {
+     "name": "Aurland Fjordhotell(备选,6 km 外)",
+     "band": "NOK 1,300-1,800/晚 ⚠️ 未核价",
+     "link": "https://www.booking.com/searchresults.html?ss=Aurland&checkin=2026-10-03&checkout=2026-10-05&group_adults=1"
+    }
+   ]
+  },
+  {
+   "base": "卑尔根 2 晚(10-05 / 10-06)",
+   "area": "市中心 Torget / 布吕根与卑尔根站之间",
+   "why": "10-05 拖箱从火车站走过来、10-07 又要拖去轻轨站,住在这两点之间最省力。布吕根、鱼市、缆车下站、KODE 全在 10-15 分钟步行圈内 —— 卑尔根是个小城,住对了就不需要坐车。夜间市中心安全,但 10 月雨大,选有电梯的。",
+   "options": [
+    {
+     "name": "Citybox Bergen(Torget 边上,自助入住)",
+     "band": "NOK 1,100-1,500/晚 ⚠️ 未核价",
+     "link": "https://www.booking.com/searchresults.html?ss=Bergen%20Sentrum&checkin=2026-10-05&checkout=2026-10-07&group_adults=1&order=review_score_and_price"
+    },
+    {
+     "name": "Thon Hotel Rosenkrantz Bergen(布吕根后方)",
+     "band": "NOK 1,500-2,000/晚 ⚠️ 未核价",
+     "link": "https://www.booking.com/searchresults.html?ss=Thon%20Hotel%20Rosenkrantz%20Bergen&checkin=2026-10-05&checkout=2026-10-07&group_adults=1"
+    },
+    {
+     "name": "Magic Hotel Korskirken(市中心,价位友好)",
+     "band": "NOK 1,000-1,400/晚 ⚠️ 未核价",
+     "link": "https://www.booking.com/searchresults.html?ss=Magic%20Hotel%20Bergen&checkin=2026-10-05&checkout=2026-10-07&group_adults=1"
+    }
+   ]
+  },
+  {
+   "base": "奥斯陆机场 1 晚(10-07)",
+   "area": "Gardermoen 航站楼步行圈",
+   "why": "BGO→OSL 与 OSL→PEK 是两张分开的票。整夜缓冲代替 2.5 小时的当天中转,是这趟行程最便宜的保险。只选能步行到航站楼的 —— 需要摆渡车的机场酒店在早班机时段会排队。",
+   "options": [
+    {
+     "name": "Radisson Blu Airport Hotel Oslo(连廊直通航站楼)",
+     "band": "NOK 1,300-1,800/晚 ⚠️ 未核价",
+     "link": "https://www.booking.com/searchresults.html?ss=Radisson%20Blu%20Airport%20Hotel%20Oslo%20Gardermoen&checkin=2026-10-07&checkout=2026-10-08&group_adults=1"
+    },
+    {
+     "name": "Park Inn by Radisson Oslo Airport(步行约 10 分)",
+     "band": "NOK 1,000-1,400/晚 ⚠️ 未核价",
+     "link": "https://www.booking.com/searchresults.html?ss=Oslo%20Gardermoen%20Airport&checkin=2026-10-07&checkout=2026-10-08&group_adults=1&order=review_score_and_price"
+    }
+   ]
+  }
+ ],
+ "budget": [
+  {
+   "cat": "国际机票 PEK⇄OSL(海航直飞)",
+   "per_person": "¥9,680",
+   "total": "¥9,680",
+   "note": "$1,436 × 6.7413 · Google 缓存价 2026-08-15 ⚠️ 比价级"
+  },
+  {
+   "cat": "挪威境内交通(铁路+峡湾船+巴士+国内航段)",
+   "per_person": "¥2,980",
+   "total": "¥2,980",
+   "note": "卑尔根铁路 499 + 弗洛姆铁路 450 + 纳柔伊峡湾船 600 + Gudvangen 巴士 150 + Stegastein 350 + Flåm→Voss 330 + Voss→Bergen 250 + Mostraumen 750 + BGO-OSL 800 ≈ NOK 4,179 ⚠️ 多项未核"
+  },
+  {
+   "cat": "住宿 7 晚",
+   "per_person": "¥7,630",
+   "total": "¥7,630",
+   "note": "奥斯陆 2×1,400 + 弗洛姆 2×1,800 + 卑尔根 2×1,500 + 机场 1×1,300 ≈ NOK 10,700 ⚠️ band,未核价"
+  },
+  {
+   "cat": "门票(Oslo Pass / KODE / 弗洛伊恩缆车)",
+   "per_person": "¥670",
+   "total": "¥670",
+   "note": "Oslo Pass 24h 595 + KODE 200 + Fløibanen 145 ≈ NOK 940;Fløibanen 与 MUNCH 价格已核"
+  },
+  {
+   "cat": "餐饮(8 天)",
+   "per_person": "¥3,420",
+   "total": "¥3,420",
+   "note": "≈ NOK 600/天 —— 挪威中等口径:早餐含在房费、午餐轻食 150、晚餐 350-450"
+  },
+  {
+   "cat": "市内交通 + 机场快线",
+   "per_person": "¥570",
+   "total": "¥570",
+   "note": "Flytoget 240 + 奥斯陆单程票若干 + 卑尔根轻轨 42 ≈ NOK 800"
+  },
+  {
+   "cat": "签证 + 保险",
+   "per_person": "¥1,050",
+   "total": "¥1,050",
+   "note": "申根签 EUR 96.5 ≈ ¥750 + 旅行医疗保险 ≈ ¥300"
+  },
+  {
+   "cat": "小计",
+   "per_person": "¥26,000",
+   "total": "¥26,000",
+   "note": ""
+  },
+  {
+   "cat": "缓冲 12%",
+   "per_person": "¥3,120",
+   "total": "¥3,120",
+   "note": "汇率波动 + 未核价项目上浮 + 峡湾船改期"
+  },
+  {
+   "cat": "合计",
+   "per_person": "≈ ¥29,100",
+   "total": "≈ ¥29,100",
+   "note": "1 NOK = 0.7133 CNY · 1 USD = 6.7413 CNY(ECB via frankfurter.dev, 2026-08-14)"
+  }
+ ],
+ "brief": {
+  "visa": "中国护照赴挪威需申根签证。**主签国规则**:本行程 100% 停留挪威,故向挪威递交(VFS 北京/沈阳/西安/武汉/成都/重庆/长沙/昆明)。签证费 EUR 90 + VFS 服务费 EUR 6.5(RMB 53,2026-03-01 起)。使馆口径:材料到馆后最长 45 天,建议提前至少 4 周递交 —— 十一前是高峰,按 45 天准备。必备:往返机票订单、全程住宿证明、行程单、保额 ≥ EUR 30,000 且含医疗遣返的申根保险、资金证明。护照须离境后仍有效 ≥3 个月、10 年内签发。⚠️ 规则会变,以 VFS/使馆官网为准。",
+  "holidays": "挪威 2026 年 10 月**没有**法定公众假日(date.nager.at 已核)—— 但假日 API 看不见真正的坑:**挪威秋假 høstferie 正好压在本行程上**。奥斯陆/东部是第 40 周(9-28 至 10-02),卑尔根/西部 Vestland 是第 41 周(10-05 至 10-09)。也就是说 10-01/10-02 的奥斯陆和 10-05 至 10-07 的卑尔根+峡湾都在本地家庭出游期内,住宿更贵、景点更满;10-03/10-04 的弗洛姆卡在两个秋假之间的周末,同样不清静。对策:住宿尽早订(尤其弗洛姆),景点按 opener 规则开门即到。另:峡湾船 9-01 至 10-15 已进入减班期,10-15 后多条航线停运 —— 本行程刚好卡在季节尾巴上。",
+  "weather": "10 月初西挪威是雨季开端。去年同期实测(Open-Meteo archive, 2025-10-01~08):卑尔根 11-15°C / 7-11°C,8 天里 6 天有雨,单日最大 46 mm;奥斯陆 10-14°C / 5-10°C,雨少但有一天 46 mm。日照:奥斯陆 10-01 日出 07:20 / 日落 18:52,到 10-08 缩到 07:37 / 18:31,一周掉约 40 分钟;卑尔根日落也在 19:00 前后。**极光诚实口径**:本行程纬度 59.9-60.9°N,天文暗夜从 21:15 前后开始,但这个纬度 10 月初要 Kp≥6 才有肉眼机会,单晚概率约 5-10% —— 不写进行程,只在弗洛姆标了观察窗口。想稳看极光要去特罗姆瑟(69°N),7 天塞不下。装备:防水冲锋衣(不是雨伞,峡湾风大)、防滑鞋、薄羽绒。",
+  "money": "货币挪威克朗 NOK(不是欧元)。挪威是全球最无现金的国家之一,Visa/Master 到处能刷,**很多店已经完全不收现金**;带一张免外汇手续费的卡比换现金重要。Apple Pay / Google Pay 普及。小费非必须(账单已含服务费),满意给 5-10% 即可。退税:非欧盟居民单店满 NOK 315 可退,机场安检前办理。物价心理准备:一杯咖啡 NOK 50、一份简餐 NOK 200、一顿正餐 NOK 400+。",
+  "connectivity": "挪威 4G/5G 覆盖极好(含大部分峡湾水面),但卑尔根铁路穿山段、纳柔伊峡湾深处、Stegastein 山路会断。eSIM 建议买欧洲多国包 ≈ ¥60-100 / 8 天 5-10GB。插头 Type C/F,230V —— 与中国不同,需转换头。⚠️ 离线准备:把本行程的 KML 导入 Organic Maps,并在奥斯陆下载好挪威离线地图,峡湾段断网时导航仍可用。"
+ },
+ "unverified": [
+  "海南航空 PEK⇄OSL 的具体航班号与返程起飞时刻 —— flight_scan 只给出「直飞 9h25、$1,436」的缓存价与去程 03:20/06:45,返程时刻请以 Google Flights 深链为准",
+  "卑尔根铁路 Oslo S→Myrdal 与弗洛姆铁路的当日具体班次时刻 —— flamsbana.no 的时刻表是 JS 日历,静态抓不到;WebFetch 两次均未取得",
+  "纳柔伊峡湾游船 10-04 的班次时刻与票价 —— 官网 429 限流;9-01~10-15 为减班期,班次可能只剩每天 1-2 班(这是本行程最需要先确认的一项)",
+  "Stegastein 观景巴士 10 月是否仍在运营、票价",
+  "Flåm→Voss(NW13)与 Voss→Bergen 的具体班次时刻与票价",
+  "Mostraumen 巡航(Rødne)10 月首班时刻 —— 若晚于 10:30 则本日结构需改",
+  "所有住宿价格均为 band 估算,未做浏览器实时核价",
+  "KODE 通票、汉萨博物馆、维京村 Njardarheimr、Nasjonalmuseet 的当前票价与 10 月开放时间;汉萨博物馆主楼修缮状态",
+  "Fram 博物馆票价(开放时间 10:00-17:00 已核);Vippa 食堂营业日",
+  "Oslo Pass 是否覆盖机场段交通(按不覆盖计入预算)",
+  "BGO→OSL 的具体承运人、班次与行李规则"
+ ]
+}

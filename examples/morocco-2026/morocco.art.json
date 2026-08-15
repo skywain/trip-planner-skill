@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "cover": {
+    "kick": "Morocco",
+    "kick_en": "MOROCCO 2026",
+    "postmark_date": "2026-11-06"
+  },
+  "home": {"city": "Toronto", "iata": "YYZ"},
+  "end": {
+    "date": "2026-11-15",
+    "mark": "TORONTO",
+    "line": "Toronto, home before dark.",
+    "fine": "11-15 Sun · airborne 15:30 Casablanca, on the ground 19:10 Toronto — westbound, the day never ends.",
+    "farewell": "SEE YOU, MOROCCO"
+  },
+  "days": {
+    "2026-11-06": {"theme": "Departure",  "en": "Toronto, ON",          "mark": "TORONTO"},
+    "2026-11-07": {"theme": "Red City",   "en": "Marrakech",            "mark": "MARRAKECH"},
+    "2026-11-08": {"theme": "Medina Day", "en": "Marrakech",            "mark": "MARRAKECH"},
+    "2026-11-09": {"theme": "Kasbah Road","en": "Aït Benhaddou · Skoura","mark": "AIT BENHADDOU"},
+    "2026-11-10": {"theme": "Dune Night", "en": "Merzouga · Erg Chebbi","mark": "MERZOUGA"},
+    "2026-11-11": {"theme": "Sand to Fes","en": "Erg Chebbi → Fes",     "mark": "ERG CHEBBI"},
+    "2026-11-12": {"theme": "Fes el-Bali","en": "Fes",                  "mark": "FES"},
+    "2026-11-13": {"theme": "Blue Town",  "en": "Chefchaouen",          "mark": "CHEFCHAOUEN"},
+    "2026-11-14": {"theme": "North Coast","en": "Tangier → Casablanca", "mark": "TANGIER"},
+    "2026-11-15": {"theme": "Homeward",   "en": "Casablanca",           "mark": "CASABLANCA"}
+  },
+  "themes": {
+    "glass": {
+      "cover": {
+        "zh": "Ochre Road",
+        "en": "MARRAKECH TO THE BLUE MOUNTAIN",
+        "sub": "Marrakech · Aït Benhaddou · Merzouga · Fes · Chefchaouen\n06–15 November 2026 · from Toronto, nine nights",
+        "credit": "\"Ochre Road\" is an original coinage · Ibn Battuta set out from Tangier, 1325"
+      },
+      "plates": [
+        "morocco-glass-hero",
+        "morocco-glass-atlas",
+        "morocco-glass-dunes",
+        "morocco-glass-fes",
+        "morocco-glass-blue",
+        "morocco-glass-dawn"
+      ],
+      "zones": ["hero", "z-atlas", "z-erg", "z-fes", "z-blue", "z-dawn"],
+      "day_plate": {
+        "2026-11-06": 0,
+        "2026-11-07": 0,
+        "2026-11-08": 0,
+        "2026-11-09": 1,
+        "2026-11-10": 2,
+        "2026-11-11": 2,
+        "2026-11-12": 3,
+        "2026-11-13": 4,
+        "2026-11-14": 4,
+        "2026-11-15": 5
+      }
+    },
+    "portal": {
+      "cover": {"zh": "Through Morocco", "en": "Through Morocco"},
+      "tag": "PORTAL · FIVE WORLDS · ONE TAKE",
+      "intro": "Scrolling is flying. Five worlds, one unbroken take: the red rooftops of Marrakech at sunrise, the earth towers of Aït Benhaddou at noon, an orange dune above a fire at Erg Chebbi, the misty tan roofs of Fes at dawn, and the blue stairs of Chefchaouen at midday. Let go and it holds; scroll back and it flies in reverse.",
+      "outro": {
+        "tag": "CASABLANCA · ATLANTIC",
+        "zh": "Touchdown",
+        "en": "Touchdown",
+        "text": "Out of the blue mountain and down to the ocean. One take, the whole way — scroll back up to fly it again in reverse."
+      },
+      "video_dir": "portal",
+      "clips": [
+        {"file": "ma01-dive.mp4",      "dur": 5.167, "off": 0, "kind": "dive", "day": 2},
+        {"file": "ma01-ma02-link.mp4", "dur": 3.750, "off": 0, "kind": "link"},
+        {"file": "ma02-dive.mp4",      "dur": 5.167, "off": 0, "kind": "dive", "day": 4},
+        {"file": "ma02-ma03-link.mp4", "dur": 3.750, "off": 0, "kind": "link"},
+        {"file": "ma03-dive.mp4",      "dur": 5.167, "off": 0, "kind": "dive", "day": 5},
+        {"file": "ma03-ma04-link.mp4", "dur": 3.750, "off": 0, "kind": "link"},
+        {"file": "ma04-dive.mp4",      "dur": 5.167, "off": 0, "kind": "dive", "day": 7},
+        {"file": "ma04-ma05-link.mp4", "dur": 3.750, "off": 0, "kind": "link"},
+        {"file": "ma05-dive.mp4",      "dur": 5.167, "off": 0, "kind": "dive", "day": 8}
+      ]
+    }
+  }
+}

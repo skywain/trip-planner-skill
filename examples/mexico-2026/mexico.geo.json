@@ -1,0 +1,1534 @@
+{
+ "lang": "en",
+ "trip": "Mexico 2026 — Mexico City · Teotihuacán · Oaxaca (Día de Muertos)",
+ "tz": "America/Mexico_City",
+ "meta": {
+  "dates": "2026-10-28 → 2026-11-06",
+  "party": "2 adults, German passports, no car (buses, flights, taxis and one guided valley tour)",
+  "route": "Berlin (BER) → Mexico City ×4n → Oaxaca ×4n → Mexico City ×1n → Berlin",
+  "budget_total": "€4,400 – €6,300 for two, all in (midpoint ≈ €5,300)",
+  "fx": "€1 = MXN 19.6592 = US$1.1567 (ECB via frankfurter.dev, 2026-08-14)",
+  "generated": "2026-08-15",
+  "pace": "3 anchors/day; travel days capped at 2",
+  "self_check": "self-checked: 8 issues found and fixed — (1) day 5 mixed an intercity flight with 3 anchors, the Zócalo/Santo Domingo block demoted to a free stroll; (2) Museo Frida Kahlo closes Mondays and sells no counter tickets, moved to Sat 31 Oct with a timed online slot on the checklist; (3) Museo Vivo del Muralismo closes Tuesdays — the Centro day sits on Thursday; (4) Museo Nacional de Antropología and Museo del Palacio de Bellas Artes both close Mondays, and the only Monday in the window (2 Nov) is spent in Oaxaca, so nothing collides; (5) the CDMX Día de Muertos parade date is NOT published for 2026 — day 4 was rebuilt so it works with or without it (swap tag + rain_alt); (6) day 3's Teotihuacán → Mercado de Jamaica return was two hop rows against one stop-pair and would have shifted every later map link, merged into one row; (7) departure day had the museum running to 13:30 against a 19:30 international departure — museum now hard-stops at 12:30 and the airport transfer carries a 3 h international buffer plus real traffic time; (8) day 8's Hierve el Agua has been closed by community disputes more than once, so it is tagged [skippable] and the tour is booked for the Mitla/Teotitlán half."
+ },
+ "decisions": [
+  "Round trip BER↔MEX, not open-jaw. Oaxaca (OAX) has no useful intercontinental service, so an open jaw would mean an OAX→MEX self-transfer on a separate ticket on departure day — the one shape that turns a missed domestic hop into a missed transatlantic flight. Cost of the decision: one night back in Mexico City on 5 Nov.",
+  "Oaxaca gets the Día de Muertos nights (1–2 Nov), Mexico City gets the parade weekend (31 Oct). The two cities peak on different days, so this is the rare case where you can have both: CDMX's Saturday desfile and Coyoacán ofrendas, then Oaxaca's 1 Nov comparsa and the 1–2 Nov cemetery vigils.",
+  "Fly CDMX↔Oaxaca, do not take ADO. ADO GL/Platino is 6.5–7 h each way and would eat a whole festival day in each direction; the flight is 1 h 05 and about 3 h 30 door to door. ADO stays on the page as the budget backup (and as the fallback if the 1 Nov flights price out) — it is comfortable, it is just slow.",
+  "Teotihuacán yes, Puebla no. Puebla is a good day but it would have cost either a Muertos night in Oaxaca or the Coyoacán day; Teotihuacán is 1 h out of the city and also feeds the mural interest (the Tepantitla Tlalocan wall paintings are inside the site).",
+  "2 Nov is deliberately half-empty in the afternoon. The day starts at the Abastos market at 09:00 and ends at a cemetery close to midnight; a normal three-anchor afternoon in between would have made the night unbearable.",
+  "No car at any point. The Tlacolula valley (Teotitlán del Valle · Mitla · mezcal) is done as a small-group guided tour, which is also the only way to see a working weaving workshop and a palenque without a rental."
+ ],
+ "checklist": [
+  {
+   "item": "Oaxaca hotel, 1–5 Nov (4 nights) — refundable if possible",
+   "deadline": "TODAY. This is the single most time-critical line on the page.",
+   "price": "€140–230/night for two on 1–2 Nov, €90–130 on 3–4 Nov",
+   "link": "https://www.booking.com/searchresults.html?ss=Oaxaca%20de%20Ju%C3%A1rez%20Centro&checkin=2026-11-01&checkout=2026-11-05&group_adults=2&no_rooms=1",
+   "note": "⚠️ Guides written for the 2026 season say to book Oaxaca by May 2026 and that centro is largely gone by September, with rates 2–3× normal for 31 Oct – 2 Nov. Booking in mid-August means you are late: take Jalatlaco or the Santo Domingo fringe rather than holding out for the Zócalo."
+  },
+  {
+   "item": "MEX→OAX (1 Nov) and OAX→MEX (5 Nov) domestic flights",
+   "deadline": "this week — 1 Nov is the single busiest domestic day of the Mexican year",
+   "price": "⚠️ MX$1,500–3,500 pp per leg at festival pricing — check, do not assume the €50 fares you see for a Tuesday in February",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20MEX%20to%20OAX%20on%202026-11-01%20for%202%20adults",
+   "note": "Aeroméxico (T2), Volaris and VivaAerobús (T1) all fly it. Check which terminal before booking the airport taxi. Backup: ADO GL from Terminal TAPO / Terminal Norte, ~6.5–7 h, MX$800–1,300 pp — book that on ado.com.mx, not a reseller."
+  },
+  {
+   "item": "Travel-medical insurance for two, WITH repatriation cover (Auslandsreise-Kranken- und Rückholversicherung)",
+   "deadline": "the moment you book the flights",
+   "price": "€40–90 for two for ten days",
+   "link": "https://www.auswaertiges-amt.de/de/service/laender/mexiko-node/mexikosicherheit-213648",
+   "note": "The Auswärtiges Amt is unusually blunt about this one: private hospitals in Mexico expect payment in cash on the spot, and consular assistance is billed back to the traveller. This is not the line to skip."
+  },
+  {
+   "item": "Museo Frida Kahlo (Casa Azul) timed ticket, Sat 31 Oct, 10:00 slot for two",
+   "deadline": "as soon as the date opens — at minimum 1–2 weeks ahead",
+   "price": "MX$320 + MX$16 service = MX$336 pp (≈ €17)",
+   "link": "https://boletos.museofridakahlo.org.mx/en/tickets/museo-frida-kahlo-cdmx",
+   "note": "Online only — the museum no longer sells at the door, so turning up without a QR code means not going in. The ticket also covers Museo Diego Rivera Anahuacalli. Closed Mondays."
+  },
+  {
+   "item": "International BER↔MEX for two",
+   "deadline": "within 2–3 weeks; Muertos week is a demand peak on the Europe–Mexico market",
+   "price": "€1,555–1,815 total for two, round trip (Google cache via flight_scan, 2026-08-15)",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20BER%20to%20MEX%20on%202026-10-28%20returning%202026-11-06%20for%202%20adults",
+   "note": "Every row in the cache was 2 stops. Also price the obvious 1-stop shape by hand — BER→FRA→MEX on Lufthansa — before you buy; the scanner did not surface it."
+  },
+  {
+   "item": "Mexico City hotel, 28 Oct – 1 Nov and 5–6 Nov (Roma Norte / Condesa)",
+   "deadline": "4–6 weeks out; re-shop 2–3 weeks before travel",
+   "price": "€100–160/night for two",
+   "link": "https://www.booking.com/searchresults.html?ss=Roma%20Norte%2C%20Mexico%20City&checkin=2026-10-28&checkout=2026-11-01&group_adults=2&no_rooms=1",
+   "note": "Book the 5–6 Nov night as a separate reservation in the same hotel if you can — the same front desk on the way out is worth more than €10 of savings when you are leaving at 15:30 with luggage."
+  },
+  {
+   "item": "Tlacolula valley small-group tour, Wed 4 Nov (Tule · Teotitlán del Valle · Mitla · mezcal palenque)",
+   "deadline": "2–3 weeks out; free cancellation up to 24 h is standard",
+   "price": "≈ MX$900–1,400 pp including site fees and a comida",
+   "link": "https://www.getyourguide.com/santa-maria-del-tule-l135627/oaxaca-hierve-el-agua-tule-mitla-mezcal-full-day-tour-t1215856/",
+   "note": "⚠️ Confirm whether the itinerary depends on Hierve el Agua — access there has been shut by community disputes more than once. Take a tour that still runs Mitla and Teotitlán if it is closed."
+  },
+  {
+   "item": "Re-check the CDMX Desfile de Día de Muertos date and route",
+   "deadline": "mid-September 2026, when the Secretaría de Cultura CDMX publishes it",
+   "price": "free",
+   "link": "https://cultura.cdmx.gob.mx/",
+   "note": "⚠️ Not published as of 2026-08-15. History says a Saturday in the window — 31 Oct or 7 Nov 2026. 7 Nov is one day after you fly home, so day 4 is written to be a good day either way."
+  },
+  {
+   "item": "Passports: 6 months' validity beyond entry; nothing else to file",
+   "deadline": "check now — a renewal takes weeks",
+   "price": "—",
+   "link": "https://www.auswaertiges-amt.de/de/service/laender/mexiko-node/mexikosicherheit-213648",
+   "note": "German passport = visa-free up to 180 days. Arriving by air there is NO paper FMM any more: entry is the digital FMMd, and biometric German passports can use the E-Gates at AICM. Do not buy an 'FMM tourist card' from a website — by air it does not exist."
+  },
+  {
+   "item": "eSIM for two + small cash float in pesos",
+   "deadline": "the week before",
+   "price": "≈ €5–25 pp for 5–10 GB; withdraw MX$4,000–6,000 on arrival",
+   "link": "https://esimdb.com/mexico",
+   "note": "Markets, cemeteries, colectivos, comparsa food stalls and tips are all cash. Restaurant tipping is 10–15%."
+  },
+  {
+   "item": "Re-confirm opening hours and fees two weeks before travel",
+   "deadline": "mid-October 2026",
+   "price": "—",
+   "link": "https://www.inah.gob.mx/",
+   "note": "INAH raised its fees on 1 January 2026 and can do it again; museum hours around 1–2 November shift locally every year. Everything on this page is a pattern verified 2026-08-15, not a date-specific confirmation."
+  }
+ ],
+ "legs": [
+  {
+   "type": "international flight",
+   "date": "2026-10-28",
+   "carrier": "⚠️ pick at the link — best cache rows were Lufthansa/United and British Airways/American, all 2 stops",
+   "from": "BER",
+   "to": "MEX",
+   "dep": "08:40",
+   "arr": "20:15 same day (local, UTC−6)",
+   "price": "flight_scan cache 2026-08-15: €1,703 round-trip TOTAL for 2 adults on the 08:40 Lufthansa/United row (18 h 35); cheapest row €1,555 total (British Airways/American, 06:35→20:15, 20 h 40). ⚠️ comparison grade — verify at the link",
+   "bags": "1 checked bag pp is normally included on LH/BA long-haul economy — confirm the fare family before buying; a Basic/Light fare is cabin-only",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20BER%20to%20MEX%20on%202026-10-28%20returning%202026-11-06%20for%202%20adults",
+   "backup": "BER→FRA→MEX on Lufthansa (one stop, ~14 h total) — not in the cache the scanner saw, price it by hand; it is the shape you actually want for a 20:15 arrival."
+  },
+  {
+   "type": "domestic flight",
+   "date": "2026-11-01",
+   "carrier": "Aeroméxico (T2) / Volaris / VivaAerobús (T1) — ⚠️ pick at the link",
+   "from": "MEX",
+   "to": "OAX",
+   "dep": "≈08:00",
+   "arr": "≈09:05 (1 h 05)",
+   "price": "⚠️ unverified for this date — MX$1,500–3,500 pp is the honest festival band; off-peak the same route sells for a fifth of that",
+   "bags": "Volaris/Viva sell cabin-only fares — a 25 kg checked bag is MX$500–900 per leg. Aeroméxico's Clásica includes one.",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20MEX%20to%20OAX%20on%202026-11-01%20for%202%20adults",
+   "backup": "ADO GL/Platino, Terminal TAPO or Terminal Norte → Oaxaca ADO, ~6.5–7 h, MX$800–1,300 pp, several departures incl. overnight — https://www.ado.com.mx/"
+  },
+  {
+   "type": "domestic flight",
+   "date": "2026-11-05",
+   "carrier": "Aeroméxico / Volaris / VivaAerobús — ⚠️ pick at the link",
+   "from": "OAX",
+   "to": "MEX",
+   "dep": "≈14:30",
+   "arr": "≈15:40 (1 h 10)",
+   "price": "⚠️ unverified — MX$900–2,200 pp; the 5th is past the peak and should be cheaper than the outbound",
+   "bags": "as above",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20OAX%20to%20MEX%20on%202026-11-05%20for%202%20adults",
+   "backup": "ADO GL 5 Nov morning (~6.5 h) arriving CDMX late afternoon — only if the flight prices are absurd; it burns the whole day."
+  },
+  {
+   "type": "international flight",
+   "date": "2026-11-06",
+   "carrier": "return half of the BER↔MEX round trip",
+   "from": "MEX",
+   "to": "BER",
+   "dep": "⚠️ ≈19:30 assumed — Europe-bound departures from MEX cluster 18:00–21:30; the scanner does not show return-leg times",
+   "arr": "arrives BER on 07 Nov, mid-morning to early afternoon",
+   "price": "included in the €1,555–1,815 round-trip total above",
+   "bags": "as the outbound",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20MEX%20to%20BER%20on%202026-11-06%20for%202%20adults",
+   "backup": "—"
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-10-28",
+   "city": "Mexico City",
+   "label": "Berlin → Mexico City · landing night",
+   "travel_day": true,
+   "walking_km": {
+    "total": 0.4,
+    "how": "terminal to the taxi rank ~0.3 + the block to dinner ~0.1"
+   },
+   "ribbon": "BER →fly 18 h 35 (2 stops)→ MEX Terminal 1 →authorised taxi 45′→ Roma Norte",
+   "rain_alt": "None needed — nothing today is outdoors.",
+   "late_cut": "if the connection slips, skip dinner and eat at the hotel; nothing tomorrow starts before 08:30.",
+   "timeline": [
+    {
+     "t": "08:40-20:15",
+     "what": "✈️ BER → MEX · 18 h 35, 2 stops · see the flights table",
+     "kind": "hop",
+     "verify": "est",
+     "map": false
+    },
+    {
+     "t": "20:15-21:15",
+     "what": "Immigration + bags at AICM Terminal 1",
+     "kind": "free",
+     "note": "German biometric passports can use the E-Gates; you get a printed slip with the entry date and the days granted instead of a paper FMM. Photograph it — it is your permit. Withdraw MX$4,000–6,000 at a bank ATM inside the terminal (Santander/Banorte, not the standalone kiosks)."
+    },
+    {
+     "t": "21:15-22:00",
+     "what": "Authorised sitio taxi · AICM T1 → Roma Norte · ~14 km · 35-50 min · MX$300-380 fixed-zone",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.436100%2C-99.071900&destination=19.418500%2C-99.162000&travelmode=driving"
+    },
+    {
+     "t": "22:15-23:00",
+     "what": "Late tacos al pastor · Roma Norte / Álvaro Obregón — food area",
+     "kind": "meal",
+     "tag": "skippable",
+     "note": "⚠️ Uber and DiDi have been effectively barred from picking up at AICM since March 2026 — buy the sitio taxi ticket at the official booth in the terminal, not from anyone who approaches you."
+    }
+   ],
+   "stops": [
+    {
+     "name": "AICM Terminal 1",
+     "query": "Aeropuerto Internacional Benito Juárez Terminal 1, Ciudad de México",
+     "lat": 19.4361,
+     "lon": -99.0719
+    },
+    {
+     "name": "Hotel · Roma Norte",
+     "query": "Álvaro Obregón y Orizaba, Roma Norte, Ciudad de México",
+     "lat": 19.4185,
+     "lon": -99.162,
+     "mode": "drive"
+    }
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=19.436100%2C-99.071900&destination=19.418500%2C-99.162000&travelmode=walking",
+   "sun": "dawn 06:13 · ☀ 06:34 / 🌇 18:06 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-10-29",
+   "city": "Mexico City",
+   "label": "Centro Histórico — the Aztec city under the murals",
+   "walking_km": {
+    "total": 6.4,
+    "how": "route on foot 3.5 ×1.3 = 4.6 + Templo Mayor circuit ~0.9 + galleries and market aisles ~0.9"
+   },
+   "ribbon": "Roma Norte →metro 30′→ Templo Mayor →walk 10′→ SEP murals →walk 18′→ Bellas Artes →walk 12′→ Mercado de San Juan →walk 10′→ Museo Mural Diego Rivera →metro 30′→ Roma Norte",
+   "rain_alt": "Everything except the Templo Mayor ruins is already indoors; in real rain start at Bellas Artes at 10:00 and do the ruins after lunch when showers usually pass.",
+   "late_cut": "drop the Museo Mural Diego Rivera, then cut the SEP courtyards to the ground floor.",
+   "timeline": [
+    {
+     "t": "08:30-09:00",
+     "what": "Breakfast · café on Álvaro Obregón",
+     "kind": "meal"
+    },
+    {
+     "t": "09:00-09:30",
+     "what": "Metro L1 (dir. Pantitlán) · Insurgentes → Pino Suárez, 6 stops · MX$5 pp · then 700 m on foot to the Zócalo",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.418500%2C-99.162000&destination=19.434600%2C-99.131600&travelmode=transit"
+    },
+    {
+     "t": "09:30-11:15",
+     "what": "Templo Mayor + site museum",
+     "kind": "anchor",
+     "price": "⚠️ MX$100–210 pp — INAH raised fees on 2026-01-01 and the flagship rate for foreign visitors is now MX$210; this site's own 2026 rate is unverified",
+     "tag": "opener",
+     "note": "Tue–Sun 09:00–17:00, last entry 16:30; closed Mondays (pattern as of 2026-08-15). Being first in means the Templo Mayor's stacked pyramids to yourself. The museum's Tlaltecuhtli monolith is the piece to make time for."
+    },
+    {
+     "t": "11:15-11:25",
+     "what": "Walk · Templo Mayor → the SEP courtyards · 0.6 km · 10 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.434600%2C-99.131600&destination=19.437200%2C-99.131800&travelmode=walking"
+    },
+    {
+     "t": "11:25-12:35",
+     "what": "Museo Vivo del Muralismo — the SEP courtyards",
+     "kind": "anchor",
+     "price": "free",
+     "note": "Diego Rivera's 235-panel cycle wraps two full courtyards of the Education Ministry — the largest single body of his mural work anywhere, and almost nobody is here. 10:00–18:00, closed Tuesdays and national holidays (pattern as of 2026-08-15)."
+    },
+    {
+     "t": "12:35-12:55",
+     "what": "Walk · SEP → Palacio de Bellas Artes · 1.3 km · 18 min, along Calle Tacuba",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.437200%2C-99.131800&destination=19.435200%2C-99.141200&travelmode=walking"
+    },
+    {
+     "t": "12:55-14:15",
+     "what": "Museo del Palacio de Bellas Artes — the mural floor",
+     "kind": "anchor",
+     "price": "MX$95 pp (+MX$30 per camera); free on Sundays",
+     "note": "Tue–Sun 10:00–18:00, closed Mondays. Rivera's 'Man, Controller of the Universe' — the repainted Rockefeller Center mural — plus Siqueiros and Orozco on the same two floors. This is the densest muralism hour in Mexico."
+    },
+    {
+     "t": "14:15-14:30",
+     "what": "Walk · Bellas Artes → Mercado de San Juan · 0.9 km · 12 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.435200%2C-99.141200&destination=19.431000%2C-99.145000&travelmode=walking"
+    },
+    {
+     "t": "14:30-15:45",
+     "what": "Lunch · Mercado de San Juan — food area",
+     "kind": "meal",
+     "price": "MX$200–400 pp",
+     "note": "The city's produce-and-delicatessen market rather than a tourist food hall: cheese and charcuterie counters that will build you a plate, plus a couple of seafood stalls at the back."
+    },
+    {
+     "t": "15:45-15:55",
+     "what": "Walk · Mercado de San Juan → Museo Mural Diego Rivera · 0.7 km · 10 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.431000%2C-99.145000&destination=19.436200%2C-99.146700&travelmode=walking"
+    },
+    {
+     "t": "15:55-16:55",
+     "what": "Museo Mural Diego Rivera",
+     "kind": "anchor",
+     "price": "MX$45 pp",
+     "tag": "skippable",
+     "note": "Built around one painting: 'Dream of a Sunday Afternoon in the Alameda Central', moved here after the 1985 earthquake. Tue–Sun 10:00–18:00."
+    },
+    {
+     "t": "16:55-17:35",
+     "what": "Metro L3 + L1 · Hidalgo → Balderas → Insurgentes · MX$5 pp · ~35 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.436200%2C-99.146700&destination=19.418500%2C-99.162000&travelmode=transit"
+    },
+    {
+     "t": "19:30-21:00",
+     "what": "Dinner · Roma Norte — food area",
+     "kind": "meal",
+     "note": "Early-week ofrendas are already going up in the Plaza Río de Janeiro; walk past on the way."
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Roma Norte",
+     "lat": 19.4185,
+     "lon": -99.162
+    },
+    {
+     "name": "Templo Mayor",
+     "query": "Museo del Templo Mayor, Ciudad de México",
+     "lat": 19.4346,
+     "lon": -99.1316,
+     "mode": "transit"
+    },
+    {
+     "name": "Museo Vivo del Muralismo (SEP)",
+     "query": "Secretaría de Educación Pública, República de Argentina 28, Ciudad de México",
+     "lat": 19.4372,
+     "lon": -99.1318,
+     "mode": "walk"
+    },
+    {
+     "name": "Palacio de Bellas Artes",
+     "query": "Palacio de Bellas Artes, Ciudad de México",
+     "lat": 19.4352,
+     "lon": -99.1412,
+     "mode": "walk"
+    },
+    {
+     "name": "Mercado de San Juan",
+     "query": "Mercado de San Juan, Ernesto Pugibet, Ciudad de México",
+     "lat": 19.431,
+     "lon": -99.145,
+     "mode": "walk"
+    },
+    {
+     "name": "Museo Mural Diego Rivera",
+     "query": "Museo Mural Diego Rivera, Ciudad de México",
+     "lat": 19.4362,
+     "lon": -99.1467,
+     "mode": "walk"
+    },
+    {
+     "name": "Hotel · Roma Norte",
+     "lat": 19.4185,
+     "lon": -99.162,
+     "mode": "transit"
+    }
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=19.418500%2C-99.162000&destination=19.418500%2C-99.162000&travelmode=walking&waypoints=19.434600%2C-99.131600%7C19.437200%2C-99.131800%7C19.435200%2C-99.141200%7C19.431000%2C-99.145000%7C19.436200%2C-99.146700",
+   "sun": "dawn 06:13 · ☀ 06:35 / 🌇 18:05 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-10-30",
+   "city": "Mexico City",
+   "label": "Teotihuacán, then the flower market at dusk",
+   "walking_km": {
+    "total": 7.2,
+    "how": "Calzada de los Muertos and back ~4.5 + Tepantitla loop ~0.8 + Jamaica aisles ~1.4 + street 0.5"
+   },
+   "ribbon": "Roma Norte →taxi 35′→ Terminal Norte →bus 60′→ Teotihuacán Puerta 1 →bus+taxi 2 h 15→ Mercado de Jamaica →taxi 30′→ Roma Norte",
+   "rain_alt": "Late October is the dry side of the year here (0.3 mm across the same ten days last year), but if it does break: the site's Museo de la Cultura Teotihuacana and the Tepantitla mural shelter are both roofed, and the Jamaica market is entirely under cover.",
+   "late_cut": "skip Tepantitla and leave the site at 13:00 — the flower market is the part that only works this week.",
+   "timeline": [
+    {
+     "t": "07:15-07:50",
+     "what": "Taxi · Roma Norte → Terminal de Autobuses del Norte · ~11 km · 30-40 min · MX$180-250",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.418500%2C-99.162000&destination=19.484400%2C-99.141600&travelmode=driving"
+    },
+    {
+     "t": "08:15-09:15",
+     "what": "Autobuses Teotihuacanos · Terminal Norte gate 8 → Teotihuacán Puerta 1 · ~1 h · ≈MX$60 pp",
+     "kind": "hop",
+     "verify": "est",
+     "note": "Departures roughly every 20 min from 06:00. Ask for 'Pirámides', not 'San Juan Teotihuacán' — the town bus drops you 3 km short.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.484400%2C-99.141600&destination=19.680000%2C-98.862000&travelmode=transit"
+    },
+    {
+     "t": "09:20-12:00",
+     "what": "Teotihuacán — Calzada de los Muertos, Pyramid of the Moon plaza, Palacio de Quetzalpapálotl",
+     "kind": "anchor",
+     "price": "MX$210 pp (INAH foreign-visitor rate, 2026)",
+     "tag": "opener",
+     "note": "Open daily 09:00–17:00, last access 16:30 (2026 rate and pattern verified 2026-08-15). ⚠️ Climbing the Sun and Moon pyramids has been prohibited since 2020 — assume you are walking around them, not up them. Enter at Puerta 1 and walk north so the sun is behind you."
+    },
+    {
+     "t": "12:00-12:45",
+     "what": "Tepantitla mural complex — the Tlalocan wall paintings",
+     "kind": "anchor",
+     "price": "included",
+     "tag": "skippable",
+     "note": "Ten minutes' walk east of the Pyramid of the Sun and the reason a mural-minded trip comes here: 1,500-year-old painted walls of a paradise garden, the ancestor of everything you saw yesterday on the SEP courtyards."
+    },
+    {
+     "t": "12:45-14:00",
+     "what": "Lunch · the comedores at Puerta 1 / La Gruta cave restaurant — food area",
+     "kind": "meal",
+     "price": "MX$250–600 pp",
+     "note": "La Gruta is in a lava cave beside Puerta 5 and takes reservations; the Puerta 1 comedores are a third of the price and perfectly good."
+    },
+    {
+     "t": "14:15-16:30",
+     "what": "Bus + taxi · Teotihuacán → Mercado de Jamaica · ~2 h 15 · ≈MX$60 pp + MX$300 taxi",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.680000%2C-98.862000&destination=19.409300%2C-99.127600&travelmode=driving"
+    },
+    {
+     "t": "16:45-18:15",
+     "what": "Mercado de Jamaica — the cempasúchil market",
+     "kind": "anchor",
+     "price": "free; a bunch of marigolds MX$50–120",
+     "tag": "pinned",
+     "note": "The city's flower market, open 24/7, and in the last week of October it turns into an orange canyon: cempasúchil by the tonne, plus copal, sugar skulls and papel picado for the ofrendas. Late afternoon is when the Muertos stalls are fully set and the light is best."
+    },
+    {
+     "t": "18:30-19:05",
+     "what": "Taxi · Mercado de Jamaica → Roma Norte · ~7 km · 30-40 min · MX$180-250",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.409300%2C-99.127600&destination=19.418500%2C-99.162000&travelmode=driving"
+    },
+    {
+     "t": "20:00-21:30",
+     "what": "Dinner · Roma Norte — food area",
+     "kind": "meal"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Roma Norte",
+     "lat": 19.4185,
+     "lon": -99.162
+    },
+    {
+     "name": "Terminal de Autobuses del Norte",
+     "query": "Central de Autobuses del Norte, Ciudad de México",
+     "lat": 19.4844,
+     "lon": -99.1416,
+     "mode": "drive"
+    },
+    {
+     "name": "Teotihuacán Puerta 1",
+     "query": "Zona Arqueológica de Teotihuacán Puerta 1, Estado de México",
+     "lat": 19.68,
+     "lon": -98.862,
+     "mode": "bus"
+    },
+    {
+     "name": "Mercado de Jamaica",
+     "query": "Mercado de Jamaica, Venustiano Carranza, Ciudad de México",
+     "lat": 19.4093,
+     "lon": -99.1276,
+     "mode": "drive"
+    },
+    {
+     "name": "Hotel · Roma Norte",
+     "lat": 19.4185,
+     "lon": -99.162,
+     "mode": "drive"
+    }
+   ],
+   "sun": "dawn 06:14 · ☀ 06:35 / 🌇 18:05 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-10-31",
+   "city": "Mexico City",
+   "label": "Coyoacán, Frida, and the parade that may or may not be today",
+   "walking_km": {
+    "total": 6.6,
+    "how": "route on foot 3.0 ×1.3 = 3.9 + Casa Azul and its garden ~0.8 + standing and shuffling along the parade route ~1.9"
+   },
+   "ribbon": "Roma Norte →taxi 30′→ Mercado de Coyoacán →walk 14′→ Casa Azul →taxi 40′→ Paseo de la Reforma →walk 22′→ Plaza Río de Janeiro →walk 8′→ Roma Norte",
+   "rain_alt": "If the parade is rained off or was never scheduled for today: Museo Nacional de Antropología is 10 minutes from the Ángel and eats an afternoon happily — but then move the Anthropology block off day 10 and use that morning for Xochimilco instead.",
+   "late_cut": "the parade is a stand-and-watch block; if you are late, join it further down Reforma at the Hemiciclo a Juárez instead of the Ángel.",
+   "timeline": [
+    {
+     "t": "08:30-09:05",
+     "what": "Taxi · Roma Norte → Mercado de Coyoacán · ~8 km · 30-40 min · MX$180-260",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.418500%2C-99.162000&destination=19.350600%2C-99.162600&travelmode=driving"
+    },
+    {
+     "t": "09:05-09:50",
+     "what": "Mercado de Coyoacán + Jardín Centenario ofrendas",
+     "kind": "anchor",
+     "price": "tostadas MX$60–120 each",
+     "tag": "opener",
+     "note": "Open from ~08:00. Tostadas Coyoacán at the centre of the market is the institution; on 31 October the aisles are full of marigolds and the plazas outside carry the neighbourhood's ofrendas and sand tapestries."
+    },
+    {
+     "t": "09:50-10:05",
+     "what": "Walk · Mercado de Coyoacán → Museo Frida Kahlo · 1.0 km · 14 min through the Jardín Centenario",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.350600%2C-99.162600&destination=19.355400%2C-99.162500&travelmode=walking"
+    },
+    {
+     "t": "10:05-11:35",
+     "what": "Museo Frida Kahlo · Casa Azul",
+     "kind": "anchor",
+     "price": "MX$336 pp incl. service fee",
+     "tag": "pinned",
+     "note": "Timed ticket, online only — no counter sales at all. Sat 10:00–18:00, closed Mondays (verified 2026-08-15). Book the 10:00 slot: the house is small and by noon it is a queue with a garden attached. Ticket also admits you to Museo Anahuacalli."
+    },
+    {
+     "t": "11:35-12:20",
+     "what": "Taxi · Coyoacán → Glorieta del Ángel de la Independencia, Paseo de la Reforma · ~12 km · 40-55 min · MX$220-320",
+     "kind": "hop",
+     "verify": "est",
+     "note": "⚠️ If the parade runs, Reforma closes — have the driver drop you a block off the avenue on Río Ródano or Havre and walk in.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.355400%2C-99.162500&destination=19.427000%2C-99.167700&travelmode=driving"
+    },
+    {
+     "t": "12:20-15:30",
+     "what": "Desfile de Día de Muertos · Paseo de la Reforma",
+     "kind": "anchor",
+     "price": "free",
+     "tag": "swap→Museo Nacional de Antropología (10 min away) or the Mega Procesión de Catrinas, if the parade is not today",
+     "note": "⚠️ THE 2026 DATE IS NOT PUBLISHED. The parade has run on a Saturday in this window every year and 31 Oct 2026 is the likely one, with 7 Nov the alternative; the Secretaría de Cultura CDMX confirms 4–6 weeks out. Route runs Puerta de los Leones (Chapultepec) → Reforma → Av. Juárez → 5 de Mayo → Zócalo, roughly 12:00–16:00, ~6 km. Stand at the Ángel or the Glorieta de la Palma and be in place by 11:00 if you want a front row."
+    },
+    {
+     "t": "15:30-15:55",
+     "what": "Walk · Paseo de la Reforma → Plaza Río de Janeiro, Roma Norte · 1.4 km · 22 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.427000%2C-99.167700&destination=19.421300%2C-99.160800&travelmode=walking"
+    },
+    {
+     "t": "16:00-17:30",
+     "what": "Roma Norte ofrendas + catrina face-painting, Plaza Río de Janeiro and Álvaro Obregón",
+     "kind": "anchor",
+     "price": "face-painting MX$150–300",
+     "tag": "skippable",
+     "note": "The neighbourhood does its altars in the plazas and outside the cafés; the face-painters set up along Álvaro Obregón from mid-afternoon. This is the low-effort version of the thing everyone flies here for."
+    },
+    {
+     "t": "17:30-17:40",
+     "what": "Walk · Plaza Río de Janeiro → hotel · 0.6 km · 8 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.421300%2C-99.160800&destination=19.418500%2C-99.162000&travelmode=walking"
+    },
+    {
+     "t": "19:30-21:30",
+     "what": "Dinner · Roma Norte / Colonia Juárez — food area",
+     "kind": "meal",
+     "note": "Pack tonight: the flight south leaves at 08:00."
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Roma Norte",
+     "lat": 19.4185,
+     "lon": -99.162
+    },
+    {
+     "name": "Mercado de Coyoacán",
+     "query": "Mercado de Coyoacán, Ciudad de México",
+     "lat": 19.3506,
+     "lon": -99.1626,
+     "mode": "drive"
+    },
+    {
+     "name": "Museo Frida Kahlo",
+     "query": "Museo Frida Kahlo, Londres 247, Coyoacán, Ciudad de México",
+     "lat": 19.3554,
+     "lon": -99.1625,
+     "mode": "walk"
+    },
+    {
+     "name": "Glorieta del Ángel de la Independencia",
+     "query": "Ángel de la Independencia, Paseo de la Reforma, Ciudad de México",
+     "lat": 19.427,
+     "lon": -99.1677,
+     "mode": "drive"
+    },
+    {
+     "name": "Plaza Río de Janeiro",
+     "query": "Plaza Río de Janeiro, Roma Norte, Ciudad de México",
+     "lat": 19.4213,
+     "lon": -99.1608,
+     "mode": "walk"
+    },
+    {
+     "name": "Hotel · Roma Norte",
+     "lat": 19.4185,
+     "lon": -99.162,
+     "mode": "walk"
+    }
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=19.418500%2C-99.162000&destination=19.418500%2C-99.162000&travelmode=walking&waypoints=19.350600%2C-99.162600%7C19.355400%2C-99.162500%7C19.427000%2C-99.167700%7C19.421300%2C-99.160800",
+   "sun": "dawn 06:14 · ☀ 06:36 / 🌇 18:04 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-01",
+   "city": "Oaxaca",
+   "label": "Fly south · Día de los Angelitos, and the first vigil",
+   "travel_day": true,
+   "walking_km": {
+    "total": 6.2,
+    "how": "route on foot 4.0 ×1.2 = 4.8 + market aisles ~1.4"
+   },
+   "ribbon": "Roma Norte →taxi 45′→ AICM →fly 1 h 05→ OAX →taxi 25′→ Oaxaca centro →walk 12′→ Mercado 20 de Noviembre →walk 25′→ Panteón General",
+   "rain_alt": "Oaxaca in the first week of November is effectively rainless (0.0 mm across the same ten days last year). If it does rain, the two markets and the Museo Textil are all indoors and the vigil goes ahead under umbrellas regardless.",
+   "late_cut": "if the flight slips, drop the centro stroll entirely — the market runs to 22:00 and the vigil does not start properly until 20:00.",
+   "timeline": [
+    {
+     "t": "05:45-06:30",
+     "what": "Taxi · Roma Norte → AICM Terminal 1 · ~14 km · 30-50 min · MX$300-380",
+     "kind": "hop",
+     "verify": "est",
+     "note": "Check your terminal the night before: Aeroméxico is T2, Volaris and Viva are T1, and they are 3 km apart.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.418500%2C-99.162000&destination=19.436100%2C-99.071900&travelmode=driving"
+    },
+    {
+     "t": "08:00-09:05",
+     "what": "✈️ AICM Terminal 1 → Aeropuerto de Oaxaca · 1 h 05 · see the flights table",
+     "kind": "hop",
+     "verify": "est"
+    },
+    {
+     "t": "09:35-10:15",
+     "what": "Taxi · Aeropuerto de Oaxaca → Hotel · Oaxaca centro · ~9 km · 25-35 min · MX$250-350 (or the shared colectivo van, MX$100 pp)",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=16.999000%2C-96.726600&destination=17.064000%2C-96.724000&travelmode=driving"
+    },
+    {
+     "t": "10:15-10:50",
+     "what": "Drop bags, coffee on Alcalá",
+     "kind": "free"
+    },
+    {
+     "t": "10:50-11:00",
+     "what": "Walk · Hotel · Oaxaca centro → Mercado 20 de Noviembre · 0.8 km · 12 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.064000%2C-96.724000&destination=17.058100%2C-96.726400&travelmode=walking"
+    },
+    {
+     "t": "11:00-13:00",
+     "what": "Mercado Benito Juárez + Mercado 20 de Noviembre — the Pasillo de Humo",
+     "kind": "anchor",
+     "price": "MX$150–350 pp for lunch; chapulines and chocolate by weight",
+     "tag": "pinned",
+     "note": "Open daily ~06:00–22:00 (verified 2026-08-15). In the Pasillo de Humo you are handed a tray of chiles and spring onions, you pick your meat at a stall, and it is grilled over charcoal in front of you — then you carry it to a table and buy tortillas, salsa and agua fresca from whoever walks past. On 1 November the surrounding aisles are pure Muertos: pan de muerto, chocolate for the atole, cempasúchil by the armful."
+    },
+    {
+     "t": "13:00-15:00",
+     "what": "Zócalo · Catedral · Templo de Santo Domingo · the sand tapestries on Alcalá",
+     "kind": "free",
+     "note": "An orientation stroll rather than an anchor — today is a moving day. The tapetes de arena laid outside the churches and courtyards are made and swept away within the week."
+    },
+    {
+     "t": "15:00-17:30",
+     "what": "Rest at the hotel",
+     "kind": "free",
+     "note": "Non-negotiable. Tonight ends after 22:00 and tomorrow starts at 09:00."
+    },
+    {
+     "t": "18:00-19:30",
+     "what": "Early dinner · centro — food area",
+     "kind": "meal"
+    },
+    {
+     "t": "19:30-20:00",
+     "what": "Walk · Mercado 20 de Noviembre → Panteón General de Oaxaca · 1.6 km · 25 min east along Av. Independencia",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.058100%2C-96.726400&destination=17.064000%2C-96.709500&travelmode=walking"
+    },
+    {
+     "t": "20:00-22:30",
+     "what": "Panteón General San Miguel — the night of the angelitos",
+     "kind": "anchor",
+     "price": "free",
+     "tag": "pinned",
+     "note": "The city's own cemetery: candlelit niches, families sitting with their graves, a municipal cultural programme in the middle, and the Comparsa de Catrinas passing through the centro the same evening. ⚠️ Hours are set by the municipality and change yearly — locals give 'until about 22:00' and 'be there from 20:00 or 21:00'. Go quietly, ask before photographing anyone, and buy your candles and marigolds at the gate."
+    },
+    {
+     "t": "22:30-23:00",
+     "what": "Walk · Panteón General de Oaxaca → Hotel · Oaxaca centro · 1.6 km · 25 min",
+     "kind": "hop",
+     "verify": "est",
+     "note": "Walk back with the crowd along Independencia, or take a street taxi from the cemetery gate — MX$60-80.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.064000%2C-96.709500&destination=17.064000%2C-96.724000&travelmode=walking"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Roma Norte",
+     "lat": 19.4185,
+     "lon": -99.162
+    },
+    {
+     "name": "AICM Terminal 1",
+     "lat": 19.4361,
+     "lon": -99.0719,
+     "mode": "drive"
+    },
+    {
+     "name": "Aeropuerto de Oaxaca (OAX)",
+     "query": "Aeropuerto Internacional de Oaxaca Xoxocotlán",
+     "lat": 16.999,
+     "lon": -96.7266,
+     "mode": "fly"
+    },
+    {
+     "name": "Hotel · Oaxaca centro",
+     "query": "Calle Macedonio Alcalá, Centro, Oaxaca de Juárez",
+     "lat": 17.064,
+     "lon": -96.724,
+     "mode": "drive"
+    },
+    {
+     "name": "Mercado 20 de Noviembre",
+     "query": "Mercado 20 de Noviembre, Oaxaca de Juárez",
+     "lat": 17.0581,
+     "lon": -96.7264,
+     "mode": "walk"
+    },
+    {
+     "name": "Panteón General de Oaxaca",
+     "query": "Panteón General San Miguel, Oaxaca de Juárez",
+     "lat": 17.064,
+     "lon": -96.7095,
+     "mode": "walk"
+    },
+    {
+     "name": "Hotel · Oaxaca centro",
+     "lat": 17.064,
+     "lon": -96.724,
+     "mode": "walk"
+    }
+   ],
+   "sun": "dawn 06:02 · ☀ 06:24 / 🌇 17:56 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-02",
+   "city": "Oaxaca",
+   "label": "Día de Muertos — the market, the hill of graves, the comparsa",
+   "walking_km": {
+    "total": 7.0,
+    "how": "Abastos aisles ~2.0 + Xoxocotlán cemetery ~1.5 + centro ofrenda crawl 2.2 ×1.3 + street 0.6"
+   },
+   "ribbon": "Hotel →taxi 15′→ Mercado de Abastos →taxi 25′→ Panteón de Xoxocotlán →taxi 25′→ Alcalá →walk 20′→ centro comparsa",
+   "rain_alt": "The Abastos market, the Museo Textil (free, open until 20:00) and the covered arcades of the Zócalo carry an entire wet day between them; the comparsas run wet or dry.",
+   "late_cut": "cut the Xoxocotlán daytime visit — the ofrendas in the centro and the night comparsa are the parts that do not repeat.",
+   "timeline": [
+    {
+     "t": "08:15-09:00",
+     "what": "Breakfast · hotel or the Zócalo arcades",
+     "kind": "meal"
+    },
+    {
+     "t": "09:00-09:15",
+     "what": "Taxi · hotel → Mercado de Abastos · ~2.5 km · 12-20 min · MX$60-90",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.064000%2C-96.724000&destination=17.053700%2C-96.737300&travelmode=driving"
+    },
+    {
+     "t": "09:15-11:00",
+     "what": "Mercado de Abastos — the wholesale market on Muertos morning",
+     "kind": "anchor",
+     "price": "free to walk; chocolate, mole paste and mezcal by weight",
+     "tag": "opener",
+     "note": "Oaxaca's enormous open market, and on 2 November it is at maximum: whole aisles of cempasúchil and cresta de gallo, mountains of pan de muerto with its little painted faces, mole pastes ground to order, and the chocolate mills grinding cacao with cinnamon while you wait. Go early and keep your bag in front of you — it is a working market, not a promenade."
+    },
+    {
+     "t": "11:00-11:25",
+     "what": "Taxi · Mercado de Abastos → Panteón de Santa Cruz Xoxocotlán · ~7 km · 20-30 min · MX$150-220",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.053700%2C-96.737300&destination=17.017000%2C-96.735000&travelmode=driving"
+    },
+    {
+     "t": "11:25-13:00",
+     "what": "Panteón de Santa Cruz Xoxocotlán, by daylight",
+     "kind": "anchor",
+     "price": "free (a donation at the gate is normal)",
+     "tag": "pinned",
+     "note": "Xoxo is the most famous of the valley's cemeteries and its nights (31 Oct and 1 Nov) are shoulder-to-shoulder with tour groups. By day on 2 November it is what it is supposed to be: families repainting graves, laying marigold arches, eating beside their dead, brass bands doing the rounds. This is the visit worth planning for."
+    },
+    {
+     "t": "13:00-13:30",
+     "what": "Taxi · Xoxocotlán → centro (Alcalá) · ~7 km · 20-30 min · MX$150-220",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.017000%2C-96.735000&destination=17.063100%2C-96.724500&travelmode=driving"
+    },
+    {
+     "t": "13:30-15:00",
+     "what": "Lunch · comedor on Alcalá / Labastida — food area",
+     "kind": "meal",
+     "price": "MX$180–400 pp"
+    },
+    {
+     "t": "15:00-17:30",
+     "what": "Rest at the hotel",
+     "kind": "free",
+     "note": "Tonight runs past 23:00."
+    },
+    {
+     "t": "17:30-19:30",
+     "what": "Ofrenda and tapete crawl · Alcalá, Santo Domingo, Centro Cultural San Pablo",
+     "kind": "anchor",
+     "price": "free",
+     "note": "Hotels, courtyards, museums and shops all mount public altars for the two days and light them at dusk; the sand tapestries outside Santo Domingo are at their best tonight and gone by the weekend."
+    },
+    {
+     "t": "19:30-20:00",
+     "what": "Walk · Alcalá → the comparsa route (Santo Domingo → Zócalo) · 1.2 km · 20 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.063100%2C-96.724500&destination=17.060600%2C-96.725500&travelmode=walking"
+    },
+    {
+     "t": "20:00-23:00",
+     "what": "Comparsa / muerteada in the centro",
+     "kind": "anchor",
+     "price": "free",
+     "tag": "pinned",
+     "note": "Masked, cross-dressed, brass-driven processions that wind through the centro on the night of the 2nd, escorting the souls back. ⚠️ Routes and start times are set neighbourhood by neighbourhood days beforehand — ask your hotel on the 1st. The famous all-night muerteada at San Agustín Etla (40 min out, runs to dawn) is the swap if you have the stamina; it is a different, wilder animal."
+    },
+    {
+     "t": "23:00-23:20",
+     "what": "Walk · centro → hotel · 0.9 km · 15 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.060600%2C-96.725500&destination=17.064000%2C-96.724000&travelmode=walking"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Oaxaca centro",
+     "lat": 17.064,
+     "lon": -96.724
+    },
+    {
+     "name": "Mercado de Abastos",
+     "query": "Central de Abastos, Oaxaca de Juárez",
+     "lat": 17.0537,
+     "lon": -96.7373,
+     "mode": "drive"
+    },
+    {
+     "name": "Panteón de Santa Cruz Xoxocotlán",
+     "query": "Panteón de Santa Cruz Xoxocotlán, Oaxaca",
+     "lat": 17.017,
+     "lon": -96.735,
+     "mode": "drive"
+    },
+    {
+     "name": "Macedonio Alcalá · Oaxaca centro",
+     "query": "Andador Macedonio Alcalá, Oaxaca de Juárez",
+     "lat": 17.0631,
+     "lon": -96.7245,
+     "mode": "drive"
+    },
+    {
+     "name": "Zócalo de Oaxaca",
+     "query": "Zócalo, Oaxaca de Juárez",
+     "lat": 17.0606,
+     "lon": -96.7255,
+     "mode": "walk"
+    },
+    {
+     "name": "Hotel · Oaxaca centro",
+     "lat": 17.064,
+     "lon": -96.724,
+     "mode": "walk"
+    }
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=17.064000%2C-96.724000&destination=17.064000%2C-96.724000&travelmode=walking&waypoints=17.053700%2C-96.737300%7C17.017000%2C-96.735000%7C17.063100%2C-96.724500%7C17.060600%2C-96.725500",
+   "sun": "dawn 06:03 · ☀ 06:24 / 🌇 17:56 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-03",
+   "city": "Oaxaca",
+   "label": "Monte Albán above the valley, textiles below it",
+   "walking_km": {
+    "total": 6.3,
+    "how": "Monte Albán plaza, ball court and the North Platform ~2.6 ×1.3 + centro on foot 2.4 + galleries ~0.5"
+   },
+   "ribbon": "Hotel →shuttle 30′→ Monte Albán →shuttle 30′→ Mercado 20 de Noviembre →walk 12′→ Museo Textil →walk 5′→ Centro Cultural San Pablo",
+   "rain_alt": "Monte Albán is entirely exposed; if the morning looks wrong, flip the day — Museo Textil and San Pablo in the morning, the ruins after 14:00 (last entry 16:00).",
+   "late_cut": "drop Centro Cultural San Pablo and go straight to the mezcalería.",
+   "timeline": [
+    {
+     "t": "08:00-08:30",
+     "what": "Breakfast · hotel",
+     "kind": "meal"
+    },
+    {
+     "t": "08:30-09:05",
+     "what": "Shuttle · centro → Monte Albán · ~10 km, 25-35 min · ≈MX$110 pp return (Autobuses Turísticos, hourly from Hotel Rivera del Ángel) or MX$250 taxi",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.064000%2C-96.724000&destination=17.043900%2C-96.767700&travelmode=transit"
+    },
+    {
+     "t": "09:05-11:50",
+     "what": "Monte Albán",
+     "kind": "anchor",
+     "price": "MX$210 pp (INAH foreign-visitor rate, 2026; site museum included)",
+     "tag": "opener",
+     "note": "Open every day of the year, 08:00–17:00, last entry 16:00 (verified 2026-08-15). A Zapotec capital on a levelled mountaintop 400 m above the city — the Gran Plaza, the Danzantes reliefs and Building J's odd angle, with the whole valley underneath. There is no shade: hat, water, and be up here before the light goes flat."
+    },
+    {
+     "t": "11:50-12:25",
+     "what": "Shuttle · Monte Albán → Mercado 20 de Noviembre · 25-35 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.043900%2C-96.767700&destination=17.058100%2C-96.726400&travelmode=transit"
+    },
+    {
+     "t": "12:30-14:00",
+     "what": "Lunch · Mercado 20 de Noviembre, Pasillo de Humo — food area",
+     "kind": "meal",
+     "price": "MX$150–300 pp",
+     "note": "Second visit on purpose: the first one was on a festival day when it was heaving. Today you can actually pick a stall."
+    },
+    {
+     "t": "14:00-14:15",
+     "what": "Walk · Mercado 20 de Noviembre → Museo Textil de Oaxaca · 0.9 km · 13 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.058100%2C-96.726400&destination=17.061600%2C-96.725500&travelmode=walking"
+    },
+    {
+     "t": "14:15-15:45",
+     "what": "Museo Textil de Oaxaca",
+     "kind": "anchor",
+     "price": "free",
+     "note": "Mon–Fri 10:00–20:00, Sat 11:00–20:00, Sun 11:00–18:00 (verified 2026-08-15). A former convent full of Oaxacan weaving, dyeing and embroidery — the best possible preparation for tomorrow's workshop visit in Teotitlán, and it costs nothing."
+    },
+    {
+     "t": "15:45-15:52",
+     "what": "Walk · Museo Textil → Centro Cultural San Pablo · 0.3 km · 5 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.061600%2C-96.725500&destination=17.062000%2C-96.724500&travelmode=walking"
+    },
+    {
+     "t": "15:52-17:00",
+     "what": "Centro Cultural San Pablo",
+     "kind": "anchor",
+     "price": "free",
+     "tag": "skippable",
+     "note": "A restored 16th-century convent turned research centre for Oaxaca's indigenous languages, with a good bookshop and rotating shows. ⚠️ hours unverified for this date."
+    },
+    {
+     "t": "17:00-17:10",
+     "what": "Walk · Centro Cultural San Pablo → Hotel · Oaxaca centro · 0.3 km · 5 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.062000%2C-96.724500&destination=17.064000%2C-96.724000&travelmode=walking"
+    },
+    {
+     "t": "18:30-20:00",
+     "what": "Mezcalería crawl · centro (Los Amantes / In Situ / Mezcaloteca class)",
+     "kind": "anchor",
+     "price": "MX$80–200 per pour; a guided tasting MX$500–900 pp",
+     "note": "Espadín is the everyday agave; ask for tobalá, tepeztate or madrecuishe if you want to understand why people write books about this. The tasting rooms take reservations and are worth one."
+    },
+    {
+     "t": "20:00-21:30",
+     "what": "Dinner · centro — food area",
+     "kind": "meal"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Oaxaca centro",
+     "lat": 17.064,
+     "lon": -96.724
+    },
+    {
+     "name": "Monte Albán",
+     "query": "Zona Arqueológica de Monte Albán, Oaxaca",
+     "lat": 17.0439,
+     "lon": -96.7677,
+     "mode": "bus"
+    },
+    {
+     "name": "Mercado 20 de Noviembre",
+     "lat": 17.0581,
+     "lon": -96.7264,
+     "mode": "bus"
+    },
+    {
+     "name": "Museo Textil de Oaxaca",
+     "query": "Museo Textil de Oaxaca, Hidalgo 917, Oaxaca de Juárez",
+     "lat": 17.0616,
+     "lon": -96.7255,
+     "mode": "walk"
+    },
+    {
+     "name": "Centro Cultural San Pablo",
+     "query": "Centro Cultural San Pablo, Oaxaca de Juárez",
+     "lat": 17.062,
+     "lon": -96.7245,
+     "mode": "walk"
+    },
+    {
+     "name": "Hotel · Oaxaca centro",
+     "lat": 17.064,
+     "lon": -96.724,
+     "mode": "walk"
+    }
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=17.064000%2C-96.724000&destination=17.064000%2C-96.724000&travelmode=walking&waypoints=17.043900%2C-96.767700%7C17.058100%2C-96.726400%7C17.061600%2C-96.725500%7C17.062000%2C-96.724500",
+   "sun": "dawn 06:03 · ☀ 06:24 / 🌇 17:56 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-04",
+   "city": "Oaxaca",
+   "label": "Tlacolula valley — the loom, the mosaic tombs, the still",
+   "walking_km": {
+    "total": 4.6,
+    "how": "Tule churchyard ~0.4 + Teotitlán workshop and village ~1.0 + Mitla site ~1.4 + palenque and Hierve el Agua paths ~1.8"
+   },
+   "ribbon": "Hotel →van 35′→ Árbol del Tule →van 25′→ Teotitlán del Valle →van 45′→ Mitla →van 20′→ mezcal palenque →van 60′→ Oaxaca",
+   "rain_alt": "Every stop today has a roof within thirty seconds — the churches at Tule and Teotitlán, the workshop, Mitla's covered tomb galleries, the palenque's shed. Only Hierve el Agua is weather-dependent, and it is already optional.",
+   "late_cut": "the tour drops Hierve el Agua first; after that, skip the palenque tasting and be back for dinner.",
+   "timeline": [
+    {
+     "t": "08:00-08:30",
+     "what": "Breakfast · hotel; the van collects from the centro",
+     "kind": "meal"
+    },
+    {
+     "t": "08:30-09:05",
+     "what": "Small-group van · Oaxaca → Santa María del Tule · ~12 km · 30-40 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.064000%2C-96.724000&destination=17.046800%2C-96.636300&travelmode=driving"
+    },
+    {
+     "t": "09:05-09:45",
+     "what": "Árbol del Tule",
+     "kind": "anchor",
+     "price": "MX$20 pp",
+     "tag": "skippable",
+     "note": "A 2,000-year-old Montezuma cypress with the stoutest trunk on earth, in a village churchyard. Fifteen minutes is honestly enough, but every tour stops here and it is a pleasant one."
+    },
+    {
+     "t": "09:45-10:15",
+     "what": "Van · Santa María del Tule → Teotitlán del Valle · ~18 km · 25-35 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.046800%2C-96.636300&destination=17.029000%2C-96.523000&travelmode=driving"
+    },
+    {
+     "t": "10:15-11:45",
+     "what": "Teotitlán del Valle — a family weaving workshop",
+     "kind": "anchor",
+     "price": "free demonstration; rugs MX$1,500–15,000",
+     "tag": "pinned",
+     "note": "The Zapotec rug-weaving village: cochineal ground on a metate in front of you, indigo, pericón and moss dye-pots, and a treadle loom that has been in the same room for four generations. Ask for natural dyes specifically — the aniline rugs are cheaper and look it after a year."
+    },
+    {
+     "t": "11:45-12:30",
+     "what": "Van · Teotitlán del Valle → Mitla · ~30 km · 40-50 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.029000%2C-96.523000&destination=16.922400%2C-96.359600&travelmode=driving"
+    },
+    {
+     "t": "12:30-13:45",
+     "what": "Mitla — Zona Arqueológica",
+     "kind": "anchor",
+     "price": "MX$210 pp (INAH foreign-visitor rate, 2026)",
+     "note": "The Zapotec/Mixtec funerary centre whose walls are covered in geometric stone mosaic — tens of thousands of cut stones set without mortar, the greca patterns you will recognise from every Oaxacan textile since. The colonial church sits directly on top of one of the palaces, which tells its own story."
+    },
+    {
+     "t": "13:45-14:10",
+     "what": "Van · Mitla → the palenque on the Hierve el Agua road · ~11 km · 20-30 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=16.922400%2C-96.359600&destination=16.866100%2C-96.276000&travelmode=driving"
+    },
+    {
+     "t": "14:10-15:30",
+     "what": "Comida + mezcal palenque with tasting — food area",
+     "kind": "meal",
+     "price": "included in most tours; a bottle MX$400–1,500",
+     "note": "The palenque is where the agave hearts are roasted in a stone pit, crushed under a horse-drawn tahona and double-distilled in copper — after which the tasting finally makes sense."
+    },
+    {
+     "t": "15:30-17:00",
+     "what": "Hierve el Agua — the petrified waterfalls",
+     "kind": "anchor",
+     "price": "MX$70 pp + local access fees",
+     "tag": "skippable",
+     "note": "⚠️ Access has been closed by community disputes more than once in recent years — confirm with the operator the day before, and pick a tour that still runs if it is shut."
+    },
+    {
+     "t": "17:00-18:30",
+     "what": "Van · Hierve el Agua → Oaxaca centro · ~70 km · 75-90 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=16.866100%2C-96.276000&destination=17.064000%2C-96.724000&travelmode=driving"
+    },
+    {
+     "t": "19:30-21:00",
+     "what": "Dinner · Jalatlaco / centro — food area",
+     "kind": "meal"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Oaxaca centro",
+     "lat": 17.064,
+     "lon": -96.724
+    },
+    {
+     "name": "Árbol del Tule",
+     "query": "Árbol del Tule, Santa María del Tule, Oaxaca",
+     "lat": 17.0468,
+     "lon": -96.6363,
+     "mode": "drive"
+    },
+    {
+     "name": "Teotitlán del Valle",
+     "query": "Teotitlán del Valle, Oaxaca",
+     "lat": 17.029,
+     "lon": -96.523,
+     "mode": "drive"
+    },
+    {
+     "name": "Mitla — Zona Arqueológica",
+     "query": "Zona Arqueológica de Mitla, San Pablo Villa de Mitla, Oaxaca",
+     "lat": 16.9224,
+     "lon": -96.3596,
+     "mode": "drive"
+    },
+    {
+     "name": "Hierve el Agua",
+     "query": "Hierve el Agua, San Lorenzo Albarradas, Oaxaca",
+     "lat": 16.8661,
+     "lon": -96.276,
+     "mode": "drive"
+    },
+    {
+     "name": "Hotel · Oaxaca centro",
+     "lat": 17.064,
+     "lon": -96.724,
+     "mode": "drive"
+    }
+   ],
+   "sun": "dawn 06:04 · ☀ 06:25 / 🌇 17:55 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-05",
+   "city": "Oaxaca → Mexico City",
+   "label": "Painted walls in Jalatlaco, then north again",
+   "travel_day": true,
+   "walking_km": {
+    "total": 5.2,
+    "how": "Jalatlaco and the aqueduct 2.8 ×1.3 + market and centro ~1.5"
+   },
+   "ribbon": "Hotel →walk 12′→ Jalatlaco →walk 18′→ Mercado Benito Juárez →taxi 30′→ OAX →fly 1 h 10→ MEX →taxi 55′→ Roma Norte",
+   "rain_alt": "Move the street-art walk to 08:00 (showers here are afternoon events even in the wet season) or spend the morning in the Museo de Filatelia and the Zócalo arcades instead.",
+   "late_cut": "skip the market and go straight to the airport — the flight is the pin today.",
+   "timeline": [
+    {
+     "t": "08:00-08:30",
+     "what": "Breakfast · hotel; bags packed and left at reception",
+     "kind": "meal"
+    },
+    {
+     "t": "08:30-08:42",
+     "what": "Walk · hotel → Barrio de Jalatlaco · 0.8 km · 12 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.064000%2C-96.724000&destination=17.062500%2C-96.717800&travelmode=walking"
+    },
+    {
+     "t": "08:42-10:15",
+     "what": "Barrio de Jalatlaco — street art and the cobbled lanes",
+     "kind": "anchor",
+     "price": "free",
+     "tag": "opener",
+     "note": "Oaxaca's mural quarter: cobblestones, low colour-washed houses and wall after wall of contemporary painting — Zapotec iconography, alebrijes, political prints, all of it repainted often enough that no guide stays accurate. Start at the Templo de San Matías and wander. Add the Xochimilco barrio's stone aqueduct arches five minutes north if there is time."
+    },
+    {
+     "t": "10:15-10:35",
+     "what": "Walk · Jalatlaco → Mercado Benito Juárez · 1.3 km · 20 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.062500%2C-96.717800&destination=17.058800%2C-96.726600&travelmode=walking"
+    },
+    {
+     "t": "10:35-11:45",
+     "what": "Mercado Benito Juárez — last shopping",
+     "kind": "anchor",
+     "price": "mole paste MX$120–250/kg, chocolate MX$100–200, mezcal MX$300+",
+     "note": "Mole negro paste, drinking chocolate, chapulines, a barro negro piece, mezcal. Vacuum-packed mole and sealed chocolate travel fine in checked baggage; mezcal must go in the hold and 1 L pp is the EU allowance."
+    },
+    {
+     "t": "12:00-12:45",
+     "what": "Collect bags · light lunch near the hotel — food area",
+     "kind": "meal"
+    },
+    {
+     "t": "12:45-13:20",
+     "what": "Taxi · Mercado Benito Juárez → Aeropuerto de Oaxaca · ~9 km · 25-35 min · MX$250-350",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=17.058800%2C-96.726600&destination=16.999000%2C-96.726600&travelmode=driving"
+    },
+    {
+     "t": "14:30-15:40",
+     "what": "✈️ Aeropuerto de Oaxaca → AICM Terminal 1 · 1 h 10 · see the flights table",
+     "kind": "hop",
+     "verify": "est"
+    },
+    {
+     "t": "16:15-17:20",
+     "what": "Authorised sitio taxi · AICM Terminal 1 → Hotel · Roma Norte · ~14 km · 40-60 min · MX$300-380",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.436100%2C-99.071900&destination=19.418500%2C-99.162000&travelmode=driving"
+    },
+    {
+     "t": "19:00-21:00",
+     "what": "Dinner · Roma Norte — food area",
+     "kind": "meal",
+     "note": "Last night; repack so the museum morning does not turn into a suitcase morning."
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Oaxaca centro",
+     "lat": 17.064,
+     "lon": -96.724
+    },
+    {
+     "name": "Barrio de Jalatlaco",
+     "query": "Templo de San Matías Jalatlaco, Oaxaca de Juárez",
+     "lat": 17.0625,
+     "lon": -96.7178,
+     "mode": "walk"
+    },
+    {
+     "name": "Mercado Benito Juárez",
+     "query": "Mercado Benito Juárez, Oaxaca de Juárez",
+     "lat": 17.0588,
+     "lon": -96.7266,
+     "mode": "walk"
+    },
+    {
+     "name": "Aeropuerto de Oaxaca (OAX)",
+     "lat": 16.999,
+     "lon": -96.7266,
+     "mode": "drive"
+    },
+    {
+     "name": "AICM Terminal 1",
+     "lat": 19.4361,
+     "lon": -99.0719,
+     "mode": "fly"
+    },
+    {
+     "name": "Hotel · Roma Norte",
+     "lat": 19.4185,
+     "lon": -99.162,
+     "mode": "drive"
+    }
+   ],
+   "sun": "dawn 06:16 · ☀ 06:38 / 🌇 18:02 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-06",
+   "city": "Mexico City → Berlin",
+   "label": "One last room in the Anthropology museum, then home",
+   "travel_day": true,
+   "walking_km": {
+    "total": 4.4,
+    "how": "the museum's twelve ground-floor halls ~2.8 + Chapultepec paths and Polanco lunch 1.2 ×1.3"
+   },
+   "ribbon": "Roma Norte →taxi 20′→ Museo Nacional de Antropología →walk 14′→ Polanco lunch →taxi 25′→ hotel →taxi 55′→ MEX",
+   "rain_alt": "The museum is indoors and the day has no other outdoor block; in rain, take the taxi from the museum door to lunch instead of walking.",
+   "late_cut": "if you are behind, do only the Teotihuacán, Mexica and Oaxaca halls — those three carry the whole trip — and leave by 12:00.",
+   "timeline": [
+    {
+     "t": "08:15-08:50",
+     "what": "Breakfast · Roma Norte café",
+     "kind": "meal"
+    },
+    {
+     "t": "08:50-09:15",
+     "what": "Taxi · Roma Norte → Museo Nacional de Antropología · ~4 km · 15-25 min · MX$120-180",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.418500%2C-99.162000&destination=19.426000%2C-99.186300&travelmode=driving"
+    },
+    {
+     "t": "09:15-12:30",
+     "what": "Museo Nacional de Antropología",
+     "kind": "anchor",
+     "price": "MX$210 pp (2026 rate); free on Sundays",
+     "tag": "opener",
+     "note": "Tue–Sun 09:00–18:00, closed Mondays (verified 2026-08-15). Open the doors at 09:00 and go anticlockwise: Teotihuacán (you were there), Mexica (the Sun Stone), then Oaxaca (Monte Albán's tomb reconstructions, Zapotec urns) — the three halls that close the loop on the last ten days. The Maya hall if there is time; the upper ethnography floor is for another trip."
+    },
+    {
+     "t": "12:30-12:45",
+     "what": "Walk · Museo Nacional de Antropología → Polanco (Campos Elíseos) · 1.0 km · 14 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.426000%2C-99.186300&destination=19.429000%2C-99.193000&travelmode=walking"
+    },
+    {
+     "t": "12:45-14:00",
+     "what": "Lunch · Polanco / Chapultepec — food area",
+     "kind": "meal",
+     "price": "MX$250–600 pp"
+    },
+    {
+     "t": "14:00-14:30",
+     "what": "Taxi · Polanco → hotel, collect bags · ~5 km · 20-30 min · MX$140-200",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.429000%2C-99.193000&destination=19.418500%2C-99.162000&travelmode=driving"
+    },
+    {
+     "t": "15:30-16:30",
+     "what": "Authorised taxi · Roma Norte → AICM · ~14 km · 45-70 min · MX$300-380",
+     "kind": "hop",
+     "verify": "est",
+     "note": "Friday afternoon in Mexico City. This is the hop that eats trips — leave at 15:30 even if the flight is at 21:00.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=19.418500%2C-99.162000&destination=19.436100%2C-99.071900&travelmode=driving"
+    },
+    {
+     "t": "16:30-19:30",
+     "what": "Airport · 3 h international check-in buffer",
+     "kind": "free",
+     "note": "⚠️ Departure time assumed at ≈19:30; Europe-bound flights out of MEX leave between 18:00 and 21:30. Set this block from your actual ticket and keep the 3 h."
+    },
+    {
+     "t": "19:30",
+     "what": "✈️ MEX → BER · arrives 07 Nov · see the flights table",
+     "kind": "hop",
+     "verify": "est",
+     "map": false
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Roma Norte",
+     "lat": 19.4185,
+     "lon": -99.162
+    },
+    {
+     "name": "Museo Nacional de Antropología",
+     "query": "Museo Nacional de Antropología, Ciudad de México",
+     "lat": 19.426,
+     "lon": -99.1863,
+     "mode": "drive"
+    },
+    {
+     "name": "Polanco · Campos Elíseos",
+     "query": "Campos Elíseos, Polanco, Ciudad de México",
+     "lat": 19.429,
+     "lon": -99.193,
+     "mode": "walk"
+    },
+    {
+     "name": "Hotel · Roma Norte",
+     "lat": 19.4185,
+     "lon": -99.162,
+     "mode": "drive"
+    },
+    {
+     "name": "AICM Terminal 1",
+     "lat": 19.4361,
+     "lon": -99.0719,
+     "mode": "drive"
+    }
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=19.418500%2C-99.162000&destination=19.436100%2C-99.071900&travelmode=walking&waypoints=19.426000%2C-99.186300%7C19.429000%2C-99.193000%7C19.418500%2C-99.162000",
+   "sun": "dawn 06:16 · ☀ 06:38 / 🌇 18:01 · CST · sunrise-sunset.org"
+  }
+ ],
+ "hotels": [
+  {
+   "base": "Mexico City · 4 nights (28 Oct – 1 Nov) + 1 night (5–6 Nov)",
+   "area": "Roma Norte (first choice) or Condesa",
+   "why": "Walkable, tree-lined, lit and busy until late, so no evening on this trip needs a dark walk · Metro L1 at Insurgentes puts the Centro Histórico 30 minutes away without a change · the restaurant density means the two nights you come home late still have dinner · it is 20 minutes from the Anthropology museum on the last morning and roughly equidistant from Coyoacán and the airport",
+   "options": [
+    {
+     "name": "Boutique tier (Casa Decu / Ignacia Guest House / Nima Local House class)",
+     "band": "€150–230/night for two",
+     "link": "https://www.booking.com/searchresults.html?ss=Roma%20Norte%2C%20Mexico%20City&checkin=2026-10-28&checkout=2026-11-01&group_adults=2&no_rooms=1"
+    },
+    {
+     "name": "Mid-range tier (La Valise-adjacent guesthouses, Stara Hamburgo, Hotel MX Condesa class)",
+     "band": "€100–160/night for two",
+     "link": "https://www.google.com/travel/hotels/Roma%20Norte?q=Roma%20Norte%20hotels&checkin=2026-10-28&checkout=2026-11-01"
+    }
+   ],
+   "note": "⚠️ Bands are seasonal ballparks from 2026 price guides, not scraped quotes for these dates — spot-check both links. Late October to April is Mexico City's high season and rates run 20–30% above the summer."
+  },
+  {
+   "base": "Oaxaca · 4 nights (1–5 Nov)",
+   "area": "Centro histórico around Santo Domingo, or Jalatlaco",
+   "why": "Everything on days 5–9 except Monte Albán and the valley starts on foot from here · the comparsas pass through the centro and the Panteón General is a 25-minute walk · Jalatlaco is quieter, has the murals on its doorstep and is still inside the walkable ring · both mean you can drink mezcal and not need a car",
+   "options": [
+    {
+     "name": "Centro / Santo Domingo boutique (Casa Antonieta, Hotel Sin Nombre, Grana B&B class)",
+     "band": "€180–280/night for two on 1–2 Nov · €110–160 on 3–4 Nov",
+     "link": "https://www.booking.com/searchresults.html?ss=Centro%2C%20Oaxaca%20de%20Ju%C3%A1rez&checkin=2026-11-01&checkout=2026-11-05&group_adults=2&no_rooms=1"
+    },
+    {
+     "name": "Jalatlaco guesthouses and small posadas",
+     "band": "€90–150/night for two",
+     "link": "https://www.booking.com/searchresults.html?ss=Jalatlaco%2C%20Oaxaca&checkin=2026-11-01&checkout=2026-11-05&group_adults=2&no_rooms=1"
+    }
+   ],
+   "note": "⚠️ This is the hard one. Muertos-week guides say Oaxaca is booked out months ahead and rates run 2–3× normal on 31 Oct – 2 Nov. Booking in August, expect thin availability in the centro — take Jalatlaco or a posada a few blocks out rather than waiting for a Zócalo room that is not coming back."
+  }
+ ],
+ "budget": [
+  {
+   "cat": "international flights (BER↔MEX, 2 adults)",
+   "per_person": "€780–910",
+   "total": "€1,555–1,815",
+   "note": "flight_scan Google cache 2026-08-15, round-trip total for 2; all rows were 2 stops — a 1-stop Lufthansa itinerary may sit above this band"
+  },
+  {
+   "cat": "domestic flights (MEX↔OAX, 2 legs × 2 adults)",
+   "per_person": "€125–290",
+   "total": "€250–580",
+   "note": "⚠️ unverified — 1 Nov is peak festival demand. ADO GL both ways would be ≈€85–130 for two instead, at the cost of 13 hours"
+  },
+  {
+   "cat": "hotels (9 nights, 2 adults, one room)",
+   "per_person": "€525–800",
+   "total": "€1,050–1,600",
+   "note": "CDMX 5 nights €100–160 · Oaxaca 3–4 Nov €110–160 · Oaxaca 1–2 Nov at Muertos pricing €180–280"
+  },
+  {
+   "cat": "local transport (taxis, metro, colectivos, Teotihuacán and Monte Albán shuttles)",
+   "per_person": "€90",
+   "total": "€180",
+   "note": "Metro MX$5 a ride; the airport and cemetery taxis are what actually costs money"
+  },
+  {
+   "cat": "site and museum admissions",
+   "per_person": "€67",
+   "total": "€134",
+   "note": "Teotihuacán MX$210 · Templo Mayor ⚠️~MX$210 · Bellas Artes MX$95 · Museo Mural MX$45 · Casa Azul MX$336 · Monte Albán MX$210 · Mitla MX$210 · Tule MX$20 · Hierve el Agua MX$70 · Antropología MX$210; Museo Textil and the SEP murals free"
+  },
+  {
+   "cat": "Tlacolula valley guided tour (4 Nov)",
+   "per_person": "€46–71",
+   "total": "€92–142",
+   "note": "MX$900–1,400 pp including site fees and comida"
+  },
+  {
+   "cat": "food and drink (10 days)",
+   "per_person": "€380–480",
+   "total": "€760–960",
+   "note": "≈MX$750–950 pp/day — market breakfasts and comidas, one proper dinner a day, mezcal on top"
+  },
+  {
+   "cat": "eSIM + travel-medical insurance with repatriation",
+   "per_person": "€35–60",
+   "total": "€70–120",
+   "note": "eSIM €5–25 pp for the ten days; insurance €40–90 for two"
+  },
+  {
+   "cat": "buffer (12%)",
+   "per_person": "≈€260",
+   "total": "≈€520",
+   "note": "Muertos-week surge on the two variable lines (Oaxaca beds, 1 Nov flights) is where a plan like this actually breaks"
+  },
+  {
+   "cat": "TOTAL",
+   "per_person": "€2,200–3,150",
+   "total": "€4,400–6,300",
+   "note": "midpoint ≈ €5,300 for two, all in. FX €1 = MXN 19.6592 (ECB via frankfurter.dev, 2026-08-14)"
+  }
+ ],
+ "brief": {
+  "visa": "German passport = visa-free for tourism up to 180 days; the passport must be valid at least six months and a Personalausweis is not accepted. Arriving by air there is no paper FMM any more — Mexico switched to the digital FMMd, and at AICM adult German biometric passports can use the E-Gates, which print a slip with the entry date and the number of days granted. Photograph that slip; it is your permit. The paid paper tourist card only exists for land crossings, so ignore the websites selling you an 'FMM' for a flight. (Auswärtiges Amt, Reise- und Sicherheitshinweise Mexiko, read 2026-08-15 — re-check before booking.)",
+  "holidays": "No federal public holiday falls inside 28 Oct – 6 Nov 2026 (date.nager.at, MX 2026: the nearest is Día de la Revolución on 16 November). Día de Muertos itself, 1–2 November, is NOT a statutory rest day — banks and government offices largely work, museums keep normal hours — but it is the single largest cultural mobilisation of the Mexican year: domestic flights, intercity buses and Oaxaca hotels behave like a holiday even though the calendar says otherwise. ⚠️ The CDMX Desfile de Día de Muertos date for 2026 was not published as of 2026-08-15; expect a Saturday (31 Oct or 7 Nov), confirmed 4–6 weeks ahead at cultura.cdmx.gob.mx.",
+  "weather": "Same dates last year (Open-Meteo archive, 2025-10-28 → 11-06): Mexico City 24 / 10 °C with 0.3 mm of rain across ten days; Oaxaca 26 / 12 °C with none at all. This is the best window of the Mexican year — the rains have stopped and the heat has not started. About 11 h of daylight, sunrise ~07:10 and sunset ~18:00 in CDMX. Two things the averages hide: Mexico City sits at 2,240 m so the first day feels thin and the nights are genuinely cold (a jacket, not a jumper), and Monte Albán at midday has no shade whatsoever.",
+  "money": "Peso, cash-first outside restaurants and hotels: markets, cemeteries, colectivos, comparsa food stalls, church donations and every tip are cash. Withdraw at bank ATMs (Santander, Banorte, BBVA) rather than the standalone kiosks in tourist streets, and decline the machine's own currency conversion. Cards are fine in Roma Norte and central Oaxaca restaurants. Tipping: 10–15% in restaurants (check whether propina is already on the bill), MX$20–50 for a taxi you liked, MX$50/day housekeeping.",
+  "connectivity": "eSIM before you fly — Telcel has by far the best coverage in the Oaxacan valleys and most travel eSIMs ride on it; €5–25 pp buys 5–10 GB for ten days. Wi-Fi is good in cafés and hotels in both cities and absent in the cemeteries and at Teotihuacán. Plug type A/B, 127 V — German devices need a plug adapter, and cheap hair dryers do not like the voltage.",
+  "insurance": "Travel-medical insurance with repatriation cover (Auslandsreise-Kranken- und Rückholversicherung) is the one non-optional purchase. The Auswärtiges Amt states plainly that private hospitals expect payment on the spot in cash and that any consular assistance is billed back to the traveller. €40–90 for two for ten days. Altitude, street food and a lot of mezcal are the three realistic claim causes on this itinerary, in that order.",
+  "safety": "The Auswärtiges Amt places no blanket travel warning on either Mexico City or the state of Oaxaca (its Oaxaca warning is for the Guatemalan border strip, which this trip never approaches). What the plan does about it rather than warning you: every night block ends in a lit, busy, walkable neighbourhood or a taxi from the door — Roma Norte and the Oaxaca centro both stay awake — and the two cemetery nights are done with the crowd, not after it. Practical: pickpocketing and phone-snatching are the real risks, so a front pocket in the Abastos and Jamaica markets; take authorised sitio taxis or app cars, never a street taxi hailed at the airport (Uber and DiDi have been barred from AICM pickups since March 2026); do not leave a drink unattended in a mezcalería.",
+  "baggage": "Two checked bags plus cabin. Where the big bag physically is: hotel in Roma Norte on days 2–4 (Teotihuacán and Coyoacán are day trips), flown to Oaxaca on day 5, in the Oaxaca hotel on days 6–8, back to the Roma Norte hotel on day 9, and left at reception on the morning of day 10 while you do the museum. Nothing on this trip needs an overnight bag. Buying mezcal: hold baggage only, 1 L pp duty-free into the EU, and pad the bottle — the Oaxaca market will wrap it in newspaper and call it done.",
+  "Día de Muertos playbook": "The two cities peak on different nights, which is the whole reason this route works. Mexico City: the Saturday parade on Reforma (date unconfirmed), ofrendas in Coyoacán and Roma Norte, and the cempasúchil canyon at the Mercado de Jamaica in the last week of October. Oaxaca: 1 November is Día de los Angelitos with the Comparsa de Catrinas and the first cemetery vigils, 2 November is the day itself, when the panteones fill from the afternoon and the comparsas escort the souls back after dark. Manners matter more than logistics here: this is a family occasion, not a show. Ask before you photograph anyone, buy your candles and marigolds from the stalls at the cemetery gate, accept the mezcal if it is offered, and do not step over a grave."
+ },
+ "unverified": [
+  "⚠️ Flight prices and times. flight_scan returned Google's cache for BER↔MEX round trips (€1,555–1,815 total for 2 adults, queried 2026-08-15) and every row was 2 stops; the obvious 1-stop Lufthansa BER–FRA–MEX shape did not appear. Return-leg departure times are not visible to the scanner at all, so the 19:30 on day 10 is an assumption.",
+  "⚠️ MEX↔OAX domestic fares for 1 and 5 November. No live quote was obtained; the MX$1,500–3,500 pp band is a festival-demand estimate, not a price.",
+  "⚠️ The 2026 date of the Mexico City Desfile de Día de Muertos. Not published as of 2026-08-15; day 4 is built to work whether it lands on 31 October or 7 November.",
+  "⚠️ Templo Mayor's own 2026 admission fee. INAH's flagship foreign-visitor rate is MX$210 after the 1 January 2026 increase, but the site-specific figure was not confirmed.",
+  "⚠️ Palacio Nacional (Rivera's stairway murals) was deliberately left off the itinerary: sources disagree on whether it opens Monday-to-Sunday or closes Mondays, and public access has been restricted since it became the presidential residence. The Museo Vivo del Muralismo at the SEP carries the same argument with a verified free entry, so it took the slot.",
+  "⚠️ Centro Cultural San Pablo's opening hours.",
+  "⚠️ Comparsa and muerteada routes and start times in Oaxaca on 2 November — set neighbourhood by neighbourhood only days ahead. Ask the hotel on 1 November.",
+  "⚠️ Panteón General and Xoxocotlán opening hours on the Muertos nights: the municipality sets them yearly and 'until about 22:00' is the best available answer.",
+  "⚠️ Hierve el Agua access on 4 November. Community disputes have closed it repeatedly; treat it as optional and confirm with the tour operator.",
+  "⚠️ All hotel bands. They come from 2026 price guides and Muertos-week reporting, not from scraped quotes for these dates; no OTA was queried.",
+  "⚠️ Every hop marked (est) is a straight-line or typical-traffic estimate, not a Google Maps lookup. Mexico City traffic can double any of the taxi hops.",
+  "⚠️ Museum and site hours are seasonal patterns verified on 2026-08-15, not date-specific confirmations — nobody publishes 2 November's hours in August. Re-confirm two weeks out."
+ ],
+ "sources": "Entry, safety and insurance: Auswärtiges Amt Reise- und Sicherheitshinweise Mexiko (2026-08-15) · Holidays: date.nager.at MX 2026 · FX: ECB via frankfurter.dev 2026-08-14 · Weather: Open-Meteo archive (same dates 2025) · Sun times: sunrise-sunset.org · Flights: Google Flights cache via scripts/flight_scan.py · Fees, hours, Día de Muertos programmes and hotel bands: 18 web searches, 2026-08-15, cited inline"
+}

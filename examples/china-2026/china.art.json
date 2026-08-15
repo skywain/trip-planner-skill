@@ -1,0 +1,300 @@
+{
+ "schema": 1,
+ "cover": {
+  "kick": "China",
+  "kick_en": "CHINA 2026",
+  "postmark_date": "2026-11-11"
+ },
+ "home": {
+  "city": "New York",
+  "iata": "JFK"
+ },
+ "end": {
+  "date": "2026-11-18",
+  "mark": "NEW YORK",
+  "line": "New York — home on the same calendar day you left Beijing.",
+  "fine": "18 Nov · PEK → ICN → JFK. Flying east you get the thirteen hours back, so the day repeats itself instead of vanishing.",
+  "farewell": "SEE YOU, CHINA"
+ },
+ "days": {
+  "2026-11-11": {
+   "theme": "Wheels Up",
+   "en": "New York → the air",
+   "mark": "NEW YORK"
+  },
+  "2026-11-12": {
+   "theme": "Land & Rail",
+   "en": "Beijing → Xi'an",
+   "mark": "PEK → XI'AN"
+  },
+  "2026-11-13": {
+   "theme": "Buried Army",
+   "en": "Lintong, Xi'an",
+   "mark": "TERRACOTTA"
+  },
+  "2026-11-14": {
+   "theme": "Wall & Pagoda",
+   "en": "Xi'an, Shaanxi",
+   "mark": "XI'AN"
+  },
+  "2026-11-15": {
+   "theme": "North Again",
+   "en": "Xi'an → Beijing",
+   "mark": "XI'AN → PEK"
+  },
+  "2026-11-16": {
+   "theme": "Great Wall",
+   "en": "Mutianyu, Huairou",
+   "mark": "MUTIANYU"
+  },
+  "2026-11-17": {
+   "theme": "Imperial Axis",
+   "en": "Beijing",
+   "mark": "BEIJING"
+  },
+  "2026-11-18": {
+   "theme": "Homeward",
+   "en": "Beijing → New York",
+   "mark": "PEK → JFK"
+  }
+ },
+ "themes": {
+  "clay": {
+   "cover": {
+    "zh": "MOON OF QIN",
+    "sub": "New York · Beijing · Xi'an · the Great Wall",
+    "credit": "after Wang Changling's 「秦时明月汉时关」 · Out of the Frontier (c. 720)",
+    "title_stem": "china-clay-title2"
+   },
+   "zones": [
+    {
+     "from_day": 1,
+     "kind": "custom",
+     "band": "china-strip-xian",
+     "to": "#ebdfae"
+    },
+    {
+     "from_day": 5,
+     "kind": "custom",
+     "band": "china-strip-beijing",
+     "to": "#cfe8c9"
+    }
+   ],
+   "days": {
+    "2026-11-11": {
+     "figurine": "clay-plane"
+    },
+    "2026-11-12": {
+     "figurine": "china-clay-train"
+    },
+    "2026-11-13": {
+     "figurine": "china-clay-warriors"
+    },
+    "2026-11-14": {
+     "figurine": "china-clay-pagoda"
+    },
+    "2026-11-15": {
+     "figurine": "china-clay-food"
+    },
+    "2026-11-16": {
+     "figurine": "china-clay-wall"
+    },
+    "2026-11-17": {
+     "figurine": "china-clay-palace"
+    },
+    "2026-11-18": {
+     "figurine": "clay-luggage"
+    }
+   }
+  },
+  "splash": {
+   "cover": {
+    "zh": "MOON OF QIN",
+    "sub": "New York · Beijing · Xi'an · the Wall — after Wang Changling's 「秦时明月汉时关」"
+   },
+   "end": {
+    "fine": "18 Nov · PEK → ICN → JFK, landing in New York on the same calendar day. 「秦时明月汉时关」— Wang Changling, Over the Border (Tang)."
+   },
+   "hero": {
+    "palette": "night",
+    "title": "china-splash-title",
+    "art": "china-splash-hero",
+    "sides": [
+     "balloon",
+     "star"
+    ]
+   },
+   "appendix": {
+    "palette": "homebound",
+    "sides": [
+     "star"
+    ]
+   },
+   "vehicles": {
+    "plane": {
+     "stem": "splash-plane",
+     "ratio": "428/277",
+     "speedlines": true
+    },
+    "train": {
+     "stem": "china-splash-veh-train",
+     "ratio": "433/318",
+     "speedlines": true
+    }
+   },
+   "mascots": {
+    "panda": {
+     "stem": "china-splash-m-panda",
+     "ratio": "385/395"
+    },
+    "dumpling": {
+     "stem": "china-splash-m-dumpling",
+     "ratio": "417/403"
+    },
+    "lantern": {
+     "stem": "china-splash-m-lantern",
+     "ratio": "362/435"
+    },
+    "warrior": {
+     "stem": "china-splash-m-warrior",
+     "ratio": "305/436"
+    },
+    "tea": {
+     "stem": "china-splash-m-tea",
+     "ratio": "389/398"
+    }
+   },
+   "strips": {
+    "beijing": {
+     "stem": "china-splash-strip-beijing",
+     "ratio": "1335/297"
+    },
+    "xian": {
+     "stem": "china-splash-strip-xian",
+     "ratio": "1354/276"
+    }
+   },
+   "days": {
+    "2026-11-11": {
+     "palette": "night",
+     "island": "splash-nightflight",
+     "fx": "moon",
+     "vehicle": {
+      "kind": "plane",
+      "when": "post",
+      "pos": "right:-10%;bottom:2%;width:clamp(120px,13vw,160px);--vr:-4deg"
+     },
+     "sides": [
+      "star",
+      "cloud"
+     ]
+    },
+    "2026-11-12": {
+     "palette": "lilac",
+     "island": "china-splash-train",
+     "fx": "beams-cool",
+     "vehicle": {
+      "kind": "train",
+      "when": "pre",
+      "pos": "left:-12%;bottom:-2%;width:clamp(130px,14vw,170px);--vr:2deg"
+     },
+     "mascot": {
+      "kind": "dumpling",
+      "pos": "right:-8%;bottom:0%;width:clamp(84px,9vw,112px);--vr:3deg"
+     },
+     "sides": [
+      "cloud"
+     ]
+    },
+    "2026-11-13": {
+     "palette": "goldfog",
+     "island": "china-splash-warriors",
+     "fx": "halo-gold",
+     "mascot": {
+      "kind": "warrior",
+      "pos": "left:-9%;bottom:-1%;width:clamp(78px,8.5vw,104px);--vr:-3deg"
+     },
+     "strip": "xian",
+     "sides": [
+      "dot"
+     ]
+    },
+    "2026-11-14": {
+     "palette": "dusk",
+     "island": "china-splash-pagoda",
+     "fx": "sun",
+     "mascot": {
+      "kind": "lantern",
+      "pos": "right:-9%;bottom:-2%;width:clamp(76px,8vw,100px);--vr:4deg"
+     },
+     "strip": "xian",
+     "sides": [
+      "spark",
+      "cloud"
+     ]
+    },
+    "2026-11-15": {
+     "palette": "alpine",
+     "island": "china-splash-tiantan",
+     "fx": "halo-teal",
+     "vehicle": {
+      "kind": "train",
+      "when": "post",
+      "pos": "left:-13%;bottom:-3%;width:clamp(126px,13.5vw,164px);--vr:-2deg;--vsx:-1"
+     },
+     "mascot": {
+      "kind": "panda",
+      "pos": "right:-8%;bottom:0%;width:clamp(82px,9vw,110px);--vr:3deg"
+     },
+     "sides": [
+      "cloud"
+     ]
+    },
+    "2026-11-16": {
+     "palette": "canyon",
+     "island": "china-splash-wall",
+     "fx": "beams-cool",
+     "mascot": {
+      "kind": "tea",
+      "pos": "left:-8%;bottom:-1%;width:clamp(78px,8.5vw,104px);--vr:-3deg"
+     },
+     "strip": "beijing",
+     "sides": [
+      "shard",
+      "dot"
+     ]
+    },
+    "2026-11-17": {
+     "palette": "sunrise",
+     "island": "china-splash-palace",
+     "fx": "halo-gold",
+     "mascot": {
+      "kind": "lantern",
+      "pos": "right:-9%;bottom:-1%;width:clamp(76px,8vw,100px);--vr:-4deg"
+     },
+     "strip": "beijing",
+     "sides": [
+      "spark"
+     ]
+    },
+    "2026-11-18": {
+     "palette": "ocean",
+     "fx": "sunrise",
+     "vehicle": {
+      "kind": "plane",
+      "when": "post",
+      "pos": "right:-12%;bottom:4%;width:clamp(126px,13.5vw,164px);--vr:-5deg"
+     },
+     "mascot": {
+      "kind": "panda",
+      "pos": "left:-8%;bottom:-1%;width:clamp(84px,9vw,112px);--vr:4deg"
+     },
+     "sides": [
+      "star",
+      "cloud"
+     ]
+    }
+   }
+  }
+ }
+}

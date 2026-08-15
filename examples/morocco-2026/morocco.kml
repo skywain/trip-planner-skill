@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document>
+<name>Morocco 2026 · Marrakech · Atlas · Sahara · Fes · Chefchaouen</name>
+<Folder><name>Day 1 2026-11-06 — Departure day: nothing to see, everything to not forget</name>
+<Placemark><name>1. Toronto Pearson (YYZ)</name><Point><coordinates>-79.624800,43.677700,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Day 2 2026-11-07 — Land, ride south, and walk into the smoke of Jemaa el-Fna</name>
+<Placemark><name>1. Casablanca Mohammed V Airport (CMN)</name><Point><coordinates>-7.589800,33.367500,0</coordinates></Point></Placemark>
+<Placemark><name>2. Marrakech Railway Station</name><Point><coordinates>-8.017700,31.630400,0</coordinates></Point></Placemark>
+<Placemark><name>3. Riad · Marrakech Medina</name><Point><coordinates>-7.985600,31.627000,0</coordinates></Point></Placemark>
+<Placemark><name>4. Koutoubia Mosque</name><Point><coordinates>-7.993400,31.623600,0</coordinates></Point></Placemark>
+<Placemark><name>5. Jemaa el-Fna</name><Point><coordinates>-7.989100,31.625800,0</coordinates></Point></Placemark>
+<Placemark><name>Day 2 route</name><Style><LineStyle><color>ffff0000</color><width>3</width></LineStyle></Style><LineString><coordinates>-7.589800,33.367500,0 -8.017700,31.630400,0 -7.985600,31.627000,0 -7.993400,31.623600,0 -7.989100,31.625800,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 3 2026-11-08 — Blue garden at opening, then the medina from the madrasa down to the tombs</name>
+<Placemark><name>1. Riad · Marrakech Medina</name><Point><coordinates>-7.985600,31.627000,0</coordinates></Point></Placemark>
+<Placemark><name>2. Jardin Majorelle</name><Point><coordinates>-8.003300,31.641700,0</coordinates></Point></Placemark>
+<Placemark><name>3. Ben Youssef Madrasa</name><Point><coordinates>-7.986100,31.632100,0</coordinates></Point></Placemark>
+<Placemark><name>4. Souk Semmarine</name><Point><coordinates>-7.988400,31.628500,0</coordinates></Point></Placemark>
+<Placemark><name>5. Bahia Palace</name><Point><coordinates>-7.983200,31.621600,0</coordinates></Point></Placemark>
+<Placemark><name>6. Saadian Tombs</name><Point><coordinates>-7.989200,31.617800,0</coordinates></Point></Placemark>
+<Placemark><name>7. Jemaa el-Fna</name><Point><coordinates>-7.989100,31.625800,0</coordinates></Point></Placemark>
+<Placemark><name>Day 3 route</name><Style><LineStyle><color>ff00aa00</color><width>3</width></LineStyle></Style><LineString><coordinates>-7.985600,31.627000,0 -8.003300,31.641700,0 -7.986100,31.632100,0 -7.988400,31.628500,0 -7.983200,31.621600,0 -7.989200,31.617800,0 -7.989100,31.625800,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 4 2026-11-09 — Over the High Atlas: the pass, the ksar, and a night in a palm-grove kasbah</name>
+<Placemark><name>1. Riad · Marrakech Medina</name><Point><coordinates>-7.985600,31.627000,0</coordinates></Point></Placemark>
+<Placemark><name>2. Tizi n'Tichka Pass</name><Point><coordinates>-7.383300,31.291900,0</coordinates></Point></Placemark>
+<Placemark><name>3. Ksar of Aït Benhaddou</name><Point><coordinates>-7.131900,31.047200,0</coordinates></Point></Placemark>
+<Placemark><name>4. Taourirt Kasbah, Ouarzazate</name><Point><coordinates>-6.893400,30.918900,0</coordinates></Point></Placemark>
+<Placemark><name>5. Skoura Palm Grove (Kasbah Amridil)</name><Point><coordinates>-6.555600,31.061100,0</coordinates></Point></Placemark>
+<Placemark><name>Day 4 route</name><Style><LineStyle><color>ff00aaff</color><width>3</width></LineStyle></Style><LineString><coordinates>-7.985600,31.627000,0 -7.383300,31.291900,0 -7.131900,31.047200,0 -6.893400,30.918900,0 -6.555600,31.061100,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 5 2026-11-10 — Two gorges, then the camels at sunset and a camp under the Erg Chebbi</name>
+<Placemark><name>1. Skoura Palm Grove (Kasbah Amridil)</name><Point><coordinates>-6.555600,31.061100,0</coordinates></Point></Placemark>
+<Placemark><name>2. Dades Gorge hairpins (Tissdrine)</name><Point><coordinates>-5.933300,31.533300,0</coordinates></Point></Placemark>
+<Placemark><name>3. Todra Gorge</name><Point><coordinates>-5.596400,31.589200,0</coordinates></Point></Placemark>
+<Placemark><name>4. Merzouga (Erg Chebbi trailhead)</name><Point><coordinates>-4.011700,31.099400,0</coordinates></Point></Placemark>
+<Placemark><name>5. Desert camp · Erg Chebbi</name><Point><coordinates>-3.983300,31.116700,0</coordinates></Point></Placemark>
+<Placemark><name>Day 5 route</name><Style><LineStyle><color>ffaa00aa</color><width>3</width></LineStyle></Style><LineString><coordinates>-6.555600,31.061100,0 -5.933300,31.533300,0 -5.596400,31.589200,0 -4.011700,31.099400,0 -3.983300,31.116700,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 6 2026-11-11 — Sunrise on the erg, then the long haul north over the Middle Atlas into Fes</name>
+<Placemark><name>1. Desert camp · Erg Chebbi</name><Point><coordinates>-3.983300,31.116700,0</coordinates></Point></Placemark>
+<Placemark><name>2. Merzouga (Erg Chebbi trailhead)</name><Point><coordinates>-4.011700,31.099400,0</coordinates></Point></Placemark>
+<Placemark><name>3. Ziz Valley viewpoint</name><Point><coordinates>-4.416700,31.933300,0</coordinates></Point></Placemark>
+<Placemark><name>4. Ifrane</name><Point><coordinates>-5.110600,33.522800,0</coordinates></Point></Placemark>
+<Placemark><name>5. Fes · Bab Bou Jeloud</name><Point><coordinates>-4.982500,34.061900,0</coordinates></Point></Placemark>
+<Placemark><name>Day 6 route</name><Style><LineStyle><color>ff777777</color><width>3</width></LineStyle></Style><LineString><coordinates>-3.983300,31.116700,0 -4.011700,31.099400,0 -4.416700,31.933300,0 -5.110600,33.522800,0 -4.982500,34.061900,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 7 2026-11-12 — Fes el-Bali on foot: two madrasas, the tanneries, and the walls from above at sunset</name>
+<Placemark><name>1. Riad · Fes el-Bali</name><Point><coordinates>-4.976000,34.064000,0</coordinates></Point></Placemark>
+<Placemark><name>2. Bab Bou Jeloud (Blue Gate)</name><Point><coordinates>-4.982500,34.061900,0</coordinates></Point></Placemark>
+<Placemark><name>3. Bou Inania Madrasa</name><Point><coordinates>-4.981700,34.062500,0</coordinates></Point></Placemark>
+<Placemark><name>4. Al-Attarine Madrasa</name><Point><coordinates>-4.973900,34.065000,0</coordinates></Point></Placemark>
+<Placemark><name>5. Chouara Tannery</name><Point><coordinates>-4.969400,34.066400,0</coordinates></Point></Placemark>
+<Placemark><name>6. Merenid Tombs viewpoint</name><Point><coordinates>-4.980300,34.071400,0</coordinates></Point></Placemark>
+<Placemark><name>Day 7 route</name><Style><LineStyle><color>ff0000ff</color><width>3</width></LineStyle></Style><LineString><coordinates>-4.976000,34.064000,0 -4.982500,34.061900,0 -4.981700,34.062500,0 -4.973900,34.065000,0 -4.969400,34.066400,0 -4.980300,34.071400,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 8 2026-11-13 — CTM north through the Rif, and an afternoon in the blue town</name>
+<Placemark><name>1. Riad · Fes el-Bali</name><Point><coordinates>-4.976000,34.064000,0</coordinates></Point></Placemark>
+<Placemark><name>2. Fes CTM Station</name><Point><coordinates>-4.999200,34.036100,0</coordinates></Point></Placemark>
+<Placemark><name>3. Chefchaouen CTM Station</name><Point><coordinates>-5.270000,35.160000,0</coordinates></Point></Placemark>
+<Placemark><name>4. Plaza Uta el-Hammam</name><Point><coordinates>-5.263600,35.169900,0</coordinates></Point></Placemark>
+<Placemark><name>5. Ras El Maa</name><Point><coordinates>-5.260000,35.171700,0</coordinates></Point></Placemark>
+<Placemark><name>Day 8 route</name><Style><LineStyle><color>ffff0000</color><width>3</width></LineStyle></Style><LineString><coordinates>-4.976000,34.064000,0 -4.999200,34.036100,0 -5.270000,35.160000,0 -5.263600,35.169900,0 -5.260000,35.171700,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 9 2026-11-14 — Blue dawn from the Spanish Mosque, the Atlantic at Cap Spartel, and a flight south</name>
+<Placemark><name>1. Riad · Chefchaouen Medina</name><Point><coordinates>-5.264000,35.170000,0</coordinates></Point></Placemark>
+<Placemark><name>2. Spanish Mosque (Bouzaafar)</name><Point><coordinates>-5.254900,35.170600,0</coordinates></Point></Placemark>
+<Placemark><name>3. Cap Spartel</name><Point><coordinates>-5.923600,35.794200,0</coordinates></Point></Placemark>
+<Placemark><name>4. Tangier Ibn Battouta Airport (TNG)</name><Point><coordinates>-5.916900,35.726900,0</coordinates></Point></Placemark>
+<Placemark><name>5. Casablanca Mohammed V Airport (CMN)</name><Point><coordinates>-7.589800,33.367500,0</coordinates></Point></Placemark>
+<Placemark><name>6. Hotel · Casablanca (near Hassan II Mosque)</name><Point><coordinates>-7.628000,33.605000,0</coordinates></Point></Placemark>
+<Placemark><name>Day 9 route</name><Style><LineStyle><color>ff00aa00</color><width>3</width></LineStyle></Style><LineString><coordinates>-5.264000,35.170000,0 -5.254900,35.170600,0 -5.923600,35.794200,0 -5.916900,35.726900,0 -7.589800,33.367500,0 -7.628000,33.605000,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 10 2026-11-15 — One mosque on the ocean, then home</name>
+<Placemark><name>1. Hotel · Casablanca (near Hassan II Mosque)</name><Point><coordinates>-7.628000,33.605000,0</coordinates></Point></Placemark>
+<Placemark><name>2. Hassan II Mosque</name><Point><coordinates>-7.632700,33.608600,0</coordinates></Point></Placemark>
+<Placemark><name>3. Casablanca Mohammed V Airport (CMN)</name><Point><coordinates>-7.589800,33.367500,0</coordinates></Point></Placemark>
+<Placemark><name>Day 10 route</name><Style><LineStyle><color>ff00aaff</color><width>3</width></LineStyle></Style><LineString><coordinates>-7.628000,33.605000,0 -7.632700,33.608600,0 -7.589800,33.367500,0</coordinates></LineString></Placemark>
+</Folder>
+</Document></kml>

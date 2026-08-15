@@ -1,0 +1,224 @@
+{
+  "schema": 1,
+  "_note": "越南 2026 测试行程(深圳出发,中文)。渲染 Zine 版 + 闪屏版两个主题。所有目的地场景(封面撕纸海报、章节海报、闪屏浮岛与主视觉、剪影条)均为本行程按各自主题风格生成,前缀 vietnam-;通用道具复用 themes/assets/IMAGE-LIBRARY.md §12(journal-boarding / journal-tag / journal-ticket / plane / splash-plane / splash-bus / splash-nightflight)。",
+
+  "cover": {
+    "kick": "越南行",
+    "kick_en": "VIETNAM 2026",
+    "postmark_date": "2026-12-12"
+  },
+
+  "home": {"city": "深圳", "iata": "SZX"},
+
+  "end": {
+    "date": "2026-12-21",
+    "mark": "SHENZHEN",
+    "line": "深圳,到家了。",
+    "fine": "12-21 週一 18:05 落地宝安 —— 十天,两千公里,一段夜火车。",
+    "farewell": "SEE YOU, VIỆT NAM"
+  },
+
+  "brief_titles": {
+    "visa": "签证 · 电子签自己办",
+    "holidays": "节假与人流",
+    "weather": "天气 · 一趟三种气候",
+    "money": "货币 · 现金社会",
+    "connectivity": "通信 · eSIM 与 Grab",
+    "insurance": "保险 · 两条排除条款",
+    "safety": "安全 · 过马路与摩托",
+    "baggage": "行李 · 船上与车上"
+  },
+
+  "days": {
+    "2026-12-12": {"theme": "落地入夜", "en": "Hanoi, on arrival", "mark": "HANOI"},
+    "2026-12-13": {"theme": "老城一圈", "en": "Hanoi Old Quarter", "mark": "HANOI"},
+    "2026-12-14": {"theme": "石灰岩海", "en": "Ha Long Bay", "mark": "HA LONG"},
+    "2026-12-15": {"theme": "湾晨夜车", "en": "Bay dawn, night train", "mark": "SE19"},
+    "2026-12-16": {"theme": "灯笼落地", "en": "Into Hoi An", "mark": "HOI AN"},
+    "2026-12-17": {"theme": "后座乡野", "en": "Hoi An countryside", "mark": "HOI AN"},
+    "2026-12-18": {"theme": "五行山下", "en": "Marble Mountains · Da Nang", "mark": "DA NANG"},
+    "2026-12-19": {"theme": "西贡老城", "en": "Saigon downtown", "mark": "SAIGON"},
+    "2026-12-20": {"theme": "桨声椰林", "en": "Mekong Delta", "mark": "MEKONG"},
+    "2026-12-21": {"theme": "一杯回家", "en": "Coffee, then home", "mark": "SAIGON"}
+  },
+
+  "themes": {
+
+    "zine": {
+      "cover": {
+        "zh": "人海",
+        "en": "A SEA OF FACES",
+        "credit": "「万人如海一身藏」—— 苏轼",
+        "photo": {
+          "stem": "vietnam-zine-hoian",
+          "caption": "LANTERN NIGHT · HỘI AN",
+          "alt": "会安老城夜里挂满彩色丝绸灯笼的临河街道",
+          "tear_seed": "cover-vietnam"
+        }
+      },
+      "toc_strip": [
+        {"stem": "vietnam-hat", "rot": -3.0},
+        {"stem": "vietnam-lantern", "rot": 2.5},
+        {"stem": "vietnam-pho", "rot": -1.5}
+      ],
+      "props": {
+        "legs": {"stem": "journal-boarding", "rot": -3.0},
+        "hotels": {"stem": "journal-tag", "rot": 4.0},
+        "checklist": {"stem": "journal-ticket", "rot": -2.0}
+      },
+      "days": {
+        "2026-12-12": {
+          "photo": {"stem": "vietnam-ph-pho", "caption": "PHỞ ON A PLASTIC STOOL · HÀ NỘI",
+                    "alt": "夜里人行道上小板凳矮桌上一碗冒热气的牛肉河粉", "treat": "mono", "rot": 2.4},
+          "sticker": {"stem": "vietnam-lantern", "size": "md", "side": "sl", "rot": -3.0},
+          "lineart": "flight"
+        },
+        "2026-12-13": {
+          "poster": {"stem": "vietnam-zine-hanoi", "caption": "TRAIN STREET · HÀ NỘI",
+                     "alt": "河内老城一条窄巷,单轨铁道从两排民居之间穿过"},
+          "photo": {"stem": "vietnam-ph-temple", "caption": "VĂN MIẾU · TEMPLE OF LITERATURE",
+                    "alt": "文庙的红漆大门与长满青苔的瓦砖庭院", "rot": -2.0},
+          "sticker": {"stem": "vietnam-scooter", "size": "sm", "side": "sr", "rot": 3.0},
+          "lineart": "skyline"
+        },
+        "2026-12-14": {
+          "poster": {"stem": "vietnam-zine-cover", "caption": "KARST AT DAWN · VỊNH HẠ LONG",
+                     "alt": "晨雾里从翡翠色水面拔起的石灰岩群岛,一艘帆船在前景"},
+          "sticker": {"stem": "vietnam-basketboat", "size": "md", "side": "sr", "rot": 2.0},
+          "lineart": "ridge"
+        },
+        "2026-12-15": {
+          "photo": {"stem": "vietnam-ph-train", "caption": "SE19 · THE COAST AT SUNRISE",
+                    "alt": "夜火车车窗外清晨的海岸线,右边是海左边是青山", "treat": "mono", "rot": 1.8},
+          "lineart": "flats"
+        },
+        "2026-12-16": {
+          "photo": {"stem": "vietnam-ph-market", "caption": "SPICES + NÓN LÁ · CHỢ HỘI AN",
+                    "alt": "有顶市场的摊位上堆着干香料、辣椒和一摞斗笠", "rot": 2.2},
+          "sticker": {"stem": "vietnam-hat", "size": "md", "side": "sl", "rot": -2.5},
+          "lineart": "bridge"
+        },
+        "2026-12-17": {
+          "sticker": {"stem": "vietnam-basketboat", "size": "md", "side": "sl", "rot": -3.0},
+          "lineart": "surf"
+        },
+        "2026-12-18": {
+          "photo": {"stem": "vietnam-ph-cave", "caption": "ONE SHAFT OF LIGHT · NGŨ HÀNH SƠN",
+                    "alt": "大理石山洞窟里,一束天光从洞顶落在石佛身上", "treat": "mono", "rot": -2.2},
+          "sticker": {"stem": "vietnam-coffee", "size": "sm", "side": "sr", "rot": 2.5},
+          "lineart": "peaks"
+        },
+        "2026-12-19": {
+          "poster": {"stem": "vietnam-zine-saigon", "caption": "THE POST OFFICE · SÀI GÒN",
+                     "alt": "芥黄色殖民时期邮政大楼与门前长曝光成流的摩托车河"},
+          "photo": {"stem": "vietnam-ph-motos", "caption": "RUSH HOUR · CHỢ BẾN THÀNH",
+                    "alt": "黄昏时殖民时期市场楼前密集的摩托车流,骑手被慢门拖成虚影", "rot": 1.6},
+          "lineart": "flats"
+        },
+        "2026-12-20": {
+          "band": {"stem": "vietnam-zine-mekong", "caption": "ONLY THE OARS · BẾN TRE",
+                   "alt": "窄木舟在水椰几乎合拢的三角洲水道里滑行,船尾戴斗笠的船娘在划桨",
+                   "tear_seed": "band-mekong"},
+          "sticker": {"stem": "vietnam-hat", "size": "sm", "side": "sr", "rot": 3.0},
+          "lineart": "surf"
+        },
+        "2026-12-21": {
+          "sticker": {"stem": "plane", "size": "md", "side": "sl", "rot": -2.0},
+          "lineart": "flight"
+        }
+      }
+    },
+
+    "splash": {
+      "cover": {
+        "zh": "千江月",
+        "sub": "河内 · 下龙湾 · 会安 · 西贡",
+        "en": "A THOUSAND RIVER MOONS",
+        "credit": "「千江有水千江月」——《嘉泰普灯录》"
+      },
+      "end": {
+        "fine": "2026-12-21 週一 18:05 落地深圳宝安 —— 十天,两千公里,一段夜火车。"
+      },
+      "hero": {
+        "palette": "night",
+        "art": "vietnam-splash-hero",
+        "sides": ["cloud", "star"]
+      },
+      "appendix": {"palette": "homebound", "sides": ["star"]},
+
+      "vehicles": {
+        "plane": {"stem": "splash-plane", "ratio": "428/277", "speedlines": true},
+        "bus":   {"stem": "splash-bus",   "ratio": "399/390"},
+        "moto":  {"stem": "vietnam-splash-moto", "ratio": "422/398"},
+        "junk":  {"stem": "vietnam-splash-junk", "ratio": "402/438"}
+      },
+      "mascots": {
+        "hat":     {"stem": "vietnam-splash-hat",     "ratio": "411/369"},
+        "pho":     {"stem": "vietnam-splash-pho",     "ratio": "390/384"},
+        "lantern": {"stem": "vietnam-splash-lantern", "ratio": "311/451"},
+        "coffee":  {"stem": "vietnam-splash-coffee",  "ratio": "340/420"}
+      },
+      "strips": {
+        "hanoi":  {"stem": "vietnam-splash-strip-hanoi",  "ratio": "1412/319"},
+        "saigon": {"stem": "vietnam-splash-strip-saigon", "ratio": "1439/395"}
+      },
+
+      "days": {
+        "2026-12-12": {
+          "palette": "night", "island": "splash-nightflight", "fx": "moon",
+          "vehicle": {"kind": "plane", "when": "post", "pos": "right:-10%;bottom:2%;width:clamp(120px,13vw,160px);--vr:-4deg"},
+          "sides": ["star", "cloud"]
+        },
+        "2026-12-13": {
+          "palette": "neon", "island": "vietnam-splash-i-hoankiem", "fx": "halo-cyan",
+          "mascot": {"kind": "pho", "pos": "right:-8%;bottom:0%;width:clamp(84px,9vw,112px);--vr:3deg"},
+          "strip": "hanoi", "sides": ["cloud"]
+        },
+        "2026-12-14": {
+          "palette": "ocean", "island": "vietnam-splash-i-karst", "fx": "beams-cool",
+          "vehicle": {"kind": "junk", "when": "pre", "pos": "left:-12%;bottom:-2%;width:clamp(126px,13.5vw,164px);--vr:2deg"},
+          "sides": ["cloud", "dot"]
+        },
+        "2026-12-15": {
+          "palette": "dusk", "island": "vietnam-splash-i-train", "fx": "sun",
+          "vehicle": {"kind": "bus", "when": "post", "pos": "left:-13%;bottom:-3%;width:clamp(120px,13vw,150px);--vr:-2deg"},
+          "mascot": {"kind": "coffee", "pos": "right:-9%;bottom:-1%;width:clamp(76px,8vw,100px);--vr:4deg"},
+          "sides": ["spark"]
+        },
+        "2026-12-16": {
+          "palette": "lilac", "island": "vietnam-splash-i-bridge", "fx": "halo-gold",
+          "mascot": {"kind": "lantern", "pos": "right:-9%;bottom:-2%;width:clamp(76px,8vw,100px);--vr:-4deg"},
+          "sides": ["cloud"]
+        },
+        "2026-12-17": {
+          "palette": "rainbow", "island": "vietnam-splash-i-basket", "fx": "rainbow",
+          "vehicle": {"kind": "moto", "when": "pre", "pos": "left:-11%;bottom:-2%;width:clamp(112px,12vw,144px);--vr:3deg"},
+          "mascot": {"kind": "hat", "pos": "right:-8%;bottom:0%;width:clamp(80px,8.5vw,106px);--vr:-3deg"},
+          "sides": ["spark", "dot"]
+        },
+        "2026-12-18": {
+          "palette": "canyon", "island": "vietnam-splash-i-marble", "fx": "halo-teal",
+          "vehicle": {"kind": "plane", "when": "post", "pos": "right:-12%;bottom:3%;width:clamp(126px,13.5vw,164px);--vr:-5deg"},
+          "sides": ["shard", "dot"]
+        },
+        "2026-12-19": {
+          "palette": "floodlight", "island": "vietnam-splash-i-postoffice", "fx": "burst",
+          "vehicle": {"kind": "moto", "when": "post", "pos": "left:-11%;bottom:-3%;width:clamp(112px,12vw,144px);--vr:-2deg;--vsx:-1"},
+          "mascot": {"kind": "pho", "pos": "right:-8%;bottom:0%;width:clamp(84px,9vw,112px);--vr:3deg"},
+          "strip": "saigon", "sides": ["dot"]
+        },
+        "2026-12-20": {
+          "palette": "goldfog", "island": "vietnam-splash-i-sampan", "fx": "halo-gold",
+          "mascot": {"kind": "hat", "pos": "left:-8%;bottom:-1%;width:clamp(80px,8.5vw,106px);--vr:4deg"},
+          "strip": "saigon", "sides": ["cloud"]
+        },
+        "2026-12-21": {
+          "palette": "sunrise", "fx": "sunrise",
+          "vehicle": {"kind": "plane", "when": "post", "pos": "right:-12%;bottom:4%;width:clamp(126px,13.5vw,164px);--vr:-5deg"},
+          "mascot": {"kind": "coffee", "pos": "left:-8%;bottom:-1%;width:clamp(76px,8vw,100px);--vr:-4deg"},
+          "sides": ["star", "cloud"]
+        }
+      }
+    }
+  }
+}

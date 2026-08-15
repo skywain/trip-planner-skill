@@ -1,0 +1,1195 @@
+{
+ "lang": "en",
+ "trip": "China 2026 — Beijing & Xi'an",
+ "tz": "Asia/Shanghai",
+ "meta": {
+  "dates": "2026-11-11 → 2026-11-18",
+  "party": "1 adult, US passport",
+  "route": "New York → Beijing → Xi'an → Beijing → New York",
+  "budget_total": "≈ US$2,340 (mid, 1 traveller, excl. visa fee — see budget)",
+  "fx": "1 CNY = 0.14834 USD (ECB via frankfurter.dev, 2026-08-14); ¥100 ≈ $14.83",
+  "generated": "2026-08-15",
+  "self_check": "self-checked: 11 issues found and fixed — Monday closure of the Palace Museum (route reversed so Beijing lands on Tue), the 15/16 Nov winter-hours switch (per-day hours re-checked on both sides), Terracotta last ticket vs arrival, Temple of Heaven 16:30 last admission vs a 15:35 arrival, Shaanxi History Museum Monday closure, day-7 walking cut from 9.2 to 7.6 km, 6 hop rows added so every stop-to-stop transition carries its own map link, two lodging stops renamed to clear a name-collision warning, sunset prose aligned to the sun tool, the return-day clock rewritten as a formula instead of a guessed departure time, and the 240-hour transit waiver ruled out before the visa line was written.",
+  "assumption": "HEADLESS RUN — no checkpoint was possible, so the route skeleton was chosen for you: Xi'an first, Beijing second. See decisions."
+ },
+ "decisions": [
+  "Tourist (L) visa, not visa-free transit. China's 240-hour transit waiver needs a third country (A → China → B). A JFK → China → JFK round trip is A → China → A, so it does NOT qualify — you must hold an L visa before you fly.",
+  "Xi'an first, Beijing second. This puts the Great Wall on a Monday and the Forbidden City on a Tuesday: the Palace Museum is closed Mondays anyway, its 40,000/day tickets are far easier to catch on a weekday, and the trip ends in the city that has your international airport.",
+  "High-speed rail both ways instead of flying out of Xi'an. 4 h 10–5 h city-centre to city-centre beats a separate-ticket XIY→PEK connection (which would need a 4 h self-transfer buffer) and keeps one round-trip international ticket.",
+  "Only two hotels for six nights — no one-night stays, no repacking mid-trip.",
+  "The Great Wall day deliberately carries ONE anchor instead of three. Mutianyu is a 2 h ride each way plus 3–4 h on the wall; anything else on that day is a lie.",
+  "Food is written as areas (Muslim Quarter, Gui Jie, Qianmen), never as named restaurants — Chinese street-food stalls churn faster than any plan can track."
+ ],
+ "checklist": [
+  {
+   "item": "Chinese tourist visa (L) — apply at the Chinese Visa Application Service Center via the COVA online form, then submit the passport in person",
+   "deadline": "start 8 weeks out (by 2026-09-16); passport is held for the whole processing window",
+   "price": "fee reduced through 2026-12-31 — ⚠️ exact amount unverified, read it at the link (express +$25)",
+   "link": "https://us.china-embassy.gov.cn/eng/lsfw/zj/qz2021/",
+   "note": "Since 2024-01-01 no round-trip ticket, hotel booking, itinerary or invitation letter is required for L visas filed in the US. Most US citizens get a 10-year multiple-entry visa. Passport: 6+ months validity, 2 blank pages."
+  },
+  {
+   "item": "12306 account + passport identity verification (China Railway official)",
+   "deadline": "do it now — verification can take days; tickets release 15 days ahead at 14:00 Beijing time",
+   "price": "free",
+   "link": "https://www.12306.cn/en/index.html",
+   "note": "Beijing↔Xi'an tickets for 2026-11-12 open ~2026-10-28 14:00 CST (2026-10-28 01:00 EST). Visa/Mastercard accepted. Book with the SAME passport you will travel on."
+  },
+  {
+   "item": "Forbidden City (Palace Museum) timed ticket for 2026-11-17",
+   "deadline": "2026-11-10, 20:00 Beijing time = 2026-11-10 07:00 EST — 7 days ahead, to the minute",
+   "price": "¥40 (≈$5.90) off-season 1 Nov–31 Mar",
+   "link": "https://bookingticket.dpm.org.cn",
+   "note": "Online only, no walk-up window, 40,000/day cap, real-name against your passport number. Bring the original passport to the Meridian Gate. Sets an alarm-clock task, not a to-do."
+  },
+  {
+   "item": "Tiananmen Square entry reservation for 2026-11-17 (separate from the Palace Museum)",
+   "deadline": "opens ~7 days ahead; book the same morning you book the Palace Museum",
+   "price": "free",
+   "link": "https://www.beijing.gov.cn/",
+   "note": "⚠️ Channel unverified (WeChat mini-program 天安门广场预约 is the usual route and has no English UI). Fallback: skip the square, enter the Palace Museum directly from the east side."
+  },
+  {
+   "item": "Terracotta Army (Emperor Qinshihuang's Mausoleum Site Museum) ticket for 2026-11-13",
+   "deadline": "bookable 30+ days out; buy as soon as the visa is granted",
+   "price": "¥120 (≈$17.80) — includes the three pits + Lishan Garden",
+   "link": "https://us.trip.com/travel-guide/attraction/xi-an/emperor-qinshihuang-s-mausoleum-site-museum-75682/",
+   "note": "Original passport required at the gate — photocopies and phone photos are refused."
+  },
+  {
+   "item": "Shaanxi History Museum free reservation for 2026-11-14",
+   "deadline": "released daily, gone in minutes",
+   "price": "free (base galleries)",
+   "link": "https://www.visitxian.cn/en/attractions/shaanxi-history-museum",
+   "note": "⚠️ WeChat official account only, no English version, daily cap. If it fails, the plan swaps in Xi'an Museum / Small Wild Goose Pagoda (free, open Sat) — already written into rain_alt."
+  },
+  {
+   "item": "Alipay and/or WeChat Pay installed and an international Visa/Mastercard linked",
+   "deadline": "before departure — verification needs a working phone number",
+   "price": "free (small FX fee per transaction)",
+   "link": "https://www.alipay.com/",
+   "note": "China is effectively cashless. Alipay is the more foreigner-friendly of the two. Carry ¥500–1000 cash as a hard backup anyway; legally every vendor must accept it."
+  },
+  {
+   "item": "Roaming travel eSIM (Airalo / Holafly / Saily style) — NOT a local China SIM",
+   "deadline": "buy before departure, activate on landing",
+   "price": "≈$15–25 for 8 days",
+   "link": "https://www.airalo.com/china-esim",
+   "note": "A roaming eSIM tunnels out of mainland China, so Google Maps / Gmail / WhatsApp keep working. A local SIM sits behind the Great Firewall. See the connectivity note in the country brief — this is the single highest-leverage $20 on the trip."
+  },
+  {
+   "item": "Travel medical insurance with evacuation cover",
+   "deadline": "buy with the flight",
+   "price": "≈$40–70 for 8 days",
+   "link": "https://www.squaremouth.com/",
+   "note": "Chinese public hospitals expect payment up front from foreigners."
+  },
+  {
+   "item": "Mutianyu access for 2026-11-16 — confirm the Dongzhimen tourist coach is still running",
+   "deadline": "2 weeks before travel",
+   "price": "coach ≈¥60 return; private car ≈¥600–800 return",
+   "link": "https://en.mutianyugreatwall.com/",
+   "note": "⚠️ The seasonal 慕田峪 direct coach from Dongzhimen thins out after mid-November. Backup: DiDi/private car (~1 h 20 each way) — book the return leg too, hailing from the wall car park is unreliable."
+  },
+  {
+   "item": "Re-confirm every opening hour, last-entry time and fee",
+   "deadline": "2 weeks before travel (≈2026-11-04)",
+   "note": "These dates are 3 months out: what is verified below is the SEASONAL PATTERN as of 2026-08-15, not that specific day's published hours. Mutianyu and the Terracotta Army both flip to winter hours on 2026-11-16 — mid-trip."
+  }
+ ],
+ "legs": [
+  {
+   "type": "international flight",
+   "date": "2026-11-11",
+   "carrier": "Korean Air (via Seoul ICN)",
+   "from": "JFK",
+   "to": "PEK",
+   "dep": "00:50",
+   "arr": "next day 09:25 (Beijing)",
+   "price": "$983 round trip incl. the 2026-11-18 return (Google Flights cache, as of 2026-08-15 — comparison grade, confirm at the link)",
+   "bags": "1 × 23 kg checked included on Korean Air transpacific economy ⚠️ verify fare-class at booking",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20JFK%20to%20PEK%20on%202026-11-11%20returning%202026-11-18%20for%201%20adults",
+   "backup": "Air China nonstop JFK→PEK (~13 h 50) — shorter and no Seoul transfer, price unverified; also compare Beijing Daxing (PKX) arrivals, but PKX adds ~40 min to the city."
+  },
+  {
+   "type": "high-speed rail",
+   "date": "2026-11-12",
+   "carrier": "China Railway G-series",
+   "from": "Beijing West 北京西",
+   "to": "Xi'an North 西安北",
+   "dep": "~14:00 (pick the 14:00–15:00 departure at booking)",
+   "arr": "~18:40 (4 h 10 – 5 h 00)",
+   "price": "¥515.5 second class / ¥824.5 first (≈$76 / $122) — travelchinaguide, as of 2026-08-15",
+   "bags": "no fee, but you carry it yourself up and down platforms",
+   "link": "https://www.12306.cn/en/index.html",
+   "backup": "23+ G-trains a day, last departure 19:00 — if the flight lands late, rebook onto a later train on the 12306 app rather than eating the fare."
+  },
+  {
+   "type": "high-speed rail",
+   "date": "2026-11-15",
+   "carrier": "China Railway G-series",
+   "from": "Xi'an North 西安北",
+   "to": "Beijing West 北京西",
+   "dep": "~09:00",
+   "arr": "~13:35 (4 h 10 – 5 h 00)",
+   "price": "¥515.5 second class (≈$76) — as of 2026-08-15",
+   "link": "https://www.12306.cn/en/index.html",
+   "backup": "an 08:00 departure buys an extra hour in Beijing; a 10:00 one buys a calmer morning."
+  },
+  {
+   "type": "international flight",
+   "date": "2026-11-18",
+   "carrier": "Korean Air (via Seoul ICN)",
+   "from": "PEK",
+   "to": "JFK",
+   "dep": "⚠️ time not verified — read it off your ticket, then work backwards",
+   "arr": "same calendar day in New York (you cross the date line eastbound)",
+   "price": "included in the $983 round trip",
+   "link": "https://www.google.com/travel/flights?q=Flights%20from%20JFK%20to%20PEK%20on%202026-11-11%20returning%202026-11-18%20for%201%20adults",
+   "backup": "Leave the hotel at departure minus 4 h 15 (3 h international check-in + 75 min city→PEK T3). Day 8's timeline is written against that formula, not against a guessed time."
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-11-11",
+   "city": "New York → in the air",
+   "label": "Departure",
+   "tz": "America/New_York",
+   "travel_day": true,
+   "walking_km": {
+    "total": 1.0,
+    "how": "terminal walking only"
+   },
+   "ribbon": "JFK T1 →Korean Air 00:50→ Seoul ICN →connect→ Beijing PEK (lands 09:25 on the 12th)",
+   "rain_alt": "none needed — the whole day is indoors",
+   "late_cut": "missed the 00:50 departure → Korean Air rebooks onto the next ICN service; the Xi'an train on day 2 is the piece to move, and 12306 lets you change it in-app.",
+   "timeline": [
+    {
+     "t": "21:00 (Nov 10)",
+     "what": "Leave Manhattan for JFK — AirTrain + LIRR, or a car. A 00:50 departure means you check in on the evening of the 10th.",
+     "kind": "free",
+     "tag": "pinned"
+    },
+    {
+     "t": "22:00-00:50",
+     "what": "JFK Terminal 1 — check in, clear security. Last chance to install the eSIM profile, Alipay and a VPN while you are still outside the Great Firewall.",
+     "kind": "free",
+     "note": "Do NOT plan to download these in China. Half of them are unreachable from a Chinese IP.",
+     "tag": "pinned"
+    },
+    {
+     "t": "00:50-09:25+1",
+     "what": "Korean Air JFK → Seoul ICN → Beijing PEK · ~19 h 35 total incl. connection",
+     "kind": "hop",
+     "map": false,
+     "verify": "est",
+     "note": "13 h ahead of New York. Sleep on the transpacific leg, stay awake after the Seoul connection — you land at 09:25 and the day has barely started.",
+     "link": "https://www.google.com/travel/flights?q=Flights%20from%20JFK%20to%20PEK%20on%202026-11-11%20returning%202026-11-18%20for%201%20adults"
+    }
+   ],
+   "stops": []
+  },
+  {
+   "date": "2026-11-12",
+   "city": "Beijing → Xi'an",
+   "label": "Landing, and straight onto the rails",
+   "travel_day": true,
+   "walking_km": {
+    "total": 3.4,
+    "how": "airport + stations 1.4 ×1.3 + Muslim Quarter stroll 1.6"
+   },
+   "ribbon": "PEK T3 →car 75′→ 北京西 →G-train ~4h30→ 西安北 →metro L2 30′→ 南院门 hotel →walk 13′→ 回民街",
+   "rain_alt": "the whole day is a corridor — rain changes nothing except taking the metro instead of walking the last 600 m",
+   "late_cut": "flight lands late → do NOT sprint. Change the G-ticket in the 12306 app to any later departure (they run to 19:00); worst case sleep in Beijing and take the 06:38 tomorrow, dropping Huaqing Palace from day 3.",
+   "timeline": [
+    {
+     "t": "09:25-10:45",
+     "what": "Land PEK Terminal 3 · immigration (fingerprints for first-time entrants), bags, customs",
+     "kind": "free",
+     "note": "Budget the full 80 min. Turn the eSIM on before immigration so you can call a car the moment you clear.",
+     "tag": "pinned"
+    },
+    {
+     "t": "10:45-12:15",
+     "what": "Car PEK T3 → Beijing West Railway Station 北京西 · ~55 km · 65-90 min · ¥130-170",
+     "kind": "hop",
+     "verify": "est",
+     "note": "Airport Express + Line 2 + Line 9 is ¥32 and ~95 min with two changes and stairs. With a suitcase and 13 h of jet lag, take the car.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=40.052400%2C116.610300&destination=39.894900%2C116.322000&travelmode=driving"
+    },
+    {
+     "t": "12:15-14:00",
+     "what": "Beijing West — passport gate (orange lane, tap the passport), lunch inside the station, find the waiting hall",
+     "kind": "free",
+     "note": "Beijing West is enormous and signage assumes you can read Chinese. 90 min is not padding.",
+     "tag": "pinned"
+    },
+    {
+     "t": "14:00-18:40",
+     "what": "G-train 北京西 → 西安北 · ~4 h 30 · ¥515.5 second class",
+     "kind": "hop",
+     "verify": "est",
+     "note": "Reserved seat, no standing. Trolley service is thin — buy food at the station."
+    },
+    {
+     "t": "18:40-19:20",
+     "what": "Metro Line 2 西安北 → 南院门 (Bell Tower stn, 1 block) · ~30 min · ¥5",
+     "kind": "hop",
+     "verify": "est",
+     "note": "Line 2 runs from directly under the station concourse to the middle of the walled city.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.376000%2C108.943000&destination=34.257000%2C108.944000&travelmode=transit"
+    },
+    {
+     "t": "19:20-20:00",
+     "what": "Hotel check-in, drop the bag, wash your face",
+     "kind": "free",
+     "tag": "pinned"
+    },
+    {
+     "t": "20:00-21:30",
+     "what": "Walk 南院门 → 回民街 Muslim Quarter · 0.9 km · 13 min — the first meal: roujiamo, biangbiang noodles, persimmon cakes",
+     "kind": "hop",
+     "verify": "est",
+     "tag": "skippable",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.257000%2C108.944000&destination=34.264600%2C108.938000&travelmode=walking"
+    },
+    {
+     "t": "21:30",
+     "what": "Muslim Quarter — eat standing up, then walk back past the lit Drum Tower. Bed early; tomorrow starts at 08:00.",
+     "kind": "meal",
+     "price": "¥60-100",
+     "tag": "swap→hotel-area noodles if you are past it"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Beijing Capital Airport T3",
+     "query": "Beijing Capital International Airport Terminal 3",
+     "lat": 40.0524,
+     "lon": 116.6103
+    },
+    {
+     "name": "Beijing West Railway Station 北京西站",
+     "query": "Beijing West Railway Station",
+     "lat": 39.8949,
+     "lon": 116.322,
+     "mode": "drive"
+    },
+    {
+     "name": "Xi'an North Railway Station 西安北站",
+     "query": "Xi'an North Railway Station",
+     "lat": 34.376,
+     "lon": 108.943,
+     "mode": "train"
+    },
+    {
+     "name": "Xi'an hotel · Nanyuanmen 南院门",
+     "query": "Nanyuanmen, Beilin, Xi'an",
+     "lat": 34.257,
+     "lon": 108.944,
+     "mode": "transit"
+    },
+    {
+     "name": "Muslim Quarter 回民街",
+     "query": "Muslim Quarter, Xi'an",
+     "lat": 34.2646,
+     "lon": 108.938,
+     "mode": "walk"
+    }
+   ],
+   "sun": "天亮 06:26 · ☀ 06:53 / 🌇 17:01 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-13",
+   "city": "Xi'an",
+   "label": "The Qin emperor's army",
+   "walking_km": {
+    "total": 6.2,
+    "how": "inside the three pits ~3.0 + Lishan Garden 1.0 + Huaqing Palace grounds 1.6 + station walks 0.5 ×1.3"
+   },
+   "ribbon": "南院门 →bus 游5 70′→ 秦始皇帝陵博物院 →walk 8′→ food street →shuttle 20′→ 华清宫 →bus 65′→ 南院门",
+   "rain_alt": "Pit 1 and Pit 3 are fully roofed; the walk between pits is covered. If it turns wet, cut Huaqing Palace (mostly outdoor gardens) and take the Shaanxi History Museum slot from tomorrow instead.",
+   "late_cut": "running >1 h late → drop Huaqing Palace, not the museum. Getting back before dark matters more than the Tang bathing pools.",
+   "timeline": [
+    {
+     "t": "07:30-08:00",
+     "what": "Hotel breakfast. Pack the passport — it is checked at the museum gate, not just at booking.",
+     "kind": "free",
+     "tag": "pinned"
+    },
+    {
+     "t": "08:00-09:20",
+     "what": "Bus 游5 (306) from the station east square → 秦始皇帝陵博物院 · ~70 min · ¥8",
+     "kind": "hop",
+     "verify": "est",
+     "note": "The official 游5 has a green-and-white livery and a queue marshal. Ignore the touts working the same forecourt — private minibuses with the same number are a known scam.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.257000%2C108.944000&destination=34.385300%2C109.278500&travelmode=transit"
+    },
+    {
+     "t": "09:20-12:30",
+     "what": "Emperor Qinshihuang's Mausoleum Site Museum 秦始皇帝陵博物院 — Pit 1 (the army), Pit 3 (the command post), Pit 2 (the kneeling archer), then the Bronze Chariots hall",
+     "kind": "anchor",
+     "price": "¥120",
+     "note": "08:30-18:30 to 15 Nov, ticket check closes 17:00 (from 16 Nov: 08:30-18:00, check closes 16:30). Enter Pit 1 from the back-right corner and walk against the crowd. Original passport required.",
+     "tag": "opener"
+    },
+    {
+     "t": "12:30-12:40",
+     "what": "Walk 秦始皇帝陵博物院 → 兵马俑小吃街 food street · 0.5 km · 8 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.385300%2C109.278500&destination=34.384600%2C109.274000&travelmode=walking"
+    },
+    {
+     "t": "12:30-13:30",
+     "what": "Lunch — the food street outside the museum gate · noodles and roujiamo, tourist-priced but fine",
+     "kind": "meal",
+     "price": "¥40-70",
+     "tag": "swap→eat in the Muslim Quarter tonight instead"
+    },
+    {
+     "t": "13:30-14:00",
+     "what": "Shuttle bus 兵马俑 → 华清宫 · 6 km · ~20 min · ¥5",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.384600%2C109.274000&destination=34.363900%2C109.211300&travelmode=transit"
+    },
+    {
+     "t": "14:00-15:45",
+     "what": "Huaqing Palace 华清宫 — the Tang imperial hot springs, the Xi'an Incident rooms on the hillside behind",
+     "kind": "anchor",
+     "price": "¥120",
+     "note": "07:00-18:00 to 30 Nov, ticket check to 17:10. The Li Mountain cable car is a separate fee and not worth it in November haze.",
+     "tag": "skippable"
+    },
+    {
+     "t": "15:45-16:50",
+     "what": "Bus 游5 (306) 华清宫 → 南院门 (via Xi'an station) · ~65 min · ¥7",
+     "kind": "hop",
+     "verify": "est",
+     "note": "Last 游5 back leaves around 18:00-19:00 in winter — do not test it.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.363900%2C109.211300&destination=34.257000%2C108.944000&travelmode=transit"
+    },
+    {
+     "t": "17:00-18:00",
+     "what": "Back at the hotel — shower, reset. Sunset is 17:43 and it gets cold fast.",
+     "kind": "free"
+    },
+    {
+     "t": "18:30-20:00",
+     "what": "Dinner around the Bell Tower / 东木头市 · dumplings, yangrou paomo · a local street, not the tourist one",
+     "kind": "meal",
+     "price": "¥50-90"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Xi'an hotel · Nanyuanmen 南院门",
+     "query": "Nanyuanmen, Beilin, Xi'an",
+     "lat": 34.257,
+     "lon": 108.944
+    },
+    {
+     "name": "Terracotta Army Museum 秦始皇帝陵博物院",
+     "query": "Emperor Qinshihuang's Mausoleum Site Museum, Lintong, Xi'an",
+     "lat": 34.3853,
+     "lon": 109.2785,
+     "mode": "bus"
+    },
+    {
+     "name": "Museum food street 兵马俑小吃街",
+     "query": "Terracotta Warriors scenic area food street, Lintong",
+     "lat": 34.3846,
+     "lon": 109.274,
+     "mode": "walk"
+    },
+    {
+     "name": "Huaqing Palace 华清宫",
+     "query": "Huaqing Palace, Lintong, Xi'an",
+     "lat": 34.3639,
+     "lon": 109.2113,
+     "mode": "bus"
+    },
+    {
+     "name": "Xi'an hotel · Nanyuanmen 南院门",
+     "query": "Nanyuanmen, Beilin, Xi'an",
+     "lat": 34.257,
+     "lon": 108.944,
+     "mode": "bus"
+    }
+   ],
+   "sun": "天亮 06:48 · ☀ 07:13 / 🌇 17:43 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-14",
+   "city": "Xi'an",
+   "label": "On the wall, under the pagoda",
+   "walking_km": {
+    "total": 6.0,
+    "how": "hotel→South Gate 1.3 + museum→pagoda 1.2 + pagoda→Everbright 0.6 ×1.3 + inside the museum 1.5 + on the wall 0.5 (the 13.7 km loop is ridden, not walked)"
+   },
+   "ribbon": "南院门 →walk 13′→ 永宁门 (ride the 13.7 km loop) →metro→ 回民街 lunch →metro 35′→ 陕西历史博物馆 →walk 18′→ 大雁塔 →walk 9′→ 大唐不夜城 →metro 25′→ 南院门",
+   "rain_alt": "the wall is exposed and the bikes stop in rain — swap it for Xi'an Museum / Small Wild Goose Pagoda 小雁塔 (free, open Sat, closed Tue) and give the pagoda district the whole afternoon.",
+   "late_cut": "running late → ride only the south-to-west quarter of the wall (45 min) instead of the full loop; the museum's last admission is the hard stop.",
+   "timeline": [
+    {
+     "t": "08:00-08:20",
+     "what": "Walk 南院门 → 永宁门 City Wall South Gate · 0.9 km · 13 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.257000%2C108.944000&destination=34.249400%2C108.946900&travelmode=walking"
+    },
+    {
+     "t": "08:20-10:40",
+     "what": "Xi'an City Wall 西安城墙 — ride the full 13.7 km circuit on a rental bike, anticlockwise from the South Gate",
+     "kind": "anchor",
+     "price": "¥54 admission + ¥45 bike (3 h, ¥200 deposit)",
+     "note": "Gates open 08:00 (South Gate to 23:00; other gates 08:00-18:00 Nov-Apr). The full loop is ~2 h at a gentle pace with photo stops. The paving is uneven — brakes, not speed.",
+     "tag": "opener"
+    },
+    {
+     "t": "10:40-11:10",
+     "what": "Metro Line 2 永宁门 → 回民街 (Bell Tower stn + 600 m walk) · ~25 min · ¥2",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.249400%2C108.946900&destination=34.264600%2C108.938000&travelmode=transit"
+    },
+    {
+     "t": "11:10-12:40",
+     "what": "Lunch, Muslim Quarter 回民街 + 化觉巷 — the alley behind the Great Mosque is where locals eat",
+     "kind": "meal",
+     "price": "¥50-90",
+     "note": "Cash is genuinely useless here; every stall takes Alipay/WeChat QR."
+    },
+    {
+     "t": "12:40-13:20",
+     "what": "Metro Line 2 回民街 → 陕西历史博物馆 (钟楼→小寨 + walk) · ~35 min · ¥3",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.264600%2C108.938000&destination=34.222400%2C108.948200&travelmode=transit"
+    },
+    {
+     "t": "13:20-15:30",
+     "what": "Shaanxi History Museum 陕西历史博物馆 — the Zhou/Qin/Han/Tang galleries; the Tang mural hall is a separate paid ticket",
+     "kind": "anchor",
+     "price": "free (reservation required); Tang murals ¥300",
+     "note": "⚠️ Reservation-only via a Chinese-language WeChat account and it sells out in minutes. 09:00-17:30 from 15 Nov, last admission 16:30; today (14 Nov) is the last 08:30-18:00 day. Closed Mondays.",
+     "tag": "swap→Xi'an Museum 小雁塔 (free, no booking fight)"
+    },
+    {
+     "t": "15:30-15:50",
+     "what": "Walk 陕西历史博物馆 → 大雁塔 · 1.2 km · 18 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.222400%2C108.948200&destination=34.218600%2C108.959800&travelmode=walking"
+    },
+    {
+     "t": "15:50-17:10",
+     "what": "Big Wild Goose Pagoda 大雁塔 / Da Ci'en Temple — the Tang pagoda Xuanzang built to house the sutras he carried back from India; climb it for the sunset over the Tang city grid",
+     "kind": "anchor",
+     "price": "¥40 temple + ¥30 to climb",
+     "note": "08:00-17:00 winter, last climb ~16:30. Sunset today 17:42 (route_tools sun).",
+     "tag": "pinned"
+    },
+    {
+     "t": "17:10-17:20",
+     "what": "Walk 大雁塔 → 大唐不夜城 Datang Everbright City · 0.6 km · 9 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.218600%2C108.959800&destination=34.213600%2C108.961300&travelmode=walking"
+    },
+    {
+     "t": "17:20-19:30",
+     "what": "Datang Everbright City 大唐不夜城 at dusk — a free open-air Tang-revival street, lit from ~17:30, with street performers and the food arcades off the main axis",
+     "kind": "free",
+     "price": "free",
+     "tag": "skippable"
+    },
+    {
+     "t": "19:30-20:30",
+     "what": "Dinner in the Datang arcades or back at 永兴坊 · Shaanxi small plates",
+     "kind": "meal",
+     "price": "¥60-100"
+    },
+    {
+     "t": "20:30-20:55",
+     "what": "Metro Line 2/3 大唐不夜城 → 南院门 · ~25 min · ¥3",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.213600%2C108.961300&destination=34.257000%2C108.944000&travelmode=transit"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Xi'an hotel · Nanyuanmen 南院门",
+     "query": "Nanyuanmen, Beilin, Xi'an",
+     "lat": 34.257,
+     "lon": 108.944
+    },
+    {
+     "name": "City Wall South Gate 永宁门",
+     "query": "Yongningmen South Gate, Xi'an City Wall",
+     "lat": 34.2494,
+     "lon": 108.9469,
+     "mode": "walk"
+    },
+    {
+     "name": "Muslim Quarter 回民街",
+     "query": "Muslim Quarter, Xi'an",
+     "lat": 34.2646,
+     "lon": 108.938,
+     "mode": "transit"
+    },
+    {
+     "name": "Shaanxi History Museum 陕西历史博物馆",
+     "query": "Shaanxi History Museum, Xi'an",
+     "lat": 34.2224,
+     "lon": 108.9482,
+     "mode": "transit"
+    },
+    {
+     "name": "Big Wild Goose Pagoda 大雁塔",
+     "query": "Giant Wild Goose Pagoda, Xi'an",
+     "lat": 34.2186,
+     "lon": 108.9598,
+     "mode": "walk"
+    },
+    {
+     "name": "Datang Everbright City 大唐不夜城",
+     "query": "Datang Everbright City, Xi'an",
+     "lat": 34.2136,
+     "lon": 108.9613,
+     "mode": "walk"
+    },
+    {
+     "name": "Xi'an hotel · Nanyuanmen 南院门",
+     "query": "Nanyuanmen, Beilin, Xi'an",
+     "lat": 34.257,
+     "lon": 108.944,
+     "mode": "transit"
+    }
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=34.257000%2C108.944000&destination=34.257000%2C108.944000&travelmode=walking&waypoints=34.249400%2C108.946900%7C34.264600%2C108.938000%7C34.222400%2C108.948200%7C34.218600%2C108.959800%7C34.213600%2C108.961300",
+   "sun": "天亮 06:49 · ☀ 07:14 / 🌇 17:42 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-15",
+   "city": "Xi'an → Beijing",
+   "label": "North again, and a circle of blue tiles",
+   "travel_day": true,
+   "walking_km": {
+    "total": 4.6,
+    "how": "Temple of Heaven park axis 2.6 + Qianmen / Dashilan 1.2 ×1.3 + station walks 0.3"
+   },
+   "ribbon": "南院门 →metro 35′→ 西安北 →G-train ~4h30→ 北京西 →metro 35′→ 鲜鱼口 hotel →metro 25′→ 天坛东门 →walk/metro 25′→ 前门大街",
+   "rain_alt": "the Hall of Prayer for Good Harvests is outdoors — swap the Temple of Heaven for the National Museum of China on Tiananmen Square (free, reservation required, closed Mondays) and keep the Qianmen evening.",
+   "late_cut": "train late → drop the Temple of Heaven entirely (attractions shut at 17:00) and spend the evening on Qianmen and Dashilan instead; the park is a fine morning substitute on day 7 if you skip Jingshan.",
+   "timeline": [
+    {
+     "t": "07:30-08:10",
+     "what": "Checkout, metro Line 2 南院门 → 西安北 · ~35 min · ¥5",
+     "kind": "hop",
+     "verify": "est",
+     "tag": "pinned",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.257000%2C108.944000&destination=34.376000%2C108.943000&travelmode=transit"
+    },
+    {
+     "t": "08:10-09:00",
+     "what": "Xi'an North — passport gate, waiting hall, coffee",
+     "kind": "free",
+     "note": "Chinese stations close boarding 3-5 min before departure. 30 min before is the real deadline, not a suggestion.",
+     "tag": "pinned"
+    },
+    {
+     "t": "09:00-13:35",
+     "what": "G-train 西安北 → 北京西 · ~4 h 30 · ¥515.5 second class",
+     "kind": "hop",
+     "verify": "est"
+    },
+    {
+     "t": "13:35-14:30",
+     "what": "Metro Line 9 → Line 7 北京西 → 鲜鱼口 · ~35 min · ¥5",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.894900%2C116.322000&destination=39.896800%2C116.402000&travelmode=transit"
+    },
+    {
+     "t": "14:30-15:10",
+     "what": "Hotel check-in, drop the bag",
+     "kind": "free",
+     "tag": "pinned"
+    },
+    {
+     "t": "15:10-15:35",
+     "what": "Metro/foot 鲜鱼口 → 天坛东门 Temple of Heaven East Gate · ~25 min · ¥3",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.896800%2C116.402000&destination=39.882300%2C116.415500&travelmode=transit"
+    },
+    {
+     "t": "15:35-17:00",
+     "what": "Temple of Heaven 天坛 — the Hall of Prayer for Good Harvests, the Echo Wall, the Circular Mound Altar, walked north to south down the raised causeway",
+     "kind": "anchor",
+     "price": "¥15 park + ¥28 through-ticket (all three monuments)",
+     "note": "Park 06:30-22:00; the MONUMENTS are 08:00-17:00 with last admission 16:30 (1 Nov-31 Mar). Arriving 15:35 is enough for the axis, not for lingering. Sunset in Beijing 16:59 — note the day's sun line is computed from the day's FIRST stop, which is still Xi'an (17:41).",
+     "tag": "pinned"
+    },
+    {
+     "t": "17:00-17:30",
+     "what": "Walk out of the park's west gate → 前门大街 Qianmen Street · ~25 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.882300%2C116.415500&destination=39.896300%2C116.397200&travelmode=transit"
+    },
+    {
+     "t": "17:30-19:30",
+     "what": "Qianmen Street 前门大街 and the Dashilan 大栅栏 lanes — the restored Qing shopfront street, the old lanes behind it, and roast duck for dinner",
+     "kind": "meal",
+     "price": "¥120-200 for duck",
+     "note": "Qianmen itself is a tourist street; the food is one block west in Dashilan and Xianyukou.",
+     "tag": "skippable"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Xi'an hotel · Nanyuanmen 南院门",
+     "query": "Nanyuanmen, Beilin, Xi'an",
+     "lat": 34.257,
+     "lon": 108.944
+    },
+    {
+     "name": "Xi'an North Railway Station 西安北站",
+     "query": "Xi'an North Railway Station",
+     "lat": 34.376,
+     "lon": 108.943,
+     "mode": "transit"
+    },
+    {
+     "name": "Beijing West Railway Station 北京西站",
+     "query": "Beijing West Railway Station",
+     "lat": 39.8949,
+     "lon": 116.322,
+     "mode": "train"
+    },
+    {
+     "name": "Beijing hotel · Xianyukou 鲜鱼口",
+     "query": "Xianyukou Street, Dongcheng, Beijing",
+     "lat": 39.8968,
+     "lon": 116.402,
+     "mode": "transit"
+    },
+    {
+     "name": "Temple of Heaven East Gate 天坛东门",
+     "query": "Temple of Heaven East Gate, Beijing",
+     "lat": 39.8823,
+     "lon": 116.4155,
+     "mode": "transit"
+    },
+    {
+     "name": "Qianmen Street 前门大街",
+     "query": "Qianmen Street, Beijing",
+     "lat": 39.8963,
+     "lon": 116.3972,
+     "mode": "transit"
+    }
+   ],
+   "sun": "天亮 06:50 · ☀ 07:15 / 🌇 17:41 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-16",
+   "city": "Beijing",
+   "label": "The wall, on a Monday",
+   "walking_km": {
+    "total": 5.4,
+    "how": "wall towers 14→20 and back down to the toboggan 2.6 + base street and stairs 1.5 ×1.3 (the cable car up and the toboggan down are ridden)"
+   },
+   "ribbon": "鲜鱼口 →metro 30′→ 东直门 →coach 100′→ 慕田峪 →shuttle+cable car→ 14号敌楼 →walk 35′→ 正关台 →toboggan→ 慕田峪村 →coach 120′→ 鲜鱼口",
+   "rain_alt": "the cable car and toboggan shut in high wind or ice. Wet-day swap: the Summer Palace 颐和园 (¥30, corridors and halls are covered) plus the 798 art district — both indoor-ish and both open Mondays.",
+   "late_cut": "on the wall past 14:30 → skip Tower 20 and take the cable car back down from Tower 14 rather than the toboggan; the last cable car is 17:00 and the last coach out is earlier than you think.",
+   "timeline": [
+    {
+     "t": "06:45-07:30",
+     "what": "Early breakfast, metro Line 2 鲜鱼口 → 东直门 Dongzhimen · ~30 min · ¥4",
+     "kind": "hop",
+     "verify": "est",
+     "tag": "pinned",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.896800%2C116.402000&destination=39.941000%2C116.434000&travelmode=transit"
+    },
+    {
+     "t": "07:30-09:20",
+     "what": "Coach 东直门 → 慕田峪游客中心 Mutianyu · ~90-110 min · ≈¥60 return",
+     "kind": "hop",
+     "verify": "est",
+     "note": "⚠️ The seasonal direct coach thins after mid-November — confirmed on the checklist. Backup: DiDi ~¥350 each way, ~80 min. Monday means no weekend queue at either end.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.941000%2C116.434000&destination=40.431900%2C116.570400&travelmode=transit"
+    },
+    {
+     "t": "09:20-09:50",
+     "what": "慕田峪游客中心 → 14号敌楼 Tower 14 — passport ticket check, shuttle bus, cable car up · ~30 min",
+     "kind": "hop",
+     "verify": "est",
+     "price": "¥45 entry + ¥15 shuttle + ¥140 cable car return / ¥120 up + toboggan down",
+     "note": "From today the scenic area runs winter hours 08:00-17:30 and the cable car 08:00-17:00.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=40.431900%2C116.570400&destination=40.437400%2C116.568000&travelmode=transit"
+    },
+    {
+     "t": "09:50-11:20",
+     "what": "Mutianyu Great Wall 慕田峪长城 — Tower 14 and the restored western ramparts, the forested Huairou ridge dropping away on both sides",
+     "kind": "anchor",
+     "price": "included above",
+     "note": "This is the day's only anchor and that is the point. Mutianyu is forested, less restored-to-death than Badaling, and on a November Monday you will have long stretches of it alone. Steep steps, uneven treads — proper shoes.",
+     "tag": "opener"
+    },
+    {
+     "t": "11:20-11:55",
+     "what": "Walk the ramparts 14号敌楼 → 正关台 Tower 20 · 0.9 km of steps · 35 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=40.437400%2C116.568000&destination=40.440200%2C116.564300&travelmode=walking"
+    },
+    {
+     "t": "11:55-13:15",
+     "what": "Zhengguantai 正关台 — the three-tower crown at the top of the restored section, then back down the wall westward",
+     "kind": "anchor",
+     "price": "included above",
+     "note": "This and the block above are one anchor split by the ridge walk. On a November Monday you will have long stretches of it alone. Steep steps, uneven treads — proper shoes.",
+     "tag": "skippable"
+    },
+    {
+     "t": "13:15-13:35",
+     "what": "Toboggan 滑道 正关台 → 慕田峪村 base village (or the cable car if it is icy) · ~20 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=40.440200%2C116.564300&destination=40.431200%2C116.569200&travelmode=transit"
+    },
+    {
+     "t": "13:35-14:40",
+     "what": "Late lunch at the Mutianyu base village — trout, farm greens, hand-pulled noodles",
+     "kind": "meal",
+     "price": "¥60-120"
+    },
+    {
+     "t": "14:40-16:40",
+     "what": "Coach 慕田峪村 → 鲜鱼口 (via Dongzhimen) · ~2 h",
+     "kind": "hop",
+     "verify": "est",
+     "note": "Leaving by 15:00 keeps you out of the Beijing evening jam.",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=40.431200%2C116.569200&destination=39.896800%2C116.402000&travelmode=transit"
+    },
+    {
+     "t": "17:00-18:00",
+     "what": "Back at the hotel — feet up. The wall is a 20,000-step day even when the map says 5 km.",
+     "kind": "free"
+    },
+    {
+     "t": "18:30-20:00",
+     "what": "Dinner on Gui Jie 簋街 (Dongzhimennei Dajie) — the all-night food street: crayfish, hotpot, grilled fish",
+     "kind": "meal",
+     "price": "¥80-150",
+     "tag": "swap→Qianmen/Dashilan if you cannot face another metro ride"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Beijing hotel · Xianyukou 鲜鱼口",
+     "query": "Xianyukou Street, Dongcheng, Beijing",
+     "lat": 39.8968,
+     "lon": 116.402
+    },
+    {
+     "name": "Dongzhimen transport hub 东直门枢纽",
+     "query": "Dongzhimen Transport Hub, Beijing",
+     "lat": 39.941,
+     "lon": 116.434,
+     "mode": "transit"
+    },
+    {
+     "name": "Mutianyu visitor centre 慕田峪游客中心",
+     "query": "Mutianyu Great Wall Visitor Center, Huairou, Beijing",
+     "lat": 40.4319,
+     "lon": 116.5704,
+     "mode": "bus"
+    },
+    {
+     "name": "Mutianyu Tower 14 慕田峪14号敌楼",
+     "query": "Mutianyu Great Wall Tower 14",
+     "lat": 40.4374,
+     "lon": 116.568,
+     "mode": "transit"
+    },
+    {
+     "name": "Mutianyu Tower 20 正关台",
+     "query": "Zhengguantai, Mutianyu Great Wall",
+     "lat": 40.4402,
+     "lon": 116.5643,
+     "mode": "walk"
+    },
+    {
+     "name": "Mutianyu base village 慕田峪村",
+     "query": "Mutianyu village, Huairou, Beijing",
+     "lat": 40.4312,
+     "lon": 116.5692,
+     "mode": "transit"
+    },
+    {
+     "name": "Beijing hotel · Xianyukou 鲜鱼口",
+     "query": "Xianyukou Street, Dongcheng, Beijing",
+     "lat": 39.8968,
+     "lon": 116.402,
+     "mode": "bus"
+    }
+   ],
+   "sun": "天亮 06:31 · ☀ 06:58 / 🌇 16:59 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-17",
+   "city": "Beijing",
+   "label": "Down the imperial axis",
+   "walking_km": {
+    "total": 7.6,
+    "how": "square→Meridian Gate→Divine Might Gate→Jingshan 3.9 ×1.3 + wandering inside the palace 2.0 + Shichahai and Yandai Xiejie 0.5"
+   },
+   "ribbon": "鲜鱼口 →walk 16′→ 天安门广场 →walk 12′→ 午门 →walk the axis→ 神武门 →walk 10′→ 景山万春亭 →taxi 20′→ 银锭桥 →walk→ 鼓楼",
+   "rain_alt": "the palace's three great halls are all outdoor courtyards. Wet day: stay inside the Treasure Gallery and the Clock Gallery (both inside the palace, small extra fee), then Beihai Park's Round City, then the National Museum of China.",
+   "late_cut": "the palace's last entry is the hard wall — everything after Jingshan is cuttable. Cut Shichahai first, then Jingshan.",
+   "timeline": [
+    {
+     "t": "07:45-08:15",
+     "what": "Walk 鲜鱼口 → 天安门广场 Tiananmen Square · 1.1 km · 16 min · security check at the square's south entrance",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.896800%2C116.402000&destination=39.905500%2C116.397600&travelmode=walking"
+    },
+    {
+     "t": "08:15-09:15",
+     "what": "Tiananmen Square 天安门广场 — the square, Tiananmen Gate, the Monument to the People's Heroes, the Great Hall of the People from outside",
+     "kind": "anchor",
+     "price": "free, advance real-name reservation required ⚠️",
+     "note": "Passport-controlled entry with airport-grade screening. Allow 20 min for the queue. If the reservation failed, walk around the east side to the palace's ticket gate instead.",
+     "tag": "opener"
+    },
+    {
+     "t": "09:15-09:30",
+     "what": "Walk 天安门广场 → 午门 Meridian Gate · 0.6 km · 12 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.905500%2C116.397600&destination=39.910700%2C116.397200&travelmode=walking"
+    },
+    {
+     "t": "09:30-11:15",
+     "what": "The Forbidden City 故宫 — in at the Meridian Gate, then the outer court: the Gate of Supreme Harmony and the three great halls straight down the axis",
+     "kind": "anchor",
+     "price": "¥40 (off-season) + ¥10 Treasure Gallery",
+     "note": "8:30-16:30 from 1 Nov, last ticket 15:30, last entry 15:40. Closed Mondays — which is why this sits on a Tuesday. Entry ONLY at the Meridian Gate, exit only at the north; you cannot double back. Passport checked at the gate against the booking.",
+     "tag": "pinned"
+    },
+    {
+     "t": "11:15-11:30",
+     "what": "Walk the imperial axis 午门 → 神武门 · 1.3 km inside the walls · no doubling back, the gates are one-way",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.910700%2C116.397200&destination=39.924500%2C116.397200&travelmode=walking"
+    },
+    {
+     "t": "11:30-12:45",
+     "what": "The inner court and the eastern palaces — the Palace of Heavenly Purity, the Treasure Gallery and the Nine-Dragon Screen, out through the Gate of Divine Might",
+     "kind": "anchor",
+     "price": "¥10 Treasure Gallery (on top of the ¥40 entry)",
+     "note": "Same anchor as the block above, split by the axis walk. Last ticket 15:30, last entry 15:40; the palace clears at 16:30.",
+     "tag": "pinned"
+    },
+    {
+     "t": "12:45-13:00",
+     "what": "Walk 神武门 → 景山万春亭 Jingshan (south gate + the climb) · 0.6 km · 10 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.924500%2C116.397200&destination=39.926800%2C116.390600&travelmode=walking"
+    },
+    {
+     "t": "13:00-13:45",
+     "what": "Lunch — the small restaurants on Jingshan Qianjie and Wusi Dajie · jianbing, noodles, a courtyard cafe",
+     "kind": "meal",
+     "price": "¥40-80"
+    },
+    {
+     "t": "13:45-15:00",
+     "what": "Jingshan Park 景山公园 — climb the coal hill to the Wanchun Pavilion for the only free view down the whole golden-roofed axis you just walked",
+     "kind": "anchor",
+     "price": "¥2",
+     "note": "06:30-20:00 (1 Nov-31 Mar), last entry 19:30. The climb is 10 minutes of steps. Best light is late afternoon, looking south.",
+     "tag": "pinned"
+    },
+    {
+     "t": "15:00-15:25",
+     "what": "Taxi/metro 景山万春亭 → 银锭桥 Silver Ingot Bridge · 1.2 km · ~20 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.926800%2C116.390600&destination=39.937500%2C116.388000&travelmode=transit"
+    },
+    {
+     "t": "15:25-16:55",
+     "what": "Shichahai / Houhai 后海 — the lake ring, the Silver Ingot Bridge, then Yandai Xiejie 烟袋斜街 into the Drum Tower hutongs at sunset (16:58)",
+     "kind": "anchor",
+     "price": "free",
+     "note": "Rickshaw touts on the bridge quote per person and change the price mid-ride — walk.",
+     "tag": "skippable"
+    },
+    {
+     "t": "16:55-17:15",
+     "what": "Walk 银锭桥 → 烟袋斜街 → 鼓楼 Drum Tower · 0.4 km",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.937500%2C116.388000&destination=39.940700%2C116.391000&travelmode=walking"
+    },
+    {
+     "t": "18:00-19:30",
+     "what": "Last dinner — the hutong restaurants around the Drum Tower / Nanluoguxiang's side lanes (avoid the main drag)",
+     "kind": "meal",
+     "price": "¥80-140"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Beijing hotel · Xianyukou 鲜鱼口",
+     "query": "Xianyukou Street, Dongcheng, Beijing",
+     "lat": 39.8968,
+     "lon": 116.402
+    },
+    {
+     "name": "Tiananmen Square 天安门广场",
+     "query": "Tiananmen Square, Beijing",
+     "lat": 39.9055,
+     "lon": 116.3976,
+     "mode": "walk"
+    },
+    {
+     "name": "Meridian Gate 午门 (Forbidden City)",
+     "query": "Meridian Gate, Palace Museum, Beijing",
+     "lat": 39.9107,
+     "lon": 116.3972,
+     "mode": "walk"
+    },
+    {
+     "name": "Gate of Divine Might 神武门",
+     "query": "Gate of Divine Might, Palace Museum, Beijing",
+     "lat": 39.9245,
+     "lon": 116.3972,
+     "mode": "walk"
+    },
+    {
+     "name": "Jingshan Wanchun Pavilion 景山万春亭",
+     "query": "Wanchun Pavilion, Jingshan Park, Beijing",
+     "lat": 39.9268,
+     "lon": 116.3906,
+     "mode": "walk"
+    },
+    {
+     "name": "Shichahai Silver Ingot Bridge 银锭桥",
+     "query": "Yinding Bridge, Shichahai, Beijing",
+     "lat": 39.9375,
+     "lon": 116.388,
+     "mode": "transit"
+    },
+    {
+     "name": "Drum Tower 鼓楼",
+     "query": "Drum Tower, Beijing",
+     "lat": 39.9407,
+     "lon": 116.391,
+     "mode": "walk"
+    }
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=39.896800%2C116.402000&destination=39.940700%2C116.391000&travelmode=walking&waypoints=39.905500%2C116.397600%7C39.910700%2C116.397200%7C39.924500%2C116.397200%7C39.926800%2C116.390600%7C39.937500%2C116.388000",
+   "sun": "天亮 06:32 · ☀ 06:59 / 🌇 16:58 · CST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-18",
+   "city": "Beijing → New York",
+   "label": "Homeward",
+   "travel_day": true,
+   "walking_km": {
+    "total": 1.2,
+    "how": "hotel to metro + terminal walking"
+   },
+   "ribbon": "鲜鱼口 →Airport Express / car 75′→ PEK T3 →Korean Air→ Seoul ICN →→ JFK (same calendar day)",
+   "rain_alt": "none needed",
+   "late_cut": "if the departure is after 15:00, the Temple of Heaven park (06:30 open, ¥15) or Beihai Park fits before you leave — both are 20 min from Qianmen and neither needs a booking.",
+   "timeline": [
+    {
+     "t": "T-4h15",
+     "what": "Leave the hotel. The formula, not a guessed clock time: departure minus 3 h international check-in minus 75 min door-to-terminal.",
+     "kind": "free",
+     "tag": "pinned"
+    },
+    {
+     "t": "T-3h45 → T-3h",
+     "what": "Metro Line 2 鲜鱼口 → 东直门, Airport Express → 首都机场 T3 · ~65 min · ¥30. With bags a car is ¥130-170 and 60-80 min — but the airport road jams hard 06:00-09:00 and 16:00-19:00.",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=39.896800%2C116.402000&destination=40.052400%2C116.610300&travelmode=transit"
+    },
+    {
+     "t": "T-3h → T-0",
+     "what": "PEK Terminal 3 — check in, departure card/exit immigration, security. Spend the last of your Alipay balance airside; it does not travel home with you.",
+     "kind": "free",
+     "tag": "pinned"
+    },
+    {
+     "t": "dep → arr",
+     "what": "Korean Air PEK → Seoul ICN → JFK · lands in New York the SAME calendar day (you gain the 13 h back crossing the date line)",
+     "kind": "hop",
+     "map": false,
+     "verify": "est",
+     "link": "https://www.google.com/travel/flights?q=Flights%20from%20JFK%20to%20PEK%20on%202026-11-11%20returning%202026-11-18%20for%201%20adults"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Beijing hotel · Xianyukou 鲜鱼口",
+     "query": "Xianyukou Street, Dongcheng, Beijing",
+     "lat": 39.8968,
+     "lon": 116.402
+    },
+    {
+     "name": "Beijing Capital Airport T3",
+     "query": "Beijing Capital International Airport Terminal 3",
+     "lat": 40.0524,
+     "lon": 116.6103,
+     "mode": "transit"
+    }
+   ],
+   "sun": "天亮 06:33 · ☀ 07:00 / 🌇 16:58 · CST · sunrise-sunset.org"
+  }
+ ],
+ "hotels": [
+  {
+   "base": "Xi'an — 3 nights (12–15 Nov)",
+   "area": "Inside the walls, Bell Tower 钟楼 / South Gate 永宁门",
+   "why": "Metro Line 2 runs from directly under Xi'an North station to the Bell Tower, so the arrival with luggage is one seated ride with no changes · the Muslim Quarter, Drum Tower and the wall's South Gate are all a 10-20 min walk · the walled city is lit, busy and safe on foot after dark, and the pavement is flat for suitcase wheels.",
+   "options": [
+    {
+     "name": "Any 4★ on Xi Dajie / Nan Dajie within 800 m of the Bell Tower",
+     "band": "¥270-470 /night (≈$40-70) — mid-range band, Nov is low season",
+     "link": "https://www.booking.com/searchresults.html?ss=Xi%27an+Bell+Tower&checkin=2026-11-12&checkout=2026-11-15&group_adults=1&no_rooms=1"
+    },
+    {
+     "name": "Bell Tower Hotel 西安钟楼饭店 — the landmark option, on the Bell Tower square itself",
+     "band": "≈$37-52 /night depending on day of week (KAYAK, as of 2026-08-15)",
+     "link": "https://us.trip.com/hotels/xi-an-hotel-detail-450319/bell-tower-hotel/"
+    },
+    {
+     "name": "Holiday Inn Express Xi'an Bell Tower — Western-chain fallback if you want a known quantity on night one",
+     "band": "verify at link",
+     "link": "https://www.ihg.com/holidayinnexpress/hotels/us/en/xian/siabt/hoteldetail"
+    }
+   ]
+  },
+  {
+   "base": "Beijing — 3 nights (15–18 Nov)",
+   "area": "Qianmen 前门 / Chongwenmen 崇文门, south of Tiananmen",
+   "why": "You walk to Tiananmen Square and the Forbidden City on day 7 instead of fighting the metro at opening time · Line 2 loops to Dongzhimen for both the Great Wall coach and the Airport Express, so days 6 and 8 both start with one ride · the Temple of Heaven is two stops away · Dashilan and Xianyukou put real food one block from the door.",
+   "options": [
+    {
+     "name": "Any 4★ in the Qianmen / Dashilan / Chongwenmen block",
+     "band": "¥400-740 /night (≈$60-110) — mid band; Nov is shoulder season in Beijing",
+     "link": "https://www.booking.com/searchresults.html?ss=Qianmen+Beijing&checkin=2026-11-15&checkout=2026-11-18&group_adults=1&no_rooms=1"
+    },
+    {
+     "name": "Qianmen Jianguo Hotel 前门建国饭店 — courtyard property with the old opera theatre attached",
+     "band": "≈$102 /night (Trip.com, as of 2026-08-15)",
+     "link": "https://us.trip.com/hotels/beijing-hotel-detail-482983/qianmen-jianguo-hotel/"
+    },
+    {
+     "name": "A hutong courtyard guesthouse in Xianyukou 鲜鱼口",
+     "band": "¥350-600 /night — verify at link; check it has heating, November nights hit -2 °C",
+     "link": "https://www.booking.com/searchresults.html?ss=Xianyukou+Beijing&checkin=2026-11-15&checkout=2026-11-18&group_adults=1&no_rooms=1"
+    }
+   ]
+  }
+ ],
+ "budget": [
+  {
+   "cat": "flights (JFK↔PEK round trip, Korean Air via ICN)",
+   "per_person": "$983",
+   "total": "$983",
+   "note": "Google Flights cache, as of 2026-08-15 — comparison grade"
+  },
+  {
+   "cat": "high-speed rail (Beijing↔Xi'an ×2, second class)",
+   "per_person": "¥1,031 ≈ $153",
+   "total": "$153",
+   "note": "¥515.5 each way, as of 2026-08-15"
+  },
+  {
+   "cat": "hotels (6 nights: 3 Xi'an + 3 Beijing)",
+   "per_person": "≈$70/night",
+   "total": "$420",
+   "note": "mid band, low season; book refundable now and re-shop 2-3 weeks out"
+  },
+  {
+   "cat": "attractions & tickets",
+   "per_person": "¥676 ≈ $100",
+   "total": "$100",
+   "note": "Terracotta ¥120 · Huaqing ¥120 · City Wall ¥54 + bike ¥45 · pagoda ¥70 · Temple of Heaven ¥28 · Mutianyu ¥45 + shuttle ¥15 + cable/toboggan ¥130 · Forbidden City ¥40 + gallery ¥10 · Jingshan ¥2"
+  },
+  {
+   "cat": "local transport (metro, DiDi, airport + wall coaches)",
+   "per_person": "¥750 ≈ $111",
+   "total": "$111",
+   "note": "includes the ¥130-170 airport→Beijing West car on day 2"
+  },
+  {
+   "cat": "food (7 days, street + mid-range, one roast duck)",
+   "per_person": "¥250/day ≈ $37/day",
+   "total": "$260",
+   "note": "China is cheap to eat well in; this band is generous"
+  },
+  {
+   "cat": "eSIM + insurance",
+   "per_person": "$75",
+   "total": "$75",
+   "note": "roaming eSIM ≈$20 + travel medical ≈$55"
+  },
+  {
+   "cat": "buffer (12%)",
+   "per_person": "$254",
+   "total": "$254",
+   "note": "FX drift + price moves + the visa fee, which is NOT in this total"
+  },
+  {
+   "cat": "TOTAL (excl. Chinese visa fee)",
+   "per_person": "≈$2,356",
+   "total": "≈$2,356",
+   "note": "⚠️ Add the Chinese L-visa fee — reduced through 2026-12-31, exact amount unverified (the embassy fee page was unreachable twice on 2026-08-15). Budget $140-185 and read the real number at the checklist link."
+  }
+ ],
+ "brief": {
+  "visa": "US passport → a Chinese tourist visa (L) is REQUIRED for this trip. The 240-hour visa-free transit that US citizens can use needs an onward ticket to a THIRD country (A → China → B); JFK → China → JFK is A → China → A and does not qualify. Since 2024-01-01, L-visa applications filed in the US no longer require a round-trip ticket, hotel booking, itinerary or invitation letter; most US applicants receive a 10-year multiple-entry visa. Apply via the COVA online form, then submit the passport in person at the Chinese Visa Application Service Center. Fee reduced through 2026-12-31 (⚠️ exact amount unverified — read it at the link on the checklist); express service +$25. Passport: 6+ months validity, 2 blank pages. Start 8 weeks out. Source: Embassy of the PRC in the USA, us.china-embassy.gov.cn, checked 2026-08-15.",
+  "holidays": "date.nager.at/PublicHolidays/2026/CN returns six national holidays for 2026 (1 Jan · 17 Feb Spring Festival · 1 May · 19 Jun Dragon Boat · 25 Sep Mid-Autumn · 1 Oct National Day). NONE falls in 11-18 November — the window is deliberately clean. What the feed cannot see and this plan handles instead: the SEASONAL SWITCH on 15/16 November. Mutianyu, the Terracotta Army and the Shaanxi History Museum all change to shorter winter hours mid-trip, and the plan's times are written per-day against the correct side of that boundary.",
+  "weather": "Same dates last year (Open-Meteo archive, 2025-11-11→18): Beijing 4–17 °C by day, −2 to +4 °C at night, zero precipitation all week; Xi'an 6–18 °C by day, −2 to +7 °C at night, 2 mm on the 16th–17th. Expect a cold snap around the 16th–17th (Beijing dropped to 3.7 °C max last year on that date). Daylight is short: Beijing sunrise ≈06:55, sunset ≈16:52. Dress in layers with a windproof shell — the Great Wall ridge and the Xi'an wall are both fully exposed. Beijing air quality can spike in November heating season; pack an N95 if you are sensitive.",
+  "money": "Effectively cashless. Alipay and WeChat Pay both accept a foreign Visa/Mastercard directly, no Chinese bank account; verified foreign users can transact up to $5,000 per payment as of early 2026. Alipay is the easier of the two to set up from abroad. Set BOTH up before you fly — verification wants SMS. Foreign cards work at big hotels and almost nowhere else; ATMs at Bank of China and ICBC take foreign cards. Carry ¥500-1,000 cash as the fallback that never fails.",
+  "connectivity": "⚠️ The single biggest practical trap on this trip, and the one thing the map links in this plan depend on: Google Maps, Google Search, Gmail, WhatsApp, Instagram and X are all blocked inside mainland China. EVERY hop link in this plan is a Google Maps URL and will fail on a Chinese local SIM. Two fixes, in order: (1) buy a ROAMING travel eSIM (Airalo/Holafly/Saily class) which routes through an offshore gateway and leaves Google working — ≈$15-25 for 8 days, this is the recommendation; (2) install a paid VPN BEFORE departure (their websites are blocked from inside). Third, unconditional safety net: the trip KML that ships with this plan (china.kml) opens offline in Maps.me / Organic Maps / Gaia, and Amap 高德 or Baidu Maps are the apps that actually work locally — both have partial English. Do not plan to download anything after you land.",
+  "safety": "Beijing and Xi'an are both very safe for a solo traveller at night by any international standard; violent crime against tourists is rare and both cities' central districts are lit and busy until late. The real risks are commercial: the 'tea house' and 'art student' scams around Tiananmen and Wangfujing (a stranger practising English invites you for tea, then the bill is ¥2,000), unlicensed taxis at PEK and Xi'an North (use DiDi or the official rank — never accept a ride from someone approaching you inside the terminal), and fake 游5 buses to the Terracotta Army. Every night in this plan ends within a 15-minute walk or one metro ride of the hotel, and no leg requires a dark walk through an unlit area. Emergency: 110 police, 120 ambulance, 119 fire.",
+  "insurance": "Travel medical insurance with evacuation cover, bought with the flight. Chinese public hospitals bill foreigners up front, in cash or by card, before treatment; international clinics (United Family, SOS) are excellent and expensive."
+ },
+ "unverified": [
+  "The Chinese L-visa fee for US citizens — the embassy's fee page returned a socket error twice on 2026-08-15. The reduction to 2026-12-31 and the +$25 express surcharge are confirmed; the base number is not.",
+  "The return flight's departure time on 2026-11-18 — the flight scanner returns outbound legs only. Day 8 is written as a formula against your ticketed time, not against a guess.",
+  "Exact G-train numbers and minutes for both Beijing↔Xi'an legs — tickets only release 15 days out, so the plan carries the published corridor (4 h 10 – 5 h 00, 23+ daily departures, ¥515.5) and a departure window rather than an invented train number.",
+  "The Tiananmen Square reservation channel — the WeChat mini-program is the usual route but it has no English UI and no stable public URL. The fallback (enter the Palace Museum directly) is written into day 7.",
+  "Whether the seasonal Dongzhimen→Mutianyu coach still runs on 2026-11-16. Checklist item + a private-car backup with a real price.",
+  "Every opening hour here is the SEASONAL PATTERN as of 2026-08-15, not a published time for that specific date — nobody publishes November hours in August. Re-confirm 2 weeks out."
+ ],
+ "sources": [
+  "Visa: us.china-embassy.gov.cn (Embassy of the PRC in the USA) + travel.state.gov — 2026-08-15",
+  "Holidays: date.nager.at/api/v3/PublicHolidays/2026/CN — 2026-08-15",
+  "Weather: archive-api.open-meteo.com (same dates, 2025) — 2026-08-15",
+  "FX: frankfurter.dev (ECB) 1 CNY = 0.14834 USD — 2026-08-14",
+  "Flights: scripts/flight_scan.py (Google Flights cache) — 2026-08-15",
+  "Rail: travelchinaguide.com + 12306.cn — 2026-08-15",
+  "Forbidden City: travelchinaguide.com / chinadiscovery.com / dpm.org.cn booking rules — 2026-08-15",
+  "Mutianyu: en.mutianyugreatwall.com + greatwalltravelguide.com — 2026-08-15",
+  "Terracotta Army & Huaqing Palace: travelchinaguide.com + trip.com — 2026-08-15",
+  "Shaanxi History Museum, City Wall, Muslim Quarter: travelchinaguide.com + visitxian.cn — 2026-08-15",
+  "Sunrise/sunset data: sunrise-sunset.org"
+ ]
+}

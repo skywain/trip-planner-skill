@@ -77,13 +77,70 @@ packed ×0.8, kids or mobility flags ×1.3.
    One low-effort block (garden, café, shopping street) mid-afternoon — but see the
    siesta trap before putting shopping there; cap time-on-feet at ~8 h (6 h with kids
    or mobility flags).
-7. **Golden hour**: fetch sunrise/sunset once per city. Any city-level coordinate
-   works — a venue 5 km away moves sunset by well under a minute — so reuse the
-   Open-Meteo geocode from Phase 1 and fetch this in the same batch as holidays and
-   FX rather than waiting on stop-level geocoding:
+7. **Golden hour**: run `python3 scripts/route_tools.py sun plan.geo.json --write`
+   once the days have a city-level coordinate (any stop's `lat/lon`, or the
+   Open-Meteo geocode from Phase 1 dropped into `stops[0]` — a venue 5 km away moves
+   sunset by well under a minute) — and run it **before you write a single sunrise /
+   golden-hour / dark-start sentence**, not after. The local clock is tzdata's, not
+   yours: Morocco leaves UTC+1 for UTC+0 on 2026-09-20, so the "07:15 sunrise" a
+   tester wrote from habit was an hour off on all ten days, and nothing downstream
+   (`check`, `qc.py`, the renderers) compares prose against `days[].sun`. Order:
+   coordinates → `sun --write` → read the values → write the prose.
+   It fetches civil dawn / sunrise / sunset per day
+   from sunrise-sunset.org (one request per day — keyed on **that day's first stop
+   with coordinates** + date + tz, cached next to the plan — **except on a moving
+   day, where it takes the day's LAST stop with coordinates**. A day is "moving"
+   when it carries `"travel_day": true` **or** its first and last stops with
+   coordinates are more than **150 km** apart; the script prints which rule fired
+   ("last stop, first->last 1,090 km" / "(travel_day)"). Reason: the evening anchor
+   and the sunset that matters are where you sleep, not where you woke up — the
+   China test's Xi'an→Beijing day reported Xi'an's 17:41 against a Beijing anchor
+   at 16:59 sunset, 42 min wrong on exactly the day that squeezes in an evening
+   block. Order the moving day's `stops` in visit order with the arrival city last
+   and the rule does the right thing. **When the day's sun-critical anchor is at the
+   first stop instead** — a Chefchaouen sunrise before the flight to Casablanca, an
+   Erg Chebbi dune sunrise before the drive to Fes — the last-stop default is 25 min
+   wrong on exactly the block that cares, so override it: set the day's
+   `"sun_stop"` to that stop's `name` (or its 0-based index in `stops`) and `sun`
+   keys the day there. The header still prints one 天亮 for the whole day, so on a
+   long east–west move say in the day note that the other city's dawn/dusk
+   differs),
+   **sanity-checks the answer** (rejects `status≠OK`, two cities or two dates
+   returning identical times, and a day length that cannot belong to that latitude
+   and month — the failure mode that once returned equatorial 12 h 09 m for Norway
+   in October with `status: OK`), and writes each day's `sun` string in place.
+   **Read the tail of its output**: after the "N request(s), N day(s) written" line
+   it prints — and repeats as a `WARN` on stderr — `skipped/failed (N): <date>
+   (reason), …` naming **every day it did not write** (no ISO date / no stop with
+   coordinates / request failed), and one `sun REJECTED — …` WARN per day the
+   sanity checks refused. A run that says "6 written" on a 7-day plan now names
+   the missing date, so you re-run `--only DATE` instead of counting `sun` fields
+   by hand (Italy test F5) — and it **exits non-zero (1)** whenever that list is
+   non-empty, so a "9/10 written" run cannot pass unnoticed in a pipeline (Vietnam
+   test F6: one TLS failure, exit 0, nearly shipped). The written days are kept;
+   fix the named ones with `--only` and re-run until it exits 0. Exit **3** = a day
+   was REJECTED by the sanity checks (look before retrying). A day with **no stops
+   at all** (pure travel/rest day) is informational only — not counted, no exit 1.
+   Canonical `sun` format — the renderers parse it, so keep the shape:
+   `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]`
+   e.g. `天亮 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org`.
+   The dawn word follows the plan language: `sun --write` picks it from `--lang` >
+   `plan.lang` > `plan.meta.lang` > zh, so an `en` plan gets
+   `dawn HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]`
+   e.g. `dawn 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org`; the renderers
+   accept either spelling (zh output is unchanged).
+   **A space always follows a time**; never glue a bracket to it — `🌇 18:00(AEST`
+   is what the "golden hour ≈ …" margin line showed when a tester wrote
+   `18:00(AEST · …)`. Extra words go after a ` · ` separator. Trips that **cross a
+   daylight-saving switch** need a fetch on both sides of the switch (the script
+   does this per day; if you hand-fetch, take one date before and one after — the
+   Sydney 10-04 jump from 18:00 to 19:00 only shows up that way).
+   Manual fallback if the script cannot run:
    `curl -s "https://api.sunrise-sunset.org/json?lat={lat}&lng={lon}&date={YYYY-MM-DD}&formatted=0&tzid={Area/City}"`
-   (credit sunrise-sunset.org in the footer; once per city, not per day).
-   The same response carries `civil_twilight_begin/end` — that is 天亮/天黑 as a
+   — once per city (plus once per side of any DST switch), not per day; apply the
+   same sanity rules by eye (data-sources.md lists them); credit sunrise-sunset.org
+   in the footer either way.
+   The response carries `civil_twilight_begin/end` — that is 天亮/天黑 as a
    traveller experiences it, ~25-30 min outside sunrise/sunset. Pre-dawn departures
    and sunrise hikes schedule against **civil dawn**, not sunrise: a 06:00 trailhead
    entry for an 06:22 sunrise is a dark-start (headlamp) only if civil dawn is 06:01.
@@ -116,10 +173,26 @@ packed ×0.8, kids or mobility flags ×1.3.
   takkyubin hotel→hotel forwarding is usually **next-day**: arrange it the evening
   before and keep an overnight kit. Never schedule an anchor with bags in tow — rule 2
   (opener at opening time) is suspended on a checkout day unless bags are already
-  stored. **Checkout + intercity move = at most 1 anchor.**
+  stored. **An intercity moving day carries ≤2 anchors, and only when the bags are
+  solved before the first anchor (checked / stored / hotel-held); otherwise 1** (same
+  sentence in SKILL.md Phase 6 self-check). Two is for the day whose train leaves at
+  16:00 and whose bags went into a locker at 09:00 (Göreme open-air museum + Dark
+  Church, then Uçhisar, then the night bus); a day that drags a suitcase to the first
+  sight is a one-anchor day whatever the timetable says. If the sunrise anchor is at
+  the *first* stop, set `sun_stop` (rule 7).
 - **Departure day** — zero sightseeing unless the flight leaves after 18:00. Work
   backwards from the airport-arrival deadline (3 h international) through the real
   city→airport transfer time, and put the luggage solution in writing again.
+  **Return-flight time unknown** (`flight_scan.py` lists outbound legs only, and the
+  deep link may not show it statically): pick a plausible departure `T` from the
+  carrier's published schedule (or the outbound's mirror), and write the day
+  backwards from it as a formula the reader can re-run: **T = takeoff → T−3 h at the
+  airport (international; 2 h domestic) → T−4 h 30 leave the hotel** — e.g.
+  `T ≈ 12:30 → 09:30 at IST → 08:00 out of the hotel`. The `legs` row carries
+  `"dep": "⚠️ ~12:30 — verify"` (not a bare time), the timeline blocks say "T−4h30"
+  next to the clock, and `unverified` gets one line: "return flight departure time
+  not confirmed — day 10 timeline is built on T ≈ 12:30". A confidently wrong 08:00
+  taxi is worse than an honest formula.
 - **Tour day (跟团日)** — the pickup is `[pinned]` with a 10-15 min margin, and the
   operator owns the clock: no `late_cut` authority inside the tour, so the day's
   degradation plan covers only what the traveller controls (meals, the evening, the
@@ -172,7 +245,10 @@ packed ×0.8, kids or mobility flags ×1.3.
   If lodging isn't in scope, say "day starts at {first block} / ends at {last block};
   add your hotel hops" and mark this check N/A rather than passed.
 - Meal blocks exist and actually sit near the clusters they claim
-- Moving days: bags solved in writing, ≤1 anchor, no anchor before storage
+- Moving days: bags solved in writing, no anchor before storage; ≤2 anchors only if
+  the bags are solved before the first one, otherwise ≤1 (§Day types)
+- Departure day with an unconfirmed return time: the T-formula is visible in the
+  timeline, `legs.dep` carries ⚠️, `unverified` names it (§Day types)
 - Worship/siesta/free-day traps checked for every affected block
 
 ## Scheduled-day format
@@ -185,7 +261,7 @@ list above. If you catch yourself writing a 0-minute gap between two places 1 km
 apart, that is the bug this example exists to prevent.
 
 ```
-2026-10-05 (周一) — 京都·东山           ☀ 05:53 / 🌇 17:38 (sunrise-sunset.org)
+2026-10-05 (周一) — 京都·东山    天亮 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org
 08:00-09:15  清水寺 ¥500 — 06:00 开门,首小时人最少                    [opener]
 09:15-09:45  步行 清水坂→三年坂→高台寺 0.7 km ~10分(+街景停留)         (est.)
 09:45-10:45  高台寺 ¥600 — 09:00-17:00,最晚入场 17:00

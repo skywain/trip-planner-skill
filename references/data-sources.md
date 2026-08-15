@@ -20,6 +20,21 @@ deep link marked "verify on click". Statuses marked ✓ were live-tested 2026-08
   `--arr-before HH:MM` (and `--dep-after`) — "cheapest USABLE flight" is the number
   the plan needs (live case: CMH→SLC sticker floor $132 was an overnight horror;
   the usable floor was $207).
+  **Read the head line of the output first**: it states the **currency** and whether
+  each price is **per person or the total** for `--adults N` — it is the **TOTAL for
+  all passengers** (`--adults 2` doubles the number; divide by N for per-person) and
+  the budget table copies that wording; `--currency XXX` sets the reported currency
+  (default follows the Google region). Two testers had to mark their whole budget
+  "⚠ pp or total unknown" before this line existed. `--nonstop` keeps only nonstop options — the LHR→HND
+  test saw nothing but 30-40 h two-stop rows in the cache until it was asked for
+  nonstops; for a long-haul leg run both with and without and quote both floors.
+  An **`AssertionError`** means Google returned a non-200 page (bot wall / consent
+  page) and the fallback renderer failed too — the error line echoes route + date
+  only so you can see which grid cell died; it is **not** a bad airport code
+  (CNS→PEK failed on three valid dates this way). Wait and retry, or fall back to
+  deep links marked "price unverified". The scan
+  returns **outbound legs only** for a return trip: the return leg's departure time
+  is not in the output — read it off the deep link when the plan needs a clock.
 - **Browser**: `https://www.google.com/travel/flights?q=` + URL-encoded natural
   language, e.g. `Flights from PVG to KIX on 2026-10-02 returning from NRT 2026-10-14
   for 2 adults` — the q= parser understands open-jaw phrasing. Currency follows the
@@ -64,21 +79,51 @@ No good keyless API exists — use browser + deep links; recommend neighborhoods
 ## Intercity rail / bus / local transit
 - Durations & connections (browser, keyless):
   `https://www.google.com/maps/dir/?api=1&origin={A}&destination={B}&travelmode=transit`
+  (mainland China: this recipe is fine *for you, the planner, on the browser pane*,
+  but never ship a Google link to the traveller there — see navigation.md provider
+  note).
 - Mode overview A→B: `https://www.rome2rio.com/map/{A}/{B}` (browser).
 - SE Asia bookings: `https://12go.asia/en/travel/{a}/{b}`.
 - Rail: price on the operator's site (country-quick-notes.md lists them). Resellers
   (Omio/Trainline/Klook) are acceptable when operator sites reject foreign cards —
   note the markup in the plan.
-- China domestic: 12306 via browser (or a 12306 MCP if installed).
+- China domestic: 12306 via browser only (12306.cn/en, passport-registered account,
+  foreign Visa/Mastercard accepted ⚡; sales open 15 days ahead in station batches);
+  Trip.com resells with a fee when the card fails. Real-name rules, the four
+  pre-sale clocks and station security are in country-quick-notes.md → China
+  (inbound).
 
 ## Geocoding & day-route sanity — ✓
 Venue-level coordinates come from Nominatim/OSM via `scripts/route_tools.py geocode` —
 keyless; the script enforces the usage policy (User-Agent + 1 req/s throttle + cache),
 so never call Nominatim in parallel or outside the script. Misses: pull coordinates
 from the Google Maps place card in the browser and fill them into the plan JSON by
-hand. Then `check` (distance/clustering sanity), `links` (per-hop + whole-day Google
-Maps deep links), `kml` (offline pins for Organic Maps / My Maps). Details:
-references/navigation.md.
+hand. **Nominatim is weak on non-Latin place names** (Japanese, Chinese, Korean,
+Thai…) and fails *quietly* — a station or lane resolves to a similarly named place
+a few hundred metres away; the script WARNs when the resolved `display_name` does
+not contain the query's head token (first Latin word of ≥4 letters, or the first 2
+CJK characters). For those countries pre-filling `est`
+coordinates for everything known is the normal path (a trip with 0 Nominatim
+requests is fine). Then `check` (distance/clustering sanity), `links` (per-hop +
+whole-day deep links — **`--provider google|apple|amap`**, default Google; `amap`
+or `apple` for mainland China where Google links are dead, `amap` emits per-hop
+links only with no day chain), `kml` (offline pins for Organic Maps / My Maps —
+the provider-independent fallback), `sun` (civil dawn / sunrise / sunset per day,
+written as `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM · TZ · sunrise-sunset.org`, or with the
+dawn word `dawn …` when the plan is `en` — `--lang zh|en` > `plan.lang` >
+`plan.meta.lang` > zh; renderers accept both).
+Details: references/navigation.md.
+- `check` reads a per-stop `mode` from the vocabulary **`walk | transit | fly |
+  drive | boat | train | bus`** (the hop *into* that stop). Anything undeclared is
+  guessed from distance, and a guess is silent: a 1.7 km coastal walk becomes
+  "transit" and the day's on-foot total reads 0 — declare signature walks. Declared
+  fly/drive/boat/train/bus hops are listed as long hops, not `SUSPICIOUS`, so a
+  plan with a flight or a reef boat can pass `check` cleanly.
+- `check`'s transit durations are a distance formula with no knowledge of tunnels,
+  express lines or airport trains: **for any transit hop >20 km it says "use the
+  operator timetable" — do that** (Flytoget OSL→Oslo S is 19 min; the formula gave
+  195-285). Timetable = operator site (country-quick-notes.md lists them) or the
+  Google Maps transit deep link above at the hour the plan uses it.
 
 ## Venues, tours, tickets
 - Hours/closures: official venue site first; Google Maps place card second (watch for
@@ -92,6 +137,16 @@ references/navigation.md.
 `curl -s "https://date.nager.at/api/v3/PublicHolidays/{year}/{ISO2}"` (keyless,
 instant). Long weekends near the trip = domestic-tourist crowds even without a direct
 collision — check the adjacent weeks too.
+**It lists fixed-date secular / statutory holidays only.** In Muslim-majority
+countries the lunar-calendar holidays — Eid al-Fitr, Eid al-Adha, Mawlid, Islamic New
+Year, and Ramadan itself — are **absent** (2026/MA returned 10 rows, every one a
+fixed civic date, zero Eids); Buddhist-calendar holidays in Thailand, Laos, Myanmar,
+Sri Lanka (Vesak, Asalha Puja, Khao Phansa…) and the Lunar New Year cluster across
+East/Southeast Asia are patchy or missing the same way. Spend one budgeted search on
+them: the country's official gazette / government holiday page, or a religious-
+holiday calendar page (timeanddate-style) for the year — and put the dates in
+`brief.holidays` with that source. Eid dates are moon-dependent and published as
+"expected" until ~1 day before: mark them ± 1 day.
 
 ## Weather — ✓ (archive call can take ~10 s on first hit)
 1. Geocode the city: `curl -s "https://geocoding-api.open-meteo.com/v1/search?name={city}&count=1"`
@@ -99,16 +154,54 @@ collision — check the adjacent weeks too.
    `curl -s "https://archive-api.open-meteo.com/v1/archive?latitude={lat}&longitude={lon}&start_date={dates-1y}&end_date={dates-1y}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto"`
 3. Trip starts within 16 days → real forecast instead:
    `https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`
-4. Sunrise/sunset for golden-hour scheduling (keyless, any future date; `tzid` on the
-   `/json` endpoint verified working 2026-08-01):
+4. Sunrise/sunset for golden-hour scheduling — preferred path is
+   `python3 scripts/route_tools.py sun plan.geo.json --write` (per-day fetch keyed on
+   the day's first stop — the **last** stop on a moving day, or the day's `sun_stop`
+   when set —, cache, the sanity rules below applied for you, canonical `sun`
+   string written into the plan, a WARN per skipped/rejected day with its date and a
+   **non-zero exit** when there is any; see scheduling.md rule 7). **Run it before
+   writing any sunrise/golden-hour prose**: the local clock comes from tzdata, which
+   knows about time-zone changes you don't (Morocco returns to UTC+0 on 2026-09-20 —
+   the tester's hand-written times were an hour off for all ten days); `sun`'s
+   output is the truth, prose follows it.
+   Manual fallback (keyless, any future date; `tzid`
+   on the `/json` endpoint verified working 2026-08-01):
    `curl -s "https://api.sunrise-sunset.org/json?lat={lat}&lng={lon}&date={YYYY-MM-DD}&formatted=0&tzid={Area/City}"`
    The service requires **visible attribution** wherever the data is shown — put
    "日出日落数据 / sunrise-sunset.org" in the plan footer — and answers heavy use with
-   HTTP 429 + Retry-After, so fetch once per city, not once per day.
+   HTTP 429 + Retry-After, so fetch once per city (plus one fetch on each side of a
+   daylight-saving switch), not once per day.
+   **Sanity rules — the API fails open.** A malformed or missing `lat`/`lng`/`date`
+   (a shell variable that didn't split, a stray quote) does **not** error: it
+   returns today's times for 0°,0° with `"status":"OK"` — 07:59/20:09, day length
+   12 h 09 m — which looks perfectly plausible for a plan and nearly went onto eight
+   Norwegian day cards. Don't trust a response unless: `status` is `OK`; two
+   different cities or two different dates give **different** times; and the day
+   length is possible for that latitude and month (60°N in early October ≈ 11 h and
+   shortening by ~5 min a day; a flat 12 h that doesn't move from one date to the
+   next is the equator, not your destination). Anything else → fix the request and
+   re-fetch, or ship the day without `sun` rather than with a wrong one.
+   From Python, `urllib` direct hits get **HTTP 403 without a User-Agent** — set one
+   (`{"User-Agent": "trip-planner-skill/1.x (personal trip planning)"}`, which the
+   script already does); curl works because it sends its own.
 
 ## FX — ✓
 `curl -s "https://api.frankfurter.dev/v1/latest?base={HOME}&symbols={DEST}"`
 (ECB daily fix). Stamp rate + date once in the budget table; don't re-fetch per line.
+**Coverage is ~30 major currencies only** (`/v1/currencies` lists them: EUR USD GBP
+JPY CNY KRW THB AUD CAD MXN TRY … — no MAD, VND, EGP, TND, DZD, KHR, LAK, LKR, NPR,
+UZS…). An unsupported symbol does **not** error: the call returns HTTP 200 and the
+`rates` object simply lacks that key (`symbols=VND,USD` → `{"USD": …}` alone), so a
+script that reads `rates[DEST]` blindly takes the wrong currency (Vietnam) or ships
+no rate at all (Morocco). Therefore:
+1. after any frankfurter call, **assert the destination key is present** in `rates`;
+2. missing → fall back to `curl -s "https://open.er-api.com/v6/latest/{HOME}"`
+   (keyless, ~160 currencies, daily; read `rates.{DEST}` and `time_last_update_utc`)
+   — check the key there too;
+3. write which source you used into `meta.fx`, e.g.
+   `1 CAD = 6.70 MAD (open.er-api.com, 2026-08-15 — MAD not on frankfurter)`.
+Closed currencies (MAD, TND, DZD, …) also get one line in the money brief: not
+buyable before departure, not exportable — exchange on arrival / ATM.
 
 ## Visa / entry
 Web search `{nationality} citizens visa {destination}` restricted to official

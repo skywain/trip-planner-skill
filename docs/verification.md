@@ -115,3 +115,33 @@ only job is to hunt for exactly this.
 | Nominatim requires ≤1 req/s and an identifying User-Agent | confirmed |
 | Naver Map web search path | **refuted** — `/v5/` is legacy, current is `/p/search/` |
 | sunrise-sunset.org is free | confirmed, but **requires visible attribution** and rate-limits with 429 |
+
+## End-to-end friction testing (August 2026)
+
+Reviews check the rules; friction tests check whether a stranger can *follow* them.
+The method, run nine times so far:
+
+1. A **fresh agent session that has never seen the skill** is asked to plan a trip and
+   render two themes, using **only the shipped documents** — it may not edit code or
+   docs, has a search budget (≤25 web searches, ≤10 Nominatim calls, one flight scan), a
+   picture budget (≤$0.60–0.70 via `themes/gen.py`), and must return a friction report:
+   what it could not find, what it had to guess, where the docs and the code disagreed,
+   ranked by severity.
+2. Each run deliberately changes **origin × destination × language** so no two runs share
+   a country or a departure city, and Chinese and English pages are both exercised:
+   Beijing→Australia (zh) · Beijing→Norway (zh) · London→Japan (en) · New York→China (en)
+   · Singapore→Italy (zh, with the video theme) · Berlin→Mexico (en) · Toronto→Morocco (en,
+   with the video theme) · Shanghai→Turkey (zh) · Shenzhen→Vietnam (zh). Every theme has
+   now been rendered by at least two testers, in both languages.
+3. Every friction item is fixed in the code or the docs *before the next batch*, and the
+   trip's generated pictures are recycled into `themes/assets/` (indexed in
+   `themes/assets/IMAGE-LIBRARY.md`) so the library grows with each destination.
+
+What the batches found, in short: the first two exposed rendering and contract gaps
+(hop/stop pairing, sunrise data sanity, art.json field roles, CJK-vs-Latin typography);
+the third exposed **data-layer** gaps — an FX source that silently drops minor currencies,
+a holiday source without religious holidays, a timezone change that shifted a whole day
+by an hour, city sub-agents asserting stale visa rules, and an undocumented top-level plan
+shape that crashed two renderers. All are closed; the residual list is
+[`docs/KNOWN-ISSUES.md`](KNOWN-ISSUES.md). Seven of the nine trips ship as
+[`examples/`](../examples/), each byte-reproducible from its `plan.geo.json` + `art.json`.

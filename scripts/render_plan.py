@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """Render a trip plan JSON into one self-contained, printable, phone-friendly HTML
-file. Part of the travel-planner skill; stdlib only, Python 3.9+.
+file. Part of the trip-planner skill; stdlib only, Python 3.9+.
 
-  python3 render_plan.py plan.json -o trip.html
+  python3 render_plan.py plan.json -o trip.html [--lang zh|en]
+
+UI language: --lang > plan["lang"] > plan["meta"]["lang"] > zh. Only the page's own
+chrome (section names, table headers, pills, footer) is translated; plan content is
+printed as written. Keys mirror themes/theme_common.STRINGS where a shared name exists.
 
 The SAME plan JSON feeds route_tools.py (which reads days[].stops) — keeping one
 canonical file is what stops the map links, the KML and the written plan from
@@ -45,6 +49,75 @@ import math
 import sys
 from pathlib import Path
 
+# UI strings. zh values are the historical ones — do not touch them (the kyoto sample
+# render must stay byte-identical); en is the same shell in English.
+STRINGS = {
+    "zh": {
+        "html_lang": "zh",
+        "link": "地图/链接", "verify.est": "est.", "verify.verified": "verified",
+        "map.cap": "示意图 · 约 {km:.1f} km 跨度 · 真实导航见上方链接",
+        "sec.decisions": "为你做的决定 / Decisions made for you",
+        "sec.checklist": "预订清单 / Booking checklist",
+        "th.item": "项目", "th.deadline": "截止/提前量", "th.price": "价格", "th.link": "链接",
+        "btn.book": "预订",
+        "sec.legs": "航班与城际交通 / Flights & intercity",
+        "th.date": "日期", "th.route": "行程", "th.carrier": "承运",
+        "leg.backup": "备选: ", "link.view": "查看",
+        "sec.days": "每日行程 / Day by day",
+        "map.here": "↗地图", "map.day": "整日路线图", "hop.map": "逐跳导航: ",
+        "hop.n": "第{}跳",
+        "walk.how": "步行约 {} km<span class=\"note\"> — {}</span>",
+        "walk": "步行约 {} km(含街道系数、散步段与馆内)",
+        "rain_alt": "雨天备选: ",
+        "sec.hotels": "住宿 / Hotels",
+        "sec.budget": "预算 / Budget",
+        "th.cat": "类别", "th.pp": "每人", "th.total": "合计", "th.note": "备注",
+        "sec.brief": "目的地简报 / Country brief",
+        "sec.unverified": "⚠️ 未核实项 / Unverified",
+        "footer": "生成于 {} · 价格会变,链接才是准绳 · 离线地图: 把 trip.kml 导入 "
+                  "Organic Maps 或 Google My Maps · 日出日落数据 sunrise-sunset.org · 地理编码 "
+                  "© OpenStreetMap contributors{}",
+    },
+    "en": {
+        "html_lang": "en",
+        "link": "map/link", "verify.est": "est.", "verify.verified": "verified",
+        "map.cap": "schematic · about {km:.1f} km across · real navigation in the links above",
+        "sec.decisions": "Decisions made for you",
+        "sec.checklist": "Booking checklist",
+        "th.item": "Item", "th.deadline": "Deadline / lead time", "th.price": "Price", "th.link": "Link",
+        "btn.book": "book",
+        "sec.legs": "Flights & intercity",
+        "th.date": "Date", "th.route": "Route", "th.carrier": "Carrier",
+        "leg.backup": "Backup: ", "link.view": "view",
+        "sec.days": "Day by day",
+        "map.here": "↗map", "map.day": "full-day route map", "hop.map": "hop-by-hop maps: ",
+        "hop.n": "hop {}",
+        "walk.how": "walk ~{} km<span class=\"note\"> — {}</span>",
+        "walk": "walk ~{} km (street factor, strolls and in-venue included)",
+        "rain_alt": "Rain plan: ",
+        "sec.hotels": "Hotels",
+        "sec.budget": "Budget",
+        "th.cat": "Category", "th.pp": "Per person", "th.total": "Total", "th.note": "Note",
+        "sec.brief": "Country brief",
+        "sec.unverified": "⚠️ Unverified",
+        "footer": "Generated {} · prices move, the links are the truth · offline map: import "
+                  "trip.kml into Organic Maps or Google My Maps · sun times sunrise-sunset.org · "
+                  "geocoding © OpenStreetMap contributors{}",
+    },
+}
+_LANG = "zh"
+
+
+def set_lang(lang):
+    global _LANG
+    _LANG = lang if lang in STRINGS else "zh"
+    return _LANG
+
+
+def T(key):
+    return STRINGS.get(_LANG, {}).get(key, STRINGS["zh"][key])
+
+
 CSS = """
 :root{--bg:#fff;--fg:#1c1c1e;--dim:#6b6b70;--line:#e3e3e6;--card:#fafafa;
 --accent:#2b6cb0;--warn:#b45309;--pin:#b91c1c;--ok:#15803d}
@@ -59,6 +132,7 @@ h1{font-size:1.6rem;margin:0 0 4px}h2{font-size:1.15rem;margin:32px 0 10px;
 padding-bottom:5px;border-bottom:2px solid var(--line)}
 h3{font-size:1rem;margin:0 0 6px}
 a{color:var(--accent);overflow-wrap:anywhere}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .sub{color:var(--dim);font-size:.9rem;margin:0 0 2px}
 .metagrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 gap:6px 18px;margin:14px 0 0;font-size:.92rem}
@@ -122,7 +196,7 @@ def link(url, label=None):
     if not url:
         return ""
     return '<a href="{}" target="_blank" rel="noopener">{}</a>'.format(
-        e(url), e(label or "地图/链接"))
+        e(url), e(label or T("link")))
 
 
 def pills(item):
@@ -135,7 +209,7 @@ def pills(item):
         out += '<span class="pill {}">{}</span>'.format(cls, e(tag))
     v = item.get("verify")
     if v:
-        label = "verified" if v == "verified" else "est."
+        label = T("verify.verified") if v == "verified" else T("verify.est")
         out += '<span class="pill {}">{}</span>'.format(
             "verified" if v == "verified" else "", label)
     return out
@@ -179,11 +253,10 @@ def day_svg(stops, w=680, h=170, pad=26):
         '<text x="{:.1f}" y="{:.1f}" text-anchor="middle" dy="4">{}</text>'
         '<title>{}</title>'.format(x, y, x, y, i, e(p[2]))
         for i, ((x, y), p) in enumerate(zip(xy, pts), 1))
-    return (
+    return ((
         '<svg class="daymap" viewBox="0 0 {w} {h}" width="100%" height="{h}" '
         'role="img" aria-label="route shape"><polyline points="{poly}"/>{dots}'
-        '<text class="cap" x="8" y="{cap}">示意图 · 约 {km:.1f} km 跨度 · '
-        '真实导航见上方链接</text></svg>'.format(
+        '<text class="cap" x="8" y="{cap}">' + T("map.cap") + '</text></svg>').format(
             w=w, h=h, poly=poly, dots=dots, cap=h - 7, km=max(km_across, 0.1)))
 
 
@@ -202,7 +275,7 @@ def render(p):
             for k, v in mg) + "</div>")
 
     if p.get("decisions"):
-        out.append(section("为你做的决定 / Decisions made for you",
+        out.append(section(T("sec.decisions"),
                            "<ul>" + "".join("<li>{}</li>".format(e(d))
                                             for d in p["decisions"]) + "</ul>"))
 
@@ -216,12 +289,13 @@ def render(p):
                     '<div class="note">{}</div>'.format(e(c["note"]))
                     if c.get("note") else "",
                     e(c.get("deadline")), e(c.get("price")),
-                    link(c.get("link"), c.get("link_text") or "预订")))
+                    link(c.get("link"), c.get("link_text") or T("btn.book"))))
         out.append(section(
-            "预订清单 / Booking checklist",
-            '<div class="scroll"><table><tr><th></th><th>项目</th><th>截止/提前量'
-            "</th><th>价格</th><th>链接</th></tr>" + "".join(rows)
-            + "</table></div>"))
+            T("sec.checklist"),
+            '<div class="scroll"><table><tr><th></th><th>{}</th><th>{}'
+            "</th><th>{}</th><th>{}</th></tr>".format(
+                T("th.item"), T("th.deadline"), T("th.price"), T("th.link"))
+            + "".join(rows) + "</table></div>"))
 
     if p.get("legs"):
         rows = []
@@ -229,7 +303,7 @@ def render(p):
             route = "{} → {}".format(e(l.get("from")), e(l.get("to")))
             times = " ".join(x for x in [e(l.get("dep")), "→", e(l.get("arr"))] if x)
             extra = " · ".join(x for x in [e(l.get("bags")), e(l.get("note"))] if x)
-            back = ('<div class="note">备选: {}</div>'.format(e(l["backup"]))
+            back = ('<div class="note">{}{}</div>'.format(T("leg.backup"), e(l["backup"]))
                     if l.get("backup") else "")
             rows.append(
                 "<tr><td>{}<div class='note'>{}</div></td><td>{}<div class='note'>"
@@ -237,11 +311,13 @@ def render(p):
                     e(l.get("date")), e(l.get("type")), route, times,
                     e(l.get("carrier")), e(l.get("price")),
                     '<div class="note">{}</div>'.format(extra) if extra else "",
-                    link(l.get("link"), "查看") + back))
+                    link(l.get("link"), T("link.view")) + back))
         out.append(section(
-            "航班与城际交通 / Flights & intercity",
-            '<div class="scroll"><table><tr><th>日期</th><th>行程</th><th>承运</th>'
-            "<th>价格</th><th>链接</th></tr>" + "".join(rows) + "</table></div>"))
+            T("sec.legs"),
+            '<div class="scroll"><table><tr><th>{}</th><th>{}</th><th>{}</th>'
+            "<th>{}</th><th>{}</th></tr>".format(
+                T("th.date"), T("th.route"), T("th.carrier"), T("th.price"), T("th.link"))
+            + "".join(rows) + "</table></div>"))
 
     if p.get("days"):
         cards = []
@@ -255,7 +331,7 @@ def render(p):
                 kind = it.get("kind", "anchor")
                 what = e(it.get("what"))
                 if it.get("link"):
-                    what += " " + link(it["link"], "↗地图")
+                    what += " " + link(it["link"], T("map.here"))
                 bits = [x for x in [e(it.get("price")), e(it.get("note"))] if x]
                 if bits:
                     what += '<div class="note">{}</div>'.format(" — ".join(bits))
@@ -264,19 +340,19 @@ def render(p):
                                 e(kind), e(it.get("t")), what, pills(it)))
             foot = []
             if d.get("day_map"):
-                foot.append(link(d["day_map"], "整日路线图"))
+                foot.append(link(d["day_map"], T("map.day")))
             if d.get("hop_links"):
-                foot.append("逐跳导航: " + " ".join(
-                    link(u, "第{}跳".format(i + 1))
+                foot.append(T("hop.map") + " ".join(
+                    link(u, T("hop.n").format(i + 1))
                     for i, u in enumerate(d["hop_links"])))
             wk = d.get("walking_km")
             if isinstance(wk, dict):
-                foot.append("步行约 {} km<span class=\"note\"> — {}</span>".format(
+                foot.append(T("walk.how").format(
                     e(wk.get("total")), e(wk.get("how", ""))))
             elif wk:
-                foot.append("步行约 {} km(含街道系数、散步段与馆内)".format(e(wk)))
+                foot.append(T("walk").format(e(wk)))
             if d.get("rain_alt"):
-                foot.append("雨天备选: {}".format(e(d["rain_alt"])))
+                foot.append(T("rain_alt") + e(d["rain_alt"]))
             fl = ('<div class="dayfoot">{}</div>'.format(" · ".join(foot))
                   if foot else "")
             lc = ('<div class="dayfoot warn">{}</div>'.format(e(d["late_cut"]))
@@ -288,18 +364,18 @@ def render(p):
                 "{}{}{}</div>".format(" travel" if d.get("travel_day") else "",
                                       head, sun, "".join(rows), fl, lc,
                                       day_svg(d.get("stops") or [])))
-        out.append(section("每日行程 / Day by day", "".join(cards)))
+        out.append(section(T("sec.days"), "".join(cards)))
 
     if p.get("hotels"):
         blocks = []
         for h in p["hotels"]:
             opts = "".join(
                 "<li>{} — {} {}</li>".format(e(o.get("name")), e(o.get("band")),
-                                             link(o.get("link"), "查看"))
+                                             link(o.get("link"), T("link.view")))
                 for o in h.get("options", []))
             blocks.append("<h3>{} · {}</h3><p class='note'>{}</p><ul>{}</ul>".format(
                 e(h.get("base")), e(h.get("area")), e(h.get("why")), opts))
-        out.append(section("住宿 / Hotels", "".join(blocks)))
+        out.append(section(T("sec.hotels"), "".join(blocks)))
 
     if p.get("budget"):
         rows = "".join(
@@ -307,31 +383,31 @@ def render(p):
             .format(e(b.get("cat")), e(b.get("per_person")), e(b.get("total")),
                     e(b.get("note"))) for b in p["budget"])
         out.append(section(
-            "预算 / Budget",
-            '<div class="scroll"><table><tr><th>类别</th><th>每人</th><th>合计</th>'
-            "<th>备注</th></tr>" + rows + "</table></div>"))
+            T("sec.budget"),
+            '<div class="scroll"><table><tr><th>{}</th><th>{}</th><th>{}</th>'
+            "<th>{}</th></tr>".format(T("th.cat"), T("th.pp"), T("th.total"), T("th.note"))
+            + rows + "</table></div>"))
 
     if p.get("brief"):
         rows = "".join("<li><b>{}</b>: {}</li>".format(e(k), e(v))
                        for k, v in p["brief"].items() if v)
-        out.append(section("目的地简报 / Country brief", "<ul>" + rows + "</ul>"))
+        out.append(section(T("sec.brief"), "<ul>" + rows + "</ul>"))
 
     if p.get("unverified"):
-        out.append(section("⚠️ 未核实项 / Unverified",
+        out.append(section(T("sec.unverified"),
                            "<ul>" + "".join("<li>{}</li>".format(e(u))
                                             for u in p["unverified"]) + "</ul>"))
 
     out.append(
-        "<footer>生成于 {} · 价格会变,链接才是准绳 · 离线地图: 把 trip.kml 导入 "
-        "Organic Maps 或 Google My Maps · 日出日落数据 sunrise-sunset.org · 地理编码 "
-        "© OpenStreetMap contributors{}</footer></main>".format(
+        "<footer>" + T("footer").format(
             e(meta.get("generated", "")),
-            " · " + e(meta["self_check"]) if meta.get("self_check") else ""))
-    return ("<!doctype html><html lang=\"zh\"><head><meta charset=\"utf-8\">"
+            " · " + e(meta["self_check"]) if meta.get("self_check") else "")
+        + "</footer></main>")
+    return ("<!doctype html><html lang=\"{}\"><head><meta charset=\"utf-8\">"
             "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
             "<title>{}</title><style>{}</style></head><body>{}"
             "<script>{}</script></body></html>").format(
-                e(trip), CSS, "\n".join(out), JS)
+                T("html_lang"), e(trip), CSS, "\n".join(out), JS)
 
 
 def main():
@@ -341,6 +417,8 @@ def main():
     ap.add_argument("-o", "--out", default="trip.html")
     ap.add_argument("--force", action="store_true",
                     help="render even with template scaffolding still in the plan")
+    ap.add_argument("--lang", default=None, choices=sorted(STRINGS),
+                    help="UI language (default: plan.lang > plan.meta.lang > zh)")
     a = ap.parse_args()
     try:
         plan = json.loads(Path(a.plan).read_text(encoding="utf-8"))
@@ -349,6 +427,7 @@ def main():
                  .format(ex))
     if not isinstance(plan, dict):
         sys.exit("Plan JSON must be an object with a \"days\" list.")
+    set_lang(a.lang or plan.get("lang") or (plan.get("meta") or {}).get("lang") or "zh")
     # Scaffolding must never reach a traveller. Both of these mean the template was
     # edited field-by-field and something got missed.
     blob = json.dumps(plan, ensure_ascii=False)

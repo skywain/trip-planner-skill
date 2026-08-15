@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "cover": {
+    "kick": "Mexico 2026",
+    "kick_en": "MEXICO 2026",
+    "postmark_date": "2026-10-28"
+  },
+  "home": {"city": "Berlin", "iata": "BER"},
+  "end": {
+    "date": "2026-11-07",
+    "mark": "BERLIN",
+    "line": "Berlin. The marigolds are still in the suitcase.",
+    "fine": "06 Nov, out of Mexico City after dark · 07 Nov, into Berlin in the rain — eleven hours west, given back in one night.",
+    "farewell": "HASTA LUEGO, MÉXICO"
+  },
+  "brief_titles": {
+    "holidays": "Holidays, crowds & the parade"
+  },
+  "days": {
+    "2026-10-28": {"theme": "Touchdown",   "en": "Berlin → Mexico City",            "mark": "BER · MEX"},
+    "2026-10-29": {"theme": "Mural City",  "en": "Centro Histórico, CDMX",          "mark": "CENTRO"},
+    "2026-10-30": {"theme": "Sun & Moon",  "en": "Teotihuacán · Mercado de Jamaica","mark": "TEOTIHUACAN"},
+    "2026-10-31": {"theme": "Marigolds",   "en": "Coyoacán · Paseo de la Reforma",  "mark": "COYOACAN"},
+    "2026-11-01": {"theme": "Angelitos",   "en": "Mexico City → Oaxaca",            "mark": "OAXACA"},
+    "2026-11-02": {"theme": "Muertos",     "en": "Xoxocotlán · the comparsa",       "mark": "XOXO"},
+    "2026-11-03": {"theme": "Monte Albán", "en": "Monte Albán · Museo Textil",      "mark": "MONTE ALBAN"},
+    "2026-11-04": {"theme": "Loom & Agave","en": "Teotitlán · Mitla · palenque",    "mark": "TLACOLULA"},
+    "2026-11-05": {"theme": "Painted Lane","en": "Jalatlaco · Oaxaca → CDMX",       "mark": "JALATLACO"},
+    "2026-11-06": {"theme": "Homeward",    "en": "Chapultepec → Berlin",            "mark": "MEXICO CITY"}
+  },
+  "themes": {
+    "journal": {
+      "cover": {
+        "zh": "Marigold",
+        "sub": "Mexico City · Teotihuacán · Oaxaca\n28 October – 6 November 2026",
+        "credit": "«Marigold» — original coinage; cempasúchil is the flower whose scent is said to walk the dead home",
+        "photo": {
+          "stem": "mexico-journal-ph-marigold",
+          "alt": "A market stall built entirely of marigolds",
+          "caption": ["Mercado de Jamaica", "cempasúchil, by the tonne"]
+        }
+      },
+      "cover_stamps": [{"cls": "st-a", "rot": -2}, {"cls": "st-b", "rot": 1.6}],
+      "stamps": {
+        "st-a": "mexico-journal-stamp-catrina",
+        "st-b": "mexico-journal-stamp-pyramid",
+        "st-wide": "mexico-journal-stamp-alebrije"
+      },
+      "days": {
+        "2026-10-28": {
+          "photo": "journal-ph-wing",
+          "caption": ["Somewhere west of Ireland", "eleven hours, two stops"],
+          "annot": "Landed at 20:15 into a city of lights that does not end. The airport slip says 180 days; we have ten.",
+          "props": [{"kind": "img", "stem": "journal-boarding", "w": 160, "rot": -3},
+                    {"kind": "stamp", "cls": "st-a", "rot": 2}],
+          "doodle": {"sketch": "skyline", "note": "2,240 m up —\nmind the stairs", "font": "hand", "rot": -2}
+        },
+        "2026-10-29": {
+          "photo": "mexico-journal-ph-bellasartes",
+          "caption": ["Palacio de Bellas Artes", "the dome, from the café across"],
+          "annot": "Three centuries in eight hundred metres: an Aztec pyramid, a ministry courtyard painted floor to ceiling, and Rivera's Rockefeller mural repainted out of spite.",
+          "props": [{"kind": "vtk", "tone": "green",
+                     "lines": ["TEMPLO MAYOR", "Centro Histórico · CDMX", "MX$210", "No. 0412"], "rot": 1.4},
+                    {"kind": "flora", "rot": -4}],
+          "doodle": {"sketch": "bridge", "note": "235 panels.\nOne courtyard.", "font": "cur", "rot": 1.5}
+        },
+        "2026-10-30": {
+          "photo": "mexico-journal-ph-teotihuacan",
+          "caption": ["Calzada de los Muertos", "the avenue of the dead, 09:20"],
+          "annot": "Nobody climbs the pyramids any more. You walk between them instead, two kilometres of it, and that turns out to be the better idea.",
+          "props": [{"kind": "vtk", "tone": "brown",
+                     "lines": ["TEOTIHUACÁN", "Zona Arqueológica · Puerta 1", "MX$210", "No. 1173"], "rot": -1.2},
+                    {"kind": "stamp", "cls": "st-b", "rot": 3}],
+          "doodle": {"svg": {"viewBox": "0 0 96 62",
+                              "d": "M3 57 H93 M13 57 L27 39 H37 L45 28 H55 L63 39 H73 L87 57 M35 45 H61 M44 34 H52",
+                              "arrow": true},
+                      "note": "No climbing.\nStill enormous.", "font": "hand", "rot": -1.5}
+        },
+        "2026-10-31": {
+          "photo": "mexico-journal-ph-casaazul",
+          "caption": ["Casa Azul, Coyoacán", "cobalt, and a garden of cacti"],
+          "annot": "Booked the 10:00 slot weeks ago because the door sells nothing. By noon the queue is longer than the house.",
+          "props": [{"kind": "img", "stem": "journal-ticket", "w": 130, "rot": 2.5},
+                    {"kind": "seal", "rot": -6}],
+          "doodle": {"sketch": "palm", "note": "Frida's garden\nis still growing.", "font": "hand", "rot": -2}
+        },
+        "2026-11-01": {
+          "annot": "South at eight in the morning. By noon we are eating meat grilled in front of us in a corridor called the smoke alley, and by eight we are in a cemetery.",
+          "props": [{"kind": "bagtag", "lines": ["MEX → OAX", "01 NOV 2026", "2 PAX"], "rot": -3}],
+          "poster": {"title": "PASILLO\nDE HUMO", "line": "pick your meat — they grill it in front of you", "rot": -1.3},
+          "doodle": {"sketch": "train", "note": "1 h 05 south.\nAnother country.", "font": "cur", "rot": 1.2}
+        },
+        "2026-11-02": {
+          "photo": "mexico-journal-ph-panteon",
+          "caption": ["Panteón de Xoxocotlán", "candles, brass, and no hurry"],
+          "annot": "By daylight the cemetery belongs to the families again — repainting, arranging, eating beside their dead. Ask before you lift a camera. Better still, put it down.",
+          "props": [{"kind": "flora", "rot": 5},
+                    {"kind": "stamp", "cls": "st-a", "rot": -2}],
+          "doodle": {"svg": {"viewBox": "0 0 96 62",
+                              "d": "M48 10 V54 M48 22 C38 14 30 18 32 26 C34 33 44 30 48 22 M48 22 C58 14 66 18 64 26 C62 33 52 30 48 22 M48 34 C40 28 33 32 35 39 C37 45 45 42 48 34 M48 34 C56 28 63 32 61 39 C59 45 51 42 48 34 M36 56 H60",
+                              "arrow": true},
+                      "note": "Candles until\nmidnight.", "font": "hand", "rot": -2}
+        },
+        "2026-11-03": {
+          "photo": "mexico-journal-ph-montealban",
+          "caption": ["Monte Albán", "a mountain, flattened by hand"],
+          "annot": "They levelled a whole mountaintop for this. No shade anywhere on it — up early, water, hat.",
+          "props": [{"kind": "img", "stem": "mexico-journal-ticket-ado", "w": 150, "rot": -2},
+                    {"kind": "stamp", "cls": "st-b", "rot": 2}],
+          "doodle": {"sketch": "peaks", "note": "A flattened\nmountaintop.", "font": "cur", "rot": 1.6}
+        },
+        "2026-11-04": {
+          "photo": "mexico-journal-ph-loom",
+          "caption": ["Teotitlán del Valle", "cochineal, indigo, four generations"],
+          "annot": "Ask for natural dyes by name. The cochineal is ground on a stone in front of you and the red it makes does not fade.",
+          "props": [{"kind": "vtk", "tone": "brown",
+                     "lines": ["MITLA", "Zona Arqueológica · Oaxaca", "MX$210", "No. 0876"], "rot": 1.8},
+                    {"kind": "seal", "rot": -5}],
+          "doodle": {"sketch": "cabin", "note": "Cochineal on\na metate.", "font": "hand", "rot": -1.4}
+        },
+        "2026-11-05": {
+          "photo": "mexico-journal-ph-jalatlaco",
+          "caption": ["Barrio de Jalatlaco", "no guide stays accurate here"],
+          "annot": "Every wall repainted often enough that no map survives a year. Start at San Matías and get lost on purpose — the flight is not until half past two.",
+          "props": [{"kind": "postcard", "note": "They repaint\nthe walls every\nseason.", "rot": -2,
+                     "stamp": {"cls": "st-wide", "rot": 2}}],
+          "doodle": {"sketch": "bridge", "note": "Every wall\nrepainted.", "font": "cur", "rot": 2}
+        },
+        "2026-11-06": {
+          "annot": "One museum, three halls, then the gate. Teotihuacán, the Mexica, and Oaxaca — the same ten days, laid out in glass cases.",
+          "props": [{"kind": "img", "stem": "journal-tag", "w": 120, "rot": 3},
+                    {"kind": "stamp", "cls": "st-b", "rot": -3}],
+          "photos2": [{"stem": "journal-ph-wing", "en": "Home, the long way round",
+                        "alt": "The wing over the Atlantic"}],
+          "poster": {"title": "SUN\nSTONE", "line": "Sala Mexica — the last room", "rot": 1.2},
+          "doodle": {"sketch": "volcano", "note": "Sun Stone,\nthen the gate.", "font": "hand", "rot": -2}
+        }
+      }
+    },
+    "noir": {
+      "cover": {
+        "zh": "Night Vigil",
+        "en": "CANDLES ON THE HILL OF THE DEAD",
+        "credit": "original coinage — for the all-night velas of Xoxocotlán, where the graves are lit until dawn"
+      },
+      "plates": ["mexico-noir-hero", "mexico-noir-centro", "mexico-noir-piramides",
+                 "mexico-noir-panteon", "mexico-noir-oaxaca", "mexico-noir-montealban"],
+      "day_plate": {
+        "2026-10-28": 0,
+        "2026-10-29": 1,
+        "2026-10-30": 2,
+        "2026-10-31": 1,
+        "2026-11-01": 3,
+        "2026-11-02": 3,
+        "2026-11-03": 5,
+        "2026-11-04": 5,
+        "2026-11-05": 4,
+        "2026-11-06": 0
+      }
+    }
+  }
+}

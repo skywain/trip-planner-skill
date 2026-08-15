@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document>
+<name>Japan 2026 — Tokyo · Hakone · Kyoto (autumn)</name>
+<Folder><name>Day 1 2026-11-21 — Touchdown · Asakusa</name>
+<Placemark><name>1. Haneda Airport T3</name><Point><coordinates>139.779800,35.549400,0</coordinates></Point></Placemark>
+<Placemark><name>2. Hotel · Shinjuku</name><Point><coordinates>139.703600,35.693800,0</coordinates></Point></Placemark>
+<Placemark><name>3. Sensō-ji</name><Point><coordinates>139.796700,35.714800,0</coordinates></Point></Placemark>
+<Placemark><name>4. Nakamise-dōri</name><Point><coordinates>139.796500,35.711800,0</coordinates></Point></Placemark>
+<Placemark><name>5. Sumida Park</name><Point><coordinates>139.800300,35.713500,0</coordinates></Point></Placemark>
+<Placemark><name>6. Hotel · Shinjuku</name><Point><coordinates>139.703600,35.693800,0</coordinates></Point></Placemark>
+<Placemark><name>Day 1 route</name><Style><LineStyle><color>ff0000ff</color><width>3</width></LineStyle></Style><LineString><coordinates>139.779800,35.549400,0 139.703600,35.693800,0 139.796700,35.714800,0 139.796500,35.711800,0 139.800300,35.713500,0 139.703600,35.693800,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 2 2026-11-22 — Sacred wood · the great garden</name>
+<Placemark><name>1. Hotel · Shinjuku</name><Point><coordinates>139.703600,35.693800,0</coordinates></Point></Placemark>
+<Placemark><name>2. Meiji Jingū</name><Point><coordinates>139.699300,35.676400,0</coordinates></Point></Placemark>
+<Placemark><name>3. Yoyogi Park</name><Point><coordinates>139.694900,35.671600,0</coordinates></Point></Placemark>
+<Placemark><name>4. Omotesandō</name><Point><coordinates>139.712600,35.665400,0</coordinates></Point></Placemark>
+<Placemark><name>5. Shinjuku Gyoen</name><Point><coordinates>139.710000,35.685200,0</coordinates></Point></Placemark>
+<Placemark><name>6. Omoide Yokochō</name><Point><coordinates>139.699697,35.693016,0</coordinates></Point></Placemark>
+<Placemark><name>7. Hotel · Shinjuku</name><Point><coordinates>139.703600,35.693800,0</coordinates></Point></Placemark>
+<Placemark><name>Day 2 route</name><Style><LineStyle><color>ffff0000</color><width>3</width></LineStyle></Style><LineString><coordinates>139.703600,35.693800,0 139.699300,35.676400,0 139.694900,35.671600,0 139.712600,35.665400,0 139.710000,35.685200,0 139.699697,35.693016,0 139.703600,35.693800,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 3 2026-11-23 — Market · tidal garden · temple ⚠️ national holiday</name>
+<Placemark><name>1. Hotel · Shinjuku</name><Point><coordinates>139.703600,35.693800,0</coordinates></Point></Placemark>
+<Placemark><name>2. Tsukiji Outer Market</name><Point><coordinates>139.770700,35.665400,0</coordinates></Point></Placemark>
+<Placemark><name>3. Hamarikyū Gardens</name><Point><coordinates>139.763400,35.659700,0</coordinates></Point></Placemark>
+<Placemark><name>4. Zōjō-ji</name><Point><coordinates>139.748400,35.657400,0</coordinates></Point></Placemark>
+<Placemark><name>5. Shiba Park</name><Point><coordinates>139.745400,35.658600,0</coordinates></Point></Placemark>
+<Placemark><name>6. Hotel · Shinjuku</name><Point><coordinates>139.703600,35.693800,0</coordinates></Point></Placemark>
+<Placemark><name>Day 3 route</name><Style><LineStyle><color>ff00aa00</color><width>3</width></LineStyle></Style><LineString><coordinates>139.703600,35.693800,0 139.770700,35.665400,0 139.763400,35.659700,0 139.748400,35.657400,0 139.745400,35.658600,0 139.703600,35.693800,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 4 2026-11-24 — Into the volcano · lake · onsen</name>
+<Placemark><name>1. Hakone-Yumoto Station</name><Point><coordinates>139.105700,35.232500,0</coordinates></Point></Placemark>
+<Placemark><name>2. Gōra Station</name><Point><coordinates>139.048300,35.245200,0</coordinates></Point></Placemark>
+<Placemark><name>3. Ōwakudani</name><Point><coordinates>139.020300,35.244000,0</coordinates></Point></Placemark>
+<Placemark><name>4. Tōgendai</name><Point><coordinates>139.012200,35.222500,0</coordinates></Point></Placemark>
+<Placemark><name>5. Moto-Hakone Port</name><Point><coordinates>139.026100,35.191800,0</coordinates></Point></Placemark>
+<Placemark><name>6. Hakone Shrine</name><Point><coordinates>139.025700,35.204300,0</coordinates></Point></Placemark>
+<Placemark><name>7. Ryokan · Hakone-Yumoto</name><Point><coordinates>139.104600,35.231800,0</coordinates></Point></Placemark>
+<Placemark><name>Day 4 route</name><Style><LineStyle><color>ff00aaff</color><width>3</width></LineStyle></Style><LineString><coordinates>139.105700,35.232500,0 139.048300,35.245200,0 139.020300,35.244000,0 139.012200,35.222500,0 139.026100,35.191800,0 139.025700,35.204300,0 139.104600,35.231800,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 5 2026-11-25 — West to Kyoto · Kiyomizu by night</name>
+<Placemark><name>1. Kyoto Station</name><Point><coordinates>135.758800,34.985800,0</coordinates></Point></Placemark>
+<Placemark><name>2. Hotel · Shijō-Karasuma</name><Point><coordinates>135.759400,35.003600,0</coordinates></Point></Placemark>
+<Placemark><name>3. Sannenzaka</name><Point><coordinates>135.781318,34.996479,0</coordinates></Point></Placemark>
+<Placemark><name>4. Kiyomizu-dera</name><Point><coordinates>135.785000,34.994900,0</coordinates></Point></Placemark>
+<Placemark><name>5. Yasaka Shrine</name><Point><coordinates>135.778500,35.003600,0</coordinates></Point></Placemark>
+<Placemark><name>6. Hotel · Shijō-Karasuma</name><Point><coordinates>135.759400,35.003600,0</coordinates></Point></Placemark>
+<Placemark><name>Day 5 route</name><Style><LineStyle><color>ffaa00aa</color><width>3</width></LineStyle></Style><LineString><coordinates>135.758800,34.985800,0 135.759400,35.003600,0 135.781318,34.996479,0 135.785000,34.994900,0 135.778500,35.003600,0 135.759400,35.003600,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 6 2026-11-26 — Bamboo at dawn · Nishiki at dusk</name>
+<Placemark><name>1. Hotel · Shijō-Karasuma</name><Point><coordinates>135.759400,35.003600,0</coordinates></Point></Placemark>
+<Placemark><name>2. Arashiyama Bamboo Grove</name><Point><coordinates>135.671600,35.017000,0</coordinates></Point></Placemark>
+<Placemark><name>3. Tenryū-ji</name><Point><coordinates>135.673800,35.015800,0</coordinates></Point></Placemark>
+<Placemark><name>4. Togetsukyō Bridge</name><Point><coordinates>135.677900,35.012800,0</coordinates></Point></Placemark>
+<Placemark><name>5. Nishiki Market</name><Point><coordinates>135.764800,35.005000,0</coordinates></Point></Placemark>
+<Placemark><name>6. Pontochō</name><Point><coordinates>135.771213,35.004246,0</coordinates></Point></Placemark>
+<Placemark><name>7. Hotel · Shijō-Karasuma</name><Point><coordinates>135.759400,35.003600,0</coordinates></Point></Placemark>
+<Placemark><name>Day 6 route</name><Style><LineStyle><color>ff777777</color><width>3</width></LineStyle></Style><LineString><coordinates>135.759400,35.003600,0 135.671600,35.017000,0 135.673800,35.015800,0 135.677900,35.012800,0 135.764800,35.005000,0 135.771213,35.004246,0 135.759400,35.003600,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 7 2026-11-27 — Torii at dawn · maple valley · lit garden</name>
+<Placemark><name>1. Hotel · Shijō-Karasuma</name><Point><coordinates>135.759400,35.003600,0</coordinates></Point></Placemark>
+<Placemark><name>2. Fushimi Inari Taisha</name><Point><coordinates>135.772700,34.967100,0</coordinates></Point></Placemark>
+<Placemark><name>3. Tōfuku-ji</name><Point><coordinates>135.773800,34.976100,0</coordinates></Point></Placemark>
+<Placemark><name>4. Nanzen-ji</name><Point><coordinates>135.794300,35.011300,0</coordinates></Point></Placemark>
+<Placemark><name>5. Philosopher's Path</name><Point><coordinates>135.795200,35.019300,0</coordinates></Point></Placemark>
+<Placemark><name>6. Eikan-dō</name><Point><coordinates>135.794700,35.014800,0</coordinates></Point></Placemark>
+<Placemark><name>7. Hotel · Shijō-Karasuma</name><Point><coordinates>135.759400,35.003600,0</coordinates></Point></Placemark>
+<Placemark><name>Day 7 route</name><Style><LineStyle><color>ff0000ff</color><width>3</width></LineStyle></Style><LineString><coordinates>135.759400,35.003600,0 135.772700,34.967100,0 135.773800,34.976100,0 135.794300,35.011300,0 135.795200,35.019300,0 135.794700,35.014800,0 135.759400,35.003600,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 8 2026-11-28 — One last pagoda, then home</name>
+<Placemark><name>1. Hotel · Shijō-Karasuma</name><Point><coordinates>135.759400,35.003600,0</coordinates></Point></Placemark>
+<Placemark><name>2. Tō-ji</name><Point><coordinates>135.747600,34.981200,0</coordinates></Point></Placemark>
+<Placemark><name>3. Kyoto Station</name><Point><coordinates>135.758800,34.985800,0</coordinates></Point></Placemark>
+<Placemark><name>Day 8 route</name><Style><LineStyle><color>ffff0000</color><width>3</width></LineStyle></Style><LineString><coordinates>135.759400,35.003600,0 135.747600,34.981200,0 135.758800,34.985800,0</coordinates></LineString></Placemark>
+</Folder>
+</Document></kml>

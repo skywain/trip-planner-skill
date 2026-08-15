@@ -3,6 +3,72 @@
 High-churn facts are marked ⚡ — re-verify at plan time. Everything here is a starting
 point, not a source: it saves searches by telling you what to search for.
 
+**Two directions live in this file.** Most sections are **outbound** — a Chinese
+passport leaving China (visa lines say "Chinese passports need…"). The **China
+(inbound)** section is the reverse: a foreign passport entering mainland China. When
+the traveller is not Chinese, read the visa line of every outbound section as "check
+your own passport", and use the destination-has-no-section rule below for the rest.
+
+**Destination has no section here?** Don't improvise — work the **"Destination not
+listed?" checklist** immediately below, then write what you found into a new section
+here so the next run doesn't pay for it again.
+
+## Destination not listed? — the checklist (as of 2026-08, after the Mexico / Morocco / Turkey / Vietnam tests)
+
+Four consecutive test trips landed on countries with no section here — the whole of
+Latin America, Africa, the Middle East / West Asia, and Vietnam. Every line below is
+something that silently produced a *wrong plan* in at least one of those runs. Phase 1
+reserves its 2-3 extra searches for the lines marked **hard**.
+
+- [ ] **hard — Visa / entry, two official sources, dated.** Check the traveller's actual
+  passport against the destination's MFA or immigration site *and* their own foreign
+  ministry; write "as of <month>, verify before booking". Rules flip: Turkey went
+  visa-free for Chinese ordinary passports on 2026-01-02 and the old "e-Visa" answer is
+  still all over the web. **The assembler owns this line — city subagents must not
+  decide visa questions** (on the Turkey test both of them returned the stale answer and
+  put it first on the checklist, which is the expensive kind of wrong).
+- [ ] **Currency: closed or convertible, and does the FX source carry it?**
+  `frankfurter.dev` carries exactly **30 currencies** (checked 2026-08: no MAD, no VND)
+  and **silently drops** a symbol it doesn't have — HTTP 200, key just missing, so an
+  unchecked run prices the trip in the wrong money. Count the keys you asked for.
+  Fallback `open.er-api.com` (keyless), reason noted in `meta.fx`. Closed currencies
+  (MAD, TND, DZD…) can't be bought before or carried out after — say so in the brief.
+- [ ] **hard — Holidays: can the source see religious ones?** `date.nager.at` returns
+  fixed-date **secular** holidays only. Muslim countries: Ramadan, Eid al-Fitr, Eid
+  al-Adha, Islamic New Year and Mawlid all move on the Hijri calendar — one separate
+  search. Same for lunar/Buddhist calendars (Tết, Songkran, Vesak). And the reverse trap:
+  Día de Muertos is *not* a statutory holiday, yet flights, buses and hotels price like
+  one. "The API says no holiday" is not "no crowds".
+- [ ] **Regional and school holidays.** nager's `counties` field carries state-level days;
+  school breaks appear in no API at all, and they are what move hotel prices.
+- [ ] **hard — Time zone and DST, before any prose.** Run `route_tools sun --write`
+  *first*, then write every sunrise/sunset/golden-hour line against its values — Morocco
+  moved to permanent UTC+0 on 2026-09-20 and ten days of hand-written times were an hour
+  out, invisible to `qc`, `check` and the renderers. Check intra-country splits too.
+- [ ] **Transit card and passes, with the break-even.** Name the card (Istanbulkart,
+  Suica, Opal, T-money, Rejsekort…) and say on which ride or day it pays back; price
+  museum passes against the actual anchor list, not the brochure.
+- [ ] **Weekly rhythms of worship and markets.** Friday midday prayer shuts mosques and
+  madrasas to visitors ~12:00-14:30 across Muslim countries; Istanbul's covered bazaars
+  close Sundays; museums close Monday or Tuesday; Sunday morning belongs to Mass. Fix the
+  weekly pattern *before* pinning anchors — it reshuffles the whole route.
+- [ ] **Local ride app, payment, SIM.** Which app actually works (Grab, BiTaksi, Bolt,
+  DiDi, Uber-on-licensed-taxis), how cash-first the country really is, and whether a
+  local SIM is a trap — Turkey IMEI-blocks an unregistered foreign handset after ~120
+  days, so eSIM or roaming.
+- [ ] **Driving licence and insurance: the 1968 Vienna Convention test.** An IDP is only
+  recognised where both countries are parties. **China is not a party and issues no IDP**
+  — self-driving or riding anything over 50 cc is unlicensed driving, and the insurer
+  refuses the claim outright. Answer with pillion seats, drivers and bicycles, never
+  "just rent a scooter". (US: no treaty either — licence + notarised translation.)
+- [ ] **Intercity ticket release windows, each with its own date on the checklist.**
+  Vietnam rail 60 days, China 12306 15 days, Japan JR 1 month, Trenitalia/Italo 90-120
+  days, Norway Vy ~90 — plus night-bus operators and seasonal ferry timetables.
+- [ ] **Travel advisory, and what the insurance must cover.** Read the traveller's own
+  foreign ministry (Auswärtiges Amt, travel.gc.ca, 中国领事服务网), then check the policy
+  does not exclude the thing the trip is built on — ballooning, diving, motorbike
+  pillion, altitude — and that it carries repatriation where hospitals want cash up front.
+
 ## Japan
 - Transit: Suica/ICOCA in Apple Wallet works for visitors ⚡; Google Maps transit is
   reliable countrywide.
@@ -20,6 +86,32 @@ point, not a source: it saves searches by telling you what to search for.
 - Luggage on move days: takkyubin (ヤマト等) hotel→hotel is usually **next-day** — book
   it the evening before and keep an overnight kit; station coin lockers, especially the
   large ones at Kyoto/Tokyo/Shinjuku, are gone by mid-morning in peak season.
+- **IC cards** (added 2026-08 after the London→Japan test): Suica / PASMO / ICOCA are
+  interchangeable nationwide for metro, JR local, buses and konbini — one card, any
+  region. Visitors: Apple Wallet Suica/PASMO (top up with a foreign card ⚡, no
+  physical card needed) or a Welcome Suica at the airport ⚡ (physical-card sales were
+  rationed 2023-24 and still come and go — check). An IC card does **not** cover
+  Shinkansen reserved seats or limited-express surcharges: those are separate tickets.
+- **Shinkansen booking window**: JR reservations (Smart-EX / EX app, JR West/East
+  sites, station counters) open **1 month before the travel date at 10:00 JST** ⚡ —
+  earlier for nothing. Ordinary days: 1-3 days out is fine; koyo weekends, Golden
+  Week, Obon and the New-Year run sell the good trains on day one. Suitcases over
+  **160 cm** (L+W+H) on the Tokaido/Sanyo/Kyushu Shinkansen need the free
+  "oversized baggage" seat reservation ⚡ or you pay a fee on board — say so on
+  every Shinkansen move day.
+- **Autumn (紅葉) season**: Kyoto colour peaks roughly mid-to-late November ⚡ (the
+  koyo forecast pages move it by a week each year — verify in September). Temple
+  night illuminations (Kiyomizu, Eikan-dō, Kōdai-ji…) run fixed date windows and
+  ticket separately ⚡. **Labour Thanksgiving Day, 23 November** is a national
+  holiday — when it lands on a Monday, Monday-closed museums close **Tuesday**
+  instead (rule above), and the three-day weekend is a domestic-crowd peak.
+- **Geocoding Japanese places is unreliable** — Nominatim is weak on Japanese names,
+  and *wrong* is worse than *missing*: on the 2026 test `Gōra Station` resolved
+  ~600 m off and `Sannenzaka` landed on a guesthouse named after the street, both
+  silently. Hand-fill `lat/lon` for anything you already know (temples, stations,
+  markets), read every resolved `display_name` against the query, and re-query
+  with the Japanese name (`強羅駅`, `産寧坂`) before trusting a hit — see
+  navigation.md "Geocoding discipline".
 
 ## Korea
 - Google Maps directions are crippled — plan with Naver Map (EN ok) or Kakao Map.
@@ -30,6 +122,52 @@ point, not a source: it saves searches by telling you what to search for.
 - Grab is the city-transport default; 12go.asia for intercity bus/train/ferry.
 - Temples: shoulders/knees covered; schedule temples 08:00-11:00 and beat the heat.
 - Onward-ticket rules enforced unevenly ⚡ — check before booking one-ways.
+- **Vietnam has its own section below** — the visa, licence and FX traps there are not
+  generic to the region.
+
+## Vietnam (as of 2026-08, after the Shenzhen→Vietnam test)
+- **e-Visa from the government portal only — `evisa.gov.vn`**: US$25 single / US$50
+  multiple, up to **90 days**, **3-5 working days** (7-10 in peak) ⚡, all nationalities
+  including Chinese passports. The first screen of search results is agencies charging
+  US$20-60 on top, so name the official site. The approval is a **PDF you must print** —
+  the counter wants paper. Submit ~3 weeks out. Never fill the form for the user.
+- **Driving licence — the trap that voids the insurance.** Vietnam recognises only IDPs
+  issued under the **1968 Vienna Convention**; **China is not a party and issues no IDP**,
+  so riding anything over 50 cc is unlicensed driving — fines to ₫5 M and, far worse,
+  **the travel/medical policy refuses the claim in full**. The obvious answer ("rent a
+  scooter") is wrong: pillion tours with a licensed driver, or a bicycle — say why in
+  `decisions` and `brief.safety`.
+- **VND is not in frankfurter.dev and the API drops it silently** — `symbols=VND,USD`
+  returns HTTP 200 with only USD, so an unchecked run quietly prices the trip in dollars.
+  Use `open.er-api.com` and count the keys. Mental rate ₫10,000 ≈ ¥2.6 (2026-08 ⚡).
+- **Night trains: `dsvn.vn`**, the official railway site — cheaper than agents, foreign
+  passports can book, passport at the counter. **Sales open 60 days ahead** ⚡: that date
+  goes on the checklist. Hanoi→Đà Nẵng **SE** (SE19 dep ~19:50, arr ~12:35 next day,
+  15.5-17 h ⚡, soft sleeper US$45-55 pp) kills a hotel night, a flight and a travel day —
+  but only on that leg; Đà Nẵng→Saigon is a 1 h 20 flight against 15 h of rail.
+- **Hạ Long: 2D1N boat vs day trip is arithmetic, not taste.** The day trip spends ~6 h on
+  the road for ~4 h of water; the overnight buys sunset, stars and the morning bay and
+  replaces a Hanoi hotel night, at US$105-160 pp + US$20-40 transfer ⚡ (~13% of a
+  mid-budget trip). Lan Hạ Bay: same class, US$20-50 less, fewer boats. Confirm transfers
+  included, big bags on board (they are), kayak included.
+- **December is three climates in one trip**: Hanoi/Hạ Long 19-24 °C, one rain day in ten;
+  **Hội An / Đà Nẵng 24-26 °C with rain on all ten days, ~137 mm** — the tail of the
+  central wet season, so both Hội An days need a rain plan *and* a "Thu Bồn floods the old
+  town → move the block north to Đà Nẵng" escape; Saigon 28-31 °C dry with afternoon
+  showers. Sunset ~17:15-17:35 mid-December — nothing outdoors after 17:00.
+- Holidays: four statutory days (1 Jan, 30 Apr, 1 May, 2 Sep) plus **Tết** on the lunar
+  calendar, so most windows are clear — but Christmas, *not* a holiday, packs the church
+  districts on 24-25 Dec, and December opens the western high season (boats and Hội An
+  homestays +15-30% over November ⚡). Hội An's lantern night is the 14th of the **lunar**
+  month — check the lunar date, not the guidebook photo.
+- Money and apps: cash society (street food, basket boats, markets, xe ôm); ATM fees
+  ₫50-165k or 2-5% with ₫2-5 M local-bank caps → fewer, larger withdrawals. **No tipping
+  culture**, but ₫50-100k lands well with boat crew and drivers. **Grab** is the ride/food
+  default. ₫20,000 and ₫500,000 are both blue polymer notes: count the zeros.
+- Streets: the motorbike flow does not stop — cross at a steady, straight, unhurried pace
+  and let it part around you; stopping mid-road is the dangerous move. Phone-snatching
+  from bikes is the real Saigon risk. Low-cost domestic carriers sell **bare fares with no
+  checked bag** — buy the 20 kg at ticketing, it doubles at the airport.
 
 ## Italy / Spain / France
 - Rail: book Trenitalia/Italo, Renfe, SNCF directly 2-4 months out — high-speed fares
@@ -42,6 +180,40 @@ point, not a source: it saves searches by telling you what to search for.
   small-town Italy.
 - City tourist tax is collected at the hotel, sometimes cash-only — put it in the budget.
 - August: locals on holiday — Paris/Madrid partially shut, coasts jammed ⚡.
+
+## Italy — Rome / Florence / Venice specifics (as of 2026-08, after the Singapore→Italy test)
+- Entry: **Singapore (and most treaty) passports are Schengen visa-free, 90 days in
+  any 180**; Chinese passports need a Schengen visa from the country of main stay
+  (see Nordic). Two schedule-shaping rules on top of the visa question: **EES**
+  (biometric entry/exit registration, live since 2026-04-10 ⚡ — first-time entry
+  takes face + four fingerprints, budget +60 min at the border) and **ETIAS**
+  (official line: launches Q4 2026, mandatory from 2027-01-01 ⚡) — a trip in that
+  window gets a "re-check the official ETIAS page 1 month before departure" checklist
+  item, not a guess either way.
+- **Closure days differ by museum, not by city**: Uffizi, Accademia, Galleria
+  Borghese, Capitoline Museums, Doge's Palace side rooms → **Monday**; **Peggy
+  Guggenheim (Venice) → Tuesday**; Vatican Museums → Sunday (except the free last
+  Sunday); Colosseum/Forum open daily. The Italy test's worst self-check catch was a
+  Tuesday rain alternative pointing at the Peggy Guggenheim — run every rain/swap
+  target through the same day-of-week check as the anchors, and put the Monday
+  closure day to work as the transfer day.
+- **Rail release windows**: Trenitalia (Frecciarossa/Frecciargento) opens sales
+  roughly **90-120 days out** and Italo about the same ⚡ — Super Economy buckets on
+  Rome–Florence–Venice can be a third of the walk-up fare and are gone weeks ahead
+  in October; book the exact train (seat reservation is compulsory on the Frecce),
+  and expect foreign cards to fail sometimes → Omio/Trainline as fallback with markup.
+- **Venice access fee** (Contributo di Accesso): day-visitors pay on a published
+  calendar of peak dates (spring–summer weekends and holidays; €5 booked ahead,
+  higher if paid late ⚡ — the calendar changes every year), overnight guests are
+  exempt but must hold the exemption/hotel registration. Look up the year's date list
+  on the Comune's official page and say for each Venice day whether it is a fee day.
+  Also: no vaporetto in the small hours — an early VCE departure needs a **pre-booked
+  water taxi** (~€100-150 ⚡) written into the plan the night before.
+- **Holy days and dress**: churches keep to the Mass schedule (Sunday morning is for
+  worshippers; feast days such as 1 Nov, 8 Dec and Easter week close museums or shift
+  hours ⚡), and enforce the dress code at the door — St Peter's, the Duomo of
+  Florence and San Marco turn away shoulders/knees/hats. Every worship-site block
+  carries the one-line dress note (scheduling.md Traps).
 
 ## USA
 - Entry: VWP/ESTA covers treaty passports only — **Chinese passports need a B1/B2
@@ -57,6 +229,291 @@ point, not a source: it saves searches by telling you what to search for.
 - Sports tickets: team site first, then SeatGeek/StubHub resale — marquee fixtures
   (Messi, playoffs) run 3-10× ⚡; kickoff times can shift for TV after on-sale ⚡.
 - Distances are the trap — one region per 10-15 days.
+
+## Mexico — CDMX / Oaxaca, Día de Muertos (as of 2026-08, after the Berlin→Mexico test)
+- Entry: German and most EU/UK/US/CA/AU/JP passports are **visa-free for tourism up to
+  180 days**; passport valid ≥6 months, a national ID card is not accepted. Chinese
+  passports need a Mexican visa *or* qualify on a valid US/Schengen/UK/CA/JP visa ⚡ —
+  verify, this is one of the routes that changes.
+- **There is no paper FMM by air any more.** Entry is the digital **FMMd**: biometric
+  passports use the **E-Gate at AICM**, and what you leave with is a printed slip and/or a
+  stamp carrying the entry date and days granted — photograph it, and pull the FMMd PDF
+  from the INM site if you need to prove status for a car rental or hotel ⚡. Sites selling
+  an "FMM tourist card" for a flight are selling the land-border form.
+- **Día de Muertos (1-2 Nov) is NOT a statutory holiday** — nager.at returns zero federal
+  holidays across the window (nearest: Revolution Day, 16 Nov) — yet domestic flights, ADO
+  buses and Oaxaca hotels fill and price like one. "No holiday" is not "no crowds".
+- **The two cities peak on different nights**, which is what makes a combined route work:
+  CDMX takes the Saturday Reforma parade, the Coyoacán ofrendas and the marigold canyon at
+  the **Mercado de Jamaica** in the last week of October; Oaxaca takes 1 Nov (Angelitos,
+  Comparsa de Catrinas, first vigils) and 2 Nov (panteones fill from the afternoon,
+  comparsas after dark). ⚡ **The CDMX parade date is published only ~6 weeks out**
+  (cultura.cdmx.gob.mx — unpublished on 2026-08-15; historically a Saturday in the window)
+  → build the day so it works either way, with a swap tag and a rain_alt, not a guess.
+- **Oaxaca 1-5 Nov is the hardest booking on the trip**: the trade line is "book by May",
+  by August the centro is largely gone and rates run 2-3× ⚡. Take Jalatlaco or the Santo
+  Domingo fringe rather than holding out for the Zócalo.
+- CDMX↔Oaxaca: **fly (1 h 05) rather than ADO (6.5-7 h)** on festival days — ADO GL/Platino
+  stays as the comfortable budget backup, booked at ado.com.mx, never a reseller. 1 Nov is
+  one of the busiest domestic flying days of the Mexican year ⚡.
+- **INAH raised admissions on 1 January 2026** and adjusts every January: foreign-visitor
+  rate at flagship sites ~MX$210 ⚡, with separate local pricing. Museo Frida Kahlo (Casa
+  Azul) is **online timed tickets only — no door sales**, closed Mondays.
+- Closure days are per museum: Monday for Antropología, Bellas Artes and Casa Azul;
+  **Tuesday** for the Museo Vivo del Muralismo at the SEP. Run rain alternatives through
+  the same day-of-week check as the anchors.
+- **Uber and DiDi have been barred from AICM pickups since March 2026** ⚡ — authorised
+  sitio taxis at the airport, app cars everywhere else, never a street taxi at arrivals.
+- Cash for markets, cemeteries, colectivos, comparsa stalls, church donations and every
+  tip; bank ATMs (Santander/Banorte/BBVA), and decline the machine's own currency
+  conversion. Tipping 10-15% — check whether *propina* is already on the bill.
+- Altitude and cold nights: CDMX sits at 2,240 m, so the first day feels thin and the
+  nights want a jacket; Monte Albán at midday has no shade. Late Oct – early Nov is the
+  dry sweet spot (~24/10 °C, near-zero rain, ~11 h of daylight).
+- Manners at the cemeteries: a family occasion, not a show — ask before photographing, buy
+  candles and marigolds at the gate stalls, don't step over a grave. Comparsa routes and
+  cemetery hours are set locally days ahead ⚡: ask the hotel, don't promise a time.
+  Travel-medical insurance **with repatriation** is not the line to skip — private
+  hospitals expect cash on the spot and consular help is billed back.
+
+## Australia (as of 2026-08)
+- Entry: the ETA (subclass 601) and eVisitor (651) are for listed passports only —
+  **Chinese passports need Visitor visa subclass 600** (tourist stream, online via
+  ImmiAccount, immi.homeaffairs.gov.au; fee ~AUD 200 ⚡ — the site 403s scrapers, read
+  it in the browser pane). Processing: 90% of applications in **~33 days** ⚡ (official
+  processing-time page) — for a trip 6-8 weeks out this is the tightest deadline in
+  the whole plan and goes to the top of the checklist. Passport valid for the stay;
+  no onward-ticket rule, but be ready to show one.
+- **Daylight saving splits the country**: NSW/VIC/ACT/SA/TAS switch on the **first
+  Sunday of October** (02:00 → 03:00; ends first Sunday of April); **QLD, NT and WA
+  do not**. From that Sunday, Sydney/Melbourne run 1 h ahead of Brisbane/Cairns —
+  re-check every SYD↔QLD flight, tour pickup and phone-call time across the switch,
+  and fetch sun times on both sides of it (scheduling.md rule 7).
+- Public holidays are **state-level** — nager.at returns them with a `counties`
+  field, read it: the **first Monday of October** is Labour Day in NSW/ACT/SA *and*
+  King's Birthday in QLD (a double long weekend; long-weekend hotel/tour surge in
+  both states). Melbourne Cup Day (first Tuesday of November) is VIC-only.
+- **School holidays** move prices and reef-boat availability more than public
+  holidays: NSW spring break runs the last week of September into the first ~2 weeks
+  of October (2026: 28 Sep–9 Oct ⚡, education.nsw.gov.au); QLD's is a week earlier
+  (⚡ qed.qld.gov.au). Not visible in any holiday API — one search per state.
+- Sydney transit: **Opal card or just tap a contactless card/phone** on trains, ferries,
+  light rail, buses (transportnsw.info); daily/weekly caps apply automatically. Blue
+  Mountains by train from Central (~2 h, Opal) — no car needed for Sydney + Blue
+  Mountains. Cairns: day tours include hotel pickup; no useful transit.
+- **Seasonal shutdowns are real and per-venue** — Skyrail Rainforest Cableway runs
+  reduced loops / full closure days for maintenance in some spring windows ⚡
+  (skyrail.com.au notices page); Kuranda Scenic Railway likewise. Check the official
+  page for the exact dates before pinning any Kuranda day.
+- Great Barrier Reef boats (Cairns/Port Douglas): outer-reef pontoon days are
+  **date-sensitive** — capacity, weather cancellations, and stinger season from ~Nov
+  ⚡; book the specific date and keep the next day free as weather backup. Prices on
+  operator sites (sunlover.com.au, quicksilver-cruises.com…) beat aggregators.
+- Money: cards everywhere, cash nearly unnecessary; tipping not expected. Sun index
+  is extreme even in spring — build shade/hat/water into hikes.
+
+## Nordic — Norway first; Sweden / Denmark / Finland notes (as of 2026-08)
+- Entry: all four are Schengen. **Chinese passports need a Schengen visa, lodged with
+  the country of main stay** (most nights; ties → first entry) — Norway via
+  VFS Global for the Norwegian embassy (udi.no); ~15 calendar days nominal, apply
+  4-8 weeks out ⚡. Travel insurance ≥ €30k mandatory for the application.
+- Rail: **Vy** (vy.no) — Oslo–Bergen line **minipris** fares open ~90 days ahead ⚡
+  and sell in buckets; the Bergen Railway + Flåm Railway (Flåmsbana, visitflam.com)
+  are the classic pairing. Sweden: SJ (sj.se); Denmark: DSB (dsb.dk); Finland: VR
+  (vr.fi). Oslo airport → city: **Flytoget 19-20 min** (flytoget.no) or the ordinary
+  Vy regional train at half the price, ~23 min — do NOT trust distance-based transit
+  estimates here.
+- **Fjord boats thin out fast in autumn**: Flåm–Gudvangen (Nærøyfjord) and similar
+  cruises drop to reduced timetables around **1 Sep – 15 Oct** and many stop
+  mid-October ⚡ (norwaysbest.com / the operator's own timetable). Verify the sailing
+  for the *specific date* before pinning a Norway-in-a-nutshell day; the whole day
+  hangs on one departure.
+- Museums: many close **Mondays** (Oslo and Bergen both) — never put a museum in a
+  Monday's rain alternative without checking. Opening hours shorten from October.
+- Money: **effectively cashless** — card/phone everywhere including buses and public
+  toilets; keep no NOK/SEK/DKK cash. Norway is outside the EU: **tax-free refund on
+  purchases ≥ NOK 315** per shop per day (Global Blue / Planet, refund at departure).
+- **Autumn school break (høstferie) is invisible to holiday APIs** — Norway has no
+  public holiday in October, yet hotels and cabins price up by region: **Oslo /
+  eastern fylker take week 40, Bergen / Vestland week 41** ⚡ (dates per fylke on
+  the county or kommune school calendar; Sweden's höstlov is week 44, Denmark's
+  efterårsferie week 42, Finland's syysloma weeks 42-43 by region). One search per
+  fylke you sleep in; expect prices up and family attractions busy.
+- **Aurora honesty**: at 60°N (Oslo, Bergen, Flåm) in early October, a single-night
+  sighting needs Kp≥6 — roughly 5-10% per night. Say so; sell it as a bonus with a
+  "look north after 22:00 if the sky is clear" note, not as an itinerary item.
+  Real aurora trips go to Tromsø (69°N) from late September.
+- Sun and weather: 60°N early October ≈ 07:20 sunrise / 18:50 sunset and losing ~5
+  min a day; Bergen averages >200 rain days a year — every Bergen day gets an indoor
+  rain alternative and the fjord day gets a weather-backup date.
+- Regional notes: Stockholm — SL tap-to-ride, archipelago boats also seasonal ⚡;
+  Copenhagen — Rejsekort or contactless, city very bikeable; Helsinki — HSL app,
+  ferry to Tallinn is a valid day trip.
+
+## Turkey (as of 2026-08, after the Shanghai→Turkey test)
+- **Entry — this one flipped recently. Chinese ordinary passports have been visa-free
+  since 2026-01-02**, tourism and transit, ≤90 days in any 180 ⚡. Two official sources
+  agree (Turkish MFA visa page; Chinese embassy in Ankara notice of 2026-01-12), checked
+  2026-08 — **verify again before booking**; the old "e-Visa, and only if you already hold
+  a Schengen/US/UK visa" answer is dead but still everywhere online, and work/study still
+  need a visa. Passport ≥6 months + a blank page; the border may spot-check a printed
+  return ticket, hotel bookings, itinerary and a physical credit card. **The assembler
+  decides this line, not the city subagents** — both of them returned the stale answer.
+- Holidays: nothing statutory in early October — Republic Day is **29 Oct**, Ramadan 2026
+  fell in March. On a Chinese Golden Week trip the pressure is all on the outbound ticket,
+  not on the ground ⚡. Watch instead for event weeks that move one town's beds (Cappadocia
+  Ultra-Trail, mid-October, date published late ⚡).
+- **Istanbulkart**: ~165 TL card fee (non-refundable) + top-up, on metro, tram, bus, ferry
+  and funicular; a ride is ~42-46 TL against ~60 TL for a single ⚡, so it pays back on the
+  4th ride — at 2-4 rides a day, top up per ride rather than buying a daypass.
+- Tickets run through **muze.gov.tr**. Hagia Sophia charges foreigners separately for the
+  **upper-gallery visitor route** (~€25 ⚡) and the Istanbul Museum Pass does **not** cover
+  it; Topkapı is one combined ticket with the Harem included (~2,750 TL ⚡), closed
+  Tuesdays. Price **Museum Pass Türkiye / Cappadocia** against the real anchor list ⚡.
+- **Weekly rhythm**: Friday midday prayer closes working mosques to visitors — Hagia Sophia
+  before 12:00, Blue Mosque after ~14:45 — and **Kariye/Chora closes to visitors all
+  Friday**. The **Grand Bazaar and Spice Bazaar close on Sundays**.
+- **Balloons (Cappadocia)**: book 4-8 weeks out ($320-450 pp ⚡). The call is made at
+  03:00-05:00 and flights are scrubbed for wind >10 km/h, rain, fog, snow or storms →
+  **100% refund or a free move to the next morning**, so the route must hold a **second
+  Cappadocia dawn as the standby window** and the operator must be told which evening you
+  leave. October is the golden month and also the windy one.
+- **Night buses** (obilet.com; Kamil Koç / Süha / Metro / Pamukkale Turizm) save a hotel
+  night and a whole day. Pin down three things: whether you change at the Nevşehir
+  *otogar*, whether the free *servis* shuttle is included, and the real arrival time.
+  Station **emanet** left-luggage exists at most otogars but hours and price need
+  confirming on arrival ⚡ — the whole post-night-bus day hangs on it.
+- Domestic flights fill what rail doesn't: IST→Nevşehir (NAV) or Kayseri (ASR) for
+  Cappadocia, Denizli (DNZ)→IST for Pamukkale. ⚠️ **AJet flies DNZ into Sabiha Gökçen
+  (SAW), not IST** — with a European-side hotel that is the wrong airport.
+- **Phone: eSIM or roaming, not a local SIM** — Turkey **IMEI-blocks** an unregistered
+  foreign handset after ~120 days on a Turkish SIM ⚡. Google Maps works normally, so the
+  skill's map deep links are fine; expect occasional throttling of social platforms, and
+  venue Wi-Fi that wants a Turkish number.
+- Money: the lira inflates fast — don't pre-buy cash. Cards are near-universal (UnionPay is
+  not: carry Visa/Mastercard); withdraw at Ziraat / İş Bankası and **always choose to be
+  charged in lira**, never the machine's own conversion. Cash for bazaar haggling, dolmuş,
+  çay, toilets and tips (restaurants 5-10%).
+- Dress and terrain: mosques want covered knees and a headscarf for women, shoes off at the
+  door; Pamukkale's travertines are **barefoot-only** (dry bag + quick towel); Uçhisar
+  castle has no railings and the Red Valley sand is loose. Check the insurance does **not**
+  exclude ballooning — many basic policies do, and it is the centrepiece of the trip.
+
+## Morocco (as of 2026-08, after the Toronto→Morocco test)
+- Entry: Canadian, EU, UK, US, AU/NZ and Japanese passports are **visa-free for 90 days**;
+  Chinese passports too ⚡ — verify. Passport valid ≥6 months beyond departure; the only
+  paperwork is the arrival card handed out on the aircraft, and the one thing to check is
+  that you actually got the stamp.
+- **MAD is a closed currency** — you cannot buy it before you go or change it back after
+  you leave. Draw cash in the CMN arrivals hall and spend the last of it at the airport.
+  **frankfurter.dev does not carry MAD** (30-currency list) → `open.er-api.com`, keyless,
+  with the reason written into `meta.fx`.
+- **Clocks: Morocco left permanent UTC+1 for permanent UTC+0 on 2026-09-20** (tzdata
+  2026c) ⚡ — the old Ramadan-only shift is gone. On the test, sunrise/sunset written from
+  general knowledge was an hour off for all ten days and nothing in `qc`/`check` caught it:
+  **run `sun --write` before any golden-hour prose**, and re-check the offset nearer the
+  date. Early-to-mid November: sunrise 06:37-07:00, sunset 17:18-17:39 → golden hour from
+  ~16:50, dark by ~18:05. Desert nights ~12 °C; the Rif (Chefchaouen) is where the rain is.
+- **date.nager.at returns only fixed-date secular holidays for Morocco** (Green March
+  6 Nov, Independence Day 18 Nov) and **lists no Islamic feast at all** — Ramadan, Eid
+  al-Fitr, Eid al-Adha, the Islamic New Year and Mawlid need a separate Hijri-calendar
+  search ⚡. The Marrakech film festival (late Nov ⚡) doubles hotel rates while being no
+  holiday at all.
+- **Friday is the weekly rule**: midday prayer closes Bou Inania and similar madrasas and
+  mosques to visitors and slows everything ~12:00-14:30 — pin the Fes medina day to a
+  Thursday and let Friday be the moving day.
+- Intercity: **ONCF** rail (oncf.ma) — Casablanca airport is on the line, so the arrival-day
+  run south is a train at a fifth of a private transfer. **CTM** (ctm.ma) and **Supratours**
+  are the reserved-seat coaches with a luggage hold; local buses reserve nothing.
+  Chefchaouen has neither airport nor rail — the exit is a bus, or Tangier + one flight.
+- **Marrakech→Fes across the High Atlas is a 3-day private-car job**, not a shared minibus:
+  Tizi n'Tichka, the Dades hairpins and the Erg Chebbi sunrise are exactly the stops a
+  17-seat group tour drives past. Get three things in writing: (a) it **ends in Fes**, not
+  back in Marrakech; (b) a private vehicle; (c) which camp ("luxury" = ensuite tent).
+  Merzouga→Fes is a real **7.5-8 h** ⚡, not the 6 h operators quote. At the camp there is
+  no mains power and no signal — charge in Merzouga, carry a battery, and leave the big bag
+  padlocked at the auberge with only a daypack on the camel.
+- Money and manners: cash for souks, petit taxis, tannery terraces, camel guides and every
+  photograph. Tipping is structural and always in dirham: MAD 10-20 porter, 20-50 terrace,
+  100-150 half-day guide, 300-500 for the desert driver at the end. Bargain in the souks,
+  not in shops with marked prices.
+- Medina friction: unofficial "guides" at the Fes gates and the tanneries, and the
+  taxi-meter argument — agree the price first or insist on the meter; "la, shukran" and
+  keep walking, engaging does not work. GPS drifts badly under the reed-roofed souks, so
+  offline maps and the trip KML matter here more than usual.
+- Connectivity and cover: eSIM on **INWI or Maroc Telecom** (they have the Atlas road and
+  Merzouga; Orange is city-only), plugs C/E at 220 V. Insurance needs **medical
+  evacuation** — hospitals expect immediate cash payment, and two nights of this route are
+  4+ hours from a major hospital.
+
+## China (inbound) — foreign passport entering mainland China (as of 2026-08, after the NYC→Xi'an/Beijing test)
+- **Visa — check the category before anything else.** The much-advertised **240-hour
+  visa-free transit** requires an onward ticket to a **third** country/region within
+  240 h; a **US round trip (JFK→PEK→JFK) does NOT qualify** → an **L (tourist) visa**
+  via the Chinese Visa Application Service Center of the home country (in-person
+  fingerprints for most applicants, ~4 working days regular service, US passports
+  usually get 10-year multi-entry ⚡). Many European, Australian, NZ, Korean and
+  Japanese passports currently have a **unilateral 30-day visa-free** entry ⚡ — those
+  lists change every few months, so confirm on the embassy site, not a blog. Passport
+  valid ≥6 months. Hotels register foreign guests with the police — pick hotels that
+  accept foreigners (nearly all chains do; some budget/local ones don't ⚡).
+- **Real-name ticketing everywhere.** Rail, flagship museums, the Great Wall and the
+  Forbidden City sell only against a passport number, tickets are non-transferable,
+  and the passport itself is the ticket at the gate. Four different pre-sale clocks
+  ⚡ run in parallel — put each on the checklist with its own date:
+  1. **Rail (12306)**: sales open **15 days** ahead of departure, released in
+     station-specific batches during the day (08:00-18:00 China time) — the
+     Xi'an↔Beijing HSR (¥515 second class, 4.5-6 h ⚡) fills on peak weekends.
+  2. **Forbidden City**: **7 days ahead at 20:00** on the palace's official channel
+     (site / WeChat mini-program), passport-numbered, capped daily; **closed
+     Mondays** (except national holidays). Weekend and holiday slots go in minutes.
+  3. **Great Wall (Badaling / Mutianyu)**: real-name timed reservation, released ~7
+     days ahead ⚡; Mutianyu is the calmer choice, Badaling has the train.
+  4. **Terracotta Army / Shaanxi History Museum / National Museum**: real-name
+     reservation windows of ~7 days ⚡ (Shaanxi History Museum is free and the
+     hardest slot in Xi'an — reserve the minute it opens or take the paid Tang mural
+     ticket). Put the flagship on a **weekday**; the China test reversed its route
+     to land the Wall on a Monday and the Forbidden City on a Tuesday for this reason.
+- **12306 works only in a browser for foreign users** (12306.cn/en; register with
+  passport, verification once — sometimes at the station window; foreign
+  Visa/Mastercard accepted since 2023 ⚡). Trip.com resells with a small fee and takes
+  any card — the fallback when 12306 rejects the card. No 12306 MCP → the browser
+  pane, per data-sources.md.
+- **The Great Firewall shapes the plan.** Google Maps/Search/Gmail/Drive, WhatsApp,
+  Instagram, X and most Western news are blocked; **every Google Maps deep link the
+  skill emits is dead on the ground in China**. Three-part fix, all in the plan:
+  (a) **roaming eSIM/SIM from home** (Airalo/Holafly-type or the home carrier's
+  roaming) — traffic tunnels via the home network so Google works; a **local China
+  SIM or hotel Wi-Fi does not**; put the eSIM at the top of the checklist;
+  (b) build the map links with `route_tools.py links --provider amap` (or `apple` —
+  Apple Maps works in China on Amap data) — see navigation.md "Google Maps is
+  unavailable in some destinations"; (c) **the trip KML in Organic Maps** (offline,
+  no network at all) is the hard fallback and goes into the footer of every China
+  plan. Name 高德 (Amap, has an English mode ⚡) and 百度 as the local apps; Google
+  Translate is blocked too — Apple Translate / an offline pack.
+- **Payment**: Alipay and WeChat Pay accept a **foreign Visa/Mastercard/Amex** bound
+  in the app (International version: single payment ≤ US$5,000, ~3% fee above ¥200
+  ⚡) — set both up before departure and test with a small top-up. Foreign cards at
+  POS terminals are rare outside international hotels; keep some cash (legal tender,
+  taxis and small vendors must accept it) from a Bank of China / ICBC ATM. Metro:
+  the Alipay/WeChat transit code or a Yikatong (Beijing) card; Didi has an English
+  mode inside Alipay.
+- **Winter opening hours switch in mid-November** — a real collision the holiday API
+  can't see: the Forbidden City goes to winter hours on **1 Nov** (last entry
+  ~15:40 ⚡); the **Terracotta Army and Mutianyu switch on 16 Nov** (closing an hour
+  earlier ⚡); many parks and gardens follow. A trip straddling those dates has two
+  sets of hours — put the switch date on the day cards, and sunset (17:00 in
+  Beijing by mid-Nov) closes outdoor sights before the ticket does.
+- **HSR practicalities**: no checked luggage — one big suitcase per person fits the
+  end-of-carriage racks (first come), the overhead takes ~24"; **airport-style
+  security X-ray at the station entrance plus a passport ID gate** (foreign passports
+  usually go through the **manned** lane, not the e-gate ⚡) — arrive 45-60 min
+  before departure, and note that stations are enormous (Beijing West, Xi'an North:
+  10-15 min walk gate to platform). Boarding gates close ~5 min before departure.
+- Holidays: **National Day Golden Week 1-7 Oct** and Spring Festival are the two
+  weeks not to be in China as a tourist; nager.at lists them, but the shifted
+  working days (weekend make-up workdays) around them are not obvious — check the
+  State Council notice ⚡. Beijing/Xi'an in November: dry, cold, occasional smog days.
 
 ## General route math
 - 10-15 days ≈ 8-13 usable days ≈ 2-4 bases; 2-3 bases beats 4 for almost everyone.

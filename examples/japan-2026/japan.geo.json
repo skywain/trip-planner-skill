@@ -1,0 +1,1467 @@
+{
+ "lang": "en",
+ "trip": "Japan 2026 — Tokyo · Hakone · Kyoto (autumn)",
+ "tz": "Asia/Tokyo",
+ "meta": {
+  "dates": "2026-11-21 → 2026-11-28",
+  "party": "2 adults, UK passports, no car",
+  "route": "London → Tokyo → Hakone → Kyoto → Osaka (KIX) → London (open-jaw)",
+  "budget_total": "£4,300 – £6,200 for two, all in (midpoint ≈ £5,200)",
+  "fx": "£1 = ¥215.25 = $1.3537 (ECB via frankfurter.dev, 2026-08-14)",
+  "generated": "2026-08-15",
+  "self_check": "self-checked: 9 issues found and fixed — (1) Shinjuku Gyoen closes Mondays, moved off the 23rd onto Sunday; (2) Tsukiji closes Sundays, moved off the 22nd and its holiday risk flagged with a swap; (3) day 4 mixed an intercity move with 3 anchors, Hakone Shrine demoted to [skippable]; (4) day 5 likewise, the Sannenzaka lanes demoted from anchor to stroll; (5) day 7 held 4 anchors, Nanzen-ji re-cast as the day's optional extra and the Philosopher's Path tagged [skippable]; (6) walking totals rewritten from route_tools check output (day 7 is 7.8 km, at the 8 km ceiling); (7) the Gōra Station geocode came back ~600 m north of the station, hand-corrected; (8) meta.dates carried prose and broke the themed covers' date eyebrow, reduced to a bare span; (9) country-brief keys renamed to readable English headings because two of the three themes print the raw key. Verified-clean, not changed: every last-entry time against its planned arrival, all three rain alternatives against their own closure days, the 3 h airport buffer, open-jaw consistency across flights/hotels/day order.",
+  "headless_note": "Planned headless — no route-skeleton checkpoint was offered. The skeleton below (3 Tokyo / 1 Hakone / 3 Kyoto, open-jaw out of Kansai) was chosen for you; see decisions[].",
+  "window": "8 days on the ground; the LHR departure is 2026-11-20 and the London arrival 2026-11-29 (see legs[])."
+ },
+ "decisions": [
+  "Open-jaw: fly into Haneda, home out of Kansai. It refunds the 2 h 15 Shinkansen backtrack to Tokyo and one more Tokyo hotel night. Cost: there is no nonstop KIX→LHR, so the way home has one connection. If you would rather have the nonstop home, swap day 8 for Kyoto→Tokyo by Shinkansen and a night near Haneda.",
+  "Dates 21–28 Nov chosen against the foliage ramp, not the calendar: Tokyo first (colour still arriving), Kyoto last (Kyoto's 2026 koyo forecast is ~25 Nov – 7 Dec). Going the other way round would have shown you two half-turned cities.",
+  "Three bases in eight days: Tokyo ×3 nights, Hakone ×1, Kyoto ×3. Hakone breaks the ≥2-nights rule on purpose — in Hakone the ryokan (onsen + kaiseki + futon) IS the anchor, and a second night would cost a Kyoto night in peak week.",
+  "No JR Pass. This route earns ~¥16,000 pp of JR travel; the 7-day national pass is ~¥50,000. Point-to-point tickets plus the Hakone Freepass win by a wide margin.",
+  "The two large cases are forwarded Tokyo hotel → Kyoto hotel by takkyūbin on day 4 (~¥2,300 each, next-day). Hakone is done on an overnight bag: the Tozan switchback train, the cable car and the ropeway are all bad places to hold a 23 kg case.",
+  "Monday 23 Nov is a national holiday (Labour Thanksgiving). That day is deliberately a market + garden + temple day inside Tokyo with an 07:30 start, not a Kamakura or Nikkō day trip — domestic crowds hit day-trip towns hardest.",
+  "Named restaurants are not in this plan on purpose; food is given as areas (Nakamise, Omoide Yokochō, Tsukiji, Nishiki, Pontochō). Kyoto restaurant listings churn faster than a plan written three months out can survive."
+ ],
+ "checklist": [
+  {
+   "item": "Travel-medical insurance for two (incl. repatriation)",
+   "deadline": "at the moment you book flights",
+   "price": "£40–80 for two",
+   "link": "https://www.gov.uk/foreign-travel-advice/japan",
+   "note": "the UK has no reciprocal healthcare agreement with Japan — a GHIC is worthless there"
+  },
+  {
+   "item": "Kyoto hotel, refundable, 25–28 Nov",
+   "deadline": "NOW (≈14 weeks out)",
+   "price": "¥30,000–50,000/night",
+   "link": "https://www.booking.com/searchresults.html?ss=Kyoto&checkin=2026-11-25&checkout=2026-11-28&group_adults=2&no_rooms=1",
+   "note": "most 3★+ central Kyoto rooms are gone ~12 weeks before peak koyo week; re-shop 2–3 weeks out"
+  },
+  {
+   "item": "Hakone onsen ryokan with half board, 24–25 Nov",
+   "deadline": "NOW",
+   "price": "¥40,000–70,000 for two, dinner + breakfast included",
+   "link": "https://www.booking.com/searchresults.html?ss=Hakone&checkin=2026-11-24&checkout=2026-11-25&group_adults=2&no_rooms=1",
+   "note": "if either of you has a tattoo, filter for a room with a private bath (kashikiri / 露天風呂付) — most public baths still refuse"
+  },
+  {
+   "item": "Tokyo hotel, Shinjuku, 21–24 Nov",
+   "deadline": "8–10 weeks out",
+   "price": "¥22,000–38,000/night",
+   "link": "https://www.booking.com/searchresults.html?ss=Shinjuku%2C%20Tokyo&checkin=2026-11-21&checkout=2026-11-24&group_adults=2&no_rooms=1"
+  },
+  {
+   "item": "Tōfuku-ji advance ticket (peak-season entry)",
+   "deadline": "when the autumn window opens, ~1 month before",
+   "price": "¥1,000 pp",
+   "link": "https://tofukuji.jp/",
+   "note": "sold via 7-Eleven / the KCB ticket system; strongly recommended for the 25 Nov – 5 Dec peak"
+  },
+  {
+   "item": "Eikan-dō evening illumination",
+   "deadline": "2–3 weeks before",
+   "price": "¥600 pp evening entry",
+   "link": "https://www.eikando.or.jp/",
+   "note": "reservations are advised for weekend evenings; we are on a Friday, which is the softer night"
+  },
+  {
+   "item": "Hakone Freepass (2-day, from Shinjuku) + Romancecar seats",
+   "deadline": "1–2 weeks before",
+   "price": "¥7,100 + ¥1,200 pp",
+   "link": "https://www.odakyu.jp/english/passes/hakone/",
+   "note": "Romancecar seats are reserved and do sell out on autumn weekdays"
+  },
+  {
+   "item": "Shinkansen Odawara → Kyoto, reserved",
+   "deadline": "opens 1 month before, book then",
+   "price": "≈¥12,300 pp",
+   "link": "https://smart-ex.jp/en/",
+   "note": "only a few Hikari services call at Odawara — pick the train first, then the day's start time"
+  },
+  {
+   "item": "Haruka reserved seat Kyoto → KIX (or the ICOCA & HARUKA package)",
+   "deadline": "2 weeks before",
+   "price": "≈¥3,110 pp",
+   "link": "https://www.westjr.co.jp/global/en/ticket/pass/icoca_haruka/"
+  },
+  {
+   "item": "Visit Japan Web — immigration + customs QR codes for both of you",
+   "deadline": "any time before departure, do it a week out",
+   "price": "free",
+   "link": "https://services.digital.go.jp/en/visit-japan-web/",
+   "note": "saves 20–30 minutes at Haneda arrivals on a Saturday morning"
+  },
+  {
+   "item": "eSIM, 8 days / 10 GB ×2",
+   "deadline": "the week before",
+   "price": "£8–12 each",
+   "link": "https://www.airalo.com/japan-esim"
+  },
+  {
+   "item": "Takkyūbin forwarding of the two big cases, Tokyo → Kyoto hotel",
+   "deadline": "hand them to the Tokyo front desk before 10:00 on 24 Nov",
+   "price": "≈¥2,300 per case",
+   "link": "https://www.kuronekoyamato.co.jp/en/",
+   "note": "tell the Kyoto hotel the cases are coming; ask the Tokyo desk to write the Kyoto address in Japanese"
+  },
+  {
+   "item": "Re-confirm every opening time, fee and illumination date",
+   "deadline": "2 weeks before travel",
+   "note": "these dates are >3 months out: what is verified below is the SEASONAL PATTERN, not the published 2026 calendar. Kiyomizu-dera announces its autumn night-viewing dates around September."
+  }
+ ],
+ "legs": [
+  {
+   "type": "international flight",
+   "date": "2026-11-20",
+   "carrier": "⚠️ pick at the link — nonstop LHR→HND is BA / JAL / ANA, ~11 h 50",
+   "from": "LHR",
+   "to": "HND",
+   "dep": "≈13:00",
+   "arr": "next day ≈09:15",
+   "price": "scan cache 2026-08-15: from $1,120 (≈£827) for the query as sent (2 adults) — but the cheapest rows are 30–40 h multi-stop. Budget £1,100–1,600 for two on a nonstop. ⚠️ price + per-pax vs total unverified",
+   "bags": "23 kg checked included on BA/JAL/ANA economy — verify the fare family",
+   "link": "https://www.google.com/travel/flights?q=One%20way%20flights%20from%20LHR%20to%20HND%20on%202026-11-20%20for%202%20adults",
+   "backup": "LHR→NRT nonstop (JAL/ANA/BA/Virgin) — add ~¥3,000 pp and 60–90 min for the Narita Express into town"
+  },
+  {
+   "type": "international flight",
+   "date": "2026-11-28",
+   "carrier": "⚠️ 1 stop — scan best was THAI via BKK, 22 h 15",
+   "from": "KIX",
+   "to": "LHR",
+   "dep": "≈17:25",
+   "arr": "next day ≈06:40",
+   "price": "scan cache 2026-08-15: from $1,338 (≈£988) for the query as sent (2 adults); the 1-stop THAI row was $1,497 (≈£1,106). ⚠️ unverified",
+   "bags": "check the connecting carrier's allowance, not just the first sector",
+   "link": "https://www.google.com/travel/flights?q=One%20way%20flights%20from%20KIX%20to%20LHR%20on%202026-11-28%20for%202%20adults",
+   "backup": "if the KIX connections are ugly: Kyoto → Tokyo Shinkansen (2 h 15) the evening before + nonstop HND→LHR — costs one extra hotel night"
+  },
+  {
+   "type": "limited express",
+   "date": "2026-11-24",
+   "carrier": "Odakyu Romancecar (Hakone-Yumoto bound)",
+   "from": "Shinjuku",
+   "to": "Hakone-Yumoto",
+   "dep": "≈09:00",
+   "arr": "≈10:25",
+   "price": "Hakone Freepass ¥7,100 pp + Romancecar surcharge ¥1,200 pp (¥1,150 as an e-ticket)",
+   "bags": "overhead racks only — this is the leg the big cases are NOT on",
+   "link": "https://www.odakyu.jp/english/romancecar/",
+   "backup": "Odakyu express + change at Odawara — same Freepass, ~20 min slower, no reservation needed"
+  },
+  {
+   "type": "shinkansen",
+   "date": "2026-11-25",
+   "carrier": "JR Tōkaidō Shinkansen · Hikari or Kodama (Shin-Ōsaka bound)",
+   "from": "Odawara",
+   "to": "Kyoto",
+   "dep": "≈10:15",
+   "arr": "≈12:50",
+   "price": "≈¥12,300 pp reserved ⚠️ fare unverified",
+   "bags": "an oversized-baggage seat is only needed above 160 cm total — our cases are already in Kyoto",
+   "link": "https://smart-ex.jp/en/",
+   "backup": "Kodama all the way (≈2 h 50, no transfer) if no Hikari calls at Odawara at the hour you want",
+   "note": "only a handful of Hikari services stop at Odawara — this is the one timetable to check before anything else on day 5"
+  },
+  {
+   "type": "airport express",
+   "date": "2026-11-28",
+   "carrier": "JR Haruka (Kansai Airport bound)",
+   "from": "Kyoto",
+   "to": "KIX",
+   "dep": "≈12:30",
+   "arr": "≈13:50",
+   "price": "≈¥3,110 pp non-reserved",
+   "bags": "large luggage racks at both car ends",
+   "link": "https://www.westjr.co.jp/global/en/ticket/pass/icoca_haruka/",
+   "backup": "Limousine bus Kyoto Station → KIX, ~1 h 30, ¥2,600 pp — better if the Haruka is packed"
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-11-21",
+   "city": "Tokyo",
+   "label": "Touchdown · Asakusa",
+   "walking_km": {
+    "total": 3.2,
+    "how": "route on foot 0.9 (0.7 straight-line ×1.3) + Sensō-ji grounds ~0.8 + Sumida riverside stroll ~1.5"
+   },
+   "ribbon": "Haneda →train 50′→ Shinjuku (bags) →metro 40′→ Sensō-ji →walk 5′→ Nakamise street food →walk 8′→ Sumida riverside →metro 45′→ Shinjuku dinner",
+   "day_map": "",
+   "rain_alt": "Nakamise is arcaded and Sensō-ji's main hall is covered; if it is pouring, drop the riverside and take the Asakusa Underground Shopping Street (Japan's oldest, 1955, all indoors) into an early izakaya on Hoppy Street.",
+   "late_cut": "running >1 h late → drop Sumida Park, then Nakamise. Sensō-ji's grounds never close, so the temple itself is the last thing to go.",
+   "timeline": [
+    {
+     "t": "09:15-10:30",
+     "what": "Land HND Terminal 3 · immigration · baggage · SIM/eSIM on",
+     "kind": "free",
+     "tag": "pinned",
+     "note": "have both Visit Japan Web QR codes screenshotted — airport wifi at 09:00 on a Saturday is a queue of its own"
+    },
+    {
+     "t": "10:30-11:25",
+     "what": "Keikyū + JR · Haneda Airport T3 → Hotel · Shinjuku · ~50 min · ¥630 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.549400%2C139.779800&destination=35.693800%2C139.703600&travelmode=transit"
+    },
+    {
+     "t": "11:25-12:20",
+     "what": "Bags to the hotel (check-in is 15:00) · first konbini run · lunch near the station",
+     "kind": "meal",
+     "tag": "swap→hotel's own café if you are too wrecked to choose"
+    },
+    {
+     "t": "12:20-13:00",
+     "what": "Tokyo Metro · Hotel · Shinjuku → Sensō-ji · ~40 min · ¥210 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.693800%2C139.703600&destination=35.714800%2C139.796700&travelmode=transit"
+    },
+    {
+     "t": "13:00-14:15",
+     "what": "Sensō-ji",
+     "kind": "anchor",
+     "price": "free",
+     "tag": "opener",
+     "note": "grounds open 24 h; the main hall and amulet office run 06:30–17:00 Oct–Mar (pattern as of 2026-08-15). Kaminarimon → main hall → the five-storey pagoda, then the quiet garden behind Denbō-in."
+    },
+    {
+     "t": "14:15-14:25",
+     "what": "Walk · Sensō-ji → Nakamise-dōri · 0.3 km · 5 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.714800%2C139.796700&destination=35.711800%2C139.796500&travelmode=walking"
+    },
+    {
+     "t": "14:25-15:30",
+     "what": "Nakamise-dōri — food area, not a named shop",
+     "kind": "meal",
+     "note": "ningyō-yaki, age-manjū, menchi-katsu; most stalls shut around 17:00. Eat standing at the stall — walking while eating is frowned on here.",
+     "tag": "swap→Hoppy Street (西参道) if Nakamise is a wall of people"
+    },
+    {
+     "t": "15:30-15:40",
+     "what": "Walk · Nakamise-dōri → Sumida Park · 0.5 km · 8 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.711800%2C139.796500&destination=35.713500%2C139.800300&travelmode=walking"
+    },
+    {
+     "t": "15:40-16:30",
+     "what": "Sumida Park riverside — Skytree across the water, first cherry-less autumn light",
+     "kind": "free",
+     "tag": "skippable",
+     "note": "sunset is around 16:28 in Tokyo this week; the Skytree lighting comes on at dusk"
+    },
+    {
+     "t": "16:30-17:20",
+     "what": "Tokyo Metro · Sumida Park → Hotel · Shinjuku · ~45 min · ¥210 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.713500%2C139.800300&destination=35.693800%2C139.703600&travelmode=transit"
+    },
+    {
+     "t": "17:20-18:30",
+     "what": "Check in properly · shower · resist the nap",
+     "kind": "free",
+     "tag": "pinned"
+    },
+    {
+     "t": "18:30-20:00",
+     "what": "Dinner · Omoide Yokochō / Shinjuku west side — yakitori counters, six seats each",
+     "kind": "meal"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Haneda Airport T3",
+     "query": "Haneda Airport Terminal 3, Tokyo, Japan",
+     "lat": 35.5494,
+     "lon": 139.7798
+    },
+    {
+     "name": "Hotel · Shinjuku",
+     "query": "Shinjuku Station, Tokyo, Japan",
+     "lat": 35.6938,
+     "lon": 139.7036,
+     "mode": "transit"
+    },
+    {
+     "name": "Sensō-ji",
+     "query": "Sensoji Temple, Asakusa, Tokyo, Japan",
+     "lat": 35.7148,
+     "lon": 139.7967,
+     "mode": "transit"
+    },
+    {
+     "name": "Nakamise-dōri",
+     "query": "Nakamise-dori, Asakusa, Taito City, Tokyo, Japan",
+     "mode": "walk",
+     "lat": 35.7118,
+     "lon": 139.7965
+    },
+    {
+     "name": "Sumida Park",
+     "query": "Sumida Park, Taito City, Tokyo, Japan",
+     "lat": 35.7135,
+     "lon": 139.8003,
+     "mode": "walk"
+    },
+    {
+     "name": "Hotel · Shinjuku",
+     "query": "Shinjuku Station, Tokyo, Japan",
+     "lat": 35.6938,
+     "lon": 139.7036,
+     "mode": "transit"
+    }
+   ],
+   "sun": "天亮 05:54 · ☀ 06:20 / 🌇 16:32 · JST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-22",
+   "city": "Tokyo",
+   "label": "Sacred wood · the great garden",
+   "walking_km": {
+    "total": 7.3,
+    "how": "route on foot 5.3 + Meiji Jingū gravel approach and Shinjuku Gyoen circuit ~2.0"
+   },
+   "ribbon": "Meiji Jingū →walk 9′→ Yoyogi Park →walk 18′→ Omotesandō lunch →metro 20′→ Shinjuku Gyoen →walk 25′→ Omoide Yokochō dinner",
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=35.693800%2C139.703600&destination=35.693800%2C139.703600&travelmode=walking&waypoints=35.676400%2C139.699300%7C35.671600%2C139.694900%7C35.665400%2C139.712600%7C35.685200%2C139.710000%7C35.693016%2C139.699697",
+   "rain_alt": "Shinjuku Gyoen's Taiwan Pavilion and greenhouse are both indoors. In real rain, swap the garden for the free observatory at the Metropolitan Government Building (closed the 1st and 3rd Tuesday — a Sunday is safe) plus the Isetan Shinjuku depachika food hall.",
+   "late_cut": "drop Yoyogi Park first, then shorten Omotesandō. Shinjuku Gyoen's 16:00 last entry is the hard stop of the day and nothing goes after it.",
+   "timeline": [
+    {
+     "t": "07:45-08:05",
+     "what": "Konbini breakfast · onigiri and hot coffee from the machine",
+     "kind": "free"
+    },
+    {
+     "t": "08:05-08:20",
+     "what": "JR Yamanote · Hotel · Shinjuku → Meiji Jingū · 2 stops · ~15 min · ¥150 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.693800%2C139.703600&destination=35.676400%2C139.699300&travelmode=transit"
+    },
+    {
+     "t": "08:20-09:50",
+     "what": "Meiji Jingū",
+     "kind": "anchor",
+     "price": "free (inner garden +¥500 pp)",
+     "tag": "opener",
+     "note": "opens at sunrise and closes at sunset — late Nov is roughly 06:15–16:10 (pattern as of 2026-08-15). The 100,000-tree forest was planted by hand in 1920; the gravel walk in from Harajuku is the point, not a means to it."
+    },
+    {
+     "t": "09:50-10:00",
+     "what": "Walk · Meiji Jingū → Yoyogi Park · 0.6 km · 9 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.676400%2C139.699300&destination=35.671600%2C139.694900&travelmode=walking"
+    },
+    {
+     "t": "10:00-10:50",
+     "what": "Yoyogi Park — the ginkgo avenue is gold in the last week of November",
+     "kind": "free",
+     "tag": "skippable"
+    },
+    {
+     "t": "10:50-11:10",
+     "what": "Walk · Yoyogi Park → Omotesandō · 1.3 km · 18 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.671600%2C139.694900&destination=35.665400%2C139.712600&travelmode=walking"
+    },
+    {
+     "t": "11:10-13:00",
+     "what": "Lunch · Omotesandō and the Ura-Hara backstreets — food area, not a named shop",
+     "kind": "meal",
+     "note": "the Omotesandō ginkgos peak in the last days of November; the backstreets behind Cat Street are where the queues aren't"
+    },
+    {
+     "t": "13:00-13:30",
+     "what": "Tokyo Metro · Omotesandō → Shinjuku Gyoen · ~20 min · ¥180 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.665400%2C139.712600&destination=35.685200%2C139.710000&travelmode=transit"
+    },
+    {
+     "t": "13:30-15:45",
+     "what": "Shinjuku Gyoen",
+     "kind": "anchor",
+     "price": "¥500 pp",
+     "note": "09:00–16:30, last entry 16:00; CLOSED MONDAYS — which is exactly why this day is the Sunday. Three gardens in one wall: French formal, English landscape, and the Japanese pond garden where the maples are."
+    },
+    {
+     "t": "15:45-16:10",
+     "what": "Walk · Shinjuku Gyoen → Omoide Yokochō · 1.5 km · 25 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.685200%2C139.710000&destination=35.693016%2C139.699697&travelmode=walking"
+    },
+    {
+     "t": "16:10-17:30",
+     "what": "Shinjuku at dusk — Kabukichō's 3-D cat, the Golden Gai alleys (look now, drink later)",
+     "kind": "free",
+     "tag": "skippable"
+    },
+    {
+     "t": "17:30-19:30",
+     "what": "Dinner · Omoide Yokochō — smoke, six-seat counters, no English menu and no need for one",
+     "kind": "meal"
+    },
+    {
+     "t": "19:30-19:40",
+     "what": "Walk · Omoide Yokochō → Hotel · Shinjuku · 0.6 km · 9 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.693016%2C139.699697&destination=35.693800%2C139.703600&travelmode=walking"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Shinjuku",
+     "query": "Shinjuku Station, Tokyo, Japan",
+     "lat": 35.6938,
+     "lon": 139.7036
+    },
+    {
+     "name": "Meiji Jingū",
+     "query": "Meiji Jingu Shrine, Shibuya, Tokyo, Japan",
+     "lat": 35.6764,
+     "lon": 139.6993,
+     "mode": "transit"
+    },
+    {
+     "name": "Yoyogi Park",
+     "query": "Yoyogi Park, Shibuya, Tokyo, Japan",
+     "lat": 35.6716,
+     "lon": 139.6949,
+     "mode": "walk"
+    },
+    {
+     "name": "Omotesandō",
+     "query": "Omotesando, Minato City, Tokyo, Japan",
+     "lat": 35.6654,
+     "lon": 139.7126,
+     "mode": "walk"
+    },
+    {
+     "name": "Shinjuku Gyoen",
+     "query": "Shinjuku Gyoen National Garden, Tokyo, Japan",
+     "lat": 35.6852,
+     "lon": 139.71,
+     "mode": "transit"
+    },
+    {
+     "name": "Omoide Yokochō",
+     "query": "Omoide Yokocho, Nishi-Shinjuku, Tokyo, Japan",
+     "mode": "walk",
+     "lat": 35.6930161,
+     "lon": 139.6996971
+    },
+    {
+     "name": "Hotel · Shinjuku",
+     "query": "Shinjuku Station, Tokyo, Japan",
+     "lat": 35.6938,
+     "lon": 139.7036,
+     "mode": "walk"
+    }
+   ],
+   "sun": "天亮 05:56 · ☀ 06:22 / 🌇 16:32 · JST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-23",
+   "city": "Tokyo",
+   "label": "Market · tidal garden · temple ⚠️ national holiday",
+   "walking_km": {
+    "total": 5.1,
+    "how": "route on foot 1.6 + Tsukiji lanes ~1.0 + Hamarikyū pond circuit ~1.5 + Zōjō-ji & Shiba ~1.0"
+   },
+   "ribbon": "Tsukiji Outer Market →walk 13′→ Hamarikyū Gardens →metro 25′→ Zōjō-ji →walk 6′→ Shiba Park at dusk →metro 45′→ Shinjuku",
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=35.693800%2C139.703600&destination=35.693800%2C139.703600&travelmode=walking&waypoints=35.665400%2C139.770700%7C35.659700%2C139.763400%7C35.657400%2C139.748400%7C35.658600%2C139.745400",
+   "rain_alt": "Hamarikyū's Nakajima teahouse sits over the water with a roof; for real rain replace Shiba Park with Tsukiji Hongan-ji (free, an Indian-styled Buddhist hall five minutes from the market) or the Ginza Mitsukoshi depachika one stop away.",
+   "late_cut": "drop Shiba Park, then cut Hamarikyū to the tidal pond and the teahouse only.",
+   "timeline": [
+    {
+     "t": "07:30-08:15",
+     "what": "Tokyo Metro · Hotel · Shinjuku → Tsukiji Outer Market · ~35 min · ¥210 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.693800%2C139.703600&destination=35.665400%2C139.770700&travelmode=transit"
+    },
+    {
+     "t": "08:15-10:15",
+     "what": "Tsukiji Outer Market — breakfast on the hoof",
+     "kind": "anchor",
+     "price": "¥1,500–3,000 pp eaten",
+     "tag": "swap→Ueno Ameyoko arcade (open on holidays) if Tsukiji is shut",
+     "note": "⚠️ the market runs 05:00–14:00 and closes Sundays AND Wednesdays; many shops also shut on national holidays, and today IS one (Labour Thanksgiving). Check tsukiji.or.jp/english/calendar the week before. 09:00–11:00 is the tourist sweet spot; we are ahead of it deliberately."
+    },
+    {
+     "t": "10:15-10:30",
+     "what": "Walk · Tsukiji Outer Market → Hamarikyū Gardens · 0.9 km · 13 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.665400%2C139.770700&destination=35.659700%2C139.763400&travelmode=walking"
+    },
+    {
+     "t": "10:30-12:30",
+     "what": "Hamarikyū Gardens",
+     "kind": "anchor",
+     "price": "¥300 pp",
+     "note": "09:00–17:00, last entry 16:30. A shogun's duck-hunting garden with a genuinely tidal seawater pond; matcha and a wagashi at Nakajima-no-ochaya over the water (~¥1,000) is the whole reason to come."
+    },
+    {
+     "t": "12:30-13:00",
+     "what": "Tokyo Metro · Hamarikyū Gardens → Zōjō-ji · ~25 min · ¥180 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.659700%2C139.763400&destination=35.657400%2C139.748400&travelmode=transit"
+    },
+    {
+     "t": "13:00-14:00",
+     "what": "Lunch · Daimon / Hamamatsuchō — food area",
+     "kind": "meal",
+     "tag": "swap→the Shiba Park convenience-store bench if the queues are holiday-sized"
+    },
+    {
+     "t": "14:00-15:15",
+     "what": "Zōjō-ji",
+     "kind": "anchor",
+     "price": "free (grounds); treasure gallery ¥700 pp",
+     "note": "main hall 09:00–17:00 (pattern as of 2026-08-15). The 1622 Sangedatsumon gate is one of the few Tokyo structures that survived both 1923 and 1945. Six Tokugawa shoguns are buried behind it."
+    },
+    {
+     "t": "15:15-15:25",
+     "what": "Walk · Zōjō-ji → Shiba Park · 0.4 km · 6 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.657400%2C139.748400&destination=35.658600%2C139.745400&travelmode=walking"
+    },
+    {
+     "t": "15:25-16:30",
+     "what": "Shiba Park — Tokyo Tower straight above the temple roof, lit from about 16:30",
+     "kind": "free",
+     "tag": "skippable",
+     "note": "go up the tower only if the holiday queue is under 20 minutes; the view from the ground is the better photograph anyway"
+    },
+    {
+     "t": "16:30-17:20",
+     "what": "Tokyo Metro · Shiba Park → Hotel · Shinjuku · ~45 min · ¥220 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.658600%2C139.745400&destination=35.693800%2C139.703600&travelmode=transit"
+    },
+    {
+     "t": "18:00-20:00",
+     "what": "Dinner · Shinjuku — food area; a holiday Monday means book anything with a name",
+     "kind": "meal"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Shinjuku",
+     "query": "Shinjuku Station, Tokyo, Japan",
+     "lat": 35.6938,
+     "lon": 139.7036
+    },
+    {
+     "name": "Tsukiji Outer Market",
+     "query": "Tsukiji Outer Market, Chuo City, Tokyo, Japan",
+     "lat": 35.6654,
+     "lon": 139.7707,
+     "mode": "transit"
+    },
+    {
+     "name": "Hamarikyū Gardens",
+     "query": "Hamarikyu Gardens, Chuo City, Tokyo, Japan",
+     "lat": 35.6597,
+     "lon": 139.7634,
+     "mode": "walk"
+    },
+    {
+     "name": "Zōjō-ji",
+     "query": "Zojoji Temple, Minato City, Tokyo, Japan",
+     "lat": 35.6574,
+     "lon": 139.7484,
+     "mode": "transit"
+    },
+    {
+     "name": "Shiba Park",
+     "query": "Shiba Park, Minato City, Tokyo, Japan",
+     "lat": 35.6586,
+     "lon": 139.7454,
+     "mode": "walk"
+    },
+    {
+     "name": "Hotel · Shinjuku",
+     "query": "Shinjuku Station, Tokyo, Japan",
+     "lat": 35.6938,
+     "lon": 139.7036,
+     "mode": "transit"
+    }
+   ],
+   "sun": "天亮 05:57 · ☀ 06:23 / 🌇 16:31 · JST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-24",
+   "city": "Tokyo → Hakone",
+   "label": "Into the volcano · lake · onsen",
+   "travel_day": true,
+   "walking_km": {
+    "total": 4.3,
+    "how": "route on foot 1.8 + Ōwakudani boardwalk ~0.5 + Gōra ~0.5 + the shrine's cedar avenue ~1.5"
+   },
+   "ribbon": "Romancecar 85′→ Hakone-Yumoto →Tozan 40′→ Gōra lunch →cable+ropeway 35′→ Ōwakudani →ropeway 25′→ Tōgendai →cruise 30′→ Moto-Hakone →walk 14′→ Hakone Shrine →bus 40′→ ryokan",
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=35.232500%2C139.105700&destination=35.231800%2C139.104600&travelmode=walking&waypoints=35.245200%2C139.048300%7C35.244000%2C139.020300%7C35.222500%2C139.012200%7C35.191800%2C139.026100%7C35.204300%2C139.025700",
+   "rain_alt": "The ropeway suspends on high volcanic-gas readings or wind; the Freepass covers the substitute bus Sōunzan→Tōgendai. A washed-out day swaps Ōwakudani for the Hakone Open-Air Museum (indoor Picasso pavilion, Freepass discount) — it is open daily 09:00–17:00.",
+   "late_cut": "miss the ~15:00 cruise → take the H-line bus straight from Tōgendai to Hakone-Yumoto and go to the onsen an hour early. Nothing here is worth arriving at the ryokan after dark for.",
+   "timeline": [
+    {
+     "t": "08:00-08:45",
+     "what": "Check out · hand the two big cases to the front desk for takkyūbin to the Kyoto hotel (≈¥2,300 each, arrives tomorrow)",
+     "kind": "free",
+     "tag": "pinned",
+     "note": "before 10:00 or it becomes a two-day delivery. Keep passports, meds and one change of clothes in the overnight bag."
+    },
+    {
+     "t": "09:00-10:25",
+     "what": "Odakyu Romancecar (Hakone-Yumoto bound) · Shinjuku → Hakone-Yumoto · 85 min",
+     "kind": "hop",
+     "map": false,
+     "verify": "est",
+     "link": "https://www.odakyu.jp/english/romancecar/",
+     "note": "front-row seats face the driver's window — worth reserving early"
+    },
+    {
+     "t": "10:25-11:00",
+     "what": "Hakone-Yumoto: overnight bag to the ryokan desk or a station locker · Freepass activated",
+     "kind": "free"
+    },
+    {
+     "t": "11:00-11:40",
+     "what": "Hakone Tozan Railway (three switchbacks) · Hakone-Yumoto Station → Gōra Station · ~40 min · Freepass",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.232500%2C139.105700&destination=35.245200%2C139.048300&travelmode=transit"
+    },
+    {
+     "t": "11:40-12:30",
+     "what": "Lunch · Gōra — food area beside the station",
+     "kind": "meal"
+    },
+    {
+     "t": "12:30-13:20",
+     "what": "Cable car + ropeway · Gōra Station → Ōwakudani · ~35 min · Freepass",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.245200%2C139.048300&destination=35.244000%2C139.020300&travelmode=transit"
+    },
+    {
+     "t": "13:20-14:20",
+     "what": "Ōwakudani",
+     "kind": "anchor",
+     "price": "Freepass; black eggs ¥500 for five",
+     "note": "⚠️ the ropeway and the valley walk close at short notice on volcanic-gas readings — check hakoneropeway.co.jp the morning of. On a clear day Fuji is directly behind the steam."
+    },
+    {
+     "t": "14:20-14:50",
+     "what": "Hakone Ropeway · Ōwakudani → Tōgendai · ~25 min · Freepass",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.244000%2C139.020300&destination=35.222500%2C139.012200&travelmode=transit"
+    },
+    {
+     "t": "14:50-15:35",
+     "what": "Lake Ashi sightseeing cruise (the pirate ship) · Tōgendai → Moto-Hakone Port · ~30 min · Freepass",
+     "kind": "hop",
+     "verify": "est",
+     "note": "the open upper deck is cold and completely worth it; Fuji sits off the starboard bow going south"
+    },
+    {
+     "t": "15:35-15:50",
+     "what": "Walk · Moto-Hakone Port → Hakone Shrine · 0.9 km · 14 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.191800%2C139.026100&destination=35.204300%2C139.025700&travelmode=walking"
+    },
+    {
+     "t": "15:50-16:40",
+     "what": "Hakone Shrine and the Heiwa-no-Torii lake gate",
+     "kind": "anchor",
+     "price": "free",
+     "tag": "skippable",
+     "note": "last usable light is about 16:25. The queue for the photo on the torii jetty runs 30+ minutes — the cedar avenue up to the main hall is the better half of this stop and has no queue at all."
+    },
+    {
+     "t": "16:40-17:25",
+     "what": "Hakone Tozan Bus (Hakone-Yumoto bound) · Hakone Shrine → Ryokan · Hakone-Yumoto · ~40 min · Freepass",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.204300%2C139.025700&destination=35.231800%2C139.104600&travelmode=transit"
+    },
+    {
+     "t": "17:30-19:00",
+     "what": "Onsen before dinner — the correct order and non-negotiable",
+     "kind": "free",
+     "tag": "pinned",
+     "note": "wash at the stool first, no towel in the water, tie long hair up. Tattoos: use the private bath you booked."
+    },
+    {
+     "t": "19:00-21:00",
+     "what": "Kaiseki dinner at the ryokan (half board)",
+     "kind": "meal",
+     "tag": "pinned",
+     "note": "the serving hour is fixed and usually early — confirm it when you book, because it decides how late the shrine stop can run"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hakone-Yumoto Station",
+     "query": "Hakone-Yumoto Station, Hakone, Kanagawa, Japan",
+     "lat": 35.2325,
+     "lon": 139.1057
+    },
+    {
+     "name": "Gōra Station",
+     "query": "Gora Station, Hakone, Kanagawa, Japan",
+     "mode": "train",
+     "lat": 35.2452,
+     "lon": 139.0483
+    },
+    {
+     "name": "Ōwakudani",
+     "query": "Owakudani, Hakone, Kanagawa, Japan",
+     "lat": 35.244,
+     "lon": 139.0203,
+     "mode": "transit"
+    },
+    {
+     "name": "Tōgendai",
+     "query": "Togendai, Hakone, Kanagawa, Japan",
+     "lat": 35.2225,
+     "lon": 139.0122,
+     "mode": "transit"
+    },
+    {
+     "name": "Moto-Hakone Port",
+     "query": "Moto-Hakone Port, Hakone, Kanagawa, Japan",
+     "lat": 35.1918,
+     "lon": 139.0261,
+     "mode": "boat"
+    },
+    {
+     "name": "Hakone Shrine",
+     "query": "Hakone Shrine, Hakone, Kanagawa, Japan",
+     "lat": 35.2043,
+     "lon": 139.0257,
+     "mode": "walk"
+    },
+    {
+     "name": "Ryokan · Hakone-Yumoto",
+     "query": "Hakone-Yumoto, Hakone, Kanagawa, Japan",
+     "lat": 35.2318,
+     "lon": 139.1046,
+     "mode": "bus"
+    }
+   ],
+   "sun": "天亮 05:59 · ☀ 06:25 / 🌇 16:34 · JST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-25",
+   "city": "Hakone → Kyoto",
+   "label": "West to Kyoto · Kiyomizu by night",
+   "travel_day": true,
+   "walking_km": {
+    "total": 4.5,
+    "how": "route on foot 2.0 + Sannenzaka/Ninenzaka lanes ~1.2 + Kiyomizu terrace circuit ~1.3"
+   },
+   "ribbon": "Odawara →Shinkansen 2h35→ Kyoto →subway 15′→ hotel →bus 25′→ Sannenzaka →walk 10′→ Kiyomizu-dera night illumination →walk 20′→ Yasaka Shrine → Gion dinner",
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=34.985800%2C135.758800&destination=35.003600%2C135.759400&travelmode=walking&waypoints=35.003600%2C135.759400%7C34.996479%2C135.781318%7C34.994900%2C135.785000%7C35.003600%2C135.778500",
+   "rain_alt": "Wet stone on the Sannenzaka steps is genuinely dangerous in smooth soles. In rain, take the bus to Kiyomizu-michi and go straight up, then spend the gap in the covered Nishiki arcade instead of the lanes.",
+   "late_cut": "the Shinkansen decides this day. Arriving after 14:00 → drop the Sannenzaka lanes and go straight to the 17:30 night opening; Kiyomizu's last entry is 21:00 and there is a lot of slack after dinner.",
+   "timeline": [
+    {
+     "t": "07:30-09:00",
+     "what": "Ryokan breakfast · one more soak · check out",
+     "kind": "free",
+     "tag": "pinned"
+    },
+    {
+     "t": "09:15-09:50",
+     "what": "Hakone Tozan train · Hakone-Yumoto → Odawara · ~15 min · Freepass (day 2)",
+     "kind": "hop",
+     "map": false,
+     "verify": "est"
+    },
+    {
+     "t": "10:15-12:50",
+     "what": "Tōkaidō Shinkansen · Odawara → Kyoto · ~2 h 35 · ≈¥12,300 pp",
+     "kind": "hop",
+     "map": false,
+     "verify": "est",
+     "link": "https://smart-ex.jp/en/",
+     "note": "⚠️ only a few Hikari services call at Odawara; if none fits, Kodama is direct and ~35 min slower. Fuji is on the RIGHT leaving Odawara — seat E."
+    },
+    {
+     "t": "12:50-13:20",
+     "what": "Karasuma subway · Kyoto Station → Hotel · Shijō-Karasuma · ~15 min · ¥220 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.985800%2C135.758800&destination=35.003600%2C135.759400&travelmode=transit"
+    },
+    {
+     "t": "13:20-14:20",
+     "what": "Collect the forwarded cases at the desk · lunch near Karasuma — food area",
+     "kind": "meal"
+    },
+    {
+     "t": "14:20-14:50",
+     "what": "City bus 207 · Hotel · Shijō-Karasuma → Sannenzaka · ~25 min · ¥230 pp",
+     "kind": "hop",
+     "verify": "est",
+     "note": "Kyoto city buses are flat-fare, pay on exit, and jammed in koyo week — the Keihan train to Kiyomizu-Gojō plus a 15-min walk is often faster",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.003600%2C135.759400&destination=34.996479%2C135.781318&travelmode=transit"
+    },
+    {
+     "t": "14:50-16:20",
+     "what": "Sannenzaka and Ninenzaka — preserved machiya lanes, yatsuhashi and warabimochi stalls",
+     "kind": "free",
+     "note": "these are stairs, not streets, and the surface is polished stone. This is the stroll, not an anchor — the anchor is after dark."
+    },
+    {
+     "t": "16:20-16:35",
+     "what": "Walk · Sannenzaka → Kiyomizu-dera · 0.5 km · 10 min uphill",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.996479%2C135.781318&destination=34.994900%2C135.785000&travelmode=walking"
+    },
+    {
+     "t": "16:35-17:30",
+     "what": "Tea on the Otowa slope while the queue forms for the night gate",
+     "kind": "free",
+     "tag": "skippable"
+    },
+    {
+     "t": "17:30-19:15",
+     "what": "Kiyomizu-dera · autumn night illumination",
+     "kind": "anchor",
+     "price": "¥400 pp",
+     "tag": "pinned",
+     "note": "⚠️ night viewing runs roughly 21–30 Nov, 17:30–21:30 with last entry 21:00 (pattern as of 2026-08-15 — the temple publishes the 2026 dates around September; re-confirm). No reservation, normal admission. A single blue beam is fired over the city and the 1633 stage floats above a bowl of lit maples."
+    },
+    {
+     "t": "19:15-19:35",
+     "what": "Walk · Kiyomizu-dera → Yasaka Shrine · 1.2 km · 20 min downhill",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.994900%2C135.785000&destination=35.003600%2C135.778500&travelmode=walking"
+    },
+    {
+     "t": "19:35-20:10",
+     "what": "Yasaka Shrine under its lantern wall",
+     "kind": "free",
+     "tag": "skippable",
+     "note": "open 24 h, free, and at its best empty and lit"
+    },
+    {
+     "t": "20:10-21:30",
+     "what": "Dinner · Gion / Hanamikōji — food area",
+     "kind": "meal",
+     "note": "photography is banned on the private lanes off Hanamikōji (¥10,000 fine, signposted). Walk the main street, eat, leave the geiko alone."
+    },
+    {
+     "t": "21:30-21:50",
+     "what": "Bus / walk · Yasaka Shrine → Hotel · Shijō-Karasuma · ~15 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.003600%2C135.778500&destination=35.003600%2C135.759400&travelmode=transit"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Kyoto Station",
+     "query": "Kyoto Station, Kyoto, Japan",
+     "lat": 34.9858,
+     "lon": 135.7588
+    },
+    {
+     "name": "Hotel · Shijō-Karasuma",
+     "query": "Shijo Karasuma, Nakagyo Ward, Kyoto, Japan",
+     "lat": 35.0036,
+     "lon": 135.7594,
+     "mode": "transit"
+    },
+    {
+     "name": "Sannenzaka",
+     "query": "Sannenzaka, Higashiyama Ward, Kyoto, Japan",
+     "mode": "transit",
+     "lat": 34.9964787,
+     "lon": 135.7813178
+    },
+    {
+     "name": "Kiyomizu-dera",
+     "query": "Kiyomizu-dera, Higashiyama Ward, Kyoto, Japan",
+     "lat": 34.9949,
+     "lon": 135.785,
+     "mode": "walk"
+    },
+    {
+     "name": "Yasaka Shrine",
+     "query": "Yasaka Shrine, Higashiyama Ward, Kyoto, Japan",
+     "lat": 35.0036,
+     "lon": 135.7785,
+     "mode": "walk"
+    },
+    {
+     "name": "Hotel · Shijō-Karasuma",
+     "query": "Shijo Karasuma, Nakagyo Ward, Kyoto, Japan",
+     "lat": 35.0036,
+     "lon": 135.7594,
+     "mode": "transit"
+    }
+   ],
+   "sun": "天亮 06:13 · ☀ 06:39 / 🌇 16:48 · JST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-26",
+   "city": "Kyoto",
+   "label": "Bamboo at dawn · Nishiki at dusk",
+   "walking_km": {
+    "total": 7.6,
+    "how": "route on foot 3.1 + bamboo path ~1.0 + Tenryū-ji garden ~1.2 + Nishiki arcade ~1.0 + Katsura riverbank ~1.3"
+   },
+   "ribbon": "Arashiyama Bamboo Grove 07:20 →walk 5′→ Tenryū-ji →walk 11′→ Togetsukyō →lunch→ rail 40′→ Nishiki Market →walk 10′→ Pontochō dinner",
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=35.003600%2C135.759400&destination=35.003600%2C135.759400&travelmode=walking&waypoints=35.017000%2C135.671600%7C35.015800%2C135.673800%7C35.012800%2C135.677900%7C35.005000%2C135.764800%7C35.004246%2C135.771213",
+   "rain_alt": "Tenryū-ji's Hōjō veranda faces the pond under a roof and the Nishiki arcade is fully covered — this day survives rain better than any other. If the riverbank is a write-off, take the Randen tram to Ryōan-ji and watch the rock garden from the viewing hall.",
+   "late_cut": "the whole day hangs on the 07:20 grove. Miss it and the grove becomes unusable until dusk — in that case reverse the day: Nishiki first, Arashiyama at 15:00 for the light instead of the quiet.",
+   "timeline": [
+    {
+     "t": "06:45-07:20",
+     "what": "JR Sagano line · Hotel · Shijō-Karasuma → Arashiyama Bamboo Grove · ~35 min · ¥240 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.003600%2C135.759400&destination=35.017000%2C135.671600&travelmode=transit"
+    },
+    {
+     "t": "07:20-08:15",
+     "what": "Arashiyama Bamboo Grove",
+     "kind": "anchor",
+     "price": "free",
+     "tag": "opener",
+     "note": "no gate, no fee, open always. The 400 m path is empty before 08:00 and solid between 11:00 and 15:00 — this hour is the single biggest quality-of-trip decision in the Kyoto half."
+    },
+    {
+     "t": "08:15-08:25",
+     "what": "Walk · Arashiyama Bamboo Grove → Tenryū-ji · 0.3 km · 5 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.017000%2C135.671600&destination=35.015800%2C135.673800&travelmode=walking"
+    },
+    {
+     "t": "08:25-10:00",
+     "what": "Tenryū-ji",
+     "kind": "anchor",
+     "price": "¥500 pp garden, +¥300 pp buildings",
+     "note": "in the 15–30 Nov autumn window the garden opens at 07:30 (regular hours 08:30–17:00, last entry 16:50). The Sōgen-chi pond garden is 700 years old and unaltered — Musō Soseki designed it, and the borrowed mountain behind it is the koyo."
+    },
+    {
+     "t": "10:00-10:15",
+     "what": "Walk · Tenryū-ji → Togetsukyō Bridge · 0.7 km · 11 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.015800%2C135.673800&destination=35.012800%2C135.677900&travelmode=walking"
+    },
+    {
+     "t": "10:15-11:30",
+     "what": "Togetsukyō Bridge and the Katsura riverbank",
+     "kind": "free",
+     "note": "the mountain-side maples read best from the north bank looking south; the boat hire is a genuinely good 30 minutes if the river is calm"
+    },
+    {
+     "t": "11:30-13:00",
+     "what": "Lunch · Arashiyama main street — food area (yudofu, soba)",
+     "kind": "meal",
+     "tag": "swap→the Randen station kimono-pole forest and a bench bentō if every counter has a queue"
+    },
+    {
+     "t": "13:00-13:15",
+     "what": "Coffee and a sit — this is the hinge of the day, not dead time",
+     "kind": "free",
+     "tag": "skippable"
+    },
+    {
+     "t": "13:15-14:00",
+     "what": "JR Sagano line · Togetsukyō Bridge → Nishiki Market · ~40 min · ¥240 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.012800%2C135.677900&destination=35.005000%2C135.764800&travelmode=transit"
+    },
+    {
+     "t": "14:00-16:00",
+     "what": "Nishiki Market",
+     "kind": "anchor",
+     "price": "¥2,000–3,500 pp eaten",
+     "note": "about 130 stalls over five covered blocks, most 09:00–18:00, a scattering closed Wednesdays (we are on Thursday). Tsukemono, tamagoyaki, hamo, sesame tofu — eat at the stall, the arcade asks you not to walk and eat."
+    },
+    {
+     "t": "16:00-16:10",
+     "what": "Walk · Nishiki Market → Pontochō · 0.7 km · 10 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.005000%2C135.764800&destination=35.004246%2C135.771213&travelmode=walking"
+    },
+    {
+     "t": "16:10-17:30",
+     "what": "Kamo riverbank and the Pontochō alley at dusk — sunset is around 16:47",
+     "kind": "free"
+    },
+    {
+     "t": "17:30-19:30",
+     "what": "Dinner · Pontochō — food area; the alley is one metre wide and lit by lanterns",
+     "kind": "meal"
+    },
+    {
+     "t": "19:30-19:45",
+     "what": "Walk · Pontochō → Hotel · Shijō-Karasuma · 0.9 km · 12 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.004246%2C135.771213&destination=35.003600%2C135.759400&travelmode=walking"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Shijō-Karasuma",
+     "query": "Shijo Karasuma, Nakagyo Ward, Kyoto, Japan",
+     "lat": 35.0036,
+     "lon": 135.7594
+    },
+    {
+     "name": "Arashiyama Bamboo Grove",
+     "query": "Arashiyama Bamboo Grove, Ukyo Ward, Kyoto, Japan",
+     "lat": 35.017,
+     "lon": 135.6716,
+     "mode": "transit"
+    },
+    {
+     "name": "Tenryū-ji",
+     "query": "Tenryu-ji, Ukyo Ward, Kyoto, Japan",
+     "lat": 35.0158,
+     "lon": 135.6738,
+     "mode": "walk"
+    },
+    {
+     "name": "Togetsukyō Bridge",
+     "query": "Togetsukyo Bridge, Arashiyama, Kyoto, Japan",
+     "mode": "walk",
+     "lat": 35.0128,
+     "lon": 135.6779
+    },
+    {
+     "name": "Nishiki Market",
+     "query": "Nishiki Market, Nakagyo Ward, Kyoto, Japan",
+     "lat": 35.005,
+     "lon": 135.7648,
+     "mode": "transit"
+    },
+    {
+     "name": "Pontochō",
+     "query": "Pontocho, Nakagyo Ward, Kyoto, Japan",
+     "mode": "walk",
+     "lat": 35.0042456,
+     "lon": 135.7712126
+    },
+    {
+     "name": "Hotel · Shijō-Karasuma",
+     "query": "Shijo Karasuma, Nakagyo Ward, Kyoto, Japan",
+     "lat": 35.0036,
+     "lon": 135.7594,
+     "mode": "walk"
+    }
+   ],
+   "sun": "天亮 06:14 · ☀ 06:40 / 🌇 16:47 · JST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-27",
+   "city": "Kyoto",
+   "label": "Torii at dawn · maple valley · lit garden",
+   "walking_km": {
+    "total": 7.8,
+    "how": "route on foot 1.8 + Inari climb to Yotsutsuji and back ~2.5 + Tōfuku-ji ravine ~1.0 + Philosopher's Path there-and-back ~2.0 + Eikan-dō ~0.5 — the longest day, right at the 8 km ceiling"
+   },
+   "ribbon": "Fushimi Inari 06:55 →rail 12′→ Tōfuku-ji →rail 35′→ Nanzen-ji lunch →walk 15′→ Philosopher's Path →walk 13′→ Eikan-dō night illumination",
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=35.003600%2C135.759400&destination=35.003600%2C135.759400&travelmode=walking&waypoints=34.967100%2C135.772700%7C34.976100%2C135.773800%7C35.011300%2C135.794300%7C35.019300%2C135.795200%7C35.014800%2C135.794700",
+   "rain_alt": "Tōfuku-ji's covered corridors and Nanzen-ji's Hōjō rooms both work wet. Rain kills only the Philosopher's Path; replace it with the Kyoto Municipal Museum of Art in Okazaki, five minutes from Eikan-dō.",
+   "late_cut": "drop the Philosopher's Path first, then Nanzen-ji's Sanmon climb. Eikan-dō's 20:00 last entry is the hard stop, and the queue there is the risk — be in it by 18:00.",
+   "timeline": [
+    {
+     "t": "06:20-06:55",
+     "what": "JR Nara line · Hotel · Shijō-Karasuma → Fushimi Inari Taisha · ~30 min · ¥150 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.003600%2C135.759400&destination=34.967100%2C135.772700&travelmode=transit"
+    },
+    {
+     "t": "06:55-08:40",
+     "what": "Fushimi Inari Taisha",
+     "kind": "anchor",
+     "price": "free",
+     "tag": "opener",
+     "note": "open 24 h, no gate. Before 08:00 the Senbon-torii is yours; by 09:00 it is a shuffling column. Yotsutsuji viewpoint is 30–40 min up and is the honest turn-back point — the full summit loop is 2–3 h and would eat Tōfuku-ji."
+    },
+    {
+     "t": "08:40-09:00",
+     "what": "JR Nara line · Fushimi Inari Taisha → Tōfuku-ji · ~12 min · ¥150 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.967100%2C135.772700&destination=34.976100%2C135.773800&travelmode=transit"
+    },
+    {
+     "t": "09:00-11:00",
+     "what": "Tōfuku-ji",
+     "kind": "anchor",
+     "price": "¥1,000 pp peak-season entry",
+     "note": "8:30–16:30 from mid-Nov to early Dec. 2,000 maples in one ravine; the Tsūtenkyō bridge queues 30–60 min at peak and photography ON the bridge is banned during the peak window — buy the advance ticket, arrive at opening, shoot from Gaunkyō instead."
+    },
+    {
+     "t": "11:00-11:45",
+     "what": "Keihan + subway · Tōfuku-ji → Nanzen-ji · ~35 min · ¥280 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.976100%2C135.773800&destination=35.011300%2C135.794300&travelmode=transit"
+    },
+    {
+     "t": "11:45-13:00",
+     "what": "Lunch · the yudofu row outside the Sanmon — food area",
+     "kind": "meal"
+    },
+    {
+     "t": "13:00-14:45",
+     "what": "Nanzen-ji",
+     "kind": "anchor",
+     "price": "free grounds; Sanmon gate ¥600 pp, Hōjō garden ¥600 pp",
+     "note": "the Meiji brick aqueduct (Suirokaku) running through a Zen temple is free and the best thing here; the Sanmon climb is the day's optional extra"
+    },
+    {
+     "t": "14:45-15:00",
+     "what": "Walk · Nanzen-ji → Philosopher's Path · 1.0 km · 15 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.011300%2C135.794300&destination=35.019300%2C135.795200&travelmode=walking"
+    },
+    {
+     "t": "15:00-16:15",
+     "what": "Philosopher's Path along the canal",
+     "kind": "free",
+     "tag": "skippable",
+     "note": "about 2 km one way — turn back at Hōnen-in rather than walking it out to Ginkaku-ji, or the evening becomes a march"
+    },
+    {
+     "t": "16:15-16:30",
+     "what": "Walk · Philosopher's Path → Eikan-dō · 0.9 km · 13 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.019300%2C135.795200&destination=35.014800%2C135.794700&travelmode=walking"
+    },
+    {
+     "t": "16:30-17:30",
+     "what": "Rest, tea, and get into the evening queue early",
+     "kind": "free",
+     "tag": "pinned"
+    },
+    {
+     "t": "17:30-19:30",
+     "what": "Eikan-dō · autumn night illumination",
+     "kind": "anchor",
+     "price": "¥600 pp evening entry",
+     "note": "evening entry 17:30–20:30, last entry 20:00, across roughly 6 Nov – 6 Dec 2026 (pattern as of 2026-08-15 — re-confirm). 3,000 maples and the Tahōtō pagoda doubled in the Hōjō pond. Walk-up queues run 60–90 min on peak Saturday evenings; Friday is the softer night, which is why it is here."
+    },
+    {
+     "t": "19:30-21:00",
+     "what": "Dinner · Okazaki / Higashiyama — food area",
+     "kind": "meal"
+    },
+    {
+     "t": "21:00-21:30",
+     "what": "City bus 5 · Eikan-dō → Hotel · Shijō-Karasuma · ~30 min · ¥230 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.014800%2C135.794700&destination=35.003600%2C135.759400&travelmode=transit"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Shijō-Karasuma",
+     "query": "Shijo Karasuma, Nakagyo Ward, Kyoto, Japan",
+     "lat": 35.0036,
+     "lon": 135.7594
+    },
+    {
+     "name": "Fushimi Inari Taisha",
+     "query": "Fushimi Inari Taisha, Fushimi Ward, Kyoto, Japan",
+     "lat": 34.9671,
+     "lon": 135.7727,
+     "mode": "transit"
+    },
+    {
+     "name": "Tōfuku-ji",
+     "query": "Tofuku-ji, Higashiyama Ward, Kyoto, Japan",
+     "lat": 34.9761,
+     "lon": 135.7738,
+     "mode": "transit"
+    },
+    {
+     "name": "Nanzen-ji",
+     "query": "Nanzen-ji, Sakyo Ward, Kyoto, Japan",
+     "lat": 35.0113,
+     "lon": 135.7943,
+     "mode": "transit"
+    },
+    {
+     "name": "Philosopher's Path",
+     "query": "Philosopher's Path, Sakyo Ward, Kyoto, Japan",
+     "lat": 35.0193,
+     "lon": 135.7952,
+     "mode": "walk"
+    },
+    {
+     "name": "Eikan-dō",
+     "query": "Eikando Zenrinji, Sakyo Ward, Kyoto, Japan",
+     "lat": 35.0148,
+     "lon": 135.7947,
+     "mode": "walk"
+    },
+    {
+     "name": "Hotel · Shijō-Karasuma",
+     "query": "Shijo Karasuma, Nakagyo Ward, Kyoto, Japan",
+     "lat": 35.0036,
+     "lon": 135.7594,
+     "mode": "transit"
+    }
+   ],
+   "sun": "天亮 06:15 · ☀ 06:41 / 🌇 16:47 · JST · sunrise-sunset.org"
+  },
+  {
+   "date": "2026-11-28",
+   "city": "Kyoto → Osaka (KIX) → London",
+   "label": "One last pagoda, then home",
+   "travel_day": true,
+   "walking_km": {
+    "total": 2.5,
+    "how": "route on foot 1.5 + Tō-ji grounds ~1.0"
+   },
+   "ribbon": "Tō-ji 09:15 →walk 18′→ Kyoto Station lunch →Haruka 80′→ KIX →3 h buffer→ LHR",
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=35.003600%2C135.759400&destination=34.985800%2C135.758800&travelmode=walking&waypoints=34.981200%2C135.747600",
+   "rain_alt": "Tō-ji's pagoda is outdoors but the Kondō and Kōdō halls are not; in rain, do the halls, skip the garden loop and spend the extra 30 minutes in the Kyoto Station food halls.",
+   "late_cut": "the flight is the only fixed point. Anything wobbles → skip Tō-ji entirely, take the 11:30 Haruka and eat at the airport.",
+   "timeline": [
+    {
+     "t": "07:30-08:45",
+     "what": "Breakfast · pack · check out; leave the cases with the hotel or in a Kyoto Station locker",
+     "kind": "free",
+     "tag": "pinned",
+     "note": "big-locker availability at Kyoto Station on a Saturday morning is thin by 09:00 — the hotel hold is the safer plan"
+    },
+    {
+     "t": "08:45-09:15",
+     "what": "Karasuma subway + walk · Hotel · Shijō-Karasuma → Tō-ji · ~25 min · ¥260 pp",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=35.003600%2C135.759400&destination=34.981200%2C135.747600&travelmode=transit"
+    },
+    {
+     "t": "09:15-10:45",
+     "what": "Tō-ji",
+     "kind": "anchor",
+     "price": "≈¥800 pp during the autumn special viewing ⚠️ fee unverified",
+     "note": "the 55 m five-storey pagoda is the tallest wooden tower in Japan and it is fifteen minutes from the platform you leave from. Grounds from 05:00; paid halls 08:30–17:00, last entry 16:30 (pattern as of 2026-08-15)."
+    },
+    {
+     "t": "10:45-11:05",
+     "what": "Walk · Tō-ji → Kyoto Station · 1.3 km · 18 min",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.981200%2C135.747600&destination=34.985800%2C135.758800&travelmode=walking"
+    },
+    {
+     "t": "11:05-12:15",
+     "what": "Last lunch and omiyage · Kyoto Station (Porta, Isetan basement)",
+     "kind": "meal",
+     "note": "do the tax-free counters here rather than at KIX, where the queue is the departures hall"
+    },
+    {
+     "t": "12:30-13:50",
+     "what": "JR Haruka (Kansai Airport bound) · Kyoto → KIX · 80 min · ≈¥3,110 pp",
+     "kind": "hop",
+     "map": false,
+     "verify": "est",
+     "link": "https://www.westjr.co.jp/global/en/ticket/pass/icoca_haruka/"
+    },
+    {
+     "t": "13:50-17:25",
+     "what": "KIX: tax-free reconciliation, check-in, security — 3 h international buffer",
+     "kind": "free",
+     "tag": "pinned"
+    },
+    {
+     "t": "17:25",
+     "what": "KIX → LHR (one stop) — arrives London Sunday morning",
+     "kind": "free",
+     "tag": "pinned"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Hotel · Shijō-Karasuma",
+     "query": "Shijo Karasuma, Nakagyo Ward, Kyoto, Japan",
+     "lat": 35.0036,
+     "lon": 135.7594
+    },
+    {
+     "name": "Tō-ji",
+     "query": "To-ji Temple, Minami Ward, Kyoto, Japan",
+     "lat": 34.9812,
+     "lon": 135.7476,
+     "mode": "transit"
+    },
+    {
+     "name": "Kyoto Station",
+     "query": "Kyoto Station, Kyoto, Japan",
+     "lat": 34.9858,
+     "lon": 135.7588,
+     "mode": "walk"
+    }
+   ],
+   "sun": "天亮 06:16 · ☀ 06:42 / 🌇 16:47 · JST · sunrise-sunset.org"
+  }
+ ],
+ "hotels": [
+  {
+   "base": "Tokyo · 3 nights (21–24 Nov)",
+   "area": "Shinjuku (west side / Nishi-Shinjuku)",
+   "why": "the Romancecar to Hakone leaves from Shinjuku, so day 4 starts at your own front door · Shinjuku Gyoen is a walk · the Yamanote and four metro lines are one station · lit and busy at every hour, so nothing on this trip needs a dark walk",
+   "options": [
+    {
+     "name": "Business-hotel tier (Sotetsu Fresa Inn / Daiwa Roynet / Tokyu Stay class)",
+     "band": "¥22,000–30,000/night for two",
+     "link": "https://www.booking.com/searchresults.html?ss=Nishi-Shinjuku%2C%20Tokyo&checkin=2026-11-21&checkout=2026-11-24&group_adults=2&no_rooms=1"
+    },
+    {
+     "name": "Step up (Keio Plaza / Hyatt Regency Tokyo class)",
+     "band": "¥32,000–45,000/night for two",
+     "link": "https://www.google.com/travel/hotels/Shinjuku?q=Shinjuku%20hotels&ts=CAESABoECAIQAA&checkin=2026-11-21&checkout=2026-11-24"
+    }
+   ],
+   "note": "⚠️ bands are seasonal ballparks, not scraped quotes — spot-check both links before booking"
+  },
+  {
+   "base": "Hakone · 1 night (24–25 Nov)",
+   "area": "Hakone-Yumoto or Gōra",
+   "why": "Yumoto is the Romancecar terminus and the bus hub, so the day can end anywhere on the loop and still get you back · Gōra is quieter and higher but adds a leg at both ends",
+   "options": [
+    {
+     "name": "Mid-tier onsen ryokan, half board (Ichinoyu group / Yaeikan class)",
+     "band": "¥40,000–70,000/night for two, dinner + breakfast in",
+     "link": "https://www.booking.com/searchresults.html?ss=Hakone-Yumoto&checkin=2026-11-24&checkout=2026-11-25&group_adults=2&no_rooms=1"
+    },
+    {
+     "name": "Room with a private open-air bath (kashikiri / 露天風呂付)",
+     "band": "¥70,000–110,000/night for two",
+     "link": "https://www.japanican.com/en/hotel/area/JPN/kanagawa/hakone/",
+     "note": "the answer if either of you has a tattoo, or if you simply do not want a shared bath"
+    }
+   ]
+  },
+  {
+   "base": "Kyoto · 3 nights (25–28 Nov)",
+   "area": "Shijō-Karasuma / Karasuma-Oike",
+   "why": "the Karasuma subway and the Hankyū line cross here, so Arashiyama, Fushimi Inari and Kyoto Station are each one ride · Nishiki Market and Pontochō are on foot · flat pavements, which Higashiyama is not, and you are wheeling cases",
+   "options": [
+    {
+     "name": "Mid-tier city hotel (Mitsui Garden Kyoto Shinmachi / Daiwa Roynet Shijō Karasuma class)",
+     "band": "¥30,000–50,000/night for two in peak koyo week",
+     "link": "https://www.booking.com/searchresults.html?ss=Shijo%20Karasuma%2C%20Kyoto&checkin=2026-11-25&checkout=2026-11-28&group_adults=2&no_rooms=1"
+    },
+    {
+     "name": "Fallback: Kyoto Station south side (Hachijō exit)",
+     "band": "¥20,000–34,000/night for two",
+     "link": "https://www.booking.com/searchresults.html?ss=Kyoto%20Station&checkin=2026-11-25&checkout=2026-11-28&group_adults=2&no_rooms=1",
+     "note": "10–20% cheaper and 8 minutes further out; the trade is that you never walk home from dinner"
+    }
+   ],
+   "note": "⚠️ peak foliage week: most 3★+ central rooms are gone about 12 weeks ahead, and the same room is 2–3× its February price. Book refundable now, re-shop 2–3 weeks out."
+  }
+ ],
+ "budget": [
+  {
+   "cat": "flights (open-jaw, 2 adults)",
+   "per_person": "£925–1,450",
+   "total": "£1,850–2,900",
+   "note": "⚠️ Google-cache scan 2026-08-15; the cheap end is a 30–40 h multi-stop, the top of the band buys a nonstop out"
+  },
+  {
+   "cat": "hotels (7 nights, 2 adults)",
+   "per_person": "£455–775",
+   "total": "£910–1,550",
+   "note": "Tokyo ¥66–114k · Hakone ryokan half board ¥40–70k · Kyoto peak-week ¥90–150k"
+  },
+  {
+   "cat": "intercity + local transport",
+   "per_person": "£158",
+   "total": "£316",
+   "note": "Hakone Freepass ¥7,100 + Romancecar ¥1,200 + Shinkansen ≈¥12,300 + Haruka ¥3,110 + ~¥8,000 local, per person; plus ¥4,600 takkyūbin for the two cases"
+  },
+  {
+   "cat": "temple and garden admissions",
+   "per_person": "£26",
+   "total": "£52",
+   "note": "Shinjuku Gyoen ¥500 · Hamarikyū ¥300 · Kiyomizu ¥400 · Tenryū-ji ¥800 · Tōfuku-ji ¥1,000 · Nanzen-ji ¥600 · Eikan-dō ¥600 · Tō-ji ¥800 · Meiji inner garden ¥500"
+  },
+  {
+   "cat": "food (7 days; the ryokan dinner is in the hotel line)",
+   "per_person": "£300",
+   "total": "£600",
+   "note": "≈¥9,000 pp/day — konbini breakfast, market lunch, a proper dinner"
+  },
+  {
+   "cat": "eSIM + travel insurance",
+   "per_person": "£40",
+   "total": "£80"
+  },
+  {
+   "cat": "buffer (12%)",
+   "per_person": "£230–310",
+   "total": "£460–620",
+   "note": "FX drift, koyo-week hotel moves, the fee jumps that peak-season entry brings"
+  },
+  {
+   "cat": "TOTAL",
+   "per_person": "£2,135–3,100",
+   "total": "£4,270–6,200",
+   "note": "at £1 = ¥215.25 / $1.3537, ECB via frankfurter.dev 2026-08-14"
+  }
+ ],
+ "brief": {
+  "Visa & entry": "UK passport = visa-free for up to 90 days as a tourist; no ETA scheme applies in 2026. Register both of you on Visit Japan Web for the immigration and customs QR codes. You will be asked for an onward ticket at the desk — have the KIX→LHR booking on your phone. ⚠️ verify at gov.uk/foreign-travel-advice/japan before you book, not after.",
+  "Holidays & crowds": "One collision in the window: Monday 23 Nov, Labour Thanksgiving Day (勤労感謝の日), from date.nager.at. Temples and gardens stay open; the Tsukiji Outer Market and small shops may not, day-trip towns and shinkansen seats fill with domestic travellers, and hotel rates on the 22nd–23rd sit above the rest of the week. Culture Day (3 Nov) is before the window. No festival closures found for these dates in Tokyo, Hakone or Kyoto.",
+  "Weather": "Same dates last year (Open-Meteo archive, 2025-11-20→29): Tokyo 16 / 7 °C, Hakone 16 / 8 °C, Kyoto 15 / 5 °C; 1–2 wet days in ten, 7–13 mm total. Roughly 10 h of daylight — sunrise ~06:20, sunset ~16:30 in Tokyo and ~16:47 in Kyoto. Kyoto's basin is genuinely cold after dark: the two night illuminations are 2 h standing still at 6 °C. Pack a real coat, not a fleece.",
+  "Foliage": "Kyoto's 2026 koyo forecast is roughly 25 Nov – 7 Dec with maximum density around 29 Nov – 3 Dec; the Kyoto half of this trip (25–28 Nov) sits on the opening shoulder of that peak. Tokyo runs about a week behind Kyoto for maples but its ginkgos (Yoyogi, Omotesandō) are gold in exactly this week. ⚠️ a forecast, not a fact — an early cold snap moves it a week either way.",
+  "Money": "Cards work almost everywhere in Tokyo and Kyoto now, but carry ¥15,000–20,000 cash between you: shrine offering boxes, temple entry windows, city buses, Nishiki stalls and the Hakone black-egg hut are cash or IC only. 7-Eleven and Japan Post ATMs take UK cards; most bank ATMs do not. Tipping is not a thing — don't.",
+  "Connectivity": "eSIM, 10 GB / 8 days, £8–12 each; activate before you leave. Free wifi is widespread and slow. Get IC cards (Suica/Pasmo/ICOCA, or Suica in Apple Wallet) on arrival — they pay for every train, metro, bus and half the vending machines on this route, and ⚠️ physical-card availability for visitors has been on and off since 2023, so the phone wallet is the reliable route.",
+  "Plugs": "Type A, two flat pins, 100 V. UK plugs do not fit; phone and laptop chargers are dual-voltage so an adapter is enough, but a hairdryer or shaver may not be.",
+  "Insurance": "Travel-medical cover with repatriation, for both of you. There is no reciprocal healthcare agreement between the UK and Japan and a GHIC is worthless here — a hospital admission is billed in full.",
+  "Safety": "Low-crime by any standard, and this route needs no dark walks: Shinjuku, Shijō-Karasuma and Hakone-Yumoto are all lit and busy at the hours we use them. The real hazards are physical, not criminal: crowd density at Kiyomizu and Tōfuku-ji in peak week, and wet polished stone on the Sannenzaka steps and the Kiyomizu approach. Bring shoes with grip. Earthquake drill: get under something, stay away from the windows, then follow the staff."
+ },
+ "unverified": [
+  "⚠️ Flight prices and times. flight_scan returned Google's cache for the two open-jaw halves (LHR→HND from $1,120, KIX→LHR from $1,338, both queried for 2 adults on 2026-08-15) but surfaced only multi-stop rows; the nonstop LHR–HND was not in the cache, and whether the price is per passenger or total is not something the scanner states. Everything about the flights is 'verify at the link'.",
+  "⚠️ Shinkansen Odawara→Kyoto fare (≈¥12,300 pp) and which Hikari services call at Odawara. Two searches did not produce a yen fare; check smart-ex.jp.",
+  "⚠️ Kiyomizu-dera's 2026 autumn night-viewing dates (given as 21–30 Nov) come from secondary sources, not the temple. The temple publishes around September.",
+  "⚠️ Tō-ji's autumn special-viewing fee (≈¥800 pp).",
+  "⚠️ Whether the Tsukiji Outer Market trades on Monday 23 Nov, a national holiday. The Sunday/Wednesday closure is solid; the holiday rule is per-shop.",
+  "⚠️ All hotel and ryokan bands are seasonal ballparks from price-guide articles, not live quotes for these dates. No OTA was scraped.",
+  "⚠️ Every hop duration marked (est) is a straight-line estimate from route_tools, not a Google Maps transit lookup.",
+  "⚠️ Opening hours across the board are the SEASONAL PATTERN as of 2026-08-15, not the published November 2026 calendar — the trip is three months out and nobody publishes that far ahead. Re-confirm two weeks before travel."
+ ],
+ "sources": "Holidays: date.nager.at · FX: ECB via frankfurter.dev · Weather: Open-Meteo archive · Sun times: sunrise-sunset.org · Flights: Google Flights cache via scripts/flight_scan.py · Hours, fees, foliage and passes: 14 web searches, 2026-08-15, listed inline"
+}

@@ -1,0 +1,147 @@
+{
+ "schema": 1,
+ "_note": "Art direction for the Japan 2026 test trip. Trip content is ENGLISH; the renderers' own UI chrome is Chinese by design and is not touched here. Picture stems prefixed japan-* live beside this file; plane / journal-boarding / journal-tag / journal-ticket are reused from themes/assets per IMAGE-LIBRARY.md §12 通用件.",
+
+ "cover": {
+  "kick": "Japan",
+  "kick_en": "JAPAN 2026",
+  "postmark_date": "2026-11-21"
+ },
+
+ "home": {"city": "London", "iata": "LHR"},
+
+ "brief_titles": {
+  "visa": "Visa & Entry",
+  "holidays": "Holidays",
+  "weather": "Weather",
+  "foliage": "Foliage",
+  "money": "Money",
+  "connectivity": "Connectivity",
+  "plugs": "Plugs",
+  "insurance": "Insurance",
+  "safety": "Safety"
+ },
+
+ "end": {
+  "date": "2026-11-29",
+  "mark": "LONDON",
+  "line": "London, home before breakfast.",
+  "fine": "Sunday 06:40 into Heathrow — one stop, an eight-hour clock change, and Saturday night never quite happened.",
+  "farewell": "SEE YOU, JAPAN"
+ },
+
+ "days": {
+  "2026-11-21": {"theme": "Touchdown",      "en": "Asakusa, Tokyo",                  "mark": "TOKYO"},
+  "2026-11-22": {"theme": "Sacred Wood",    "en": "Meiji & Shinjuku",                "mark": "SHINJUKU"},
+  "2026-11-23": {"theme": "Market Day",     "en": "Tsukiji & Shiba",                 "mark": "TSUKIJI"},
+  "2026-11-24": {"theme": "Steam & Lake",   "en": "Hakone",                          "mark": "HAKONE"},
+  "2026-11-25": {"theme": "Night Maples",   "en": "Kiyomizu, Kyoto",                 "mark": "KYOTO"},
+  "2026-11-26": {"theme": "Bamboo Dawn",    "en": "Arashiyama",                      "mark": "ARASHIYAMA"},
+  "2026-11-27": {"theme": "Torii to Flame", "en": "Fushimi · Tofuku-ji · Eikando",   "mark": "FUSHIMI"},
+  "2026-11-28": {"theme": "Homeward",       "en": "To-ji, then Kansai",              "mark": "KANSAI"}
+ },
+
+ "themes": {
+
+  "illustrated": {
+   "cover": {
+    "zh": "Late Maples",
+    "en": "EIGHT DAYS IN THE RED SEASON",
+    "sub": "Tokyo · Hakone · Kyoto",
+    "credit": "after Bashō — “this road: no one goes down it, autumn dusk” (public domain); English title an original coinage",
+    "hero": "japan-cover-hero"
+   },
+   "end": {
+    "hero": "plane",
+    "fine": "2026-11-29, Sunday, 06:40 into Heathrow — one stop, an eight-hour clock change, and Saturday night never quite happened."
+   },
+   "days": {
+    "2026-11-21": {"hero": "japan-gate"},
+    "2026-11-22": {"hero": "japan-teahouse"},
+    "2026-11-23": {"hero": "japan-stall"},
+    "2026-11-24": {"hero": "japan-ropeway", "feature": true},
+    "2026-11-25": {"hero": "japan-stage",   "feature": true},
+    "2026-11-26": {"hero": "japan-bamboo"},
+    "2026-11-27": {"hero": "japan-torii",   "feature": true},
+    "2026-11-28": {"hero": "japan-pagoda"}
+   }
+  },
+
+  "zine": {
+   "cover": {
+    "zh": "KOYO",
+    "en": "GATHERED MAPLES",
+    "photo": {"stem": "japan-zine-cover",
+              "caption": "SENBON TORII · FUSHIMI",
+              "alt": "A tunnel of vermilion torii gates climbing a wooded hillside",
+              "tear_seed": "cover-japan"}
+   },
+   "toc_strip": [
+    {"stem": "japan-train",   "rot": -3.0},
+    {"stem": "japan-lantern", "rot": 2.5},
+    {"stem": "japan-onsen",   "rot": -1.5}
+   ],
+   "props": {
+    "legs":      {"stem": "journal-boarding", "rot": -3.0},
+    "hotels":    {"stem": "journal-tag",      "rot": 4.0},
+    "checklist": {"stem": "journal-ticket",   "rot": -2.0}
+   },
+   "days": {
+    "2026-11-21": {
+     "poster":  {"stem": "japan-zine-tokyo", "caption": "KAMINARIMON · ASAKUSA",
+                 "alt": "A huge red paper lantern hanging in a temple gate at dusk"},
+     "lineart": "flight",
+     "sticker": {"stem": "japan-lantern", "size": "md", "side": "sl", "rot": -3.0}
+    },
+    "2026-11-22": {
+     "photo":   {"stem": "japan-ph-meiji", "caption": "THE PLANTED FOREST · MEIJI JINGU",
+                 "alt": "A plain wooden torii on a gravel path through dense forest",
+                 "treat": "mono", "rot": 2.4},
+     "lineart": "skyline"
+    },
+    "2026-11-23": {
+     "pair":    {"prints": [
+                   {"stem": "japan-ph-tsukiji", "alt": "A fish-market stall with tuna and crushed ice", "rot": -1.0},
+                   {"stem": "japan-ph-hamarikyu", "alt": "A wooden teahouse on a tidal pond under office towers",
+                    "treat": "duo-blue", "rot": 2.3}],
+                 "caption": "MARKET + TIDAL GARDEN · TOKYO", "rot": -1.2},
+     "lineart": "bridge"
+    },
+    "2026-11-24": {
+     "poster":  {"stem": "japan-zine-hakone", "caption": "THE GATE IN THE WATER · LAKE ASHI",
+                 "alt": "A vermilion torii standing in a still lake below a snow-capped cone"},
+     "photo":   {"stem": "japan-ph-owakudani", "caption": "SULPHUR · OWAKUDANI",
+                 "alt": "Steam venting from a bare volcanic hillside under a ropeway cable", "rot": 2.0},
+     "sticker": {"stem": "japan-onsen", "size": "md", "side": "sr", "rot": 3.0},
+     "lineart": "volcano"
+    },
+    "2026-11-25": {
+     "poster":  {"stem": "japan-zine-momiji", "caption": "NIGHT MAPLES · KIYOMIZU",
+                 "alt": "Floodlit red maples around a small pagoda reflected in a pond"},
+     "photo":   {"stem": "japan-ph-kiyomizu", "caption": "THE STAGE, LIT",
+                 "alt": "A wooden temple stage on tall stilts lit at night above red maples",
+                 "treat": "mono", "rot": -2.2},
+     "sticker": {"stem": "japan-maple", "size": "sm", "side": "sl", "rot": 3.0}
+    },
+    "2026-11-26": {
+     "poster":  {"stem": "japan-zine-arashiyama", "caption": "SEVEN O'CLOCK · ARASHIYAMA",
+                 "alt": "Tall bamboo stalks converging towards a pale sky"},
+     "lineart": "ridge"
+    },
+    "2026-11-27": {
+     "photo":   {"stem": "japan-ph-fushimi", "caption": "TEN THOUSAND GATES · FUSHIMI INARI",
+                 "alt": "A tunnel of torii gates with one figure walking away",
+                 "treat": "mono", "rot": 1.8},
+     "sticker": {"stem": "japan-torii", "size": "sm", "side": "sr", "rot": -2.5},
+     "lineart": "sunrise"
+    },
+    "2026-11-28": {
+     "band":    {"stem": "japan-zine-toji", "caption": "LAST LIGHT · TO-JI",
+                 "alt": "A five-storey pagoda silhouetted against an orange dusk sky",
+                 "tear_seed": "band-toji"},
+     "sticker": {"stem": "plane", "size": "md", "side": "sl", "rot": 2.0}
+    }
+   }
+  }
+ }
+}
