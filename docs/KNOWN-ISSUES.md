@@ -18,6 +18,7 @@ Source pointers are `file → function / section`.
 | [EXP-6](#exp-6) | Portal theme | No portrait/mobile video chain — landscape only | planned |
 | [EXP-7](#exp-7) | Probes | macOS headless Chrome will not go below ~500 px wide | open |
 | [EXP-8](#exp-8) | Probes | Chrome 151 headless never exits; scripts self-kill | open |
+| [EXP-9](#exp-9) | Export engine | Splash whole-page export can drop its last screen when the page exceeds the area budget | open |
 | [PLN-1](#pln-1) | route_tools | `sun` falls back to a longitude offset with no DST | open |
 | [PLN-2](#pln-2) | route_tools | Mainland-China polygon is coarse at the borders | open |
 | [PLN-3](#pln-3) | route_tools | `sun_stop` is new and only exercised synthetically | open |
@@ -195,6 +196,23 @@ acceptance check cannot be done by resizing the window.**
 - **Source** — `themes/xprobe.sh` / `themes/xt.sh` headers;
   `references/themes.md` §6.
 - **Status** — open (environment defect, worked around)
+
+---
+
+### EXP-9
+**Splash whole-page export can lose its final screen on long trips.**
+
+- **Symptom** — on the China test page the whole-page export came out 1367 × 23412 px
+  (≈3.2e7 px, right at the engine's area budget) and the closing spread (end card +
+  copyright line) was missing from the bottom of the long image; the same content is
+  fine in the appendix module export (`module '#appendix'`).
+- **Workaround** — export the appendix module separately, or shorten the trip / raise
+  the budget; the live page is unaffected.
+- **Impact** — a "one long image" of an 8–10-day splash trip may end one screen early
+  without any error.
+- **Source** — `themes/theme_common.py` `export_js` (area budgets); found 2026-08-16
+  while shooting the README showcase.
+- **Status** — open
 
 ---
 

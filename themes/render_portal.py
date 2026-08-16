@@ -30,6 +30,9 @@ ART CONTRACT (schema: ART-SCHEMA.md → themes.portal):
                              no dives → "PORTAL · ONE TAKE")
   themes.portal.intro        intro paragraph (the N-world route sentence)     → generic
   themes.portal.outro        {"tag": "DIAMOND HEAD · SUNRISE", "zh": "落在日出里", "text": "…"} → TOUCHDOWN / 落地 / generic
+  (day overlay card: plan day.label ≤64 chars and up to four anchor rows' `what`
+   ≤52 chars are shown; longer copy is cut at a word/punctuation boundary with an
+   ellipsis — soft_cut() — so keep labels short or accept the "…")
                              (no world count in the outro defaults — nothing
                              to keep in sync there)
   themes.portal.video_dir    directory holding the clips, relative to the ART
@@ -131,15 +134,32 @@ def portal_tag(n_worlds):
     return f"PORTAL · {word} {'WORLD' if n_worlds == 1 else 'WORLDS'} · ONE TAKE"
 
 
+def soft_cut(s, n):
+    """Overlay copy has a hard budget (the card is ~430px wide); cut over-long
+    strings at a word / punctuation boundary and mark the cut with an ellipsis
+    instead of slicing mid-word ("a night in a palm-g", "ScottsMiracle-" —
+    Morocco/US 2026-08-16). Strings within budget are returned untouched, so
+    plans that never overflowed render byte-identically."""
+    s = s or ""
+    if len(s) <= n:
+        return s
+    cut = n - 1
+    for k in range(cut, int(n * 0.6), -1):
+        if s[k] in " \t,;:·—–-()()、,;:" and s[k - 1] not in " \t":
+            cut = k
+            break
+    return s[:cut].rstrip(" \t,;:·—–-(、,;:") + "…"
+
+
 def day_payload(day, i, art):
     rows = []
     for r in day.get("timeline", []):
         if r.get("kind") in (None, "anchor") and len(rows) < 4:
-            rows.append({"t": r.get("t", ""), "w": r.get("what", "")[:52]})
+            rows.append({"t": r.get("t", ""), "w": soft_cut(r.get("what", ""), 52)})
     return {
         "n": i, "date": day.get("date", ""),
         "theme": art.day_theme(day.get("date", ""), day.get("city", "")),
-        "city": day.get("city", ""), "label": day.get("label", "")[:64],
+        "city": day.get("city", ""), "label": soft_cut(day.get("label", ""), 64),
         "rows": rows,
     }
 
