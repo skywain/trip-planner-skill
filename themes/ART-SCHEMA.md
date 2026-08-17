@@ -555,6 +555,24 @@ painting) is `towebp.py x.png` → `x.webp` — never `cutout.py` (it would eat 
    centred sticker, both lines the same height, no icons/moons inside the letters,
    wide white margin (see china-clay-title2; Turkey tester's tip — simple glyphs, ≤8
    strokes, keep the strokes intact:「九万里风」came out clean first time).
+2b. **没有生成能力就走素材库(stock 模式),不是退回纯文本页。** Phase 0 的图片能力检查把结果
+   写进 plan 的 `prefs.pictures`:`native`(agent 自带生图)/ `key`(存在
+   `themes/.auth_header`,只 `test -s` 判断,永不读取打印)/ `stock`(两者都没有)。`stock` 下
+   用内置素材包把图片补齐,页面照样交付主题版:
+   ```bash
+   python3 <skill>/themes/stock_art.py plan.geo.json --theme illustrated -o plan.art.json
+   # 还有 --theme clay · --lang zh|en · --index PATH(换一份 stock 索引)
+   ```
+   脚本按行程国家 + 每天停靠点的关键词,从 `themes/assets/stock/`(索引 `stock/index.json`,
+   清单见 `stock/README.md`)加共享图库里同国图片与通用件(`IMAGE-LIBRARY.md` §通用件)挑图,
+   **只填图片槽位**:封面画、每天的 hero / 抠图件、道具。**文字照旧由你写**——封面标题
+   (`references/cover-titles.md`)、每天 `theme`(4 字)/ `en` / `mark`、图注、批注、结尾句;
+   带着脚本占位词交付算缺陷,判据和下面第 3 步一样。脚本会把素材库说明写进 `end.fine`,**别删**,
+   聊天摘要里再说一遍(「图片来自内置素材库(本次未接入生图能力);接入生图模型或 KEY 后可为本次
+   行程定制生成。」),也永远不要在对话里索要 KEY。覆盖度:**插画版**完整;**黏土版**可用(地形带
+   走内置中性 SVG 套件 `ridge|plain|coast|forest|lake|desert` + 通用黏土道具);夜航 / 玻璃 /
+   手账 / Zine / 闪屏 / 穿越这六个主题的图版、照片、岛屿、视频仍然必须生成——用户点名要它们时,
+   说明情况并改推插画版,硬渲染只会得到一页空图槽(穿越版更是连素材都没有)。
 3. Write the words: captions, annotations, doodle notes, the closing line. Voice
    rules live in each theme's renderer docstring.
 4. Render, run `qc.py`, eyeball an export.

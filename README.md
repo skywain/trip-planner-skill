@@ -2,18 +2,21 @@
 
 # Trip Planner Skill
 
-**One sentence in, a verified, hour-by-hour, bookable trip plan out — plus the same plan
-as a designed page in any of eight visual themes.** An open-format Agent Skill (`SKILL.md`)
-that runs inside your coding agent: it checks opening hours, prices and holidays with tools
-instead of guessing, hands you a link for every booking, and never books or pays for you.
+**One sentence in, a verified, hour-by-hour, bookable trip plan out — delivered as a
+designed page in one of eight visual themes.** An open-format Agent Skill (`SKILL.md`)
+that runs inside whichever coding agent you already use — Claude Code, Codex, Gemini CLI,
+Cursor, GitHub Copilot, OpenCode, Qwen Code, Deep Code, Goose, Kiro, Roo Code, or any
+other harness that loads Agent Skills: it checks opening hours, prices and holidays with
+tools instead of guessing, hands you a link for every booking, and never books or pays
+for you.
 
-![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3776AB.svg)
 ![Agent Skills: open format](https://img.shields.io/badge/Agent%20Skills-open%20format-0A7B83.svg)
-![Models: any, tested with Claude](https://img.shields.io/badge/models-any%20%C2%B7%20tested%20with%20Claude-informational.svg)
+![Agents: Claude Code · Codex · Gemini CLI · Cursor · GitHub Copilot · OpenCode · Qwen Code · Deep Code · Goose · Kiro · Roo Code](https://img.shields.io/badge/agents-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Gemini%20CLI%20%C2%B7%20Cursor%20%C2%B7%20GitHub%20Copilot%20%C2%B7%20OpenCode%20%C2%B7%20Qwen%20Code%20%C2%B7%20Deep%20Code%20%C2%B7%20Goose%20%C2%B7%20Kiro%20%C2%B7%20Roo%20Code-4C51BF.svg)
 
-![Tested in: Claude Code](https://img.shields.io/badge/tested%20in-Claude%20Code-8A63D2.svg)
-![Should run in: Codex · Gemini CLI · Cursor · GitHub Copilot · OpenCode · Qwen Code · Deep Code · Goose · Kiro · Roo Code (untested)](https://img.shields.io/badge/should%20run%20in-Codex%20%C2%B7%20Gemini%20CLI%20%C2%B7%20Cursor%20%C2%B7%20GitHub%20Copilot%20%C2%B7%20OpenCode%20%C2%B7%20Qwen%20Code%20%C2%B7%20Deep%20Code%20%C2%B7%20Goose%20%C2%B7%20Kiro%20%C2%B7%20Roo%20Code%20%28untested%29-555.svg)
+![Verified in: Claude Code (others untested)](https://img.shields.io/badge/verified%20in-Claude%20Code%20%28others%20untested%29-8A63D2.svg)
+![Models: any](https://img.shields.io/badge/models-any-informational.svg)
+![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3776AB.svg)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 <p align="center">
   <img src="docs/showcase/hero-grid.webp" alt="The eight themes, one cover each: illustrated, clay, noir, glass, journal, zine, splash, portal" width="900">
@@ -106,9 +109,13 @@ screenshots only — the motion capture below is recorded from the live page.
 |---|---|---|
 | <img src="docs/showcase/portal-cover.webp" width="280"> | <img src="docs/showcase/portal-day.webp" width="280"> | <img src="docs/showcase/portal-end.webp" width="280"> |
 
-The plain, un-themed page looks like [`examples/kyoto-sample.html`](examples/kyoto-sample.html)
-(a Chinese-language sample; the same renderer produces the English UI from an `"lang": "en"` plan);
-`themes/render_picker.py` builds a style-chooser page linking every rendered edition of a trip.
+Every render command, cost and file for the seven trips is listed in
+[`examples/README.md`](examples/README.md). The plain, un-themed page — the printable
+extra, never the default deliverable — looks like
+[`examples/kyoto-sample.html`](examples/kyoto-sample.html) (a Chinese-language sample; the
+same renderer produces the English UI from a `"lang": "en"` plan);
+`themes/render_picker.py` builds a style-chooser page linking every rendered edition of a
+trip as `<prefix>-<theme>.html`.
 
 ## What you get
 
@@ -119,22 +126,29 @@ Say *"Japan, 12–15 days in October, mid budget, history and food."* The skill 
 - **An hour-level plan for every day** — opening hours and closure days checked with tools,
   dwell times and buffers from a written scheduling method, a holiday and festival collision
   scan, and a tappable map link on every hop.
-- **`plan.geo.json`, the single source of truth**, rendered to a plain self-contained HTML
-  (offline, printable, phone-friendly) and an offline KML for Organic Maps / Google My Maps.
+- **A designed page as the deliverable, not a wall of text** — the plan is rendered
+  through one of the **eight themed renderers** above (default **illustrated**) into one
+  self-contained, phone-friendly file: `trip-<theme>.html`. The seven still themes carry
+  offline share-image buttons (*Save this day* / *Save appendix* / *One long image*;
+  whole-page export on five of the eight — noir and glass export day modules only), and
+  portal (video) has no share buttons — screenshot it. The plain printable page is an
+  extra you can ask for.
+- **`plan.geo.json`, the single source of truth** — the themed page, the map links and an
+  offline KML for Organic Maps / Google My Maps all come out of that one file.
 - **A hotel shortlist by neighbourhood** (dated deep links, not invented nightly rates), a
   budget rollup in your home currency, and a **booking checklist sorted by deadline**.
-- Optionally, the same plan through the **eight themed renderers** above — each a
-  self-contained page; the seven still themes carry offline share-image buttons (*Save this
-  day* / *Save appendix* / *One long image*; whole-page export on five of the eight — noir
-  and glass export day modules only), and portal (video) has no share buttons — screenshot it.
+- **Pictures, whatever your agent can do** — three rungs, checked silently before the
+  page style ever comes up: your agent's **native** image generation → your own
+  OpenRouter **key** → the built-in **stock kit**. The last rung still ships a themed
+  page, and says so in plain words (see *No image generator?* below).
 
 What it will not do: book, pay, hold, or enter personal data. You click the links.
 
 ## Quick start
 
 **1. Install** — agents that support Agent Skills discover them by directory, so clone
-straight into your skills folder (Claude Code shown; see [Compatibility](#compatibility)
-for the others):
+straight into your skills folder (Claude Code's path is shown; other agents: see
+[Compatibility](#compatibility)):
 
 ```bash
 git clone https://github.com/skywain/trip-planner-skill.git ~/.claude/skills/trip-planner
@@ -155,7 +169,8 @@ python3 themes/render_clay2.py examples/china-2026/china.geo.json -o china-clay.
   && python3 themes/qc.py china-clay.html                                                 # an English themed page + its QC (exit 0)
 ```
 
-(For a Chinese-language themed page swap in `examples/turkey-2026/turkey.geo.json`.)
+(For a Chinese-language themed page swap in `examples/turkey-2026/turkey.geo.json`; the
+other six trips and their commands are in [`examples/README.md`](examples/README.md).)
 
 **2. Plan a trip** — in your agent, one sentence. The skill triggers on its own for trip /
 flight / itinerary requests, or explicitly:
@@ -174,8 +189,10 @@ The plan's UI language follows the language you ask in (`"lang": "zh"|"en"` in t
 | **Gap filler** | "I'm near X with 2 free hours" | 2–3 options within a 15-min radius, each with walk time, map link, turn-back deadline |
 | **Live replan** | "missed the train / it's pouring" | Rebuilds only the affected day from its degradation tags |
 
-**3. Want the designed edition?** Three commands, from the repo root (full manual:
-[`themes/README.md`](themes/README.md), [`references/themes.md`](references/themes.md)):
+**3. The designed page** — this is the deliverable the skill hands over, in the theme you
+picked (default **illustrated** = `render_theme2.py`), never a plain text page. Three
+commands, from the repo root (full manual: [`themes/README.md`](themes/README.md),
+[`references/themes.md`](references/themes.md)):
 
 ```bash
 # optional: a <plan>.art.json beside the plan is picked up automatically — cover title, per-day titles, which pictures go where
@@ -188,33 +205,57 @@ The art contract is [`themes/ART-SCHEMA.md`](themes/ART-SCHEMA.md); every field 
 and an empty art file must still render. Pictures resolve `--assets` → art dir → plan dir →
 `themes/assets/`.
 
-**4. Pictures and video: your own generator first, one key otherwise.** Reuse the shipped
-library first — [`themes/assets/IMAGE-LIBRARY.md`](themes/assets/IMAGE-LIBRARY.md) indexes
-301 stems (444 webp, 26 MB) by subject. For what is missing: **if the agent running the
-skill can already generate images or video natively, it uses that — no key to set up**
-(same specs and prompts, same `split_sheet.py` → `cutout.py` → `towebp.py` → trip-manifest
-steps; the contract is the generator-choice section of `themes/ART-SCHEMA.md`). Only an
-environment without native generation needs the fallback scripts: create
-`themes/.auth_header` containing one line — `Authorization: Bearer <your OpenRouter key>` —
-(gitignored, read only from that directory; both scripts pass it to curl as a header file,
-so it must be the full header line, not the bare key). `--dry-run` prints the credential
-path it would read:
+**4. Pictures and video: three rungs, best first.** The skill walks this ladder itself,
+silently, before it ever mentions a page style:
+
+1. **Native** — the agent running the skill can already generate images or video, so it
+   uses that: art drawn for this trip, **no key to set up** (same specs and prompts, same
+   `split_sheet.py` → `cutout.py` → `towebp.py` → trip-manifest steps; the contract is the
+   generator-choice section of `themes/ART-SCHEMA.md`).
+2. **One key** — no native generation: create `themes/.auth_header` containing one line —
+   `Authorization: Bearer <your OpenRouter key>` — (gitignored, read only from that
+   directory; both scripts pass it to curl as a header file, so it must be the full header
+   line, not the bare key). `--dry-run` prints the credential path it would read:
+
+   ```bash
+   python3 themes/gen.py <trip>/jobs.json --outdir <trip> --manifest <trip>/manifest.<trip>.json      # gpt-image-2; --dry-run first
+   python3 themes/genvideo.py jobs.json --outdir <trip>/portal --manifest <trip>/manifest.<trip>.json  # veo-3.1-lite by default; --models for prices
+   ```
+
+3. **Stock kit** — neither of the above: the pictures come from the kit bundled in this
+   repo, and the page is still a themed page (next block).
+
+On every rung the shipped library comes first —
+[`themes/assets/IMAGE-LIBRARY.md`](themes/assets/IMAGE-LIBRARY.md) indexes 301 stems
+(444 webp, 26 MB) by subject, and its rules draw the line: generic props are reusable,
+while anything destination-specific (covers, hero plates, title stickers, terrain bands,
+splash islands, journal photos) must belong to the trip it is on. Real costs from the
+shipped examples: **$0.25–0.46 of image generation per trip** (7–11 `gpt-image-2` calls).
+The **portal** theme is the one that needs footage: either `genvideo.py` in the cloud
+(`google/veo-3.1-lite`, 720p, ≈ $0.03/s → roughly $3 for a ten-world chain; smoke-tested
+on one 4 s clip, $0.12) or a local GPU (the author's regression footage comes from ComfyUI
+on an RTX 5090 via `themes/build_portal_jobs.py`). The shipped chain in
+`themes/assets/portal/` (19 clips, ~35 MB) belongs to the US trip that drove the design;
+another trip needs its own.
+
+**No image generator? Still a designed page.** Two commands, and the plan comes out in a
+real theme instead of degrading to plain text:
 
 ```bash
-python3 themes/gen.py <trip>/jobs.json --outdir <trip> --manifest <trip>/manifest.<trip>.json      # gpt-image-2; --dry-run first
-python3 themes/genvideo.py jobs.json --outdir <trip>/portal --manifest <trip>/manifest.<trip>.json  # veo-3.1-lite by default; --models for prices
+python3 themes/stock_art.py plan.geo.json --theme illustrated -o plan.art.json
+python3 themes/render_theme2.py plan.geo.json --art plan.art.json \
+        --assets themes/assets/stock -o trip-illustrated.html   # --assets is required here
 ```
 
-Real costs from the shipped examples: **$0.25–0.46 of image generation per trip** (7–11
-`gpt-image-2` calls). Without a key you are limited to the library — which is enough for
-every theme except anything destination-specific: covers, hero plates, title stickers,
-terrain bands, splash islands, journal photos (the library rules in `IMAGE-LIBRARY.md`
-forbid reusing those across trips). The **portal** theme is the one that needs footage:
-either `genvideo.py` in the cloud (`google/veo-3.1-lite`, 720p, ≈ $0.03/s → roughly $3 for
-a ten-world chain; smoke-tested on one 4 s clip, $0.12) or a local GPU (the author's
-regression footage comes from ComfyUI on an RTX 5090 via `themes/build_portal_jobs.py`).
-The shipped chain in `themes/assets/portal/` (19 clips, ~35 MB) belongs to the US trip that
-drove the design; another trip needs its own.
+The kit (`themes/assets/stock/`, 80 stems / 161 webp / 5.2 MB, all in the illustrated
+gouache style) holds 14 region cover paintings, 30 generic scene cut-outs and 36
+world-landmark cut-outs; `stock_art.py` picks the cover from the destination country and
+one hero per day by keyword score, leaves the words (cover title, day titles, captions) to
+the agent, and writes the notice — *"Pictures: built-in stock kit — no image generator or
+key was available; provide one and the art is generated for this trip."* — into the page's
+fine print, where it must stay, and into the chat summary. Coverage: complete for
+**illustrated**, works for **clay**; the other six themes need generated pictures.
+Details: [`themes/assets/stock/README.md`](themes/assets/stock/README.md).
 
 ## How it works
 
@@ -223,7 +264,22 @@ only for what is missing) → Phase 1 country brief (visa from official sources,
 a budgeted festival search, weather, money, safety) → Phase 2 route skeletons → checkpoint
 → Phase 3 flights and intercity legs (`scripts/flight_scan.py`) → Phase 4 city day-plans
 (parallel city subagents with an explicit search budget) → Phase 5 hotels → Phase 6
-assemble, adversarial self-check, deliver. Two checkpoints with the user, no more.
+assemble, adversarial self-check, deliver. Three moments with the user at most, usually
+two: an intake message only when a core fact is missing and cannot be inferred, the
+route-skeleton pick, and delivery.
+
+**Intake: no questions when the request already carries the facts.** *"Plan my Germany
+trip, 1–7 Oct this year"* has the destination and the dates, so nothing is asked — the
+origin and the rest are inferred and listed as assumptions at the first checkpoint. Only a
+genuinely missing core fact (destination, when / how long, an origin that cannot be
+inferred) triggers a single intake message, and the optional preferences ride along in that
+same message, each one marked *skip = default*: travel style (public transport ·
+self-drive · group tour), lodging habit and band, scenery taste (nature / city / beach /
+forest / lake / mountain), pace, party size, budget, ranked interests, date flexibility.
+Whatever you answer or the skill assumes is written into the plan's `prefs` block
+([`assets/plan.example.json`](assets/plan.example.json)) so a later replan does not re-ask.
+Say *"just plan it, don't ask"* and both the intake and the route checkpoint are skipped,
+with every assumption stated at the top of the result.
 
 **One file, one truth.** `plan.geo.json` is written once and read by everything:
 `scripts/route_tools.py` (`geocode` · `check` · `links --write` · `kml` · `sun`) produces
@@ -264,28 +320,32 @@ dated deep links rather than quoting a nightly price it cannot verify.
 
 ## Compatibility
 
-- **Format.** This is an [Agent Skill](https://agentskills.io) — an open format: a
-  `SKILL.md` playbook plus `references/`, `scripts/` and `themes/`. Any harness that loads
-  Agent Skills can load this one.
-- **Tested in Claude Code.** Every trip, render and export in this repository was produced
-  there; the install path above is Claude Code's.
-- **Should run in** Codex, Gemini CLI, Cursor, GitHub Copilot, OpenCode, Qwen Code,
-  Deep Code (DeepSeek), Goose, Kiro and Roo Code — each declares support for `SKILL.md`
-  skills, and the scripts here are stdlib-only Python 3.9+, so nothing in the repo is tied
-  to one harness. **We have not tested those environments one by one — reports welcome**,
+- **Format, not a product integration.** This is an [Agent Skill](https://agentskills.io)
+  — an open format: a `SKILL.md` playbook plus `references/`, `scripts/` and `themes/`.
+  Any harness that loads Agent Skills can load this one; nothing here is tied to one
+  vendor's agent.
+- **The agents.** Claude Code, Codex, Gemini CLI, Cursor, GitHub Copilot, OpenCode,
+  Qwen Code, Deep Code (DeepSeek), Goose, Kiro and Roo Code all declare support for
+  `SKILL.md` skills, and the scripts here are stdlib-only Python 3.9+. The only difference
+  between them, from this repo's point of view, is where they expect skills to live — so
+  the `git clone` target in Quick start is the one line you adapt.
+- **Verified in Claude Code; the rest are untested.** Every trip, render and export in
+  this repository was produced in Claude Code, and the install path above is its skills
+  directory. **We have not run the other harnesses one by one — reports welcome**,
   including the skills directory each one expects.
 - **What the harness needs.** A shell that can run Python 3.9+ (the scripts), and web
   search / fetch tools (the country brief, day plans and hotel phases verify hours, prices
   and holidays online). Nice-to-have: subagents (Phase 4 fans out one agent per city — a
   harness without them plans the cities in sequence), a browser tool (the flight and hotel
-  price fallbacks when the keyless scripts fail), and native image / video generation
-  (otherwise the OpenRouter fallback scripts below).
+  price fallbacks when the keyless scripts fail), and native image / video generation (else
+  an OpenRouter key, else the bundled stock kit — the page stays themed either way).
 - **Any model.** The skill is instructions plus scripts; whatever model your harness runs
   (Claude, GPT, Gemini, Qwen, DeepSeek, Mistral, …) executes it. Stronger models follow the
   verification rules more faithfully; the scripts behave the same regardless.
 - **Native generation is optional.** Pictures and portal footage use the agent's own image /
   video generation when it has one; otherwise `themes/gen.py` / `themes/genvideo.py` with a
-  single OpenRouter key. Rendering from the shipped library needs neither.
+  single OpenRouter key; otherwise `themes/stock_art.py` and the bundled stock kit.
+  Rendering from the shipped library or the stock kit needs no key at all.
 
 ## Repository layout
 
@@ -309,21 +369,27 @@ scripts/
 themes/
   README.md                   what is here, the three commands, where pictures come from
   render_theme2.py …          eight renderers: theme2 (illustrated) · clay2 · noir2 · glass2 · journal · zine · splash · portal
-  render_picker.py            style-chooser page
+  render_picker.py            style-chooser page (links <prefix>-<theme>.html)
   theme_common.py             shared helpers, i18n, the offline share-image engine
   qc.py  xprobe.sh  xt.sh     static QC · headless export probes
   gen.py  genvideo.py         fallback generators (OpenRouter gpt-image-2 / video, one key) for agents without native generation
+  stock_art.py                no generator, no key: builds the picture side of art.json from the stock kit
   towebp.py cutout.py split_sheet.py build_manifest.py build_portal_jobs.py
                               asset pipeline (png→webp, cut-outs, sheet splitting, manifest, portal jobs)
   ART-SCHEMA.md               the art.json contract (the only copy)
   assets/                     picture library: 444 webp (301 stems), Caveat font, manifest.json,
                               IMAGE-LIBRARY.md (index by subject), portal/*.mp4 (19 clips)
+    stock/                    the stock kit: 14 region covers + 66 cut-outs (161 webp, 5.2 MB),
+                              index.json (lookup: archetypes, 225 ISO2, keywords, notice), README.md
 assets/plan.example.json      schema template — copy it, fill the PLACEHOLDERs, then render (or --force to preview)
-examples/                     seven themed trips (plan + art + KML + rendered HTML + README) and the plain Kyoto sample
+examples/
+  README.md                   the seven trips: themes, routes, costs, every render command
+  japan-2026/ …               one folder per trip: <trip>.geo.json + <trip>.art.json + <trip>-<theme>.html
+  kyoto-sample.*              the plain page's sample plan, its HTML and its KML
 docs/
   showcase/                   README images (hero grid, per-theme cover / day / end frames, portal motion capture)
   verification.md             how the skill was hardened, and what the reviews caught
-  KNOWN-ISSUES.md             27 defects and hard limits (26 open / planned, 1 resolved), each with a source pointer, plus the roadmap
+  KNOWN-ISSUES.md             30 defects and hard limits (29 open / planned, 1 resolved), each with a source pointer, plus the roadmap
 ```
 
 Not in the repo: personal trip data (`trips/`), PNG originals, and the OpenRouter
@@ -333,9 +399,9 @@ credential file `themes/.auth_header` that `gen.py` / `genvideo.py` read.
 
 - **Static QC** — `themes/qc.py page.html` checks the offline contract (no network, no
   external fetches), no-JS survival, print, focus order and link hygiene; exit code is the
-  FAIL count. The seven themed examples re-render byte-identically from their README
-  commands and pass; the plain `render_plan.py` page (`examples/kyoto-sample.html`)
-  passes too.
+  FAIL count. The seven themed examples re-render byte-identically from the commands in
+  [`examples/README.md`](examples/README.md) and pass; the plain `render_plan.py` page
+  (`examples/kyoto-sample.html`) passes too.
 - **Export probes** — `themes/xprobe.sh` / `xt.sh` drive a headless Chrome to click the
   page's real share button and write the image it produces, so export defects are seen,
   not assumed. macOS with Google Chrome in `/Applications` only (the path is hardcoded in
@@ -353,10 +419,13 @@ credential file `themes/.auth_header` that `gen.py` / `genvideo.py` read.
 
 ## Status and known issues
 
-Working, personal-use software under active development. Every defect and hard limit
-in the current tree is listed in [`docs/KNOWN-ISSUES.md`](docs/KNOWN-ISSUES.md)
-— 27 entries (26 open or planned, 1 resolved) across export/renderers, planning scripts,
-assets and scope, each with a symptom, workaround and source pointer, plus a short roadmap (whole-page export sizing,
+Working, personal-use software under active development, and **harness-agnostic on
+purpose**: an Agent Skill, not a Claude Code plugin — verified end-to-end in Claude Code,
+expected to run in the ten other agents listed under [Compatibility](#compatibility), and
+untested there until someone files a report. Every defect and hard limit in the current
+tree is listed in [`docs/KNOWN-ISSUES.md`](docs/KNOWN-ISSUES.md) — 30 entries (29 open or
+planned, 1 resolved) across export/renderers, planning scripts, assets and scope, each with
+a symptom, workaround and source pointer, plus a short roadmap (whole-page export sizing,
 journal `zh` cover fix, picker copy, a portrait portal chain, a post-trip photo album,
 affiliate rails for a hosted version).
 
@@ -364,9 +433,10 @@ affiliate rails for a hosted version).
 except optional `fast-flights` (flight scanner) and Pillow (asset pipeline: `towebp.py`,
 `cutout.py`, `split_sheet.py`, `gen.py`). `gen.py` / `genvideo.py` need `themes/.auth_header`
 (one line: `Authorization: Bearer <OpenRouter key>`) — and only when the agent has no native
-image/video generation of its own. The export probes need macOS with Google Chrome in
-`/Applications` (path hardcoded). Rendering any theme from the shipped library needs none
-of these.
+image/video generation of its own; with neither, `stock_art.py` and the bundled stock kit
+still produce a themed page. The export probes need macOS with Google Chrome in
+`/Applications` (path hardcoded). Rendering any theme from the shipped library or the stock
+kit needs none of these.
 
 **Limitations and non-goals.**
 

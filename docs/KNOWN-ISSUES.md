@@ -33,6 +33,9 @@ Source pointers are `file → function / section`.
 | [AST-4](#ast-4) | Portal footage | Cloud video path smoke-tested on one 4 s clip | open |
 | [AST-5](#ast-5) | Zine theme | `cover.zh` is a hard 2–4 glyph column | open |
 | [AST-6](#ast-6) | Renderers | Wrong plan section type warns instead of failing | open |
+| [AST-7](#ast-7) | Stock mode | Stock kit covers illustrated fully and clay partially; six themes still need generated pictures | open |
+| [AST-8](#ast-8) | Stock mode | The stock kit is drawn in the illustrated style only — per-style stock packs are future work | open |
+| [AST-9](#ast-9) | Stock mode | A stock render without `--assets themes/assets/stock` silently drops the stock pictures | open |
 | [SCO-1](#sco-1) | Scope | Personal-use posture — not licensable as a service | planned |
 | [SCO-2](#sco-2) | Scope | Not real-time: no delay tracking, no rebooking | open |
 | [SCO-3](#sco-3) | Scope | Beyond ~3 months only the seasonal pattern is knowable | open |
@@ -141,7 +144,7 @@ ring on `zh` pages.**
   functional effect.
 - **Workaround** — render the picker with `--lang en`, or delete the `retired` value
   before rendering.
-- **Source** — `themes/render_picker.py` → `L["zh"]["retired"]` (~line 61); the
+- **Source** — `themes/render_picker.py` → `L["zh"]["retired"]` (~line 65); the
   module docstring already notes "in en … the retired-editions footnote (US history)
   is dropped".
 - **Status** — planned
@@ -411,13 +414,24 @@ holidays are absent.**
   get its cover, hero, title sticker, terrain band, noir plate or splash island —
   and those slots are explicitly **never** reused across trips (a China page opening
   with a New York skyline band was logged as a defect).
-- **Workaround** — render from the shipped library (which needs no key, no Pillow and
-  no network) and accept generic props only; or supply a key. Credentials are read
-  from `themes/` only, are gitignored, are never copied into a trip folder and are
-  never printed. Generation costs money and needs the owner's approval.
+- **Workaround** — **stock mode** (2026-08-17): `themes/stock_art.py` fills the picture
+  slots from the built-in stock kit (`themes/assets/stock/`) plus the shared library's
+  same-country pictures and generic props, so a keyless session still delivers a themed
+  page instead of a plain one — with the one-line notice that the pictures are stock. Its
+  coverage is uneven (AST-7) and its style is illustrated-only (AST-8). Needs no key, no
+  Pillow and no network. Or supply a key. Credentials are read from `themes/` only, are
+  gitignored, are never copied into a trip folder and are never printed. Generation costs
+  money and needs the owner's approval.
+- **Fixed in part, 2026-08-17** — the *deliverable* consequence is closed. Before this
+  date, no native generator + no key meant the user got the plain `render_plan.py` text
+  page; SKILL.md Phase 0 now runs a picture-capability check (`prefs.pictures` =
+  `native|key|stock`) and Phase 6 states that a plain text page is never the deliverable.
+  What stays open is the line above it: *generating* new pictures still needs either a
+  native generator or a key.
 - **Source** — `themes/gen.py` docstring (credentials paragraph);
-  `themes/README.md` §"Not in the repo"; `README.md` §Requirements.
-- **Status** — open
+  `themes/README.md` §"Not in the repo"; `README.md` §Requirements;
+  `SKILL.md` Phase 0 (picture-capability check) + Phase 6; `references/themes.md` §3b.
+- **Status** — open (narrowed 2026-08-17)
 
 ### AST-4
 **The cloud path for Portal footage has been smoke-tested on a single 4-second clip;
@@ -477,6 +491,90 @@ render blank.**
   no WARN and byte-identical output.
 - **Source** — `themes/theme_common.py` → `PLAN_SHAPE` / `norm_plan()`
   (~lines 286–360); `assets/plan.example.json`; `references/output-template.md`.
+- **Status** — open
+
+### AST-7
+**Stock mode covers illustrated completely and clay partially; the other six themes
+still need generated pictures.**
+
+- **Symptom** — `prefs.pictures = "stock"` (no native generator, no key) with a theme
+  other than illustrated or clay: `stock_art.py` has nothing to put in that theme's own
+  picture slots, so noir/glass plates, journal photos and stamps, zine prints, splash
+  islands come out empty, and portal has no footage at all. The page renders — every
+  renderer must survive an empty art file — it just loses the images that carry it.
+- **Cause** — the kit is a **finite** set of region cover paintings and landmark /
+  generic-scene cut-outs. Illustrated's slots (cover painting, per-day cut-out hero,
+  feature card) map onto exactly that; clay works because its terrain bands come from the
+  built-in neutral SVG kit (`ridge|plain|coast|forest|lake|desert`) rather than from
+  pictures, with generic clay props on top. The remaining six are built around
+  photographic plates or per-theme illustrated objects that no generic library can stand
+  in for — and their scenery slots are the ones explicitly never reused across trips
+  (AST-3).
+- **Impact** — a user in a keyless session who names one of those six gets a visibly
+  thinner page than the showcase, for a reason that is not their fault.
+- **Workaround** — in stock mode, offer **illustrated** (the default) or clay, and say
+  plainly that the other six need an image generator or a key. Do not render one of the
+  six "anyway" without telling the user what they will get.
+- **Source** — `SKILL.md` Phase 0 (picture-capability check, last bullet) + Phase 6
+  (stock branch); `references/themes.md` §3b (Coverage today); `themes/ART-SCHEMA.md`
+  §"Authoring a new trip's art" step 2b; `themes/stock_art.py` (`--theme` accepts
+  illustrated and clay).
+- **Status** — open
+
+### AST-8
+**The stock kit is drawn in one style — illustrated. There are no per-style stock
+packs.**
+
+- **Symptom** — nothing at runtime; it is why AST-7 exists. Every picture in
+  `themes/assets/stock/` is painted in the illustrated theme's visual language, so it can
+  only ever stand in for slots that suit that language.
+- **Cause** — deliberate scope for the first version (2026-08-17): one style, complete,
+  for the default theme, rather than eight styles half-done. Each additional pack is a
+  separate generation batch with its own style anchor (a riso pack for zine, a night
+  photographic pack for noir, a clay-prop pack, …), and each costs money and review time.
+- **Impact** — the ceiling on stock mode is a design decision, not a bug, but it means
+  "themed page without a generator" effectively means "illustrated page" today.
+- **Workaround** — none needed for illustrated. For another style, supply a native
+  generator or a key and generate for the trip, which is better art in any case.
+- **Future work** — a per-style stock pack, one style at a time, each following the same
+  contract as the illustrated kit (`stock/index.json` entries + `stock/README.md` row +
+  the same webp/cut-out shapes the theme's size table asks for, `themes/ART-SCHEMA.md`).
+  Not on the [Roadmap](#roadmap) yet — no fix scheduled.
+- **Source** — `themes/assets/stock/README.md`; `references/themes.md` §3b;
+  `SKILL.md` §Bundled resources (`themes/assets/` and `themes/stock_art.py` entries).
+- **Status** — open
+
+### AST-9
+**A stock-mode render that forgets `--assets themes/assets/stock` drops the stock
+pictures without any error.**
+
+- **Symptom** — the render exits 0, `qc.py` returns `PASS`, and the page simply has
+  fewer pictures: the summary line's `assets=N` is lower, with no WARN naming a
+  missing file. Measured on the Japan example (2026-08-17): without the flag
+  `no.html: 1014KB, days=8, assets=17`; with it
+  `yes.html: 1422KB, days=8, assets=26`. Every stem `stock_art.py` resolved out of
+  `themes/assets/stock/` is silently blank; only the stems that happen to live in
+  `themes/assets/` itself survive, which is why a trip to a country the shared
+  library already covers looks almost right and a trip to one it does not looks
+  gutted.
+- **Cause** — `theme_common.data_uri()` searches the `--assets` dirs, the art file's
+  directory, the plan's directory and `themes/assets/`, and it does **not** recurse
+  into sub-folders of any of them. `themes/assets/stock/` is a sub-folder, so it is
+  never reached unless it is passed explicitly. A stem that resolves nowhere returns
+  `""` rather than raising — the same fail-soft rule that lets an empty art file
+  render.
+- **Impact** — the failure is invisible to both gates a user would think to run
+  (exit code, `qc.py`), so a keyless session can ship a visibly thin page believing
+  stock mode did not work at all.
+- **Workaround** — paste the render command `stock_art.py` prints on its last stderr
+  lines, which already carries the flag and the reason; or simply always pass
+  `--assets themes/assets/stock` on a stock render. To check after the fact, compare
+  `assets=N` against a run with the flag.
+- **Source** — `themes/theme_common.py` → `data_uri()` (~line 210) and
+  `add_asset_dir`; `themes/stock_art.py` → the `next:` block at the end of the stderr
+  summary (~line 780); `themes/README.md` §Where pictures come from;
+  `themes/assets/stock/README.md` §"How the skill uses it"; `SKILL.md` Phase 6
+  (stock branch).
 - **Status** — open
 
 ---

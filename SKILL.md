@@ -47,14 +47,18 @@ data, not on prose — fixing exactly that is this skill's job, so verification 
    from a 200 response** (`symbols=VND,USD` comes back with USD alone). For those use
    `https://open.er-api.com/v6/latest/<BASE>` and **check the returned object has the
    key you asked for**; the plan states which source it used (data-sources.md §FX).
-6. Track the phases as todos so a long plan survives interruptions and stays visible.
+6. Track the phases as todos (whatever task/todo tool the harness has; none → a
+   short checklist at the top of your working notes) so a long plan survives
+   interruptions and stays visible.
 
 ## Interaction contract
 
-Two checkpoints, no more: (a) after Phase 2 — present 2-3 route skeletons, get a pick;
-(b) final delivery. Everything else runs without questions. If the user says "一次到位 /
-don't ask, just plan" or the session is clearly headless, skip (a): pick the best
-skeleton yourself and state that assumption prominently at the top of the output.
+Three moments at most, usually two: (0) **one intake message, only if a core fact is
+missing and can't be inferred** (Phase 0 — most requests need none); (a) after Phase 2 —
+present 2-3 route skeletons, get a pick; (b) final delivery. Everything else runs without
+questions. If the user says "一次到位 / don't ask, just plan" or the session is clearly
+headless, skip (0) and (a): assume, pick the best skeleton yourself and state every
+assumption prominently at the top of the output.
 
 ## Quick modes (no full pipeline)
 
@@ -71,16 +75,67 @@ skeleton yourself and state that assumption prominently at the top of the output
   re-planning the trip. `[pinned]` blocks hold; `[opener]` may move but costs a queue;
   re-verify only the hops that changed.
 
-## Phase 0 — Intake
+## Phase 0 — Intake (one message, or none)
 
-Ask once, in one message, only for what's missing; assume and clearly state defaults
-for the rest (mid budget, pace 3 anchors/day, ±2 days flexibility, no kids):
-origin airport/city · destination country or shortlist · date window + flexibility ·
-nights (a range like 10-15 is fine) · party size & mobility · budget style or number ·
-interests ranked (food/history/nature/anime/hiking/shopping/photography/nightlife) ·
-pace (2/3/4 anchors per day) · passport nationality (visa!) · locked must-sees, if any.
-Set the plan's top-level `"lang"` (`zh` | `en`, output-template.md §Plan language) from
-the language the user asked in — the rendered pages' UI follows it; `--lang` overrides.
+**Read the request before deciding whether to ask anything.** Most requests already carry
+what matters — "帮我安排今年 10.1 到 10.7 的德国之旅" has the destination and the dates,
+and gets **zero questions**: infer the rest, list the assumptions in one block at the top
+of checkpoint (a), and move. Ask only when a *core* fact is missing **and** cannot be
+inferred — and then ask for everything in ONE message, core first, optional after,
+each optional line marked "(skip = default)".
+
+**Core** — must be known or defensibly assumed:
+- **Origin** (city/airport). Missing → infer from the conversation language, the user's
+  locale/timezone or anything said earlier, pick that country's main international hub and
+  state it as an assumption; it costs one line to fix at checkpoint (a) and a whole round
+  trip to ask. Genuinely unguessable → it is the one core question.
+- **Destination** (country, city or a shortlist). Missing → ask; nothing to plan without it.
+- **When / how long** (dates, or a duration + rough month + flexibility). Missing → ask.
+- **Page style** — one of the eight themes (Phase 6). Default: **illustrated 插画版**.
+  Before you mention styles at all, run the **picture-capability check** below — its
+  result decides what you say about pictures.
+
+**Optional** — ask them in the same message only when you are already asking; never
+send a message just for these. Unanswered → default, and the assumptions block says so:
+- travel style: self-drive · group tour · public transport + walking (default: public
+  transport, or self-drive where the destination is car-first — Phase 3 §Driving legs)
+- lodging habit: hotel · hostel · B&B / guesthouse · apartment · ryokan/onsen-style
+  stays, and the band (default: mid-range hotel, refundable)
+- scenery taste: scenery/nature · city · beach · forest · lake · mountain (default: read
+  from the destination + interests)
+- party size & mobility (default: 2 adults, no kids) · budget style or number (mid) ·
+  interests ranked (food/history/nature/anime/hiking/shopping/photography/nightlife) ·
+  pace 2/3/4 anchors per day (3) · ±day flexibility (±2) · passport nationality
+  (visa! infer from origin, state it) · locked must-sees.
+
+Write what you learned or assumed into the plan's top-level `prefs` block
+(`assets/plan.example.json`: `theme`, `pictures`, `travel_style`, `lodging`, `scenery`,
+`pace`, `budget`, and `notes` — the inferred values in one line, e.g. "assumed origin
+PVG (zh request, no origin given)"; the assumptions block at checkpoint (a) is written
+from it) so Phases 2-6 read one place and a later replan does not re-ask.
+
+**Picture-capability check** — silent, once, before styles come up:
+1. You have a **native image-generation tool** → bespoke art for this trip, nothing to
+   configure (`prefs.pictures = "native"`).
+2. Else `<skill>/themes/.auth_header` exists (`test -s`; never read, print or copy it) →
+   `gen.py` over OpenRouter with the user's key (`"key"`).
+3. Neither → **the page still ships in a theme** (Phase 6 — a plain text page is never
+   the deliverable): the built-in **stock kit** (`themes/assets/stock/`) supplies the
+   pictures (`"stock"`). Tell the user once — in the intake message if you are sending
+   one, otherwise in the assumptions block at checkpoint (a): *"No image generator is
+   available in this session, so the page will use the built-in stock illustrations —
+   still a designed page, just less bespoke. If you have an OpenRouter key, put it in
+   `themes/.auth_header` (one line: `Authorization: Bearer <key>`) and tell me; then I
+   generate the art for this trip."* Never ask for a key in the chat, never handle one.
+   Stock mode is complete for **illustrated** (default) and works for **clay** (built-in
+   terrain kit); the other six themes need generated pictures — say so if the user asks
+   for one, and offer illustrated instead.
+
+Style, when you do ask, is one line: the eight names with the showcase link
+(https://github.com/skywain/trip-planner-skill#showcase; offline: render
+`themes/render_picker.py`), "skip = illustrated". Set the plan's top-level `"lang"` (`zh` | `en`,
+output-template.md §Plan language) from the language the user asked in — the rendered
+pages' UI follows it; `--lang` overrides.
 
 ## Phase 1 — Country brief (once per destination, ≤10 lines of output)
 
@@ -121,13 +176,18 @@ list of things every new country costs a first planner 6-9 searches to rediscove
 
 ## Phase 2 — Route skeleton → checkpoint (a)
 
-1. Longlist cities/areas scored against the user's ranked interests; shortlist by
-   geography — order as a line or loop, never a star with backtracking.
+1. Longlist cities/areas scored against the user's ranked interests and
+   `prefs.scenery` (nature / city / beach / forest / lake / mountain); shortlist by
+   geography — order as a line or loop, never a star with backtracking. `prefs.travel_style`
+   shapes the legs: self-drive → a rental leg and park/countryside bases (Phase 3
+   §Driving legs); group tour → the tour's own schedule is the spine (Phase 4).
 2. Nights allocation: ≥2 nights per base (each 1-night stay burns a half day on packing
    and transit); prefer "base + day-trips" over hotel-hopping when the day-trip is
    <90 min each way. 10-15 days ≈ 8-13 usable days ≈ 2-4 bases, and 2-3 beats 4.
-3. Day-count honesty: landing before 15:00 = half a sightseeing day, later = zero;
-   departure day = zero unless the flight leaves after 18:00.
+3. Day-count honesty: landing before 15:00 = half a sightseeing day, later = zero
+   sightseeing days for the count — the evening still gets one free, walkable,
+   unticketed block near the hotel (scheduling.md §Arrival day); departure day = zero
+   unless the flight leaves after 18:00.
 4. Decide **open-jaw now** (fly into the first base, out of the last) — on multi-city
    routes it usually beats round-trip because it refunds a backtracking day. Check both
    jaw directions in Phase 3; prices are asymmetric.
@@ -243,12 +303,15 @@ Per city:
    both be wrong — `check` says (guessed) next to anything you left it to infer.
    Transit durations come back as ranges — keep them ranges unless you
    browser-verified the hop. Deliver day-level granularity only if the user asks for
-   a rough cut.
+   a rough cut. Each finished day also gets its `ribbon` one-liner (Stop1 →walk 12′→
+   Stop2 →metro 9′→ …, output-template.md §5) — no script writes it; seven blank
+   ribbons is the usual way to find out you forgot.
 
 ## Phase 5 — Hotels
 
 Per base: pick 1-2 neighborhoods with reasons (near the rail hub actually used, safe
-after dark, luggage-friendly). Browser spot-check Google Hotels/Booking with the real
+after dark, luggage-friendly), in the lodging type and band from `prefs.lodging`
+(default mid-range hotel; a ryokan/onsen or B&B habit changes which properties you list). Browser spot-check Google Hotels/Booking with the real
 dates for a price band, then list 2-3 concrete properties: name, area, band per night,
 deep link with dates baked in (recipes in data-sources.md). Advise: book refundable
 now, re-shop 2-3 weeks out.
@@ -266,7 +329,10 @@ Never ship a literal placeholder like "X国行"; never use the clichés on that 
 blacklist. Cite the allusion honestly (原句 in the subtitle or a small credit line).
 
 **Adversarial self-check** — run this list against the finished plan, fix what it
-catches, then append "self-checked: N issues found and fixed":
+catches, then record "self-checked: N issues found and fixed" in `meta.self_check`
+(the plain page's footer) **and** as the last `decisions[]` row (seven of the eight
+themed pages render `decisions`; only journal also prints `meta.self_check`, and
+portal renders neither — on portal the chat summary carries it):
 - Closure scan: every anchor's closed-days vs its scheduled date (Mondays! holidays
   from Phase 1 — including "closed Tue when Mon is a holiday" rules), **and** the
   classes the holiday feed misses: festivals overlapping the window, seasonal
@@ -277,7 +343,9 @@ catches, then append "self-checked: N issues found and fixed":
 - Arrival/departure days respect Phase 2 §3; airport buffer = 3 h international + real
   city→airport transfer time
 - Every intercity leg: plausible duration; separate-ticket air self-transfer ≥ 4 h;
-  rail connections ≥ 30 min
+  rail connections ≥ 30 min — except a **timed meet** (a bus/boat that waits for the
+  train, e.g. Füssen train → Neuschwanstein bus, 9 min by design): keep it, name it as
+  a meet in the hop note, and give the next timed ticket the slack instead
 - Last-entry time vs planned arrival for each anchor
 - Timeline checks from scheduling.md §verification: chain arithmetic (block start ≥
   prev end + hop + buffer), day walking totals ≤ 8 km, late hops vs last departures,
@@ -290,59 +358,104 @@ catches, then append "self-checked: N issues found and fixed":
   otherwise 1** (same sentence in scheduling.md §Day types)
 - Every price has source + as-of date; every bookable line has a link
 
-**Deliver**: a chat summary (route one-liner, total budget, the 3 biggest decisions
-made for the user) + the full plan rendered by `scripts/render_plan.py plan.geo.json
--o trip.html` — one self-contained, printable, phone-friendly file with a checkbox
-booking checklist and an offline route sketch per day. Publish via Artifact when
-available, else SendUserFile, else save and give the path. Ship the trip KML
-(`scripts/route_tools.py kml plan.geo.json -o trip.kml`) alongside for offline map
-apps. **`plan.geo.json` is the single editable source** for all of it — every command
-above reads that one file — so a later "move day 3 to Nara" is a JSON edit plus
-geocode → check → links → kml → render, not a rewrite. The page chrome (section
+**Deliver — the deliverable is a themed page, never a plain text one.** Render
+`plan.geo.json` through the theme chosen in Phase 0 (`prefs.theme`, default
+**illustrated**) — see *Themed renders* below — and hand over: a chat summary (route
+one-liner, total budget, the 3 biggest decisions made for the user, and in stock mode
+the one-line picture notice) + `trip-<theme>.html`, one self-contained, phone-friendly
+file with its own share/export buttons and the appendix (checklist, legs, hotels,
+budget, brief). Publish through whatever artifact / file hand-off tool the harness
+has (in Claude Code: Artifact, else SendUserFile); otherwise save the file and give
+its absolute path. Ship the trip KML (`scripts/route_tools.py kml plan.geo.json -o
+trip.kml`) alongside for offline map apps. The plain `scripts/render_plan.py plan.geo.json
+-o trip.html` page (printable, checkbox checklist, offline route sketch per day) is an
+**extra** — add it when the user asks for a printable/plain version, or as the last
+resort if the theme renderer still fails after one honest fix attempt (then say so in
+the summary). **`plan.geo.json` is the single editable source** for all of it — every
+command above reads that one file — so a later "move day 3 to Nara" is a JSON edit
+plus geocode → check → links → kml → render, not a rewrite. The page chrome (section
 names, buttons, pills, weekdays) speaks `plan.lang` (set in Phase 0, `zh` default);
 `--lang zh|en` on any renderer overrides it, plan content prints as written.
 
-**Themed renders** (optional, on top of the plain page): when the user wants a
-"good-looking / shareable" version, render the same `plan.geo.json` through one of
-the eight themes in `themes/` — the plain `render_plan.py` page stays the default
-deliverable. Themes: **illustrated 插画** (a painted book on paper) · **clay 黏土**
-(one continuous clay landscape with a road) · **noir 夜航** (a single night-negative
-tracking shot) · **glass 玻璃** (liquid-glass panes over crossfading photos) ·
-**journal 手账** (a vintage travel journal: tape, stamps, polaroids) · **zine** (torn
-riso-poster collage) · **splash 闪屏** (game-splash floating islands, chained sky
-gradients) · **portal 穿越** (scroll-scrubbed video fly-through — needs footage, see
-below). `render_picker.py` renders a one-page style chooser of all of them. Flow:
+**Themed renders** — the same `plan.geo.json` through one of the eight themes in
+`themes/`. Themes: **illustrated 插画** (a painted book on paper — the default) ·
+**clay 黏土** (one continuous clay landscape with a road) · **noir 夜航** (a single
+night-negative tracking shot) · **glass 玻璃** (liquid-glass panes over crossfading
+photos) · **journal 手账** (a vintage travel journal: tape, stamps, polaroids) ·
+**zine** (torn riso-poster collage) · **splash 闪屏** (game-splash floating islands,
+chained sky gradients) · **portal 穿越** (scroll-scrubbed video fly-through — needs
+footage, see below). `render_picker.py` renders a one-page style chooser of all of
+them. Flow:
 1. Write `<plan>.art.json` next to the plan (contract: `themes/ART-SCHEMA.md`) — the
    **common** block first (cover poem title from references/cover-titles.md, `kick`,
    `home`, `end`, and per day `theme` 4 chars / `en` / `mark`), then one block per
-   theme you render. Pictures: **the cover / hero / title sticker / terrain bands
-   are destination scenery and are ALWAYS generated for this trip, in the theme's
-   own style** — priority: the trip's actual sights (Xi'an city wall, the Great
-   Wall) > a national landmark > a neutral scene, but never blank and never
-   another trip's band (a China page once opened on the New York skyline because a
-   default band was reused). The same ladder applies to `end.hero` / the tail cover,
-   with one twist: that picture is the **return to the departure city** (home
-   skyline at landing, not another destination view) — generated for this trip
-   too, never a stock tail. "Reuse first" applies only to generic props: `themes/assets/IMAGE-LIBRARY.md` §通用件 lists what any trip may use;
-   generate the rest — **with the agent's own native image/video generation if it has
-   one (no key to configure; same specs, same prompts-as-style-anchors, same
-   split/cutout/webp/manifest steps — ART-SCHEMA.md 「生成器选择」), otherwise
-   `gen.py` / `genvideo.py` over OpenRouter** — using the sheet recipe in ART-SCHEMA.md (title
-   stickers: one centred sticker, symmetric lines, no icons inside the letters),
-   then `towebp.py`, and keep the webp beside the plan (or pass `--assets DIR`).
+   theme you render. Pictures, by `prefs.pictures` (Phase 0):
+   - **native / key — generate for this trip.** The cover / hero / title sticker /
+     terrain bands are destination scenery and are ALWAYS generated for this trip, in
+     the theme's own style — priority: the trip's actual sights (Xi'an city wall, the
+     Great Wall) > a national landmark > a neutral scene, but never blank and never
+     another trip's band (a China page once opened on the New York skyline because a
+     default band was reused). The same ladder applies to `end.hero` / the tail cover,
+     with one twist: that picture is the **return to the departure city** (home skyline
+     at landing, not another destination view) — generated for this trip too. "Reuse
+     first" applies only to generic props: `themes/assets/IMAGE-LIBRARY.md` §通用件
+     lists what any trip may use; generate the rest — **with the agent's own native
+     image/video generation if it has one (no key to configure; same specs, same
+     prompts-as-style-anchors, same split/cutout/webp/manifest steps — ART-SCHEMA.md
+     「生成器选择」), otherwise `gen.py` / `genvideo.py` over OpenRouter** — using the
+     sheet recipe in ART-SCHEMA.md (title stickers: one centred sticker, symmetric
+     lines, no icons inside the letters), then `towebp.py`, and keep the webp beside
+     the plan (or pass `--assets DIR`).
+   - **stock — no generator, no key: use the stock kit, still a themed page.**
+     Two commands, both from the skill root (absolute paths when your cwd is the
+     trip folder):
+     ```
+     python3 <skill>/themes/stock_art.py plan.geo.json --theme illustrated -o plan.art.json
+         # also --theme clay · --lang zh|en · --country ISO2 (when the plan's own words
+         # do not name the destination) · --index PATH · --force (overwrite)
+     python3 <skill>/themes/render_theme2.py plan.geo.json --art plan.art.json \
+         --assets <skill>/themes/assets/stock -o trip-illustrated.html
+         # --assets is REQUIRED in stock mode: data_uri() does not look inside
+         # themes/assets/stock on its own — without it the page renders, qc passes,
+         # and the stock pictures are silently missing. The script prints this exact
+         # render line on its last stderr line; paste it.
+     ```
+     `stock_art.py` builds the picture side of the art file from `themes/assets/stock/`
+     (region cover paintings, landmark and generic-scene cut-outs, matched to the
+     plan's country and each day's stops; `themes/assets/stock/README.md`) plus the
+     shared library's same-country pictures and generic props. It leaves the **words**
+     to you — fill `cover` title (references/cover-titles.md), each day's `theme` /
+     `en` / `mark`, captions and the closing line before rendering; a page shipped
+     with the script's placeholders is a defect. The script writes the stock notice
+     into `end.fine` (full) and `cover.credit` (short form; if the cover also cites a
+     poem, keep the citation first and the notice after it — the fine print carries
+     the full text anyway); keep both, and repeat the notice in the chat summary —
+     the exact strings are `notice.en` / `notice.zh` in `themes/assets/stock/index.json`
+     (en: "Pictures: built-in stock kit — no image generator or key was available;
+     provide one and the art is generated for this trip.").
 2. `python3 themes/render_<theme>.py plan.geo.json -o trip-<theme>.html`
    (`--art F|none`, `--assets DIR`, `--lang zh|en`); a missing art file must still
-   render. All eight themes and the picker render in **en** as well as zh: the UI
+   render. Renderer files: illustrated = `render_theme2.py`, clay = `render_clay2.py`,
+   noir = `render_noir2.py`, glass = `render_glass2.py`; journal / zine / splash /
+   portal use their own name (`render_journal.py` …). All eight themes and the picker render in **en** as well as zh: the UI
    shell (buttons, tags, section names, weekdays, cover fallbacks) follows
    `plan.lang` / `--lang`, art copy renders in whatever language it was written
    (ART-SCHEMA.md §language; English cover titles: references/cover-titles.md).
 3. `python3 themes/qc.py trip-<theme>.html` must exit 0, then
    `themes/xprobe.sh trip-<theme>.html module '#d5' out.png` and **look at the PNG**
    — a green probe title is not proof; blank icons and cropped tails only show visually.
-Every themed page carries its own share buttons (保存这一天 / 保存附录 / 生成长图 —
-Save this day / Save appendix / Save long image in en), offline, no dependencies. Portal is the "only when footage exists" theme: it needs the
-19 mp4 clips in `themes/assets/portal/` (or a trip's own chain) beside the HTML.
-Details, per-theme limits and the new-theme manual: references/themes.md.
+   No headless Chrome in this environment → open the HTML in whatever browser tool
+   you have (a browser pane may refuse `file://` — serve the folder with
+   `python3 -m http.server` and open `http://localhost:8000/trip-<theme>.html`) and
+   look at the cover and one day; if you have none, say so in the summary.
+Each of the seven still themes carries its own share buttons (保存这一天 / 保存附录 /
+生成长图 — Save this day / Save appendix / Save long image in en), offline, no
+dependencies; noir and glass export day modules only, portal (video) has none —
+screenshot it. Portal is the "only when footage exists" theme: it needs **its own**
+footage chain beside the HTML; the 19 mp4 clips in `themes/assets/portal/` are the US
+trip's and serve as the style reference and pipeline example, not as a substitute
+(another trip's scenery on a cover is a logged defect). Details, per-theme limits and
+the new-theme manual: references/themes.md.
 
 ## When things fail
 
@@ -382,7 +495,7 @@ directory is not the skill directory and shell cwd does not persist between call
 - `scripts/render_plan.py` — turn the plan JSON into the final self-contained HTML.
   It reads the same file route_tools does, so write the plan once and render often.
 - `assets/plan.example.json` — runnable schema example **and the single source of
-  truth for the plan's top-level keys** (`budget`/`legs`/`checklist`/`hotels`/
+  truth for the plan's top-level keys** (`prefs`/`budget`/`legs`/`checklist`/`hotels`/
   `brief`/`days[]`… shapes; output-template.md §Top-level plan skeleton mirrors it):
   copy it, replace the placeholders, and both scripts work on it immediately.
 - `references/themes.md` — the themed-render manual: what each of the eight themes
@@ -397,5 +510,13 @@ directory is not the skill directory and shell cwd does not persist between call
   authoritative art.json contract) and `themes/README.md`.
 - `themes/assets/` — the shared picture library: all embeddable webp, the Caveat
   webfont, `manifest.json` (prompt/cost per generated asset), `IMAGE-LIBRARY.md`
-  (index by subject — check its 通用件 section before generating anything) and
-  `portal/*.mp4` (the portal theme's footage).
+  (index by subject — check its 通用件 section before generating anything),
+  `portal/*.mp4` (the portal theme's footage) and `stock/` — the **stock kit**
+  (region cover paintings + landmark / generic-scene cut-outs in the illustrated
+  style, `stock/index.json` + `stock/README.md`) that `themes/stock_art.py` uses to
+  build an art file when the session has no image generator and no key.
+- `themes/stock_art.py` — `plan.geo.json --theme illustrated|clay [--lang zh|en]
+  [--country ISO2] [--index PATH] [--force] -o plan.art.json`: fills the picture slots
+  from the stock kit + shared library (country match, day keyword match, generic
+  props); you write the words; render with `--assets themes/assets/stock`. Stock mode
+  only (Phase 0).

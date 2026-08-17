@@ -5,6 +5,13 @@ reads, each into one self-contained HTML (assets inlined as data URIs, opens by
 double-click, no network). Manual: `references/themes.md`; art contract: `ART-SCHEMA.md`
 here (the only copy).
 
+**One of these pages is the deliverable** — SKILL.md Phase 6 hands the user
+`trip-<theme>.html` in the theme chosen at Phase 0 (`prefs.theme`, default
+**illustrated**) plus `trip.kml`; a plain text page is never the deliverable. The
+`scripts/render_plan.py` page is the printable extra, or the last resort after one honest
+fix attempt here. A session with no image generator and no key does not drop to that
+plain page either — it renders a theme from the built-in stock kit (below).
+
 ## What is here
 
 | file | what |
@@ -26,7 +33,7 @@ python3 themes/qc.py out.html                        # exit 0 = clean; exit code
 themes/xprobe.sh out.html module '#d5' out.png       # click the real share button headlessly, look at out.png
 ```
 
-`<x>` ∈ theme2 clay2 noir2 glass2 journal zine splash portal picker. (`render_picker.py plan.geo.json -o picker.html [--products DIR] [--prefix NAME]` links the rendered pages as `{prefix}-{theme_name}.html` in the page language, e.g. `US-2026-插画版.html` / `Japan-2026-Illustrated.html`; prefix defaults to `cover.kick_en` with spaces → `-`; products dir defaults to the output dir.) A trip is
+`<x>` ∈ theme2 clay2 noir2 glass2 journal zine splash portal picker. (`render_picker.py plan.geo.json -o picker.html [--products DIR] [--prefix NAME]` links the rendered pages as `{prefix}-{theme}.html` with the English theme key, e.g. `japan-illustrated.html` — pages exported under the old Chinese tag (e.g. `-插画版.html`) still resolve; prefix defaults to `cover.kick_en` with spaces → `-`; products dir defaults to the output dir.) A trip is
 rendered into as many themes as you like from the same plan; the theme picks up
 `<plan stem>.art.json` beside the plan automatically. UI language (buttons, tags,
 section names, weekdays, `<title>` theme name) follows the plan's top-level `"lang"`
@@ -79,6 +86,40 @@ is the record; the main agent folds generic pieces back into the library after a
 shipped one) next to the output HTML — it is the only theme that ships sidecar files;
 `build_portal_jobs.py --spec worlds.json` writes the ComfyUI jobs (`STEPS` = 10 by
 default since 2026-08-16).
+
+**Neither native generation nor a key → stock mode** (`prefs.pictures = "stock"`, set by
+Phase 0's capability check). `stock_art.py` builds the picture side of the art file from
+`assets/stock/` — region cover paintings and landmark / generic-scene cut-outs in the
+illustrated style, matched to the plan's country and each day's stops — plus the shared
+library's same-country pictures and generic props:
+
+```bash
+python3 themes/stock_art.py plan.geo.json --theme illustrated -o plan.art.json
+```
+
+It fills pictures only; the **words** stay yours (cover title, per-day `theme`/`en`/`mark`,
+captions, closing line) and shipping its placeholders is a defect. It writes the stock
+notice into the page's fine print — keep it, and say the same line once in the chat
+summary. Coverage: **illustrated** complete, **clay** works (built-in neutral SVG terrain
+kit + generic clay props); the other six themes still need generated pictures
+(`references/themes.md` §3b).
+
+In full: `stock_art.py plan.geo.json [--theme illustrated|clay] [--lang zh|en] [--country
+ISO2] [--index PATH] [-o OUT] [--force]`. `-o` defaults to `<plan stem>.art.json` beside the
+plan — the sidecar every renderer finds by itself — and an existing art file is never
+overwritten without `--force`; `--lang` follows `plan.lang` unless you say otherwise. The
+day → stem table with the reason for each pick goes to stderr, the output path to stdout, and
+the last stderr line is the render command to paste — **including `--assets
+themes/assets/stock`, which is not optional**: `data_uri()` searches `themes/assets/` but not
+its sub-folders, so a render without it yields a page with no pictures and no errors. The
+destination country is read from the plan's own words (trip title, `meta.route`, legs, each
+day's city and stop names) against `index.json`'s 225 ISO2 codes; a country named in a single
+stop is ignored (the Egyptian Bazaar does not move a trip to Egypt), and when nothing is
+recognised the script WARNs, paints a neutral cover and asks for `--country DE`. Illustrated
+then gets the cover painting, one cut-out per day (landmarks the trip actually visits first,
+then the shared library's same-country stems, then generic scenes; a travel day gets the plane
+or the train unless the day is really about a place) and up to three wide `feature` days; clay
+gets its terrain `zones` from the country's archetype and one figurine per day.
 
 ## Not in the repo
 

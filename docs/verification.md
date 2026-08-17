@@ -145,3 +145,45 @@ by an hour, city sub-agents asserting stale visa rules, and an undocumented top-
 shape that crashed two renderers. All are closed; the residual list is
 [`docs/KNOWN-ISSUES.md`](KNOWN-ISSUES.md). Seven of the nine trips ship as
 [`examples/`](../examples/), each byte-reproducible from its `plan.geo.json` + `art.json`.
+
+## What the owner's own read-through changed (2026-08-17)
+
+Nine friction runs by fresh agents still missed two things, because every tester was
+handed a destination, a departure city **and** a picture budget. A real user hands over
+neither. Both rules below are now canonical in `SKILL.md` (Phase 0, Phase 6) and mirrored
+in `references/output-template.md`, `references/themes.md`, `themes/ART-SCHEMA.md` and
+`themes/README.md` — this is the record of why, so they do not get simplified back out.
+
+### The skill opened by planning, not by asking
+
+Every test prompt already carried origin, destination and dates, so the intake gap never
+showed: asked "plan me a trip", the skill would invent an origin, a pace and a page style
+in silence, and the user found out only at delivery. Asking about all of it is the other
+failure — a round trip of questions for facts that were already in the request
+("帮我安排今年 10.1 到 10.7 的德国之旅" needs zero questions).
+
+*Fix:* Phase 0 is **one message or none** — ask only for a core fact that is missing *and*
+not inferable, everything in a single message, optional lines marked "(skip = default)",
+and write what was learned or assumed into the plan's top-level `prefs` block so Phases
+2-6 and any later replan read one place instead of re-asking. Anything inferred is stated
+in the assumptions block at checkpoint (a), where it costs one line to correct.
+
+### "No key" silently downgraded the deliverable to a plain text page
+
+The picture pipeline had exactly two states — generate, or don't — so a session without a
+native image generator and without an OpenRouter key fell through to the plain
+`render_plan.py` page. That is the same trip data in the least interesting form the repo
+can produce, and nothing told the user *why* their page looked nothing like the showcase.
+
+*Fix:* a **picture-capability check** at Phase 0 (native tool → `themes/.auth_header` →
+neither) recorded as `prefs.pictures`, and a third state that still ships a themed page:
+the built-in stock kit (`themes/assets/stock/` + `themes/stock_art.py`) fills the picture
+slots, the agent writes the words, and one notice — in the chat summary and the page's fine
+print — says the pictures are stock because no generator or key was available. The plain
+page is now explicitly an extra: printable on request, or the last resort after one honest
+fix attempt at the theme renderer.
+
+**Not yet tested end-to-end:** a friction run with **no picture budget at all**, which is
+the configuration stock mode exists for. Every run so far had a key. Stock coverage is
+also uneven by design today — complete for illustrated, working for clay, six themes still
+need generated pictures (KNOWN-ISSUES AST-7 / AST-8).

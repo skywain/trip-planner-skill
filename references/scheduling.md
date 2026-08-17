@@ -162,7 +162,9 @@ packed ×0.8, kids or mobility flags ×1.3.
 
 ## Day types that need a different structure
 
-- **Arrival day** — landing before 15:00 = half a sightseeing day, later = zero. The
+- **Arrival day** — landing before 15:00 = half a sightseeing day, later = **zero
+  sightseeing days for the count** — but the evening still gets one free, walkable,
+  unticketed block near the hotel (same rule in SKILL.md Phase 2 §3). The
   first morning after a long-haul arrival starts no earlier than 10:00. Plan the first
   evening within walking distance of the hotel; nothing ticketed.
 - **Moving day (base change)** — luggage-encumbered from checkout (10:00-11:00) to

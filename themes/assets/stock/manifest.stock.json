@@ -1,0 +1,900 @@
+{
+  "_readme": "stock kit generation record (task A, 2026-08-17/18): 14 cover paintings + 11 six-cell sheets = 66 cut-outs, gouache illustrated style, style_anchor and prompt skeletons from ../manifest.json (japan-cover-hero / japan-sheet-cutouts-a). PNG masters stay out of git; `files` lists the webp that ship. Lookup table: index.json; how-to: README.md.",
+  "style_anchor": "Flat hand-drawn travel illustration, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style — 贴纸类加: thick organic silhouette, no text, no border, single isolated subject centered on a solid pure white background, no shadow",
+  "assets": [
+    {
+      "name": "stock-cover-alpine-lake",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (snow-capped peaks, a still lake with a rowing boat, a wooden chalet, a tiny cable car cabin hanging from a wire, pine slopes), and the UPPER TWO THIRDS is a vast calm sky in a soft cream-to-soft-blue gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03308,
+      "generated_at": "2026-08-17",
+      "files": {
+        "png": 2172764,
+        "webp": 103398
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-andes-colonial",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (terraced stone ruins on a mountain saddle, a colonial town with a domed church and coloured houses, tall cacti, two llamas), and the UPPER TWO THIRDS is a vast calm sky in a soft cream-to-dusty-teal gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03309,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 2272610,
+        "webp": 126500
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-castle-highlands",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (a stone castle on a crag above a loch, rolling green hills with dry stone walls and a few sheep, a lighthouse on a far cape), and the UPPER TWO THIRDS is a vast calm sky in a soft grey-to-cream gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.033085,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 2075935,
+        "webp": 73576
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-desert-medina",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (rolling sand dunes, a small camel caravan, an adobe kasbah with a square minaret, a palm oasis), and the UPPER TWO THIRDS is a vast calm sky in a soft apricot-to-lilac gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.033055,
+      "generated_at": "2026-08-17",
+      "files": {
+        "png": 2051918,
+        "webp": 81950
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-east-asian-temple",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (a temple gate and a five-storey pagoda, clipped pines, an arched stone bridge over a pond, misty layered hills), and the UPPER TWO THIRDS is a vast calm sky in a soft cream-to-grey-blue gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.033075,
+      "generated_at": "2026-08-17",
+      "files": {
+        "png": 2472959,
+        "webp": 120772
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-european-old-town",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (half-timbered gabled houses around a small square, a gothic cathedral spire, a stone arch bridge over a river with a small boat, a distant hilltop castle), and the UPPER TWO THIRDS is a vast calm sky in a soft cream-to-dusty-rose gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.033125,
+      "generated_at": "2026-08-17",
+      "files": {
+        "png": 2006778,
+        "webp": 93024
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-mediterranean-coast",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (a whitewashed cliff village with blue domes, cypress trees, a small fishing harbour, ancient marble columns on a headland, a calm blue sea), and the UPPER TWO THIRDS is a vast calm sky in a soft cream-to-pale-apricot gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.033105,
+      "generated_at": "2026-08-17",
+      "files": {
+        "png": 2100908,
+        "webp": 87872
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-modern-skyline",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (glass towers of different heights on a harbour, a ferris wheel, a ferry crossing, a suspension bridge, tiny dusk lights in the windows), and the UPPER TWO THIRDS is a vast calm sky in a soft dusk-lilac-to-peach gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03309,
+      "generated_at": "2026-08-17",
+      "files": {
+        "png": 2123395,
+        "webp": 91262
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-nordic-fjord",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (a deep fjord between steep cliffs, red wooden cabins on stilts, a thin waterfall, a small ferry, a faint hint of green aurora), and the UPPER TWO THIRDS is a vast calm sky in a soft pale-green-blue-to-cream gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.033095,
+      "generated_at": "2026-08-17",
+      "files": {
+        "png": 2067863,
+        "webp": 98218
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-north-america-roadtrip",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (a red-rock canyon and flat mesas, a two-lane highway with a small vintage car, the silhouette of a retro motel sign with no letters on it, tall pines), and the UPPER TWO THIRDS is a vast calm sky in a soft cream-to-dusty-orange gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03312,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 1971093,
+        "webp": 85606
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-rainforest",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (a jungle waterfall falling into a pool, dense broad leaves, a hanging rope bridge, a toucan on a branch, low mist), and the UPPER TWO THIRDS is a vast calm sky in a soft green-to-cream gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.033065,
+      "generated_at": "2026-08-17",
+      "files": {
+        "png": 2248693,
+        "webp": 114756
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-savanna",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (flat-topped acacia trees, an elephant and a giraffe silhouette, a safari jeep on a dirt track, a distant flat mesa), and the UPPER TWO THIRDS is a vast calm sky in a soft warm-gold-to-cream gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03308,
+      "generated_at": "2026-08-17",
+      "files": {
+        "png": 1825498,
+        "webp": 56832
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-southeast-asia",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (a golden stupa and a tiered temple roof, palm trees, a longtail boat on a river, limestone karst islands in the distance), and the UPPER TWO THIRDS is a vast calm sky in a soft cream-to-warm-peach gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03309,
+      "generated_at": "2026-08-17",
+      "files": {
+        "png": 2014775,
+        "webp": 85110
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-cover-tropical-beach",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape (leaning coconut palms over a white beach, a turquoise lagoon, an overwater bungalow on stilts, small green islands on the horizon), and the UPPER TWO THIRDS is a vast calm sky in a soft pale-turquoise-to-cream gradient with two small clouds and a few tiny birds, intentionally empty and quiet so it can hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, minimal cozy storybook style, no text, no lettering, no flags",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.033085,
+      "generated_at": "2026-08-17",
+      "files": {
+        "png": 2021826,
+        "webp": 83540
+      },
+      "transparent": false,
+      "kit": "stock"
+    },
+    {
+      "name": "stock-sheet-landmark-a",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate flat hand-drawn travel illustrations arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: the Eiffel Tower in Paris, full height, iron lattice arch at the base; Tower Bridge in London with its two stone towers and a raised bascule deck; the Big Ben clock tower of Westminster with its gothic spire and clock face. Row 2: the Sagrada Familia in Barcelona with its tall pointed honeycomb spires; the Brandenburg Gate in Berlin: a wide colonnade topped by a chariot with four horses; Neuschwanstein castle: a white fairy-tale castle with slim blue-roofed towers on a wooded crag. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.042325,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 1792352,
+        "stock-eiffel-tower.cut.webp": 25122,
+        "stock-eiffel-tower.sm.webp": 4448,
+        "stock-tower-bridge.cut.webp": 52210,
+        "stock-tower-bridge.sm.webp": 6492,
+        "stock-tower-bridge.md.webp": 38716,
+        "stock-big-ben.cut.webp": 20340,
+        "stock-big-ben.sm.webp": 3512,
+        "stock-sagrada-familia.cut.webp": 53310,
+        "stock-sagrada-familia.sm.webp": 8684,
+        "stock-brandenburg-gate.cut.webp": 41530,
+        "stock-brandenburg-gate.sm.webp": 8014,
+        "stock-neuschwanstein.cut.webp": 53760,
+        "stock-neuschwanstein.sm.webp": 8274
+      },
+      "transparent": false,
+      "split_into": [
+        "stock-eiffel-tower",
+        "stock-tower-bridge",
+        "stock-big-ben",
+        "stock-sagrada-familia",
+        "stock-brandenburg-gate",
+        "stock-neuschwanstein"
+      ],
+      "children": [
+        "stock-big-ben.cut.webp",
+        "stock-big-ben.sm.webp",
+        "stock-brandenburg-gate.cut.webp",
+        "stock-brandenburg-gate.sm.webp",
+        "stock-eiffel-tower.cut.webp",
+        "stock-eiffel-tower.sm.webp",
+        "stock-neuschwanstein.cut.webp",
+        "stock-neuschwanstein.sm.webp",
+        "stock-sagrada-familia.cut.webp",
+        "stock-sagrada-familia.sm.webp",
+        "stock-tower-bridge.cut.webp",
+        "stock-tower-bridge.md.webp",
+        "stock-tower-bridge.sm.webp"
+      ],
+      "kit": "stock"
+    },
+    {
+      "name": "stock-sheet-landmark-b",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate flat hand-drawn travel illustrations arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: the Colosseum in Rome: a ring of stacked stone arches with one broken side; the leaning round marble bell tower of Pisa, tilted, with stacked colonnades; the Parthenon temple on the Acropolis of Athens: a marble colonnade with a triangular pediment. Row 2: a white Santorini chapel with a blue dome and a small bell arch on a cliff edge; Mont Saint-Michel: a conical island abbey with a tall spire rising above ramparts, ringed by water; the Charles Bridge in Prague: a stone bridge with statues along the parapet and a gothic bridge tower. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.042405,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 2072944,
+        "stock-colosseum.cut.webp": 55724,
+        "stock-colosseum.sm.webp": 6594,
+        "stock-colosseum.md.webp": 47514,
+        "stock-leaning-tower.cut.webp": 27202,
+        "stock-leaning-tower.sm.webp": 5044,
+        "stock-acropolis.cut.webp": 49792,
+        "stock-acropolis.sm.webp": 5776,
+        "stock-acropolis.md.webp": 43458,
+        "stock-santorini.cut.webp": 41568,
+        "stock-santorini.sm.webp": 7586,
+        "stock-mont-saint-michel.cut.webp": 46938,
+        "stock-mont-saint-michel.sm.webp": 6978,
+        "stock-charles-bridge.cut.webp": 53474,
+        "stock-charles-bridge.sm.webp": 7362,
+        "stock-charles-bridge.md.webp": 50736
+      },
+      "transparent": false,
+      "split_into": [
+        "stock-colosseum",
+        "stock-leaning-tower",
+        "stock-acropolis",
+        "stock-santorini",
+        "stock-mont-saint-michel",
+        "stock-charles-bridge"
+      ],
+      "children": [
+        "stock-acropolis.cut.webp",
+        "stock-acropolis.md.webp",
+        "stock-acropolis.sm.webp",
+        "stock-charles-bridge.cut.webp",
+        "stock-charles-bridge.md.webp",
+        "stock-charles-bridge.sm.webp",
+        "stock-colosseum.cut.webp",
+        "stock-colosseum.md.webp",
+        "stock-colosseum.sm.webp",
+        "stock-leaning-tower.cut.webp",
+        "stock-leaning-tower.sm.webp",
+        "stock-mont-saint-michel.cut.webp",
+        "stock-mont-saint-michel.sm.webp",
+        "stock-santorini.cut.webp",
+        "stock-santorini.sm.webp"
+      ],
+      "kit": "stock",
+      "note": "gutter probe saw 3 row bands (the tiny flag above the Pisa tower sits above a hairline pole the stride-2 profile misses); split from a working copy stock-sheet-landmark-b.fix.png with the pole thickened by 5 px, so the six cells keep their gutter padding"
+    },
+    {
+      "name": "stock-sheet-landmark-c",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate flat hand-drawn travel illustrations arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: the Matterhorn: a sharp lopsided snow-covered rock pyramid peak; a lakeside alpine village: a slim church spire with pastel houses stacked at the water's edge; Hagia Sophia in Istanbul: a wide grey-pink central dome flanked by four slender minarets. Row 2: Saint Basil's Cathedral in Moscow: a cluster of coloured spiral onion domes; the rock-cut treasury facade of Petra carved into a rose sandstone cliff; three Egyptian pyramids with a small sphinx in front of them. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.042295,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 2179164,
+        "stock-matterhorn.cut.webp": 45076,
+        "stock-matterhorn.sm.webp": 6742,
+        "stock-hallstatt.cut.webp": 43808,
+        "stock-hallstatt.sm.webp": 7904,
+        "stock-hagia-sophia.cut.webp": 50838,
+        "stock-hagia-sophia.sm.webp": 7816,
+        "stock-hagia-sophia.md.webp": 49506,
+        "stock-st-basils.cut.webp": 52040,
+        "stock-st-basils.sm.webp": 8302,
+        "stock-petra.cut.webp": 60286,
+        "stock-petra.sm.webp": 8164,
+        "stock-pyramids.cut.webp": 41468,
+        "stock-pyramids.sm.webp": 5708,
+        "stock-pyramids.md.webp": 37896
+      },
+      "transparent": false,
+      "split_into": [
+        "stock-matterhorn",
+        "stock-hallstatt",
+        "stock-hagia-sophia",
+        "stock-st-basils",
+        "stock-petra",
+        "stock-pyramids"
+      ],
+      "children": [
+        "stock-hagia-sophia.cut.webp",
+        "stock-hagia-sophia.md.webp",
+        "stock-hagia-sophia.sm.webp",
+        "stock-hallstatt.cut.webp",
+        "stock-hallstatt.sm.webp",
+        "stock-matterhorn.cut.webp",
+        "stock-matterhorn.sm.webp",
+        "stock-petra.cut.webp",
+        "stock-petra.sm.webp",
+        "stock-pyramids.cut.webp",
+        "stock-pyramids.md.webp",
+        "stock-pyramids.sm.webp",
+        "stock-st-basils.cut.webp",
+        "stock-st-basils.sm.webp"
+      ],
+      "kit": "stock"
+    },
+    {
+      "name": "stock-sheet-landmark-d",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate flat hand-drawn travel illustrations arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: the Burj Khalifa: a very tall tapering glass spire tower with setbacks; the Taj Mahal: a white marble mausoleum with a bulbous central dome and four corner minarets; Angkor Wat: five stone lotus-bud towers on a long terraced temple base. Row 2: Wat Arun in Bangkok: a tall porcelain-encrusted prang spire with smaller spires beside it; Marina Bay Sands: three tall towers carrying one long boat-shaped roof deck across the top; Table Mountain: a wide flat-topped mountain with a thin cloth of cloud above a bay. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.04237,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 1804955,
+        "stock-burj-khalifa.cut.webp": 13444,
+        "stock-burj-khalifa.sm.webp": 2596,
+        "stock-taj-mahal.cut.webp": 42292,
+        "stock-taj-mahal.sm.webp": 7022,
+        "stock-angkor-wat.cut.webp": 54238,
+        "stock-angkor-wat.sm.webp": 7336,
+        "stock-wat-arun.cut.webp": 38064,
+        "stock-wat-arun.sm.webp": 7776,
+        "stock-marina-bay-sands.cut.webp": 35004,
+        "stock-marina-bay-sands.sm.webp": 7404,
+        "stock-table-mountain.cut.webp": 47280,
+        "stock-table-mountain.sm.webp": 4988,
+        "stock-table-mountain.md.webp": 37066
+      },
+      "transparent": false,
+      "split_into": [
+        "stock-burj-khalifa",
+        "stock-taj-mahal",
+        "stock-angkor-wat",
+        "stock-wat-arun",
+        "stock-marina-bay-sands",
+        "stock-table-mountain"
+      ],
+      "children": [
+        "stock-angkor-wat.cut.webp",
+        "stock-angkor-wat.sm.webp",
+        "stock-burj-khalifa.cut.webp",
+        "stock-burj-khalifa.sm.webp",
+        "stock-marina-bay-sands.cut.webp",
+        "stock-marina-bay-sands.sm.webp",
+        "stock-table-mountain.cut.webp",
+        "stock-table-mountain.md.webp",
+        "stock-table-mountain.sm.webp",
+        "stock-taj-mahal.cut.webp",
+        "stock-taj-mahal.sm.webp",
+        "stock-wat-arun.cut.webp",
+        "stock-wat-arun.sm.webp"
+      ],
+      "kit": "stock"
+    },
+    {
+      "name": "stock-sheet-landmark-e",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate flat hand-drawn travel illustrations arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: Mount Fuji: a symmetrical snow-capped cone with a small vermilion torii gate in front; the Great Wall of China running over green ridges with one square watchtower; a Korean palace gate: a stone gatehouse with a green and red painted double-eaved roof. Row 2: the Sydney Opera House: overlapping white shell sails on a harbour podium; the Statue of Liberty: a green robed figure holding up a torch on a star-shaped stone base; the Golden Gate Bridge: a red-orange suspension bridge tower with cables sweeping away. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.042325,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 1763053,
+        "stock-mount-fuji.cut.webp": 35408,
+        "stock-mount-fuji.sm.webp": 4974,
+        "stock-mount-fuji.md.webp": 35014,
+        "stock-great-wall.cut.webp": 41450,
+        "stock-great-wall.sm.webp": 6580,
+        "stock-gyeongbokgung.cut.webp": 47032,
+        "stock-gyeongbokgung.sm.webp": 6244,
+        "stock-sydney-opera-house.cut.webp": 41088,
+        "stock-sydney-opera-house.sm.webp": 5854,
+        "stock-sydney-opera-house.md.webp": 39984,
+        "stock-statue-of-liberty.cut.webp": 23766,
+        "stock-statue-of-liberty.sm.webp": 4882,
+        "stock-golden-gate.cut.webp": 35804,
+        "stock-golden-gate.sm.webp": 5440,
+        "stock-golden-gate.md.webp": 31398
+      },
+      "transparent": false,
+      "split_into": [
+        "stock-mount-fuji",
+        "stock-great-wall",
+        "stock-gyeongbokgung",
+        "stock-sydney-opera-house",
+        "stock-statue-of-liberty",
+        "stock-golden-gate"
+      ],
+      "children": [
+        "stock-golden-gate.cut.webp",
+        "stock-golden-gate.md.webp",
+        "stock-golden-gate.sm.webp",
+        "stock-great-wall.cut.webp",
+        "stock-great-wall.sm.webp",
+        "stock-gyeongbokgung.cut.webp",
+        "stock-gyeongbokgung.sm.webp",
+        "stock-mount-fuji.cut.webp",
+        "stock-mount-fuji.md.webp",
+        "stock-mount-fuji.sm.webp",
+        "stock-statue-of-liberty.cut.webp",
+        "stock-statue-of-liberty.sm.webp",
+        "stock-sydney-opera-house.cut.webp",
+        "stock-sydney-opera-house.md.webp",
+        "stock-sydney-opera-house.sm.webp"
+      ],
+      "kit": "stock"
+    },
+    {
+      "name": "stock-sheet-landmark-f",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate flat hand-drawn travel illustrations arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: the Christ the Redeemer statue with open arms on a rounded green peak; Machu Picchu: stone terraces and roofless ruins on a saddle with a steep green peak behind; the stepped Mayan pyramid of Chichen Itza with a temple on top and a central stair. Row 2: a wide horseshoe waterfall thundering into a gorge with mist and a small tour boat; a layered red rock canyon with a river far below and flat rims; a turquoise mountain lake with a small wooden lodge and two grey peaks. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.0423,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 2281662,
+        "stock-christ-redeemer.cut.webp": 27874,
+        "stock-christ-redeemer.sm.webp": 5888,
+        "stock-machu-picchu.cut.webp": 63080,
+        "stock-machu-picchu.sm.webp": 8546,
+        "stock-chichen-itza.cut.webp": 39420,
+        "stock-chichen-itza.sm.webp": 5438,
+        "stock-chichen-itza.md.webp": 39282,
+        "stock-niagara-falls.cut.webp": 62600,
+        "stock-niagara-falls.sm.webp": 8284,
+        "stock-grand-canyon.cut.webp": 56986,
+        "stock-grand-canyon.sm.webp": 7916,
+        "stock-banff-lake.cut.webp": 70332,
+        "stock-banff-lake.sm.webp": 8394,
+        "stock-banff-lake.md.webp": 67852
+      },
+      "transparent": false,
+      "split_into": [
+        "stock-christ-redeemer",
+        "stock-machu-picchu",
+        "stock-chichen-itza",
+        "stock-niagara-falls",
+        "stock-grand-canyon",
+        "stock-banff-lake"
+      ],
+      "children": [
+        "stock-banff-lake.cut.webp",
+        "stock-banff-lake.md.webp",
+        "stock-banff-lake.sm.webp",
+        "stock-chichen-itza.cut.webp",
+        "stock-chichen-itza.md.webp",
+        "stock-chichen-itza.sm.webp",
+        "stock-christ-redeemer.cut.webp",
+        "stock-christ-redeemer.sm.webp",
+        "stock-grand-canyon.cut.webp",
+        "stock-grand-canyon.sm.webp",
+        "stock-machu-picchu.cut.webp",
+        "stock-machu-picchu.sm.webp",
+        "stock-niagara-falls.cut.webp",
+        "stock-niagara-falls.sm.webp"
+      ],
+      "kit": "stock"
+    },
+    {
+      "name": "stock-sheet-scene-a",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate flat hand-drawn travel illustrations arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: a gothic cathedral with twin bell towers and a round rose window; a hilltop castle with two round towers and a red conical roof; a cobbled old-town square with a stone fountain in front of three gabled houses. Row 2: a neoclassical museum facade with a row of columns and a bare flag pole with no flag on it; a park bench under a cast-iron lamp post with one round leafy tree; a narrow canal with a small wooden boat in front of three tall slim canal houses. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.04229,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 2314244,
+        "stock-cathedral.cut.webp": 56216,
+        "stock-cathedral.sm.webp": 8574,
+        "stock-castle.cut.webp": 50872,
+        "stock-castle.sm.webp": 7872,
+        "stock-old-town-square.cut.webp": 62620,
+        "stock-old-town-square.sm.webp": 9656,
+        "stock-museum.cut.webp": 43082,
+        "stock-museum.sm.webp": 6198,
+        "stock-city-park.cut.webp": 49880,
+        "stock-city-park.sm.webp": 9254,
+        "stock-canal.cut.webp": 71134,
+        "stock-canal.sm.webp": 9994
+      },
+      "transparent": false,
+      "split_into": [
+        "stock-cathedral",
+        "stock-castle",
+        "stock-old-town-square",
+        "stock-museum",
+        "stock-city-park",
+        "stock-canal"
+      ],
+      "children": [
+        "stock-canal.cut.webp",
+        "stock-canal.sm.webp",
+        "stock-castle.cut.webp",
+        "stock-castle.sm.webp",
+        "stock-cathedral.cut.webp",
+        "stock-cathedral.sm.webp",
+        "stock-city-park.cut.webp",
+        "stock-city-park.sm.webp",
+        "stock-museum.cut.webp",
+        "stock-museum.sm.webp",
+        "stock-old-town-square.cut.webp",
+        "stock-old-town-square.sm.webp"
+      ],
+      "kit": "stock"
+    },
+    {
+      "name": "stock-sheet-scene-b",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate flat hand-drawn travel illustrations arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: a fruit and vegetable market stall under a striped awning with crates of produce; a small night food cart with two paper lanterns and curls of steam; a cafe terrace: one round table, two bentwood chairs and a striped awning above. Row 2: a vintage tram seen from a three-quarter front angle; a hard-shell suitcase with a passport and a small camera resting on top; a hilltop viewpoint railing with a coin-operated telescope on a post. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.042235,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 2009055,
+        "stock-market.cut.webp": 59262,
+        "stock-market.sm.webp": 10752,
+        "stock-food-stall.cut.webp": 43716,
+        "stock-food-stall.sm.webp": 7392,
+        "stock-cafe.cut.webp": 47990,
+        "stock-cafe.sm.webp": 11780,
+        "stock-tram.cut.webp": 38142,
+        "stock-tram.sm.webp": 7450,
+        "stock-luggage.cut.webp": 36804,
+        "stock-luggage.sm.webp": 6838,
+        "stock-viewpoint.cut.webp": 45958,
+        "stock-viewpoint.sm.webp": 7504
+      },
+      "transparent": false,
+      "split_into": [
+        "stock-market",
+        "stock-food-stall",
+        "stock-cafe",
+        "stock-tram",
+        "stock-luggage",
+        "stock-viewpoint"
+      ],
+      "children": [
+        "stock-cafe.cut.webp",
+        "stock-cafe.sm.webp",
+        "stock-food-stall.cut.webp",
+        "stock-food-stall.sm.webp",
+        "stock-luggage.cut.webp",
+        "stock-luggage.sm.webp",
+        "stock-market.cut.webp",
+        "stock-market.sm.webp",
+        "stock-tram.cut.webp",
+        "stock-tram.sm.webp",
+        "stock-viewpoint.cut.webp",
+        "stock-viewpoint.sm.webp"
+      ],
+      "kit": "stock"
+    },
+    {
+      "name": "stock-sheet-scene-c",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate flat hand-drawn travel illustrations arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: a small passenger ferry with one funnel on a few painted waves; a red and white striped lighthouse standing on a rock; a striped beach umbrella and a deck chair beside a leaning palm. Row 2: a harbour corner with two sailboats and two mooring bollards; a stone arch bridge over a narrow stream; a waterfall falling into a round forest pool with ferns. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.042145,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 1958134,
+        "stock-ferry.cut.webp": 31752,
+        "stock-ferry.sm.webp": 6148,
+        "stock-lighthouse.cut.webp": 22876,
+        "stock-lighthouse.sm.webp": 5268,
+        "stock-beach.cut.webp": 48278,
+        "stock-beach.sm.webp": 10840,
+        "stock-harbour.cut.webp": 41650,
+        "stock-harbour.sm.webp": 8566,
+        "stock-bridge.cut.webp": 55232,
+        "stock-bridge.sm.webp": 8286,
+        "stock-waterfall.cut.webp": 58678,
+        "stock-waterfall.sm.webp": 8774
+      },
+      "transparent": false,
+      "split_into": [
+        "stock-ferry",
+        "stock-lighthouse",
+        "stock-beach",
+        "stock-harbour",
+        "stock-bridge",
+        "stock-waterfall"
+      ],
+      "children": [
+        "stock-beach.cut.webp",
+        "stock-beach.sm.webp",
+        "stock-bridge.cut.webp",
+        "stock-bridge.sm.webp",
+        "stock-ferry.cut.webp",
+        "stock-ferry.sm.webp",
+        "stock-harbour.cut.webp",
+        "stock-harbour.sm.webp",
+        "stock-lighthouse.cut.webp",
+        "stock-lighthouse.sm.webp",
+        "stock-waterfall.cut.webp",
+        "stock-waterfall.sm.webp"
+      ],
+      "kit": "stock"
+    },
+    {
+      "name": "stock-sheet-scene-d",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate flat hand-drawn travel illustrations arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: a still lake with a small rowing boat and one snow-capped peak behind; a single cable-car cabin hanging from a wire above two pines; an empty ski lift chair hanging from a wire above a snowy slope. Row 2: a wooden hiking trail signpost with a backpack leaning against its post; a steaming outdoor stone hot-spring pool with a folded towel on the rim; a camel wearing a patterned saddle blanket in front of one sand dune. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.042225,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 1952292,
+        "stock-mountain-lake.cut.webp": 46364,
+        "stock-mountain-lake.sm.webp": 7140,
+        "stock-cable-car.cut.webp": 33078,
+        "stock-cable-car.sm.webp": 7082,
+        "stock-ski.cut.webp": 35324,
+        "stock-ski.sm.webp": 8064,
+        "stock-trail.cut.webp": 24868,
+        "stock-trail.sm.webp": 5282,
+        "stock-hot-spring.cut.webp": 48358,
+        "stock-hot-spring.sm.webp": 7366,
+        "stock-hot-spring.md.webp": 47468,
+        "stock-camel.cut.webp": 52956,
+        "stock-camel.sm.webp": 7270
+      },
+      "transparent": false,
+      "split_into": [
+        "stock-mountain-lake",
+        "stock-cable-car",
+        "stock-ski",
+        "stock-trail",
+        "stock-hot-spring",
+        "stock-camel"
+      ],
+      "children": [
+        "stock-cable-car.cut.webp",
+        "stock-cable-car.sm.webp",
+        "stock-camel.cut.webp",
+        "stock-camel.sm.webp",
+        "stock-hot-spring.cut.webp",
+        "stock-hot-spring.md.webp",
+        "stock-hot-spring.sm.webp",
+        "stock-mountain-lake.cut.webp",
+        "stock-mountain-lake.sm.webp",
+        "stock-ski.cut.webp",
+        "stock-ski.sm.webp",
+        "stock-trail.cut.webp",
+        "stock-trail.sm.webp"
+      ],
+      "kit": "stock"
+    },
+    {
+      "name": "stock-sheet-scene-e",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate flat hand-drawn travel illustrations arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: an East-Asian temple hall with a curved tiled roof and two hanging lanterns; a mosque with one large dome and a single slender minaret; three broken ancient stone columns holding a cracked pediment. Row 2: a formal garden square with a round fountain and two cone-shaped topiary bushes; rows of vines on a slope with one small winery house; a small cluster of lit high-rise towers at night with tiny yellow windows. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.042205,
+      "generated_at": "2026-08-18",
+      "files": {
+        "png": 2008222,
+        "stock-temple.cut.webp": 48040,
+        "stock-temple.sm.webp": 6432,
+        "stock-temple.md.webp": 47280,
+        "stock-mosque.cut.webp": 32526,
+        "stock-mosque.sm.webp": 6382,
+        "stock-ruins.cut.webp": 38728,
+        "stock-ruins.sm.webp": 8274,
+        "stock-garden.cut.webp": 57146,
+        "stock-garden.sm.webp": 8330,
+        "stock-vineyard.cut.webp": 57178,
+        "stock-vineyard.sm.webp": 8942,
+        "stock-vineyard.md.webp": 56446,
+        "stock-night-skyline.cut.webp": 39648,
+        "stock-night-skyline.sm.webp": 7720
+      },
+      "transparent": false,
+      "split_into": [
+        "stock-temple",
+        "stock-mosque",
+        "stock-ruins",
+        "stock-garden",
+        "stock-vineyard",
+        "stock-night-skyline"
+      ],
+      "children": [
+        "stock-garden.cut.webp",
+        "stock-garden.sm.webp",
+        "stock-mosque.cut.webp",
+        "stock-mosque.sm.webp",
+        "stock-night-skyline.cut.webp",
+        "stock-night-skyline.sm.webp",
+        "stock-ruins.cut.webp",
+        "stock-ruins.sm.webp",
+        "stock-temple.cut.webp",
+        "stock-temple.md.webp",
+        "stock-temple.sm.webp",
+        "stock-vineyard.cut.webp",
+        "stock-vineyard.md.webp",
+        "stock-vineyard.sm.webp"
+      ],
+      "kit": "stock"
+    }
+  ]
+}

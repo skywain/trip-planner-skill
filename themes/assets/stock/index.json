@@ -1,0 +1,2758 @@
+{
+ "_readme": "stock kit lookup table — see README.md. Matching rules for a consumer (stock_art.py): lower-case the haystack; match Latin keywords on WORD BOUNDARIES (plain substring would find 'oman' in 'Romania' and 'iran' in 'Tirana'), CJK keywords as plain substrings; when several country names match, the LONGEST wins ('刚果民主共和国' before '刚果'). A landmark cut-out outranks a scene only when its `countries` intersect the trip's destination set (or it has none).",
+ "style": "illustrated",
+ "version": 1,
+ "notice": {
+  "en": "Pictures: built-in stock kit — no image generator or key was available; provide one and the art is generated for this trip.",
+  "zh": "图片来自内置素材库(本次未接入生图能力);接入生图模型或 KEY 后可为本次行程定制生成。"
+ },
+ "covers": [
+  {
+   "stem": "stock-cover-european-old-town",
+   "archetype": "european-old-town",
+   "keywords": [
+    "old town",
+    "altstadt",
+    "historic centre",
+    "historic center",
+    "half-timbered",
+    "cobbled",
+    "cathedral",
+    "castle",
+    "christmas market",
+    "老城",
+    "古城",
+    "老城区",
+    "教堂",
+    "石桥",
+    "中欧",
+    "东欧"
+   ]
+  },
+  {
+   "stem": "stock-cover-mediterranean-coast",
+   "archetype": "mediterranean-coast",
+   "keywords": [
+    "mediterranean",
+    "aegean",
+    "adriatic",
+    "island hopping",
+    "whitewashed",
+    "blue dome",
+    "cypress",
+    "riviera",
+    "coast",
+    "地中海",
+    "爱琴海",
+    "白房子",
+    "蓝顶",
+    "海岛",
+    "跳岛"
+   ]
+  },
+  {
+   "stem": "stock-cover-east-asian-temple",
+   "archetype": "east-asian-temple",
+   "keywords": [
+    "temple",
+    "shrine",
+    "pagoda",
+    "torii",
+    "tea house",
+    "zen",
+    "garden",
+    "东亚",
+    "东瀛",
+    "寺庙",
+    "神社",
+    "宝塔",
+    "禅",
+    "庭园",
+    "和风"
+   ]
+  },
+  {
+   "stem": "stock-cover-southeast-asia",
+   "archetype": "southeast-asia",
+   "keywords": [
+    "stupa",
+    "wat",
+    "tuk tuk",
+    "longtail boat",
+    "karst",
+    "monsoon",
+    "东南亚",
+    "佛塔",
+    "嘟嘟车",
+    "喀斯特",
+    "热带雨林城"
+   ]
+  },
+  {
+   "stem": "stock-cover-tropical-beach",
+   "archetype": "tropical-beach",
+   "keywords": [
+    "beach",
+    "lagoon",
+    "snorkel",
+    "snorkelling",
+    "diving",
+    "reef",
+    "overwater",
+    "palm",
+    "resort",
+    "island",
+    "海滩",
+    "沙滩",
+    "环礁",
+    "浮潜",
+    "潜水",
+    "水屋",
+    "度假岛"
+   ]
+  },
+  {
+   "stem": "stock-cover-desert-medina",
+   "archetype": "desert-medina",
+   "keywords": [
+    "desert",
+    "dune",
+    "sahara",
+    "medina",
+    "souk",
+    "kasbah",
+    "oasis",
+    "camel",
+    "沙漠",
+    "沙丘",
+    "老城迷宫",
+    "麦地那",
+    "绿洲",
+    "骆驼"
+   ]
+  },
+  {
+   "stem": "stock-cover-alpine-lake",
+   "archetype": "alpine-lake",
+   "keywords": [
+    "alps",
+    "alpine",
+    "chalet",
+    "glacier",
+    "cable car",
+    "mountain lake",
+    "hiking",
+    "himalaya",
+    "阿尔卑斯",
+    "高山",
+    "雪山",
+    "湖区",
+    "冰川",
+    "木屋",
+    "缆车",
+    "徒步"
+   ]
+  },
+  {
+   "stem": "stock-cover-nordic-fjord",
+   "archetype": "nordic-fjord",
+   "keywords": [
+    "fjord",
+    "aurora",
+    "northern lights",
+    "midnight sun",
+    "arctic",
+    "nordic",
+    "scandinavia",
+    "峡湾",
+    "极光",
+    "北极",
+    "极夜",
+    "北欧"
+   ]
+  },
+  {
+   "stem": "stock-cover-modern-skyline",
+   "archetype": "modern-skyline",
+   "keywords": [
+    "skyline",
+    "skyscraper",
+    "downtown",
+    "cbd",
+    "observation deck",
+    "harbour city",
+    "metropolis",
+    "shopping",
+    "天际线",
+    "摩天楼",
+    "市中心",
+    "购物",
+    "夜景",
+    "都市"
+   ]
+  },
+  {
+   "stem": "stock-cover-savanna",
+   "archetype": "savanna",
+   "keywords": [
+    "safari",
+    "savanna",
+    "savannah",
+    "big five",
+    "game drive",
+    "game reserve",
+    "elephant",
+    "giraffe",
+    "萨凡纳",
+    "草原",
+    "野生动物",
+    "狩猎之旅",
+    "大象",
+    "长颈鹿"
+   ]
+  },
+  {
+   "stem": "stock-cover-rainforest",
+   "archetype": "rainforest",
+   "keywords": [
+    "rainforest",
+    "jungle",
+    "amazon",
+    "canopy",
+    "toucan",
+    "cloud forest",
+    "雨林",
+    "丛林",
+    "亚马逊",
+    "云雾林",
+    "瀑布丛林"
+   ]
+  },
+  {
+   "stem": "stock-cover-andes-colonial",
+   "archetype": "andes-colonial",
+   "keywords": [
+    "andes",
+    "altiplano",
+    "inca",
+    "colonial town",
+    "colonial",
+    "llama",
+    "maya",
+    "aztec",
+    "安第斯",
+    "印加",
+    "殖民小镇",
+    "羊驼",
+    "玛雅"
+   ]
+  },
+  {
+   "stem": "stock-cover-castle-highlands",
+   "archetype": "castle-highlands",
+   "keywords": [
+    "highlands",
+    "loch",
+    "moor",
+    "whisky",
+    "distillery",
+    "cliffs",
+    "stone wall",
+    "castle ruin",
+    "高地",
+    "湖区城堡",
+    "威士忌",
+    "牧场",
+    "海崖"
+   ]
+  },
+  {
+   "stem": "stock-cover-north-america-roadtrip",
+   "archetype": "north-america-roadtrip",
+   "keywords": [
+    "road trip",
+    "roadtrip",
+    "route 66",
+    "canyon",
+    "mesa",
+    "motel",
+    "rv",
+    "national park loop",
+    "自驾",
+    "公路旅行",
+    "峡谷",
+    "国家公园环线",
+    "汽车旅馆"
+   ]
+  }
+ ],
+ "country_archetype": {
+  "AD": "alpine-lake",
+  "AE": "modern-skyline",
+  "AF": "desert-medina",
+  "AG": "tropical-beach",
+  "AI": "tropical-beach",
+  "AL": "mediterranean-coast",
+  "AM": "alpine-lake",
+  "AO": "savanna",
+  "AR": "alpine-lake",
+  "AS": "tropical-beach",
+  "AT": "alpine-lake",
+  "AU": "tropical-beach",
+  "AW": "tropical-beach",
+  "AZ": "desert-medina",
+  "BA": "european-old-town",
+  "BB": "tropical-beach",
+  "BD": "southeast-asia",
+  "BE": "european-old-town",
+  "BF": "savanna",
+  "BG": "european-old-town",
+  "BH": "desert-medina",
+  "BI": "savanna",
+  "BJ": "savanna",
+  "BM": "tropical-beach",
+  "BN": "southeast-asia",
+  "BO": "andes-colonial",
+  "BR": "rainforest",
+  "BS": "tropical-beach",
+  "BT": "alpine-lake",
+  "BW": "savanna",
+  "BY": "european-old-town",
+  "BZ": "tropical-beach",
+  "CA": "alpine-lake",
+  "CD": "rainforest",
+  "CF": "rainforest",
+  "CG": "rainforest",
+  "CH": "alpine-lake",
+  "CI": "rainforest",
+  "CK": "tropical-beach",
+  "CL": "andes-colonial",
+  "CM": "rainforest",
+  "CN": "east-asian-temple",
+  "CO": "andes-colonial",
+  "CR": "rainforest",
+  "CU": "tropical-beach",
+  "CV": "tropical-beach",
+  "CW": "tropical-beach",
+  "CY": "mediterranean-coast",
+  "CZ": "european-old-town",
+  "DE": "european-old-town",
+  "DJ": "savanna",
+  "DK": "european-old-town",
+  "DM": "tropical-beach",
+  "DO": "tropical-beach",
+  "DZ": "desert-medina",
+  "EC": "andes-colonial",
+  "EE": "european-old-town",
+  "EG": "desert-medina",
+  "ER": "savanna",
+  "ES": "mediterranean-coast",
+  "ET": "savanna",
+  "FI": "nordic-fjord",
+  "FJ": "tropical-beach",
+  "FM": "tropical-beach",
+  "FO": "nordic-fjord",
+  "FR": "european-old-town",
+  "GA": "rainforest",
+  "GB": "castle-highlands",
+  "GD": "tropical-beach",
+  "GE": "alpine-lake",
+  "GF": "rainforest",
+  "GG": "castle-highlands",
+  "GH": "savanna",
+  "GI": "mediterranean-coast",
+  "GL": "nordic-fjord",
+  "GM": "savanna",
+  "GN": "rainforest",
+  "GP": "tropical-beach",
+  "GQ": "rainforest",
+  "GR": "mediterranean-coast",
+  "GT": "andes-colonial",
+  "GU": "tropical-beach",
+  "GW": "tropical-beach",
+  "GY": "rainforest",
+  "HK": "modern-skyline",
+  "HN": "andes-colonial",
+  "HR": "mediterranean-coast",
+  "HT": "tropical-beach",
+  "HU": "european-old-town",
+  "ID": "southeast-asia",
+  "IE": "castle-highlands",
+  "IL": "mediterranean-coast",
+  "IM": "castle-highlands",
+  "IN": "southeast-asia",
+  "IQ": "desert-medina",
+  "IR": "desert-medina",
+  "IS": "nordic-fjord",
+  "IT": "european-old-town",
+  "JE": "castle-highlands",
+  "JM": "tropical-beach",
+  "JO": "desert-medina",
+  "JP": "east-asian-temple",
+  "KE": "savanna",
+  "KG": "alpine-lake",
+  "KH": "southeast-asia",
+  "KI": "tropical-beach",
+  "KM": "tropical-beach",
+  "KN": "tropical-beach",
+  "KP": "east-asian-temple",
+  "KR": "east-asian-temple",
+  "KW": "desert-medina",
+  "KY": "tropical-beach",
+  "KZ": "alpine-lake",
+  "LA": "southeast-asia",
+  "LB": "mediterranean-coast",
+  "LC": "tropical-beach",
+  "LI": "alpine-lake",
+  "LK": "tropical-beach",
+  "LR": "rainforest",
+  "LS": "savanna",
+  "LT": "european-old-town",
+  "LU": "european-old-town",
+  "LV": "european-old-town",
+  "LY": "desert-medina",
+  "MA": "desert-medina",
+  "MC": "mediterranean-coast",
+  "MD": "european-old-town",
+  "ME": "mediterranean-coast",
+  "MG": "rainforest",
+  "MH": "tropical-beach",
+  "MK": "european-old-town",
+  "ML": "desert-medina",
+  "MM": "southeast-asia",
+  "MN": "alpine-lake",
+  "MO": "modern-skyline",
+  "MP": "tropical-beach",
+  "MQ": "tropical-beach",
+  "MR": "desert-medina",
+  "MT": "mediterranean-coast",
+  "MU": "tropical-beach",
+  "MV": "tropical-beach",
+  "MW": "savanna",
+  "MX": "andes-colonial",
+  "MY": "southeast-asia",
+  "MZ": "tropical-beach",
+  "NA": "savanna",
+  "NC": "tropical-beach",
+  "NE": "desert-medina",
+  "NG": "savanna",
+  "NI": "andes-colonial",
+  "NL": "european-old-town",
+  "NO": "nordic-fjord",
+  "NP": "alpine-lake",
+  "NR": "tropical-beach",
+  "NU": "tropical-beach",
+  "NZ": "alpine-lake",
+  "OM": "desert-medina",
+  "PA": "rainforest",
+  "PE": "andes-colonial",
+  "PF": "tropical-beach",
+  "PG": "rainforest",
+  "PH": "tropical-beach",
+  "PK": "desert-medina",
+  "PL": "european-old-town",
+  "PR": "tropical-beach",
+  "PS": "desert-medina",
+  "PT": "mediterranean-coast",
+  "PW": "tropical-beach",
+  "PY": "andes-colonial",
+  "QA": "modern-skyline",
+  "RE": "tropical-beach",
+  "RO": "european-old-town",
+  "RS": "european-old-town",
+  "RU": "european-old-town",
+  "RW": "savanna",
+  "SA": "desert-medina",
+  "SB": "tropical-beach",
+  "SC": "tropical-beach",
+  "SD": "desert-medina",
+  "SE": "nordic-fjord",
+  "SG": "modern-skyline",
+  "SI": "alpine-lake",
+  "SK": "european-old-town",
+  "SL": "tropical-beach",
+  "SM": "european-old-town",
+  "SN": "savanna",
+  "SO": "savanna",
+  "SR": "rainforest",
+  "SS": "savanna",
+  "ST": "tropical-beach",
+  "SV": "andes-colonial",
+  "SY": "desert-medina",
+  "SZ": "savanna",
+  "TC": "tropical-beach",
+  "TD": "desert-medina",
+  "TG": "savanna",
+  "TH": "southeast-asia",
+  "TJ": "alpine-lake",
+  "TL": "tropical-beach",
+  "TM": "desert-medina",
+  "TN": "desert-medina",
+  "TO": "tropical-beach",
+  "TR": "mediterranean-coast",
+  "TT": "tropical-beach",
+  "TV": "tropical-beach",
+  "TW": "east-asian-temple",
+  "TZ": "savanna",
+  "UA": "european-old-town",
+  "UG": "savanna",
+  "US": "north-america-roadtrip",
+  "UY": "mediterranean-coast",
+  "UZ": "desert-medina",
+  "VA": "european-old-town",
+  "VC": "tropical-beach",
+  "VE": "rainforest",
+  "VG": "tropical-beach",
+  "VI": "tropical-beach",
+  "VN": "southeast-asia",
+  "VU": "tropical-beach",
+  "WS": "tropical-beach",
+  "XK": "european-old-town",
+  "YE": "desert-medina",
+  "ZA": "savanna",
+  "ZM": "savanna",
+  "ZW": "savanna"
+ },
+ "country_names": {
+  "AD": [
+   "Andorra",
+   "安道尔",
+   "安道爾"
+  ],
+  "AE": [
+   "United Arab Emirates",
+   "UAE",
+   "Emirates",
+   "Dubai",
+   "Abu Dhabi",
+   "阿联酋",
+   "阿聯酋",
+   "迪拜",
+   "杜拜",
+   "阿布扎比"
+  ],
+  "AF": [
+   "Afghanistan",
+   "阿富汗"
+  ],
+  "AG": [
+   "Antigua and Barbuda",
+   "安提瓜和巴布达",
+   "安提瓜"
+  ],
+  "AI": [
+   "Anguilla",
+   "安圭拉"
+  ],
+  "AL": [
+   "Albania",
+   "Shqiperia",
+   "阿尔巴尼亚",
+   "阿爾巴尼亞"
+  ],
+  "AM": [
+   "Armenia",
+   "亚美尼亚",
+   "亞美尼亞"
+  ],
+  "AO": [
+   "Angola",
+   "安哥拉"
+  ],
+  "AR": [
+   "Argentina",
+   "阿根廷"
+  ],
+  "AS": [
+   "American Samoa",
+   "美属萨摩亚"
+  ],
+  "AT": [
+   "Austria",
+   "Osterreich",
+   "Österreich",
+   "奥地利",
+   "奧地利"
+  ],
+  "AU": [
+   "Australia",
+   "澳大利亚",
+   "澳大利亞",
+   "澳洲"
+  ],
+  "AW": [
+   "Aruba",
+   "阿鲁巴"
+  ],
+  "AZ": [
+   "Azerbaijan",
+   "阿塞拜疆",
+   "亞塞拜然"
+  ],
+  "BA": [
+   "Bosnia and Herzegovina",
+   "Bosnia",
+   "波黑",
+   "波斯尼亚",
+   "波士尼亞"
+  ],
+  "BB": [
+   "Barbados",
+   "巴巴多斯"
+  ],
+  "BD": [
+   "Bangladesh",
+   "孟加拉国",
+   "孟加拉"
+  ],
+  "BE": [
+   "Belgium",
+   "Belgique",
+   "Belgie",
+   "België",
+   "比利时",
+   "比利時"
+  ],
+  "BF": [
+   "Burkina Faso",
+   "布基纳法索",
+   "布吉納法索"
+  ],
+  "BG": [
+   "Bulgaria",
+   "保加利亚",
+   "保加利亞"
+  ],
+  "BH": [
+   "Bahrain",
+   "巴林"
+  ],
+  "BI": [
+   "Burundi",
+   "布隆迪",
+   "蒲隆地"
+  ],
+  "BJ": [
+   "Benin",
+   "贝宁",
+   "貝寧"
+  ],
+  "BM": [
+   "Bermuda",
+   "百慕大"
+  ],
+  "BN": [
+   "Brunei",
+   "文莱",
+   "文萊"
+  ],
+  "BO": [
+   "Bolivia",
+   "玻利维亚",
+   "玻利維亞"
+  ],
+  "BR": [
+   "Brazil",
+   "Brasil",
+   "巴西"
+  ],
+  "BS": [
+   "Bahamas",
+   "巴哈马",
+   "巴哈馬"
+  ],
+  "BT": [
+   "Bhutan",
+   "不丹"
+  ],
+  "BW": [
+   "Botswana",
+   "博茨瓦纳",
+   "波札那"
+  ],
+  "BY": [
+   "Belarus",
+   "白俄罗斯",
+   "白俄羅斯"
+  ],
+  "BZ": [
+   "Belize",
+   "伯利兹",
+   "貝里斯"
+  ],
+  "CA": [
+   "Canada",
+   "加拿大"
+  ],
+  "CD": [
+   "DR Congo",
+   "Democratic Republic of the Congo",
+   "刚果民主共和国",
+   "剛果民主共和國",
+   "刚果金"
+  ],
+  "CF": [
+   "Central African Republic",
+   "中非"
+  ],
+  "CG": [
+   "Republic of the Congo",
+   "Congo-Brazzaville",
+   "刚果布",
+   "剛果共和國"
+  ],
+  "CH": [
+   "Switzerland",
+   "Suisse",
+   "Schweiz",
+   "Svizzera",
+   "瑞士"
+  ],
+  "CI": [
+   "Ivory Coast",
+   "Cote d'Ivoire",
+   "Côte d'Ivoire",
+   "科特迪瓦",
+   "象牙海岸"
+  ],
+  "CK": [
+   "Cook Islands",
+   "库克群岛",
+   "庫克群島"
+  ],
+  "CL": [
+   "Chile",
+   "智利"
+  ],
+  "CM": [
+   "Cameroon",
+   "喀麦隆",
+   "喀麥隆"
+  ],
+  "CN": [
+   "China",
+   "Mainland China",
+   "PRC",
+   "中国",
+   "中國",
+   "中国大陆"
+  ],
+  "CO": [
+   "Colombia",
+   "哥伦比亚",
+   "哥倫比亞"
+  ],
+  "CR": [
+   "Costa Rica",
+   "哥斯达黎加",
+   "哥斯大黎加"
+  ],
+  "CU": [
+   "Cuba",
+   "古巴"
+  ],
+  "CV": [
+   "Cabo Verde",
+   "Cape Verde",
+   "佛得角",
+   "維德角"
+  ],
+  "CW": [
+   "Curacao",
+   "Curaçao",
+   "库拉索"
+  ],
+  "CY": [
+   "Cyprus",
+   "塞浦路斯",
+   "賽普勒斯"
+  ],
+  "CZ": [
+   "Czechia",
+   "Czech Republic",
+   "捷克"
+  ],
+  "DE": [
+   "Germany",
+   "Deutschland",
+   "德国",
+   "德國"
+  ],
+  "DJ": [
+   "Djibouti",
+   "吉布提"
+  ],
+  "DK": [
+   "Denmark",
+   "Danmark",
+   "丹麦",
+   "丹麥"
+  ],
+  "DM": [
+   "Dominica",
+   "多米尼克"
+  ],
+  "DO": [
+   "Dominican Republic",
+   "多米尼加"
+  ],
+  "DZ": [
+   "Algeria",
+   "阿尔及利亚",
+   "阿爾及利亞"
+  ],
+  "EC": [
+   "Ecuador",
+   "厄瓜多尔",
+   "厄瓜多"
+  ],
+  "EE": [
+   "Estonia",
+   "Eesti",
+   "爱沙尼亚",
+   "愛沙尼亞"
+  ],
+  "EG": [
+   "Egypt",
+   "埃及"
+  ],
+  "ER": [
+   "Eritrea",
+   "厄立特里亚",
+   "厄利垂亞"
+  ],
+  "ES": [
+   "Spain",
+   "Espana",
+   "España",
+   "西班牙"
+  ],
+  "ET": [
+   "Ethiopia",
+   "埃塞俄比亚",
+   "衣索比亞"
+  ],
+  "FI": [
+   "Finland",
+   "Suomi",
+   "芬兰",
+   "芬蘭"
+  ],
+  "FJ": [
+   "Fiji",
+   "斐济",
+   "斐濟"
+  ],
+  "FM": [
+   "Micronesia",
+   "密克罗尼西亚"
+  ],
+  "FO": [
+   "Faroe Islands",
+   "法罗群岛",
+   "法羅群島"
+  ],
+  "FR": [
+   "France",
+   "法国",
+   "法國"
+  ],
+  "GA": [
+   "Gabon",
+   "加蓬",
+   "加彭"
+  ],
+  "GB": [
+   "United Kingdom",
+   "Great Britain",
+   "Britain",
+   "England",
+   "Scotland",
+   "Wales",
+   "英国",
+   "英國",
+   "英格兰",
+   "苏格兰",
+   "蘇格蘭",
+   "威尔士"
+  ],
+  "GD": [
+   "Grenada",
+   "格林纳达",
+   "格瑞那達"
+  ],
+  "GE": [
+   "Georgia",
+   "Sakartvelo",
+   "格鲁吉亚",
+   "格魯吉亞",
+   "喬治亞"
+  ],
+  "GF": [
+   "French Guiana",
+   "法属圭亚那"
+  ],
+  "GG": [
+   "Guernsey",
+   "根西島"
+  ],
+  "GH": [
+   "Ghana",
+   "加纳",
+   "迦納"
+  ],
+  "GI": [
+   "Gibraltar",
+   "直布罗陀",
+   "直布羅陀"
+  ],
+  "GL": [
+   "Greenland",
+   "格陵兰",
+   "格陵蘭"
+  ],
+  "GM": [
+   "Gambia",
+   "冈比亚",
+   "甘比亞"
+  ],
+  "GN": [
+   "Guinea",
+   "几内亚",
+   "幾內亞"
+  ],
+  "GP": [
+   "Guadeloupe",
+   "瓜德罗普"
+  ],
+  "GQ": [
+   "Equatorial Guinea",
+   "赤道几内亚"
+  ],
+  "GR": [
+   "Greece",
+   "Hellas",
+   "希腊",
+   "希臘"
+  ],
+  "GT": [
+   "Guatemala",
+   "危地马拉",
+   "瓜地馬拉"
+  ],
+  "GU": [
+   "Guam",
+   "关岛",
+   "關島"
+  ],
+  "GW": [
+   "Guinea-Bissau",
+   "几内亚比绍"
+  ],
+  "GY": [
+   "Guyana",
+   "圭亚那",
+   "蓋亞那"
+  ],
+  "HK": [
+   "Hong Kong",
+   "香港"
+  ],
+  "HN": [
+   "Honduras",
+   "洪都拉斯"
+  ],
+  "HR": [
+   "Croatia",
+   "Hrvatska",
+   "克罗地亚",
+   "克羅地亞",
+   "克羅埃西亞"
+  ],
+  "HT": [
+   "Haiti",
+   "海地"
+  ],
+  "HU": [
+   "Hungary",
+   "Magyarorszag",
+   "匈牙利"
+  ],
+  "ID": [
+   "Indonesia",
+   "Bali",
+   "Java",
+   "印尼",
+   "印度尼西亚",
+   "印度尼西亞",
+   "巴厘岛",
+   "峇里島"
+  ],
+  "IE": [
+   "Ireland",
+   "Eire",
+   "爱尔兰",
+   "愛爾蘭"
+  ],
+  "IL": [
+   "Israel",
+   "以色列"
+  ],
+  "IM": [
+   "Isle of Man",
+   "马恩岛"
+  ],
+  "IN": [
+   "India",
+   "Bharat",
+   "印度"
+  ],
+  "IQ": [
+   "Iraq",
+   "伊拉克"
+  ],
+  "IR": [
+   "Iran",
+   "Persia",
+   "伊朗"
+  ],
+  "IS": [
+   "Iceland",
+   "Island",
+   "冰岛",
+   "冰島"
+  ],
+  "IT": [
+   "Italy",
+   "Italia",
+   "意大利",
+   "義大利"
+  ],
+  "JE": [
+   "Jersey",
+   "泽西島"
+  ],
+  "JM": [
+   "Jamaica",
+   "牙买加",
+   "牙買加"
+  ],
+  "JO": [
+   "Jordan",
+   "约旦",
+   "約旦"
+  ],
+  "JP": [
+   "Japan",
+   "Nippon",
+   "Nihon",
+   "日本"
+  ],
+  "KE": [
+   "Kenya",
+   "肯尼亚",
+   "肯亞"
+  ],
+  "KG": [
+   "Kyrgyzstan",
+   "吉尔吉斯斯坦",
+   "吉爾吉斯"
+  ],
+  "KH": [
+   "Cambodia",
+   "Kampuchea",
+   "柬埔寨"
+  ],
+  "KI": [
+   "Kiribati",
+   "基里巴斯"
+  ],
+  "KM": [
+   "Comoros",
+   "科摩罗",
+   "葛摩"
+  ],
+  "KN": [
+   "Saint Kitts and Nevis",
+   "圣基茨和尼维斯"
+  ],
+  "KP": [
+   "North Korea",
+   "DPRK",
+   "朝鲜",
+   "朝鮮",
+   "北韓"
+  ],
+  "KR": [
+   "South Korea",
+   "Korea",
+   "Republic of Korea",
+   "韩国",
+   "韓國",
+   "南韓"
+  ],
+  "KW": [
+   "Kuwait",
+   "科威特"
+  ],
+  "KY": [
+   "Cayman Islands",
+   "开曼群岛",
+   "開曼群島"
+  ],
+  "KZ": [
+   "Kazakhstan",
+   "哈萨克斯坦",
+   "哈薩克"
+  ],
+  "LA": [
+   "Laos",
+   "Lao PDR",
+   "老挝",
+   "老撾",
+   "寮國"
+  ],
+  "LB": [
+   "Lebanon",
+   "黎巴嫩"
+  ],
+  "LC": [
+   "Saint Lucia",
+   "圣卢西亚",
+   "聖露西亞"
+  ],
+  "LI": [
+   "Liechtenstein",
+   "列支敦士登"
+  ],
+  "LK": [
+   "Sri Lanka",
+   "Ceylon",
+   "斯里兰卡",
+   "斯里蘭卡"
+  ],
+  "LR": [
+   "Liberia",
+   "利比里亚",
+   "賴比瑞亞"
+  ],
+  "LS": [
+   "Lesotho",
+   "莱索托",
+   "賴索托"
+  ],
+  "LT": [
+   "Lithuania",
+   "立陶宛"
+  ],
+  "LU": [
+   "Luxembourg",
+   "Luxemburg",
+   "卢森堡",
+   "盧森堡"
+  ],
+  "LV": [
+   "Latvia",
+   "拉脱维亚",
+   "拉脫維亞"
+  ],
+  "LY": [
+   "Libya",
+   "利比亚",
+   "利比亞"
+  ],
+  "MA": [
+   "Morocco",
+   "Maroc",
+   "摩洛哥"
+  ],
+  "MC": [
+   "Monaco",
+   "摩纳哥",
+   "摩納哥"
+  ],
+  "MD": [
+   "Moldova",
+   "摩尔多瓦",
+   "摩爾多瓦"
+  ],
+  "ME": [
+   "Montenegro",
+   "黑山",
+   "蒙特內哥羅"
+  ],
+  "MG": [
+   "Madagascar",
+   "马达加斯加",
+   "馬達加斯加"
+  ],
+  "MH": [
+   "Marshall Islands",
+   "马绍尔群岛"
+  ],
+  "MK": [
+   "North Macedonia",
+   "Macedonia",
+   "北马其顿",
+   "北馬其頓"
+  ],
+  "ML": [
+   "Mali",
+   "马里共和国",
+   "馬利"
+  ],
+  "MM": [
+   "Myanmar",
+   "Burma",
+   "缅甸",
+   "緬甸"
+  ],
+  "MN": [
+   "Mongolia",
+   "蒙古"
+  ],
+  "MO": [
+   "Macau",
+   "Macao",
+   "澳门",
+   "澳門"
+  ],
+  "MP": [
+   "Northern Mariana Islands",
+   "Saipan",
+   "北马里亚纳群岛",
+   "塞班岛"
+  ],
+  "MQ": [
+   "Martinique",
+   "马提尼克"
+  ],
+  "MR": [
+   "Mauritania",
+   "毛里塔尼亚",
+   "茅利塔尼亞"
+  ],
+  "MT": [
+   "Malta",
+   "马耳他",
+   "馬爾他"
+  ],
+  "MU": [
+   "Mauritius",
+   "毛里求斯",
+   "模里西斯"
+  ],
+  "MV": [
+   "Maldives",
+   "马尔代夫",
+   "馬爾地夫"
+  ],
+  "MW": [
+   "Malawi",
+   "马拉维",
+   "馬拉威"
+  ],
+  "MX": [
+   "Mexico",
+   "Mexico City",
+   "México",
+   "墨西哥"
+  ],
+  "MY": [
+   "Malaysia",
+   "马来西亚",
+   "馬來西亞"
+  ],
+  "MZ": [
+   "Mozambique",
+   "莫桑比克",
+   "莫三比克"
+  ],
+  "NA": [
+   "Namibia",
+   "纳米比亚",
+   "納米比亞"
+  ],
+  "NC": [
+   "New Caledonia",
+   "新喀里多尼亚"
+  ],
+  "NE": [
+   "Niger",
+   "尼日尔",
+   "尼日"
+  ],
+  "NG": [
+   "Nigeria",
+   "尼日利亚",
+   "奈及利亞"
+  ],
+  "NI": [
+   "Nicaragua",
+   "尼加拉瓜"
+  ],
+  "NL": [
+   "Netherlands",
+   "Holland",
+   "Nederland",
+   "荷兰",
+   "荷蘭"
+  ],
+  "NO": [
+   "Norway",
+   "Norge",
+   "挪威"
+  ],
+  "NP": [
+   "Nepal",
+   "尼泊尔",
+   "尼泊爾"
+  ],
+  "NR": [
+   "Nauru",
+   "瑙鲁"
+  ],
+  "NU": [
+   "Niue",
+   "纽埃"
+  ],
+  "NZ": [
+   "New Zealand",
+   "Aotearoa",
+   "新西兰",
+   "新西蘭",
+   "紐西蘭"
+  ],
+  "OM": [
+   "Oman",
+   "阿曼"
+  ],
+  "PA": [
+   "Panama",
+   "巴拿马",
+   "巴拿馬"
+  ],
+  "PE": [
+   "Peru",
+   "秘鲁",
+   "秘魯"
+  ],
+  "PF": [
+   "French Polynesia",
+   "Tahiti",
+   "Bora Bora",
+   "法属波利尼西亚",
+   "大溪地",
+   "塔希提"
+  ],
+  "PG": [
+   "Papua New Guinea",
+   "巴布亚新几内亚"
+  ],
+  "PH": [
+   "Philippines",
+   "菲律宾",
+   "菲律賓"
+  ],
+  "PK": [
+   "Pakistan",
+   "巴基斯坦"
+  ],
+  "PL": [
+   "Poland",
+   "Polska",
+   "波兰",
+   "波蘭"
+  ],
+  "PR": [
+   "Puerto Rico",
+   "波多黎各"
+  ],
+  "PS": [
+   "Palestine",
+   "巴勒斯坦"
+  ],
+  "PT": [
+   "Portugal",
+   "葡萄牙"
+  ],
+  "PW": [
+   "Palau",
+   "帕劳",
+   "帛琉"
+  ],
+  "PY": [
+   "Paraguay",
+   "巴拉圭"
+  ],
+  "QA": [
+   "Qatar",
+   "卡塔尔",
+   "卡達"
+  ],
+  "RE": [
+   "Reunion",
+   "Réunion",
+   "留尼汪",
+   "留尼旺"
+  ],
+  "RO": [
+   "Romania",
+   "罗马尼亚",
+   "羅馬尼亞"
+  ],
+  "RS": [
+   "Serbia",
+   "塞尔维亚",
+   "塞爾維亞"
+  ],
+  "RU": [
+   "Russia",
+   "Russian Federation",
+   "俄罗斯",
+   "俄羅斯",
+   "俄国"
+  ],
+  "RW": [
+   "Rwanda",
+   "卢旺达",
+   "盧安達"
+  ],
+  "SA": [
+   "Saudi Arabia",
+   "沙特阿拉伯",
+   "沙烏地阿拉伯"
+  ],
+  "SB": [
+   "Solomon Islands",
+   "所罗门群岛"
+  ],
+  "SC": [
+   "Seychelles",
+   "塞舌尔",
+   "塞席爾"
+  ],
+  "SD": [
+   "Sudan",
+   "苏丹",
+   "蘇丹"
+  ],
+  "SE": [
+   "Sweden",
+   "Sverige",
+   "瑞典"
+  ],
+  "SG": [
+   "Singapore",
+   "新加坡"
+  ],
+  "SI": [
+   "Slovenia",
+   "斯洛文尼亚",
+   "斯洛文尼亞"
+  ],
+  "SK": [
+   "Slovakia",
+   "斯洛伐克"
+  ],
+  "SL": [
+   "Sierra Leone",
+   "塞拉利昂",
+   "獅子山"
+  ],
+  "SM": [
+   "San Marino",
+   "圣马力诺",
+   "聖馬利諾"
+  ],
+  "SN": [
+   "Senegal",
+   "塞内加尔",
+   "塞內加爾"
+  ],
+  "SO": [
+   "Somalia",
+   "索马里",
+   "索馬利亞"
+  ],
+  "SR": [
+   "Suriname",
+   "苏里南",
+   "蘇利南"
+  ],
+  "SS": [
+   "South Sudan",
+   "南苏丹",
+   "南蘇丹"
+  ],
+  "ST": [
+   "Sao Tome and Principe",
+   "圣多美和普林西比"
+  ],
+  "SV": [
+   "El Salvador",
+   "萨尔瓦多",
+   "薩爾瓦多"
+  ],
+  "SY": [
+   "Syria",
+   "叙利亚",
+   "敘利亞"
+  ],
+  "SZ": [
+   "Eswatini",
+   "Swaziland",
+   "斯威士兰",
+   "史瓦帝尼"
+  ],
+  "TC": [
+   "Turks and Caicos",
+   "特克斯和凯科斯"
+  ],
+  "TD": [
+   "Chad",
+   "乍得",
+   "查德"
+  ],
+  "TG": [
+   "Togo",
+   "多哥"
+  ],
+  "TH": [
+   "Thailand",
+   "Siam",
+   "泰国",
+   "泰國"
+  ],
+  "TJ": [
+   "Tajikistan",
+   "塔吉克斯坦",
+   "塔吉克"
+  ],
+  "TL": [
+   "Timor-Leste",
+   "East Timor",
+   "东帝汶",
+   "東帝汶"
+  ],
+  "TM": [
+   "Turkmenistan",
+   "土库曼斯坦",
+   "土庫曼"
+  ],
+  "TN": [
+   "Tunisia",
+   "突尼斯",
+   "突尼西亞"
+  ],
+  "TO": [
+   "Tonga",
+   "汤加",
+   "東加"
+  ],
+  "TR": [
+   "Turkey",
+   "Turkiye",
+   "Türkiye",
+   "土耳其"
+  ],
+  "TT": [
+   "Trinidad and Tobago",
+   "特立尼达和多巴哥"
+  ],
+  "TV": [
+   "Tuvalu",
+   "图瓦卢"
+  ],
+  "TW": [
+   "Taiwan",
+   "台湾",
+   "臺灣",
+   "台灣"
+  ],
+  "TZ": [
+   "Tanzania",
+   "Zanzibar",
+   "坦桑尼亚",
+   "坦尚尼亞",
+   "桑给巴尔"
+  ],
+  "UA": [
+   "Ukraine",
+   "乌克兰",
+   "烏克蘭"
+  ],
+  "UG": [
+   "Uganda",
+   "乌干达",
+   "烏干達"
+  ],
+  "US": [
+   "United States",
+   "United States of America",
+   "USA",
+   "America",
+   "美国",
+   "美國"
+  ],
+  "UY": [
+   "Uruguay",
+   "乌拉圭",
+   "烏拉圭"
+  ],
+  "UZ": [
+   "Uzbekistan",
+   "乌兹别克斯坦",
+   "烏茲別克"
+  ],
+  "VA": [
+   "Vatican City",
+   "Holy See",
+   "梵蒂冈",
+   "梵蒂岡"
+  ],
+  "VC": [
+   "Saint Vincent and the Grenadines",
+   "圣文森特和格林纳丁斯"
+  ],
+  "VE": [
+   "Venezuela",
+   "委内瑞拉",
+   "委內瑞拉"
+  ],
+  "VG": [
+   "British Virgin Islands",
+   "英属维尔京群岛"
+  ],
+  "VI": [
+   "United States Virgin Islands",
+   "美属维尔京群岛"
+  ],
+  "VN": [
+   "Vietnam",
+   "Viet Nam",
+   "越南"
+  ],
+  "VU": [
+   "Vanuatu",
+   "瓦努阿图",
+   "瓦努阿圖"
+  ],
+  "WS": [
+   "Samoa",
+   "萨摩亚",
+   "薩摩亞"
+  ],
+  "XK": [
+   "Kosovo",
+   "科索沃"
+  ],
+  "YE": [
+   "Yemen",
+   "也门",
+   "也門"
+  ],
+  "ZA": [
+   "South Africa",
+   "南非"
+  ],
+  "ZM": [
+   "Zambia",
+   "赞比亚",
+   "尚比亞"
+  ],
+  "ZW": [
+   "Zimbabwe",
+   "津巴布韦",
+   "辛巴威"
+  ]
+ },
+ "cutouts": [
+  {
+   "stem": "stock-cathedral",
+   "kind": "scene",
+   "keywords": [
+    "cathedral",
+    "minster",
+    "basilica",
+    "duomo",
+    "dom",
+    "kathedrale",
+    "cathédrale",
+    "catedral",
+    "大教堂",
+    "教堂",
+    "主教座堂"
+   ]
+  },
+  {
+   "stem": "stock-castle",
+   "kind": "scene",
+   "keywords": [
+    "castle",
+    "chateau",
+    "château",
+    "schloss",
+    "burg",
+    "castillo",
+    "fortress",
+    "citadel",
+    "城堡",
+    "古堡",
+    "要塞",
+    "堡"
+   ]
+  },
+  {
+   "stem": "stock-old-town-square",
+   "kind": "scene",
+   "keywords": [
+    "old town",
+    "altstadt",
+    "historic centre",
+    "historic center",
+    "centro storico",
+    "town square",
+    "market square",
+    "plaza mayor",
+    "grand place",
+    "rathaus",
+    "老城",
+    "古城",
+    "老城区",
+    "广场",
+    "市政厅"
+   ]
+  },
+  {
+   "stem": "stock-museum",
+   "kind": "scene",
+   "keywords": [
+    "museum",
+    "gallery",
+    "musée",
+    "museo",
+    "exhibition",
+    "博物馆",
+    "美术馆",
+    "展览",
+    "纪念馆"
+   ]
+  },
+  {
+   "stem": "stock-city-park",
+   "kind": "scene",
+   "keywords": [
+    "park",
+    "promenade",
+    "green space",
+    "picnic",
+    "公园",
+    "绿地",
+    "散步",
+    "野餐"
+   ]
+  },
+  {
+   "stem": "stock-canal",
+   "kind": "scene",
+   "keywords": [
+    "canal",
+    "gracht",
+    "waterway",
+    "canal cruise",
+    "运河",
+    "水道",
+    "河道",
+    "水城"
+   ]
+  },
+  {
+   "stem": "stock-market",
+   "kind": "scene",
+   "keywords": [
+    "market",
+    "bazaar",
+    "souk",
+    "mercado",
+    "marché",
+    "markt",
+    "market hall",
+    "farmers market",
+    "flea market",
+    "市场",
+    "集市",
+    "巴扎",
+    "早市",
+    "跳蚤市场"
+   ]
+  },
+  {
+   "stem": "stock-food-stall",
+   "kind": "scene",
+   "keywords": [
+    "street food",
+    "food stall",
+    "food cart",
+    "night market",
+    "hawker",
+    "yatai",
+    "izakaya",
+    "小吃",
+    "夜市",
+    "路边摊",
+    "大排档",
+    "美食街"
+   ]
+  },
+  {
+   "stem": "stock-cafe",
+   "kind": "scene",
+   "keywords": [
+    "cafe",
+    "café",
+    "coffee",
+    "brunch",
+    "bakery",
+    "konditorei",
+    "咖啡",
+    "咖啡馆",
+    "下午茶",
+    "面包店"
+   ]
+  },
+  {
+   "stem": "stock-tram",
+   "kind": "scene",
+   "keywords": [
+    "tram",
+    "streetcar",
+    "trolley",
+    "tramway",
+    "funicular tram",
+    "电车",
+    "有轨电车",
+    "叮叮车"
+   ]
+  },
+  {
+   "stem": "stock-luggage",
+   "kind": "scene",
+   "keywords": [
+    "luggage",
+    "baggage",
+    "packing",
+    "check-in",
+    "checkin",
+    "left luggage",
+    "行李",
+    "打包",
+    "寄存",
+    "入住"
+   ]
+  },
+  {
+   "stem": "stock-viewpoint",
+   "kind": "scene",
+   "keywords": [
+    "viewpoint",
+    "lookout",
+    "overlook",
+    "panorama",
+    "mirador",
+    "aussichtspunkt",
+    "观景",
+    "观景台",
+    "瞭望台",
+    "眺望"
+   ]
+  },
+  {
+   "stem": "stock-ferry",
+   "kind": "scene",
+   "keywords": [
+    "ferry",
+    "boat trip",
+    "cruise",
+    "water taxi",
+    "渡轮",
+    "渡船",
+    "游船",
+    "船票",
+    "邮轮"
+   ]
+  },
+  {
+   "stem": "stock-lighthouse",
+   "kind": "scene",
+   "keywords": [
+    "lighthouse",
+    "cape",
+    "headland",
+    "灯塔",
+    "海角"
+   ]
+  },
+  {
+   "stem": "stock-beach",
+   "kind": "scene",
+   "keywords": [
+    "beach",
+    "seaside",
+    "playa",
+    "plage",
+    "strand",
+    "sunbathe",
+    "海滩",
+    "沙滩",
+    "海边",
+    "日光浴"
+   ]
+  },
+  {
+   "stem": "stock-harbour",
+   "kind": "scene",
+   "keywords": [
+    "harbour",
+    "harbor",
+    "port",
+    "marina",
+    "quay",
+    "waterfront",
+    "fishing village",
+    "港口",
+    "码头",
+    "渔港",
+    "海滨"
+   ]
+  },
+  {
+   "stem": "stock-bridge",
+   "kind": "scene",
+   "keywords": [
+    "bridge",
+    "brücke",
+    "pont",
+    "puente",
+    "ponte",
+    "桥",
+    "石桥",
+    "大桥"
+   ]
+  },
+  {
+   "stem": "stock-waterfall",
+   "kind": "scene",
+   "keywords": [
+    "waterfall",
+    "falls",
+    "cascade",
+    "wasserfall",
+    "cascada",
+    "瀑布",
+    "飞瀑"
+   ]
+  },
+  {
+   "stem": "stock-mountain-lake",
+   "kind": "scene",
+   "keywords": [
+    "lake",
+    "loch",
+    "lakeside",
+    "see",
+    "lago",
+    "lac",
+    "reservoir",
+    "湖",
+    "湖畔",
+    "湖区",
+    "堰塞湖"
+   ]
+  },
+  {
+   "stem": "stock-cable-car",
+   "kind": "scene",
+   "keywords": [
+    "cable car",
+    "gondola lift",
+    "ropeway",
+    "funicular",
+    "aerial tram",
+    "缆车",
+    "索道"
+   ]
+  },
+  {
+   "stem": "stock-ski",
+   "kind": "scene",
+   "keywords": [
+    "ski",
+    "skiing",
+    "snowboard",
+    "piste",
+    "ski resort",
+    "滑雪",
+    "雪场",
+    "雪道"
+   ]
+  },
+  {
+   "stem": "stock-trail",
+   "kind": "scene",
+   "keywords": [
+    "hike",
+    "hiking",
+    "trail",
+    "trek",
+    "trekking",
+    "wanderung",
+    "徒步",
+    "步道",
+    "登山",
+    "健行",
+    "环线"
+   ]
+  },
+  {
+   "stem": "stock-hot-spring",
+   "kind": "scene",
+   "keywords": [
+    "hot spring",
+    "onsen",
+    "thermal bath",
+    "spa",
+    "hammam",
+    "banya",
+    "温泉",
+    "泡汤",
+    "汤屋",
+    "浴场"
+   ]
+  },
+  {
+   "stem": "stock-camel",
+   "kind": "scene",
+   "keywords": [
+    "camel",
+    "dune",
+    "desert camp",
+    "sahara",
+    "erg",
+    "骆驼",
+    "沙漠",
+    "沙丘",
+    "沙漠营地"
+   ]
+  },
+  {
+   "stem": "stock-temple",
+   "kind": "scene",
+   "keywords": [
+    "temple",
+    "shrine",
+    "pagoda",
+    "monastery",
+    "wat",
+    "stupa",
+    "寺",
+    "寺庙",
+    "神社",
+    "佛塔",
+    "庙",
+    "禅院"
+   ]
+  },
+  {
+   "stem": "stock-mosque",
+   "kind": "scene",
+   "keywords": [
+    "mosque",
+    "minaret",
+    "camii",
+    "moschee",
+    "mezquita",
+    "清真寺",
+    "宣礼塔",
+    "礼拜堂"
+   ]
+  },
+  {
+   "stem": "stock-ruins",
+   "kind": "scene",
+   "keywords": [
+    "ruins",
+    "ancient",
+    "archaeological",
+    "forum",
+    "amphitheatre",
+    "amphitheater",
+    "necropolis",
+    "遗址",
+    "废墟",
+    "古迹",
+    "考古"
+   ]
+  },
+  {
+   "stem": "stock-garden",
+   "kind": "scene",
+   "keywords": [
+    "garden",
+    "botanical",
+    "jardin",
+    "garten",
+    "orangery",
+    "花园",
+    "园林",
+    "植物园",
+    "庭院"
+   ]
+  },
+  {
+   "stem": "stock-vineyard",
+   "kind": "scene",
+   "keywords": [
+    "vineyard",
+    "winery",
+    "wine tasting",
+    "wine route",
+    "weingut",
+    "bodega",
+    "酒庄",
+    "葡萄园",
+    "品酒"
+   ]
+  },
+  {
+   "stem": "stock-night-skyline",
+   "kind": "scene",
+   "keywords": [
+    "skyline",
+    "night view",
+    "downtown",
+    "cbd",
+    "observation deck",
+    "rooftop bar",
+    "夜景",
+    "天际线",
+    "市中心",
+    "高楼",
+    "观景塔"
+   ]
+  },
+  {
+   "stem": "stock-eiffel-tower",
+   "kind": "landmark",
+   "countries": [
+    "FR"
+   ],
+   "keywords": [
+    "eiffel",
+    "tour eiffel",
+    "eiffelturm",
+    "champ de mars",
+    "埃菲尔",
+    "艾菲尔",
+    "艾菲爾",
+    "铁塔"
+   ]
+  },
+  {
+   "stem": "stock-tower-bridge",
+   "kind": "landmark",
+   "countries": [
+    "GB"
+   ],
+   "keywords": [
+    "tower bridge",
+    "塔桥",
+    "伦敦塔桥",
+    "倫敦塔橋"
+   ]
+  },
+  {
+   "stem": "stock-big-ben",
+   "kind": "landmark",
+   "countries": [
+    "GB"
+   ],
+   "keywords": [
+    "big ben",
+    "westminster",
+    "parliament",
+    "大本钟",
+    "大鐘",
+    "议会大厦",
+    "西敏"
+   ]
+  },
+  {
+   "stem": "stock-colosseum",
+   "kind": "landmark",
+   "countries": [
+    "IT"
+   ],
+   "keywords": [
+    "colosseum",
+    "colosseo",
+    "coliseum",
+    "roman forum",
+    "斗兽场",
+    "斗獸場",
+    "竞技场",
+    "罗马斗兽场"
+   ]
+  },
+  {
+   "stem": "stock-leaning-tower",
+   "kind": "landmark",
+   "countries": [
+    "IT"
+   ],
+   "keywords": [
+    "leaning tower",
+    "pisa",
+    "torre di pisa",
+    "比萨斜塔",
+    "比薩斜塔",
+    "斜塔"
+   ]
+  },
+  {
+   "stem": "stock-sagrada-familia",
+   "kind": "landmark",
+   "countries": [
+    "ES"
+   ],
+   "keywords": [
+    "sagrada familia",
+    "sagrada família",
+    "gaudi",
+    "gaudí",
+    "圣家堂",
+    "聖家堂",
+    "高迪"
+   ]
+  },
+  {
+   "stem": "stock-brandenburg-gate",
+   "kind": "landmark",
+   "countries": [
+    "DE"
+   ],
+   "keywords": [
+    "brandenburg gate",
+    "brandenburger tor",
+    "unter den linden",
+    "勃兰登堡门",
+    "勃蘭登堡門"
+   ]
+  },
+  {
+   "stem": "stock-neuschwanstein",
+   "kind": "landmark",
+   "countries": [
+    "DE"
+   ],
+   "keywords": [
+    "neuschwanstein",
+    "hohenschwangau",
+    "新天鹅堡",
+    "新天鵝堡",
+    "天鹅城堡"
+   ]
+  },
+  {
+   "stem": "stock-santorini",
+   "kind": "landmark",
+   "countries": [
+    "GR"
+   ],
+   "keywords": [
+    "santorini",
+    "oia",
+    "thira",
+    "fira",
+    "圣托里尼",
+    "聖托里尼",
+    "蓝顶教堂",
+    "藍頂"
+   ]
+  },
+  {
+   "stem": "stock-acropolis",
+   "kind": "landmark",
+   "countries": [
+    "GR"
+   ],
+   "keywords": [
+    "acropolis",
+    "parthenon",
+    "plaka",
+    "卫城",
+    "衛城",
+    "帕特农",
+    "雅典卫城"
+   ]
+  },
+  {
+   "stem": "stock-charles-bridge",
+   "kind": "landmark",
+   "countries": [
+    "CZ"
+   ],
+   "keywords": [
+    "charles bridge",
+    "karluv most",
+    "karlův most",
+    "查理大桥",
+    "查理橋",
+    "查理大橋"
+   ]
+  },
+  {
+   "stem": "stock-mont-saint-michel",
+   "kind": "landmark",
+   "countries": [
+    "FR"
+   ],
+   "keywords": [
+    "mont saint-michel",
+    "mont st michel",
+    "mont-saint-michel",
+    "圣米歇尔山",
+    "聖米歇爾山"
+   ]
+  },
+  {
+   "stem": "stock-matterhorn",
+   "kind": "landmark",
+   "countries": [
+    "CH"
+   ],
+   "keywords": [
+    "matterhorn",
+    "zermatt",
+    "cervino",
+    "马特洪峰",
+    "馬特洪峰",
+    "采尔马特"
+   ]
+  },
+  {
+   "stem": "stock-hallstatt",
+   "kind": "landmark",
+   "countries": [
+    "AT"
+   ],
+   "keywords": [
+    "hallstatt",
+    "哈尔施塔特",
+    "哈爾施塔特"
+   ]
+  },
+  {
+   "stem": "stock-hagia-sophia",
+   "kind": "landmark",
+   "countries": [
+    "TR"
+   ],
+   "keywords": [
+    "hagia sophia",
+    "ayasofya",
+    "sultanahmet",
+    "圣索菲亚",
+    "聖索菲亞",
+    "索菲亚大教堂",
+    "蓝色清真寺"
+   ]
+  },
+  {
+   "stem": "stock-st-basils",
+   "kind": "landmark",
+   "countries": [
+    "RU"
+   ],
+   "keywords": [
+    "st basil",
+    "saint basil",
+    "red square",
+    "kremlin",
+    "圣瓦西里",
+    "聖瓦西里",
+    "红场",
+    "克里姆林"
+   ]
+  },
+  {
+   "stem": "stock-petra",
+   "kind": "landmark",
+   "countries": [
+    "JO"
+   ],
+   "keywords": [
+    "petra",
+    "al-khazneh",
+    "treasury",
+    "wadi musa",
+    "佩特拉",
+    "佩特拉古城"
+   ]
+  },
+  {
+   "stem": "stock-pyramids",
+   "kind": "landmark",
+   "countries": [
+    "EG"
+   ],
+   "keywords": [
+    "pyramid",
+    "pyramids",
+    "giza",
+    "sphinx",
+    "金字塔",
+    "吉萨",
+    "吉薩",
+    "狮身人面"
+   ]
+  },
+  {
+   "stem": "stock-burj-khalifa",
+   "kind": "landmark",
+   "countries": [
+    "AE"
+   ],
+   "keywords": [
+    "burj khalifa",
+    "dubai mall",
+    "downtown dubai",
+    "哈利法塔",
+    "迪拜塔",
+    "杜拜塔"
+   ]
+  },
+  {
+   "stem": "stock-taj-mahal",
+   "kind": "landmark",
+   "countries": [
+    "IN"
+   ],
+   "keywords": [
+    "taj mahal",
+    "agra",
+    "泰姬陵",
+    "泰姬瑪哈",
+    "阿格拉"
+   ]
+  },
+  {
+   "stem": "stock-angkor-wat",
+   "kind": "landmark",
+   "countries": [
+    "KH"
+   ],
+   "keywords": [
+    "angkor",
+    "angkor wat",
+    "siem reap",
+    "bayon",
+    "吴哥",
+    "吳哥",
+    "吴哥窟",
+    "暹粒"
+   ]
+  },
+  {
+   "stem": "stock-wat-arun",
+   "kind": "landmark",
+   "countries": [
+    "TH"
+   ],
+   "keywords": [
+    "wat arun",
+    "temple of dawn",
+    "wat pho",
+    "grand palace bangkok",
+    "郑王庙",
+    "鄭王廟",
+    "黎明寺",
+    "大皇宫"
+   ]
+  },
+  {
+   "stem": "stock-marina-bay-sands",
+   "kind": "landmark",
+   "countries": [
+    "SG"
+   ],
+   "keywords": [
+    "marina bay sands",
+    "marina bay",
+    "gardens by the bay",
+    "滨海湾金沙",
+    "濱海灣",
+    "金沙",
+    "滨海湾"
+   ]
+  },
+  {
+   "stem": "stock-table-mountain",
+   "kind": "landmark",
+   "countries": [
+    "ZA"
+   ],
+   "keywords": [
+    "table mountain",
+    "cape town",
+    "桌山",
+    "开普敦",
+    "開普敦"
+   ]
+  },
+  {
+   "stem": "stock-mount-fuji",
+   "kind": "landmark",
+   "countries": [
+    "JP"
+   ],
+   "keywords": [
+    "mount fuji",
+    "mt fuji",
+    "fujisan",
+    "hakone",
+    "kawaguchiko",
+    "富士山",
+    "富士",
+    "河口湖"
+   ]
+  },
+  {
+   "stem": "stock-great-wall",
+   "kind": "landmark",
+   "countries": [
+    "CN"
+   ],
+   "keywords": [
+    "great wall",
+    "badaling",
+    "mutianyu",
+    "jinshanling",
+    "长城",
+    "長城",
+    "八达岭",
+    "慕田峪"
+   ]
+  },
+  {
+   "stem": "stock-gyeongbokgung",
+   "kind": "landmark",
+   "countries": [
+    "KR"
+   ],
+   "keywords": [
+    "gyeongbokgung",
+    "gwanghwamun",
+    "changdeokgung",
+    "bukchon",
+    "景福宫",
+    "景福宮",
+    "光化门",
+    "北村"
+   ]
+  },
+  {
+   "stem": "stock-sydney-opera-house",
+   "kind": "landmark",
+   "countries": [
+    "AU"
+   ],
+   "keywords": [
+    "opera house",
+    "sydney opera",
+    "circular quay",
+    "悉尼歌剧院",
+    "雪梨歌劇院",
+    "歌剧院"
+   ]
+  },
+  {
+   "stem": "stock-statue-of-liberty",
+   "kind": "landmark",
+   "countries": [
+    "US"
+   ],
+   "keywords": [
+    "statue of liberty",
+    "liberty island",
+    "ellis island",
+    "自由女神"
+   ]
+  },
+  {
+   "stem": "stock-golden-gate",
+   "kind": "landmark",
+   "countries": [
+    "US"
+   ],
+   "keywords": [
+    "golden gate",
+    "san francisco bay",
+    "金门大桥",
+    "金門大橋",
+    "金门"
+   ]
+  },
+  {
+   "stem": "stock-christ-redeemer",
+   "kind": "landmark",
+   "countries": [
+    "BR"
+   ],
+   "keywords": [
+    "christ the redeemer",
+    "corcovado",
+    "cristo redentor",
+    "sugarloaf",
+    "rio de janeiro",
+    "基督像",
+    "救世基督",
+    "里约",
+    "面包山"
+   ]
+  },
+  {
+   "stem": "stock-machu-picchu",
+   "kind": "landmark",
+   "countries": [
+    "PE"
+   ],
+   "keywords": [
+    "machu picchu",
+    "huayna picchu",
+    "sacred valley",
+    "马丘比丘",
+    "馬丘比丘",
+    "圣谷"
+   ]
+  },
+  {
+   "stem": "stock-chichen-itza",
+   "kind": "landmark",
+   "countries": [
+    "MX"
+   ],
+   "keywords": [
+    "chichen itza",
+    "chichén itzá",
+    "kukulkan",
+    "teotihuacan",
+    "tulum ruins",
+    "奇琴伊察",
+    "玛雅金字塔",
+    "特奥蒂瓦坎"
+   ]
+  },
+  {
+   "stem": "stock-niagara-falls",
+   "kind": "landmark",
+   "countries": [
+    "CA",
+    "US"
+   ],
+   "keywords": [
+    "niagara",
+    "horseshoe falls",
+    "尼亚加拉",
+    "尼加拉瀑布",
+    "尼亞加拉"
+   ]
+  },
+  {
+   "stem": "stock-grand-canyon",
+   "kind": "landmark",
+   "countries": [
+    "US"
+   ],
+   "keywords": [
+    "grand canyon",
+    "south rim",
+    "colorado river",
+    "大峡谷",
+    "大峽谷",
+    "科罗拉多大峡谷"
+   ]
+  },
+  {
+   "stem": "stock-banff-lake",
+   "kind": "landmark",
+   "countries": [
+    "CA"
+   ],
+   "keywords": [
+    "banff",
+    "lake louise",
+    "moraine lake",
+    "jasper",
+    "icefields",
+    "班夫",
+    "露易斯湖",
+    "梦莲湖",
+    "贾斯珀"
+   ]
+  }
+ ],
+ "library": {
+  "JP": {
+   "cover": "japan-cover-hero",
+   "cutouts": [
+    "japan-gate",
+    "japan-torii",
+    "japan-pagoda",
+    "japan-maple",
+    "japan-bamboo",
+    "japan-onsen",
+    "japan-stage",
+    "japan-stall",
+    "japan-teahouse",
+    "japan-lantern",
+    "japan-ropeway"
+   ]
+  },
+  "TR": {
+   "cover": "turkey-cover-hero",
+   "cutouts": [
+    "turkey-hagia",
+    "turkey-bazaar",
+    "turkey-chimney",
+    "turkey-pamukkale",
+    "turkey-ferry",
+    "turkey-underground"
+   ]
+  },
+  "US": {
+   "cover": "cover-hero",
+   "cutouts": [
+    "liberty",
+    "golden-gate",
+    "diamond-head",
+    "kilauea",
+    "prismatic",
+    "teton",
+    "yosemite",
+    "stadium"
+   ]
+  },
+  "CN": {
+   "cutouts": [
+    "tiananmen"
+   ]
+  }
+ },
+ "generic": {
+  "plane": "plane",
+  "bus": "bus",
+  "train": "japan-train",
+  "balloon": "turkey-balloon"
+ }
+}

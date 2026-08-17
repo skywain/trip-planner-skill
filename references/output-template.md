@@ -21,6 +21,8 @@ to crash on it, and `legs` still prints every cell blank).
 {
  "trip": "Japan 12 days",
  "lang": "zh",                                  // zh | en — see §Plan language
+ "prefs": {"theme", "pictures", "travel_style", "lodging", "scenery", "pace", "budget",
+           "notes"},                            // Phase 0 intake — see §Intake prefs
  "meta": {"dates", "party", "route", "budget_total", "fx", "generated", "self_check"},
  "decisions": ["one line per decision made for the traveller — each vetoable", ...],
  "checklist": [{"item", "deadline", "price", "link", "link_text", "note"}],
@@ -55,6 +57,47 @@ to crash on it, and `legs` still prints every cell blank).
 - Field-level meaning of the `days[]` object (timeline `kind`/`tag`/`verify`,
   `map:false`, `stops` ↔ hop rows) is in §city-block right below — the day objects
   are byte-identical in both places.
+
+### §Intake prefs — top-level `prefs`
+
+What Phase 0 (Intake) learned or **assumed**, written down once so Phases 2-6 and any
+later replan read one place instead of re-asking the user. Renderers ignore the whole
+block (it is not in `theme_common.PLAN_SHAPE`, and adding it leaves every rendered page
+byte-identical) — it is a note the planning agent leaves for itself.
+
+```json
+"prefs": {
+  "theme": "illustrated",
+  "pictures": "stock",
+  "travel_style": "public",
+  "lodging": "hotel · mid-range, refundable",
+  "scenery": ["city", "nature"],
+  "pace": 3,
+  "budget": "mid",
+  "notes": "assumed origin PVG (zh request, no origin given)"
+}
+```
+
+- `theme` ∈ `illustrated|clay|noir|glass|journal|zine|splash|portal` — which of the
+  eight themed pages is the deliverable. Default **illustrated 插画版**.
+- `pictures` ∈ `native|key|stock` — the result of Phase 0's picture-capability check:
+  a native image-generation tool · `themes/.auth_header` (an OpenRouter key, never read
+  or printed) · neither, so the built-in stock kit supplies the pictures. It decides how
+  the art file gets built at Phase 6, and `stock` is what puts the picture notice into
+  the chat summary and the page's fine print.
+- `travel_style` ∈ `public|self-drive|group-tour|mixed` (default `public`) — Phase 2
+  shapes the legs from it and Phase 3 adds a rental leg for `self-drive`.
+- `lodging` — free text: type + band (default mid-range hotel, refundable), read by
+  Phase 5.
+- `scenery` ⊂ `nature|city|beach|forest|lake|mountain` — Phase 2 scores the longlist
+  against it.
+- `pace` — anchors per day (2/3/4, default 3); `budget` — a band word or a number.
+- `notes` — every value that was **inferred rather than told**, in one string, so the
+  assumptions block at checkpoint (a) can be written straight from this object.
+
+Only what is known or defensibly assumed goes in; a key the user never touched and the
+agent never needed is simply absent. An intake that asked nothing (the request already
+carried destination + dates) still fills `prefs` — from the defaults it chose.
 
 ## §city-block — what each city researcher returns (fan-out or sequential)
 
@@ -155,10 +198,23 @@ read it (`--lang zh|en` overrides per run); the shared word table lives in
 
 ## Final deliverable
 
-One self-contained HTML file — inline CSS, no external assets, printable, readable on
-a phone — produced by `scripts/render_plan.py` from the plan JSON. The JSON is the
-editable source; there is no separate Markdown copy to keep in sync. Structure, in
-order:
+**A themed HTML page, never a plain text one.** Phase 6 renders `plan.geo.json` through
+the theme picked in Phase 0 (`prefs.theme`, default **illustrated 插画版**) into
+`trip-<theme>.html` — one self-contained file (pictures inlined as data URIs, no
+network, opens by double-click), phone-friendly, carrying its own share/export buttons
+and the appendix — and ships the trip KML beside it for offline map apps
+(`scripts/route_tools.py kml plan.geo.json -o trip.kml`). Details of the eight themes
+and the art file: `references/themes.md`, `themes/ART-SCHEMA.md`.
+
+The plain `scripts/render_plan.py` page — printable, checkbox checklist, a small offline
+route sketch per day — is an **extra**, not the deliverable: render it when the user asks
+for a printable or plain version, or as the last resort if the theme renderer still fails
+after one honest fix attempt (then say which it is in the summary). `plan.geo.json` is
+the single editable source for both, so a later change is a JSON edit plus
+geocode → check → links → kml → render, never a rewrite; there is no separate Markdown
+copy to keep in sync.
+
+Both pages present the same material in the same order:
 
 1. **Header**: route one-liner, dates, party, total budget in home currency, FX rate +
    date.
@@ -179,23 +235,47 @@ order:
    render_plan.py also draws a small offline route schematic per day straight from
    `stops` — one more reason to fill `stops` even for days you already mapped.
    Below the table: the whole-day map link, the honest walking total, the rain
-   alternative, the `ribbon` one-liner (Stop1 →walk 12′→ Stop2 →metro 9′→ …) and the
-   late_cut line. Travel days are marked visually by `travel_day: true`.
+   alternative, the `ribbon` one-liner (Stop1 →walk 12′→ Stop2 →metro 9′→ …
+   authored by the planner in Phase 4 — no script writes it; the renderers only
+   print it) and the late_cut line. Travel days are marked visually by `travel_day: true`.
 6. **Hotels**: per base — neighborhood rationale, 2-3 properties, band, dated links.
 7. **Budget table**: category rows (flights/lodging/intercity/local/entries/food),
    per-person and total columns, 10-15% buffer line, FX note, as-of dates.
 8. **Country brief**: visa summary, holiday collisions, weather line, money +
    connectivity notes.
 9. **Footer**: generation date · "prices move — links are the source of truth" ·
-   self-check result (N issues found and fixed) · ⚠️ unverified list · offline tip:
+   the self-check result (N issues found and fixed) — write that line into
+   `meta.self_check`, which the plain page's footer prints, **and** repeat it as the
+   last `decisions[]` row, because that is the field the themed pages actually
+   render: seven of the eight print `decisions` (illustrated, clay, noir, glass,
+   journal, zine, splash) and only **journal** also prints `meta.self_check`, in its
+   footer; **portal** shows neither — it is the video page, so there the chat summary
+   carries the self-check · ⚠️ unverified list · offline tip:
    import the delivered trip.kml into Organic Maps / Google My Maps · data credits
    (sunrise-sunset.org for sun times — required attribution; © OpenStreetMap
    contributors when OSM geocoding fed the map links).
 
 The accompanying chat summary: route one-liner, total budget, the 3 biggest decisions,
-and which checklist item needs the user's action first.
+which checklist item needs the user's action first — and, when `prefs.pictures` is
+`stock`, the one-line picture notice, in the plan's language:
 
-HTML style: system font stack, max-width 720px, day cards with a left border, the
-checklist as a real `<table>`, print CSS (no shadows; page breaks between days are
-fine). No JS required; a tiny inline script persisting checkbox state to localStorage
-is welcome.
+> **en** — Pictures: built-in stock kit — no image generator or key was available;
+> provide one and the art is generated for this trip.
+>
+> **zh** — 图片来自内置素材库(本次未接入生图能力);接入生图模型或 KEY 后可为本次行程定制生成。
+
+The same notice sits in the page's fine print, where `stock_art.py` puts it — do not
+delete it from either place.
+
+**The assumptions block at checkpoint (a)** — one block at the top of the route-skeleton
+message, written from `prefs`: the inferred origin (and what it was inferred from), every
+optional field that fell back to a default, and the picture mode when it is not `native`.
+It exists so a wrong guess costs the user one line to correct instead of a round trip of
+questions. In "一次到位 / don't ask" mode there is no checkpoint (a), so the same block
+goes at the top of the delivery instead.
+
+HTML style of the **plain** page: system font stack, max-width 720px, day cards with a
+left border, the checklist as a real `<table>`, print CSS (no shadows; page breaks
+between days are fine). No JS required; a tiny inline script persisting checkbox state to
+localStorage is welcome. The themed pages own their own visual language — do not restyle
+them toward this one.

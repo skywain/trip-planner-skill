@@ -2,6 +2,7 @@
 
 2026-08-16 实扫:**301 个基名 = webp 444 个 26MB**(**页面只用这些**;png 母图不进 repo,重切图用的 png 留在各 trips/ 目录)。
 生成累计 **≈$6.57**(manifest 求和;portal 视频另计);单条 prompt/参数/单价查 `manifest.json`(**181 条**;sheet 切出的子件不单列,查对应 `*-sheet-*` 母条目)。**通用件(§12)先查本表+manifest,已有就复用;封面/主视觉/地形带=目的地场景,必须为本行程生成(见 SKILL.md Phase 6);生成时 agent 自己有原生生图能力就直接用(不配 KEY),没有才走 gen.py/OpenRouter(见 ART-SCHEMA「生成器选择」);生成花钱须 owner 批。**
+另有 **stock 通用素材包**(`stock/`,80 个基名 / 161 webp / $0.9284,索引与 manifest 独立)——**没有生图能力时**的兜底图库,见 §22;它不是「通用件」的替代,有生图能力照旧为本行程现生成。
 
 **测试行程资产怎么进库(2026-08-16 定,别再照第 13 节以前的写法自己往 themes/ 里塞)**
 - 测试员/普通用户**只写自己的行程目录**:`trips/<trip>/manifest.<trip>.json` 是那趟资产的**权威记录**(prompt/参数/单价/文件大小全在里面),png 与 webp 都留在该目录,`themes/` 一律只读——`themes/*.py`、`ART-SCHEMA.md`、本表都不许改。
@@ -418,3 +419,26 @@ clay-sheet-{deco,props} / journal-sheet-{photo-a,photo-b,props} / splash-sheet-n
 | vietnam-splash-coffee | cut31 | 厚涂滴滤壶+冰奶咖 | 🇻🇳 | splash mascot |
 | vietnam-splash-strip-hanoi | cut70 | 靛紫老城筒子楼天际线剪影+琥珀灯点(两端渐隐) | 🇻🇳 河内 | splash strip |
 | vietnam-splash-strip-saigon | cut93 | 深青三角洲水岸+棕榈+钟楼+成排舢板(洋红霞) | 🇻🇳 西贡 | splash strip |
+
+## 22 stock 通用素材包(`stock/`,2026-08-17,$0.9284)— 80 个基名 / 161 webp / 5.2 MB
+
+**这一节是索引入口,细节在 `stock/README.md` 与 `stock/index.json`,别把 stock 件混进上面各节的表。**
+用途:agent **既没有原生生图能力、也没有 KEY** 时(`prefs.pictures: "stock"`),仍然交付插画版主题页面——
+本包=预生成的插画风(gouache)通用图库。**有生图能力时不用它**:封面/主视觉照旧为本行程现生成(顶部规则不变)。
+
+| 内容 | 数量 | 文件 | 用途 |
+|---|---|---|---|
+| 地区封面画(16:9 不透明,上 2/3 留白托标题) | 14 | `stock-cover-<archetype>.webp`(55–124 KB) | `cover.hero`,按国家 → archetype 选 |
+| 通用场景抠图件 | 30 | `stock-<scene>.cut.webp` + `.sm`(部分 `.md`) | 日章头 `days[date].hero` |
+| 世界地标抠图件 | 36 | `stock-<landmark>.cut.webp` + `.sm`(部分 `.md`) | 同上,命中地标关键词时优先 |
+
+- 14 个 archetype:european-old-town / mediterranean-coast / east-asian-temple / southeast-asia /
+  tropical-beach / desert-medina / alpine-lake / nordic-fjord / modern-skyline / savanna / rainforest /
+  andes-colonial / castle-highlands / north-america-roadtrip。
+- `stock/index.json` = 查找表:archetype 关键词、**225 个 ISO2 → archetype**、多语言国名(en/本地/中文 702 条)、
+  每个抠图件的多语言关键词、本库已有插画件的国别索引(JP/TR/US/CN)、通用交通件(plane/bus/japan-train/turkey-balloon)。
+- 生成记录在 `stock/manifest.stock.json`(25 次调用:14 张封面 + 11 张 3×2 sheet 切 66 件;prompt 骨架照抄
+  `japan-cover-hero` / `japan-sheet-cutouts-a`,`style_anchor` 同本库)。PNG 母图按 `themes/**/*.png` 不进 repo。
+- ⚠️ **渲染时要加 `--assets themes/assets/stock`**:`data_uri` 只搜 `themes/assets/` 与 plan 所在目录,不递归子目录。
+- ⚠️ **图片来源必须写在页面上**(`end.fine` + `cover.credit`,两语版本在 `index.json.notice`)——
+  不写就等于把兜底图当定制图交付。

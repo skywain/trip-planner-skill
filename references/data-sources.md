@@ -200,6 +200,15 @@ no rate at all (Morocco). Therefore:
    — check the key there too;
 3. write which source you used into `meta.fx`, e.g.
    `1 CAD = 6.70 MAD (open.er-api.com, 2026-08-15 — MAD not on frankfurter)`.
+
+A third failure mode: frankfurter can answer a `?base=…&symbols=…` call with an
+**empty body** — 0 bytes, HTTP 200, no error text — so the JSON parse fails on
+nothing rather than on a missing key. Retry the same date with another base
+(`base=EUR`) and cross-multiply to the pair you need
+(`HOME→DEST = (EUR→DEST) / (EUR→HOME)`); if that is what produced the number, say so
+in `meta.fx`, e.g. `1 CAD = 108.4 JPY (frankfurter.dev via EUR cross, 2026-08-15 —
+direct CAD call returned an empty body)`. An empty body twice → go to step 2's
+fallback.
 Closed currencies (MAD, TND, DZD, …) also get one line in the money brief: not
 buyable before departure, not exportable — exchange on arrival / ATM.
 

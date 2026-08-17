@@ -10,9 +10,12 @@ about layout, which is what you are actually choosing between.
 Usage: python3 render_picker.py <plan.geo.json> [--art F|none] -o out.html
                                 [--products DIR] [--prefix NAME]
 
-The eight rendered pages are expected as {prefix}-{主题中文名}.html
-(插画版/黏土版/夜航版/玻璃版/手账版/Zine版/闪屏版/穿越版) in --products
-(default: the output file's directory); their sizes are read from there.
+The eight rendered pages are expected as {prefix}-{theme}.html in --products
+(default: the output file's directory), where {theme} is the English theme
+key — illustrated / clay / noir / glass / journal / zine / splash / portal,
+the canonical trip-<theme>.html of SKILL.md Phase 6. The old Chinese tags
+(插画版/黏土版/夜航版/玻璃版/手账版/Zine版/闪屏版/穿越版) are still picked up
+when they are what is on disk; their sizes are read from there.
 --prefix defaults to art cover.kick_en with spaces → "-" ("US 2026" →
 "US-2026"), else "trip". Card titles come from art themes.<key>.cover.zh
 (falling back to cover.zh); the page title from cover.kick + trip year
@@ -21,8 +24,9 @@ The eight rendered pages are expected as {prefix}-{主题中文名}.html
 Language: plan.lang / meta.lang / --lang (theme_common.init_lang). The zh
 card copy is inline in THEMES (byte-stable); the English copy lives in
 THEMES_EN and the page voice in L. In en the card title prefers cover.en,
-products are looked up as {prefix}-{English theme name}.html first, and the
-retired-editions footnote (US history) is dropped.
+the English display name ({prefix}-Night Flight.html) joins the product
+lookup as a further candidate, and the retired-editions footnote (US
+history) is dropped.
 """
 import argparse
 import html
@@ -425,13 +429,15 @@ def main():
     page_title = " ".join(x for x in (kick, year) if x) + " · " + theme_name("picker")
     plan_name = pathlib.Path(args.plan).name
     for th in THEMES:
-        # products are named {prefix}-{theme name}.html; the name is the
-        # zh tag by convention, but an en trip may have exported with the
-        # English theme name — take whichever exists (zh tag when neither).
-        cands = [f"{prefix}-{th['tag']}.html"]
+        # products are named {prefix}-{theme}.html. Canonical is the English
+        # theme key (trip-illustrated.html, SKILL.md Phase 6); pages exported
+        # before that used the zh tag ({prefix}-插画版) and en trips
+        # sometimes the English display name. Take whichever is on disk, and
+        # fall back to the canonical name when none of them is.
+        cands = [f"{prefix}-{th['id']}.html", f"{prefix}-{th['tag']}.html"]
         if lang() != "zh":
-            cands.insert(0, f"{prefix}-{theme_name(th['id'])}.html")
-        th["file"] = next((c for c in cands if (products / c).exists()), cands[-1])
+            cands.insert(1, f"{prefix}-{theme_name(th['id'])}.html")
+        th["file"] = next((c for c in cands if (products / c).exists()), cands[0])
     cards = "".join(card(th, art, products) for th in THEMES)
     table = "".join(
         f'<tr><th scope="row">{esc(display_name(th))}</th><td>{esc(field(th, "principle"))}</td>'

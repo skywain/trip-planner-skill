@@ -1,9 +1,14 @@
 # Themed renders — the manual
 
 Read this before rendering any theme, and all of it before touching a renderer.
-Written for an AI that meets the theme system for the first time. The plain
-`scripts/render_plan.py` page is still the default deliverable; a theme is what you
-add when the user wants a good-looking, shareable version.
+Written for an AI that meets the theme system for the first time. **A themed page is
+the deliverable** — SKILL.md Phase 6: the plan ships as `trip-<theme>.html` in the theme
+chosen at Phase 0 (`prefs.theme`, default **illustrated 插画版**) plus `trip.kml`, and a
+plain text page is never what the user gets. The plain `scripts/render_plan.py` page is
+an **extra** — the printable version on request, or the last resort after one honest fix
+attempt at the theme renderer. A session with no image generator and no key does not
+fall back to that plain page either: it renders a theme from the built-in stock kit
+(§3b).
 
 ## 1. The model in one paragraph
 
@@ -28,8 +33,10 @@ themes/xprobe.sh out.html module '#d5' out.png      # click the real export butt
 themes/xprobe.sh out.html page   ''    out.png      # whole-page export (ANCHOR=bottom → last 2600px)
 themes/xt.sh    out.html module '#d5'               # title-only probe, ~15 s, no picture
 python3 themes/render_picker.py plan.geo.json -o picker.html [--products DIR] [--prefix NAME]
-    # the style-chooser page; expects the eight pages as {prefix}-{主题中文名}.html
-    # (prefix defaults to cover.kick_en with spaces→"-", e.g. US-2026-插画版.html)
+    # the style-chooser page; expects the eight pages as {prefix}-{theme}.html
+    # with the English theme key (japan-illustrated.html; pages exported under
+    # the old Chinese tag — e.g. -插画版.html — still resolve). prefix defaults
+    # to cover.kick_en with spaces→"-"
 ```
 
 Assets are looked up by `theme_common.data_uri(stem, size)` in this order: every
@@ -216,6 +223,52 @@ add every new theme to its `THEMES` list or the chooser silently falls behind.
 5. Render → `qc.py` exit 0 → `xprobe.sh` one module and, for whole-page themes, one
    page export → **look at both PNGs** (§6). Deliver the HTML (and for portal, the
    video directory beside it).
+
+Steps 2-3 above assume the session **can** make pictures. Whether it can is decided
+once, at Phase 0, and recorded in `prefs.pictures` — §3b is the branch for when it
+cannot.
+
+### 3b. Stock mode — no generator, no key, still a themed page
+
+Phase 0's **picture-capability check** writes one of three values into the plan's
+`prefs.pictures`, and Phase 6 reads it instead of guessing:
+
+1. **`native`** — the agent has its own image-generation tool → generate this trip's art
+   with it; nothing to configure, no key. Same specs, same prompts-as-style-anchors, same
+   four downstream steps (ART-SCHEMA.md 「生成器选择」). §3 steps 2-3 as written.
+2. **`key`** — `themes/.auth_header` exists (checked with `test -s`; never read, print or
+   copy it) → `gen.py` / `genvideo.py` over OpenRouter with the user's key. §3 steps 2-3.
+3. **`stock`** — neither. **This is not a reason to ship the plain page.** The built-in
+   stock kit supplies the pictures and the page still renders in a theme:
+
+```
+python3 themes/stock_art.py plan.geo.json --theme illustrated -o plan.art.json
+    # also: --theme clay · --lang zh|en · --index PATH (a different stock index)
+```
+
+- **What the script fills**: the picture side of the art file — cover painting, per-day
+  heroes/cut-outs and props — matched to the plan's country and each day's stops from
+  `themes/assets/stock/` (`stock/index.json`, catalogue in `stock/README.md`) plus the
+  shared library's same-country pictures and generic props (`IMAGE-LIBRARY.md` §通用件).
+- **What it does not fill — you write the words**: the cover title from
+  `references/cover-titles.md`, each day's `theme` (4 chars) / `en` / `mark`, captions,
+  annotations and the closing line. A page shipped with the script's placeholders in it
+  is a defect, exactly as in §3 step 4.
+- **Keep the notice.** The script writes the stock notice into the page's fine print
+  (`end.fine`); leave it there, and repeat it once in the chat summary — *"pictures come
+  from the built-in stock kit because no image generator or key was available; provide
+  one and the art gets generated for this trip."* Never ask the user for a key in chat
+  and never handle one.
+- **Coverage today**: **illustrated** (the default) is complete; **clay** works — its
+  terrain bands come from the built-in neutral SVG kit (`ridge|plain|coast|forest|lake|
+  desert`) plus generic clay props. The other six themes (noir, glass, journal, zine,
+  splash, portal) need generated pictures for their plates / photos / islands / footage —
+  if the user asks for one of them in stock mode, say so and offer illustrated instead;
+  rendering them anyway gives a page with empty picture slots, and portal has no footage
+  at all. Stock packs for the remaining styles are future work
+  ([`docs/KNOWN-ISSUES.md`](../docs/KNOWN-ISSUES.md) AST-8).
+- Everything else is unchanged: render, `qc.py` exit 0, probe and **look** at the PNG
+  (§6). A stock page is a real themed page and gets the same verification.
 
 ## 4. Adding a theme
 
