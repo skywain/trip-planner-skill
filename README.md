@@ -13,6 +13,7 @@ for you.
 ![Agent Skills: open format](https://img.shields.io/badge/Agent%20Skills-open%20format-0A7B83.svg)
 ![Agents: Claude Code · Codex · Gemini CLI · Cursor · GitHub Copilot · OpenCode · Qwen Code · Deep Code · Goose · Kiro · Roo Code](https://img.shields.io/badge/agents-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Gemini%20CLI%20%C2%B7%20Cursor%20%C2%B7%20GitHub%20Copilot%20%C2%B7%20OpenCode%20%C2%B7%20Qwen%20Code%20%C2%B7%20Deep%20Code%20%C2%B7%20Goose%20%C2%B7%20Kiro%20%C2%B7%20Roo%20Code-4C51BF.svg)
 
+[![Live demos](https://img.shields.io/badge/live%20demos-skywain.github.io-0A7B83.svg)](https://skywain.github.io/trip-planner-skill/)
 ![Verified in: Claude Code (others untested)](https://img.shields.io/badge/verified%20in-Claude%20Code%20%28others%20untested%29-8A63D2.svg)
 ![Models: any](https://img.shields.io/badge/models-any-informational.svg)
 ![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3776AB.svg)
@@ -32,10 +33,14 @@ spread. Four of the eight pages ship verbatim under [`examples/`](examples/); th
 other four render from the same example folders with one command (each example's `art.json`
 carries both of its trip's themes); portal additionally needs footage (see below).
 
+Every page below is live: **[open the demo site](https://skywain.github.io/trip-planner-skill/)**
+or click a theme's *Live page* link.
+
 **illustrated** — Japan · London → Tokyo → Hakone → Kyoto → Osaka (open-jaw) → London,
 21–28 Nov 2026 · a painted picture-book on paper: the cover is the menu, each day a tinted
 riso plate with a ghost numeral, the whole scroll exports as one long image ·
-[examples/japan-2026](examples/japan-2026/)
+[examples/japan-2026](examples/japan-2026/) ·
+**[Live page ↗](https://skywain.github.io/trip-planner-skill/examples/japan-2026/japan-illustrated.html)**
 
 | cover | a day | the end |
 |---|---|---|
@@ -43,8 +48,10 @@ riso plate with a ghost numeral, the whole scroll exports as one long image ·
 
 **clay** — China · New York → Beijing → Xi'an → Beijing → New York, 11–18 Nov 2026 · one
 continuous claymation landscape with a road threading the milestone stones ·
-render it: `python3 themes/render_clay2.py examples/china-2026/china.geo.json -o china-clay.html`
-(Chinese-language clay example: [examples/turkey-2026](examples/turkey-2026/))
+render it: `python3 themes/render_clay2.py examples/china-2026/china.geo.json -o china-clay.html` ·
+**[Live page ↗](https://skywain.github.io/trip-planner-skill/examples/china-2026/china-clay.html)**
+(Chinese-language clay example: [examples/turkey-2026](examples/turkey-2026/) ·
+[live ↗](https://skywain.github.io/trip-planner-skill/examples/turkey-2026/turkey-clay.html))
 
 | cover | a day | the end |
 |---|---|---|
@@ -52,8 +59,10 @@ render it: `python3 themes/render_clay2.py examples/china-2026/china.geo.json -o
 
 **noir** — Mexico · Berlin → Mexico City → Oaxaca → Berlin, 28 Oct – 6 Nov 2026 (Día de
 Muertos) · one night-negative tracking shot, monospace body, days dissolving into each
-other · render it: `python3 themes/render_noir2.py examples/mexico-2026/mexico.geo.json -o mexico-noir.html`
-(Chinese-language noir example: [examples/nordic-2026](examples/nordic-2026/))
+other · render it: `python3 themes/render_noir2.py examples/mexico-2026/mexico.geo.json -o mexico-noir.html` ·
+**[Live page ↗](https://skywain.github.io/trip-planner-skill/examples/mexico-2026/mexico-noir.html)**
+(Chinese-language noir example: [examples/nordic-2026](examples/nordic-2026/) ·
+[live ↗](https://skywain.github.io/trip-planner-skill/examples/nordic-2026/nordic-noir.html))
 
 | cover | a day | the end |
 |---|---|---|
@@ -61,7 +70,8 @@ other · render it: `python3 themes/render_noir2.py examples/mexico-2026/mexico.
 
 **glass** — Morocco · Toronto → Marrakech → Aït Benhaddou → Merzouga → Fes → Chefchaouen →
 Casablanca → Toronto, 6–15 Nov 2026 · liquid-glass panes floating over a fixed world of
-cross-fading photographs, one pane per world · [examples/morocco-2026](examples/morocco-2026/)
+cross-fading photographs, one pane per world · [examples/morocco-2026](examples/morocco-2026/) ·
+**[Live page ↗](https://skywain.github.io/trip-planner-skill/examples/morocco-2026/morocco-glass.html)**
 
 | cover | a day | the end |
 |---|---|---|
@@ -69,7 +79,8 @@ cross-fading photographs, one pane per world · [examples/morocco-2026](examples
 
 **journal** — Mexico · Berlin → Mexico City → Oaxaca → Berlin, 28 Oct – 6 Nov 2026 · a
 vintage travel journal on a dark desk: tape, stamps, postmarks, polaroids, and a Day of the
-Dead week planned around the crowd · [examples/mexico-2026](examples/mexico-2026/)
+Dead week planned around the crowd · [examples/mexico-2026](examples/mexico-2026/) ·
+**[Live page ↗](https://skywain.github.io/trip-planner-skill/examples/mexico-2026/mexico-journal.html)**
 
 | cover | a day | the end |
 |---|---|---|
@@ -77,8 +88,10 @@ Dead week planned around the crowd · [examples/mexico-2026](examples/mexico-202
 
 **zine** — Japan · London → Tokyo → Hakone → Kyoto → Osaka (open-jaw) → London,
 21–28 Nov 2026 · torn riso-poster collage with giant vertical two-colour glyphs, built like a
-photocopied fan zine · render it: `python3 themes/render_zine.py examples/japan-2026/japan.geo.json -o japan-zine.html`
-(Chinese-language zine example: [examples/vietnam-2026](examples/vietnam-2026/))
+photocopied fan zine · render it: `python3 themes/render_zine.py examples/japan-2026/japan.geo.json -o japan-zine.html` ·
+**[Live page ↗](https://skywain.github.io/trip-planner-skill/examples/japan-2026/japan-zine.html)**
+(Chinese-language zine example: [examples/vietnam-2026](examples/vietnam-2026/) ·
+[live ↗](https://skywain.github.io/trip-planner-skill/examples/vietnam-2026/vietnam-zine.html))
 
 | cover | a day | the end |
 |---|---|---|
@@ -87,7 +100,8 @@ photocopied fan zine · render it: `python3 themes/render_zine.py examples/japan
 **splash** — China · New York → Beijing → Xi'an → Beijing → New York, 11–18 Nov 2026 · a
 game splash screen stretched into a scroll: floating day-islands under a chained sky, routed
 Xi'an-first so the Wall and the Forbidden City both land on weekdays ·
-[examples/china-2026](examples/china-2026/)
+[examples/china-2026](examples/china-2026/) ·
+**[Live page ↗](https://skywain.github.io/trip-planner-skill/examples/china-2026/china-splash.html)**
 
 | cover | a day | the end |
 |---|---|---|
@@ -98,8 +112,12 @@ Casablanca → Toronto, 6–15 Nov 2026 · scrolling is flying: five 3D worlds i
 take, dive → frame-chained link → dive, with the day's plan laid over the footage; let go and
 it holds, scroll back and it flies in reverse. The only theme that needs video (nine clips
 here, rendered on a local GPU; an agent with native video generation or `themes/genvideo.py`
-produces the same chain). Footage is not shipped with the example, so this page is
-screenshots only — the motion capture below is recorded from the live page.
+produces the same chain). Footage is not shipped with the example, so the page in the repo
+is screenshots only; the demo site serves the nine clips from a release asset, which makes
+the live link below the real thing — the motion capture is recorded from it ·
+[examples/morocco-2026](examples/morocco-2026/) ·
+**[Live page ↗](https://skywain.github.io/trip-planner-skill/examples/morocco-2026/morocco-portal.html)**
+(16 MB of video)
 
 <p align="center">
   <img src="docs/showcase/portal-motion.webp" alt="Portal theme in motion: dive into a world, link to the next, day overlay on top (animated)" width="640">
@@ -366,6 +384,9 @@ scripts/
   flight_scan.py              Google Flights grid scanner (keyless, centre-out)
   route_tools.py              geocode → distance check → map links → KML → sun times
   render_plan.py              plan JSON → self-contained printable HTML
+  build_site.py               examples + showcase → the GitHub Pages demo site (_site/)
+.github/workflows/
+  pages.yml                   builds and deploys that site on every push to main
 themes/
   README.md                   what is here, the three commands, where pictures come from
   render_theme2.py …          eight renderers: theme2 (illustrated) · clay2 · noir2 · glass2 · journal · zine · splash · portal

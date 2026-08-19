@@ -26,3 +26,6 @@ themes/.or_key
 themes/.auth_header
 themes/.payload.json
 themes/**/*.png
+
+# Built demo site (scripts/build_site.py) — GitHub Actions builds it on push
+_site/

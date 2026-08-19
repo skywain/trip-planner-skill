@@ -11,6 +11,7 @@ Qwen Code、Deep Code、Goose、Kiro、Roo Code,以及任何能加载 Agent Skil
 ![Agent Skills: open format](https://img.shields.io/badge/Agent%20Skills-open%20format-0A7B83.svg)
 ![Agents: Claude Code · Codex · Gemini CLI · Cursor · GitHub Copilot · OpenCode · Qwen Code · Deep Code · Goose · Kiro · Roo Code](https://img.shields.io/badge/agents-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Gemini%20CLI%20%C2%B7%20Cursor%20%C2%B7%20GitHub%20Copilot%20%C2%B7%20OpenCode%20%C2%B7%20Qwen%20Code%20%C2%B7%20Deep%20Code%20%C2%B7%20Goose%20%C2%B7%20Kiro%20%C2%B7%20Roo%20Code-4C51BF.svg)
 
+[![Live demos](https://img.shields.io/badge/live%20demos-skywain.github.io-0A7B83.svg)](https://skywain.github.io/trip-planner-skill/)
 ![Verified in: Claude Code (others untested)](https://img.shields.io/badge/verified%20in-Claude%20Code%20%28others%20untested%29-8A63D2.svg)
 ![Models: any](https://img.shields.io/badge/models-any-informational.svg)
 ![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3776AB.svg)
@@ -29,10 +30,14 @@ skill 端到端规划出来,再从它的 `plan.geo.json` + `art.json` 渲染而�
 同样的示例目录渲染出来(每个示例的 `art.json` 里都带着这趟旅行的两种主题);portal 还额外
 需要视频素材(见下)。
 
+下面每个页面都是活的:**[打开在线演示站](https://skywain.github.io/trip-planner-skill/)**,
+或者点某个主题的「在线打开」。
+
 **illustrated** —— 日本 · London → Tokyo → Hakone → Kyoto → Osaka(缺口程 open-jaw)→ London,
 2026 年 11 月 21–28 日 · 纸上的一本手绘画册:封面就是目录,每一天是一块带幽灵数字的
 套色 riso 印版,整卷可以导出成一张长图 ·
-[examples/japan-2026](examples/japan-2026/)
+[examples/japan-2026](examples/japan-2026/) ·
+**[在线打开 ↗](https://skywain.github.io/trip-planner-skill/examples/japan-2026/japan-illustrated.html)**
 
 | 封面 | 一天 | 结尾 |
 |---|---|---|
@@ -41,7 +46,9 @@ skill 端到端规划出来,再从它的 `plan.geo.json` + `art.json` 渲染而�
 **clay** —— 中国 · New York → Beijing → Xi'an → Beijing → New York,2026 年 11 月 11–18 日 ·
 一整片连续的黏土定格地景,一条路串起沿途的里程碑石头 ·
 渲染它:`python3 themes/render_clay2.py examples/china-2026/china.geo.json -o china-clay.html`
-(中文版 clay 示例:[examples/turkey-2026](examples/turkey-2026/))
+**[在线打开 ↗](https://skywain.github.io/trip-planner-skill/examples/china-2026/china-clay.html)**
+(中文版 clay 示例:[examples/turkey-2026](examples/turkey-2026/) ·
+[在线 ↗](https://skywain.github.io/trip-planner-skill/examples/turkey-2026/turkey-clay.html))
 
 | 封面 | 一天 | 结尾 |
 |---|---|---|
@@ -50,7 +57,9 @@ skill 端到端规划出来,再从它的 `plan.geo.json` + `art.json` 渲染而�
 **noir** —— 墨西哥 · Berlin → Mexico City → Oaxaca → Berlin,2026 年 10 月 28 日 – 11 月 6 日
 (亡灵节 Día de Muertos)· 一整段夜色负片的跟拍长镜头,正文等宽字,日与日之间彼此
 溶接 · 渲染它:`python3 themes/render_noir2.py examples/mexico-2026/mexico.geo.json -o mexico-noir.html`
-(中文版 noir 示例:[examples/nordic-2026](examples/nordic-2026/))
+**[在线打开 ↗](https://skywain.github.io/trip-planner-skill/examples/mexico-2026/mexico-noir.html)**
+(中文版 noir 示例:[examples/nordic-2026](examples/nordic-2026/) ·
+[在线 ↗](https://skywain.github.io/trip-planner-skill/examples/nordic-2026/nordic-noir.html))
 
 | 封面 | 一天 | 结尾 |
 |---|---|---|
@@ -58,7 +67,8 @@ skill 端到端规划出来,再从它的 `plan.geo.json` + `art.json` 渲染而�
 
 **glass** —— 摩洛哥 · Toronto → Marrakech → Aït Benhaddou → Merzouga → Fes → Chefchaouen →
 Casablanca → Toronto,2026 年 11 月 6–15 日 · 液态玻璃面板浮在一个交叉淡入淡出的照片
-世界之上,一个世界一块面板 · [examples/morocco-2026](examples/morocco-2026/)
+世界之上,一个世界一块面板 · [examples/morocco-2026](examples/morocco-2026/) ·
+**[在线打开 ↗](https://skywain.github.io/trip-planner-skill/examples/morocco-2026/morocco-glass.html)**
 
 | 封面 | 一天 | 结尾 |
 |---|---|---|
@@ -66,7 +76,8 @@ Casablanca → Toronto,2026 年 11 月 6–15 日 · 液态玻璃面板浮在一
 
 **journal** —— 墨西哥 · Berlin → Mexico City → Oaxaca → Berlin,2026 年 10 月 28 日 – 11 月 6 日 ·
 深色桌面上的一本旧旅行手账:胶带、印章、邮戳、拍立得,以及一整周绕开人潮安排的
-亡灵节 · [examples/mexico-2026](examples/mexico-2026/)
+亡灵节 · [examples/mexico-2026](examples/mexico-2026/) ·
+**[在线打开 ↗](https://skywain.github.io/trip-planner-skill/examples/mexico-2026/mexico-journal.html)**
 
 | 封面 | 一天 | 结尾 |
 |---|---|---|
@@ -75,7 +86,9 @@ Casablanca → Toronto,2026 年 11 月 6–15 日 · 液态玻璃面板浮在一
 **zine** —— 日本 · London → Tokyo → Hakone → Kyoto → Osaka(缺口程 open-jaw)→ London,
 2026 年 11 月 21–28 日 · 撕边的 riso 海报拼贴,巨大的双色竖排字形,做得像一本复印出来的
 同人 zine · 渲染它:`python3 themes/render_zine.py examples/japan-2026/japan.geo.json -o japan-zine.html`
-(中文版 zine 示例:[examples/vietnam-2026](examples/vietnam-2026/))
+**[在线打开 ↗](https://skywain.github.io/trip-planner-skill/examples/japan-2026/japan-zine.html)**
+(中文版 zine 示例:[examples/vietnam-2026](examples/vietnam-2026/) ·
+[在线 ↗](https://skywain.github.io/trip-planner-skill/examples/vietnam-2026/vietnam-zine.html))
 
 | 封面 | 一天 | 结尾 |
 |---|---|---|
@@ -84,7 +97,8 @@ Casablanca → Toronto,2026 年 11 月 6–15 日 · 液态玻璃面板浮在一
 **splash** —— 中国 · New York → Beijing → Xi'an → Beijing → New York,2026 年 11 月 11–18 日 ·
 一张被拉长成长卷的游戏启动画面:浮空的日子岛屿悬在成链的天空下,路线特意先去西安,
 好让长城和故宫都落在工作日 ·
-[examples/china-2026](examples/china-2026/)
+[examples/china-2026](examples/china-2026/) ·
+**[在线打开 ↗](https://skywain.github.io/trip-planner-skill/examples/china-2026/china-splash.html)**
 
 | 封面 | 一天 | 结尾 |
 |---|---|---|
@@ -94,8 +108,12 @@ Casablanca → Toronto,2026 年 11 月 6–15 日 · 液态玻璃面板浮在一
 Casablanca → Toronto,2026 年 11 月 6–15 日 · 滚动就是飞行:五个三维世界连成一镜到底,
 俯冲 → 首尾帧相接的过场 → 再俯冲,当天的计划叠在画面之上;手一松它就停住,往回滚就是
 倒着飞。唯一需要视频的主题(这里是九段片子,在本地 GPU 上渲染;有原生视频生成能力的
-agent 或 `themes/genvideo.py` 出的是同样的一条链)。视频素材不随示例分发,所以这个页面
-只有截图 —— 下面这段动态是从活着的页面上录下来的。
+agent 或 `themes/genvideo.py` 出的是同样的一条链)。视频素材不随示例分发,所以仓库里的
+这个页面只有截图;演示站会从 release 附件里取那九段视频,因此下面这条在线链接是真正跑起来
+的版本 —— 这段动态就是从它上面录的 ·
+[examples/morocco-2026](examples/morocco-2026/) ·
+**[在线打开 ↗](https://skywain.github.io/trip-planner-skill/examples/morocco-2026/morocco-portal.html)**
+(16 MB 视频)
 
 <p align="center">
   <img src="docs/showcase/portal-motion.webp" alt="穿越版动起来:俯冲进一个世界、接到下一个、当天信息叠在上面(动图)" width="640">
@@ -341,6 +359,9 @@ scripts/
   flight_scan.py              Google Flights 价格网格扫描器(免密钥,从中心往外扩)
   route_tools.py              geocode → 距离检查 → 地图链接 → KML → 日出日落
   render_plan.py              plan JSON → 自包含可打印 HTML
+  build_site.py               examples + showcase → GitHub Pages 演示站(_site/)
+.github/workflows/
+  pages.yml                   每次推到 main 就构建并部署那个演示站
 themes/
   README.md                   这里有什么、三条命令、图片从哪来
   render_theme2.py …          八个渲染器:theme2(illustrated)· clay2 · noir2 · glass2 · journal · zine · splash · portal

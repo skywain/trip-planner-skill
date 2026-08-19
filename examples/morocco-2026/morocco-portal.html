@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOROCCO 2026 · Portal</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:auto; }
+  body { background:#0d0b14; color:#f3eefc;
+    font-family:"PingFang SC","Hiragino Sans GB",system-ui,sans-serif; }
+  :focus-visible { outline:2.5px solid #ffd98a; outline-offset:3px; }
+  #track { position:relative; }
+  #stage { position:fixed; inset:0; overflow:hidden; background:#0d0b14; }
+  #stage video { position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; opacity:0; }
+  /* soft edges so the 9:16 clip breathes on desktop */
+  #stage::after { content:""; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(120% 100% at 50% 50%, transparent 62%,
+      rgba(13,11,20,.55) 100%); }
+
+  .screen { position:relative; z-index:3; height:100svh; display:flex;
+    flex-direction:column; align-items:center; justify-content:center;
+    gap:18px; text-align:center; padding:0 24px; }
+  .screen h1 { font-size:clamp(34px,6vw,64px); font-weight:800;
+    letter-spacing:.18em; text-indent:.18em; }
+  .screen p { font-size:14px; line-height:2; color:#c9bfe0; max-width:34em; }
+  /* intro/outro text sits over a held video frame — shadow keeps it legible */
+  .screen h1, .screen p { text-shadow:0 2px 18px rgba(13,11,20,.65),
+    0 1px 6px rgba(13,11,20,.5); }
+  .tag { font-size:11px; letter-spacing:.4em; color:#9f8fd0; text-indent:.4em; }
+  .cue { margin-top:12px; font-size:12px; letter-spacing:.3em; color:#c9bfe0;
+    animation:bob 2s ease-in-out infinite; }
+  @keyframes bob { 50% { transform:translateY(8px); } }
+  #load { font-size:12px; letter-spacing:.2em; color:#9f8fd0;
+    font-variant-numeric:tabular-nums; }
+
+  /* day overlay card — appears while the camera is inside that world */
+  .ov { position:fixed; z-index:4; left:clamp(18px,6vw,90px);
+    bottom:clamp(56px,12vh,120px); max-width:min(430px, 82vw);
+    opacity:0; transform:translateY(26px); pointer-events:none; }
+  .ov .k { font-size:11px; letter-spacing:.34em; color:#ffd98a; }
+  .ov h2 { font-size:clamp(30px,5vw,44px); font-weight:800; margin:8px 0 6px;
+    letter-spacing:.1em; text-shadow:0 2px 18px rgba(0,0,0,.6); }
+  .ov .lb { font-size:13px; line-height:1.9; color:#e8e0f5;
+    text-shadow:0 1px 10px rgba(0,0,0,.65); }
+  .ov ul { list-style:none; margin-top:12px; }
+  .ov li { font-size:12.5px; line-height:2; color:#d9cfee;
+    text-shadow:0 1px 8px rgba(0,0,0,.65); }
+  .ov li b { font-family:ui-monospace,Menlo,monospace; font-weight:700;
+    color:#ffd98a; margin-right:8px; }
+
+  #hud { position:fixed; z-index:5; top:14px; right:16px; font-size:10px;
+    letter-spacing:.18em; color:#8d7fbd; font-variant-numeric:tabular-nums;
+    text-align:right; line-height:1.9; }
+
+  .fallback { display:none; }
+  .no-scrub #stage, .no-scrub .ov, .no-scrub #hud { display:none; }
+  .no-scrub .fallback { display:block; position:relative; z-index:3;
+    max-width:760px; margin:0 auto; padding:40px 22px 80px; }
+  .fallback h2 { margin:34px 0 10px; font-size:22px; letter-spacing:.1em; }
+  .fallback p { font-size:13.5px; line-height:2; color:#c9bfe0; }
+  noscript .screen { height:auto; padding:60px 24px; }
+  @media (prefers-reduced-motion:reduce) { .cue { animation:none; } }
+  @media print {
+    #stage, #hud, .ov, #scrub, #load, .cue { display:none; }
+    body { background:#fff; color:#16121f; }
+    .screen { height:auto; padding:48px 24px; }
+    .screen h1, .screen p { text-shadow:none; }
+    .screen p, .tag { color:#454050; }
+  }
+</style>
+</head>
+<body>
+<div id="track">
+  <section class="screen" id="intro">
+    <p class="tag">PORTAL · FIVE WORLDS · ONE TAKE</p>
+    <h1>Through Morocco</h1>
+    <p>Scrolling is flying. Five worlds, one unbroken take: the red rooftops of Marrakech at sunrise, the earth towers of Aït Benhaddou at noon, an orange dune above a fire at Erg Chebbi, the misty tan roofs of Fes at dawn, and the blue stairs of Chefchaouen at midday. Let go and it holds; scroll back and it flies in reverse.</p>
+    <p id="load">Loading the reel …</p>
+    <p class="cue">▼ Scroll down to fly in</p>
+  </section>
+  <div id="scrub" aria-hidden="true"></div>
+  <section class="screen" id="outro">
+    <p class="tag">CASABLANCA · ATLANTIC</p>
+    <h1>Touchdown</h1>
+    <p>Out of the blue mountain and down to the ocean. One take, the whole way — scroll back up to fly it again in reverse.</p>
+  </section>
+  <noscript><section class="screen"><h1>Portal needs JavaScript</h1>
+    <p>This edition is a scroll-driven video flight; with JS off, open one of the other editions instead.</p>
+  </section></noscript>
+</div>
+<div id="stage" aria-hidden="true"><video muted playsinline preload="auto"></video><video muted playsinline preload="auto"></video></div>
+<aside class="ov" data-clip="0" aria-hidden="true"><p class="k">DAY 02 · 11-07 · Marrakech</p><h2>Red City</h2><p class="lb">Land, ride south, and walk into the smoke of Jemaa el-Fna</p><ul><li><b>17:25-18:10</b>Koutoubia Mosque and its gardens at last light</li></ul></aside><aside class="ov" data-clip="2" aria-hidden="true"><p class="k">DAY 04 · 11-09 · Aït Benhaddou · Skoura</p><h2>Kasbah Road</h2><p class="lb">Over the High Atlas: the pass, the ksar, and a night in a palm…</p><ul><li><b>12:45-15:15</b>Ksar of Aït Benhaddou — cross the riverbed, climb…</li><li><b>15:50-16:50</b>Taourirt Kasbah, Ouarzazate — the Glaoui pashas&#x27;…</li></ul></aside><aside class="ov" data-clip="4" aria-hidden="true"><p class="k">DAY 05 · 11-10 · Merzouga</p><h2>Dune Night</h2><p class="lb">Two gorges, then the camels at sunset and a camp under the Erg…</p><ul><li><b>11:30-13:00</b>Todra Gorge — walk the flat kilometre between the…</li><li><b>17:40-19:30</b>Arrive camp, climb the dune behind it for the last…</li></ul></aside><aside class="ov" data-clip="6" aria-hidden="true"><p class="k">DAY 07 · 11-12 · Fes</p><h2>Fes el-Bali</h2><p class="lb">Fes el-Bali on foot: two madrasas, the tanneries, and the walls…</p><ul><li><b>09:35-10:30</b>Bou Inania Madrasa — the only madrasa in Fes with a…</li><li><b>11:00-12:15</b>Al-Attarine Madrasa and the outside of the…</li><li><b>13:50-15:00</b>Chouara Tannery from a leather-shop terrace</li><li><b>16:40-17:45</b>Merenid Tombs — the whole of Fes el-Bali laid out…</li></ul></aside><aside class="ov" data-clip="8" aria-hidden="true"><p class="k">DAY 08 · 11-13 · Chefchaouen</p><h2>Blue Town</h2><p class="lb">CTM north through the Rif, and an afternoon in the blue town</p><ul><li><b>14:00-15:00</b>Kasbah Museum and its garden — the 15th-century…</li><li><b>15:00-16:30</b>The blue lanes — Rue Bin Souaki, the stepped alleys…</li><li><b>16:45-17:45</b>Ras El Maa — the spring where the town&#x27;s water…</li></ul></aside>
+<div id="hud" aria-hidden="true"></div>
+
+<script>
+(function () {
+  var CLIPS = [{"src": "portal/ma01-dive.mp4", "dur": 5.167, "off": 0.0}, {"src": "portal/ma01-ma02-link.mp4", "dur": 3.75, "off": 0.0}, {"src": "portal/ma02-dive.mp4", "dur": 5.167, "off": 0.0}, {"src": "portal/ma02-ma03-link.mp4", "dur": 3.75, "off": 0.0}, {"src": "portal/ma03-dive.mp4", "dur": 5.167, "off": 0.0}, {"src": "portal/ma03-ma04-link.mp4", "dur": 3.75, "off": 0.0}, {"src": "portal/ma04-dive.mp4", "dur": 5.167, "off": 0.0}, {"src": "portal/ma04-ma05-link.mp4", "dur": 3.75, "off": 0.0}, {"src": "portal/ma05-dive.mp4", "dur": 5.167, "off": 0.0}];
+  var PXS = 340;
+  var doc = document.documentElement;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) { doc.classList.add('no-scrub'); return; }
+
+  var stage = document.getElementById('stage');
+  var slots = stage.querySelectorAll('video');
+  var loadEl = document.getElementById('load');
+  var hud = document.getElementById('hud');
+  var scrub = document.getElementById('scrub');
+
+  // scroll spans
+  var total = 0;
+  CLIPS.forEach(function (c) {
+    c.play = c.dur - c.off - 0.03;          // seekable window, to the true last frame
+    c.span = Math.round(c.play * PXS);
+    c.start = total; total += c.span;
+  });
+  scrub.style.height = total + 'px';
+
+  // Everything init()/paint() touches must be declared BEFORE the loader:
+  // on file:// the done() chain is fully synchronous, so init() runs right
+  // here — a declaration below the loader is still undefined then (that
+  // exact bug killed every overlay/HUD on double-click while HTTP, being
+  // async, hid it).
+  var ovs = [].slice.call(document.querySelectorAll('.ov'));
+
+  // Preferred: blob-load every clip (instant, reliable seeking over HTTP).
+  // Double-clicked file:// pages can't fetch() at all — fall back to direct
+  // <video src>, which browsers DO allow for sibling local files and which
+  // seeks fine from disk. Same fallback if any fetch fails for other reasons.
+  var left = CLIPS.length;
+  function done(c, url) {
+    c.url = url;
+    left--;
+    loadEl.textContent = left ? ('Loading the reel … ' + left + ' to go')
+                              : 'Reel ready · scroll to take off';
+    if (!left) init();
+  }
+  if (location.protocol === 'file:') {
+    CLIPS.forEach(function (c) { done(c, c.src); });
+  } else {
+    CLIPS.forEach(function (c) {
+      fetch(c.src).then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.blob();
+      }).then(function (b) {
+        done(c, URL.createObjectURL(b));
+      }).catch(function () {
+        done(c, c.src);       // direct-src degrade beats a dead page
+      });
+    });
+  }
+
+  function init() {
+    slots[0].src = CLIPS[0].url; slots[0].dataset.clip = 0;
+    // a single-clip reel plays in slot 0 alone: slot 1 stays empty
+    // (dataset.clip unset → NaN, never matched) and slotFor() only ever
+    // resolves clip 0, so no seam pre-seek is attempted.
+    if (CLIPS.length > 1) { slots[1].src = CLIPS[1].url; slots[1].dataset.clip = 1; }
+    // direct-src mode loads lazily: repaint once a slot learns its duration
+    slots.forEach(function (s) {
+      s.addEventListener('loadedmetadata', function () { paint(); });
+    });
+    var ticking = false;
+    addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(paint); }
+    }, { passive: true });
+    addEventListener('resize', function () { paint(); });   // sync: works even
+    // where rAF is suspended (hidden panes) — and harmless everywhere else
+    paint();
+
+    function slotFor(ci) {
+      for (var s = 0; s < 2; s++)
+        if (+slots[s].dataset.clip === ci) return slots[s];
+      // steal the slot that is furthest from ci
+      var v = slots[(ci % 2)];
+      v.dataset.clip = ci; v.src = CLIPS[ci].url;
+      return v;
+    }
+
+    function paint() {
+      ticking = false;
+      var vh = innerHeight;
+      var y = scrollY - vh;              // scrub space starts after the intro
+      var i, c, p;
+      if (y < 0) { setActive(-1); return; }
+      if (y >= total) { setActive(-2); return; }
+      for (i = CLIPS.length - 1; i > 0 && y < CLIPS[i].start; i--) {}
+      c = CLIPS[i];
+      p = Math.min(1, Math.max(0, (y - c.start) / c.span));
+      var v = slotFor(i);
+      var t = c.off + p * c.play;
+      if (v.readyState >= 1 && Math.abs((v.currentTime || 0) - t) > 0.033)
+        v.currentTime = t;
+      // frame-chained seams: the neighbour clip sits UNDERNEATH at full
+      // opacity, pre-seeked to its boundary frame (pixel-identical to this
+      // clip's edge frame), so crossing a seam is a hard cut between
+      // identical frames. A translucent crossfade here would drag a frozen
+      // ghost over moving footage and read as judder. Hysteresis (0.25/0.35)
+      // keeps the spare slot from thrashing its src around mid-clip.
+      var spare = slots[0] === v ? slots[1] : slots[0];
+      var held = +spare.dataset.clip;
+      var oc;
+      if (p < 0.25) oc = i > 0 ? i - 1 : i + 1;
+      else if (p > 0.35) oc = i < CLIPS.length - 1 ? i + 1 : i - 1;
+      else oc = (held === i - 1 || held === i + 1) ? held
+              : (i < CLIPS.length - 1 ? i + 1 : i - 1);
+      var other = null;
+      if (oc >= 0 && oc < CLIPS.length) {
+        other = slotFor(oc);
+        var ot = oc === i + 1 ? CLIPS[oc].off : CLIPS[oc].off + CLIPS[oc].play;
+        if (other.readyState >= 1 && Math.abs((other.currentTime || 0) - ot) > 0.05)
+          other.currentTime = ot;
+      }
+      slots.forEach(function (s) { s.style.opacity = 0; s.style.zIndex = 1; });
+      if (other) other.style.opacity = 1;
+      v.style.opacity = 1; v.style.zIndex = 2;
+      // day overlays ride their dive's mid-window
+      ovs.forEach(function (o) {
+        var ci = +o.dataset.clip, w0 = 0.30, w1 = 0.94, oo = 0;
+        if (ci === i) {
+          if (p > w0 && p < w1) {
+            oo = Math.min(1, (p - w0) / 0.10, (w1 - p) / 0.06);
+          }
+        }
+        o.style.opacity = oo.toFixed(3);
+        o.style.transform = 'translateY(' + (26 * (1 - oo)).toFixed(1) + 'px)';
+      });
+      hud.textContent = 'CLIP ' + (i + 1) + '/' + CLIPS.length + ' · ' +
+        (p * 100).toFixed(0) + '%';
+      stage.style.opacity = 1;
+    }
+
+    function setActive(mode) {
+      slots.forEach(function (s) { s.style.opacity = 0; });
+      ovs.forEach(function (o) { o.style.opacity = 0; });
+      if (mode === -1) {                       // intro: hold clip 0 first frame
+        var v = slotFor(0);
+        if (v.readyState >= 1 && Math.abs((v.currentTime || 0) - CLIPS[0].off) > 0.05)
+          v.currentTime = CLIPS[0].off;
+        v.style.opacity = 1;
+        var fade = Math.min(1, Math.max(0, scrollY / (innerHeight * 0.7)));
+        v.style.opacity = fade.toFixed(3);
+        hud.textContent = 'INTRO';
+      } else {                                 // outro: hold last frame
+        var w = slotFor(CLIPS.length - 1);
+        var cl = CLIPS[CLIPS.length - 1];
+        if (w.readyState >= 1 && Math.abs((w.currentTime || 0) - (cl.off + cl.play)) > 0.05)
+          w.currentTime = cl.off + cl.play;
+        w.style.opacity = 1;
+        hud.textContent = 'OUTRO';
+      }
+    }
+  }
+})();
+</script>
+</body>
+</html>

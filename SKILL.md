@@ -81,8 +81,11 @@ assumption prominently at the top of the output.
 what matters — "帮我安排今年 10.1 到 10.7 的德国之旅" has the destination and the dates,
 and gets **zero questions**: infer the rest, list the assumptions in one block at the top
 of checkpoint (a), and move. Ask only when a *core* fact is missing **and** cannot be
-inferred — and then ask for everything in ONE message, core first, optional after,
-each optional line marked "(skip = default)".
+inferred — and then ask for everything in ONE message in the **intake format** below:
+core first, optional after, **only the items the user has not already answered**
+(anything stated in the request — destination, dates, party, "自驾", a style name, a
+budget — is settled and must not reappear as a question), each optional line with its
+default, one "all defaults" escape hatch.
 
 **Core** — must be known or defensibly assumed:
 - **Origin** (city/airport). Missing → infer from the conversation language, the user's
@@ -108,6 +111,34 @@ send a message just for these. Unanswered → default, and the assumptions block
   pace 2/3/4 anchors per day (3) · ±day flexibility (±2) · passport nationality
   (visa! infer from origin, state it) · locked must-sees.
 
+**Intake format** (user's language; markdown; full zh/en samples in
+references/output-template.md §Intake message). Keep it to one screen:
+
+```
+**先确认几件事 —— 一条消息回我,写序号+答案;没写的按默认**
+
+**必答**
+1. 出发城市 —— 我猜是上海(你用中文问的),对吗?
+2. 玩多久、大概什么时候 —— 例:10.1–10.7,或「7 天 · 10 月 · 前后可挪 2 天」
+
+**选答(不答走默认)**
+3. 页面风格:插画(默认)· 黏土 · 夜航 · 玻璃 · 手账 · Zine · 闪屏 · 穿越 —— 样子见 https://skywain.github.io/trip-planner-skill/
+4. 出行方式:公共交通+步行(默认)· 自驾 · 跟团
+5. 住宿:中档酒店(默认)· 青旅 · 民宿 · 公寓 · 温泉旅馆
+6. 偏好:城市 · 自然风光 · 海滩 · 森林 · 湖泊 · 山 —— 默认按目的地定
+7. 人数 / 预算 / 节奏:默认 2 成人 · 中档 · 每天 3 个主要点
+
+ℹ️ 本次会话没有生图能力,页面会用内置插画素材(仍是成品页,只是不如定制图贴合);有 OpenRouter key 的话放进 themes/.auth_header 再告诉我,就能为这趟生成。
+💡 回「默认」= 全部按默认,直接开工。
+```
+
+Rules for the block: numbering runs continuously over whatever is left; a heading with
+nothing under it is dropped; the ℹ️ line appears only in stock mode (Picture-capability
+check below), the 💡 line only when at least one optional item is shown; a guessed core
+value is asked as a confirmation ("我猜是 X,对吗?"), not as an open question; never
+more than one message, never a follow-up "just one more thing". English sample:
+output-template.md. The same facts, answered or defaulted, go into `prefs` next.
+
 Write what you learned or assumed into the plan's top-level `prefs` block
 (`assets/plan.example.json`: `theme`, `pictures`, `travel_style`, `lodging`, `scenery`,
 `pace`, `budget`, and `notes` — the inferred values in one line, e.g. "assumed origin
@@ -132,7 +163,7 @@ from it) so Phases 2-6 read one place and a later replan does not re-ask.
    for one, and offer illustrated instead.
 
 Style, when you do ask, is one line: the eight names with the showcase link
-(https://github.com/skywain/trip-planner-skill#showcase; offline: render
+(https://skywain.github.io/trip-planner-skill/; offline: render
 `themes/render_picker.py`), "skip = illustrated". Set the plan's top-level `"lang"` (`zh` | `en`,
 output-template.md §Plan language) from the language the user asked in — the rendered
 pages' UI follows it; `--lang` overrides.

@@ -99,6 +99,59 @@ Only what is known or defensibly assumed goes in; a key the user never touched a
 agent never needed is simply absent. An intake that asked nothing (the request already
 carried destination + dates) still fills `prefs` — from the defaults it chose.
 
+### §Intake message — the one question block (only when a core fact is missing)
+
+Shape: a bold one-line lead, **必答 / Must answer** then **选答 / Optional**, numbered
+continuously, one option list per line with the default named, and at most two footer
+lines (ℹ️ stock-picture note, only in stock mode; 💡 "all defaults" shortcut, only when
+optional items are shown). **Only items the user has not already given** appear — a
+heading with nothing under it is dropped. A guessed core value is asked as a
+confirmation, not an open question. One message, never a follow-up. Markdown, in the
+user's language.
+
+**zh sample** — request was "帮我规划一次日本之旅" (destination known, everything else
+missing, no image generator in the session):
+
+```
+**先确认几件事 —— 一条消息回我,写序号+答案;没写的按默认**
+
+**必答**
+1. 出发城市 —— 我猜是上海(你用中文问的),对吗?
+2. 玩多久、大概什么时候 —— 例:10.1–10.7,或「7 天 · 10 月 · 前后可挪 2 天」
+
+**选答(不答走默认)**
+3. 页面风格:插画(默认)· 黏土 · 夜航 · 玻璃 · 手账 · Zine · 闪屏 · 穿越 —— 样子见 https://skywain.github.io/trip-planner-skill/
+4. 出行方式:公共交通+步行(默认)· 自驾 · 跟团
+5. 住宿:中档酒店(默认)· 青旅 · 民宿 · 公寓 · 温泉旅馆
+6. 偏好:城市 · 自然风光 · 海滩 · 森林 · 湖泊 · 山 —— 默认按目的地定
+7. 人数 / 预算 / 节奏:默认 2 成人 · 中档 · 每天 3 个主要点
+
+ℹ️ 本次会话没有生图能力,页面会用内置插画素材(仍是成品页,只是不如定制图贴合);有 OpenRouter key 的话放进 themes/.auth_header 再告诉我,就能为这趟生成。
+💡 回「默认」= 全部按默认,直接开工。
+```
+
+**en sample** — request was "Plan me 10 days in Portugal in May, we're a family of four,
+self-driving" (destination, duration, month, party and travel style already given → none
+of them is asked; the session has a native image generator → no ℹ️ line):
+
+```
+**Two quick things before I plan — reply in one message, number + answer; anything you skip uses the default**
+
+**Must answer**
+1. Departure city — I'm guessing London (your timezone); right?
+
+**Optional (skip = default)**
+2. Page style: illustrated (default) · clay · noir · glass · journal · zine · splash · portal — see https://skywain.github.io/trip-planner-skill/
+3. Lodging: mid-range hotel (default) · hostel · B&B / guesthouse · apartment
+4. Taste: city · nature · beach · forest · lake · mountain — default: read from the destination
+5. Budget / pace: default mid-range · 3 main stops a day
+
+💡 Reply "defaults" and I start right away.
+```
+
+Answers land in `prefs` (above); what was guessed and not corrected goes into
+`prefs.notes` and the assumptions block at checkpoint (a).
+
 ## §city-block — what each city researcher returns (fan-out or sequential)
 
 Return **plan-JSON fragments, not a parallel dialect**. The assembler inserts your

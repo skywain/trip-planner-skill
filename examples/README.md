@@ -7,8 +7,43 @@ the two source files and the page they produce — `<trip>.geo.json` (the facts)
 no network). Re-running the render command below rewrites the shipped page **byte for
 byte**, which is what makes these examples a regression test as well as a showcase.
 
-The eighth theme, `portal`, is a video fly-through: its clips are ~16 MB per trip and are
-not shipped here (see the Morocco row).
+The eighth theme, `portal`, is a video fly-through. Its page **is** here
+(`morocco-2026/morocco-portal.html`, 13 KB — the markup is small because the footage is not
+inlined), but its nine clips are ~16 MB and are not committed; they are published as the
+`demo-assets-v1` release asset `morocco-portal-clips.zip`, which `scripts/build_site.py`
+downloads when it builds the demo site. So the portal page renders complete online and
+warns about missing `portal/*.mp4` when you open the repo copy locally.
+
+## Open them without cloning
+
+Every page below is served from the demo site, built by `scripts/build_site.py` and
+deployed by `.github/workflows/pages.yml`. Each one is the real deliverable — ~1.5 MB,
+self-contained, no server:
+
+Eleven pages are live. Eight are the gallery's cards — one per theme, all English, each
+one matching the frames in the root README's Showcase. Three of those eight are **not
+stored in the repo**: `china-clay`, `mexico-noir` and `japan-zine` are rendered at build
+time by `scripts/build_site.py`, straight from the committed `geo.json` + `art.json` (each
+art file carries its trip's second theme, so nothing extra is needed). The remaining three
+rows are the shipped Chinese editions of those same themes.
+
+| Trip · theme | Lang | Live page | On disk |
+|---|---|---|---|
+| `japan-2026` · `illustrated` | en | <https://skywain.github.io/trip-planner-skill/examples/japan-2026/japan-illustrated.html> | shipped |
+| `china-2026` · `clay` | en | <https://skywain.github.io/trip-planner-skill/examples/china-2026/china-clay.html> | rendered at build time |
+| `mexico-2026` · `noir` | en | <https://skywain.github.io/trip-planner-skill/examples/mexico-2026/mexico-noir.html> | rendered at build time |
+| `morocco-2026` · `glass` | en | <https://skywain.github.io/trip-planner-skill/examples/morocco-2026/morocco-glass.html> | shipped |
+| `mexico-2026` · `journal` | en | <https://skywain.github.io/trip-planner-skill/examples/mexico-2026/mexico-journal.html> | shipped |
+| `japan-2026` · `zine` | en | <https://skywain.github.io/trip-planner-skill/examples/japan-2026/japan-zine.html> | rendered at build time |
+| `china-2026` · `splash` | en | <https://skywain.github.io/trip-planner-skill/examples/china-2026/china-splash.html> | shipped |
+| `morocco-2026` · `portal` | en | <https://skywain.github.io/trip-planner-skill/examples/morocco-2026/morocco-portal.html> | shipped (16 MB of video, fetched) |
+| `turkey-2026` · `clay` | zh | <https://skywain.github.io/trip-planner-skill/examples/turkey-2026/turkey-clay.html> | shipped |
+| `nordic-2026` · `noir` | zh | <https://skywain.github.io/trip-planner-skill/examples/nordic-2026/nordic-noir.html> | shipped |
+| `vietnam-2026` · `zine` | zh | <https://skywain.github.io/trip-planner-skill/examples/vietnam-2026/vietnam-zine.html> | shipped |
+
+The gallery that links all of them: <https://skywain.github.io/trip-planner-skill/>. Each
+trip's `geo.json` and `art.json` sit next to its page there too, so the sources are one
+click away.
 
 ## The seven trips
 
@@ -96,7 +131,11 @@ see how far apart the themes really are.
 
 Morocco's `portal` block is the one that cannot render fully here: the page builds, but it
 warns that nine `.mp4` clips are missing, because the video (~16 MB) is not shipped. The
-other six second themes render complete pages.
+shipped `morocco-portal.html` is that same page — see it running, footage and all, at
+<https://skywain.github.io/trip-planner-skill/examples/morocco-2026/morocco-portal.html>.
+The other six second themes render complete pages — and three of them, `china-clay`,
+`mexico-noir` and `japan-zine`, are exactly what the demo site serves for those themes,
+rendered by these same commands on every deploy.
 
 ## Maps and the KML
 
