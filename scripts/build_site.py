@@ -18,12 +18,31 @@ Everything the pages need is either inlined in the page itself or copied here,
 so the site is fully static. Only the portal footage comes off the network, and
 `--no-download` skips it for local dry runs.
 
+Web-optimised copies (the repo pages themselves are untouched):
+    every page's data-URI pictures/fonts are written out once to
+    _site/assets/<sha1>.<ext> (shared across pages, cacheable) and the page
+    references them by relative URL, so a 2.6 MB single-file page becomes a
+    ~150 KB document that paints at once while the pictures stream in; images
+    past the first few get loading="lazy". A small shim appended to each page
+    re-inlines everything as data URIs the first time an export button
+    ([data-x-for] / [data-x-page]) is clicked, so the offline PNG export engine
+    (which rasterises through <svg><foreignObject> and therefore cannot fetch
+    external resources) keeps working exactly as on the original page.
+    `--keep-inline` disables the whole step (pages copied verbatim). The
+    site copies are for viewing online; a page saved from the site and opened
+    from file:// exports without pictures (fetch is blocked there) — the
+    single-file originals live in examples/ in the repo.
+
 Runs from anywhere: the repo root is resolved from this file's location.
 Python 3.9+, standard library only.
 """
 
 import argparse
+import base64
+import hashlib
+import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -545,7 +564,7 @@ HEAD = """<!DOCTYPE html>
   <p class="pitch">Eight themed, offline, self-contained pages rendered by the trip-planner
   skill — open one, it is the real deliverable, ~1.5&nbsp;MB, no server.</p>
   <p class="langnote">Pages are written in whichever language the trip was planned in. The
-  eight below are English; three Chinese editions are linked under the grid.</p>
+  eight below are English; three Chinese editions are linked under the grid. Site copies are web-optimised (pictures load separately, exports still work); the single-file originals are in the repo’s <code>examples/</code>.</p>
   <nav class="toplinks">
     <a class="toplink" href="__REPO__">The repo on GitHub&nbsp;↗</a>
     <a class="toplink" href="__REPO__#showcase">README · Showcase&nbsp;↗</a>
@@ -726,6 +745,169 @@ def render_siblings(out_root, written):
             print("    %s" % output)
 
 
+DATA_URI_RE = re.compile(
+    r"data:(image|font|application)/([a-z0-9.+\-]+);base64,([A-Za-z0-9+/=]+)")
+ASSET_EXT = {"svg+xml": "svg", "jpeg": "jpg", "x-font-ttf": "ttf",
+             "x-font-woff": "woff", "font-woff": "woff", "font-woff2": "woff2",
+             "octet-stream": "bin"}
+LAZY_AFTER = 4          # real <img> tags after this many (document order) get loading="lazy"
+IMG_TAG_RE = re.compile(r"<img(?=[\s/>])", re.IGNORECASE)
+# text ranges the lazy pass must not touch
+SKIP_RANGE_RE = re.compile(
+    r"<script\b.*?</script>|<!--.*?-->|<template\b.*?</template>|<noscript\b.*?</noscript>",
+    re.DOTALL | re.IGNORECASE)
+# a payload must end at a real terminator, else the regex only saw a prefix
+PAYLOAD_END = "\"')>, \t\r\n"
+# the shim can restore exactly these carriers — anything else fails the build
+CARRIER_OK_RE = re.compile(r'(?:src|href|xlink:href)=["\']$|url\(["\']?$')
+ASSET_REF_RE = re.compile(r"assets/[0-9a-f]{20}\.[a-z0-9]+")
+MODULE_ONLY_MARK = 'PAGE_ROOT = ""'     # export_js: whole-page export disabled
+
+# The shim is appended to every externalised page. It does nothing until an
+# export button is clicked; then it fetches each asset (browser cache), turns
+# it back into a data URI, swaps it into <img src>, SVG <image href>, inline
+# style url() and <style> text, drops loading="lazy", waits for decode/fonts,
+# and re-dispatches that one click. After that the page is the same DOM the
+# offline engine was written for. Per-asset failures cost that one picture,
+# not the export; while it works the button is aria-busy and the cursor is
+# 'progress'; extra clicks during the fetch are dropped, not queued.
+INLINE_SHIM = """
+<script data-site-shim>
+(function(){
+var U=__URLS__,SEL=__SEL__,M=null,P=null,B=null;
+function toData(u){return fetch(u).then(function(r){if(!r.ok)throw new Error(u);return r.blob()})
+ .then(function(b){return new Promise(function(ok,no){var fr=new FileReader();fr.onload=function(){ok(fr.result)};fr.onerror=no;fr.readAsDataURL(b)})})}
+function rep(t){var n=t;for(var k in M){if(n.indexOf(k)>=0){n=n.split(k).join(M[k])}}return n}
+function settle(){var w=[];if(document.fonts&&document.fonts.ready)w.push(document.fonts.ready);
+ Array.prototype.forEach.call(document.images,function(i){if(!i.complete){w.push(new Promise(function(ok){i.addEventListener('load',ok,{once:true});i.addEventListener('error',ok,{once:true})}))}});
+ return Promise.race([Promise.all(w),new Promise(function(ok){setTimeout(ok,2500)})])}
+function inlineAll(){if(P)return P;P=Promise.all(U.map(function(u){return toData(u).then(function(d){return[u,d]},function(){return null})}))
+ .then(function(pairs){M={};var miss=0;pairs.forEach(function(p){if(p){M[p[0]]=p[1]}else{miss++}});
+ if(miss===U.length&&U.length){P=null;throw new Error('offline')}
+ Array.prototype.forEach.call(document.querySelectorAll('img'),function(im){var s=im.getAttribute('src');if(s&&M[s]){im.setAttribute('src',M[s])}im.removeAttribute('loading')});
+ Array.prototype.forEach.call(document.querySelectorAll('image'),function(im){var s=im.getAttribute('href')||im.getAttribute('xlink:href');if(s&&M[s]){im.setAttribute('href',M[s])}});
+ Array.prototype.forEach.call(document.querySelectorAll('[style]'),function(el){var s=el.getAttribute('style');if(s&&s.indexOf('url(')>=0){var n=rep(s);if(n!==s)el.setAttribute('style',n)}});
+ Array.prototype.forEach.call(document.querySelectorAll('style'),function(st){var t=st.textContent||'';var n=rep(t);if(n!==t)st.textContent=n});
+ window.__siteMissing=miss;
+ return settle().then(function(){window.__siteInlined=true})});return P}
+function busy(on){document.documentElement.style.cursor=on?'progress':'';if(B){if(on){B.setAttribute('aria-busy','true')}else{B.removeAttribute('aria-busy')}}}
+document.addEventListener('click',function(e){
+ if(window.__siteInlined||!e.target||!e.target.closest)return;
+ var b=e.target.closest(SEL);if(!b)return;
+ e.stopImmediatePropagation();e.preventDefault();
+ if(B)return;
+ B=b;busy(true);
+ inlineAll().then(function(){busy(false);var t=B;B=null;t.click()},function(){busy(false);var t=B;B=null;window.__siteInlined=true;t.click();window.__siteInlined=false});
+},true);
+window.__siteInline=inlineAll;
+})();
+</script>
+"""
+
+
+def externalize_page(out_root, rel_page, written, stats):
+    """Rewrite one copied page in place: data URIs -> _site/assets/<sha1>.<ext>,
+    lazy-load the later <img>s, append the re-inline shim. Returns the number
+    of data URIs actually moved out. The repo file is never touched. Fails the
+    build (SystemExit) on anything the shim could not restore at export time."""
+    path = os.path.join(out_root, rel_page)
+    with open(path, "r", encoding="utf-8") as handle:
+        html = handle.read()
+    original = html
+    page_dir = os.path.dirname(rel_page)
+    rel_assets = os.path.relpath("assets", page_dir).replace(os.sep, "/")
+    assets_dir = os.path.join(out_root, "assets")
+    os.makedirs(assets_dir, exist_ok=True)
+    urls = []
+    moved = [0]
+
+    # tripwire 1: every base64 data URI must sit in a carrier the shim restores
+    for m in DATA_URI_RE.finditer(original):
+        ctx = original[max(0, m.start() - 12):m.start()]
+        if not CARRIER_OK_RE.search(ctx):
+            raise SystemExit(
+                "ERROR: %s has a data URI in a carrier the re-inline shim cannot "
+                "restore (context %r) — extend the shim or build with --keep-inline"
+                % (rel_page, ctx))
+
+    def swap(match):
+        kind, subtype, b64 = match.groups()
+        nxt = match.string[match.end():match.end() + 1]
+        if nxt and nxt not in PAYLOAD_END:
+            return match.group(0)          # payload continues (wrapped / URL-safe) — leave inline
+        try:
+            raw = base64.b64decode(b64, validate=True)
+        except (ValueError, TypeError):
+            return match.group(0)          # not real base64 — leave it alone
+        ext = ASSET_EXT.get(subtype, subtype.split("+")[0])
+        name = "%s.%s" % (hashlib.sha1(raw).hexdigest()[:20], ext)
+        dest = os.path.join(assets_dir, name)
+        if not os.path.exists(dest):
+            with open(dest, "wb") as out:
+                out.write(raw)
+            written.append((os.path.join("assets", name), len(raw)))
+            stats["new_assets"] += 1
+        else:
+            stats["shared_hits"] += 1
+        url = rel_assets + "/" + name
+        if url not in urls:
+            urls.append(url)
+        moved[0] += 1
+        return url
+
+    before = len(html.encode("utf-8"))
+    html = DATA_URI_RE.sub(swap, html)
+    if moved[0] == 0:
+        return 0                             # portal: nothing inline, keep verbatim
+
+    # tripwire 2: no asset reference may have landed inside a <script> (the
+    # shim cannot rewrite JS strings) — the shim itself is appended later
+    for m in re.finditer(r"<script\b.*?</script>", html, re.DOTALL | re.IGNORECASE):
+        if ASSET_REF_RE.search(m.group(0)):
+            raise SystemExit(
+                "ERROR: %s: an externalised asset is referenced inside a <script> "
+                "block; the export shim cannot restore it" % rel_page)
+
+    # lazy-load the pictures past the first few (cover + first day keep
+    # priority); <img in scripts / comments / templates / noscript is skipped
+    skip = [(m.start(), m.end()) for m in SKIP_RANGE_RE.finditer(html)]
+    seen = [0]
+
+    def lazy(match):
+        pos = match.start()
+        if any(a <= pos < b for a, b in skip):
+            return match.group(0)
+        tag_end = html.find(">", pos)
+        if tag_end != -1 and re.search(r"\sloading=", html[pos:tag_end]):
+            return match.group(0)            # already declares its own policy
+        seen[0] += 1
+        if seen[0] > LAZY_AFTER:
+            return '<img loading="lazy"'
+        return match.group(0)
+    html = IMG_TAG_RE.sub(lazy, html)
+
+    module_only = MODULE_ONLY_MARK in html
+    sel = "[data-x-for]" if module_only else "[data-x-for],[data-x-page]"
+    shim = (INLINE_SHIM.replace("__URLS__", json.dumps(urls))
+                       .replace("__SEL__", json.dumps(sel)))
+    if "</body>" in html:
+        html = html.replace("</body>", shim + "</body>", 1)
+    else:
+        html = html + shim
+    with open(path, "w", encoding="utf-8") as handle:
+        handle.write(html)
+    after = len(html.encode("utf-8"))
+    for i, row in enumerate(written):
+        if row[0] == rel_page:
+            written[i] = (rel_page, after)
+    stats["bytes_before"] += before
+    stats["bytes_after"] += after
+    print("  %s: %s -> %s, %d data URIs -> %d assets%s"
+          % (rel_page, human(before), human(after), moved[0], len(urls),
+             " (module-only export)" if module_only else ""))
+    return moved[0]
+
+
 def download_zip(url, expect_bytes, attempts=3):
     """Fetch the release asset, following redirects. Returns the bytes."""
     last = None
@@ -795,7 +977,7 @@ def extract_clips(blob, out_root, written):
         )
 
 
-def build(out_root, download=True):
+def build(out_root, download=True, externalize=True):
     out_root = os.path.abspath(out_root)
     if os.path.exists(out_root):
         shutil.rmtree(out_root)
@@ -818,6 +1000,19 @@ def build(out_root, download=True):
     # 2b. the three English siblings, rendered from the committed geo + art
     print("rendered pages:")
     render_siblings(out_root, written)
+
+    # 2c. web-optimise every page copy: pictures out to assets/, shim in
+    if externalize:
+        print("externalising data URIs:")
+        stats = {"new_assets": 0, "shared_hits": 0, "bytes_before": 0, "bytes_after": 0}
+        pages = list(COPIED_PAGES) + [job["out"] for job in RENDERED]
+        for rel in pages:
+            externalize_page(out_root, rel, written, stats)
+        print("  assets/: %d files written, %d shared references; pages %s -> %s"
+              % (stats["new_assets"], stats["shared_hits"],
+                 human(stats["bytes_before"]), human(stats["bytes_after"])))
+    else:
+        print("externalising data URIs: SKIPPED (--keep-inline)")
 
     # 3. the plan + art sources beside them
     for rel in EXAMPLE_JSON:
@@ -886,13 +1081,16 @@ def main(argv=None):
                         help="output directory (default: _site, relative to the repo root)")
     parser.add_argument("--no-download", action="store_true",
                         help="skip the portal footage download (local dry runs only)")
+    parser.add_argument("--keep-inline", action="store_true",
+                        help="copy the pages verbatim (no data-URI externalisation, no shim)")
     args = parser.parse_args(argv)
 
     out = args.out
     if not os.path.isabs(out):
         out = os.path.join(REPO_ROOT, out)
 
-    out_root, written = build(out, download=not args.no_download)
+    out_root, written = build(out, download=not args.no_download,
+                              externalize=not args.keep_inline)
     print_summary(out_root, written)
     return 0
 
