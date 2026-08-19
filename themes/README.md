@@ -23,7 +23,7 @@ plain page either — it renders a theme from the built-in stock kit (below).
 | `xprobe.sh` · `xt.sh` | headless export probes (with / without picture) |
 | `towebp.py` · `cutout.py` · `split_sheet.py` · `gen.py` · `build_manifest.py` · `build_portal_jobs.py` | asset pipeline: png→webp (+ size variants), alpha cut-out, sheet splitting, gpt-image-2 generation, manifest refresh, portal clip job builder |
 | `ART-SCHEMA.md` · `lucide-icons.json` | the art.json contract · the icon sprite source |
-| `assets/` | the picture library: every embeddable `*.webp`, `caveat-vf.woff2`, `manifest.json` (prompt + cost per generated asset), `IMAGE-LIBRARY.md` (index by subject), `portal/*.mp4` (the portal footage) |
+| `assets/` | the picture library: every embeddable `*.webp`, `caveat-vf.woff2`, `manifest.json` (prompt + cost per generated asset), `IMAGE-LIBRARY.md` (index by subject), `portal/` (the portal footage sidecar dir — empty in the tree, restore command in [`assets/portal/README.md`](assets/portal/README.md)) |
 
 ## Three commands
 
@@ -82,8 +82,11 @@ square, silently). Keep a trip's webp beside its plan or pass `--assets DIR`; th
 order is `--assets` → art dir → plan dir → `themes/assets/`. **A test trip or a normal
 user never writes into `assets/` or `IMAGE-LIBRARY.md`** — `<trip>/manifest.<trip>.json`
 is the record; the main agent folds generic pieces back into the library after a batch
-(ART-SCHEMA.md 测试行程资产回收). Portal needs its clip chain (`assets/portal/` is the
-shipped one) next to the output HTML — it is the only theme that ships sidecar files;
+(ART-SCHEMA.md 测试行程资产回收). Portal needs its clip chain next to the output HTML — it
+is the only theme that ships sidecar files. The US reference chain is a release asset, not
+in the tree; `assets/portal/` is empty in a fresh clone and
+[`assets/portal/README.md`](assets/portal/README.md) has the one-line curl+unzip restore
+(the shipped portal case is Morocco, live on the demo site).
 `build_portal_jobs.py --spec worlds.json` writes the ComfyUI jobs (`STEPS` = 10 by
 default since 2026-08-16).
 

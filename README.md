@@ -252,9 +252,11 @@ shipped examples: **$0.25–0.46 of image generation per trip** (7–11 `gpt-ima
 The **portal** theme is the one that needs footage: either `genvideo.py` in the cloud
 (`google/veo-3.1-lite`, 720p, ≈ $0.03/s → roughly $3 for a ten-world chain; smoke-tested
 on one 4 s clip, $0.12) or a local GPU (the author's regression footage comes from ComfyUI
-on an RTX 5090 via `themes/build_portal_jobs.py`). The shipped chain in
-`themes/assets/portal/` (19 clips, ~35 MB) belongs to the US trip that drove the design;
-another trip needs its own.
+on an RTX 5090 via `themes/build_portal_jobs.py`). The US chain that drove the design
+(19 clips, ~35 MB) is the style reference and a [release asset](https://github.com/skywain/trip-planner-skill/releases/download/demo-assets-v1/us-portal-clips.zip),
+not part of the tree — one `curl` + `unzip` restores it into `themes/assets/portal/`
+([how](themes/assets/portal/README.md)). The shipped portal case is Morocco, live on the
+demo site; another trip needs its own chain.
 
 **No image generator? Still a designed page.** Two commands, and the plan comes out in a
 real theme instead of degrading to plain text:
@@ -399,7 +401,8 @@ themes/
                               asset pipeline (png→webp, cut-outs, sheet splitting, manifest, portal jobs)
   ART-SCHEMA.md               the art.json contract (the only copy)
   assets/                     picture library: 444 webp (301 stems), Caveat font, manifest.json,
-                              IMAGE-LIBRARY.md (index by subject), portal/*.mp4 (19 clips)
+                              IMAGE-LIBRARY.md (index by subject), portal/ (footage sidecar dir —
+                              empty in the tree, README.md has the restore command)
     stock/                    the stock kit: 14 region covers + 66 cut-outs (161 webp, 5.2 MB),
                               index.json (lookup: archetypes, 225 ISO2, keywords, notice), README.md
 assets/plan.example.json      schema template — copy it, fill the PLACEHOLDERs, then render (or --force to preview)
@@ -413,8 +416,10 @@ docs/
   KNOWN-ISSUES.md             30 defects and hard limits (29 open / planned, 1 resolved), each with a source pointer, plus the roadmap
 ```
 
-Not in the repo: personal trip data (`trips/`), PNG originals, and the OpenRouter
-credential file `themes/.auth_header` that `gen.py` / `genvideo.py` read.
+Not in the repo: personal trip data (`trips/`), PNG originals, the US portal reference
+chain (`themes/assets/portal/*.mp4` — a `demo-assets-v1` release asset), and the OpenRouter
+credential file `themes/.auth_header` that `gen.py` / `genvideo.py` read. A clone is
+**~48 MB tracked**.
 
 ## Verification
 
@@ -504,8 +509,8 @@ trips to confirm it is still byte-identical.
   [frankfurter.dev](https://frankfurter.dev/), [open.er-api.com](https://www.exchangerate-api.com/)
   — holidays, weather, FX.
 - Generated pictures: `openai/gpt-image-2` via [OpenRouter](https://openrouter.ai/).
-  The shipped portal clips (`themes/assets/portal/`, 19 mp4) and the Morocco portal footage
-  in the showcase were rendered locally with MiniMax-H3 in ComfyUI; the cloud alternative
+  The US portal reference chain (19 mp4, a `demo-assets-v1` release asset) and the Morocco
+  portal footage in the showcase were rendered locally with MiniMax-H3 in ComfyUI; the cloud alternative
   in `genvideo.py` is `google/veo-3.1-lite` (default) or `minimax/hailuo-3` via OpenRouter.
 
 ## License

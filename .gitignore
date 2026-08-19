@@ -29,3 +29,7 @@ themes/**/*.png
 
 # Built demo site (scripts/build_site.py) — GitHub Actions builds it on push
 _site/
+
+# US portal reference chain (19 mp4, ~35 MB) is a release asset, not tracked:
+# https://github.com/skywain/trip-planner-skill/releases/tag/demo-assets-v1
+themes/assets/portal/*.mp4

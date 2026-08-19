@@ -9,7 +9,8 @@ its own licence, which travels with them:
 | **Caveat** variable font (embedded as a data-URI `@font-face` in the journal / zine pages) | `themes/assets/caveat-vf.woff2` | SIL Open Font License 1.1 — Copyright 2014 The Caveat Project Authors | [themes/assets/OFL-Caveat.txt](themes/assets/OFL-Caveat.txt) |
 | **Lucide** icon paths (inlined as SVG sprites by the themed renderers) | `themes/lucide-icons.json` | ISC — Copyright (c) Lucide Icons and Contributors; some icons derive from Feather (MIT, Cole Bemis) | [themes/LICENSE-lucide.txt](themes/LICENSE-lucide.txt) |
 
-Generated images and video (`themes/assets/*.webp`, `themes/assets/portal/*.mp4`) were
+Generated images and video (`themes/assets/*.webp`, plus the portal mp4 published as
+`demo-assets-v1` release assets rather than tracked here) were
 produced for this project with `openai/gpt-image-2` (via OpenRouter) and MiniMax-H3
 (ComfyUI, local GPU); they are published under the repository's MIT licence. Their
 prompts, parameters and cost are recorded in `themes/assets/manifest.json`.

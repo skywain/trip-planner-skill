@@ -480,7 +480,11 @@ zones, every seam clean in the export; the China test used the same shape with
   "intro": "滚动就是飞行:纽约黄昏 → … 十个小世界一镜到底 …",   // intro paragraph → generic sentence
   "outro": {"tag": "DIAMOND HEAD · SUNRISE", "zh": "落在日出里", "text": "…"},   // → TOUCHDOWN / 落地 / generic; en page: outro.en before outro.zh
   "video_dir": "../../themes/assets/portal",  // relative to THIS art file (or absolute); the page links
-                                              // clips relative to the OUTPUT html so file:// still works
+                                              // clips relative to the OUTPUT html so file:// still works.
+                                              // NB: that dir is EMPTY in a fresh clone — the US reference
+                                              // chain is a release asset, restored with one curl+unzip
+                                              // (themes/assets/portal/README.md). A real trip points
+                                              // video_dir at its OWN chain beside the plan.
   "clips": [                                   // reel order; kind dive|link; day = 1-based plan day whose
     {"file": "s01-dive.mp4", "dur": 5.167, "off": 0, "kind": "dive", "day": 2},   //   overlay fades in
     {"file": "s01-s02-link.mp4", "dur": 3.75, "off": 0, "kind": "link"}

@@ -344,7 +344,7 @@ THEMES = [
         "motion": "纵向滚动 = 飞行进度,松手即停,倒滚倒飞(全家唯一视频态)",
         "voice": "无衬线巨题 + 字距拉开的注记,时刻走琥珀等宽",
         "shape": "零卡片:字幕直接浮在画面上(阴影托底),天色随行程昼夜流转",
-        "art": "AI 视频 19 条 35MB(需 assets/portal 视频素材同行)",
+        "art": "AI 视频若干条(视频目录需与页面同行)",
         "pal": ["#0d0b14", "#ffd98a", "#c9bfe0", "#7fc9a8"],
         "svg": """<defs><linearGradient id="ptg" x1="0" y1="0" x2="0" y2="1">
 <stop offset="0" stop-color="#3d2050"/><stop offset=".52" stop-color="#0d0b14"/>

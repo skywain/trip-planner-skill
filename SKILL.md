@@ -483,10 +483,12 @@ Each of the seven still themes carries its own share buttons (保存这一天 / 
 生成长图 — Save this day / Save appendix / Save long image in en), offline, no
 dependencies; noir and glass export day modules only, portal (video) has none —
 screenshot it. Portal is the "only when footage exists" theme: it needs **its own**
-footage chain beside the HTML; the 19 mp4 clips in `themes/assets/portal/` are the US
-trip's and serve as the style reference and pipeline example, not as a substitute
-(another trip's scenery on a cover is a logged defect). Details, per-theme limits and
-the new-theme manual: references/themes.md.
+footage chain beside the HTML; the US 19-clip chain is the style reference and pipeline
+example, not a substitute (another trip's scenery on a cover is a logged defect). That
+chain is a release asset, **not in the tree** — `themes/assets/portal/` is empty in a
+fresh clone and its README.md has the one-line curl+unzip restore; the shipped portal
+case is Morocco (live on the demo site). Details, per-theme limits and the new-theme
+manual: references/themes.md.
 
 ## When things fail
 
@@ -542,7 +544,8 @@ directory is not the skill directory and shell cwd does not persist between call
 - `themes/assets/` — the shared picture library: all embeddable webp, the Caveat
   webfont, `manifest.json` (prompt/cost per generated asset), `IMAGE-LIBRARY.md`
   (index by subject — check its 通用件 section before generating anything),
-  `portal/*.mp4` (the portal theme's footage) and `stock/` — the **stock kit**
+  `portal/` (the portal theme's footage sidecar dir — empty in the tree; the US
+  reference chain is a release asset, see `portal/README.md`) and `stock/` — the **stock kit**
   (region cover paintings + landmark / generic-scene cut-outs in the illustrated
   style, `stock/index.json` + `stock/README.md`) that `themes/stock_art.py` uses to
   build an art file when the session has no image generator and no key.

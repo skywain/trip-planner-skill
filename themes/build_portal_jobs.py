@@ -14,7 +14,10 @@ worlds themselves come from a spec file, one per trip:
      "ambience": "soft evening city traffic, distant horns"},  # audio line; link i borrows world i+1's
     …
   ]
-  (The author's US regression spec has 10 worlds; a test trip used 5. Any length works.)
+  (The author's US regression spec has 10 worlds; a test trip used 5. Any length works.
+   That 19-clip US chain is the style reference / regression fixture and is a release
+   asset, NOT in the git tree — restore it into themes/assets/portal/ with the one-line
+   curl+unzip in themes/assets/portal/README.md. The shipped portal case is Morocco.)
 
 Usage:
   build_portal_jobs.py --spec worlds.json dives 1,2,3      > dives.ndjson

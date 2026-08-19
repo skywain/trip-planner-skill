@@ -154,7 +154,7 @@ ring on `zh` pages.**
 
 - **Symptom** — on a phone held upright, the scroll-scrubbed flight plays a 16:9
   landscape frame letterboxed into a tall viewport.
-- **Cause** — the whole pipeline is landscape end to end: the shipped US chain is
+- **Cause** — the whole pipeline is landscape end to end: the US reference chain is
   1344×768 @ 24 fps, and `genvideo.py` defaults to `"resolution": "720p",
   "aspect_ratio": "16:9"`. There is no 9:16 job spec, no portrait seed frames, and no
   portrait branch in the renderer.

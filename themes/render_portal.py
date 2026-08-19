@@ -16,6 +16,12 @@ any N ≥ 1 works — N dives + N-1 links, or dives only):
   them as data URIs would triple-bloat the page), so this page travels
   together with its video dir (themes/assets/portal/ for the US trip) —
   file:// double-click included.
+  That dir is EMPTY in the git tree: the US chain is a release asset
+  (demo-assets-v1/us-portal-clips.zip), one curl+unzip away — see
+  themes/assets/portal/README.md. It is the style reference and
+  regression fixture only; the shipped portal case is Morocco
+  (examples/morocco-2026/morocco-portal.html, live on the demo site),
+  and every other trip needs its own chain.
 
 Usage: python3 render_portal.py <plan.geo.json> [--art <file>|none] [--assets DIR] -o out.html
 

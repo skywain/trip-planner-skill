@@ -242,8 +242,10 @@ art 文件也必须能渲染出来。图片按 `--assets` → art 目录 → pla
 唯一需要视频素材的主题:要么在云上跑 `genvideo.py`(`google/veo-3.1-lite`,720p,约
 $0.03/秒 → 一条十个世界的链条大约 $3;只在一段 4 秒片子上冒烟测过,$0.12),要么用本地 GPU
 (作者的回归测试素材来自 RTX 5090 上的 ComfyUI,经 `themes/build_portal_jobs.py` 生成)。
-`themes/assets/portal/` 里附带的那条链条(19 段片子,约 35 MB)属于催生这套设计的那趟
-美国行程;换一趟旅行就得有自己的一套。
+催生这套设计的那条美国链条(19 段片子,约 35 MB)是风格参考,它不在仓库树里,而是发布成了
+[release 资产](https://github.com/skywain/trip-planner-skill/releases/download/demo-assets-v1/us-portal-clips.zip)
+—— 一条 `curl` + `unzip` 就能还原进 `themes/assets/portal/`([命令](themes/assets/portal/README.md))。
+随仓库出货的 portal 案例是摩洛哥(demo 站上有实时页面);换一趟旅行就得有自己的一套。
 
 **没有生图能力?照样是设计版页面。** 两条命令,计划就能出成一个真正的主题页面,而不是降级成
 朴素文字:
@@ -374,7 +376,8 @@ themes/
                               素材流水线(png→webp、抠图、拼版切分、manifest、portal 任务)
   ART-SCHEMA.md               art.json 契约(唯一副本)
   assets/                     图库:444 张 webp(301 个词干)、Caveat 字体、manifest.json、
-                              IMAGE-LIBRARY.md(按主题索引)、portal/*.mp4(19 段)
+                              IMAGE-LIBRARY.md(按主题索引)、portal/(视频伴生目录 ——
+                              仓库树里是空的,还原命令见其 README.md)
     stock/                    素材库:14 张大区封面 + 66 个抠图(161 张 webp,5.2 MB)、
                               index.json(查找表:archetype、225 个 ISO2、关键词、声明文案)、README.md
 assets/plan.example.json      schema 模板 —— 复制一份,填掉 PLACEHOLDER 再渲染(或加 --force 先预览)
@@ -388,8 +391,9 @@ docs/
   KNOWN-ISSUES.md             30 条缺陷与硬性限制(29 条未修 / 已排期,1 条已解决),每条带来源指针,外加路线图
 ```
 
-不在仓库里的东西:个人旅行数据(`trips/`)、PNG 原图,以及 `gen.py` / `genvideo.py`
-读取的 OpenRouter 凭证文件 `themes/.auth_header`。
+不在仓库里的东西:个人旅行数据(`trips/`)、PNG 原图、美国 portal 参考链条
+(`themes/assets/portal/*.mp4` —— `demo-assets-v1` release 资产),以及 `gen.py` / `genvideo.py`
+读取的 OpenRouter 凭证文件 `themes/.auth_header`。克隆下来**约 48 MB**。
 
 ## 核验方式
 
@@ -469,8 +473,8 @@ macOS 且 Google Chrome 装在 `/Applications` 下(路径写死)。用附带图�
 - [Nager.Date](https://date.nager.at/)、[Open-Meteo](https://open-meteo.com/)、
   [frankfurter.dev](https://frankfurter.dev/)、[open.er-api.com](https://www.exchangerate-api.com/)
   —— 节假日、天气、汇率。
-- 生成图片:`openai/gpt-image-2`,经 [OpenRouter](https://openrouter.ai/)。随仓库附带的
-  portal 片子(`themes/assets/portal/`,19 段 mp4)和作品展示里的摩洛哥 portal 素材,都是
+- 生成图片:`openai/gpt-image-2`,经 [OpenRouter](https://openrouter.ai/)。美国 portal 参考
+  链条(19 段 mp4,`demo-assets-v1` release 资产)和作品展示里的摩洛哥 portal 素材,都是
   在本地用 ComfyUI 跑 MiniMax-H3 渲染的;`genvideo.py` 里的云端替代方案是经 OpenRouter 的
   `google/veo-3.1-lite`(默认)或 `minimax/hailuo-3`。
 

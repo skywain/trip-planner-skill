@@ -120,7 +120,7 @@ v1(build_page/render_theme)也引用本组,不影响复用。
 
 ## 8 Portal 视频底图(i2v 种子帧,**不嵌页面**)— 13
 portal-nyc / portal-yellowstone(旧 1:1)+ portal-{nyc,stadium,saltlake,yellowstone,teton,goldengate,yosemite,waikiki,volcano,diamondhead}-w + portal-nyc-w2(16:9 宽版,各 1.5–2.0MB png)。
-仅被 `build_portal_jobs.py` 当生视频输入;页面用的是 `themes/assets/portal/*.mp4`(19 条 37MB),详见 portal-theme 记忆。
+仅被 `build_portal_jobs.py` 当生视频输入;页面用的是 portal 的 mp4 伴生文件。美国参考链条(19 条,约 35MB)是 release 资产,不在仓库树里 —— `portal/` 在新克隆里是空的,还原命令见 [`portal/README.md`](portal/README.md);随仓库出货的 portal 案例是摩洛哥。详见 portal-theme 记忆。
 
 ## 9 wishlist 增补(2026-08-13,owner「全补上」;引用列由接入方更新)
 

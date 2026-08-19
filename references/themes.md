@@ -165,8 +165,11 @@ Footage can come from the agent's **own native video generation** if it has one 
   over HTTP, direct `src` fallback on `file://` so double-click always works.
 - Art (`themes.portal`, contract in the renderer docstring): `intro`, `outro`,
   `video_dir` (relative to the art file), `clips` (`file/dur/off/kind/day`).
-- Limits: **the "only when footage exists" theme** — the shipped chain (19 clips,
-  ~35 MB in `themes/assets/portal/`) is the US trip's; another trip needs its own
+- Limits: **the "only when footage exists" theme** — the US reference chain (19 clips,
+  ~35 MB) is a release asset, **not in the tree**: `themes/assets/portal/` is empty in a
+  fresh clone and [its README](../themes/assets/portal/README.md) has the one-line
+  curl+unzip restore. The shipped portal case is Morocco (live on the demo site); the US
+  chain is the style reference / pipeline fixture only, so another trip needs its own
   clips (build recipe: `build_portal_jobs.py --spec worlds.json` + a ComfyUI i2v
   box; sampler `STEPS` defaults to **10** since 2026-08-16 — same look as 20 to the
   owner's eye, half the wall clock, ≈21 min for 5 dives + 4 links). Videos stay
