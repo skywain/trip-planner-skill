@@ -76,19 +76,48 @@ PORTAL_DEST = os.path.join("examples", "morocco-2026", "portal")
 
 # One entry per card, in gallery order. `page` doubles as the repo-relative
 # source path and the site-relative href — the site mirrors the repo layout.
+# `feature: True` cards render half-width at the top of the grid (the default
+# theme + the flagship video theme); the rest render as thirds below them.
+# Every visible string carries a `*_zh` sibling — the page ships both and the
+# language toggle shows exactly one.
 THEMES = [
     {
         "slug": "illustrated",
         "name": "Illustrated",
         "zh": "插画版",
+        "feature": True,
         "page": "examples/japan-2026/japan-illustrated.html",
         "cover": "showcase/illustrated-cover.webp",
-        "trip": "Japan · 8 days · en",
+        "trip": "Japan · 8 days · English page",
+        "trip_zh": "日本 · 8 天 · 英文页面",
         "blurb": "A painted picture-book on paper: the cover is the menu, each day "
                  "a tinted riso plate with a ghost numeral, and the whole scroll "
                  "exports as one long image.",
+        "blurb_zh": "纸上的手绘绘本:封面即目录,每一天是一张带幽灵数字的 riso "
+                    "色版,整卷可导出为一张长图。",
         "plan": "examples/japan-2026/japan.geo.json",
         "art": "examples/japan-2026/japan.art.json",
+    },
+    {
+        "slug": "portal",
+        "name": "Portal",
+        "zh": "穿越版",
+        "feature": True,
+        "page": "examples/morocco-2026/morocco-portal.html",
+        "cover": "showcase/portal-cover.webp",
+        "trip": "Morocco · 10 days · English page",
+        "trip_zh": "摩洛哥 · 10 天 · 英文页面",
+        "blurb": "Scrolling is flying: five 3D worlds in one unbroken take, dive → "
+                 "frame-chained link → dive, the day's plan laid over the footage. "
+                 "Let go and it holds; scroll back and it flies in reverse.",
+        "blurb_zh": "滚动即飞行:五个 3D 世界一镜到底,俯冲 → 帧接帧转场 → 俯冲,"
+                    "当日行程叠在画面上。松手即停,回滚即倒放。",
+        "plan": "examples/morocco-2026/morocco.geo.json",
+        "art": "examples/morocco-2026/morocco.art.json",
+        "pill": "video · 16 MB · scroll = fly",
+        "pill_zh": "视频 · 16 MB · 滚动=飞行",
+        "hint": "Silent — nothing to mute; autoplay may need one tap.",
+        "hint_zh": "视频无声,无需静音;自动播放可能需要点一下。",
     },
     {
         "slug": "clay",
@@ -96,10 +125,13 @@ THEMES = [
         "zh": "黏土版",
         "page": "examples/china-2026/china-clay.html",
         "cover": "showcase/clay-cover.webp",
-        "trip": "China · 8 days · en",
+        "trip": "China · 8 days · English page",
+        "trip_zh": "中国 · 8 天 · 英文页面",
         "blurb": "One continuous claymation landscape scrolled end to end, a "
                  "modelled road threading the milestone stones from one day to "
                  "the next.",
+        "blurb_zh": "一整条黏土定格动画式的连续风景从头滚到尾,一条捏出来的路"
+                    "把每天的里程碑石串在一起。",
         "plan": "examples/china-2026/china.geo.json",
         "art": "examples/china-2026/china.art.json",
     },
@@ -109,10 +141,13 @@ THEMES = [
         "zh": "夜航版",
         "page": "examples/mexico-2026/mexico-noir.html",
         "cover": "showcase/noir-cover.webp",
-        "trip": "Mexico · 10 days · en",
+        "trip": "Mexico · 10 days · English page",
+        "trip_zh": "墨西哥 · 10 天 · 英文页面",
         "blurb": "One night-negative tracking shot: full-bleed frames that "
                  "cross-fade as you scroll, monospace body, days dissolving into "
                  "each other.",
+        "blurb_zh": "一镜到底的夜间负片跟拍:满幅画面随滚动交叉淡化,等宽字体"
+                    "正文,一天溶进另一天。",
         "plan": "examples/mexico-2026/mexico.geo.json",
         "art": "examples/mexico-2026/mexico.art.json",
     },
@@ -122,10 +157,13 @@ THEMES = [
         "zh": "玻璃版",
         "page": "examples/morocco-2026/morocco-glass.html",
         "cover": "showcase/glass-cover.webp",
-        "trip": "Morocco · 10 days · en",
+        "trip": "Morocco · 10 days · English page",
+        "trip_zh": "摩洛哥 · 10 天 · 英文页面",
         "blurb": "Liquid-glass panes floating over a fixed world of cross-fading "
                  "photographs, one pane per world — the itinerary reads like a "
                  "native travel app.",
+        "blurb_zh": "液态玻璃面板悬浮在交叉淡化的照片世界之上,一景一板 —— "
+                    "行程读起来像原生旅行 App。",
         "plan": "examples/morocco-2026/morocco.geo.json",
         "art": "examples/morocco-2026/morocco.art.json",
     },
@@ -135,10 +173,13 @@ THEMES = [
         "zh": "手账版",
         "page": "examples/mexico-2026/mexico-journal.html",
         "cover": "showcase/journal-cover.webp",
-        "trip": "Mexico · 10 days · en",
+        "trip": "Mexico · 10 days · English page",
+        "trip_zh": "墨西哥 · 10 天 · 英文页面",
         "blurb": "A vintage travel journal on a dark desk: tape, stamps, postmarks "
                  "and polaroids, with a Day of the Dead week planned around the "
                  "crowd.",
+        "blurb_zh": "深色书桌上的复古旅行手账:胶带、邮票、邮戳与拍立得,亡灵节"
+                    "一周按人流错峰安排。",
         "plan": "examples/mexico-2026/mexico.geo.json",
         "art": "examples/mexico-2026/mexico.art.json",
     },
@@ -148,10 +189,13 @@ THEMES = [
         "zh": "Zine 版",
         "page": "examples/japan-2026/japan-zine.html",
         "cover": "showcase/zine-cover.webp",
-        "trip": "Japan · 8 days · en",
+        "trip": "Japan · 8 days · English page",
+        "trip_zh": "日本 · 8 天 · 英文页面",
         "blurb": "Torn riso-poster collage with giant vertical two-colour glyphs, "
                  "hand-set headlines and film-grain plates, built like a "
                  "photocopied fan zine.",
+        "blurb_zh": "撕边 riso 海报拼贴,巨大的竖排双色字,手排标题与胶片颗粒"
+                    "图版,像一本影印出来的同人志。",
         "plan": "examples/japan-2026/japan.geo.json",
         "art": "examples/japan-2026/japan.art.json",
     },
@@ -161,27 +205,15 @@ THEMES = [
         "zh": "闪屏版",
         "page": "examples/china-2026/china-splash.html",
         "cover": "showcase/splash-cover.webp",
-        "trip": "China · 8 days · en",
+        "trip": "China · 8 days · English page",
+        "trip_zh": "中国 · 8 天 · 英文页面",
         "blurb": "A game splash screen stretched into a scroll: floating "
                  "day-islands under a chained sky, routed so the Wall and the "
                  "Forbidden City both land on weekdays.",
+        "blurb_zh": "游戏闪屏拉成长卷:锁链天空下漂浮的日程岛屿,路线特意让"
+                    "长城与故宫都落在工作日。",
         "plan": "examples/china-2026/china.geo.json",
         "art": "examples/china-2026/china.art.json",
-    },
-    {
-        "slug": "portal",
-        "name": "Portal",
-        "zh": "穿越版",
-        "page": "examples/morocco-2026/morocco-portal.html",
-        "cover": "showcase/portal-cover.webp",
-        "trip": "Morocco · 10 days · en",
-        "blurb": "Scrolling is flying: five 3D worlds in one unbroken take, dive → "
-                 "frame-chained link → dive, the day's plan laid over the footage. "
-                 "Let go and it holds; scroll back and it flies in reverse.",
-        "plan": "examples/morocco-2026/morocco.geo.json",
-        "art": "examples/morocco-2026/morocco.art.json",
-        "pill": "video · 16 MB · scroll = fly",
-        "hint": "Silent — nothing to mute; autoplay may need one tap.",
     },
 ]
 
@@ -216,6 +248,7 @@ ZH_PAGES = [
         "page": "examples/turkey-2026/turkey-clay.html",
         "label": "turkey-clay.html",
         "theme": "黏土",
+        "theme_en": "Clay",
         "plan": "examples/turkey-2026/turkey.geo.json",
         "art": "examples/turkey-2026/turkey.art.json",
     },
@@ -223,6 +256,7 @@ ZH_PAGES = [
         "page": "examples/nordic-2026/nordic-noir.html",
         "label": "nordic-noir.html",
         "theme": "夜航",
+        "theme_en": "Noir",
         "plan": "examples/nordic-2026/nordic.geo.json",
         "art": "examples/nordic-2026/nordic.art.json",
     },
@@ -230,6 +264,7 @@ ZH_PAGES = [
         "page": "examples/vietnam-2026/vietnam-zine.html",
         "label": "vietnam-zine.html",
         "theme": "Zine",
+        "theme_en": "Zine",
         "plan": "examples/vietnam-2026/vietnam.geo.json",
         "art": "examples/vietnam-2026/vietnam.art.json",
     },
@@ -252,11 +287,25 @@ EXAMPLE_JSON = sorted(set(
 # --------------------------------------------------------------------------
 
 HEAD = """<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trip Planner Skill — live demos</title>
+<script>
+/* Pick the language before first paint: saved choice, else the browser's.
+   localStorage can throw (privacy modes) — that must not eat the browser
+   fallback, so only the read sits in the try. */
+(function () {
+  var s = null;
+  try { s = localStorage.getItem("tps-lang"); } catch (e) {}
+  var l = (s === "zh" || s === "en") ? s
+    : (((navigator.language || "") + "").toLowerCase().slice(0, 2) === "zh" ? "zh" : "en");
+  document.documentElement.setAttribute("data-lang", l);
+  document.documentElement.setAttribute("lang", l === "zh" ? "zh-CN" : "en");
+})();
+</script>
+<noscript><style>.lang-toggle { display: none; }</style></noscript>
 <meta name="description" content="Eight themed, offline, self-contained trip pages rendered by the trip-planner Agent Skill. Open one — it is the real deliverable, no server needed.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Trip Planner Skill — live demos">
@@ -267,7 +316,7 @@ HEAD = """<!DOCTYPE html>
 <meta name="twitter:image" content="__SITE__showcase/hero-grid.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Noto+Serif+SC:wght@500;700&display=swap">
 <style>
   :root {
     --paper:   #f6f1e7;
@@ -288,6 +337,17 @@ HEAD = """<!DOCTYPE html>
   * { box-sizing: border-box; }
 
   html { -webkit-text-size-adjust: 100%; }
+
+  /* One language at a time: every visible string exists twice (.l-en / .l-zh)
+     and the root's data-lang shows exactly one set. No-JS default is English. */
+  html[data-lang="en"] .l-zh { display: none !important; }
+  html[data-lang="zh"] .l-en { display: none !important; }
+
+  /* Chinese headlines get a real serif instead of the system fallback;
+     Fraunces stays first so Latin glyphs inside them keep matching. */
+  html[data-lang="zh"] {
+    --serif: 'Fraunces', 'Noto Serif SC', 'Songti SC', 'STSong', serif;
+  }
 
   body {
     margin: 0;
@@ -323,7 +383,16 @@ HEAD = """<!DOCTYPE html>
 
   /* ---------- masthead ---------- */
 
-  header { padding: 72px 0 40px; }
+  header { padding: 34px 0 40px; }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 18px;
+    flex-wrap: wrap;
+    margin: 0 0 44px;
+  }
 
   .eyebrow {
     font-family: var(--mono);
@@ -331,8 +400,39 @@ HEAD = """<!DOCTYPE html>
     letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--ink-3);
-    margin: 0 0 18px;
+    margin: 0;
   }
+
+  .lang-toggle {
+    display: inline-flex;
+    padding: 3px;
+    gap: 2px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: rgba(255,255,255,.6);
+  }
+
+  .lang-toggle button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--ink-2);
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+
+  .lang-toggle button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .lang-toggle button[aria-pressed="false"]:hover { color: var(--accent-d); }
 
   h1 {
     font-family: var(--serif);
@@ -394,10 +494,12 @@ HEAD = """<!DOCTYPE html>
 
   /* ---------- grid ---------- */
 
+  /* Six tracks: two half-width feature cards on the first row (the default
+     theme + the video theme), then rows of three. */
   .grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 34px 26px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 40px 26px;
     padding-bottom: 8px;
   }
 
@@ -405,7 +507,14 @@ HEAD = """<!DOCTYPE html>
     display: flex;
     flex-direction: column;
     min-width: 0;
+    grid-column: span 2;
   }
+
+  .card.feature { grid-column: span 3; }
+
+  .card.feature h2 { font-size: 26px; }
+
+  .card.feature .blurb { font-size: 15.5px; max-width: 58ch; }
 
   .shot {
     display: block;
@@ -424,9 +533,11 @@ HEAD = """<!DOCTYPE html>
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform .35s ease;
   }
 
   .card:hover .shot { transform: translateY(-3px); box-shadow: var(--shadow-h); }
+  .card:hover .shot img { transform: scale(1.035); }
 
   .pill {
     position: absolute;
@@ -449,11 +560,6 @@ HEAD = """<!DOCTYPE html>
     letter-spacing: -.01em;
     line-height: 1.25;
     margin: 16px 0 3px;
-  }
-
-  .card h2 .zh {
-    font-weight: 500;
-    color: var(--ink-2);
   }
 
   .trip {
@@ -545,13 +651,22 @@ HEAD = """<!DOCTYPE html>
 
   @media (max-width: 980px) {
     .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
-    header { padding: 56px 0 32px; }
+    .card { grid-column: span 1; }
+    .card.feature { grid-column: span 2; }
+    header { padding: 28px 0 32px; }
+    .topbar { margin-bottom: 36px; }
   }
 
   @media (max-width: 560px) {
     .wrap { padding: 0 18px; }
     .grid { grid-template-columns: minmax(0, 1fr); gap: 34px; }
-    header { padding: 44px 0 28px; }
+    .card, .card.feature { grid-column: span 1; }
+    .card.feature h2 { font-size: 22px; }
+    .card.feature .blurb { font-size: 14.5px; }
+    header { padding: 20px 0 28px; }
+    /* keep the toggle on the eyebrow's row — top-right even on phones */
+    .topbar { margin-bottom: 30px; flex-wrap: nowrap; }
+    .eyebrow { font-size: 10px; letter-spacing: .08em; }
   }
 </style>
 </head>
@@ -559,15 +674,22 @@ HEAD = """<!DOCTYPE html>
 <div class="wrap">
 
 <header>
-  <p class="eyebrow">Trip Planner Skill · demo site</p>
-  <h1>Eight themes.<span class="live">One real page each.</span></h1>
-  <p class="pitch">Eight themed, offline, self-contained pages rendered by the trip-planner
-  skill — open one, it is the real deliverable, ~1.5&nbsp;MB, no server.</p>
-  <p class="langnote">Pages are written in whichever language the trip was planned in. The
-  eight below are English; three Chinese editions are linked under the grid. Site copies are web-optimised (pictures load separately, exports still work); the single-file originals are in the repo’s <code>examples/</code>.</p>
+  <div class="topbar">
+    <p class="eyebrow"><span class="l-en">Trip Planner Skill · demo site</span><span class="l-zh">Trip Planner Skill · 示例站</span></p>
+    <div class="lang-toggle" role="group" aria-label="Language / 语言">
+      <button type="button" data-set-lang="zh" lang="zh-CN" aria-pressed="false">中文</button>
+      <button type="button" data-set-lang="en" lang="en" aria-pressed="true">EN</button>
+    </div>
+  </div>
+  <h1><span class="l-en">Eight themes.<span class="live">One real page each.</span></span><span class="l-zh">八种主题。<span class="live">每种一页真实成品。</span></span></h1>
+  <p class="pitch"><span class="l-en">Eight themed, offline, self-contained pages rendered by the trip-planner
+  skill — open one, it is the real deliverable, ~1.5&nbsp;MB, no server.</span><span class="l-zh">八个主题化、离线、单文件的旅行页面,由 trip-planner
+  skill 渲染 —— 点开任何一个,就是交付给用户的真实成品,约 1.5&nbsp;MB,无需服务器。</span></p>
+  <p class="langnote"><span class="l-en">Pages are written in whichever language the trip was planned in. The
+  eight below are English; three Chinese editions are linked under the grid. Site copies are web-optimised (pictures load separately, exports still work); the single-file originals are in the repo’s <code>examples/</code>.</span><span class="l-zh">页面语言跟随规划时用户提问的语言:下面八个示例是英文页,网格下方另有三个中文页。站点副本经过加载优化(图片单独加载,导出功能不受影响);单文件原版在仓库的 <code>examples/</code> 目录。</span></p>
   <nav class="toplinks">
-    <a class="toplink" href="__REPO__">The repo on GitHub&nbsp;↗</a>
-    <a class="toplink" href="__REPO__#showcase">README · Showcase&nbsp;↗</a>
+    <a class="toplink" href="__REPO__"><span class="l-en">The repo on GitHub&nbsp;↗</span><span class="l-zh">GitHub 仓库&nbsp;↗</span></a>
+    <a class="toplink" href="__REPO__#showcase"><span class="l-en">README · Showcase&nbsp;↗</span><span class="l-zh">README · 案例展示&nbsp;↗</span></a>
     <a class="toplink" href="__REPO__/blob/main/SKILL.md">SKILL.md&nbsp;↗</a>
   </nav>
 </header>
@@ -579,14 +701,36 @@ HEAD = """<!DOCTYPE html>
 
 FOOT = """</main>
 
-<p class="also"><strong>Also in Chinese 中文版</strong>__ZHROW__</p>
+<p class="also"><strong><span class="l-en">Also in Chinese</span><span class="l-zh">中文示例页</span></strong>__ZHROW__</p>
 
 <footer>
-  <span>Pictures generated with gpt-image-2 · Caveat (OFL) · Lucide (ISC) · MIT · © 2026 skywain</span>
-  <span><a href="__REPO__">Back to GitHub&nbsp;↗</a></span>
+  <span><span class="l-en">Pictures generated with gpt-image-2</span><span class="l-zh">图片由 gpt-image-2 生成</span> · Caveat (OFL) · Lucide (ISC) · MIT · © 2026 skywain</span>
+  <span><a href="__REPO__"><span class="l-en">Back to GitHub&nbsp;↗</span><span class="l-zh">返回 GitHub&nbsp;↗</span></a></span>
 </footer>
 
 </div>
+<script>
+/* The head script already picked the language; this wires the toggle. */
+(function () {
+  var buttons = document.querySelectorAll("[data-set-lang]");
+  function apply(l) {
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.setAttribute("lang", l === "zh" ? "zh-CN" : "en");
+    for (var i = 0; i < buttons.length; i++) {
+      var b = buttons[i];
+      b.setAttribute("aria-pressed", b.getAttribute("data-set-lang") === l ? "true" : "false");
+    }
+  }
+  apply(document.documentElement.getAttribute("data-lang") === "zh" ? "zh" : "en");
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function () {
+      var l = this.getAttribute("data-set-lang");
+      apply(l);
+      try { localStorage.setItem("tps-lang", l); } catch (e) {}
+    });
+  }
+})();
+</script>
 </body>
 </html>
 """
@@ -598,41 +742,57 @@ def esc(text):
                 .replace(">", "&gt;").replace('"', "&quot;"))
 
 
+def bi(en, zh):
+    """One visible string, both languages; CSS shows exactly one."""
+    return ('<span class="l-en">%s</span><span class="l-zh">%s</span>'
+            % (esc(en), esc(zh)))
+
+
 def render_card(theme):
+    feature = " feature" if theme.get("feature") else ""
+    # Feature covers sit above the fold — load them eagerly; the rest lazily.
+    loading = "" if theme.get("feature") else ' loading="lazy"'
+
     pill = ""
     if theme.get("pill"):
-        pill = '\n      <span class="pill">%s</span>' % esc(theme["pill"])
+        pill = ('\n      <span class="pill">%s</span>'
+                % bi(theme["pill"], theme.get("pill_zh", theme["pill"])))
 
     hint = ""
     if theme.get("hint"):
-        hint = '\n    <p class="hint">%s</p>' % esc(theme["hint"])
+        hint = ('\n    <p class="hint">%s</p>'
+                % bi(theme["hint"], theme.get("hint_zh", theme["hint"])))
 
     alt = "%s theme cover — %s" % (theme["name"], theme["trip"])
 
-    return """  <article class="card">
+    return """  <article class="card{feature}">
     <a class="shot" href="{page}">
-      <img src="{cover}" alt="{alt}" loading="lazy" width="640" height="360">{pill}
+      <img src="{cover}" alt="{alt}"{loading} width="640" height="360">{pill}
     </a>
-    <h2>{name} <span class="zh">· {zh}</span></h2>
+    <h2>{name}</h2>
     <p class="trip">{trip}</p>
     <p class="blurb">{blurb}</p>{hint}
     <div class="actions">
-      <a class="btn" href="{page}">Open the page ↗</a>
-      <span class="src"><a href="{plan}">plan</a> + <a href="{art}">art JSON</a></span>
+      <a class="btn" href="{page}">{open}</a>
+      <span class="src"><a href="{plan}">{src_plan}</a> + <a href="{art}">{src_art}</a></span>
     </div>
   </article>
 """.format(
+        feature=feature,
         page=esc(theme["page"]),
         cover=esc(theme["cover"]),
         alt=esc(alt),
+        loading=loading,
         pill=pill,
-        name=esc(theme["name"]),
-        zh=esc(theme["zh"]),
-        trip=esc(theme["trip"]),
-        blurb=esc(theme["blurb"]),
+        name=bi(theme["name"], theme["zh"]),
+        trip=bi(theme["trip"], theme["trip_zh"]),
+        blurb=bi(theme["blurb"], theme["blurb_zh"]),
         hint=hint,
+        open=bi("Open the page ↗", "打开页面 ↗"),
         plan=esc(theme["plan"]),
         art=esc(theme["art"]),
+        src_plan=bi("plan", "行程"),
+        src_art=bi("art JSON", "美术 JSON"),
     )
 
 
@@ -642,14 +802,17 @@ def render_zh_row():
     for zh in ZH_PAGES:
         bits.append(
             '<span class="sep">·</span> <a href="%s"><code>%s</code></a> (%s)'
-            % (esc(zh["page"]), esc(zh["label"]), esc(zh["theme"]))
+            % (esc(zh["page"]), esc(zh["label"]),
+               bi(zh["theme_en"], zh["theme"]))
         )
     return " " + " ".join(bits)
 
 
 def render_index():
+    ordered = ([t for t in THEMES if t.get("feature")]
+               + [t for t in THEMES if not t.get("feature")])
     parts = [HEAD]
-    for theme in THEMES:
+    for theme in ordered:
         parts.append(render_card(theme))
     parts.append(FOOT)
     html = "".join(parts)

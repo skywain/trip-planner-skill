@@ -166,7 +166,11 @@ Style, when you do ask, is one line: the eight names with the showcase link
 (https://skywain.github.io/trip-planner-skill/; offline: render
 `themes/render_picker.py`), "skip = illustrated". Set the plan's top-level `"lang"` (`zh` | `en`,
 output-template.md §Plan language) from the language the user asked in — the rendered
-pages' UI follows it; `--lang` overrides.
+pages' UI follows it; `--lang` overrides. `lang` covers the page chrome only: **every
+content string you write into the plan — day titles, notes, tips, checklist rows,
+decisions, hotel blurbs — is in the user's language too.** The research sources are
+mostly English and will drag your prose toward English if you let them; a zh user
+receiving an English page is a shipped bug, not a style choice (self-check row, Phase 6).
 
 ## Phase 1 — Country brief (once per destination, ≤10 lines of output)
 
@@ -280,7 +284,15 @@ overnight-bag-only). Output 1 pick + 1 backup per leg.
 When ≥3 cities and subagents are available, fan out one agent per city; each prompt
 must include: the dates, the user's interests + pace, **search budget ≤8**, an
 explicit **"do not run geocoding"** line (parallel agents would break Nominatim's
-1 req/s policy — the assembler geocodes once, centrally), and the exact return
+1 req/s policy — the assembler geocodes once, centrally), **the plan language**
+(`plan.lang`, with one line telling the agent every reader-facing string in its
+returned block — `label`, `what`, `note`, `why`, hotel blurbs, checklist rows,
+`unverified[]` — is written in that language; its sources will mostly be
+English, and English notes pasted verbatim are how a zh plan goes half-English.
+Machine fields keep the schema's form regardless: `stops[].query` stays
+geocoder-friendly romanized/destination-local, and `kind`/`tag`/`verify` keep
+the English enum words the renderers switch on),
+and the exact return
 format from references/output-template.md §city-block — **plan-JSON day objects,
 insertable verbatim**, not a summary. Hard rule for the prompt: **city agents do not
 make visa/entry judgements** — no visa rows in their `checklist_items`, no "you need
@@ -388,6 +400,13 @@ portal renders neither — on portal the chat summary carries it):
   the bags are solved before the first anchor (checked / stored / hotel-held);
   otherwise 1** (same sentence in scheduling.md §Day types)
 - Every price has source + as-of date; every bookable line has a link
+- **Language**: `plan.lang` matches the language the user asked in, and every
+  reader-facing string in the plan (day titles, notes, tips, checklist rows,
+  decisions, hotel blurbs) is in that language — an English fragment copied verbatim
+  from a source into a zh plan gets translated, not shipped. Proper nouns stay in
+  their native form with a gloss where useful (浅草寺 Sensō-ji); machine fields are
+  exempt (`stops[].query` stays geocoder-friendly, `kind`/`tag`/`verify` keep their
+  English enum words)
 
 **Deliver — the deliverable is a themed page, never a plain text one.** Render
 `plan.geo.json` through the theme chosen in Phase 0 (`prefs.theme`, default
