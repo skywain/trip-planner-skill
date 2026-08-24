@@ -293,14 +293,12 @@ HEAD = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trip Planner Skill — live demos</title>
 <script>
-/* Pick the language before first paint: saved choice, else the browser's.
-   localStorage can throw (privacy modes) — that must not eat the browser
-   fallback, so only the read sits in the try. */
+/* Pick the language before first paint. The site defaults to English —
+   only an explicit earlier toggle choice (saved in localStorage) wins. */
 (function () {
   var s = null;
   try { s = localStorage.getItem("tps-lang"); } catch (e) {}
-  var l = (s === "zh" || s === "en") ? s
-    : (((navigator.language || "") + "").toLowerCase().slice(0, 2) === "zh" ? "zh" : "en");
+  var l = (s === "zh" || s === "en") ? s : "en";
   document.documentElement.setAttribute("data-lang", l);
   document.documentElement.setAttribute("lang", l === "zh" ? "zh-CN" : "en");
 })();
@@ -381,17 +379,26 @@ HEAD = """<!DOCTYPE html>
 
   a { color: var(--accent); }
 
-  /* ---------- masthead ---------- */
+  /* ---------- masthead ----------
+     Deliberately shallow: the theme covers are the product, so the first
+     screen must show them — everything above the grid stays under ~200px. */
 
-  header { padding: 34px 0 40px; }
+  header { padding: 18px 0 24px; }
 
   .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px 18px;
+    gap: 10px 18px;
     flex-wrap: wrap;
-    margin: 0 0 44px;
+    margin: 0 0 22px;
+  }
+
+  .topnav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 10px;
   }
 
   .eyebrow {
@@ -405,6 +412,7 @@ HEAD = """<!DOCTYPE html>
 
   .lang-toggle {
     display: inline-flex;
+    flex-shrink: 0;   /* the one control that must never squash or wrap */
     padding: 3px;
     gap: 2px;
     border: 1px solid var(--rule);
@@ -420,6 +428,7 @@ HEAD = """<!DOCTYPE html>
     font-size: 13px;
     font-weight: 600;
     line-height: 1;
+    white-space: nowrap;
     color: var(--ink-2);
     padding: 7px 14px;
     border-radius: 999px;
@@ -437,50 +446,36 @@ HEAD = """<!DOCTYPE html>
   h1 {
     font-family: var(--serif);
     font-weight: 700;
-    font-size: clamp(38px, 6.4vw, 68px);
-    line-height: 1.04;
-    letter-spacing: -.018em;
-    margin: 0 0 20px;
-    max-width: 16ch;
+    font-size: clamp(26px, 3.4vw, 40px);
+    line-height: 1.12;
+    letter-spacing: -.014em;
+    margin: 0 0 8px;
   }
 
   h1 .live {
-    display: block;
     color: var(--accent);
     font-style: italic;
   }
 
   .pitch {
-    font-size: clamp(17px, 1.6vw, 20px);
-    line-height: 1.55;
+    /* the +8px keeps the middle term live across the whole range:
+       17px from ~818px viewports down to a 15.5px floor on phones */
+    font-size: clamp(15.5px, 1.1vw + 8px, 17px);
+    line-height: 1.5;
     color: var(--ink-2);
-    max-width: 62ch;
-    margin: 0 0 12px;
-  }
-
-  .langnote {
-    font-size: 14.5px;
-    color: var(--ink-3);
-    max-width: 62ch;
-    margin: 0 0 28px;
-  }
-
-  .toplinks {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 12px;
-    align-items: center;
+    max-width: 78ch;
+    margin: 0;
   }
 
   .toplink {
     display: inline-block;
-    padding: 8px 15px;
+    padding: 6px 12px;
     border: 1px solid var(--rule);
     border-radius: 999px;
     background: rgba(255,255,255,.5);
     color: var(--ink-2);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     transition: border-color .15s, color .15s, background .15s;
   }
 
@@ -489,7 +484,7 @@ HEAD = """<!DOCTYPE html>
   .rule {
     height: 1px;
     background: var(--rule);
-    margin: 0 0 40px;
+    margin: 0 0 26px;
   }
 
   /* ---------- grid ---------- */
@@ -611,10 +606,23 @@ HEAD = """<!DOCTYPE html>
   .src a { color: var(--ink-3); text-decoration-color: var(--rule); }
   .src a:hover { color: var(--accent-d); }
 
-  /* ---------- the Chinese editions ---------- */
+  /* ---------- notes under the grid ---------- */
+
+  .sitenote {
+    margin: 40px 0 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--ink-2);   /* ink-3 fails AA at this size */
+    max-width: 88ch;
+  }
+
+  .sitenote code {
+    font-family: var(--mono);
+    font-size: 12px;
+  }
 
   .also {
-    margin-top: 42px;
+    margin-top: 16px;
     padding: 15px 20px;
     border: 1px solid var(--rule);
     border-radius: 10px;
@@ -653,8 +661,23 @@ HEAD = """<!DOCTYPE html>
     .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
     .card { grid-column: span 1; }
     .card.feature { grid-column: span 2; }
-    header { padding: 28px 0 32px; }
-    .topbar { margin-bottom: 36px; }
+    header { padding: 14px 0 20px; }
+    .topbar { margin-bottom: 16px; }
+  }
+
+  /* Below ~700px the eyebrow + two pills + toggle no longer share a row:
+     drop the pills, forbid wrapping, and let the eyebrow ellipsize — the
+     toggle must stay top-right on one line at every width. */
+  @media (max-width: 700px) {
+    .topbar { flex-wrap: nowrap; }
+    .topnav .toplink { display: none; }
+    .eyebrow {
+      flex-shrink: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   @media (max-width: 560px) {
@@ -663,9 +686,8 @@ HEAD = """<!DOCTYPE html>
     .card, .card.feature { grid-column: span 1; }
     .card.feature h2 { font-size: 22px; }
     .card.feature .blurb { font-size: 14.5px; }
-    header { padding: 20px 0 28px; }
-    /* keep the toggle on the eyebrow's row — top-right even on phones */
-    .topbar { margin-bottom: 30px; flex-wrap: nowrap; }
+    header { padding: 10px 0 16px; }
+    .topbar { margin-bottom: 12px; }
     .eyebrow { font-size: 10px; letter-spacing: .08em; }
   }
 </style>
@@ -676,22 +698,17 @@ HEAD = """<!DOCTYPE html>
 <header>
   <div class="topbar">
     <p class="eyebrow"><span class="l-en">Trip Planner Skill · demo site</span><span class="l-zh">Trip Planner Skill · 示例站</span></p>
-    <div class="lang-toggle" role="group" aria-label="Language / 语言">
-      <button type="button" data-set-lang="zh" lang="zh-CN" aria-pressed="false">中文</button>
-      <button type="button" data-set-lang="en" lang="en" aria-pressed="true">EN</button>
+    <div class="topnav">
+      <a class="toplink" href="__REPO__">GitHub&nbsp;↗</a>
+      <a class="toplink" href="__REPO__/blob/main/SKILL.md">SKILL.md&nbsp;↗</a>
+      <div class="lang-toggle" role="group" aria-label="Language / 语言">
+        <button type="button" data-set-lang="zh" lang="zh-CN" aria-pressed="false">中文</button>
+        <button type="button" data-set-lang="en" lang="en" aria-pressed="true">EN</button>
+      </div>
     </div>
   </div>
-  <h1><span class="l-en">Eight themes.<span class="live">One real page each.</span></span><span class="l-zh">八种主题。<span class="live">每种一页真实成品。</span></span></h1>
-  <p class="pitch"><span class="l-en">Eight themed, offline, self-contained pages rendered by the trip-planner
-  skill — open one, it is the real deliverable, ~1.5&nbsp;MB, no server.</span><span class="l-zh">八个主题化、离线、单文件的旅行页面,由 trip-planner
-  skill 渲染 —— 点开任何一个,就是交付给用户的真实成品,约 1.5&nbsp;MB,无需服务器。</span></p>
-  <p class="langnote"><span class="l-en">Pages are written in whichever language the trip was planned in. The
-  eight below are English; three Chinese editions are linked under the grid. Site copies are web-optimised (pictures load separately, exports still work); the single-file originals are in the repo’s <code>examples/</code>.</span><span class="l-zh">页面语言跟随规划时用户提问的语言:下面八个示例是英文页,网格下方另有三个中文页。站点副本经过加载优化(图片单独加载,导出功能不受影响);单文件原版在仓库的 <code>examples/</code> 目录。</span></p>
-  <nav class="toplinks">
-    <a class="toplink" href="__REPO__"><span class="l-en">The repo on GitHub&nbsp;↗</span><span class="l-zh">GitHub 仓库&nbsp;↗</span></a>
-    <a class="toplink" href="__REPO__#showcase"><span class="l-en">README · Showcase&nbsp;↗</span><span class="l-zh">README · 案例展示&nbsp;↗</span></a>
-    <a class="toplink" href="__REPO__/blob/main/SKILL.md">SKILL.md&nbsp;↗</a>
-  </nav>
+  <h1><span class="l-en">Eight themes. <span class="live">One real page each.</span></span><span class="l-zh">八种主题。<span class="live">每种一页真实成品。</span></span></h1>
+  <p class="pitch"><span class="l-en">Offline, single-file trip pages rendered by the trip-planner skill — open one, it is the real deliverable (~1.5&nbsp;MB, no server).</span><span class="l-zh">离线、单文件的旅行页面,由 trip-planner skill 渲染 —— 点开任何一个,就是交付给用户的真实成品(约 1.5&nbsp;MB,无需服务器)。</span></p>
 </header>
 
 <div class="rule"></div>
@@ -701,11 +718,15 @@ HEAD = """<!DOCTYPE html>
 
 FOOT = """</main>
 
+<p class="sitenote"><span class="l-en">Pages are written in whichever language the trip was planned in — the
+eight above are English. Site copies are web-optimised (pictures load separately, exports still work); the
+single-file originals are in the repo’s <code>examples/</code>.</span><span class="l-zh">页面语言跟随规划时用户提问的语言:上面八个示例是英文页。站点副本经过加载优化(图片单独加载,导出功能不受影响);单文件原版在仓库的 <code>examples/</code> 目录。</span></p>
+
 <p class="also"><strong><span class="l-en">Also in Chinese</span><span class="l-zh">中文示例页</span></strong>__ZHROW__</p>
 
 <footer>
   <span><span class="l-en">Pictures generated with gpt-image-2</span><span class="l-zh">图片由 gpt-image-2 生成</span> · Caveat (OFL) · Lucide (ISC) · MIT · © 2026 skywain</span>
-  <span><a href="__REPO__"><span class="l-en">Back to GitHub&nbsp;↗</span><span class="l-zh">返回 GitHub&nbsp;↗</span></a></span>
+  <span><a href="__REPO__#showcase"><span class="l-en">README · Showcase&nbsp;↗</span><span class="l-zh">README · 案例展示&nbsp;↗</span></a> · <a href="__REPO__"><span class="l-en">Back to GitHub&nbsp;↗</span><span class="l-zh">返回 GitHub&nbsp;↗</span></a></span>
 </footer>
 
 </div>
