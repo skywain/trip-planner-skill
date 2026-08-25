@@ -21,6 +21,9 @@ to crash on it, and `legs` still prints every cell blank).
 {
  "trip": "Japan 12 days",
  "lang": "zh",                                  // zh | en — see §Plan language
+ "tz": "Asia/Tokyo",                            // optional IANA default; days[].tz
+                                                // overrides — cross-tz plans need one
+                                                // of the two set or `sun` refuses
  "prefs": {"theme", "pictures", "travel_style", "lodging", "scenery", "pace", "budget",
            "notes"},                            // Phase 0 intake — see §Intake prefs
  "meta": {"dates", "party", "route", "budget_total", "fx", "generated", "self_check"},
@@ -37,6 +40,11 @@ to crash on it, and `legs` still prints every cell blank).
  "hotels": [{"base", "area", "why", "options": [{"name", "band", "link"}]}],
  "budget": [{"cat", "per_person", "total", "note"}],   // a LIST of rows, not {rows:[]}
  "brief":  {"visa", "holidays", "weather", "money", "connectivity"},
+                                                // extra keys render as their own
+                                                // sections (title = the key), e.g.
+                                                // "safety", "insurance", "baggage",
+                                                // "lookalikes" — see §Booking-artifact
+                                                // conventions
  "unverified": ["anything that survived two searches unverified", ...]
 }
 ```
@@ -194,7 +202,8 @@ follow `scripts/render_plan.py`'s schema field-for-field.
  ],
  "tour_options": [
   {"name": "…", "price": "…含单房差/门票包/非居民费/小费口径…", "schedule": "班期 —
-    静态可核则给核实结论,JS 日历给链接标 unverified", "pickup": "…", "link": "…"}
+    有浏览器则逐日读定价日历后给核实结论(宣传的 Available Days 文案不算数),
+    否则给日历链接标 unverified", "pickup": "…", "link": "…"}
  ],
  "checklist_items": [
   {"item": "…", "deadline": "…", "price": "…", "link": "…", "note": "…"}
@@ -326,6 +335,25 @@ optional field that fell back to a default, and the picture mode when it is not 
 It exists so a wrong guess costs the user one line to correct instead of a round trip of
 questions. In "一次到位 / don't ask" mode there is no checkpoint (a), so the same block
 goes at the top of the delivery instead.
+
+### Booking-artifact conventions (checklist + hotels rows)
+
+- **Dates ride inside every booking link** (`checkin=`/`checkout=` on hotel
+  searches, date params on flight links) and place names carry their disambiguator
+  (state / prefecture / full property name) — a link the user can mis-city is a
+  bug, not a convenience. When the route contains collision-prone names
+  (one-letter-apart airport codes, the same city name in several states, a
+  same-name hotel airside AND landside in one airport, aggregators mixing nearby
+  airports into a search), the brief gets a `lookalikes` entry naming each trap
+  (zh pages title it 重名陷阱); the country files carry the known ones (see §USA).
+- **Hotel stays are explicit local calendar dates** ("check-in D1 → check-out D3"
+  = the nights of D1 and D2). Booking sites use the hotel's local calendar and
+  never convert timezones — the mis-bookings are human, so pre-chew the two
+  classics wherever the plan contains them, on the checklist row itself and not
+  only in prose: a past-midnight arrival still sleeps the PREVIOUS calendar night
+  (book the landing date + a "late arrival" note, never the clock date the guest
+  walks in on); a date-line crossing books the ARRIVAL-local calendar date, not
+  the departure date.
 
 HTML style of the **plain** page: system font stack, max-width 720px, day cards with a
 left border, the checklist as a real `<table>`, print CSS (no shadows; page breaks

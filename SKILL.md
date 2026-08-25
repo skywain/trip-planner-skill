@@ -248,6 +248,15 @@ empty section (they used to crash — the Vietnam test lost both themed pages to
   LHR vs LGW/STN…). A ¥400-cheaper fare into a far airport often loses.
 - Departing CN: also spot-check one LCC directly in the browser (Spring 春秋, Peach,
   Scoot…) — aggregators miss or misprice some LCC inventory.
+- **Separate tickets across an international connection are a visa trap, not just
+  a baggage nuisance** — audit whenever two PNRs meet at a foreign hub, including
+  tickets the user bought before coming to you. Separate-journey policies tag bags
+  only to the first ticket's endpoint, and carousels sit landside — so claiming +
+  re-checking can REQUIRE entering the transit country. Before writing "no visa
+  needed", check: the first carrier's separate-PNR interline stance (assume no
+  through-check), the passport's transit-country visa need, and airside overnight
+  options if the layover crosses a night. A needed transit visa goes on the
+  checklist with its deadline counted back from the departure date.
 - LCC arithmetic: add the checked-bag fee before comparing — a "cheap" fare + ¥280 bag
   usually isn't.
 
@@ -272,9 +281,11 @@ empty section (they used to crash — the Vietnam test lost both themed pages to
   go on the booking checklist, not the "later" pile.
 
 **Record for every leg**: carrier, date, dep/arr local times, price + currency + as-of
-date, **checked-bag fee** (US domestic: $35-40/leg on every major since Southwest
-ended free bags in 2025 — 4 legs is a real budget line; UA Basic Economy excludes
-even a full-size carry-on), refund/change class, deep link. Multi-leg trips get a
+date, **checked-bag fee** (US domestic: $35-45 per bag per one-way on every major
+since Southwest ended free bags in 2025 — 4 legs is a real budget line; UA Basic
+Economy is personal-item-only on domestic and short-haul Latin America routes,
+while long-haul international Basic Economy does include the carry-on ⚡),
+refund/change class, deep link. Multi-leg trips get a
 **baggage walkthrough**: where the big bag physically is on every tour/venue day
 (day tours = bag stays at hotel; stadiums ban bags; 2-day tours are often
 overnight-bag-only). Output 1 pick + 1 backup per leg.
@@ -338,7 +349,10 @@ Per city:
    hand-written times were an hour off on all ten days, and neither `check` nor
    `qc.py` compares prose against `sun`). A moving day defaults to the last stop;
    when the day's sunrise anchor is at the *first* stop, set the day's `sun_stop`
-   (scheduling.md rule 7). **Non-zero exit = at least one day was skipped or
+   (scheduling.md rule 7). **A plan that crosses timezones stamps every day's `tz`
+   (IANA name) before `sun --write`** — sun refuses any day whose zone it would
+   have to guess from longitude (the guess puts Hawaii at UTC-11), and it refuses
+   per-day, so one sweep over `days[].tz` beats fifteen retries. **Non-zero exit = at least one day was skipped or
    rejected**: the written days are fine, re-run `--only DATE` for the ones it
    names before writing prose for them. Mark ridden
    hops with a `mode` on the arriving stop (`transit`/`train`/`bus`/`drive`/`boat`/

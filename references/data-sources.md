@@ -54,7 +54,11 @@ schedule dictates the surrounding legs, not the other way around.
   want may simply not exist (learned live: no 2-day Yellowstone tour departs SLC at
   all — shortest is 3-day, and only a "Day 1 = airport-pickup day" 4-day structure
   preserved the onward flight). JS booking calendars cannot be verified statically:
-  ship the calendar link + mark 班期 unverified, never guess it.
+  with the browser pane, verify — page the pricing calendar and read each date cell
+  (bookable / sold-out / blank); no browser → ship the calendar link + mark 班期
+  unverified, never guess it. **The listing's "Available Days: Mon, Tue…" line is
+  marketing, not schedule**: checked live against five product calendars, it
+  contradicted every one of them.
 - **Price anatomy** (quote ALL of it, not the sticker): double-occupancy base;
   single supplement ×1.3-1.6 or listed at checkout; mandatory fee package
   ($90-140 门票包 on US park tours); **non-resident surcharges** (US parks +$100/park
@@ -63,6 +67,23 @@ schedule dictates the surrounding legs, not the other way around.
   day); what time it returns on the last day (operators state "book flights after
   X:00" — obey it); overnight-bag-only luggage rules on 2-day tours; whether the
   advertised sight is a stop or a drive-by.
+- **Audit the finalists like a hostile lawyer** (1-2 shortlisted products, not the
+  longlist): the date-specific fare beats the "From $X" banner (select the date,
+  read the fare row — live case: $229 banner, $239 on every bookable date); "park
+  entrance fees included for US Residents with acceptable ID" means NOT included
+  for your traveller; pickup-point lists often render only inside checkout — walk
+  to the checkout page without paying to read them; put the operator phone from
+  the product page on the checklist row (the recurring 1★ failure mode is a missed
+  pickup with an unreachable driver). If pickup is confirmed "by phone the night
+  before" (US operators routinely do this), the plan's connectivity brief must
+  require a **local-voice-capable** SIM — data-only eSIMs can't take the call.
+- **Reserve-now-pay-later + free cancellation = zero-cost options**: when a
+  decision gate (a squad announcement, a companion's dates, an unresolved branch)
+  blocks commitment and the departure is capacity-limited ("Likely to sell out"),
+  the checklist's TOP row becomes "place the free hold on the branch-compatible
+  date now" with the free-cancel deadline as its own row — the user places it
+  (Hard rule 1: the agent never books or holds anything). The hold costs nothing,
+  survives the gate, and turns "wait and hope" into "decide at leisure".
 
 ## Hotels
 No good keyless API exists — use browser + deep links; recommend neighborhoods and
