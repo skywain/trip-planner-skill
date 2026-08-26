@@ -181,6 +181,9 @@ list of things every new country costs a first planner 6-9 searches to rediscove
 
 - **Visa/entry** for that passport: official government/embassy sources only; put the
   processing lead time on the booking checklist. Rules change — never answer from memory.
+  Transit countries count too: a separate-ticket connection can force ENTERING the hub
+  country to re-check bags (Phase 3 §International, the separate-tickets bullet) — run
+  that audit here, before writing "no visa needed" anywhere.
   **This judgement is the assembler's alone**: city subagents (Phase 4) do not make
   visa/entry calls, and anything they say about it is overwritten by this line.
 - **Holidays colliding with the window**:
@@ -313,7 +316,9 @@ required" as checklist item #1; entry had been visa-free since 2026-01-02).
 Otherwise do the cities sequentially with the
 same structure. When the user prefers group tours, the city agent's first job is
 finding real in-sale products with departure schedules (data-sources.md §Group
-tours) — the tour's schedule then dictates the surrounding legs.
+tours) — the tour's schedule then dictates the surrounding legs, and a fly-in day
+tour must clear BOTH weekday grids (operator departure days AND feeder-flight
+schedules — same section) before its day is fixed in the skeleton.
 
 Per city:
 1. Anchors per interest-fit, ≤ pace + 1 optional per day. Cluster by geography per day;
@@ -547,7 +552,10 @@ resolve it once and call the scripts by absolute path, because a subagent's work
 directory is not the skill directory and shell cwd does not persist between calls.
 
 - `references/data-sources.md` — read before Phase 1: every API/URL recipe + fallback
-  chain (flights, hotels, rail, venues, weather, FX, holidays, geocoding).
+  chain (flights, hotels, rail, venues, weather, FX, holidays, geocoding) — **plus
+  the booking-judgment rules that decide plans**: §Group tours (weekday grids,
+  min-party, calendar-vs-marketing, zero-cost holds and booking order) and §Hotels
+  (checkout all-in pricing). Not just a curl cookbook.
 - `references/country-quick-notes.md` — read the destination's section before Phase 2:
   passes, sell-outs, closure patterns, transit apps per country; destination absent →
   its "Destination not listed? — the checklist" section.

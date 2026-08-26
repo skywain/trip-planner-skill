@@ -71,6 +71,11 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   pillion, altitude — and that it carries repatriation where hospitals want cash up front.
 
 ## Japan
+- Entry: most treaty passports get 90-day visa-free stamps ⚡; **Chinese passports
+  need a visa** — the JAPAN eVISA (single-entry tourism, 15/30-day stays) covers
+  mainland residents ⚡, and there is no transit-without-visa landing for PRC
+  passports: airside-only connections are fine, but stepping landside (e.g. to
+  re-check bags on separate tickets) needs the visa.
 - Transit: Suica/ICOCA in Apple Wallet works for visitors ⚡; Google Maps transit is
   reliable countrywide.
 - JR Pass: since the Oct-2023 price hike the nationwide pass usually LOSES on the
@@ -252,6 +257,9 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   bags (5-10 kg), so "carry-on only" dies at international check-in, not domestic.
   UA Basic Economy is personal-item-only on domestic/short-haul Latin America
   routes (long-haul international keeps the carry-on).
+- Hotels: resort strips (Waikiki, Las Vegas) add resort/urban fees of $30-56/night
+  plus ~19% taxes on top of list prices — quote the checkout all-in
+  (data-sources §Hotels), and expect NYC boutiques to do the same with "urban" fees.
 - Lookalike names bite bookings: **JAC** (Jackson Hole, WY) vs **JAX**
   (Jacksonville, FL) is one airport-code letter; Columbus OH vs GA, Jackson
   WY/MS/TN; SFO searches on aggregators mix in OAK/SJC departures. Booking links
