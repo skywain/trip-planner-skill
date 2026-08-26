@@ -40,11 +40,12 @@ to crash on it, and `legs` still prints every cell blank).
  "hotels": [{"base", "area", "why", "options": [{"name", "band", "link"}]}],
  "budget": [{"cat", "per_person", "total", "note"}],   // a LIST of rows, not {rows:[]}
  "brief":  {"visa", "holidays", "weather", "money", "connectivity"},
-                                                // extra keys render as their own
-                                                // sections (title = the key), e.g.
-                                                // "safety", "insurance", "baggage",
-                                                // "lookalikes" — see §Booking-artifact
-                                                // conventions
+                                                // extra keys become their own card
+                                                // inside the Country-brief section;
+                                                // titles from theme_common.BRIEF_TITLES
+                                                // (fallback: the raw key; art
+                                                // brief_titles overrides) — see
+                                                // §Booking-artifact conventions
  "unverified": ["anything that survived two searches unverified", ...]
 }
 ```
@@ -336,7 +337,13 @@ It exists so a wrong guess costs the user one line to correct instead of a round
 questions. In "一次到位 / don't ask" mode there is no checkpoint (a), so the same block
 goes at the top of the delivery instead.
 
-### Booking-artifact conventions (checklist + hotels rows)
+HTML style of the **plain** page: system font stack, max-width 720px, day cards with a
+left border, the checklist as a real `<table>`, print CSS (no shadows; page breaks
+between days are fine). No JS required; a tiny inline script persisting checkbox state to
+localStorage is welcome. The themed pages own their own visual language — do not restyle
+them toward this one.
+
+### §Booking-artifact conventions (checklist + hotels rows)
 
 - **Dates ride inside every booking link** (`checkin=`/`checkout=` on hotel
   searches, date params on flight links) and place names carry their disambiguator
@@ -344,8 +351,12 @@ goes at the top of the delivery instead.
   bug, not a convenience. When the route contains collision-prone names
   (one-letter-apart airport codes, the same city name in several states, a
   same-name hotel airside AND landside in one airport, aggregators mixing nearby
-  airports into a search), the brief gets a `lookalikes` entry naming each trap
-  (zh pages title it 重名陷阱); the country files carry the known ones (see §USA).
+  airports into a search), the brief gets a `lookalikes` entry naming each trap.
+  Themed renderers title brief cards from `theme_common.BRIEF_TITLES` (fallback:
+  the raw key; the art file's `brief_titles` overrides) — `lookalikes` is not in
+  that table, so give it its display title via `brief_titles` (zh: 重名陷阱), or on
+  a zh-only plan simply key the entry 重名陷阱. The country files carry the known
+  traps (see §USA).
 - **Hotel stays are explicit local calendar dates** ("check-in D1 → check-out D3"
   = the nights of D1 and D2). Booking sites use the hotel's local calendar and
   never convert timezones — the mis-bookings are human, so pre-chew the two
@@ -355,8 +366,3 @@ goes at the top of the delivery instead.
   walks in on); a date-line crossing books the ARRIVAL-local calendar date, not
   the departure date.
 
-HTML style of the **plain** page: system font stack, max-width 720px, day cards with a
-left border, the checklist as a real `<table>`, print CSS (no shadows; page breaks
-between days are fine). No JS required; a tiny inline script persisting checkbox state to
-localStorage is welcome. The themed pages own their own visual language — do not restyle
-them toward this one.

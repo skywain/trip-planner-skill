@@ -237,8 +237,9 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   re-examining license validity after an accident — as the headline risk, ahead of
   road skills. Car essential outside NYC/SF/Boston/Chicago/DC; city parking
   $40-70/night.
-- Parks: entrance fees are per **vehicle** (~$35); 3+ parks → America the Beautiful
-  annual pass ($80 — **residents-only since 2026** ⚡) wins. Timed-entry policy
+- Parks: entrance fees are per **vehicle** (~$35); 3+ parks → an annual pass wins,
+  but the $80 America the Beautiful is **residents-only since 2026** ⚡ —
+  non-residents see the surcharge bullet below for the $250 pass that replaces it. Timed-entry policy
   changes per park per year ⚡ (Yosemite dropped its system for 2026; Yellowstone
   has never had one — check each park). In-park lodges and gateway towns sell out
   and close seasonally ⚡.
@@ -257,13 +258,14 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   bags (5-10 kg), so "carry-on only" dies at international check-in, not domestic.
   UA Basic Economy is personal-item-only on domestic/short-haul Latin America
   routes (long-haul international keeps the carry-on).
-- Hotels: resort strips (Waikiki, Las Vegas) add resort/urban fees of $30-56/night
-  plus ~19% taxes on top of list prices — quote the checkout all-in
-  (data-sources §Hotels), and expect NYC boutiques to do the same with "urban" fees.
+- Hotels ⚡: resort strips (Waikiki, Las Vegas) carry resort/urban fees of
+  $30-56/night plus ~19% taxes — sometimes inside the list price, sometimes at the
+  property; quote the checkout all-in (data-sources.md §Hotels), and expect NYC
+  boutiques to do the same with "urban" fees.
 - Lookalike names bite bookings: **JAC** (Jackson Hole, WY) vs **JAX**
   (Jacksonville, FL) is one airport-code letter; Columbus OH vs GA, Jackson
   WY/MS/TN; SFO searches on aggregators mix in OAK/SJC departures. Booking links
-  in the plan carry the state (see output-template §Booking-artifact conventions).
+  in the plan carry the state (see output-template.md §Booking-artifact conventions).
 - Booking forms: **KTN = a US trusted-traveler number** (TSA PreCheck / Global
   Entry) — leave it blank; never the passport number. (A mismatched KTN is
   silently ignored, so the mistake is harmless — but it buys nothing, and the

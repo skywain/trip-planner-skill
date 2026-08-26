@@ -73,8 +73,9 @@ schedule dictates the surrounding legs, not the other way around.
   calendar is the answer, not the bot.
 - **Price anatomy** (quote ALL of it, not the sticker): double-occupancy base;
   single supplement ×1.3-1.6 or listed at checkout; mandatory fee package
-  ($90-140 门票包 on US park tours); **non-resident surcharges** (US parks +$100/park
-  from 2026, operator-collected); driver-guide tips $10-15/person/day (often cash).
+  ($90-140 门票包 on US park tours); **non-resident surcharges** (US parks:
+  +$100/person at 11 flagship parks from 2026 — ask who collects it;
+  country-quick-notes.md §USA); driver-guide tips $10-15/person/day (often cash).
 - **Structure quirks to check**: which day is a pickup/dropoff day (not a touring
   day); what time it returns on the last day (operators state "book flights after
   X:00" — obey it); overnight-bag-only luggage rules on 2-day tours; whether the
@@ -94,7 +95,7 @@ schedule dictates the surrounding legs, not the other way around.
   blocks commitment and the departure is capacity-limited ("Likely to sell out"),
   the checklist's TOP row becomes "place the free hold on the branch-compatible
   date now" with the free-cancel deadline as its own row — the user places it
-  (Hard rule 1: the agent never books or holds anything). The hold costs nothing,
+  (SKILL.md Hard rule 1: the agent never books or holds anything). The hold costs nothing,
   survives the gate, and turns "wait and hope" into "decide at leisure". The
   same logic orders ALL bookings: free-cancel holds first, refundables next,
   non-refundables last — every ticketed non-refundable freezes the re-planning

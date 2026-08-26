@@ -278,7 +278,9 @@ empty section (they used to crash — the Vietnam test lost both themed pages to
   half a day of driving).
 - Record per driving leg: pick-up/drop point + counter hours, car class, price +
   as-of date, insurance note, fuel estimate, park entrance fee (per **vehicle** in the
-  US; 3+ parks → the annual pass wins), and the license requirement for the driver's
+  US; 3+ parks → an annual pass wins — the $80 America the Beautiful is
+  residents-only since 2026, non-residents take the $250 pass from the 2nd park,
+  country notes §USA), and the license requirement for the driver's
   passport (see country notes).
 - Gateway towns run out of cars and rooms in season — the rental and the first night
   go on the booking checklist, not the "later" pile.
@@ -365,8 +367,8 @@ Per city:
    (scheduling.md rule 7). **A plan that crosses timezones stamps every day's `tz`
    (IANA name) before `sun --write`** — sun refuses any day whose zone it would
    have to guess from longitude (the guess puts Hawaii at UTC-11), and it refuses
-   per-day, so one sweep over `days[].tz` beats fifteen retries. **Non-zero exit = at least one day was skipped or
-   rejected**: the written days are fine, re-run `--only DATE` for the ones it
+   per-day, so one sweep over `days[].tz` beats fifteen retries.
+   **Non-zero exit = at least one day was skipped or rejected**: the written days are fine, re-run `--only DATE` for the ones it
    names before writing prose for them. Mark ridden
    hops with a `mode` on the arriving stop (`transit`/`train`/`bus`/`drive`/`boat`/
    `fly`; long signature walks `walk`), or the walking total and the links will
@@ -426,7 +428,10 @@ portal renders neither — on portal the chat summary carries it):
 - No day exceeds pace; **an intercity moving day carries ≤2 anchors, and only when
   the bags are solved before the first anchor (checked / stored / hotel-held);
   otherwise 1** (same sentence in scheduling.md §Day types)
-- Every price has source + as-of date; every bookable line has a link
+- Every price has source + as-of date; every bookable line has a link — and the
+  link carries its dates and a disambiguated place name; hotel rows state explicit
+  local check-in→check-out calendar dates, with past-midnight-arrival and
+  date-line nights flagged (output-template §Booking-artifact conventions)
 - **Language**: `plan.lang` matches the language the user asked in, and every
   reader-facing string in the plan (day titles, notes, tips, checklist rows,
   decisions, hotel blurbs) is in that language — an English fragment copied verbatim

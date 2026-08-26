@@ -111,11 +111,11 @@ packed ×0.8, kids or mobility flags ×1.3.
    in October with `status: OK`), and writes each day's `sun` string in place.
    **Read the tail of its output**: after the "N request(s), N day(s) written" line
    it prints — and repeats as a `WARN` on stderr — `skipped/failed (N): <date>
-   (reason), …` naming **every day it did not write** (no ISO date / no stop with
-   coordinates / `tz approximate` — set `days[].tz` or a plan-level `tz`, the
-   longitude guess is wrong wherever zones bend / request failed), and one
-   `sun REJECTED — …` WARN per day the
-   sanity checks refused. A run that says "6 written" on a 7-day plan now names
+   (reason), …` naming **every day it did not write** — the reasons are: no ISO
+   date; no stop with coordinates; `tz approximate` (fix: set `days[].tz`, a
+   plan-level `tz`, or pass `--tz Area/City` — the longitude guess is wrong
+   wherever zones bend); request failed — plus one `sun REJECTED — …` WARN per
+   day the sanity checks refused. A run that says "6 written" on a 7-day plan now names
    the missing date, so you re-run `--only DATE` instead of counting `sun` fields
    by hand (Italy test F5) — and it **exits non-zero (1)** whenever that list is
    non-empty, so a "9/10 written" run cannot pass unnoticed in a pipeline (Vietnam
