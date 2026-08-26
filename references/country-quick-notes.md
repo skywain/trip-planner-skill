@@ -256,6 +256,10 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   (Jacksonville, FL) is one airport-code letter; Columbus OH vs GA, Jackson
   WY/MS/TN; SFO searches on aggregators mix in OAK/SJC departures. Booking links
   in the plan carry the state (see output-template §Booking-artifact conventions).
+- Booking forms: **KTN = a US trusted-traveler number** (TSA PreCheck / Global
+  Entry) — leave it blank; never the passport number. (A mismatched KTN is
+  silently ignored, so the mistake is harmless — but it buys nothing, and the
+  passport goes only in the travel-documents section at check-in.)
 - Sports tickets: team site first, then SeatGeek/StubHub resale — marquee fixtures
   (Messi, playoffs) run 3-10× ⚡; kickoff times can shift for TV after on-sale ⚡.
 - Distances are the trap — one region per 10-15 days.

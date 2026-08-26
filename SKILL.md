@@ -327,7 +327,15 @@ Per city:
    travel" on the checklist. Claiming date-specific verification you cannot have is
    worse than admitting the horizon — and prices move on their own schedule
    (admission fees jump at fiscal-year boundaries), so re-check the fee, not just
-   the hours.
+   the hours. National parks and other big nature anchors: also read the park's
+   official Alerts/Current Conditions page — storm, fire and eruption closures
+   outlast news cycles, and a partially-open park may hold 2-3 hours of content
+   where the brochure promises a day (resize the day; design it droppable while
+   the region is in disaster recovery). When the draw is a natural phenomenon
+   (lava fountains, aurora), plan the day to work WITHOUT it: base rate ≈ event
+   duration ÷ recurrence interval, the official forecast horizon (days, not
+   weeks) sets a decision gate on the checklist — keep every related booking
+   cancellable until that gate, and pay no premium for a lottery ticket.
 3. Transit: day-pass vs pay-per-ride arithmetic — sum the day's expected rides and
    recommend the pass only when it actually wins. Note the local IC card / transit app.
 4. Each day gets one rain alternative and a food **area** (market/street/neighborhood)

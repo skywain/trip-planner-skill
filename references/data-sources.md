@@ -59,6 +59,18 @@ schedule dictates the surrounding legs, not the other way around.
   unverified, never guess it. **The listing's "Available Days: Mon, Tue…" line is
   marketing, not schedule**: checked live against five product calendars, it
   contradicted every one of them.
+- **Fly-in day tours live on a weekday grid with two axes**: the operator's real
+  departure days AND the feeder flights' weekday schedule — feasibility is the
+  AND of both (learned live: a Sunday Oahu→Big Island day trip was structurally
+  dead — no inter-island flight before 8:00 on Sundays AND no package departing
+  Sundays; Monday had three pre-7:00 flights, $26 cheaper). When the AND fails,
+  don't force it: swap two adjacent flexible days so the fly-in lands on a
+  workable weekday — and swap BEFORE anything in the pair is ticketed.
+- **Min-party lines bite solo travellers**: drive-yourself products (UTV, buggy)
+  often require "minimum 2 participants" per booking — no pairing with
+  strangers; operators usually sell a ride-along/passenger variant that books
+  solo, so ask. Operator chatbots hedge ("may not be available…"): the booking
+  calendar is the answer, not the bot.
 - **Price anatomy** (quote ALL of it, not the sticker): double-occupancy base;
   single supplement ×1.3-1.6 or listed at checkout; mandatory fee package
   ($90-140 门票包 on US park tours); **non-resident surcharges** (US parks +$100/park
@@ -83,11 +95,23 @@ schedule dictates the surrounding legs, not the other way around.
   the checklist's TOP row becomes "place the free hold on the branch-compatible
   date now" with the free-cancel deadline as its own row — the user places it
   (Hard rule 1: the agent never books or holds anything). The hold costs nothing,
-  survives the gate, and turns "wait and hope" into "decide at leisure".
+  survives the gate, and turns "wait and hope" into "decide at leisure". The
+  same logic orders ALL bookings: free-cancel holds first, refundables next,
+  non-refundables last — every ticketed non-refundable freezes the re-planning
+  around it (a pair of "freely swappable" days stops being free the moment the
+  flights inside it are ticketed).
 
 ## Hotels
 No good keyless API exists — use browser + deep links; recommend neighborhoods and
 2-3 properties with a price band, and let the user's click show live prices.
+- **Compare on the checkout screen's all-in total, never the list price**:
+  resort/amenity/urban fees ($30-56/night on resort strips, common in NYC) plus
+  ~19% taxes sit between the two — sometimes inside the list price, sometimes
+  payable at the property; only the final screen settles which. Calibrate scores
+  to the destination's baseline (an ageing resort strip's 8.0 ≈ a mainland
+  boutique's 8.5), and when the itinerary has pre-dawn starts, read the RECENT
+  low reviews for the three sleep-killers — AC, street/door noise, slow
+  elevators — before price breaks the tie.
 - Google Hotels (browser): https://www.google.com/travel/hotels — search the city,
   **set the dates in the page UI and confirm they display before reading prices**:
   URL date parameters are silently ignored, and the default view shows near-term
