@@ -90,6 +90,24 @@ schedule dictates the surrounding legs, not the other way around.
   pickup with an unreachable driver). If pickup is confirmed "by phone the night
   before" (US operators routinely do this), the plan's connectivity brief must
   require a **local-voice-capable** SIM — data-only eSIMs can't take the call.
+- **The OTA's pickup-location field is not the operator's manifest**: where a
+  product uses a pickup-list picker (seen on GetYourGuide; other OTAs likely
+  match), the field persists only entries from the operator's predefined
+  list; when the hotel isn't on it,
+  the "drop a pin on the map + add a note" fallback can report "processed"
+  yet read back empty after a refresh, and nothing reaches the driver's sheet
+  (live case: a Jackson hotel missing from a GetYourGuide pickup list; two
+  bookings silently kept an empty pickup field). The reliable channel is
+  written, not the UI, and **the user sends it** (SKILL.md Hard rule 1: the
+  agent never enters personal data anywhere — a hotel address plus booking
+  reference through a live booking is exactly that): the plan ships a
+  checklist row telling the user to message the operator through the booking
+  (hotel name + full street address + booking reference) and get pickup time
+  and point confirmed **in writing**, plus a second deadline row "written
+  pickup confirmation received" — the empty field is harmless once the
+  operator's reply exists. Operator silent for ~3 days — or half the time
+  remaining to pickup, whichever is shorter — the row escalates: the user
+  quotes the booking reference in the OTA's support chat.
 - **Reserve-now-pay-later + free cancellation = zero-cost options**: when a
   decision gate (a squad announcement, a companion's dates, an unresolved branch)
   blocks commitment and the departure is capacity-limited ("Likely to sell out"),
