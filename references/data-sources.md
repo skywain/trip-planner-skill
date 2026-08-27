@@ -100,7 +100,12 @@ schedule dictates the surrounding legs, not the other way around.
   same logic orders ALL bookings: free-cancel holds first, refundables next,
   non-refundables last — every ticketed non-refundable freezes the re-planning
   around it (a pair of "freely swappable" days stops being free the moment the
-  flights inside it are ticketed).
+  flights inside it are ticketed). The rule's converse prices the refund premium:
+  refundability is worth paying for while a live gate can still move that date;
+  once a night sits wedged between already-ticketed non-refundables with no open
+  gate touching it, the premium buys almost nothing — the scenarios that would
+  cancel it are trip-collapse ones, which belong to travel insurance
+  (trip-cancellation/interruption cover), not to per-booking refund fees.
 
 ## Hotels
 No good keyless API exists — use browser + deep links; recommend neighborhoods and
