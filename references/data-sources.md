@@ -112,7 +112,11 @@ No good keyless API exists — use browser + deep links; recommend neighborhoods
   to the destination's baseline (an ageing resort strip's 8.0 ≈ a mainland
   boutique's 8.5), and when the itinerary has pre-dawn starts, read the RECENT
   low reviews for the three sleep-killers — AC, street/door noise, slow
-  elevators — before price breaks the tie.
+  elevators — before price breaks the tie. **Cross-validate the score on a second
+  platform with a different reviewer base** (Booking ↔ Agoda; Google as
+  tie-break): the bases weight cleanliness, noise and breakfast differently, so
+  agreement adds confidence and a gap >0.5 is itself a finding — read that
+  hotel's low reviews before shortlisting it.
 - Google Hotels (browser): https://www.google.com/travel/hotels — search the city,
   **set the dates in the page UI and confirm they display before reading prices**:
   URL date parameters are silently ignored, and the default view shows near-term
