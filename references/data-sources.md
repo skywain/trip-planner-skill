@@ -116,7 +116,12 @@ No good keyless API exists — use browser + deep links; recommend neighborhoods
   platform with a different reviewer base** (Booking ↔ Agoda; Google as
   tie-break): the bases weight cleanliness, noise and breakfast differently, so
   agreement adds confidence and a gap >0.5 is itself a finding — read that
-  hotel's low reviews before shortlisting it.
+  hotel's low reviews before shortlisting it. The cross-check applies to PRICE
+  too: platforms contract different rates for the same room (Agoda often
+  undercuts for Asia-market users by tens of dollars a night) — compare
+  like-for-like (same room, refundable vs non-refundable) before paying, and
+  remember the cancellation terms you get are the booking platform's, not the
+  cheapest platform's.
 - Google Hotels (browser): https://www.google.com/travel/hotels — search the city,
   **set the dates in the page UI and confirm they display before reading prices**:
   URL date parameters are silently ignored, and the default view shows near-term
