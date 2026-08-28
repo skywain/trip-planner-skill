@@ -154,7 +154,11 @@ Say *"Japan, 12–15 days in October, mid budget, history and food."* The skill 
 - **`plan.geo.json`, the single source of truth** — the themed page, the map links and an
   offline KML for Organic Maps / Google My Maps all come out of that one file.
 - **A hotel shortlist by neighbourhood** (dated deep links, not invented nightly rates), a
-  budget rollup in your home currency, and a **booking checklist sorted by deadline**.
+  budget rollup in your home currency, a travel-insurance line calibrated to the
+  destination, and a **booking checklist sorted by deadline** — with date-locked gates
+  (ticket-release instants, decision deadlines, on-trip re-checks) also delivered as a
+  **`.ics` calendar file**: dual alarms per gate, the full action list in the event
+  body, and floating local times so an on-trip reminder rings wherever you are.
 - **Pictures, whatever your agent can do** — three rungs, checked silently before the
   page style ever comes up: your agent's **native** image generation → your own
   OpenRouter **key** → the built-in **stock kit**. The last rung still ships a themed
@@ -244,8 +248,8 @@ silently, before it ever mentions a page style:
    repo, and the page is still a themed page (next block).
 
 On every rung the shipped library comes first —
-[`themes/assets/IMAGE-LIBRARY.md`](themes/assets/IMAGE-LIBRARY.md) indexes 301 stems
-(444 webp, 26 MB) by subject, and its rules draw the line: generic props are reusable,
+[`themes/assets/IMAGE-LIBRARY.md`](themes/assets/IMAGE-LIBRARY.md) indexes 355 stems
+(515 webp, 30 MB) by subject, and its rules draw the line: generic props are reusable,
 while anything destination-specific (covers, hero plates, title stickers, terrain bands,
 splash islands, journal photos) must belong to the trip it is on. Real costs from the
 shipped examples: **$0.25–0.46 of image generation per trip** (7–11 `gpt-image-2` calls).
@@ -434,10 +438,11 @@ credential file `themes/.auth_header` that `gen.py` / `genvideo.py` read. A clon
   the probes). Run them serially.
 - **Friction testing** — the most valuable technique: give a fresh agent that has never
   seen the skill a real trip request, let it follow the instructions in order, and treat
-  every place it got confused as the primary deliverable. Nine test trips (Australia,
-  Nordic, Japan, China, Italy, Mexico, Morocco, Turkey, Vietnam) were planned this way,
-  each by a fresh agent session, on top of the earlier Kyoto and Rome runs; the friction
-  points became rules in `references/` and entries in `country-quick-notes.md`.
+  every place it got confused as the primary deliverable. Eleven test trips (Australia,
+  Nordic, Japan, China, Italy, Mexico, Morocco, Turkey, Vietnam, Yunnan, Peru) were
+  planned this way, each by a fresh agent session, on top of the earlier Kyoto and Rome
+  runs; the friction points became rules in `references/` and entries in
+  `country-quick-notes.md`.
 - **Adversarial review** — three rounds by seven independent agents (script torture-tester,
   external fact-checker, tour-leader realism attacker, cross-file coherence reviewer, two
   end-to-end builders). What they caught, and the rules that came out of it:
