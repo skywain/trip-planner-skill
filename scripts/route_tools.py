@@ -598,12 +598,19 @@ def cmd_check(args):
                       if long_hops else ""))
         n_anchor = len(anchor_rows(day))
         if walk_km == 0 and n_anchor >= 2:
-            # AU F2: two 2 km coastal-walk hops were guessed as transit and the day
-            # showed 0 km on foot without a word. Anchors imply walking between them.
-            warn("Day {} {}: 0 km on foot but {} anchor rows — a walking hop is "
-                 "probably guessed as transit; declare \"mode\": \"walk\" on the "
-                 "stop it walks INTO (or the day really is all rides — then fine)."
-                 .format(i, day.get("date", "?"), n_anchor))
+            if ride["guessed"] == 0:
+                # Every hop mode is explicitly declared — nothing was guessed, so
+                # 0 km on foot is a deliberate all-rides day, not the AU F2 trap.
+                print("  Day {} {}: 0 km on foot, {} anchor rows — all rides "
+                      "declared — fine if intended.".format(
+                          i, day.get("date", "?"), n_anchor))
+            else:
+                # AU F2: two 2 km coastal-walk hops were guessed as transit and the day
+                # showed 0 km on foot without a word. Anchors imply walking between them.
+                warn("Day {} {}: 0 km on foot but {} anchor rows — a walking hop is "
+                     "probably guessed as transit; declare \"mode\": \"walk\" on the "
+                     "stop it walks INTO (or the day really is all rides — then fine)."
+                     .format(i, day.get("date", "?"), n_anchor))
         print("  + in-venue walking and strolls: add your own; the {:.0f} km cap is "
               "on the SUM — {}".format(DAY_WALK_FLAG_KM,
                                        "; ".join(note) if note else "OK so far"))
@@ -797,7 +804,7 @@ def cmd_links(args):
                     what = str(row.get("what", ""))
                     if h["url"] is None:
                         row.pop("link", None)
-                        print("  ✎ row {} 「{}」 ← {} → {}: {}".format(
+                        print("  ✎ row {} “{}” ← {} → {}: {}".format(
                             idx, what[:48], h["a"], h["b"], h["note"]))
                         continue
                     foreign = foreign_stops(arrow_context(what), h["sa"], h["sb"],
@@ -805,12 +812,12 @@ def cmd_links(args):
                     if foreign:
                         n_susp += 1
                         parked.append(h["url"])
-                        parked_log.append("Day {} row {} 「{}」 (names {}; hop is "
+                        parked_log.append("Day {} row {} “{}” (names {}; hop is "
                                           "{} → {})".format(
                                               i, idx, what[:40], ", ".join(foreign),
                                               h["a"], h["b"]))
                         row.pop("link", None)
-                        warn("Day {} row {} 「{}」 names {} but the hop in this "
+                        warn("Day {} row {} “{}” names {} but the hop in this "
                              "position is {} → {} — SUSPICIOUS mismatch, link parked "
                              "in hop_links, not written. Fix: give every stop-to-stop "
                              "transition its own hop row in order; \"map\": false "
@@ -822,7 +829,7 @@ def cmd_links(args):
                         continue
                     row["link"] = h["url"]
                     n_wrote += 1
-                    print("  ✎ row {} 「{}」 ← {} → {}".format(
+                    print("  ✎ row {} “{}” ← {} → {}".format(
                         idx, what[:48], h["a"], h["b"]))
             else:
                 parked.extend(h["url"] for h in hops if h["url"])
@@ -834,7 +841,7 @@ def cmd_links(args):
                     if h["url"] is None:
                         print("  ✎ {} → {}: {}".format(h["a"], h["b"], h["note"]))
                 warn("Day {}: {} mappable hop rows vs {} mapped hops — links parked "
-                     "in day['hop_links'] (render_plan shows them as a 逐跳导航 row). "
+                     "in day['hop_links'] (render_plan shows them as a hop-by-hop maps row). "
                      "To place them on rows: give every stop-to-stop transition its "
                      "own hop row (a rail/flight row whose two stations are in "
                      "stops[] IS one of them — keep it mappable, it just gets no "
@@ -903,7 +910,7 @@ def cmd_links(args):
             # Morocco F6: 13 parked links and the command was "green". Exit code
             # stays 0 (parking is the designed fallback), but it must be visible.
             warn("==== links --write: {} link(s) PARKED in day['hop_links'], NOT on "
-                 "hop rows — the page degrades to one 逐跳导航 row per such day ===="
+                 "hop rows — the page degrades to one hop-by-hop maps row per such day ===="
                  .format(n_parked))
             for line in parked_log:
                 warn("  parked: " + line)

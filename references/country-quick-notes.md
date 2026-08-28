@@ -60,16 +60,45 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   recognised where both countries are parties. **China is not a party and issues no IDP**
   — self-driving or riding anything over 50 cc is unlicensed driving, and the insurer
   refuses the claim outright. Answer with pillion seats, drivers and bicycles, never
-  "just rent a scooter". (US: no treaty either — licence + notarised translation.)
+  "just rent a scooter". (US: party to 1949 Geneva but China to neither convention,
+  so no recognition either way — see §USA Driving for the counter reality.)
 - [ ] **Intercity ticket release windows, each with its own date on the checklist.**
   Vietnam rail 60 days, China 12306 15 days, Japan JR 1 month, Trenitalia/Italo 90-120
   days, Norway Vy ~90 — plus night-bus operators and seasonal ferry timetables.
+- [ ] **Highest sleeping altitude and the ladder to it.** Not the highest point
+  visited — the highest **bed**, and the steps up to it. See §Altitude below: this
+  line reshapes the route order, so it is answered at skeleton time, not at packing
+  time.
 - [ ] **Travel advisory, and what the insurance must cover.** Read the traveller's own
   foreign ministry (Auswärtiges Amt, travel.gc.ca, 中国领事服务网), then check the policy
   does not exclude the thing the trip is built on — ballooning, diving, motorbike
   pillion, altitude — and that it carries repatriation where hospitals want cash up front.
 
+## Altitude
+
+- **Design the sleep ladder, not just the route.** What the body prices is the
+  altitude it *sleeps* at: a high day trip from a low bed is forgiving, while raising
+  the sleeping altitude by big jumps above ~2,500 m is what loses a day to headache
+  and bad sleep. Order the bases so the beds climb gradually and the highest bed
+  comes late — this is a route-order decision, which is why the checklist asks it at
+  skeleton time.
+- **Cap the first day at altitude.** Arriving high (CDMX 2,240 m, Lijiang 2,400 m,
+  Cusco 3,400 m): one light anchor, no stair-heavy sight, no same-day push higher.
+  The energy-curve rule (scheduling.md rule 6) tightens at altitude; it never relaxes.
+- **Diamox lead time is a doctor's question.** The plan writes "the traveller asks
+  their doctor about acetazolamide, N days before the climb" and puts the consult
+  date on the checklist — it never doses or prescribes.
+- **Insurance reads altitude sickness as illness, not accident** — and many policies
+  also cap covered altitude at 3,000-4,000 m. Check the policy's altitude ceiling
+  against the trip's highest point, and that illness cover (not just accident cover)
+  is real, before buying — see data-sources.md §Travel insurance.
+
 ## Japan
+- Entry: most treaty passports get 90-day visa-free stamps ⚡; **Chinese passports
+  need a visa** — the JAPAN eVISA (single-entry tourism, 15/30-day stays) covers
+  mainland residents ⚡, and there is no transit-without-visa landing for PRC
+  passports: airside-only connections are fine, but stepping landside (e.g. to
+  re-check bags on separate tickets) needs the visa.
 - Transit: Suica/ICOCA in Apple Wallet works for visitors ⚡; Google Maps transit is
   reliable countrywide.
 - JR Pass: since the Oct-2023 price hike the nationwide pass usually LOSES on the
@@ -215,17 +244,55 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   Florence and San Marco turn away shoulders/knees/hats. Every worship-site block
   carries the one-line dress note (scheduling.md Traps).
 
-## USA
+## USA (as of 2026-08)
 - Entry: VWP/ESTA covers treaty passports only — **Chinese passports need a B1/B2
   visa** (Beijing interview waits run weeks-months ⚡) **plus current EVUS enrollment**
   on 10-year visas ⚡. On any US trip, visa status is the first intake question.
-- Driving: China has no IDP treaty — carry the license + a notarized English
-  translation; major rental chains and most states accept that (verify the specific
-  state ⚡). Car essential outside NYC/SF/Boston/Chicago/DC; city parking $40-70/night.
-- Parks: entrance fees are per **vehicle** (~$35); 3+ parks → America the Beautiful
-  annual pass ($80) wins. Timed-entry policy changes per park per year ⚡ (Yosemite
-  dropped its system for 2026; Yellowstone has never had one — check each park).
-  In-park lodges and gateway towns sell out and close seasonally ⚡.
+- Driving: state law and the rental counter are **two different gates** ⚡.
+  UT/ID/MT-style statutes accept any home-country license for visitors, but Hertz's
+  published policy requires an IDP for **non-Latin-alphabet** licenses (with a
+  separate PRC-license certification-form path ⚡) and Enterprise strongly
+  recommends one — and mainland China cannot issue a genuine IDP (party to neither
+  road-traffic convention), so a Chinese-license renter can be refused at the
+  counter even where state law is fine. Translations work often in practice but are
+  not policy: get written confirmation from the specific pickup branch before
+  building a self-drive plan, and treat counter refusal — plus the insurer
+  re-examining license validity after an accident — as the headline risk, ahead of
+  road skills. Car essential outside NYC/SF/Boston/Chicago/DC; city parking
+  $40-70/night.
+- Parks: entrance fees are per **vehicle** (~$35); 3+ parks → an annual pass wins,
+  but the $80 America the Beautiful is **residents-only since 2026** ⚡ —
+  non-residents see the surcharge bullet below for the $250 pass that replaces it. Timed-entry policy
+  changes per park per year ⚡ (Yosemite dropped its system for 2026; Yellowstone
+  has never had one — check each park). In-park lodges and gateway towns sell out
+  and close seasonally ⚡.
+- **Non-resident park surcharge (2026-01-01 ⚡)**: non-US residents 16+ pay
+  **$100/person at 11 flagship parks** (Acadia, Bryce, Everglades, Glacier, Grand
+  Canyon, Grand Teton, Rocky Mountain, Sequoia/Kings Canyon, Yellowstone,
+  Yosemite, Zion — no park outside these 11 charges it); the $250 non-resident
+  annual pass waives it, admitting the whole private vehicle at per-vehicle parks
+  or the holder + 3 adults at per-person parks, so it wins from the 2nd park even
+  solo ($135×2 > $250). Tour smallprint now reads "park fees included **for US
+  residents**" — that wording excludes the surcharge; ask who collects it.
+- Bags ⚡: domestic carriers don't weigh carry-ons (size 22×14×9 in only) but
+  charge ~$35-45 **per checked bag per one-way** (connections included; separate
+  tickets and directions are what multiply) — so one case beats two across a
+  multi-leg itinerary; CN/JP carriers on the international bookends DO weigh cabin
+  bags (5-10 kg), so "carry-on only" dies at international check-in, not domestic.
+  UA Basic Economy is personal-item-only on domestic/short-haul Latin America
+  routes (long-haul international keeps the carry-on).
+- Hotels ⚡: resort strips (Waikiki, Las Vegas) carry resort/urban fees of
+  $30-56/night plus ~19% taxes — sometimes inside the list price, sometimes at the
+  property; quote the checkout all-in (data-sources.md §Hotels), and expect NYC
+  boutiques to do the same with "urban" fees.
+- Lookalike names bite bookings: **JAC** (Jackson Hole, WY) vs **JAX**
+  (Jacksonville, FL) is one airport-code letter; Columbus OH vs GA, Jackson
+  WY/MS/TN; SFO searches on aggregators mix in OAK/SJC departures. Booking links
+  in the plan carry the state (see output-template.md §Booking-artifact conventions).
+- Booking forms: **KTN = a US trusted-traveler number** (TSA PreCheck / Global
+  Entry) — leave it blank; never the passport number. (A mismatched KTN is
+  silently ignored, so the mistake is harmless — but it buys nothing, and the
+  passport goes only in the travel-documents section at check-in.)
 - Sports tickets: team site first, then SeatGeek/StubHub resale — marquee fixtures
   (Messi, playoffs) run 3-10× ⚡; kickoff times can shift for TV after on-sale ⚡.
 - Distances are the trap — one region per 10-15 days.

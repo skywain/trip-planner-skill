@@ -68,6 +68,10 @@ together with scheduling.md before Phase 4 timeline assembly.
      the timeline hop row is just a reminder — takes `"map": false`, so it drops out
      of the count. Getting this backwards on a day with a rail leg parks every link
      of that day (`N rows vs N+1 hops`).
+   - **A day that returns the way it came** (one road in and out, up the valley and
+     back): only the outbound chain rows stay mappable; every retraced return row
+     takes `"map": false` — its geometry already exists in the forward direction,
+     so a mappable return row would demand a hop the day's chain does not have.
    **Three more shapes that go quietly wrong** (all three on one Morocco day — 13
    links parked on the first `--write`, then every later pairing off by one; the
    command itself was green):
@@ -131,10 +135,11 @@ together with scheduling.md before Phase 4 timeline assembly.
    - **refuses to write a row whose text names another stop of the day** (the words
      around the arrow mention a stop that is not this hop's origin/destination —
      the classic one-off shift) — that URL is **parked** in `day["hop_links"]`
-     (rendered as a 逐跳导航 row) instead of being written to the wrong line, and the
-     row is named so you can fix it (add the missing stop, mark the lodging/legs
-     row `map:false`, or correct the names) and re-run. A row that names *neither*
-     endpoint is still written — that is why the printed pairing must be read;
+     (rendered as a hop-by-hop maps row) instead of being written to the wrong
+     line, and the row is named so you can fix it (add the missing stop, mark the
+     lodging/legs row `map:false`, or correct the names) and re-run. A row that
+     names *neither* endpoint is still written — that is why the printed pairing
+     must be read;
    - writes **no link at all for legs over 100 km or declared `fly`/`boat`** (a
      `travelmode=transit` link across 1,971 km is never right): the row is kept in
      the count for alignment and gets a per-row note; nothing is parked;
@@ -143,10 +148,11 @@ together with scheduling.md before Phase 4 timeline assembly.
      a warning to scroll past; `L` is **not** a failure counter — it is the number
      of rail/boat/flight rows that correctly got no link (a tester read the older
      `(long legs without link: 1)` as a fourth kind of error; it never was).
-     **`parked > 0` still exits 0** — the plan is renderable, the links just moved to
-     the 逐跳导航 row — but stderr carries a loud `WARN` block naming each parked row;
-     go back and read it before rendering. `check` will not catch this later, and
-     the page degrades silently from tappable rows to a bare per-hop list.
+     **`parked > 0` still exits 0** — the plan is renderable, the links just moved
+     to the hop-by-hop maps row — but stderr carries a loud `WARN` block naming
+     each parked row; go back and read it before rendering. `check` will not catch
+     this later, and the page degrades silently from tappable rows to a bare
+     per-hop list.
    - How the name check matches (so you can predict a park instead of discovering
      it): stop names of the day are tried **longest first**; Latin names match on
      **word boundaries** (`Mural` no longer fires inside `Muralismo`; `centro`
@@ -224,12 +230,15 @@ no Naver provider — hand-write Naver search links per "Which app where".
 
 ## Hop-row format (canonical — scheduling.md and output-template.md follow this)
 
-`模式 线路名(往…方向) 站数/分钟 票价 · 上车站→下车站 · 出口号`, e.g.
-`地铁 乌丸线(往竹田方向) 4站/9分 ¥260 · 四条→京都 · 出口2`
+`模式 线路名(往…方向) 站数/分钟 票价 · 上车站→下车站 · 出口号` — in the plan's
+language: mode, line (toward …), stops/minutes, fare · boarding→alighting stop ·
+exit number. zh e.g. `地铁 乌丸线(往竹田方向) 4站/9分 ¥260 · 四条→京都 · 出口2`
 Buses have no exit numbers and the stop count means nothing to a rider, so swap the
 last field for the walk off the stop:
-`巴士 203(往銀閣寺道) ~25分 ¥230 · 祇園→銀閣寺道 · 下车步行8分`.
-Walking hops shorten to `步行 {from}→{to} {km} · {min}分`.
+bus, line (toward …), ~minutes, fare · boarding→alighting stop · walk-off time;
+zh e.g. `巴士 203(往銀閣寺道) ~25分 ¥230 · 祇園→銀閣寺道 · 下车步行8分`.
+Walking hops shorten to walk, from→to, km · minutes — zh e.g.
+`步行 清水寺→八坂神社 1.2 km · 15分`.
 
 Exit numbers matter: in Tokyo/Seoul/Taipei the wrong exit costs 10 minutes. Capture
 the exit when you browser-verify a hop. Every hop carries a verification marker —

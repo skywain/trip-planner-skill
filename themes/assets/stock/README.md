@@ -64,7 +64,7 @@ kit must not do.
 Same prompts, same pipeline: copy the skeleton of a `manifest.stock.json` entry
 (a cover, or a `stock-sheet-*` six-cell sheet), generate with `themes/gen.py …
 --outdir themes/assets/stock --manifest themes/assets/stock/manifest.stock.json`
-(`--dry-run` first), then per ART-SCHEMA.md「图片工具链」: `split_sheet.py
+(`--dry-run` first), then per ART-SCHEMA.md §Image toolchain: `split_sheet.py
 <sheet>.png --probe` → the same with the six stems in reading order (add `--grid
 3x2` when the probe misses a gutter) → `cutout.py <cell>.png` → `towebp.py
 <cell>.cut.png --sizes sm,md,lg`. Covers skip the split: `towebp.py

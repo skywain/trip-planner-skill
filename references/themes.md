@@ -157,7 +157,7 @@ contract; this is the field guide.
 
 ### portal 穿越 — `render_portal.py`
 
-Footage can come from the agent's **own native video generation** if it has one (no key; 16:9 h264 mp4 24 fps, dive 5–6 s / link 4 s, first/last-frame conditioning for links — ART-SCHEMA.md 「生成器选择」), from `themes/genvideo.py` (OpenRouter video API, same key as `gen.py`; first/last-frame conditioning; ≈$3 per ten-world chain on `google/veo-3.1-lite`, `minimax/hailuo-3` for quality), or from the local ComfyUI/MiniMax-H3 pipeline (`build_portal_jobs.py`, free).
+Footage can come from the agent's **own native video generation** if it has one (no key; 16:9 h264 mp4 24 fps, dive 5–6 s / link 4 s, first/last-frame conditioning for links — ART-SCHEMA.md §Generator choice), from `themes/genvideo.py` (OpenRouter video API, same key as `gen.py`; first/last-frame conditioning; ≈$3 per ten-world chain on `google/veo-3.1-lite`, `minimax/hailuo-3` for quality), or from the local ComfyUI/MiniMax-H3 pipeline (`build_portal_jobs.py`, free).
 - Paradigm: **scroll = flight** — scroll position scrubs a chain of mp4 clips
   (dive into a world, frame-chained link to the next, dive again); day overlays
   fade in while the camera is inside that day's world. Two `<video>` slots, hard
@@ -199,17 +199,17 @@ add every new theme to its `THEMES` list or the chooser silently falls behind.
    chars) / `en` / `mark`. Titles are per theme in practice — put `zh/en/sub/credit`
    under `themes.<theme>.cover`.
 2. Per theme, pick pictures — **reuse first**: `themes/assets/IMAGE-LIBRARY.md`
-   §通用件 lists what any trip may use (a plane, a bus, a beach, tape, flora…).
+   §Generic pieces (通用件) lists what any trip may use (a plane, a bus, a beach, tape, flora…).
    Place-bound assets (Liberty, Golden Gate, Yosemite, `noir-*`, `glass-*`,
    `zine-*`, `au-*`, `nordic-*`…) never cross trips. Note the index's merged rows
    (`name-a/b/c`, `name-*(N)`) — expand before deciding something is missing.
 3. Generate only what is missing — with the agent's **own native image generation if
    it has one (no key; same specs/prompts, then the same split/cutout/webp/manifest
-   steps — ART-SCHEMA.md 「生成器选择」)**, otherwise `python3 themes/gen.py <trip>/jobs.json --outdir
+   steps — ART-SCHEMA.md §Generator choice)**, otherwise `python3 themes/gen.py <trip>/jobs.json --outdir
    <trip> --manifest <trip>/manifest.<trip>.json` (`--dry-run` first; small parts go
    on a **sheet** — one image cut into 6–12 pieces by `split_sheet.py`, ~$0.005 each;
    `--probe` first, then names in the prompt's Row 1 → Row 2 order; recipe and the
-   full command forms in ART-SCHEMA.md 图片工具链), then `cutout.py` for every
+   full command forms in ART-SCHEMA.md §Image toolchain), then `cutout.py` for every
    **cut-out** slot (stickers, islands, figurines, bands, stamps, props — the "shape"
    column of ART-SCHEMA's size table) or `towebp.py` for opaque plates/photos, and
    `towebp.py x.cut.png --sizes sm,md,lg` for size variants of a cut-out (running
@@ -220,7 +220,7 @@ add every new theme to its `THEMES` list or the chooser silently falls behind.
    referenced twice doubles its base64. The trip's `manifest.<trip>.json` is the
    record of what was generated; **do not write into `themes/assets/` or
    `IMAGE-LIBRARY.md`** — folding a test trip's generic pieces back into the
-   library is the main agent's job after the batch (ART-SCHEMA 测试行程资产回收).
+   library is the main agent's job after the batch (ART-SCHEMA §Test-trip asset recycling).
 4. Write the words: captions, annotations, doodle notes, the closing line. Voice
    rules live in each renderer's docstring.
 5. Render → `qc.py` exit 0 → `xprobe.sh` one module and, for whole-page themes, one
@@ -238,7 +238,7 @@ Phase 0's **picture-capability check** writes one of three values into the plan'
 
 1. **`native`** — the agent has its own image-generation tool → generate this trip's art
    with it; nothing to configure, no key. Same specs, same prompts-as-style-anchors, same
-   four downstream steps (ART-SCHEMA.md 「生成器选择」). §3 steps 2-3 as written.
+   four downstream steps (ART-SCHEMA.md §Generator choice). §3 steps 2-3 as written.
 2. **`key`** — `themes/.auth_header` exists (checked with `test -s`; never read, print or
    copy it) → `gen.py` / `genvideo.py` over OpenRouter with the user's key. §3 steps 2-3.
 3. **`stock`** — neither. **This is not a reason to ship the plain page.** The built-in
@@ -252,7 +252,7 @@ python3 themes/stock_art.py plan.geo.json --theme illustrated -o plan.art.json
 - **What the script fills**: the picture side of the art file — cover painting, per-day
   heroes/cut-outs and props — matched to the plan's country and each day's stops from
   `themes/assets/stock/` (`stock/index.json`, catalogue in `stock/README.md`) plus the
-  shared library's same-country pictures and generic props (`IMAGE-LIBRARY.md` §通用件).
+  shared library's same-country pictures and generic props (`IMAGE-LIBRARY.md` §Generic pieces).
 - **What it does not fill — you write the words**: the cover title from
   `references/cover-titles.md`, each day's `theme` (4 chars) / `en` / `mark`, captions,
   annotations and the closing line. A page shipped with the script's placeholders in it
@@ -467,6 +467,8 @@ images never `loading=lazy`; itinerary grids never `grid-auto-flow:dense`.
   last=-1; for i in $(seq 1 120); do [ -s "$OUT" ] && { sz=$(stat -f%z "$OUT"); [ "$sz" = "$last" ] && break; last=$sz; }; sleep 1; done
   { pkill -9 -f -- "--user-data-dir=$UDD"; wait; } 2>/dev/null; rm -rf "$UDD"
   ```
+  (If the shell blocks a foreground `sleep`, poll with
+  `python3 -c "import time;time.sleep(1)"` instead — same one-second beat.)
   (For a `.reveal` theme inject `.reveal{opacity:1!important}` into a copy first —
   IntersectionObserver never fires headless.) `ANCHOR=bottom xprobe.sh … page ''`
   shows the export's last 2600 px — the tail check; on a module-only theme it is the

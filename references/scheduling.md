@@ -111,9 +111,11 @@ packed ×0.8, kids or mobility flags ×1.3.
    in October with `status: OK`), and writes each day's `sun` string in place.
    **Read the tail of its output**: after the "N request(s), N day(s) written" line
    it prints — and repeats as a `WARN` on stderr — `skipped/failed (N): <date>
-   (reason), …` naming **every day it did not write** (no ISO date / no stop with
-   coordinates / request failed), and one `sun REJECTED — …` WARN per day the
-   sanity checks refused. A run that says "6 written" on a 7-day plan now names
+   (reason), …` naming **every day it did not write** — the reasons are: no ISO
+   date; no stop with coordinates; `tz approximate` (fix: set `days[].tz`, a
+   plan-level `tz`, or pass `--tz Area/City` — the longitude guess is wrong
+   wherever zones bend); request failed — plus one `sun REJECTED — …` WARN per
+   day the sanity checks refused. A run that says "6 written" on a 7-day plan now names
    the missing date, so you re-run `--only DATE` instead of counting `sun` fields
    by hand (Italy test F5) — and it **exits non-zero (1)** whenever that list is
    non-empty, so a "9/10 written" run cannot pass unnoticed in a pipeline (Vietnam
@@ -121,9 +123,14 @@ packed ×0.8, kids or mobility flags ×1.3.
    fix the named ones with `--only` and re-run until it exits 0. Exit **3** = a day
    was REJECTED by the sanity checks (look before retrying). A day with **no stops
    at all** (pure travel/rest day) is informational only — not counted, no exit 1.
+   **Redirect sun's output to a file rather than piping it** (`… sun plan.geo.json
+   --write > sun.log 2>&1`, then read the file) — a pipe makes `$?` the *last*
+   command's exit and loses sun's non-zero signal. A transient TLS failure on one
+   day is expected, not breakage: re-run with `--only DATE` for the day it names.
    Canonical `sun` format — the renderers parse it, so keep the shape:
    `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]`
-   e.g. `天亮 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org`.
+   e.g. `天亮 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org`
+   (TZ may be a numeric offset like `-05` where the zone has no abbreviation — normal).
    The dawn word follows the plan language: `sun --write` picks it from `--lang` >
    `plan.lang` > `plan.meta.lang` > zh, so an `en` plan gets
    `dawn HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]`
@@ -180,7 +187,11 @@ packed ×0.8, kids or mobility flags ×1.3.
   sentence in SKILL.md Phase 6 self-check). Two is for the day whose train leaves at
   16:00 and whose bags went into a locker at 09:00 (Göreme open-air museum + Dark
   Church, then Uçhisar, then the night bus); a day that drags a suitcase to the first
-  sight is a one-anchor day whatever the timetable says. If the sunrise anchor is at
+  sight is a one-anchor day whatever the timetable says. Third case,
+  **transfer-day-as-itinerary** — the bags ride locked in a private vehicle door to
+  door (a hired car with driver, a private tour van), never dragged and never stored:
+  then the anchor cap is the pace cap, not 2, and the surviving constraint is the
+  energy curve (rule 6). If the sunrise anchor is at
   the *first* stop, set `sun_stop` (rule 7).
 - **Departure day** — zero sightseeing unless the flight leaves after 18:00. Work
   backwards from the airport-arrival deadline (3 h international) through the real

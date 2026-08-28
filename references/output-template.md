@@ -21,6 +21,9 @@ to crash on it, and `legs` still prints every cell blank).
 {
  "trip": "Japan 12 days",
  "lang": "zh",                                  // zh | en — see §Plan language
+ "tz": "Asia/Tokyo",                            // optional IANA default; days[].tz
+                                                // overrides — cross-tz plans need one
+                                                // of the two set or `sun` refuses
  "prefs": {"theme", "pictures", "travel_style", "lodging", "scenery", "pace", "budget",
            "notes"},                            // Phase 0 intake — see §Intake prefs
  "meta": {"dates", "party", "route", "budget_total", "fx", "generated", "self_check"},
@@ -37,6 +40,12 @@ to crash on it, and `legs` still prints every cell blank).
  "hotels": [{"base", "area", "why", "options": [{"name", "band", "link"}]}],
  "budget": [{"cat", "per_person", "total", "note"}],   // a LIST of rows, not {rows:[]}
  "brief":  {"visa", "holidays", "weather", "money", "connectivity"},
+                                                // extra keys become their own card
+                                                // inside the Country-brief section;
+                                                // titles from theme_common.BRIEF_TITLES
+                                                // (fallback: the raw key; art
+                                                // brief_titles overrides) — see
+                                                // §Booking-artifact conventions
  "unverified": ["anything that survived two searches unverified", ...]
 }
 ```
@@ -190,11 +199,15 @@ follow `scripts/render_plan.py`'s schema field-for-field.
  ],
  "hotels": [
   {"base": "Kyoto 3 晚", "area": "四条乌丸", "why": "…",
-   "options": [{"name": "…", "band": "…", "link": "…带日期深链…"}]}
+   "options": [{"name": "…", "band": "…", "link": "…deep link with dates…"}]}
  ],
  "tour_options": [
-  {"name": "…", "price": "…含单房差/门票包/非居民费/小费口径…", "schedule": "班期 —
-    静态可核则给核实结论,JS 日历给链接标 unverified", "pickup": "…", "link": "…"}
+  {"name": "…",
+   "price": "…include single supplement / fee package / non-resident surcharge / tipping basis…",
+   "schedule": "departure days — with a
+    browser, page the pricing calendar and read each date cell before giving a
+    verified conclusion (the marketing 'Available Days' blurb doesn't count);
+    without one, ship the calendar link marked unverified", "pickup": "…", "link": "…"}
  ],
  "checklist_items": [
   {"item": "…", "deadline": "…", "price": "…", "link": "…", "note": "…"}
@@ -279,10 +292,11 @@ Both pages present the same material in the same order:
    checkbox.
 4. **Flights & intercity table**: pick + backup per leg with all Phase 3 fields.
 5. **Day-by-day cards**: one card per day — header (date/city/label + sunrise/sunset),
-   then the hour-level timeline as a two-column table: 时间 · 内容. Hops are their own
-   rows, styled dimmer, written in the canonical hop-row format from navigation.md
-   (mode, line + direction, stops/duration, fare, boarding→alighting station, exit
-   number) with the tappable link on the row; price and notes sit under the activity
+   then the hour-level timeline as a two-column table: 时间 · 内容 (time · activity).
+   Hops are their own rows, styled dimmer, written in the canonical hop-row format
+   from navigation.md (mode, line (toward …), stops/minutes, fare ·
+   boarding→alighting stop · exit number) with the tappable link on the row; price
+   and notes sit under the activity
    name; tags ([pinned]/[opener]/[skippable]/[swap→…]) and hop markers
    ((verified)/(est.)) render as pills at the end of the row.
    render_plan.py also draws a small offline route schematic per day straight from
@@ -332,3 +346,52 @@ left border, the checklist as a real `<table>`, print CSS (no shadows; page brea
 between days are fine). No JS required; a tiny inline script persisting checkbox state to
 localStorage is welcome. The themed pages own their own visual language — do not restyle
 them toward this one.
+
+### §Booking-artifact conventions (checklist + hotels rows)
+
+- **Dates ride inside every booking link** (`checkin=`/`checkout=` on hotel
+  searches, date params on flight links) and place names carry their disambiguator
+  (state / prefecture / full property name) — a link the user can mis-city is a
+  bug, not a convenience. When the route contains collision-prone names
+  (one-letter-apart airport codes, the same city name in several states, a
+  same-name hotel airside AND landside in one airport, aggregators mixing nearby
+  airports into a search), the brief gets a `lookalikes` entry naming each trap.
+  Themed renderers title brief cards from `theme_common.BRIEF_TITLES` (fallback:
+  the raw key; the art file's `brief_titles` overrides) — `lookalikes` is not in
+  that table, so give it its display title via `brief_titles` (zh: 重名陷阱), or on
+  a zh-only plan simply key the entry 重名陷阱 — unlike `altitude` and `navigation`,
+  which are now built-in `BRIEF_TITLES` keys and need no override. The country files
+  carry the known traps (see §USA).
+- **Hotel stays are explicit local calendar dates** ("check-in D1 → check-out D3"
+  = the nights of D1 and D2). Booking sites use the hotel's local calendar and
+  never convert timezones — the mis-bookings are human, so pre-chew the two
+  classics wherever the plan contains them, on the checklist row itself and not
+  only in prose: a past-midnight arrival still sleeps the PREVIOUS calendar night
+  (book the landing date + a "late arrival" note, never the clock date the guest
+  walks in on); a date-line crossing books the ARRIVAL-local calendar date, not
+  the departure date.
+- **Date-locked rows also ship as a calendar file**: when the checklist carries
+  gates (a ticket-release instant, a decision deadline, an on-trip re-check),
+  offer a `.ics` beside the page (worked example: `examples/gates-sample.ics`)
+  — one VEVENT per gate, with the FULL action
+  list in DESCRIPTION (the user acts from the alarm, not from memory: what to
+  do, the fallback if it fails, the linked bookings by number), two VALARMs
+  (`-P1D` and `-PT30M`), and stable UIDs with an incremented SEQUENCE and
+  fresh DTSTAMP on every plan change. Write times as FLOATING local times (no
+  `Z`, no `TZID`): a pre-trip gate then fires on home wall-clock, and an
+  on-trip gate at that hour in whatever timezone the traveller is standing in
+  — which is what an on-trip re-check wants. The exception is a fixed-instant
+  gate (a ticket drop at home-timezone clock time): schedule it on a pre-trip
+  date when it is one, and when it can fall mid-trip give that one VEVENT a
+  TZID-anchored DTSTART with its VTIMEZONE — RFC 5545 allows mixing anchored
+  and floating events in one file. File mechanics are strict
+  (RFC 5545): escape DESCRIPTION newlines as `\n`, fold long content lines at
+  75 octets, include VERSION/PRODID and a DTSTAMP per event. Client caveats
+  belong on the page, not in the user's lap: Google Calendar pins floating
+  times to the calendar's timezone, skips same-UID re-imports instead of
+  updating, and replaces VALARMs with its own default reminders (Apple/iOS
+  Calendar honours floating times and VALARMs) — so open each DESCRIPTION
+  with the intended hour ("09:00 local, wherever you are"), and after a plan
+  change instruct
+  "delete the old events, then import the new file".
+

@@ -181,6 +181,9 @@ list of things every new country costs a first planner 6-9 searches to rediscove
 
 - **Visa/entry** for that passport: official government/embassy sources only; put the
   processing lead time on the booking checklist. Rules change — never answer from memory.
+  Transit countries count too: a separate-ticket connection can force ENTERING the hub
+  country to re-check bags (Phase 3 §International, the separate-tickets bullet) — run
+  that audit here, before writing "no visa needed" anywhere.
   **This judgement is the assembler's alone**: city subagents (Phase 4) do not make
   visa/entry calls, and anything they say about it is overwritten by this line.
 - **Holidays colliding with the window**:
@@ -204,7 +207,11 @@ list of things every new country costs a first planner 6-9 searches to rediscove
 - **Money & connectivity one-liners**: card vs cash norms, eSIM ballpark, plug type.
 - **Insurance line**: travel-medical insurance with destination-appropriate coverage
   goes on the checklist (US target: ≥$100k medical + medical evacuation — an ER visit
-  is four figures before insurance). Tours never substitute for it.
+  is four figures before insurance). Tours never substitute for it. When the plan
+  carries a monitored hazard gate, the insurance row's deadline is NOW, not "before
+  departure" (the user buys — Hard rule 1); the agent's jobs are the read-side ones:
+  verify the issued policy rather than the product page, and match the plan's
+  activities against the exclusion list by name — data-sources.md §Travel insurance.
 - **Safety paragraph, one per base**: which areas to avoid after dark, and — more
   useful than warnings — design the plan so night movement is door-to-door by car.
   A route that never needs a dark walk beats a list of cautions.
@@ -248,6 +255,15 @@ empty section (they used to crash — the Vietnam test lost both themed pages to
   LHR vs LGW/STN…). A ¥400-cheaper fare into a far airport often loses.
 - Departing CN: also spot-check one LCC directly in the browser (Spring 春秋, Peach,
   Scoot…) — aggregators miss or misprice some LCC inventory.
+- **Separate tickets across an international connection are a visa trap, not just
+  a baggage nuisance** — audit whenever two PNRs meet at a foreign hub, including
+  tickets the user bought before coming to you. Separate-journey policies tag bags
+  only to the first ticket's endpoint, and carousels sit landside — so claiming +
+  re-checking can REQUIRE entering the transit country. Before writing "no visa
+  needed", check: the first carrier's separate-PNR interline stance (assume no
+  through-check), the passport's transit-country visa need, and airside overnight
+  options if the layover crosses a night. A needed transit visa goes on the
+  checklist with its deadline counted back from the departure date.
 - LCC arithmetic: add the checked-bag fee before comparing — a "cheap" fare + ¥280 bag
   usually isn't.
 
@@ -266,15 +282,19 @@ empty section (they used to crash — the Vietnam test lost both themed pages to
   half a day of driving).
 - Record per driving leg: pick-up/drop point + counter hours, car class, price +
   as-of date, insurance note, fuel estimate, park entrance fee (per **vehicle** in the
-  US; 3+ parks → the annual pass wins), and the license requirement for the driver's
+  US; 3+ parks → an annual pass wins — the $80 America the Beautiful is
+  residents-only since 2026, non-residents take the $250 pass from the 2nd park,
+  country notes §USA), and the license requirement for the driver's
   passport (see country notes).
 - Gateway towns run out of cars and rooms in season — the rental and the first night
   go on the booking checklist, not the "later" pile.
 
 **Record for every leg**: carrier, date, dep/arr local times, price + currency + as-of
-date, **checked-bag fee** (US domestic: $35-40/leg on every major since Southwest
-ended free bags in 2025 — 4 legs is a real budget line; UA Basic Economy excludes
-even a full-size carry-on), refund/change class, deep link. Multi-leg trips get a
+date, **checked-bag fee** (US domestic: $35-45 per bag per one-way on every major
+since Southwest ended free bags in 2025 — 4 legs is a real budget line; UA Basic
+Economy is personal-item-only on domestic and short-haul Latin America routes,
+while long-haul international Basic Economy does include the carry-on ⚡),
+refund/change class, deep link. Multi-leg trips get a
 **baggage walkthrough**: where the big bag physically is on every tour/venue day
 (day tours = bag stays at hotel; stadiums ban bags; 2-day tours are often
 overnight-bag-only). Output 1 pick + 1 backup per leg.
@@ -302,7 +322,9 @@ required" as checklist item #1; entry had been visa-free since 2026-01-02).
 Otherwise do the cities sequentially with the
 same structure. When the user prefers group tours, the city agent's first job is
 finding real in-sale products with departure schedules (data-sources.md §Group
-tours) — the tour's schedule then dictates the surrounding legs.
+tours) — the tour's schedule then dictates the surrounding legs, and a fly-in day
+tour must clear BOTH weekday grids (operator departure days AND feeder-flight
+schedules — same section) before its day is fixed in the skeleton.
 
 Per city:
 1. Anchors per interest-fit, ≤ pace + 1 optional per day. Cluster by geography per day;
@@ -316,7 +338,15 @@ Per city:
    travel" on the checklist. Claiming date-specific verification you cannot have is
    worse than admitting the horizon — and prices move on their own schedule
    (admission fees jump at fiscal-year boundaries), so re-check the fee, not just
-   the hours.
+   the hours. National parks and other big nature anchors: also read the park's
+   official Alerts/Current Conditions page — storm, fire and eruption closures
+   outlast news cycles, and a partially-open park may hold 2-3 hours of content
+   where the brochure promises a day (resize the day; design it droppable while
+   the region is in disaster recovery). When the draw is a natural phenomenon
+   (lava fountains, aurora), plan the day to work WITHOUT it: base rate ≈ event
+   duration ÷ recurrence interval, the official forecast horizon (days, not
+   weeks) sets a decision gate on the checklist — keep every related booking
+   cancellable until that gate, and pay no premium for a lottery ticket.
 3. Transit: day-pass vs pay-per-ride arithmetic — sum the day's expected rides and
    recommend the pass only when it actually wins. Note the local IC card / transit app.
 4. Each day gets one rain alternative and a food **area** (market/street/neighborhood)
@@ -328,9 +358,10 @@ Per city:
    arrival/moving/departure day structures, worship + siesta + crowd-calendar traps,
    degradation tags) and references/navigation.md (hop links, canonical hop-row
    format, exit numbers, verify-vs-estimate rules), then run scripts/route_tools.py
-   in this order: **geocode → check → links --write → kml**, so every hop carries a
-   distance-sane duration and a tappable map link written into the plan for you.
-   Then `sun --write` once the stops carry coordinates: it fills every day's
+   in this order: **geocode → per-day tz sweep → sun --write → links --write →
+   check → kml**, so every hop carries a distance-sane duration and a tappable map
+   link written into the plan for you.
+   `sun --write` runs once the stops carry coordinates: it fills every day's
    `sun` (civil dawn · sunrise / sunset) in one canonical string and refuses data
    that fails a solar sanity check — never hand-copy sunrise numbers, and **run it
    before writing any sunrise / golden-hour / dark-start prose**: tz changes live in
@@ -338,8 +369,11 @@ Per city:
    hand-written times were an hour off on all ten days, and neither `check` nor
    `qc.py` compares prose against `sun`). A moving day defaults to the last stop;
    when the day's sunrise anchor is at the *first* stop, set the day's `sun_stop`
-   (scheduling.md rule 7). **Non-zero exit = at least one day was skipped or
-   rejected**: the written days are fine, re-run `--only DATE` for the ones it
+   (scheduling.md rule 7). **A plan that crosses timezones stamps every day's `tz`
+   (IANA name) before `sun --write`** — sun refuses any day whose zone it would
+   have to guess from longitude (the guess puts Hawaii at UTC-11), and it refuses
+   per-day, so one sweep over `days[].tz` beats fifteen retries.
+   **Non-zero exit = at least one day was skipped or rejected**: the written days are fine, re-run `--only DATE` for the ones it
    names before writing prose for them. Mark ridden
    hops with a `mode` on the arriving stop (`transit`/`train`/`bus`/`drive`/`boat`/
    `fly`; long signature walks `walk`), or the walking total and the links will
@@ -369,7 +403,8 @@ rollup → country brief.
 poetic display title from references/cover-titles.md — zh 2-6 characters + an English
 line, matched to the trip archetype (road-trip / island / mountain / city / coast).
 Never ship a literal placeholder like "X国行"; never use the clichés on that file's
-blacklist. Cite the allusion honestly (原句 in the subtitle or a small credit line).
+blacklist. Cite the allusion honestly (the source line in the subtitle or a small
+credit line).
 
 **Adversarial self-check** — run this list against the finished plan, fix what it
 catches, then record "self-checked: N issues found and fixed" in `meta.self_check`
@@ -399,7 +434,10 @@ portal renders neither — on portal the chat summary carries it):
 - No day exceeds pace; **an intercity moving day carries ≤2 anchors, and only when
   the bags are solved before the first anchor (checked / stored / hotel-held);
   otherwise 1** (same sentence in scheduling.md §Day types)
-- Every price has source + as-of date; every bookable line has a link
+- Every price has source + as-of date; every bookable line has a link — and the
+  link carries its dates and a disambiguated place name; hotel rows state explicit
+  local check-in→check-out calendar dates, with past-midnight-arrival and
+  date-line nights flagged (output-template §Booking-artifact conventions)
 - **Language**: `plan.lang` matches the language the user asked in, and every
   reader-facing string in the plan (day titles, notes, tips, checklist rows,
   decisions, hotel blurbs) is in that language — an English fragment copied verbatim
@@ -417,7 +455,9 @@ file with its own share/export buttons and the appendix (checklist, legs, hotels
 budget, brief). Publish through whatever artifact / file hand-off tool the harness
 has (in Claude Code: Artifact, else SendUserFile); otherwise save the file and give
 its absolute path. Ship the trip KML (`scripts/route_tools.py kml plan.geo.json -o
-trip.kml`) alongside for offline map apps. The plain `scripts/render_plan.py plan.geo.json
+trip.kml`) alongside for offline map apps; when the checklist carries date-locked
+gates, also offer the gates `.ics` (output-template.md §Booking-artifact
+conventions). The plain `scripts/render_plan.py plan.geo.json
 -o trip.html` page (printable, checkbox checklist, offline route sketch per day) is an
 **extra** — add it when the user asks for a printable/plain version, or as the last
 resort if the theme renderer still fails after one honest fix attempt (then say so in
@@ -448,11 +488,11 @@ them. Flow:
      default band was reused). The same ladder applies to `end.hero` / the tail cover,
      with one twist: that picture is the **return to the departure city** (home skyline
      at landing, not another destination view) — generated for this trip too. "Reuse
-     first" applies only to generic props: `themes/assets/IMAGE-LIBRARY.md` §通用件
+     first" applies only to generic props: `themes/assets/IMAGE-LIBRARY.md` §Generic pieces (通用件)
      lists what any trip may use; generate the rest — **with the agent's own native
      image/video generation if it has one (no key to configure; same specs, same
      prompts-as-style-anchors, same split/cutout/webp/manifest steps — ART-SCHEMA.md
-     「生成器选择」), otherwise `gen.py` / `genvideo.py` over OpenRouter** — using the
+     §Generator choice), otherwise `gen.py` / `genvideo.py` over OpenRouter** — using the
      sheet recipe in ART-SCHEMA.md (title stickers: one centred sticker, symmetric
      lines, no icons inside the letters), then `towebp.py`, and keep the webp beside
      the plan (or pass `--assets DIR`).
@@ -525,7 +565,10 @@ resolve it once and call the scripts by absolute path, because a subagent's work
 directory is not the skill directory and shell cwd does not persist between calls.
 
 - `references/data-sources.md` — read before Phase 1: every API/URL recipe + fallback
-  chain (flights, hotels, rail, venues, weather, FX, holidays, geocoding).
+  chain (flights, hotels, rail, venues, weather, FX, holidays, geocoding) — **plus
+  the booking-judgment rules that decide plans**: §Group tours (weekday grids,
+  min-party, calendar-vs-marketing, zero-cost holds and booking order) and §Hotels
+  (checkout all-in pricing). Not just a curl cookbook.
 - `references/country-quick-notes.md` — read the destination's section before Phase 2:
   passes, sell-outs, closure patterns, transit apps per country; destination absent →
   its "Destination not listed? — the checklist" section.
@@ -535,8 +578,9 @@ directory is not the skill directory and shell cwd does not persist between call
   times, buffers, meals, energy curve, degradation tags, timeline verification.
 - `references/navigation.md` — read with it: hop-link recipes, transit-row format,
   exit numbers, verify-vs-estimate policy, offline-maps (KML) workflow.
-- `references/cover-titles.md` — bilingual poetic cover-title case library (诗词/散文/
-  名著出处 + trip-archetype fit + cliché blacklist); read at Phase 6 when rendering.
+- `references/cover-titles.md` — bilingual poetic cover-title case library (poetry /
+  prose / classic-literature sources + trip-archetype fit + cliché blacklist); read
+  at Phase 6 when rendering.
 - `scripts/flight_scan.py` — Google Flights grid scanner; run with `--help` first.
 - `scripts/route_tools.py` — geocode stops, distance-check clustering, emit per-hop +
   whole-day map links and the trip KML; subcommands geocode / check / links / kml /
@@ -562,7 +606,7 @@ directory is not the skill directory and shell cwd does not persist between call
   authoritative art.json contract) and `themes/README.md`.
 - `themes/assets/` — the shared picture library: all embeddable webp, the Caveat
   webfont, `manifest.json` (prompt/cost per generated asset), `IMAGE-LIBRARY.md`
-  (index by subject — check its 通用件 section before generating anything),
+  (index by subject — check its Generic pieces section before generating anything),
   `portal/` (the portal theme's footage sidecar dir — empty in the tree; the US
   reference chain is a release asset, see `portal/README.md`) and `stock/` — the **stock kit**
   (region cover paintings + landmark / generic-scene cut-outs in the illustrated

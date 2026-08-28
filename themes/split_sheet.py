@@ -17,6 +17,10 @@ Usage:
       # fewer cells than props). Each forced cell is still autocropped by the
       # cut-out, so a little slack around a prop is harmless.
 
+With --no-cut (alias --opaque) the cutout is skipped and each cell is written
+as <name>.png + plain <name>.webp — for photo/opaque sheets whose ART-SCHEMA
+shape column says the asset keeps its rectangle.
+
 Writes <name>.png (cropped RGB), <name>.cut.png / .cut.webp (alpha) per cell
 BESIDE THE SHEET (its directory), or into --outdir DIR (created if missing) —
 so `python3 themes/split_sheet.py trips/x/x-sheet.png a b c` from the repo
@@ -127,6 +131,10 @@ def main():
                     help="force COLSxROWS equal cells instead of gutter detection")
     ap.add_argument("--outdir", metavar="DIR", default=None,
                     help="where the cells go (default: beside the sheet; created if missing)")
+    ap.add_argument("--no-cut", "--opaque", dest="no_cut", action="store_true",
+                    help="skip the white-background cutout: emit <name>.png and a "
+                         "plain <name>.webp per cell (for photo/opaque sheets — see "
+                         "ART-SCHEMA's shape column)")
     args = ap.parse_intermixed_args()   # names may follow --grid/--probe
     sheet_path = pathlib.Path(args.sheet)
     probe = args.probe
@@ -173,6 +181,11 @@ def main():
         stem = outdir / name
         crop = sheet.crop(box)
         crop.save(f"{stem}.png")
+        if args.no_cut:
+            crop.save(f"{stem}.webp", quality=90, method=6)
+            print(f"  → {stem}: {crop.width}x{crop.height} opaque (no cutout) "
+                  f"webp={pathlib.Path(f'{stem}.webp').stat().st_size // 1024}KB")
+            continue
         cut = cutout(crop)
         cut.save(f"{stem}.cut.png")
         cut.save(f"{stem}.cut.webp", quality=90, method=6)

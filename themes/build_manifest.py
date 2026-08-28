@@ -101,9 +101,17 @@ def main():
             entries[name] = e
 
     data = {
-        "_readme": ("生成图片索引——新图生成前先查这里,已有就复用。"
-                    "gen.py 每次成功生成会自动登记;手动清理后跑 build_manifest.py 刷新。"
-                    "transparent=true 表示有 .cut.webp 真 alpha 抠图版。"),
+        # must stay byte-identical to the hand-merged _readme in manifest.json —
+        # this write overwrites it, so any drift here silently rewrites the manifest
+        "_readme": ("Generated-image index — check here before generating a new image "
+                    "and reuse what already exists. gen.py registers every successful "
+                    "generation automatically; run build_manifest.py to refresh after "
+                    "manual cleanup. transparent=true means a .cut.webp real-alpha "
+                    "cutout exists. Test-trip assets (测试行程资产) are hand-merged in "
+                    "by the main agent from trips/test-*/manifest.<trip>.json (without "
+                    "running build_manifest.py — it would scramble the job↔png "
+                    "relationships in the trip directories); those entries' files.png "
+                    "refers to the png master under trips/, which stays out of the repo."),
         "style_anchor": ("Flat hand-drawn travel illustration, gouache paint texture "
                          "with soft grain, warm muted palette of terracotta, sand beige, "
                          "dusty teal and cream, clean rounded shapes, minimal cozy "

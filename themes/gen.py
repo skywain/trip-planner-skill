@@ -3,7 +3,7 @@
 
 FALLBACK PATH: an agent that can generate images natively should use that
 instead (no key to configure) — same specs and prompts, then the same
-split_sheet / cutout / towebp / trip-manifest steps (ART-SCHEMA.md 生成器选择).
+split_sheet / cutout / towebp / trip-manifest steps (ART-SCHEMA.md "Generator choice").
 This script exists for environments without native generation.
 
 Usage: python3 gen.py <jobs.json> [--outdir DIR] [--manifest PATH] [--dry-run]

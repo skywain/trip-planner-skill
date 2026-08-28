@@ -268,7 +268,7 @@ def main():
             hdr = "{} -> {} ({} nights)".format(dep_s, ret_s, n)
         else:
             hdr = "{} (one way)".format(dep_s)
-        res, err = None, ""
+        res, err, err_body = None, "", ""
         for attempt in range(2):      # transient Google throttling is common
             try:
                 res = fetch_grid_cell(legs, trip, pax, max_stops, currency)
@@ -276,17 +276,27 @@ def main():
             except Exception as e:
                 # AU F13: "FETCH FAILED (AssertionError)" named neither the airports
                 # nor the date, so three failing cells were indistinguishable.
-                detail = " ".join(str(e).split())[:90]
+                err_body = " ".join(str(e).split())
+                detail = err_body[:90]
                 err = "{}: {}{}".format(type(e).__name__, route,
                                         " — " + detail if detail else "")
                 if attempt == 0:
                     time.sleep(3)
         if res is None:
-            hint = ("Google returned a non-200 page (bot wall / consent) and the "
-                    "fallback renderer failed too" if err.startswith("AssertionError")
-                    else "no result list on the page (unserved pair or date too "
-                    "far out)" if err.startswith("RuntimeError") else
-                    "network / parser error")
+            if err.startswith("AssertionError"):
+                # Not every AssertionError is Google's bot wall: a 401/403 in the
+                # error body means the FALLBACK service refused us (auth), and no
+                # amount of browsing Google will fix that.
+                if re.search(r"(?<!\d)(401|403)(?!\d)", err_body):
+                    hint = ("fallback renderer refused (auth) — a browser will "
+                            "not help; ship the deep link as an estimate")
+                else:
+                    hint = ("Google returned a non-200 page (bot wall / consent) "
+                            "and the fallback renderer failed too")
+            else:
+                hint = ("no result list on the page (unserved pair or date too "
+                        "far out)" if err.startswith("RuntimeError") else
+                        "network / parser error")
             print("\n== {} ==  FETCH FAILED ({}) — {}; use the link:\n  {}".format(
                 hdr, err, hint, link))
             continue

@@ -1,5 +1,5 @@
 {
-  "_readme": "生成图片索引——新图生成前先查这里,已有就复用。gen.py 每次成功生成会自动登记;手动清理后跑 build_manifest.py 刷新。transparent=true 表示有 .cut.webp 真 alpha 抠图版。测试行程资产由主 agent 从 trips/test-*/manifest.<trip>.json 手工回收合并(不跑 build_manifest.py,否则 trip 目录里的 job/png 关系会被打乱);这些条目的 files.png 指向 trips/ 下的母图,不在 repo 里。",
+  "_readme": "Generated-image index — check here before generating a new image and reuse what already exists. gen.py registers every successful generation automatically; run build_manifest.py to refresh after manual cleanup. transparent=true means a .cut.webp real-alpha cutout exists. Test-trip assets (测试行程资产) are hand-merged in by the main agent from trips/test-*/manifest.<trip>.json (without running build_manifest.py — it would scramble the job↔png relationships in the trip directories); those entries' files.png refers to the png master under trips/, which stays out of the repo.",
   "style_anchor": "Flat hand-drawn travel illustration, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style — 贴纸类加: thick organic silhouette, no text, no border, single isolated subject centered on a solid pure white background, no shadow",
   "assets": [
     {
@@ -4081,6 +4081,476 @@
         "vietnam-coffee",
         "vietnam-basketboat",
         "vietnam-scooter"
+      ]
+    },
+    {
+      "name": "yn-cover-hero",
+      "kind": "asset",
+      "prompt": "Flat hand-drawn travel poster in gouache, 16:9 wide composition designed as a website cover: the LOWER THIRD shows a tiny layered landscape of a south-west China mountain journey (a cluster of tall grey limestone karst pinnacles on the left, three slender white pagodas beside a long blue lake in the middle, a snow-capped ridge with pines on the right, a few grey-tiled sloping roofs and a small stone bridge in front), and the UPPER TWO THIRDS is a vast calm sky in a soft cream-to-pale-teal gradient with two small clouds and a few tiny birds, intentionally empty and quiet to hold a large page title, gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.033235,
+      "generated_at": "2026-08-29",
+      "files": {
+        "webp": 104472
+      },
+      "transparent": false,
+      "source_job": "trips/test-yunnan-2026/jobs.json",
+      "trip": "yunnan",
+      "note": "云南 2026(悉尼出发,英文)测试行程(插画+玻璃+手账+闪屏 四版);png 母图留在 trips/test-yunnan-2026/,未入 repo"
+    },
+    {
+      "name": "yn-glass-dawn",
+      "kind": "asset",
+      "prompt": "Bright airy travel photography, first light over a cluster of grey-tiled sloping old-town roofs with thin mist lying in the lanes and a distant snow peak catching pink light on the horizon, soft pastel dawn palette, high-key exposure, clean minimalist composition with calm negative space in the upper half, crisp modern travel-app aesthetic, wide 16:9, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.032735,
+      "generated_at": "2026-08-29",
+      "files": {
+        "webp": 131496
+      },
+      "transparent": false,
+      "source_job": "trips/test-yunnan-2026/jobs.json",
+      "trip": "yunnan",
+      "note": "云南 2026(悉尼出发,英文)测试行程(插画+玻璃+手账+闪屏 四版);png 母图留在 trips/test-yunnan-2026/,未入 repo"
+    },
+    {
+      "name": "yn-glass-hero",
+      "kind": "asset",
+      "prompt": "Bright airy travel photography, aerial view of a long deep-blue highland lake lying between a high snow-streaked mountain ridge on one side and a wide plain of small whitewashed grey-tiled villages and pale stubble fields on the other, golden morning light, high-key exposure, pastel blue sky with thin clouds, clean minimalist composition with calm negative space in the upper half, crisp modern travel-app aesthetic, wide 16:9, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03282,
+      "generated_at": "2026-08-29",
+      "files": {
+        "webp": 153596
+      },
+      "transparent": false,
+      "source_job": "trips/test-yunnan-2026/jobs.json",
+      "trip": "yunnan",
+      "note": "云南 2026(悉尼出发,英文)测试行程(插画+玻璃+手账+闪屏 四版);png 母图留在 trips/test-yunnan-2026/,未入 repo"
+    },
+    {
+      "name": "yn-glass-karst",
+      "kind": "asset",
+      "prompt": "Bright airy travel photography, a wide field of tall narrow grey limestone karst pinnacles rising out of green grass and low shrubs under a very high pale blue sky, soft late-morning light, high-key exposure, clean minimalist composition with calm negative space in the upper half, crisp modern travel-app aesthetic, wide 16:9, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.032715,
+      "generated_at": "2026-08-29",
+      "files": {
+        "webp": 148410
+      },
+      "transparent": false,
+      "source_job": "trips/test-yunnan-2026/jobs.json",
+      "trip": "yunnan",
+      "note": "云南 2026(悉尼出发,英文)测试行程(插画+玻璃+手账+闪屏 四版);png 母图留在 trips/test-yunnan-2026/,未入 repo"
+    },
+    {
+      "name": "yn-glass-snow",
+      "kind": "asset",
+      "prompt": "Bright airy travel photography, a long snow-capped mountain ridge above a high plateau of dark pines and a small turquoise glacier-melt pool, crisp thin cold air, pale blue sky with a few high clouds, high-key exposure, clean minimalist composition with calm negative space in the upper half, crisp modern travel-app aesthetic, wide 16:9, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.032735,
+      "generated_at": "2026-08-29",
+      "files": {
+        "webp": 205876
+      },
+      "transparent": false,
+      "source_job": "trips/test-yunnan-2026/jobs.json",
+      "trip": "yunnan",
+      "note": "云南 2026(悉尼出发,英文)测试行程(插画+玻璃+手账+闪屏 四版);png 母图留在 trips/test-yunnan-2026/,未入 repo"
+    },
+    {
+      "name": "yn-illus-sheet",
+      "kind": "asset",
+      "prompt": "A sheet of NINE separate flat hand-drawn travel illustrations arranged in a clean 3-column by 3-row grid on a plain pure white background, WIDE empty white gutters between every illustration and a wide white margin around the grid, each one a single isolated subject with a thick organic silhouette, no ground line and no shadow, all sharing the same gouache paint texture with soft grain, warm muted palette of terracotta, sand beige, dusty teal and cream, clean rounded shapes, minimal cozy storybook style. Row 1: a small flock of white gulls with red beaks wheeling above a willow-fringed lake pavilion; a cluster of tall narrow grey limestone karst pinnacles with a thin path winding between them; three slender white pagodas standing in a row in front of a long snow-capped ridge. Row 2: a white-walled grey-tiled courtyard house with painted eaves and a carved screen wall; a snow-capped mountain ridge with one slim cable-car pylon and a thin cable; three terraced turquoise pools stepping down over low pale weirs with two small pines. Row 3: a cluster of grey-tiled sloping roofs above a small arched stone bridge over a narrow water channel; a square of indigo-blue tie-dyed cloth with white sunburst patterns hanging from a bamboo pole; a harbour skyline at dusk with a large white sail-shell opera house and a wide steel arch bridge. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "1:1",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.05422,
+      "generated_at": "2026-08-29",
+      "files": {
+        "png": 1731189
+      },
+      "transparent": false,
+      "source_job": "trips/test-yunnan-2026/jobs.json",
+      "trip": "yunnan",
+      "note": "云南 2026(悉尼出发,英文)测试行程(插画+玻璃+手账+闪屏 四版);png 母图留在 trips/test-yunnan-2026/,未入 repo",
+      "split_into": [
+        "yn-i-gulls",
+        "yn-i-karst",
+        "yn-i-pagodas",
+        "yn-i-baihouse",
+        "yn-i-snowridge",
+        "yn-i-pools",
+        "yn-i-roofs",
+        "yn-i-tiedye",
+        "yn-i-sydney"
+      ]
+    },
+    {
+      "name": "yn-journal-sheet",
+      "kind": "asset",
+      "prompt": "A sheet of NINE separate vintage 1970s film photographs arranged in a clean 3-column by 3-row grid on a plain pure white background, WIDE empty white gutters between every photo and a wide white margin around the grid, each photo a simple borderless rectangle, all in matching faded warm Kodachrome tones with film grain and slight vignetting. Row 1: a city park lake at dawn with white red-beaked gulls wheeling over a small red lakeside pavilion; a field of tall grey limestone pinnacles rising out of green grass under a high sky; three slender white pagodas mirrored in a still pool with a long snow ridge behind them. Row 2: a wide blue mountain lake with a weathered wooden jetty and one small fishing boat; a whitewashed courtyard farmhouse with painted eaves at the edge of a stubble field; lengths of indigo-dyed cloth hanging to dry on lines in a village yard. Row 3: a wooden boardwalk on a bare snow ridge in thin bright air above a sea of cloud; terraced turquoise pools below a snow mountain, pines at the water's edge; a narrow night lane of grey-tiled roofs with red lanterns strung above a stone water channel. No borders, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "1:1",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.05403,
+      "generated_at": "2026-08-29",
+      "files": {
+        "png": 1855339
+      },
+      "transparent": false,
+      "source_job": "trips/test-yunnan-2026/jobs.json",
+      "trip": "yunnan",
+      "note": "云南 2026(悉尼出发,英文)测试行程(插画+玻璃+手账+闪屏 四版);png 母图留在 trips/test-yunnan-2026/,未入 repo",
+      "split_into": [
+        "yn-ph-greenlake",
+        "yn-ph-karst",
+        "yn-ph-pagodas",
+        "yn-ph-erhai",
+        "yn-ph-xizhou",
+        "yn-ph-indigo",
+        "yn-ph-snowridge",
+        "yn-ph-pools",
+        "yn-ph-nightlane"
+      ]
+    },
+    {
+      "name": "yn-splash-sheet",
+      "kind": "asset",
+      "prompt": "A product sheet of NINE separate items arranged in a clean 3-column by 3-row grid on a plain pure white background, with WIDE empty white gutters between every item and a wide white margin around the whole grid so each is clearly isolated and never touches another. ALL NINE painted in the identical Supercell Brawl Stars splash art style: hand-painted stylized 2.5D, soft airbrushed volume shading inside bold clean silhouettes, chunky exaggerated proportions, magenta and cyan rim light. Row 1 first: a single hand-painted game title plate of thick painterly capital letters with heavy dark outlines and glossy bevelled faces, spelling exactly two centred lines of the SAME letter height, the first line reading SOUTH OF THE and the second line reading CLOUDS, with a wide empty margin around the plate and nothing else inside or over the letters. Row 1 second: a large floating rock chunk with a chunky twin-peaked snow mountain on top, dark green pines around its base and small floating rock bits below. Row 1 third: a floating grass chunk holding a small round green lake with a chunky red-roofed lakeside pavilion and three tiny white birds above it. Row 2 first: a floating rock chunk crowded with tall narrow grey limestone pinnacles and a thin winding path. Row 2 second: a floating grass chunk with three chunky slender white pagodas in a row and a strip of blue lake water along its front edge. Row 2 third: a floating chunk of grey-tiled sloping roofs with a tiny arched stone bridge and a thin stream running off the edge as a small waterfall. Row 3 first: a floating chunk of blue-white glacier ice with a slim cable-car pylon and one cable, thin mist below. Row 3 second: a floating wetland chunk of green reeds with a small wooden rowing boat and two tiny geese. Row 3 third: a floating chunk with a black-tiled open pavilion beside a still dark pool reflecting a small snow peak. No shadows on the white background, no text or letters anywhere except the two title lines in the first item, no labels",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "1:1",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.05488,
+      "generated_at": "2026-08-29",
+      "files": {
+        "png": 1535622
+      },
+      "transparent": false,
+      "source_job": "trips/test-yunnan-2026/jobs.json",
+      "trip": "yunnan",
+      "note": "云南 2026(悉尼出发,英文)测试行程(插画+玻璃+手账+闪屏 四版);png 母图留在 trips/test-yunnan-2026/,未入 repo",
+      "split_into": [
+        "yn-splash-title",
+        "yn-splash-hero",
+        "yn-si-greenlake",
+        "yn-si-karst",
+        "yn-si-pagodas",
+        "yn-si-roofs",
+        "yn-si-glacier",
+        "yn-si-wetland",
+        "yn-si-dawnpool"
+      ]
+    },
+    {
+      "name": "peru-clay-sheet-figs",
+      "kind": "asset",
+      "prompt": "A product sheet of SIX separate handmade polymer clay figurines arranged in a clean 3-column by 2-row grid on a plain pure white background, with WIDE empty white gutters between every figurine and a wide white margin around the whole grid so each subject is clearly isolated and never touches another. Row 1 left to right: a small woolly white llama with a red and orange woven blanket on its back; a chunky grey clay Inca stone wall block with trapezoid doorway and a tiny green clay terrace at its foot; a pastel clay cathedral facade with two square bell towers on a small plaza base. Row 2 left to right: a stubby blue and cream clay tourist train carriage with big round windows; a small clay plate of ceviche, white fish cubes with a red onion curl and a yellow corn cob beside it; a little hillside of tiny white clay salt pans stepping down in a block. All six in identical style: handmade polymer clay, soft bevelled edges, subtle fingerprint texture, glossy studio lighting, pastel palette, each a single isolated subject, no ground line, no shadow on the white background, no borders, no text, no labels",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.04237,
+      "generated_at": "2026-08-29",
+      "files": {
+        "png": 1682495
+      },
+      "transparent": false,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo",
+      "split_into": [
+        "peru-clay-llama",
+        "peru-clay-wall",
+        "peru-clay-cathedral",
+        "peru-clay-train",
+        "peru-clay-ceviche",
+        "peru-clay-salt"
+      ]
+    },
+    {
+      "name": "peru-clay-title",
+      "kind": "asset",
+      "prompt": "A single handmade polymer clay 3D title sticker floating on a plain pure white background with a wide empty white margin all around. Chunky hand-rolled pastel clay Chinese characters, thick, rounded, soft bevelled edges, subtle fingerprint texture, glossy studio lighting. Exactly ONE horizontal line of exactly FOUR Chinese characters, all four the same height, centred on one baseline, evenly spaced, no other objects, no icons, no moon, no clouds, no decorations, no Latin letters: the line reads 云上石城. Each character alternates coral, mint green, butter yellow and lavender clay. Every stroke of every character fully visible, complete and clearly separated, generous spacing between characters, nothing touching the image edges.",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "1K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.04191,
+      "generated_at": "2026-08-29",
+      "files": {
+        "cut.webp": 69330,
+        "md.webp": 24748
+      },
+      "transparent": true,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo"
+    },
+    {
+      "name": "peru-noir-cusco",
+      "kind": "asset",
+      "prompt": "Cinematic moody dusk scene, a high Andean colonial town at blue hour seen from a hillside above: a dense field of terracotta tiled roofs stepping down a bowl-shaped valley, a twin-towered stone cathedral on a lit central square glowing warm amber, dark mountains closing the horizon, first stars in a deep indigo sky, thin smoke from chimneys, deep charcoal and ink-blue palette with warm amber and gold highlights, painterly realism with subtle film grain, wide 16:9, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03288,
+      "generated_at": "2026-08-29",
+      "files": {
+        "webp": 155856
+      },
+      "transparent": false,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo"
+    },
+    {
+      "name": "peru-noir-hero",
+      "kind": "asset",
+      "prompt": "Cinematic moody night scene, wide aerial view over the Andes at the end of a long flight: dark layered mountain ridges receding into blue-black haze, a thin band of amber sunset still burning along the horizon, one small airliner silhouette high on the left with a faint contrail, a scatter of tiny warm town lights deep in a valley below, deep charcoal and ink-blue palette with warm amber and gold highlights, painterly realism with subtle film grain, vast dark sky occupying the upper half with faint stars, wide 16:9 composition, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03294,
+      "generated_at": "2026-08-29",
+      "files": {
+        "webp": 52732
+      },
+      "transparent": false,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo"
+    },
+    {
+      "name": "peru-noir-lima",
+      "kind": "asset",
+      "prompt": "Cinematic moody night scene, the Pacific coast cliffs of a South American capital at blue hour seen from above: a long curving clifftop promenade with warm street lamps, dark ocean with a faint line of surf catching the last light, apartment towers glowing behind the cliff edge, low sea mist softening the far end of the bay, deep charcoal and ink-blue palette with warm amber and gold highlights, painterly realism with subtle film grain, wide 16:9, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03286,
+      "generated_at": "2026-08-29",
+      "files": {
+        "webp": 95956
+      },
+      "transparent": false,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo"
+    },
+    {
+      "name": "peru-noir-machu",
+      "kind": "asset",
+      "prompt": "Cinematic moody dawn scene, an ancient stone citadel of grey terraces and roofless buildings on a high saddle between steep cloud-forest peaks, thick white mist pouring through the valley below and half-swallowing the ruins, one sharp pointed peak rising behind them, the first cold blue light on the stone with a faint warm rim along the eastern ridge, deep charcoal and ink-blue palette with warm amber highlights, painterly realism with subtle film grain, wide 16:9, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.032865,
+      "generated_at": "2026-08-29",
+      "files": {
+        "webp": 81266
+      },
+      "transparent": false,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo"
+    },
+    {
+      "name": "peru-strip-andes",
+      "kind": "asset",
+      "prompt": "Wide horizontal diorama strip of handmade polymer clay scenery isolated on a solid pure white background: a warm ochre clay highland band with, from left to right, a stepped hillside of curved green clay agricultural terraces, a tiny pastel clay Andean village of adobe houses with red tiled roofs and a small white bell tower, a group of three small woolly clay llamas standing on a ridge, and on the right a cluster of concentric circular clay terraces sunk into the ground like a bowl, a few round clay shrubs and a thin blue clay river between them, the top half of the image is pure empty white, soft studio lighting, subtle clay texture, pastel palette, no shadow on background, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03308,
+      "generated_at": "2026-08-29",
+      "files": {
+        "cut.webp": 130512
+      },
+      "transparent": true,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo"
+    },
+    {
+      "name": "peru-strip-lima",
+      "kind": "asset",
+      "prompt": "Wide horizontal diorama strip of handmade polymer clay scenery isolated on a solid pure white background: a pale sand-and-slate clay coastal band with, from left to right, a low brown clay sea cliff dropping to a strip of blue-grey clay ocean with two tiny white surfers, a small pastel clay colonial city block with a yellow arcaded facade and a carved dark-wood enclosed balcony, a tiny clay adobe step-pyramid mound, and on the right two round clay palm trees beside a small red clay food cart, a few round clay bushes between them, the top half of the image is pure empty white, soft studio lighting, subtle clay texture, pastel palette, no shadow on background, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.03307,
+      "generated_at": "2026-08-29",
+      "files": {
+        "cut.webp": 118656
+      },
+      "transparent": true,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo"
+    },
+    {
+      "name": "peru-strip-machu",
+      "kind": "asset",
+      "prompt": "Wide horizontal diorama strip of handmade polymer clay scenery isolated on a solid pure white background: a deep green cloud-forest band with, from left to right, a low mint-green clay ridge with a small yellow clay tourist train on a thread of track, a tiny cluster of grey clay stone ruins with trapezoid doorways on a stepped green clay shelf, behind them one tall steep pointed clay peak in blue-green, and on the right two round dark-green clay trees and a small white clay cloud puff resting on the slope, the top half of the image is pure empty white, soft studio lighting, subtle clay texture, pastel palette, no shadow on background, no text",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.033045,
+      "generated_at": "2026-08-29",
+      "files": {
+        "cut.webp": 111848
+      },
+      "transparent": true,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo"
+    },
+    {
+      "name": "peru-zine-band",
+      "kind": "asset",
+      "prompt": "High-contrast black and white photograph, wide horizontal composition, terraced Andean mountainsides falling away into a deep valley with a river far below, layered ridges receding into haze, a single narrow footpath cutting across the slope, big sky with torn clouds, heavy 35mm film grain, deep blacks, documentary photography mood, slightly imperfect exposure like a printed zine page, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.032785,
+      "generated_at": "2026-08-29",
+      "files": {
+        "webp": 232520
+      },
+      "transparent": false,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo"
+    },
+    {
+      "name": "peru-zine-cover",
+      "kind": "asset",
+      "prompt": "High-contrast black and white photograph of an ancient Andean stone citadel on a high ridge, roofless stone buildings and stepped terraces in the foreground, a steep pointed peak towering behind, torn banks of cloud crossing the valley, dramatic sky, heavy 35mm film grain, deep blacks and blown highlights, documentary photography mood, slightly imperfect exposure like a printed zine page, vertical composition, no text, no watermark",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "2:3",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.04161,
+      "generated_at": "2026-08-29",
+      "files": {
+        "webp": 463044
+      },
+      "transparent": false,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo"
+    },
+    {
+      "name": "peru-zine-sheet",
+      "kind": "asset",
+      "prompt": "A sheet of SIX separate high-contrast black and white photographs arranged in a clean 3-column by 2-row grid on a plain pure white background, WIDE empty white gutters between every photo and a wide white margin around the grid, each photo a simple borderless rectangle, all matching: heavy 35mm film grain, deep blacks, documentary street-photography mood, slightly imperfect exposure like a printed zine page. Row 1 left to right: a colonial main square with arcaded stone galleries and a baroque cathedral facade, pigeons lifting off the wet paving; a close view of a massive polygonal Inca stone wall, huge irregular blocks fitted without mortar, one hand for scale; a crowded Andean market alley, stacked woven blankets and a woman in a bowler hat behind a stall. Row 2 left to right: the view out of a moving train window down a narrow river gorge, blurred foliage streaking past the glass; a hillside of hundreds of small salt evaporation pans, bright white geometry on a dark slope; a Pacific sea-cliff promenade at midday with paragliders above the drop and the ocean beyond. No text, no watermark, no borders, no labels",
+      "params": {
+        "background": "opaque",
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "quality": "medium"
+      },
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.0424,
+      "generated_at": "2026-08-29",
+      "files": {
+        "png": 3314516
+      },
+      "transparent": false,
+      "source_job": "trips/test-peru-2026/jobs.json",
+      "trip": "peru",
+      "note": "秘鲁 2026(首尔出发,中文)测试行程(黏土+夜航+Zine 三版);png 母图留在 trips/test-peru-2026/,未入 repo",
+      "split_into": [
+        "peru-zine-plaza",
+        "peru-zine-stonewall",
+        "peru-zine-market",
+        "peru-zine-trainwindow",
+        "peru-zine-salt",
+        "peru-zine-cliff"
       ]
     }
   ]
