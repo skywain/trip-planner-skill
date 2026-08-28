@@ -207,7 +207,11 @@ list of things every new country costs a first planner 6-9 searches to rediscove
 - **Money & connectivity one-liners**: card vs cash norms, eSIM ballpark, plug type.
 - **Insurance line**: travel-medical insurance with destination-appropriate coverage
   goes on the checklist (US target: ≥$100k medical + medical evacuation — an ER visit
-  is four figures before insurance). Tours never substitute for it.
+  is four figures before insurance). Tours never substitute for it. When the plan
+  carries a monitored hazard gate, the insurance row's deadline is NOW, not "before
+  departure" (the user buys — Hard rule 1); the agent's jobs are the read-side ones:
+  verify the issued policy rather than the product page, and match the plan's
+  activities against the exclusion list by name — data-sources.md §Travel insurance.
 - **Safety paragraph, one per base**: which areas to avoid after dark, and — more
   useful than warnings — design the plan so night movement is door-to-door by car.
   A route that never needs a dark walk beats a list of cautions.

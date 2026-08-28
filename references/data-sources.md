@@ -123,7 +123,9 @@ schedule dictates the surrounding legs, not the other way around.
   once a night sits wedged between already-ticketed non-refundables with no open
   gate touching it, the premium buys almost nothing — the scenarios that would
   cancel it are trip-collapse ones, which belong to travel insurance
-  (trip-cancellation/interruption cover), not to per-booking refund fees.
+  (trip-cancellation/interruption cover — provided the policy predates the
+  hazard's announcement; §Travel insurance "buy before the world moves"), not
+  to per-booking refund fees.
 
 ## Hotels
 No good keyless API exists — use browser + deep links; recommend neighborhoods and
@@ -153,6 +155,65 @@ No good keyless API exists — use browser + deep links; recommend neighborhoods
 - Booking deep link with dates baked in:
   `https://www.booking.com/searchresults.html?ss={CITY}&checkin={YYYY-MM-DD}&checkout={YYYY-MM-DD}&group_adults={N}&order=review_score_and_price`
 - Agoda often beats Booking in Asia — search in browser, copy property links.
+
+## Travel insurance (旅行险)
+
+- **Three layers, and the numbers live in the last one**: the product page's
+  coverage table sells, the clause PDFs define, and the issued policy schedule
+  (保单) decides — on the audited product, clause after clause read
+  "以保险单载明为准" for exactly the numbers that matter (illness waiting
+  period, deductible and payout ratio, delay-hour thresholds, per-category
+  sub-limits). Verification does not end at the purchase screen: the picker
+  lookalikes and the waiting-period question bite BEFORE buying; the rest is
+  read off the issued policy (the user supplies it). Four checks — the
+  destination list (the purchase flow's picker, on the user's side, has
+  lookalikes of its own: "United States Minor Outlying Islands" is NOT Hawaii
+  — Hawaii lives under "United States"), the illness waiting period (a 15-day
+  trip dies on a 30-day wait), deductible/payout ratio, and the assistance
+  hotline, which may appear nowhere else (live case: the clause docs named no
+  provider at all; the hotline existed only on the schedule).
+- **Buy before the world moves**: trip-change/cancellation cover excludes events
+  already announced or occurred at purchase time (declared strikes, named
+  storms, an erupting volcano, announced epidemics). When the plan carries a
+  monitored natural-hazard gate, the insurance row's deadline is NOW, not
+  "before departure" (the user buys — SKILL.md Hard rule 1) — every day of
+  delay is a day the exclusion can crystallise.
+- **Match the itinerary's activities against the exclusion list by name**: main
+  policies exclude a defined high-risk-sports list — horse riding/马术 commonly
+  sits on it (it did here), alongside diving and climbing; the fix is a product
+  whose high-risk extension names the activity — and the extension's claim
+  rules bind (live case): the operator booking voucher plus an incident
+  certificate FROM THE ORGANISER were required claim documents, so the plan's
+  day note says to keep them. Guided sessions inside a licensed commercial
+  venue usually satisfy the organised-activity carve-out; the same activity
+  self-organised often does not.
+- **Riders can carry purchase-time windows**: an event-ticket cancellation rider
+  demanded insuring within a day of paying for the ticket — tickets bought
+  before the policy can never be covered by it, and a ticket bought at a later
+  gate needs the same-day insurance linkage written on that gate's checklist
+  row. Read which clause actually carries each prepaid item's risk: a delay
+  rider quietly covered missed-event ticket loss the cancellation rider could
+  not.
+- **A self-drive day is a stack, and travel insurance is the thin layer**: the
+  personal-liability rider excludes motor vehicles wholesale, and on the
+  audited policy the rental-car rider was a gap-filler paying only on top of
+  the rental counter's own CDW/theft/third-party cover — declining the
+  counter's coverage leaves the rider paying nothing (check whether the user's
+  policy is excess-only or primary). Say it on the self-drive day itself:
+  third-party cover comes
+  from the rental counter, not the travel policy; and watch the policy's
+  blood-alcohol line (20 mg/100 mL ≈ one drink on the audited policy — it
+  voids the whole day, not just the drive).
+- **Once bought, the 保险 brief becomes an operating card, not a purchase
+  reminder**: assistance hotline + policy number, the first-call rule
+  (approval-first clauses are common — on the audited policy, medical
+  transport arranged without the assistance company's approval was not
+  reimbursed), and the evidence discipline — hospital ER over standalone
+  clinics (the medical-facility definition can exclude urgent-care
+  storefronts), itemized bill before leaving, police report within the
+  policy's window (24 h here) for theft, PIR at the baggage belt, and
+  jewellery is often an excluded or sub-limited property class, so advise
+  leaving it home.
 
 ## Intercity rail / bus / local transit
 - Durations & connections (browser, keyless):
