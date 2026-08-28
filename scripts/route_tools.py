@@ -797,7 +797,7 @@ def cmd_links(args):
                     what = str(row.get("what", ""))
                     if h["url"] is None:
                         row.pop("link", None)
-                        print("  ✎ row {} 「{}」 ← {} → {}: {}".format(
+                        print("  ✎ row {} “{}” ← {} → {}: {}".format(
                             idx, what[:48], h["a"], h["b"], h["note"]))
                         continue
                     foreign = foreign_stops(arrow_context(what), h["sa"], h["sb"],
@@ -805,12 +805,12 @@ def cmd_links(args):
                     if foreign:
                         n_susp += 1
                         parked.append(h["url"])
-                        parked_log.append("Day {} row {} 「{}」 (names {}; hop is "
+                        parked_log.append("Day {} row {} “{}” (names {}; hop is "
                                           "{} → {})".format(
                                               i, idx, what[:40], ", ".join(foreign),
                                               h["a"], h["b"]))
                         row.pop("link", None)
-                        warn("Day {} row {} 「{}」 names {} but the hop in this "
+                        warn("Day {} row {} “{}” names {} but the hop in this "
                              "position is {} → {} — SUSPICIOUS mismatch, link parked "
                              "in hop_links, not written. Fix: give every stop-to-stop "
                              "transition its own hop row in order; \"map\": false "
@@ -822,7 +822,7 @@ def cmd_links(args):
                         continue
                     row["link"] = h["url"]
                     n_wrote += 1
-                    print("  ✎ row {} 「{}」 ← {} → {}".format(
+                    print("  ✎ row {} “{}” ← {} → {}".format(
                         idx, what[:48], h["a"], h["b"]))
             else:
                 parked.extend(h["url"] for h in hops if h["url"])
@@ -834,7 +834,7 @@ def cmd_links(args):
                     if h["url"] is None:
                         print("  ✎ {} → {}: {}".format(h["a"], h["b"], h["note"]))
                 warn("Day {}: {} mappable hop rows vs {} mapped hops — links parked "
-                     "in day['hop_links'] (render_plan shows them as a 逐跳导航 row). "
+                     "in day['hop_links'] (render_plan shows them as a hop-by-hop maps row). "
                      "To place them on rows: give every stop-to-stop transition its "
                      "own hop row (a rail/flight row whose two stations are in "
                      "stops[] IS one of them — keep it mappable, it just gets no "
@@ -903,7 +903,7 @@ def cmd_links(args):
             # Morocco F6: 13 parked links and the command was "green". Exit code
             # stays 0 (parking is the designed fallback), but it must be visible.
             warn("==== links --write: {} link(s) PARKED in day['hop_links'], NOT on "
-                 "hop rows — the page degrades to one 逐跳导航 row per such day ===="
+                 "hop rows — the page degrades to one hop-by-hop maps row per such day ===="
                  .format(n_parked))
             for line in parked_log:
                 warn("  parked: " + line)

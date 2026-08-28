@@ -199,12 +199,15 @@ follow `scripts/render_plan.py`'s schema field-for-field.
  ],
  "hotels": [
   {"base": "Kyoto 3 晚", "area": "四条乌丸", "why": "…",
-   "options": [{"name": "…", "band": "…", "link": "…带日期深链…"}]}
+   "options": [{"name": "…", "band": "…", "link": "…deep link with dates…"}]}
  ],
  "tour_options": [
-  {"name": "…", "price": "…含单房差/门票包/非居民费/小费口径…", "schedule": "班期 —
-    有浏览器则逐日读定价日历后给核实结论(宣传的 Available Days 文案不算数),
-    否则给日历链接标 unverified", "pickup": "…", "link": "…"}
+  {"name": "…",
+   "price": "…include single supplement / fee package / non-resident surcharge / tipping basis…",
+   "schedule": "departure days — with a
+    browser, page the pricing calendar and read each date cell before giving a
+    verified conclusion (the marketing 'Available Days' blurb doesn't count);
+    without one, ship the calendar link marked unverified", "pickup": "…", "link": "…"}
  ],
  "checklist_items": [
   {"item": "…", "deadline": "…", "price": "…", "link": "…", "note": "…"}
@@ -289,10 +292,11 @@ Both pages present the same material in the same order:
    checkbox.
 4. **Flights & intercity table**: pick + backup per leg with all Phase 3 fields.
 5. **Day-by-day cards**: one card per day — header (date/city/label + sunrise/sunset),
-   then the hour-level timeline as a two-column table: 时间 · 内容. Hops are their own
-   rows, styled dimmer, written in the canonical hop-row format from navigation.md
-   (mode, line + direction, stops/duration, fare, boarding→alighting station, exit
-   number) with the tappable link on the row; price and notes sit under the activity
+   then the hour-level timeline as a two-column table: 时间 · 内容 (time · activity).
+   Hops are their own rows, styled dimmer, written in the canonical hop-row format
+   from navigation.md (mode, line (toward …), stops/minutes, fare ·
+   boarding→alighting stop · exit number) with the tappable link on the row; price
+   and notes sit under the activity
    name; tags ([pinned]/[opener]/[skippable]/[swap→…]) and hop markers
    ((verified)/(est.)) render as pills at the end of the row.
    render_plan.py also draws a small offline route schematic per day straight from

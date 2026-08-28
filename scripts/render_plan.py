@@ -23,7 +23,7 @@ Schema (all keys optional except days[].date):
                 "link","note","backup"}],
  "days": [{"date","city","label","sun","day_map","ribbon","rain_alt","late_cut",
            // HONEST total: on-foot ×1.3 + strolls + in-venue. Either a number or
-           // {"total": 7.5, "how": "on foot 2.1×1.3 + 站内 0.8 + 馆内 4.0"}
+           // {"total": 7.5, "how": "on foot 2.1×1.3 + in-station 0.8 + in-venue 4.0"}
            "walking_km": 5.4,
            "travel_day": true,
            "timeline": [{"t","what","kind":"anchor|hop|meal|free","price","note",
@@ -33,7 +33,7 @@ Schema (all keys optional except days[].date):
                                            // legs — excluded from links --write
            "hop_links": ["url", ...],      // parked by route_tools when rows and
                                            // mapped hops don't align; rendered as
-                                           // a 逐跳导航 row under the day card
+                                           // a hop-by-hop maps row under the day card
            "stops": [{"name","query","lat","lon"}]}],   // mirrors the timeline's
                                                         // places, in visit order
  "hotels": [{"base","area","why","options":[{"name","band","link"}]}],

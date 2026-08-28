@@ -398,7 +398,8 @@ rollup → country brief.
 poetic display title from references/cover-titles.md — zh 2-6 characters + an English
 line, matched to the trip archetype (road-trip / island / mountain / city / coast).
 Never ship a literal placeholder like "X国行"; never use the clichés on that file's
-blacklist. Cite the allusion honestly (原句 in the subtitle or a small credit line).
+blacklist. Cite the allusion honestly (the source line in the subtitle or a small
+credit line).
 
 **Adversarial self-check** — run this list against the finished plan, fix what it
 catches, then record "self-checked: N issues found and fixed" in `meta.self_check`
@@ -570,8 +571,9 @@ directory is not the skill directory and shell cwd does not persist between call
   times, buffers, meals, energy curve, degradation tags, timeline verification.
 - `references/navigation.md` — read with it: hop-link recipes, transit-row format,
   exit numbers, verify-vs-estimate policy, offline-maps (KML) workflow.
-- `references/cover-titles.md` — bilingual poetic cover-title case library (诗词/散文/
-  名著出处 + trip-archetype fit + cliché blacklist); read at Phase 6 when rendering.
+- `references/cover-titles.md` — bilingual poetic cover-title case library (poetry /
+  prose / classic-literature sources + trip-archetype fit + cliché blacklist); read
+  at Phase 6 when rendering.
 - `scripts/flight_scan.py` — Google Flights grid scanner; run with `--help` first.
 - `scripts/route_tools.py` — geocode stops, distance-check clustering, emit per-hop +
   whole-day map links and the trip KML; subcommands geocode / check / links / kml /
