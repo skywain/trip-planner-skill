@@ -358,9 +358,10 @@ Per city:
    arrival/moving/departure day structures, worship + siesta + crowd-calendar traps,
    degradation tags) and references/navigation.md (hop links, canonical hop-row
    format, exit numbers, verify-vs-estimate rules), then run scripts/route_tools.py
-   in this order: **geocode → check → links --write → kml**, so every hop carries a
-   distance-sane duration and a tappable map link written into the plan for you.
-   Then `sun --write` once the stops carry coordinates: it fills every day's
+   in this order: **geocode → per-day tz sweep → sun --write → links --write →
+   check → kml**, so every hop carries a distance-sane duration and a tappable map
+   link written into the plan for you.
+   `sun --write` runs once the stops carry coordinates: it fills every day's
    `sun` (civil dawn · sunrise / sunset) in one canonical string and refuses data
    that fails a solar sanity check — never hand-copy sunrise numbers, and **run it
    before writing any sunrise / golden-hour / dark-start prose**: tz changes live in

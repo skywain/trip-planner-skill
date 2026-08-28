@@ -359,8 +359,9 @@ them toward this one.
   Themed renderers title brief cards from `theme_common.BRIEF_TITLES` (fallback:
   the raw key; the art file's `brief_titles` overrides) — `lookalikes` is not in
   that table, so give it its display title via `brief_titles` (zh: 重名陷阱), or on
-  a zh-only plan simply key the entry 重名陷阱. The country files carry the known
-  traps (see §USA).
+  a zh-only plan simply key the entry 重名陷阱 — unlike `altitude` and `navigation`,
+  which are now built-in `BRIEF_TITLES` keys and need no override. The country files
+  carry the known traps (see §USA).
 - **Hotel stays are explicit local calendar dates** ("check-in D1 → check-out D3"
   = the nights of D1 and D2). Booking sites use the hotel's local calendar and
   never convert timezones — the mis-bookings are human, so pre-chew the two
@@ -371,7 +372,8 @@ them toward this one.
   the departure date.
 - **Date-locked rows also ship as a calendar file**: when the checklist carries
   gates (a ticket-release instant, a decision deadline, an on-trip re-check),
-  offer a `.ics` beside the page — one VEVENT per gate, with the FULL action
+  offer a `.ics` beside the page (worked example: `examples/gates-sample.ics`)
+  — one VEVENT per gate, with the FULL action
   list in DESCRIPTION (the user acts from the alarm, not from memory: what to
   do, the fallback if it fails, the linked bookings by number), two VALARMs
   (`-P1D` and `-PT30M`), and stable UIDs with an incremented SEQUENCE and

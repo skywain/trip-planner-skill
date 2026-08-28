@@ -65,10 +65,33 @@ reserves its 2-3 extra searches for the lines marked **hard**.
 - [ ] **Intercity ticket release windows, each with its own date on the checklist.**
   Vietnam rail 60 days, China 12306 15 days, Japan JR 1 month, Trenitalia/Italo 90-120
   days, Norway Vy ~90 — plus night-bus operators and seasonal ferry timetables.
+- [ ] **Highest sleeping altitude and the ladder to it.** Not the highest point
+  visited — the highest **bed**, and the steps up to it. See §Altitude below: this
+  line reshapes the route order, so it is answered at skeleton time, not at packing
+  time.
 - [ ] **Travel advisory, and what the insurance must cover.** Read the traveller's own
   foreign ministry (Auswärtiges Amt, travel.gc.ca, 中国领事服务网), then check the policy
   does not exclude the thing the trip is built on — ballooning, diving, motorbike
   pillion, altitude — and that it carries repatriation where hospitals want cash up front.
+
+## Altitude
+
+- **Design the sleep ladder, not just the route.** What the body prices is the
+  altitude it *sleeps* at: a high day trip from a low bed is forgiving, while raising
+  the sleeping altitude by big jumps above ~2,500 m is what loses a day to headache
+  and bad sleep. Order the bases so the beds climb gradually and the highest bed
+  comes late — this is a route-order decision, which is why the checklist asks it at
+  skeleton time.
+- **Cap the first day at altitude.** Arriving high (CDMX 2,240 m, Lijiang 2,400 m,
+  Cusco 3,400 m): one light anchor, no stair-heavy sight, no same-day push higher.
+  The energy-curve rule (scheduling.md rule 6) tightens at altitude; it never relaxes.
+- **Diamox lead time is a doctor's question.** The plan writes "the traveller asks
+  their doctor about acetazolamide, N days before the climb" and puts the consult
+  date on the checklist — it never doses or prescribes.
+- **Insurance reads altitude sickness as illness, not accident** — and many policies
+  also cap covered altitude at 3,000-4,000 m. Check the policy's altitude ceiling
+  against the trip's highest point, and that illness cover (not just accident cover)
+  is real, before buying — see data-sources.md §Travel insurance.
 
 ## Japan
 - Entry: most treaty passports get 90-day visa-free stamps ⚡; **Chinese passports

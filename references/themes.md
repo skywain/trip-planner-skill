@@ -467,6 +467,8 @@ images never `loading=lazy`; itinerary grids never `grid-auto-flow:dense`.
   last=-1; for i in $(seq 1 120); do [ -s "$OUT" ] && { sz=$(stat -f%z "$OUT"); [ "$sz" = "$last" ] && break; last=$sz; }; sleep 1; done
   { pkill -9 -f -- "--user-data-dir=$UDD"; wait; } 2>/dev/null; rm -rf "$UDD"
   ```
+  (If the shell blocks a foreground `sleep`, poll with
+  `python3 -c "import time;time.sleep(1)"` instead — same one-second beat.)
   (For a `.reveal` theme inject `.reveal{opacity:1!important}` into a copy first —
   IntersectionObserver never fires headless.) `ANCHOR=bottom xprobe.sh … page ''`
   shows the export's last 2600 px — the tail check; on a module-only theme it is the

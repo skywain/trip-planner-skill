@@ -68,6 +68,10 @@ together with scheduling.md before Phase 4 timeline assembly.
      the timeline hop row is just a reminder — takes `"map": false`, so it drops out
      of the count. Getting this backwards on a day with a rail leg parks every link
      of that day (`N rows vs N+1 hops`).
+   - **A day that returns the way it came** (one road in and out, up the valley and
+     back): only the outbound chain rows stay mappable; every retraced return row
+     takes `"map": false` — its geometry already exists in the forward direction,
+     so a mappable return row would demand a hop the day's chain does not have.
    **Three more shapes that go quietly wrong** (all three on one Morocco day — 13
    links parked on the first `--write`, then every later pairing off by one; the
    command itself was green):

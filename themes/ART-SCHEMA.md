@@ -556,16 +556,20 @@ painting) is `towebp.py x.png` → `x.webp` — never `cutout.py` (it would eat 
    City — see `china-strip-xian` / `china-strip-beijing`, made from the same prompt
    template as the US `strip-*` bands) > a national landmark > a neutral scene. A
    page that opens on another country's skyline is a defect, not a saving; a page
-   with no scenery at all is a missed shot. "Reuse first" applies to generic props only —
+   with no scenery at all is a missed shot. For glass plates and photo pieces
+   (journal / zine / noir), name a concrete built object in the frame — a pagoda, a
+   tiled roofline, a jetty — landform-only prompts return stock scenery that could
+   be anywhere. "Reuse first" applies to generic props only —
    `IMAGE-LIBRARY.md` §Generic pieces (通用件): a plane, a bus, a cloud, luggage, a wing shot, a
    generic beach. Generate the rest with the sheet recipe; `gen.py --manifest
    <trip>/manifest.<trip>.json` registers it in the trip's own manifest (never
    `themes/assets/manifest.json` — see Test-trip asset recycling (测试行程资产回收)
    below). Title stickers: one
    centred sticker, both lines the same height, no icons/moons inside the letters,
-   wide white margin (see china-clay-title2; Turkey tester's tip — simple glyphs, ≤8
-   strokes, keep the strokes intact —「九万里风」("ninety-thousand-mile wind") came out
-   clean first time).
+   wide white margin (see china-clay-title2; Turkey tester's tip — prefer simple
+   glyphs and tell the model to keep the strokes intact; not a hard stroke cap: a
+   9-stroke glyph rendered fine with an explicit keep-strokes-intact line in the
+   prompt, and「九万里风」("ninety-thousand-mile wind") came out clean first time).
 2b. **No generation capability → stock mode (the built-in asset library), never a fall
    back to a text-only page.** Phase 0's picture-capability check writes its result
    into the plan's `prefs.pictures`: `native` (the agent generates images itself) /
@@ -659,12 +663,19 @@ it is spelled out above so the landing spot stays visible.
   every photo and a wide white margin around the grid, each … a simple borderless
   rectangle, no borders, no text" — then write each cell's content in Row 1/Row 2
   order; parameters `background:opaque, aspect_ratio:3:2, resolution:2K,
-  quality:medium`. **Cutting order: `--probe` first to confirm the cell count matches
+  quality:medium`. Returned resolution follows the aspect, not the "2K" label:
+  1:1@2K → 1024×1024, 3:2@2K → ~1248×832 — rule of thumb, a 9-cell sheet needs
+  3:2@2K or cells fall to ~310 px; check `--probe`'s cell sizes against the target
+  slot before cutting. **Cutting order: `--probe` first to confirm the cell count matches
   the prompt's, then type piece names in Row 1 → Row 2 order** — once names and prompt
   rows misalign, every piece on the sheet is misnamed and downstream raises zero errors
   (Mexico P3). `--probe` finding fewer cells than the prompt has (splash stars drifting
   into a gutter merged two columns into one) → add `--grid 3x2` to hard-cut by
-  columns×rows. Products `<name>.png/.cut.png/.cut.webp`. **Sheet-cut pieces usually
+  columns×rows. An **opaque photo sheet** (journal polaroids, zine prints — the
+  shape column says the asset keeps its rectangle) takes `split_sheet.py --no-cut`:
+  the white-background cutout is skipped and each cell lands as `<name>.png` + a
+  plain `<name>.webp`, no `.cut.*`. Products otherwise
+  `<name>.png/.cut.png/.cut.webp`. **Sheet-cut pieces usually
   get only the sm + cut variants**: cells run about 300–560 px, `towebp --sizes
   sm,md,lg` skips md/lg (dropped when not smaller than the source, or when the bytes
   actually grow), and illustrated's md/lg slots fall back to `.cut.webp` — normal.

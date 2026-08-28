@@ -1,0 +1,265 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//trip-planner//yunnan-2026-gates//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Yunnan 2026 — booking gates
+BEGIN:VEVENT
+UID:yunnan2026-gate-0905@trip-planner
+DTSTAMP:20260829T033000Z
+SEQUENCE:0
+DTSTART:20260905T090000
+DTEND:20260905T100000
+SUMMARY:🛡️ Buy travel insurance + passport validity check
+DESCRIPTION:09:00 local\, wherever you are.\nWHY NOW\, not 'before depart
+ ure': trip-cancellation cover excludes anything already announced or occ
+ urred when you buy. Every week you wait is a week an exclusion can cryst
+ allise.\nDO:\n1. Buy medical + evacuation cover for 2 adults\, 2026-11-2
+ 0 → 2026-11-29.\n2. Destination picker must read China (mainland) — 
+ NOT Hong Kong\, NOT Macau.\n3. Altitude: the policy must cover 4\,680 m.
+  Many cap trekking at 3\,000 or 4\,000 m\; Yulong Glacier Park is above 
+ both. If it caps out\, buy the extension or cancel the day-6 cable car (
+ checklist row 10).\n4. If you intend to ride at Lashihai on day 7\, hors
+ e riding needs a NAMED high-risk extension.\n5. Check both passports are
+  valid to at least 2027-05-29 (six months past return).\n6. Re-read the 
+ Chinese Embassy Canberra visa-free notice: https://au.china-embassy.gov.
+ cn/eng/tzgg/202511/t20251105_11747334.htm\nAFTER: save the issued policy
+  SCHEDULE (not the product page) to your phone — the waiting period\, 
+ deductible\, payout ratio and assistance hotline are only on it.\nIF IT 
+ FAILS: a policy that will not cover 4\,680 m is not a reason to skip ins
+ urance — buy the medical cover and drop the glacier cable car instead.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tomorrow: buy travel insurance (altitude 4\,680 m + China mai
+ nland)
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Now: buy travel insurance\, check passport validity
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:yunnan2026-gate-0930@trip-planner
+DTSTAMP:20260829T033000Z
+SEQUENCE:0
+DTSTART:20260930T090000
+DTEND:20260930T100000
+SUMMARY:✈️ Book SYD→KMG and LJG→SYD
+DESCRIPTION:09:00 local\, wherever you are.\nTARGET: A$1\,243 for 2\, Chi
+ na Southern\, dep SYD 15:15 Fri 2026-11-20 → arr KMG 09:45 Sat 11-21 (
+ 1 stop\, 21 h 30).\nhttps://www.google.com/travel/flights?q=One+way+flig
+ hts+from+SYD+to+KMG+on+2026-11-20+for+2+adults\nRETURN — this one was 
+ never priced: https://www.google.com/travel/flights?q=One+way+flights+fr
+ om+LJG+to+SYD+on+2026-11-28+for+2+adults\nBook LJG→SYD as ONE ticket e
+ nd to end. Two separate tickets meeting at Guangzhou tag your bag only t
+ o Guangzhou and put you landside to re-check it.\nDO NOT take the A$1\,1
+ 19 fare that lands 21:30 — it is A$124 cheaper and deletes day 1.\nCHE
+ CK: checked-bag allowance on the fare you pick\, before comparing prices
+ .\nFALLBACK if LJG→SYD is absurd: fly or take the train Lijiang→Kunm
+ ing on 11-28 morning and use KMG→SYD 22:35 (A$1\,030 for 2\, verified 
+ 2026-08-29) — separate tickets\, so allow ≥4 h at Kunming.\nLINKED: 
+ day 8's whole timeline is built on an assumed 13:30 take-off. Once booke
+ d\, tell the planner the real time.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tomorrow: book the Yunnan flights
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Now: book SYD→KMG and LJG→SYD
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:yunnan2026-gate-1108@trip-planner
+DTSTAMP:20260829T033000Z
+SEQUENCE:0
+DTSTART:20261108T110000
+DTEND:20261108T113000
+SUMMARY:🚄 12306 opens: Kunming → Dali (day 3\, 11-23)
+DESCRIPTION:11:00 Sydney = 08:00 China. Sales open exactly 15 days ahead 
+ and are released in station batches through the China day (08:00–18:00
+ ).\nBEFORE the alarm: your 12306 account must already be registered agai
+ nst the passport number — first-time foreign registration sometimes ne
+ eds a one-off verification at a station window\, which you cannot do fro
+ m Sydney.\nhttps://www.12306.cn/en/\nBOOK: Kunming Railway Station 昆
+ 明站 → Dali Railway Station 大理站\, 2nd class\, 2 adults\, morni
+ ng departure around 10:15 (≈2 h 05\, ≈¥145 pp).\nNAME must match th
+ e passport exactly — a mismatch is refused at the gate\, not fixed on 
+ the platform.\nIF THE CARD IS REJECTED: Trip.com resells the same seat w
+ ith a small fee and takes any card.\nIF THE MORNING TRAINS ARE GONE: tak
+ e any departure before 13:00 — day 3 has slack\; after that the Dali e
+ vening block dies.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tomorrow 11:00: 12306 opens for Kunming→Dali
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:30 min: 12306 opens for Kunming→Dali (11-23)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:yunnan2026-gate-1110@trip-planner
+DTSTAMP:20260829T033000Z
+SEQUENCE:0
+DTSTART:20261110T110000
+DTEND:20261110T113000
+SUMMARY:🚄 12306 opens: Dali → Lijiang (day 5\, 11-25)
+DESCRIPTION:11:00 Sydney = 08:00 China. Same 15-day clock as the 11-08 ga
+ te.\nhttps://www.12306.cn/en/\nBOOK: Dali Railway Station 大理站 → 
+ Lijiang Railway Station 丽江站\, 2nd class\, 2 adults\, around 10:45 
+ (≈1 h 55\, ≈¥70 pp).\nLate November is Yunnan's low season so this 
+ leg should not be tight — but the passport number is the ticket.\nIF I
+ T IS FULL: the Xiaguan→Lijiang express coach does it in ~3 h and needs
+  no pre-sale\, but it lands you at the new-town terminal.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tomorrow 11:00: 12306 opens for Dali→Lijiang
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:30 min: 12306 opens for Dali→Lijiang (11-25)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:yunnan2026-gate-1114@trip-planner
+DTSTAMP:20260829T033000Z
+SEQUENCE:0
+DTSTART:20261114T090000
+DTEND:20261114T103000
+SUMMARY:📋 Two-weeks-out re-check (hours\, fees\, payments\, eSIM)
+DESCRIPTION:09:00 local\, wherever you are. Every opening hour and fee in
+  the plan is a seasonal PATTERN captured 2026-08-29 — nobody publishes
+  late-November hours in August. This is where they become facts.\nRE-REA
+ D\, in this order:\n1. Yulong Snow Mountain reservation rules — they c
+ hanged twice in 2026. Confirm the 7-day / 20:00 China release and that t
+ he glacier cable car is ¥140. https://www.ylxs.com.cn/\n2. Winter hours
+ : many Yunnan sites switch around 16 November\, mid-trip. Stone Forest (
+ 07:30–18:00)\, Three Pagodas (08:30–17:30)\, Mu Palace (last entry ~
+ 17:30)\, Yuantong Temple (~18:00).\n3. Fees marked est: Stone Forest ¥1
+ 30+¥25\, Wangu Tower ¥50\, Mu Palace ¥60\, Baisha ¥30\, Shuhe (free?
+ )\, Lashihai boat.\n4. Lijiang old-town maintenance fee — still ¥50 p
+ p\, 365-day validity?\nALSO TODAY:\n5. Bind a Visa/Mastercard in BOTH Al
+ ipay and WeChat Pay and test each with a small top-up. WeChat must be re
+ al-name verified before the 11-19 gate or you cannot buy the cable car a
+ t all.\n6. Buy and install the roaming eSIM (NOT a China SIM — a local
+  SIM sits inside the firewall).\n7. Download Amap 高德\, Organic Maps 
+ + the trip.kml\, an Apple Translate offline pack\, DiDi.\nIF SOMETHING H
+ AS MOVED: the day it breaks is named on that day's card under 'running l
+ ate'.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tomorrow: two-weeks-out re-check of every hour and fee
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Now: re-check hours/fees\, test Alipay + WeChat Pay\, install
+  the eSIM
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:yunnan2026-gate-1119@trip-planner
+DTSTAMP:20260829T033000Z
+SEQUENCE:0
+DTSTART:20261119T230000
+DTEND:20261119T233000
+SUMMARY:🏔️ Yulong glacier cable car — booking opens (for 11-26)
+DESCRIPTION:23:00 Sydney = 20:00 China. Released 7 days ahead\, real-name
+  against the passport.\nONLY the official WeChat mini-programs sell it: 
+ 玉龙雪山服务 and 丽江旅游集团. No third party is authorised 
+ — anything else is a resale at a markup\, and some are not tickets at 
+ all.\nBUY: 2 adults — ¥100 entry + ¥20 eco-bus + ¥140 Glacier Park 
+ (big) cable car = ¥260 pp. Pick the earliest slot\; the plan is built o
+ n being at the visitor centre 08:40 and on the cable car 09:20.\nPREREQU
+ ISITE (done at the 11-14 gate): WeChat installed\, real-name verified\, 
+ a card bound.\nIF THE GLACIER CAR SELLS OUT: book Yunshanping 云杉坪 
+ (¥55\, 3\,200 m) or Maoniuping 牦牛坪 (¥60\, 3\,700 m) instead — 
+ lower\, easier\, and day 6 still works. Do not buy a 'guaranteed' third-
+ party glacier ticket.\nIF THE FORECAST IS BAD: buy anyway if it is refun
+ dable\; day 6's rain alternative swaps the mountain to day 7\, but the r
+ eservation is date-locked\, so that swap has to be decided the evening b
+ efore.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tomorrow 23:00: Yulong cable-car tickets open (7-day release)
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:30 min: Yulong glacier cable car opens — 玉龙雪山服务
+  mini-program
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:yunnan2026-gate-1125@trip-planner
+DTSTAMP:20260829T033000Z
+SEQUENCE:0
+DTSTART:20261125T200000
+DTEND:20261125T203000
+SUMMARY:🎻 On the trip: lock day 7's evening and read day 6's sky
+DESCRIPTION:20:00 local — you are in Lijiang tonight.\n1. Ask the guest
+ house to confirm the Dayan Naxi Ancient Music performance for 11-27 and 
+ book two seats (≈¥120–180 pp). The 15–30 November dates came from
+  a tourism listing\, not the ensemble — if it is dark\, ask for a Dong
+ ba script workshop instead.\n2. Read tomorrow's Yulong forecast. Cloud o
+ n the peak makes the ¥140 cable car a ride into white: if it looks bad\
+ , swap day 6 and day 7 tonight — the reservation is date-locked and ca
+ nnot be moved in the morning.\n3. Confirm the car and driver for 07:50 t
+ omorrow\, and that they carry oxygen.\n4. No alcohol tonight. You go fro
+ m 2\,400 m to 4\,506 m in twenty minutes tomorrow.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tomorrow evening in Lijiang: book the music\, read the mounta
+ in forecast
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Now: confirm Naxi music + tomorrow's Yulong forecast + the 07
+ :50 car
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:yunnan2026-gate-1127@trip-planner
+DTSTAMP:20260829T033000Z
+SEQUENCE:0
+DTSTART:20261127T180000
+DTEND:20261127T183000
+SUMMARY:🛫 On the trip: confirm the real departure time and re-run day 
+ 8
+DESCRIPTION:18:00 local — Lijiang\, the night before you fly.\nTHE WHOL
+ E OF DAY 8 IS BUILT ON AN ASSUMED 13:30 TAKE-OFF. Confirm the real one n
+ ow.\n1. Open the booking (https://www.csair.com/en/ or the agent you use
+ d) and read the actual LJG departure time T.\n2. Re-run the formula: T =
+  take-off → T−3 h at LJG (international ticket\, the bag is tagged t
+ hrough) → T−4 h out of the guesthouse.\n3. Check in online and pick 
+ seats.\n4. Book the airport car with the guesthouse for T−4 h (≈¥12
+ 0\, 28 km\, 40 min). There is no reliable street-hail at the old-town ga
+ tes in the morning.\n5. If T is earlier than 11:30\, drop the Black Drag
+ on Pool dawn walk and sleep instead — sunrise is 07:47 and the reflect
+ ion is not worth a missed flight.\n6. Find the old-town maintenance-fee 
+ receipt: Black Dragon Pool asks for it at the gate.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tomorrow you fly: confirm the real departure time tonight
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Now: confirm T\, check in\, book the airport car for T−4 h
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

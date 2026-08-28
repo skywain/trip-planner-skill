@@ -293,12 +293,17 @@ holiday calendar page (timeanddate-style) for the year — and put the dates in
    `curl -s "https://archive-api.open-meteo.com/v1/archive?latitude={lat}&longitude={lon}&start_date={dates-1y}&end_date={dates-1y}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto"`
 3. Trip starts within 16 days → real forecast instead:
    `https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`
+   Run these with `--max-time 90`, one city per call, and assert the body is
+   non-empty JSON before reading numbers out of it — an empty 200 looks identical
+   to a stall.
 4. Sunrise/sunset for golden-hour scheduling — preferred path is
    `python3 scripts/route_tools.py sun plan.geo.json --write` (per-day fetch keyed on
    the day's first stop — the **last** stop on a moving day, or the day's `sun_stop`
    when set —, cache, the sanity rules below applied for you, canonical `sun`
    string written into the plan, a WARN per skipped/rejected day with its date and a
-   **non-zero exit** when there is any; see scheduling.md rule 7). **Run it before
+   **non-zero exit** when there is any; see scheduling.md rule 7). Redirect its
+   output to a file rather than piping — a pipe makes `$?` the last command's exit
+   and loses sun's non-zero signal (scheduling.md rule 7). **Run it before
    writing any sunrise/golden-hour prose**: the local clock comes from tzdata, which
    knows about time-zone changes you don't (Morocco returns to UTC+0 on 2026-09-20 —
    the tester's hand-written times were an hour off for all ten days); `sun`'s
