@@ -1,9 +1,9 @@
-# IMAGE-LIBRARY — themes/assets/ reusable picture-library index (incl. the nine test trips' assets (测试行程资产), §13-21)
+# IMAGE-LIBRARY — themes/assets/ reusable picture-library index (incl. the eleven test trips' assets (测试行程资产), §13-21 & §23-24)
 
-Actual scan 2026-08-16: **301 stems = 444 webp, 26MB** (**pages use only these**; png
+Actual scan 2026-08-29: **355 stems = 515 webp, 30MB** (**pages use only these**; png
 masters stay out of the repo — the pngs kept for re-cutting live in their trips/
-directories). Cumulative generation cost **≈$6.57** (manifest sum; portal video billed
-separately); look up any item's prompt/params/unit price in `manifest.json` (**181
+directories). Cumulative generation cost **≈$7.33** (manifest sum; portal video billed
+separately); look up any item's prompt/params/unit price in `manifest.json` (**201
 entries**; sheet-cut sub-pieces are not listed individually — check the parent
 `*-sheet-*` entry). **Generic pieces (§12): check this table + manifest first and reuse
 what exists; covers / key art / terrain bands = destination scenes and MUST be generated
@@ -65,9 +65,9 @@ with generation ability, destination art is still generated fresh per trip.
   trips** — other trips may use only the stems listed in §12 "Generic pieces (通用件)";
   everything else is generated fresh (sheet recipe: ART-SCHEMA.md "Image toolchain
   (图片工具链)").
-- **There is exactly one "generic" table: §12.** Any stem whose region column a §13-21
-  per-trip table marks **generic** **must also appear in §12's table** (source section
-  noted); marked generic in a section but absent from §12 = a defect, and reusers
+- **There is exactly one "generic" table: §12.** Any stem whose region column a §13-21 /
+  §23-24 per-trip table marks **generic** **must also appear in §12's table** (source
+  section noted); marked generic in a section but absent from §12 = a defect, and reusers
   **treat it as unlisted** (i.e. as region-bound — don't use it). Stems marked
   "**depends on the trip**" belong to the "decide per trip" list at the end of §12 and
   are not generic pieces; the "(generic-ish)" markers in §13/§14 are likewise handled as
@@ -221,10 +221,12 @@ landform, a city-specific object). The pieces below contain none — writing the
 art.json will never "paste someone else's trip onto your page"; every other stem
 (especially `*-liberty / -goldengate / -yellowstone / -yosemite / -diamondhead /
 -volcano / -kilauea / -prismatic / -teton / -saltlake / -stadium / -tiananmen / zine-* /
-noir-* / glass-*` and the nine test trips' `au-* / nordic-* / japan-* / china-* /
-italy-* / mexico-* / morocco-* / turkey-* / vietnam-*`) is region-bound by default.
+noir-* / glass-*` and the eleven test trips' `au-* / nordic-* / japan-* / china-* /
+italy-* / mexico-* / morocco-* / turkey-* / vietnam-* / yn-* / peru-*`) is region-bound
+by default.
 **This table is the sole authority on "generic"**: every stem marked generic in the
-§13-21 sections appears here; marked there but missing here = treat as region-bound (see
+§13-21 / §23-24 sections appears here; marked there but missing here = treat as
+region-bound (see
 the rule at the top).
 
 | Stem | Variants (KB) | Use | Theme |
@@ -262,6 +264,9 @@ the rule at the top).
 | turkey-balloon | cut27 sm8 | four striped hot-air balloons lifting off (gouache), no landmark — sky decoration / balloon days | illustrated (插画) / zine (from §20) |
 | vietnam-splash-i-train | cut32 sm7 | green sleeper-carriage floating island + crescent moon, no landmark — night-train-day chapter head | splash (from §21) |
 | vietnam-ph-train | webp23 | coastal morning light outside a sleeper-car window (berth + window frame), no landmark; **the coastline reads tropical/subtropical** — skip on inland or Nordic trips | zine / journal (from §21) |
+| **↓ Added 2026-08-29, Yunnan/Peru batch (§23-24, each opened and eyeballed)** | | | |
+| peru-clay-train | cut26 | blue-and-cream clay tourist-train carriage with big round windows, no landmark and no livery text — any scenic/tourist rail day | clay (from §24) |
+| peru-zine-trainwindow | cut62 | b/w view out a moving train window down a rocky river gorge, blurred foliage, no landmark; **the scenery reads steep green mountain gorge** — skip on flat/desert routes | zine / journal (from §24) |
 
 **Decide per trip (regional flavor, but not a landmark)**: `splash-taxi` (yellow cab =
 New York), `splash-m-hotdog` (NYC hot-dog cart), `splash-m-cablecar` (San Francisco
@@ -271,7 +276,10 @@ island), `strip-mountains/-geyser`; **added 2026-08-16**: `china-clay-food` /
 `china-splash-m-dumpling` (bamboo steamer + baozi = Chinese cuisine; §16 originally
 mislabeled them generic), `au-noir-hero`/`au-noir-dawn` (southern-sky Milky Way / dawn
 return flight — Southern-Hemisphere or island trips may borrow), `nordic-noir-aurora`
-(aurora — Arctic-Circle trips may borrow) — reuse only when the trip actually visits the
+(aurora — Arctic-Circle trips may borrow); **added 2026-08-29**: `peru-clay-ceviche`
+(ceviche plate = Peruvian/coastal Latin cuisine), `peru-noir-hero` (night flight over
+dark mountain ridges, no landmark but prompted over the Andes — mountain-country trips
+may borrow) — reuse only when the trip actually visits the
 matching place / cuisine.
 
 ## 13 Australia 2026 test-trip assets (测试行程资产) (2026-08-15, generated by the Opus tester, $0.31; sheet masters au-journal-sheet-photo / -props in manifest) — 19
@@ -552,3 +560,80 @@ at the top stands).
 - ⚠️ **The image source must be printed on the page** (`end.fine` + `cover.credit`;
   both language versions are in `index.json.notice`) — omitting it means shipping
   fallback art as if it were custom.
+
+## 23 Yunnan 2026 (Sydney departure, English) test-trip assets (测试行程资产) (2026-08-29, illustrated (插画) + glass (玻璃) + journal (手账) + splash (闪屏), $0.3274; sheet masters yn-illus-sheet / yn-journal-sheet / yn-splash-sheet in manifest) — 32
+All 32 stems are region-bound — none enters §12. `yn-i-sydney` is the **departure
+city** Sydney (an `end.hero` squeezed into the illustration sheet's 9th cell, zero
+cost) — never use it as a Yunnan piece; `yn-splash-title` bakes in the English title
+plate "SOUTH OF THE CLOUDS" and is **this trip only**; the generic-looking glass
+plates and splash scenery chunks (`yn-glass-hero` lake, `yn-glass-snow` snow ridge,
+`yn-si-wetland` reed wetland, `yn-si-dawnpool` pavilion pool) were all prompted as
+specific Yunnan scenes and stay Yunnan-bound.
+
+| Stem | Variants (KB) | Content and use | Region | Theme |
+|---|---|---|---|---|
+| yn-cover-hero | webp102 | illustrated full-frame cover: karst + pagodas-by-the-lake + snow ridge along the lower third, top 2/3 sky left clear for the title | 🇨🇳 Yunnan | illustrated (插画) |
+| yn-glass-dawn | webp128 | first light over grey-tiled old-town roofs, mist in the lanes + distant pink snow peak (16:9 plate) | 🇨🇳 Lijiang | glass (玻璃) plate |
+| yn-glass-hero | webp150 | aerial: long deep-blue highland lake between snow ridge and village plain (16:9 cover plate) | 🇨🇳 Dali (Erhai) | glass (玻璃) plate 0 |
+| yn-glass-karst | webp145 | field of tall grey limestone pinnacles under a high pale sky (16:9 plate) | 🇨🇳 Kunming (Stone Forest) | glass (玻璃) plate |
+| yn-glass-snow | webp201 | snow-capped ridge over dark pines + turquoise glacier-melt pool (16:9 plate) | 🇨🇳 Lijiang (Jade Dragon) | glass (玻璃) plate |
+| yn-i-gulls | cut31 sm10 | gouache: red-beaked gulls wheeling over a willow-fringed lake pavilion | 🇨🇳 Kunming (Green Lake) | illustrated (插画) |
+| yn-i-karst | cut32 sm9 | gouache: karst pinnacle cluster + winding path | 🇨🇳 Kunming (Stone Forest) | illustrated (插画) |
+| yn-i-pagodas | cut29 sm8 | gouache: three slender white pagodas + snow ridge behind | 🇨🇳 Dali (Three Pagodas) | illustrated (插画) |
+| yn-i-baihouse | cut31 sm8 | gouache: white-walled grey-tiled Bai courtyard house + painted eaves + screen wall | 🇨🇳 Dali (Xizhou) | illustrated (插画) |
+| yn-i-snowridge | cut26 sm7 | gouache: snow ridge + one cable-car pylon | 🇨🇳 Lijiang (Jade Dragon) | illustrated (插画) |
+| yn-i-pools | cut34 sm9 | gouache: terraced turquoise pools stepping over pale weirs + two pines | 🇨🇳 Lijiang (Baishui / White Water River) | illustrated (插画) |
+| yn-i-roofs | cut32 sm8 | gouache: grey-tiled sloping roofs + arched stone bridge over a water channel | 🇨🇳 Lijiang old town | illustrated (插画) |
+| yn-i-tiedye | cut30 sm9 | gouache: indigo tie-dyed cloth with white sunburst patterns on a bamboo pole | 🇨🇳 Dali (Bai tie-dye, Zhoucheng) | illustrated (插画) |
+| yn-i-sydney | cut36 sm8 | gouache: harbour skyline at dusk — sail-shell opera house + steel arch bridge | 🇦🇺 Sydney (**departure city**) | illustrated (插画) `end.hero` |
+| yn-ph-greenlake | cut24 | Kodachrome polaroid: park lake at dawn, gulls over a red lakeside pavilion | 🇨🇳 Kunming (Green Lake) | journal (手账) photo |
+| yn-ph-karst | cut28 | polaroid: limestone pinnacle field under a high sky | 🇨🇳 Kunming (Stone Forest) | journal (手账) photo |
+| yn-ph-pagodas | cut24 | polaroid: three pagodas mirrored in a still pool + snow ridge | 🇨🇳 Dali (Three Pagodas) | journal (手账) photo |
+| yn-ph-erhai | cut26 | polaroid: wide blue mountain lake + weathered jetty + one fishing boat | 🇨🇳 Dali (Erhai) | journal (手账) photo |
+| yn-ph-xizhou | cut31 | polaroid: whitewashed courtyard farmhouse at the edge of a stubble field | 🇨🇳 Dali (Xizhou) | journal (手账) photo |
+| yn-ph-indigo | cut34 | polaroid: indigo-dyed cloth drying on lines in a village yard | 🇨🇳 Dali (Zhoucheng tie-dye) | journal (手账) photo |
+| yn-ph-snowridge | cut24 | polaroid: boardwalk on a bare snow ridge above a sea of cloud | 🇨🇳 Lijiang (Jade Dragon) | journal (手账) photo |
+| yn-ph-pools | cut31 | polaroid: terraced turquoise pools below a snow mountain | 🇨🇳 Lijiang (Baishui) | journal (手账) photo |
+| yn-ph-nightlane | cut31 | polaroid: night lane of grey-tiled roofs, red lanterns over a stone water channel | 🇨🇳 Lijiang old town | journal (手账) photo |
+| yn-splash-title | cut24 | thick-paint game-title plate "SOUTH OF THE CLOUDS" (two lines) | **this trip only** (baked-in text) | splash (闪屏) title |
+| yn-splash-hero | cut30 | floating rock chunk + chunky twin-peaked snow mountain + pines (key visual) | 🇨🇳 Lijiang (Jade Dragon) | splash (闪屏) |
+| yn-si-greenlake | cut27 sm9 | floating grass chunk: round green lake + red-roofed pavilion + birds | 🇨🇳 Kunming (Green Lake) | splash (闪屏) day island |
+| yn-si-karst | cut32 sm10 | floating rock chunk crowded with limestone pinnacles + winding path | 🇨🇳 Kunming (Stone Forest) | splash (闪屏) day island |
+| yn-si-pagodas | cut29 sm8 | floating grass chunk: three white pagodas + lake-water front edge | 🇨🇳 Dali (Three Pagodas) | splash (闪屏) day island |
+| yn-si-roofs | cut29 sm8 | floating chunk of grey-tiled roofs + arched bridge + waterfall edge | 🇨🇳 Lijiang old town | splash (闪屏) day island |
+| yn-si-glacier | cut28 sm9 | floating glacier-ice chunk + slim cable-car pylon + mist | 🇨🇳 Lijiang (Jade Dragon cableway) | splash (闪屏) day island |
+| yn-si-wetland | cut30 sm8 | floating wetland chunk: green reeds + wooden rowing boat + two geese | 🇨🇳 Lijiang (Lashihai wetland) | splash (闪屏) day island |
+| yn-si-dawnpool | cut31 sm9 | floating chunk: black-tiled pavilion + still pool reflecting a snow peak | 🇨🇳 Lijiang (Black Dragon Pool) | splash (闪屏) day island |
+
+## 24 Peru 2026 (Seoul departure, Chinese) test-trip assets (测试行程资产) (2026-08-29, clay (黏土) + noir (夜航) + zine, $0.4318; sheet masters peru-clay-sheet-figs / peru-zine-sheet in manifest) — 22
+`peru-clay-train` and `peru-zine-trainwindow` have no landmark and are also listed in
+§12; `peru-clay-ceviche` (Peruvian cuisine) and `peru-noir-hero` (night flight over
+dark mountains, prompted over the Andes) sit in §12's **decide-per-trip** list — reuse
+only on a matching trip; `peru-clay-title` bakes in the Chinese title 「云上石城」
+("Stone City above the Clouds") and is **this trip only**. The rest — llamas, Inca
+walls, salt pans, bowler-hat markets — are Peru-bound.
+
+| Stem | Variants (KB) | Content and use | Region | Theme |
+|---|---|---|---|---|
+| peru-clay-llama | cut23 | clay woolly white llama + red-orange woven blanket | 🇵🇪 (Andes) | clay (黏土) |
+| peru-clay-wall | cut27 | clay Inca stone-wall block + trapezoid doorway + tiny terrace | 🇵🇪 Cusco | clay (黏土) |
+| peru-clay-cathedral | cut32 | clay pastel cathedral facade, two square bell towers on a plaza base | 🇵🇪 Cusco | clay (黏土) |
+| peru-clay-train | cut26 | clay blue-and-cream tourist train carriage, big round windows, no landmark | **generic** (see §12) | clay (黏土) |
+| peru-clay-ceviche | cut26 | clay ceviche plate: white fish cubes + red onion curl + corn cob | 🇵🇪 (cuisine — **decide per trip**, see §12) | clay (黏土) |
+| peru-clay-salt | cut34 | clay hillside of tiny white salt pans stepping down | 🇵🇪 Maras | clay (黏土) |
+| peru-clay-title | cut68 md24 | clay 3D Chinese title 「云上石城」(one line, four characters) | **this trip only** (baked-in text) | clay (黏土) title sticker |
+| peru-strip-andes | cut127 | terrain band: green terraces + adobe village + three llamas + Moray circular terraces | 🇵🇪 Sacred Valley | clay (黏土) band |
+| peru-strip-lima | cut116 | terrain band: sea cliff + surfers + colonial balcony block + adobe step-pyramid + palms + food cart | 🇵🇪 Lima | clay (黏土) band |
+| peru-strip-machu | cut109 | terrain band: yellow tourist train + trapezoid-door ruins + steep pointed peak + cloud puff | 🇵🇪 Machu Picchu | clay (黏土) band |
+| peru-noir-hero | webp51 | night flight over dark Andes ridges, amber horizon + airliner silhouette (16:9 plate) | 🇵🇪 (generic-ish — **decide per trip**, see §12) | noir (夜航) plate 0 |
+| peru-noir-lima | webp94 | Pacific cliff promenade at blue hour, lamps + towers + sea mist (16:9 plate) | 🇵🇪 Lima (Miraflores) | noir (夜航) plate |
+| peru-noir-cusco | webp152 | high Andean colonial town at dusk: terracotta roofs + twin-towered cathedral on a lit square (16:9 plate) | 🇵🇪 Cusco | noir (夜航) plate |
+| peru-noir-machu | webp79 | stone citadel at dawn, mist pouring through the valley + pointed peak (16:9 plate) | 🇵🇪 Machu Picchu | noir (夜航) plate |
+| peru-zine-cover | webp452 | b/w: stone citadel on a ridge + towering peak + torn cloud (portrait cover) | 🇵🇪 Machu Picchu | zine |
+| peru-zine-band | webp227 | b/w: terraced Andean mountainsides falling into a river valley (16:9 band) | 🇵🇪 (Andes) | zine |
+| peru-zine-plaza | cut76 | b/w: arcaded colonial square + baroque cathedral, pigeons off wet paving | 🇵🇪 Cusco | zine photo |
+| peru-zine-stonewall | cut89 | b/w: massive polygonal Inca wall, one hand for scale | 🇵🇪 Cusco | zine photo |
+| peru-zine-market | cut77 | b/w: Andean market alley, stacked blankets + woman in a bowler hat | 🇵🇪 (Andean market) | zine photo |
+| peru-zine-trainwindow | cut62 | b/w: view out a moving train window down a river gorge, no landmark | **generic** (see §12) | zine photo |
+| peru-zine-salt | cut85 | b/w: hillside of hundreds of salt evaporation pans | 🇵🇪 Maras | zine photo |
+| peru-zine-cliff | cut71 | b/w: Pacific sea-cliff promenade + paragliders above the drop | 🇵🇪 Lima (Miraflores) | zine photo |
