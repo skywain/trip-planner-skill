@@ -100,7 +100,8 @@ key here when it wants a different heading (`"visa": "Visa & ESTA"`).
 **`plan.meta.dates` contract (not art, but every cover reads it — `theme_common.short_dates`):**
 keep it a bare `YYYY-MM-DD → YYYY-MM-DD` (arrow or dash between). Renderers strip the
 years (`09-25 → 10-07`) and swap the arrow for their own dash; `date_span()` takes the two
-ISO ends. Prose such as `10.01 抵达 – 10.08 离开(…)` is passed through verbatim minus
+ISO ends. Prose such as `10.01 抵达 – 10.08 离开(…)` ("arrive 10.01 – depart 10.08")
+is passed through verbatim minus
 years and lands on the cover date line of every theme exactly as written — it folded the
 nordic cover.
 
@@ -109,7 +110,8 @@ zine on the cover, clay and splash use it as the fallback for `cover.sub`). Keep
 **≤68 characters** — the journal envelope is the tightest: a 76-character English route
 folded to two lines and hit the envelope's bottom edge, 68 sat on one line (Mexico
 2026-08-15). CJK routes were not measured — verify with xprobe. If the plan's route must
-carry branch prose ("哥伦布(球赛·可切C分支)") for the plain page, give clay/splash their
+carry branch prose ("哥伦布(球赛·可切C分支)" — "Columbus (match · can switch to branch C)")
+for the plain page, give clay/splash their
 own short `cover.sub`; journal and zine print `meta.route` as it is.
 
 **Latin length ceilings (CJK designs, measured 2026-08-15):** `days[].theme` is sized for
@@ -124,7 +126,7 @@ overrides per key (`themes.<theme>.days[date]` is merged **over** `days[date]`,
 `themes.<theme>.cover` over `cover`, `themes.<theme>.end` over `end`).
 
 **Cover titles are per theme in practice** — every theme has its own poem title
-(手账「美国行」/ 夜航「星垂平野」/ 插画「碧海苍梧」…), so `zh/en/sub/credit`
+(journal「美国行」/ noir「星垂平野」/ illustrated「碧海苍梧」…), so `zh/en/sub/credit`
 normally live in `themes.<theme>.cover`; the top-level `cover` keeps what is truly
 shared: `kick`, `kick_en`, `postmark_date`.
 
@@ -138,7 +140,7 @@ carries the year is not given a second one), so write it in the CAPS form you wa
 see there (`"MOROCCO 2026"`, `"TURKEY 2026"`).
 Journal auto-sizes its h1 by character count (2-3 chars full size, 4 slightly smaller,
 5-6 smaller, ≥7 shrunk to one line) — a four-character poem title fits; the US page
-keeps its owner-approved 大白话「美国行」as `zh` with the poem as `sub`.
+keeps its owner-approved plain-speech「美国行」("US trip") as `zh` with the poem as `sub`.
 
 **`caption: [a, b]` (journal polaroids, cover photo) is two typographic slots, not two
 languages**: `[0]` = the main line (Kaiti), `[1]` = the handwritten aside (Caveat, smaller).
@@ -332,7 +334,7 @@ zones, every seam clean in the export; the China test used the same shape with
   L (upper-left) · R (upper-right) · L-low · R-low** (`CUSTOM_DECOR_POS` in
   `render_clay2.py`); or `{"stem", "pos": "<inline style>"}` to place one yourself. Kit
   props any trip may use: `clay-pines` `clay-signpost` `clay-cloud-a/b/c` `clay-balloon`
-  `clay-bus-solo` (IMAGE-LIBRARY §通用件); a trip's own figurine (`turkey-clay-tea`) is fine
+  `clay-bus-solo` (IMAGE-LIBRARY §Generic pieces (通用件)); a trip's own figurine (`turkey-clay-tea`) is fine
   too. Two per zone is the comfortable count.
 - The band + figurines + title sticker are all cut-outs (see the size table).
 
@@ -421,53 +423,56 @@ zones, every seam clean in the export; the China test used the same shape with
 
 
 ```jsonc
-"cover": {"kick": "美国行"},                    // <title> 「{kick} {year} · 闪屏版行程」+ 导出文件名前缀
-"end":   {"line": "北京,到家了。"},             // 尾牌;fine 见主题块(闪屏版带年份)
+"cover": {"kick": "美国行"},                    // <title> 「{kick} {year} · 闪屏版行程」 + export filename prefix
+"end":   {"line": "北京,到家了。"},             // endcap plate; for fine see the theme block (splash carries the year)
 "themes": { "splash": {
-  "cover": {"zh": "美国行",                     // 标题牌 alt;没有标题牌时就是文字大标题(缺→kick→「出发!」)
-            "sub": "纽约 · 球赛 · 黄石 · 优胜美地 · 火山"},   // 海报下的路线行(缺→plan meta.route→不写)
+  "cover": {"zh": "美国行",                     // title-plate alt; with no title plate it IS the big text title (missing → kick → 「出发!」)
+            "sub": "纽约 · 球赛 · 黄石 · 优胜美地 · 火山"},   // route line under the poster (missing → plan meta.route → not written)
   "end":   {"fine": "2026-10-07 週三 12:00 落地 —— 跨过日界线,日历上的 10-06 在空中消失。"},
-  "hero": {"palette": "night",                  // 第 0 章(封面)天色:kit 情绪名;或 "scene":[4 hex] + "wash":[hex…]
-           "title": "splash-title",             // 手绘标题牌 stem(md 档,抠图件:cutout.py → towebp x.cut.png --sizes md);缺→文字标题(kit CSS 按需注入)
-           "art":   "splash-hero",              // 海报主岛 stem(md 档,抠图件——直接 towebp --sizes md 会嵌进一张白底方块且零报错);缺→整个 figure(含其 fx)不画
-           "sides": ["balloon"]},               // 侧场额外漂浮件(kit 词或 {"stem","w"} 行程自有抠图)
-  "appendix": {"palette": "homebound"},         // 末章天色 / 可加 sides
-  "vehicles": {                                 // 行程自己的交通工具贴纸 → 生成 .veh-<kind>;stem 一律是抠图件(.cut.webp)
-    "plane":   {"stem": "splash-plane",   "ratio": "428/277", "speedlines": true},   // speedlines = 奶油尾迹;ratio = 该 .cut.webp 的真实像素 w/h(不是母图/sheet 的)—— 抠完 `python3 -c 'from PIL import Image;print(Image.open("x.cut.webp").size)'` 抄进来
+  "hero": {"palette": "night",                  // chapter-0 (cover) sky: a kit mood name; or "scene": [4 hex] + "wash": [hex…]
+           "title": "splash-title",             // hand-drawn title-plate stem (md size, a cut-out: cutout.py → towebp x.cut.png --sizes md); missing → text title (kit CSS injected on demand)
+           "art":   "splash-hero",              // poster main-island stem (md size, a cut-out — towebp --sizes md straight on the PNG embeds a white square with zero errors); missing → the whole figure (its fx included) is not drawn
+           "sides": ["balloon"]},               // extra floating side-field pieces (kit words, or {"stem","w"} for the trip's own cut-outs)
+  "appendix": {"palette": "homebound"},         // final-chapter sky / may also take sides
+  "vehicles": {                                 // the trip's own vehicle stickers → generates .veh-<kind>; stems are always cut-outs (.cut.webp)
+    "plane":   {"stem": "splash-plane",   "ratio": "428/277", "speedlines": true},   // speedlines = cream contrail; ratio = that .cut.webp's REAL pixel w/h (not the master's / sheet's) — after cutting run `python3 -c 'from PIL import Image;print(Image.open("x.cut.webp").size)'` and copy it in
     "bus":     {"stem": "splash-bus",     "ratio": "399/390"},
     "sequoia": {"stem": "splash-sequoia", "ratio": "395/434"}},
   "mascots": {"hotdog": {"stem": "splash-m-hotdog", "ratio": "330/408"}, "…": {}},   // → .mas-<kind>
-  "strips":  {"city": {"stem": "splash-strip-city", "ratio": "1433/314"},            // 章脚剪影条 → .strip-<kind>
+  "strips":  {"city": {"stem": "splash-strip-city", "ratio": "1433/314"},            // chapter-foot silhouette strips → .strip-<kind>
               "gg":   {"stem": "splash-strip-goldengate", "ratio": "1431/391"}},
   "days": {
     "2026-09-29": {
-      "palette": "rainbow",                     // 本章天色情绪名(链式:起色=上一章末色);或 "scene"/"wash" 显式色值
-      "island":  "splash-geyser",               // 漂浮岛 stem(sm 档,抠图件);缺→无岛(无 fx 时按序号放 CSS 勋章 moon/dusk/sunrise)
-      "fx":      "rainbow",                     // 岛后场景特效,kit 词:halo-cyan|halo-gold|halo-teal|burst|beams-cool|rainbow|"rainbow sm"|sun|moon|dusk|sunrise|""(不要)
-      "vehicle": {"kind": "bus", "when": "post",            // kind 指向 vehicles;when=pre 在岛后 / post 在岛前
-                  "pos": "left:-14%;bottom:-3%;width:clamp(120px,13vw,150px);--vr:-2deg"},   // .scene 内的内联定位(--vr 倾斜,--vsx:-1 镜像)
-                  // pos 安全范围(.scene 是 position:relative 的居中格,岛宽 clamp(200px,46vw,330px);.chap overflow:hidden 兜底):
-                  //   left|right: -8% … -18%(负值 = 探到岛外侧;再大就贴到章节边缘/被裁)
-                  //   bottom: -8% … +4%(或 top: -12% … +4% 挂在岛肩上)
-                  //   width: clamp(76–130px, 8–15vw, 100–175px);--vr: -8deg … 8deg
-                  // 以上是 US/China/Vietnam 三份成品页 30 余条 pos 的实测区间;出圈的值渲染不会报错,只能靠 xprobe 目检
-      "mascot":  {"kind": "bison", "pos": "right:-9%;bottom:-2%;width:clamp(88px,9.5vw,120px);--vr:3deg"},   // 同一套 pos 范围;吉祥物一般 8–9.5vw
-      "strip":   "city",                        // 指向 strips 的名字
-      "sides":   ["balloon"]                    // 侧场额外件
+      "palette": "rainbow",                     // this chapter's sky mood name (chained: opening colour = previous chapter's closing colour); or explicit "scene"/"wash" hex values
+      "island":  "splash-geyser",               // floating-island stem (sm size, a cut-out); missing → no island (with no fx either, a CSS medallion moon/dusk/sunrise is placed by day index)
+      "fx":      "rainbow",                     // scene effect behind the island, kit words: halo-cyan|halo-gold|halo-teal|burst|beams-cool|rainbow|"rainbow sm"|sun|moon|dusk|sunrise|"" (none)
+      "vehicle": {"kind": "bus", "when": "post",            // kind points into vehicles; when=pre sits behind the island / post in front of it
+                  "pos": "left:-14%;bottom:-3%;width:clamp(120px,13vw,150px);--vr:-2deg"},   // inline positioning inside .scene (--vr tilt, --vsx:-1 mirror)
+                  // pos safe ranges (.scene is a position:relative centred cell, island width clamp(200px,46vw,330px); .chap overflow:hidden is the backstop):
+                  //   left|right: -8% … -18% (negative = poking past the island's outer edge; larger sticks to the chapter edge / gets clipped)
+                  //   bottom: -8% … +4% (or top: -12% … +4% to hang on the island's shoulder)
+                  //   width: clamp(76–130px, 8–15vw, 100–175px); --vr: -8deg … 8deg
+                  // the measured envelope of the 30-odd pos values across the US/China/Vietnam finished pages; out-of-range values render without any error — only an xprobe eyeball catches them
+      "mascot":  {"kind": "bison", "pos": "right:-9%;bottom:-2%;width:clamp(88px,9.5vw,120px);--vr:3deg"},   // same pos ranges; mascots usually 8–9.5vw
+      "strip":   "city",                        // a name pointing into strips
+      "sides":   ["balloon"]                    // extra side-field pieces
     }
   }
 }}
 ```
-资源找不到的 vehicles/mascots/strips 条目整个不生成 CSS 类,引用它的日子也不画;未知 palette 名回落到序号节奏;未知 side kind 画成 spark。
+A vehicles/mascots/strips entry whose asset cannot be found generates no CSS class at
+all, and a day referencing it simply skips that piece (the day itself still
+renders in full); an unknown palette name falls back to the
+day-number rhythm; an unknown side kind is drawn as a spark.
 
-**Kit (theme-owned, not in art)**: 留在渲染器的 kit:
-- MOODS 天色情绪表(12 种:night/neon/lilac/floodlight/dusk/rainbow/alpine/goldfog/canyon/ocean/lava/sunrise/homebound,每种 4 个渐变停点 + 洗色 pastel 表;停点已按 AA 预校)+ 链式接缝机制 resolve_chain()(第 i+1 章起色 = 第 i 章末色)+ HERO_MOOD/APPX_MOOD 默认 + DEFAULT_RHYTHM(无 art 时按天序号循环情绪)+ contrast_report() 建期复核实际链。
-- 章节索引约定(0=hero,1..N=天,N+1=附录)及所有 seeded RNG(deco 洗/光带/柔焦/纸屑;sides 侧场;hill 山脊)——种子是冻结常量,内容按索引掷。
-- 侧场池 cloud×2/spark/dot/shard/heart/star + 通用抠图 splash-cloud-a..d/splash-star/splash-balloon(主题库 embeds)+ 新增 {"stem","w"} img 件。
-- 头部特效 head_fx():halo-cyan/gold/teal、burst、beams-cool、rainbow(sm)、sun,以及三枚 CSS 勋章 moon/dusk/sunrise(MEDALLIONS,无岛无 fx 时按序号轮放)。
-- 交通工具/吉祥物/剪影条的**机制**:.veh/.mas/.strip 基类、drift 动画、speedlines 尾迹、STRIP_A 透明度封顶、kit_css() 按注册表生成 .veh-<kind>/.mas-<kind>/.strip-<kind> 类(吉祥物选择器对齐补空与原手写块一致)。
-- 丝带路 + 3.5/96.5 gutter、大数字、色带、导出徽章、TITLE_TXT_CSS 文字标题回退(仅无标题牌时注入)。
-- 文案中性词:<title> 后缀「闪屏版行程」、h1 回退「出发!」、附录/尾牌图形。
+**Kit (theme-owned, not in art)**: what stays in the renderer:
+- The MOODS sky-mood table (12 moods: night/neon/lilac/floodlight/dusk/rainbow/alpine/goldfog/canyon/ocean/lava/sunrise/homebound, each with 4 gradient stops + a pastel wash table; stops pre-checked for AA) + the chained-seam mechanism resolve_chain() (chapter i+1's opening colour = chapter i's closing colour) + the HERO_MOOD/APPX_MOOD defaults + DEFAULT_RHYTHM (no art → moods cycle by day number) + contrast_report() to re-check the actual chain at build time.
+- The chapter-index convention (0 = hero, 1..N = days, N+1 = appendix) and every seeded RNG (deco washes / light bands / soft-focus / confetti; sides side-field; hill ridges) — seeds are frozen constants, content is rolled by index.
+- The side-field pool cloud×2/spark/dot/shard/heart/star + the generic cut-outs splash-cloud-a..d/splash-star/splash-balloon (theme-library embeds) + the newer {"stem","w"} img pieces.
+- Head effects head_fx(): halo-cyan/gold/teal, burst, beams-cool, rainbow(sm), sun, plus the three CSS medallions moon/dusk/sunrise (MEDALLIONS — rotated by day index when a day has no island and no fx).
+- The **mechanics** of vehicles/mascots/strips: the .veh/.mas/.strip base classes, drift animation, speedlines contrails, the STRIP_A opacity cap, kit_css() generating the .veh-<kind>/.mas-<kind>/.strip-<kind> classes from the registries (mascot selector alignment padding identical to the original hand-written block).
+- The ribbon road + the 3.5/96.5 gutter, big numerals, colour bands, export badges, the TITLE_TXT_CSS text-title fallback (injected only when there is no title plate).
+- Neutral copy: the <title> suffix 「闪屏版行程」, the h1 fallback 「出发!」, the appendix/endcap graphics.
 
 
 ## Theme block: `portal` (穿越版 — scroll-scrubbed video)
@@ -552,97 +557,139 @@ painting) is `towebp.py x.png` → `x.webp` — never `cutout.py` (it would eat 
    template as the US `strip-*` bands) > a national landmark > a neutral scene. A
    page that opens on another country's skyline is a defect, not a saving; a page
    with no scenery at all is a missed shot. "Reuse first" applies to generic props only —
-   `IMAGE-LIBRARY.md` §通用件: a plane, a bus, a cloud, luggage, a wing shot, a
+   `IMAGE-LIBRARY.md` §Generic pieces (通用件): a plane, a bus, a cloud, luggage, a wing shot, a
    generic beach. Generate the rest with the sheet recipe; `gen.py --manifest
    <trip>/manifest.<trip>.json` registers it in the trip's own manifest (never
-   `themes/assets/manifest.json` — see 测试行程资产回收 below). Title stickers: one
+   `themes/assets/manifest.json` — see Test-trip asset recycling (测试行程资产回收)
+   below). Title stickers: one
    centred sticker, both lines the same height, no icons/moons inside the letters,
    wide white margin (see china-clay-title2; Turkey tester's tip — simple glyphs, ≤8
-   strokes, keep the strokes intact:「九万里风」came out clean first time).
-2b. **没有生成能力就走素材库(stock 模式),不是退回纯文本页。** Phase 0 的图片能力检查把结果
-   写进 plan 的 `prefs.pictures`:`native`(agent 自带生图)/ `key`(存在
-   `themes/.auth_header`,只 `test -s` 判断,永不读取打印)/ `stock`(两者都没有)。`stock` 下
-   用内置素材包把图片补齐,页面照样交付主题版:
+   strokes, keep the strokes intact —「九万里风」("ninety-thousand-mile wind") came out
+   clean first time).
+2b. **No generation capability → stock mode (the built-in asset library), never a fall
+   back to a text-only page.** Phase 0's picture-capability check writes its result
+   into the plan's `prefs.pictures`: `native` (the agent generates images itself) /
+   `key` (`themes/.auth_header` exists — judged with `test -s` only, never read or
+   printed) / `stock` (neither). Under `stock`, the built-in asset pack fills in the
+   pictures and the page still ships as a themed render:
    ```bash
    python3 <skill>/themes/stock_art.py plan.geo.json --theme illustrated -o plan.art.json
-   # 还有 --theme clay · --lang zh|en · --index PATH(换一份 stock 索引)
+   # also --theme clay · --lang zh|en · --index PATH (swap in a different stock index)
    ```
-   脚本按行程国家 + 每天停靠点的关键词,从 `themes/assets/stock/`(索引 `stock/index.json`,
-   清单见 `stock/README.md`)加共享图库里同国图片与通用件(`IMAGE-LIBRARY.md` §通用件)挑图,
-   **只填图片槽位**:封面画、每天的 hero / 抠图件、道具。**文字照旧由你写**——封面标题
-   (`references/cover-titles.md`)、每天 `theme`(4 字)/ `en` / `mark`、图注、批注、结尾句;
-   带着脚本占位词交付算缺陷,判据和下面第 3 步一样。脚本会把素材库说明写进 `end.fine`,**别删**,
-   聊天摘要里再说一遍(「图片来自内置素材库(本次未接入生图能力);接入生图模型或 KEY 后可为本次
-   行程定制生成。」),也永远不要在对话里索要 KEY。覆盖度:**插画版**完整;**黏土版**可用(地形带
-   走内置中性 SVG 套件 `ridge|plain|coast|forest|lake|desert` + 通用黏土道具);夜航 / 玻璃 /
-   手账 / Zine / 闪屏 / 穿越这六个主题的图版、照片、岛屿、视频仍然必须生成——用户点名要它们时,
-   说明情况并改推插画版,硬渲染只会得到一页空图槽(穿越版更是连素材都没有)。
+   The script picks by trip country + each day's stop keywords, from
+   `themes/assets/stock/` (index `stock/index.json`, inventory in `stock/README.md`)
+   plus same-country pictures and generic pieces (`IMAGE-LIBRARY.md` §Generic pieces (通用件)) in the
+   shared library, and **fills picture slots only**: the cover painting, each day's
+   hero / cut-outs, props. **The words are still yours to write** — cover title
+   (`references/cover-titles.md`), each day's `theme` (4 chars) / `en` / `mark`,
+   captions, annotations, the closing line; shipping with the script's placeholder
+   words is a defect, judged exactly like step 3 below. The script writes a
+   stock-library notice into `end.fine` — **do not delete it** — and repeat it in the
+   chat summary (「图片来自内置素材库(本次未接入生图能力);接入生图模型或 KEY 后可为本次
+   行程定制生成。」 — "pictures come from the built-in stock library, no image
+   generation was connected this run; hook up an image model or KEY and they can be
+   custom-generated for this trip"), and never ask for a KEY in the conversation.
+   Coverage: **illustrated** is complete; **clay** is usable (terrain bands fall to the
+   built-in neutral SVG kit `ridge|plain|coast|forest|lake|desert` + generic clay
+   props); the other six — noir / glass / journal / zine / splash / portal — still
+   need their plates, photos, islands and video generated: when the user names one of
+   them, explain the situation and steer to illustrated instead — a forced render only
+   yields a page of empty picture slots (portal has no stock material at all).
 3. Write the words: captions, annotations, doodle notes, the closing line. Voice
    rules live in each theme's renderer docstring.
 4. Render, run `qc.py`, eyeball an export.
 
-**生成器选择(先看这一条)**:如果当前 AI / agent **自身就有图片(或视频)生成能力**(内置的
-image / video 生成工具、可直接调用的原生生图),**优先直接用自己的能力生成,不需要配置任何 KEY**——
-`gen.py` / `genvideo.py` + OpenRouter 只是给「运行环境没有原生生成能力」准备的备胎。用自身能力时,
-下游的切图 / 抠图 / webp / manifest 四步**一步不少**,而且要满足同一套产物契约:
-- **规格照旧**:全幅件 16:9(1536×864 或 2K);sheet 件按「N 件 C×R 网格 · 纯白背景 · 宽白沟槽 ·
-  无边框无文字」写提示词(照抄 manifest 里 `*-sheet-*` 的骨架)才能被 `split_sheet.py` 认格;
-  抠图件=单一主体 + 纯白/纯色背景,`cutout.py` 才抠得净;标题贴纸规则同上一节。
-- **提示词照抄本库的风格锚**:同主题条目的 prompt + `manifest.json` 顶部 `style_anchor`,保证和
-  已有资产同一风格族(黏土像黏土、riso 像 riso),不要即兴换风格。
-- **落盘位置与命名不变**:`<trip>/<trip>-<name>.png`,然后照下面 ①②③④ 跑 split_sheet / cutout / towebp。
-- **仍要记进 `<trip>/manifest.<trip>.json`**:`model` 写你实际用的生成器名,`cost_usd` 写 0 或实际,
-  `prompt` 全文保留——回收入库和「已有就复用」都靠它。
-- **视频(portal)**同理:产物契约见 portal 块——mp4 h264 16:9(1344×768 或 1280×720)24 fps,
-  dive 5–6 s / link 4 s,link 需要**首尾帧条件**;原生视频能力若不支持首尾帧,只出 dive、link 留空并在
-  art.json 里注明,页面会走单段兜底。
-只有当前环境**没有**原生生成能力时,才走 `gen.py` / `genvideo.py`(需要 `themes/.auth_header` 一行
-OpenRouter key)——下面的命令都是这条备胎路径。
+**Generator choice (生成器选择) — read this first**: if the current AI / agent **has
+image (or video) generation of its own** (a built-in image / video tool, native
+generation it can call directly), **use that ability first — no KEY needs
+configuring**. `gen.py` / `genvideo.py` + OpenRouter are only the spare tyre for
+environments with no native generation. Generating natively, the four downstream steps
+— sheet-split / cutout / webp / manifest — are **every one still required**, against
+the same artefact contract:
+- **Specs unchanged**: full-bleed pieces 16:9 (1536×864 or 2K); sheet pieces prompted
+  as "N pieces in a C×R grid · pure white background · wide white gutters · no borders,
+  no text" (copy the `*-sheet-*` skeleton in the manifest) or `split_sheet.py` will not
+  recognise the grid; cut-out pieces = one single subject on a pure-white/solid
+  background, or `cutout.py` cannot cut clean; title-sticker rules as in the previous
+  section.
+- **Prompts copy this library's style anchors**: a same-theme entry's prompt + the
+  `style_anchor` at the top of `manifest.json`, so new pieces stay in the same style
+  family as the existing assets (clay looks like clay, riso like riso) — no improvised
+  style switches.
+- **Landing paths and naming unchanged**: `<trip>/<trip>-<name>.png`, then run
+  split_sheet / cutout / towebp per steps ①②③④ below.
+- **Still record into `<trip>/manifest.<trip>.json`**: `model` = the generator you
+  actually used, `cost_usd` = 0 or the real number, `prompt` kept in full — recycling
+  into the library and "reuse what already exists" both depend on it.
+- **Video (portal)** likewise: artefact contract in the portal block — mp4 h264 16:9
+  (1344×768 or 1280×720) 24 fps, dives 5–6 s / links 4 s, links need **first+last-frame
+  conditioning**; if native video cannot condition on first/last frames, produce dives
+  only, leave links out and note it in art.json — the page falls back to single-slot
+  playback.
+Only when the current environment has **no** native generation do you take `gen.py` /
+`genvideo.py` (needs `themes/.auth_header` — one line, an OpenRouter key) — the
+commands below are all this spare-tyre path.
 
-**图片工具链**(全部在 themes/,不必复制;密钥只在 themes/ 读;共享图库在 themes/assets/)。
-**每条命令都写全路径**——agent 的 shell cwd 每次调用都会重置,`cd` 不保留;下面
-`<skill>` = skill 根目录,`<trip>` = 行程目录(如 `trips/kyoto-2027`),四步都从 `<skill>` 起跑:
+**Image toolchain (图片工具链)** (all of it lives in themes/ — nothing to copy; the key
+is read only inside themes/; the shared library is themes/assets/). **Write every
+command with full paths** — the agent's shell cwd resets on every call and `cd` does
+not persist; below, `<skill>` = the skill root, `<trip>` = the trip directory (e.g.
+`trips/kyoto-2027`), and all four steps start from `<skill>`:
 
 ```bash
-# ① 生成(先 --dry-run 看 payload;PNG 与 manifest 落到 <trip>,themes/assets/manifest.json 不动)
+# ① generate (--dry-run first to inspect the payload; PNGs and manifest land in <trip>, themes/assets/manifest.json untouched)
 python3 <skill>/themes/gen.py <trip>/jobs.json --outdir <trip> --manifest <trip>/manifest.<trip>.json
-# ② 切 sheet:先 --probe 看它认出几格,再按 prompt 的 Row 1 / Row 2 顺序敲件名(reading order)
+# ② split the sheet: --probe first to see how many cells it recognises, then type piece names in the prompt's Row 1 / Row 2 order (reading order)
 python3 <skill>/themes/split_sheet.py <trip>/x-sheet.png --probe
 python3 <skill>/themes/split_sheet.py <trip>/x-sheet.png --grid 3x2 name1 name2 … name6 --outdir <trip>
-# ③ 单件抠图(抠图槽位:贴纸/岛/小人/地形带/邮票/道具)
+# ③ single-piece cutout (the cut-out slots: stickers/islands/figurines/terrain bands/stamps/props)
 python3 <skill>/themes/cutout.py <trip>/x.png --outdir <trip>            # → x.cut.png + x.cut.webp
-# ④ webp 与尺寸档:不透明大图直接喂 png;抠图件喂 .cut.png(stem 保持 x,不会变成 x.cut.cut)
-python3 <skill>/themes/towebp.py <trip>/x.png --outdir <trip>                       # 不透明 → x.webp
-python3 <skill>/themes/towebp.py <trip>/x.cut.png --sizes sm,md,lg --outdir <trip>  # 抠图 → x.sm/md/lg.webp
+# ④ webp + size variants: feed opaque large pictures the png directly; feed cut-outs the .cut.png (the stem stays x, never becomes x.cut.cut)
+python3 <skill>/themes/towebp.py <trip>/x.png --outdir <trip>                       # opaque → x.webp
+python3 <skill>/themes/towebp.py <trip>/x.cut.png --sizes sm,md,lg --outdir <trip>  # cut-out → x.sm/md/lg.webp
 ```
-`split_sheet.py` / `cutout.py` / `towebp.py` 的 `--outdir` 默认都是**输入文件所在目录**
-(`towebp.py` 一直如此;前两者 2026-08-16 起——之前写 cwd),所以给了 `<trip>/x.png` 就不必再写
-`--outdir`——上面写出来是为了看得见落点。
+`split_sheet.py` / `cutout.py` / `towebp.py` all default `--outdir` to **the input
+file's own directory** (`towebp.py` always did; the other two since 2026-08-16 — they
+used to write to cwd), so given `<trip>/x.png` there is no need to write `--outdir` —
+it is spelled out above so the landing spot stays visible.
 
-- **sheet 配方**(一张 $0.04 切 6–12 件,零返工):照抄 `manifest.json` 里
-  `journal-sheet-photo-a` 的 prompt 骨架——「SIX separate … 3-column by 2-row grid on a plain
-  pure white background, WIDE empty white gutters between every photo and a wide white
-  margin around the grid, each … a simple borderless rectangle, no borders, no text」,
-  再逐格写 Row 1/Row 2 的内容;参数 `background:opaque, aspect_ratio:3:2, resolution:2K,
-  quality:medium`。**切格顺序:先 `--probe` 确认格数与 prompt 的格数一致,再按 Row 1 → Row 2
-  的顺序敲件名**——件名和 prompt 行序一旦错位,整张 sheet 的件全部错名而下游零报错(墨西哥 P3)。
-  `--probe` 认出的格数少于 prompt(闪屏星星落进沟槽把两列并成一列)→ 加 `--grid 3x2` 按列×行硬切。
-  产物 `<name>.png/.cut.png/.cut.webp`。**sheet 切出的件通常只有 sm + cut 两档**:格子约 300–560 px,
-  `towebp --sizes sm,md,lg` 会跳过 md/lg(不比源小或字节反而更大就丢),插画 md/lg 槽位回落到
-  `.cut.webp`,正常。
-- 哪些槽位是抠图件、哪些是不透明件,看上面尺寸表的「shape」列;抠图件**先** `cutout.py` **再**
-  `towebp.py x.cut.png`,直接 `towebp x.png --sizes md` 会得到一张白底方块且零报错(越南 F7)。
-- `gen.py --outdir <trip>` 会在行程目录留下 `.png` 母图与 `.payload.json` 草稿——它们
-  **不是交付物**(渲染器只吃 webp)。交付时只留 webp;png 母图可以删,或留在行程目录但不进 repo、
-  不当资产入库(越南一趟 62 个 png 占 59 MB,真交付物 12 MB)。
-- 资产放在行程目录即可(渲染器搜 plan 所在目录 → `--assets DIR` → themes/assets/);
-  webp 命名与 `data_uri` 回退链一致,不要手改后缀。
+- **Sheet recipe** (one $0.04 sheet cuts into 6–12 pieces, zero rework): copy the
+  `journal-sheet-photo-a` prompt skeleton in `manifest.json` — "SIX separate … 3-column
+  by 2-row grid on a plain pure white background, WIDE empty white gutters between
+  every photo and a wide white margin around the grid, each … a simple borderless
+  rectangle, no borders, no text" — then write each cell's content in Row 1/Row 2
+  order; parameters `background:opaque, aspect_ratio:3:2, resolution:2K,
+  quality:medium`. **Cutting order: `--probe` first to confirm the cell count matches
+  the prompt's, then type piece names in Row 1 → Row 2 order** — once names and prompt
+  rows misalign, every piece on the sheet is misnamed and downstream raises zero errors
+  (Mexico P3). `--probe` finding fewer cells than the prompt has (splash stars drifting
+  into a gutter merged two columns into one) → add `--grid 3x2` to hard-cut by
+  columns×rows. Products `<name>.png/.cut.png/.cut.webp`. **Sheet-cut pieces usually
+  get only the sm + cut variants**: cells run about 300–560 px, `towebp --sizes
+  sm,md,lg` skips md/lg (dropped when not smaller than the source, or when the bytes
+  actually grow), and illustrated's md/lg slots fall back to `.cut.webp` — normal.
+- Which slots are cut-outs and which opaque: the "shape" column of the size table
+  above; cut-outs go **first** `cutout.py` **then** `towebp.py x.cut.png` — `towebp
+  x.png --sizes md` straight on the PNG yields a white square with zero errors
+  (Vietnam F7).
+- `gen.py --outdir <trip>` leaves `.png` masters and `.payload.json` drafts in the trip
+  directory — they are **not deliverables** (renderers eat only webp). Ship webp only;
+  png masters may be deleted, or kept in the trip directory but out of the repo and
+  never registered as library assets (one Vietnam run: 62 pngs at 59 MB, real
+  deliverables 12 MB).
+- Assets can simply live in the trip directory (renderers search the plan's directory →
+  `--assets DIR` → themes/assets/); webp names follow the `data_uri` fallback chain —
+  never hand-edit the suffixes.
 
-**测试行程资产回收**(2026-08-16 定):`<trip>/manifest.<trip>.json` 是这趟生成物的**权威记录**
-(prompt、参数、花费、切件名),写在行程目录就算登记完成。**测试员与普通用户不写 `themes/assets/`
-和 `IMAGE-LIBRARY.md`**——通用件回收进共享图库、索引追加新章,由主 agent 在一批测试跑完后
-统一做(`build_manifest.py` 刷 manifest + 手写索引段)。IMAGE-LIBRARY 里「新测试行程跑完照此追加」
-说的是主 agent 的那一步,不是测试员的任务。
+**Test-trip asset recycling (测试行程资产回收)** (settled 2026-08-16):
+`<trip>/manifest.<trip>.json` is the **authoritative record** of what the run generated
+(prompts, parameters, costs, sheet-cut piece names); written into the trip directory,
+registration is complete. **Testers and ordinary users never write `themes/assets/` or
+`IMAGE-LIBRARY.md`** — recycling common assets into the shared library and appending
+new index chapters is done in one pass by the main agent after a batch of tests
+(`build_manifest.py` refreshes the manifest + a hand-written index section).
+IMAGE-LIBRARY's 「新测试行程跑完照此追加」 ("append like this after each new test trip")
+refers to that main-agent step, not a tester task.
 
 ## Migration status
 

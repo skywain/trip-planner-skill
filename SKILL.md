@@ -481,11 +481,11 @@ them. Flow:
      default band was reused). The same ladder applies to `end.hero` / the tail cover,
      with one twist: that picture is the **return to the departure city** (home skyline
      at landing, not another destination view) — generated for this trip too. "Reuse
-     first" applies only to generic props: `themes/assets/IMAGE-LIBRARY.md` §通用件
+     first" applies only to generic props: `themes/assets/IMAGE-LIBRARY.md` §Generic pieces (通用件)
      lists what any trip may use; generate the rest — **with the agent's own native
      image/video generation if it has one (no key to configure; same specs, same
      prompts-as-style-anchors, same split/cutout/webp/manifest steps — ART-SCHEMA.md
-     「生成器选择」), otherwise `gen.py` / `genvideo.py` over OpenRouter** — using the
+     §Generator choice), otherwise `gen.py` / `genvideo.py` over OpenRouter** — using the
      sheet recipe in ART-SCHEMA.md (title stickers: one centred sticker, symmetric
      lines, no icons inside the letters), then `towebp.py`, and keep the webp beside
      the plan (or pass `--assets DIR`).
@@ -599,7 +599,7 @@ directory is not the skill directory and shell cwd does not persist between call
   authoritative art.json contract) and `themes/README.md`.
 - `themes/assets/` — the shared picture library: all embeddable webp, the Caveat
   webfont, `manifest.json` (prompt/cost per generated asset), `IMAGE-LIBRARY.md`
-  (index by subject — check its 通用件 section before generating anything),
+  (index by subject — check its Generic pieces section before generating anything),
   `portal/` (the portal theme's footage sidecar dir — empty in the tree; the US
   reference chain is a release asset, see `portal/README.md`) and `stock/` — the **stock kit**
   (region cover paintings + landmark / generic-scene cut-outs in the illustrated

@@ -59,11 +59,11 @@ from it. Every field is optional; an empty art file must still render. Schema:
 
 ## Where pictures come from
 
-Reuse first: `assets/IMAGE-LIBRARY.md` §通用件 lists the assets any trip may use
+Reuse first: `assets/IMAGE-LIBRARY.md` §Generic pieces (通用件) lists the assets any trip may use
 (place-bound ones — landmarks, `noir-*`, `glass-*`, `au-*`, `nordic-*` — do not cross
 trips). Missing pieces: **an agent that can generate images natively should just do
 that — no key — and then run the same split/cutout/webp steps below** (contract:
-ART-SCHEMA.md 「生成器选择」); `gen.py` is the fallback for environments without native
+ART-SCHEMA.md §Generator choice); `gen.py` is the fallback for environments without native
 generation. Full paths — the shell cwd resets between calls:
 
 ```bash
@@ -82,7 +82,7 @@ square, silently). Keep a trip's webp beside its plan or pass `--assets DIR`; th
 order is `--assets` → art dir → plan dir → `themes/assets/`. **A test trip or a normal
 user never writes into `assets/` or `IMAGE-LIBRARY.md`** — `<trip>/manifest.<trip>.json`
 is the record; the main agent folds generic pieces back into the library after a batch
-(ART-SCHEMA.md 测试行程资产回收). Portal needs its clip chain next to the output HTML — it
+(ART-SCHEMA.md §Test-trip asset recycling). Portal needs its clip chain next to the output HTML — it
 is the only theme that ships sidecar files. The US reference chain is a release asset, not
 in the tree; `assets/portal/` is empty in a fresh clone and
 [`assets/portal/README.md`](assets/portal/README.md) has the one-line curl+unzip restore

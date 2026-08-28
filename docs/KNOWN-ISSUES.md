@@ -376,7 +376,7 @@ holidays are absent.**
   --sizes …`. Which slots are cut-outs and which are opaque is the **"shape" column**
   of the size table in `ART-SCHEMA.md`; an opaque slot (photo, plate, poster, cover
   painting) must **not** go through `cutout.py` — it would eat the sky.
-- **Source** — `themes/ART-SCHEMA.md` §"图片工具链" (~lines 507–514, 594) and the
+- **Source** — `themes/ART-SCHEMA.md` §Image toolchain (图片工具链) (~lines 632–682, 601) and the
   per-theme size table; `themes/towebp.py` docstring (Naming block);
   `themes/README.md` (asset pipeline paragraph).
 - **Status** — open
@@ -400,13 +400,13 @@ holidays are absent.**
   place after generation inside `themes/assets/`.
 - **Note** — testers and ordinary users never write into `themes/assets/` or
   `IMAGE-LIBRARY.md` at all; `trips/<trip>/manifest.<trip>.json` is their record.
-- **Source** — `themes/assets/IMAGE-LIBRARY.md` header, "测试行程资产怎么进库"
+- **Source** — `themes/assets/IMAGE-LIBRARY.md` header, "How test-trip assets are folded into this library"
   (2026-08-16), bullets 2–3; `themes/build_manifest.py` docstring;
   `themes/README.md`.
 - **Status** — open
 
 ### AST-3
-**Generating new images or video requires an OpenRouter key — unless the agent can generate natively.** (Since 2026-08-16 the docs say: an agent with its own image/video generation uses it directly, no key; `gen.py` / `genvideo.py` are the fallback for environments without one — ART-SCHEMA.md 「生成器选择」.)
+**Generating new images or video requires an OpenRouter key — unless the agent can generate natively.** (Since 2026-08-16 the docs say: an agent with its own image/video generation uses it directly, no key; `gen.py` / `genvideo.py` are the fallback for environments without one — ART-SCHEMA.md §Generator choice.)
 
 - **Symptom** — without `themes/.auth_header` (one line `Authorization: Bearer <OpenRouter
   key>`, passed to curl as a header file), `gen.py` and `genvideo.py` cannot run.
