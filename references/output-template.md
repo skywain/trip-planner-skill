@@ -369,4 +369,27 @@ them toward this one.
   (book the landing date + a "late arrival" note, never the clock date the guest
   walks in on); a date-line crossing books the ARRIVAL-local calendar date, not
   the departure date.
+- **Date-locked rows also ship as a calendar file**: when the checklist carries
+  gates (a ticket-release instant, a decision deadline, an on-trip re-check),
+  offer a `.ics` beside the page — one VEVENT per gate, with the FULL action
+  list in DESCRIPTION (the user acts from the alarm, not from memory: what to
+  do, the fallback if it fails, the linked bookings by number), two VALARMs
+  (`-P1D` and `-PT30M`), and stable UIDs with an incremented SEQUENCE and
+  fresh DTSTAMP on every plan change. Write times as FLOATING local times (no
+  `Z`, no `TZID`): a pre-trip gate then fires on home wall-clock, and an
+  on-trip gate at that hour in whatever timezone the traveller is standing in
+  — which is what an on-trip re-check wants. The exception is a fixed-instant
+  gate (a ticket drop at home-timezone clock time): schedule it on a pre-trip
+  date when it is one, and when it can fall mid-trip give that one VEVENT a
+  TZID-anchored DTSTART with its VTIMEZONE — RFC 5545 allows mixing anchored
+  and floating events in one file. File mechanics are strict
+  (RFC 5545): escape DESCRIPTION newlines as `\n`, fold long content lines at
+  75 octets, include VERSION/PRODID and a DTSTAMP per event. Client caveats
+  belong on the page, not in the user's lap: Google Calendar pins floating
+  times to the calendar's timezone, skips same-UID re-imports instead of
+  updating, and replaces VALARMs with its own default reminders (Apple/iOS
+  Calendar honours floating times and VALARMs) — so open each DESCRIPTION
+  with the intended hour ("09:00 local, wherever you are"), and after a plan
+  change instruct
+  "delete the old events, then import the new file".
 

@@ -454,7 +454,9 @@ file with its own share/export buttons and the appendix (checklist, legs, hotels
 budget, brief). Publish through whatever artifact / file hand-off tool the harness
 has (in Claude Code: Artifact, else SendUserFile); otherwise save the file and give
 its absolute path. Ship the trip KML (`scripts/route_tools.py kml plan.geo.json -o
-trip.kml`) alongside for offline map apps. The plain `scripts/render_plan.py plan.geo.json
+trip.kml`) alongside for offline map apps; when the checklist carries date-locked
+gates, also offer the gates `.ics` (output-template.md §Booking-artifact
+conventions). The plain `scripts/render_plan.py plan.geo.json
 -o trip.html` page (printable, checkbox checklist, offline route sketch per day) is an
 **extra** — add it when the user asks for a printable/plain version, or as the last
 resort if the theme renderer still fails after one honest fix attempt (then say so in
