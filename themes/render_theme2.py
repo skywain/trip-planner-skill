@@ -80,7 +80,8 @@ import urllib.parse
 
 from theme_common import (LUCIDE, T, Art, add_art_arg, asset_count, brief_titles,
                           data_uri, day_embed_url, esc, export_js, export_prefix, init_lang,
-                          lang, load_art, load_plan, short_dates, theme_name, title_head)
+                          lang, load_art, load_plan, short_dates, theme_name, title_head,
+                          title_kick)
 
 HERE = pathlib.Path(__file__).parent
 THEME = "illustrated"
@@ -405,7 +406,7 @@ def main():
     year = year if year.isdigit() else ""
 
     # cover words — all the trip's, all optional
-    kick = ART.cover(THEME, "kick")
+    kick = title_kick(ART, THEME)
     cover_zh = ART.cover(THEME, "zh") or kick or t("cover_fallback")
     cover_en = ART.cover(THEME, "en")
     cover_credit = ART.cover(THEME, "credit")

@@ -109,7 +109,8 @@ import urllib.parse
 
 from theme_common import (Art, LUCIDE, T, add_art_arg, asset_count, brief_titles,
                           data_uri, day_embed_url, esc, et, export_js, export_prefix, ic,
-                          init_lang, lang, load_art, load_plan, short_dates, theme_name, title_head)
+                          init_lang, lang, load_art, load_plan, short_dates, theme_name, title_head,
+                          title_kick)
 
 HERE = pathlib.Path(__file__).parent
 THEME = "zine"
@@ -747,7 +748,7 @@ def main():
     year = (meta.get("dates", "") or "")[:4]
     year = year if year.isdigit() else ""
     # cover words — the trip's, all optional (see ART CONTRACT)
-    kick = ART.cover(THEME, "kick")
+    kick = title_kick(ART, THEME)
     kick_en = ART.cover(THEME, "kick_en")
     cover_zh = ART.cover(THEME, "zh") or kick or t("cover_fallback")
     cover_en = ART.cover(THEME, "en", "COLLAGE")

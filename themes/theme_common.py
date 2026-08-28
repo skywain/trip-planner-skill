@@ -396,12 +396,14 @@ def date_span(meta_dates):
 BRIEF_TITLES = {
     "visa": "签证", "holidays": "节假与人流", "weather": "天气",
     "money": "货币与小费", "connectivity": "通信", "insurance": "保险",
-    "safety": "安全", "baggage": "行李",
+    "safety": "安全", "baggage": "行李", "altitude": "高原与海拔",
+    "navigation": "导航",
 }
 BRIEF_TITLES_EN = {
     "visa": "Visa & entry", "holidays": "Holidays & crowds", "weather": "Weather",
     "money": "Money & tipping", "connectivity": "Connectivity", "insurance": "Insurance",
-    "safety": "Safety", "baggage": "Baggage",
+    "safety": "Safety", "baggage": "Baggage", "altitude": "Altitude",
+    "navigation": "Maps & navigation",
 }
 
 

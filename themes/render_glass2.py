@@ -86,7 +86,8 @@ import sys
 
 from theme_common import (LUCIDE, T, add_art_arg, asset_count, brief_titles, data_uri,
                           day_embed_url, esc, export_js, export_prefix, init_lang, lang,
-                          load_art, load_plan, short_dates, theme_name, title_head)
+                          load_art, load_plan, short_dates, theme_name, title_head,
+                          title_kick)
 
 HERE = pathlib.Path(__file__).parent
 THEME = "glass"
@@ -320,7 +321,7 @@ def main():
     year = year if year.isdigit() else ""
 
     # cover words — all the trip's, all optional
-    kick = art.cover(THEME, "kick")
+    kick = title_kick(art, THEME)
     cover_zh = art.cover(THEME, "zh", t("cover_word"))
     cover_en = art.cover(THEME, "en")
     cover_sub = art.cover(THEME, "sub")

@@ -106,7 +106,7 @@ import sys
 from theme_common import (LUCIDE, T, add_art_arg, asset_count, brief_titles,
                           data_uri, day_embed_url, esc, et, export_js, export_prefix, ic,
                           init_lang, lang, load_art, load_plan, set_icon_base, short_dates, title_head,
-                          sprite, tag_pretty, theme_name)
+                          sprite, tag_pretty, theme_name, title_kick)
 
 HERE = pathlib.Path(__file__).parent
 
@@ -590,7 +590,7 @@ def main():
     year = year if year.isdigit() else ""
 
     # cover words — the trip's, all optional
-    kick = art.cover(THEME, "kick")
+    kick = title_kick(art, THEME)
     cover_zh = art.cover(THEME, "zh")
     page_title = " · ".join(x for x in (title_head(art, THEME, year), theme_name(THEME)) if x)
     title_img = data_uri(art.cover(THEME, "title_stem"))

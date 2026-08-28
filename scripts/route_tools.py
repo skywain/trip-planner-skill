@@ -598,12 +598,19 @@ def cmd_check(args):
                       if long_hops else ""))
         n_anchor = len(anchor_rows(day))
         if walk_km == 0 and n_anchor >= 2:
-            # AU F2: two 2 km coastal-walk hops were guessed as transit and the day
-            # showed 0 km on foot without a word. Anchors imply walking between them.
-            warn("Day {} {}: 0 km on foot but {} anchor rows — a walking hop is "
-                 "probably guessed as transit; declare \"mode\": \"walk\" on the "
-                 "stop it walks INTO (or the day really is all rides — then fine)."
-                 .format(i, day.get("date", "?"), n_anchor))
+            if ride["guessed"] == 0:
+                # Every hop mode is explicitly declared — nothing was guessed, so
+                # 0 km on foot is a deliberate all-rides day, not the AU F2 trap.
+                print("  Day {} {}: 0 km on foot, {} anchor rows — all rides "
+                      "declared — fine if intended.".format(
+                          i, day.get("date", "?"), n_anchor))
+            else:
+                # AU F2: two 2 km coastal-walk hops were guessed as transit and the day
+                # showed 0 km on foot without a word. Anchors imply walking between them.
+                warn("Day {} {}: 0 km on foot but {} anchor rows — a walking hop is "
+                     "probably guessed as transit; declare \"mode\": \"walk\" on the "
+                     "stop it walks INTO (or the day really is all rides — then fine)."
+                     .format(i, day.get("date", "?"), n_anchor))
         print("  + in-venue walking and strolls: add your own; the {:.0f} km cap is "
               "on the SUM — {}".format(DAY_WALK_FLAG_KM,
                                        "; ".join(note) if note else "OK so far"))
