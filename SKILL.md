@@ -360,7 +360,13 @@ Per city:
    format, exit numbers, verify-vs-estimate rules), then run scripts/route_tools.py
    in this order: **geocode → per-day tz sweep → sun --write → links --write →
    check → kml**, so every hop carries a distance-sane duration and a tappable map
-   link written into the plan for you.
+   link written into the plan for you. **`check` must exit 0 before rendering** —
+   a BROKEN hop is a stop with no lat/lon (geocode it, or hand-fill: navigation.md
+   §2), a SUSPICIOUS hop is an undeclared hop over 12 km (the day is mis-clustered,
+   or the ride needs its `mode`); fix the plan, never explain the flag away — not in
+   prose, and not with a `mode` slapped on to silence it (a tester shipped exit-2
+   output rationalised as "expected for a multi-city trip" — every flagged hop was
+   a real defect).
    `sun --write` runs once the stops carry coordinates: it fills every day's
    `sun` (civil dawn · sunrise / sunset) in one canonical string and refuses data
    that fails a solar sanity check — never hand-copy sunrise numbers, and **run it
@@ -373,8 +379,9 @@ Per city:
    (IANA name) before `sun --write`** — sun refuses any day whose zone it would
    have to guess from longitude (the guess puts Hawaii at UTC-11), and it refuses
    per-day, so one sweep over `days[].tz` beats fifteen retries.
-   **Non-zero exit = at least one day was skipped or rejected**: the written days are fine, re-run `--only DATE` for the ones it
-   names before writing prose for them. Mark ridden
+   **`sun`: non-zero exit = at least one day was skipped or rejected** — the written
+   days are fine, re-run `--only DATE` for the ones it names before writing prose
+   for them. Mark ridden
    hops with a `mode` on the arriving stop (`transit`/`train`/`bus`/`drive`/`boat`/
    `fly`; long signature walks `walk`), or the walking total and the links will
    both be wrong — `check` says (guessed) next to anything you left it to infer.
@@ -429,7 +436,8 @@ portal renders neither — on portal the chat summary carries it):
   prev end + hop + buffer), day walking totals ≤ 8 km, late hops vs last departures,
   golden-hour blocks vs actual sunset — and every sunrise / sunset / dark-start time
   in the prose was written **after** `sun --write`, matching `days[].sun` (the
-  script exited 0; any `sun_stop` override is on the right day)
+  script exited 0; any `sun_stop` override is on the right day); `route_tools check`
+  exits 0 (no BROKEN or SUSPICIOUS hops survived into the render)
 - Red-eye / timezone day-number arithmetic
 - No day exceeds pace; **an intercity moving day carries ≤2 anchors, and only when
   the bags are solved before the first anchor (checked / stored / hotel-held);

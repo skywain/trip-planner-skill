@@ -114,7 +114,8 @@ together with scheduling.md before Phase 4 timeline assembly.
 3. `... check plan.geo.json` — distances with walk/transit duration estimates. It
    flags hops >1.6 km (take transit), >12 km with no declared mode (probably a
    clustering mistake), and days over 8 km on foot, and exits non-zero when a day
-   is broken. Declared `fly/drive/boat/train/bus` hops are reported as such, not as
+   is broken — **exit 0 is the acceptance bar before rendering** (SKILL.md Phase 4),
+   the same way `links` accepts only `parked 0 / suspicious 0`. Declared `fly/drive/boat/train/bus` hops are reported as such, not as
    suspicious. Its transit estimate is a distance formula: for any transit hop
    **>20 km** it prints "use the operator timetable" instead of a number — obey it
    (a 19-min airport express was estimated at 195-285 min). Catch these BEFORE
