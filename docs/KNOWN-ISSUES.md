@@ -5,7 +5,8 @@ each entry was re-checked against the code or the doc it points at before being
 listed here. Nothing is aspirational: if a limit is deliberate, the entry says so and
 still lists it, because it will bite whoever hits it first.
 
-`Status` is `open` (no fix scheduled) or `planned` (on the [Roadmap](#roadmap)).
+`Status` is `open` (no fix scheduled), `planned` (on the [Roadmap](#roadmap)), or
+`resolved` (kept for the record — the entry says what fixed it).
 Source pointers are `file → function / section`.
 
 | ID | Area | One line | Status |
@@ -18,7 +19,7 @@ Source pointers are `file → function / section`.
 | [EXP-6](#exp-6) | Portal theme | No portrait/mobile video chain — landscape only | planned |
 | [EXP-7](#exp-7) | Probes | macOS headless Chrome will not go below ~500 px wide | open |
 | [EXP-8](#exp-8) | Probes | Chrome 151 headless never exits; scripts self-kill | open |
-| [EXP-9](#exp-9) | Export engine | Splash whole-page export can drop its last screen when the page exceeds the area budget | open |
+| [EXP-9](#exp-9) | Export engine | Zine/splash whole-page export dropped its tail (foreignObject lays out taller than the live page) | resolved |
 | [PLN-1](#pln-1) | route_tools | `sun` falls back to a longitude offset with no DST | open |
 | [PLN-2](#pln-2) | route_tools | Mainland-China polygon is coarse at the borders | open |
 | [PLN-3](#pln-3) | route_tools | `sun_stop` is new and only exercised synthetically | open |
@@ -203,19 +204,29 @@ acceptance check cannot be done by resizing the window.**
 ---
 
 ### EXP-9
-**Splash whole-page export can lose its final screen on long trips.**
+**Zine/splash whole-page export dropped its tail (decisions / colophon / end card).**
 
-- **Symptom** — on the China test page the whole-page export came out 1367 × 23412 px
-  (≈3.2e7 px, right at the engine's area budget) and the closing spread (end card +
-  copyright line) was missing from the bottom of the long image; the same content is
-  fine in the appendix module export (`module '#appendix'`).
-- **Workaround** — export the appendix module separately, or shorten the trip / raise
-  the budget; the live page is unaffected.
-- **Impact** — a "one long image" of an 8–10-day splash trip may end one screen early
-  without any error.
-- **Source** — `themes/theme_common.py` `export_js` (area budgets); found 2026-08-16
-  while shooting the README showcase.
-- **Status** — open
+- **Symptom** — whole-page long images of prose-heavy pages ended one screen early
+  with no error: the China splash page (2026-08-16 first sighting, 1367 × 23412)
+  and the Peru zine / Vietnam splash pages (2026-09-01) all lost their closing
+  blocks, with the cut landing mid-element.
+- **Root cause** — not the area budget, as first suspected: the SVG image used for
+  capture lays the same markup out ~5–7% **taller** than the live page (font
+  fallback / line wrapping inside an SVG image; CJK prose sections worst, up to
+  +40%), and a `foreignObject` clips silently at the `<svg>` height attribute,
+  which was sized from the live page's `scrollHeight`. `measure_clone` cannot help:
+  it measures HTML layout, and the growth only exists inside the SVG. The clip
+  evaded every bottom-anchored probe because a clipped export still ends in
+  plausible-looking prose.
+- **Fix (2026-09-02)** — the engine rasterises once with 35% headroom, finds the
+  lowest inked row on a 64px-wide thumbnail, and sizes the real canvas from that:
+  ink at or past the measured height grows the canvas (+140px of paper), ink clear
+  of it takes the pre-fix code path (verified: clay/illustrated whole pages and a
+  noir day module byte-identical old-engine-vs-new in same-day runs — cross-day
+  comparisons jitter from rasterisation nondeterminism alone; zine and splash
+  tails complete). Pages rendered before the fix carry the old engine — re-render
+  to pick it up.
+- **Status** — resolved (`themes/theme_common.py` `export_js`)
 
 ---
 

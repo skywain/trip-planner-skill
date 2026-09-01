@@ -57,7 +57,7 @@ TMP="$D/probe-$(basename "$OUT" .png).html"
 # serves nothing itself — run `python3 -m http.server PORT` in ROOT first. The
 # instrumented copy is written NEXT TO the page (so relative URLs resolve) and
 # loaded over http://127.0.0.1:PORT/<rel>; it is deleted afterwards.
-# XPROBE_WAIT_MS overrides the post-click wait (default 6000 module / 16000
+# XPROBE_WAIT_MS overrides the post-click wait (default 9000 module / 24000
 # page); the demo-site pages re-inline their pictures on the first export click,
 # so give them 12000+ over HTTP.
 URL="file://$TMP"
@@ -81,7 +81,9 @@ img = ("<div style='position:relative;height:2600px;overflow:hidden'>"
 s = pathlib.Path(src).read_text(encoding='utf-8')
 pick = ('document.querySelector("[data-x-page]")' if mode == 'page'
         else 'document.querySelector(%s)' % json.dumps('[data-x-for="%s"]' % sel))
-wait = int(wait_ms) if wait_ms else (16000 if mode == 'page' else 6000)
+# the engine decodes the capture SVG twice since the ink-bottom sizing fix
+# (probe raster + final raster), so the default waits cover two decodes
+wait = int(wait_ms) if wait_ms else (24000 if mode == 'page' else 9000)
 inject = ('<script>window.__errs=[];window.onerror=function(m){window.__errs.push(String(m));};'
   'var _tb=HTMLCanvasElement.prototype.toBlob;'
   'HTMLCanvasElement.prototype.toBlob=function(cb,t){window.__c=this;'

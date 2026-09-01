@@ -1046,59 +1046,118 @@
       if (mh) h = mh;
     })();
     var xml = new XMLSerializer().serializeToString(holder);
-    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w +
-      '" height="' + h + '"><foreignObject width="100%" height="100%">' +
-      '<div xmlns="http://www.w3.org/1999/xhtml"><style>' + css +
-      '</style>' + xml + '</div></foreignObject></svg>';
-    var img = new Image();
-    // Scale: 2x keeps a module crisp; a whole-page capture is thousands of
-    // px tall, so the caps below decide instead. 30000 stays inside Chrome's
-    // 32767-per-side ceiling and keeps a long page readable (a tighter cap
-    // shrinks the width until the body text turns to mush).
-    // Area budget: a module can afford a crisp 2x, but a whole-page canvas
-    // of tens of millions of px makes toBlob hand back null on real machines
-    // (46M px died here). Staying near 32M lands the first attempt and keeps
-    // the long image ~1300px wide — wide enough to read the body text.
-    var budget = whole ? 3.2e7 : 2.6e8;
-    var scale = Math.min(2, 2600 / w, 30000 / h,
-      Math.sqrt(budget / (w * h)));
-    if (scale < 0.2) { toast('This block is too large — try a smaller one'); return; }
-    // Format: a day module stays lossless PNG (2400×~2500 ≈ 6M px, a few
-    // MB). Anything past 12M px — the whole page, or a long appendix block
-    // (Zine's is 2400×11568 = 25 MB as PNG, unshareable) — goes JPEG 0.92,
-    // same readable width at a tenth of the size. Day blocks top out around
-    // 2400×4100 ≈ 10M px, so the threshold never touches them.
-    var jpeg = whole || (w * scale * h * scale > 1.2e7);
-    function draw(sc, retried) {
-      var c = document.createElement('canvas');
-      c.width = Math.round(w * sc); c.height = Math.round(h * sc);
-      var ctx = c.getContext('2d');
-      ctx.fillStyle = BG; ctx.fillRect(0, 0, c.width, c.height);
-      ctx.drawImage(img, 0, 0, c.width, c.height);
-      try {
-        c.toBlob(function (b) {
-          // an over-budget canvas yields a null blob rather than throwing —
-          // halve once and try again before giving up on the user
-          if (!b) {
-            if (!retried) { draw(sc / 2, true); return; }
-            toast('Could not save: too large, try a single block'); return;
-          }
-          var a = document.createElement('a');
-          a.href = URL.createObjectURL(b);
-          a.download = 'JAPAN 2026-' + THEME + '-' + label +
-            (jpeg ? '.jpg' : '.png');
-          document.body.appendChild(a); a.click(); a.remove();
-          setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
-          toast('Saved · ' + label);
-        }, jpeg ? 'image/jpeg' : 'image/png', jpeg ? 0.92 : undefined);
-      } catch (e) {
-        if (!retried) { draw(sc / 2, true); return; }
-        toast('Could not save:' + e.message);
-      }
+    function svgAt(hh) {
+      return '<svg xmlns="http://www.w3.org/2000/svg" width="' + w +
+        '" height="' + hh + '"><foreignObject width="100%" height="100%">' +
+        '<div xmlns="http://www.w3.org/1999/xhtml"><style>' + css +
+        '</style>' + xml + '</div></foreignObject></svg>';
     }
-    img.onload = function () { draw(scale, false); };
+    // The SVG image can lay this same markup out TALLER than the live page
+    // (font fallback / line wrapping differ inside an SVG image: measured
+    // +5-7% overall on CJK-prose whole pages, up to +40% inside dense note
+    // sections), and a foreignObject clips silently at the height attribute
+    // — that is how zine/splash whole-page exports lost their decisions /
+    // colophon / end-card tail while every bottom-anchored probe kept
+    // showing plausible prose (2026-09-01). The live h is a floor, not the
+    // truth. So: rasterise once with 35% headroom, find the lowest inked
+    // row on a 64px-wide thumbnail (vs the BG fill; the tolerance eats
+    // antialiasing), then raster the real canvas at that height. Ink clear
+    // of the h floor takes the pre-fix code path — same-run output is
+    // byte-identical to the unfixed engine (rasterisation itself jitters
+    // across runs); ink at or past the floor grows the canvas instead of
+    // vanishing. measure_clone cannot see this: it measures HTML layout,
+    // and the growth only exists inside the SVG.
+    var pad = Math.max(1200, Math.ceil(h * 0.35));
+    function inkBottom(im, hh) {
+      var pw = 64, ph = Math.max(1, Math.round(hh * pw / w));
+      var bc = document.createElement('canvas'); bc.width = bc.height = 1;
+      var bx = bc.getContext('2d'); bx.fillStyle = BG; bx.fillRect(0, 0, 1, 1);
+      var bp = bx.getImageData(0, 0, 1, 1).data;
+      var pc = document.createElement('canvas'); pc.width = pw; pc.height = ph;
+      var px = pc.getContext('2d');
+      px.fillStyle = BG; px.fillRect(0, 0, pw, ph);
+      px.drawImage(im, 0, 0, pw, ph);
+      var d = px.getImageData(0, 0, pw, ph).data;
+      // summed-RGB threshold below eats antialiasing, but ink covering
+      // ≲4% of a ~19px probe cell can read as background — a theme whose
+      // tail ends in a lone tiny or near-invisible mark stays clipped;
+      // keep real tails inked (see the tail bar in references/themes.md)
+      for (var y = ph - 1; y >= 0; y--)
+        for (var x = 0; x < pw; x++) {
+          var i = (y * pw + x) * 4;
+          if (Math.abs(d[i] - bp[0]) + Math.abs(d[i + 1] - bp[1]) +
+              Math.abs(d[i + 2] - bp[2]) > 24)
+            return Math.ceil((y + 1) * (hh / ph));
+        }
+      return 0;
+    }
+    var img = new Image();
+    img.onload = function () {
+      var bottom = 0;
+      // a probe failure must never kill the export — fall back to live h
+      try { bottom = inkBottom(img, h + pad); } catch (e) {}
+      // Grow ONLY when ink actually reaches the h floor (the probe's
+      // ~w/64-px row quantisation only ever rounds the detected bottom
+      // DOWN the page, so growth can also trigger for ink ending within
+      // ~a probe row + 8px of h — extra paper, never a clip): a page
+      // whose ink stops clear of that band fits as-is and takes the
+      // pre-fix code path. When it does grow, +140px keeps a little
+      // paper under the text.
+      var fh = bottom > h - 8 ? Math.min(h + pad, bottom + 140) : h;
+      // Scale: 2x keeps a module crisp; a whole-page capture is thousands
+      // of px tall, so the caps below decide instead. 30000 stays inside
+      // Chrome's 32767-per-side ceiling and keeps a long page readable (a
+      // tighter cap shrinks the width until the body text turns to mush).
+      // Area budget: a module can afford a crisp 2x, but a whole-page
+      // canvas of tens of millions of px makes toBlob hand back null on
+      // real machines (46M px died here). Staying near 32M lands the first
+      // attempt and keeps the long image ~1300px wide — wide enough to
+      // read the body text.
+      var budget = whole ? 3.2e7 : 2.6e8;
+      var scale = Math.min(2, 2600 / w, 30000 / fh,
+        Math.sqrt(budget / (w * fh)));
+      if (scale < 0.2) { toast('This block is too large — try a smaller one'); return; }
+      // Format: a day module stays lossless PNG (2400×~2500 ≈ 6M px, a few
+      // MB). Anything past 12M px — the whole page, or a long appendix
+      // block (Zine's is 2400×11568 = 25 MB as PNG, unshareable) — goes
+      // JPEG 0.92, same readable width at a tenth of the size. Day blocks
+      // top out around 2400×4100 ≈ 10M px, so the threshold never touches
+      // them.
+      var jpeg = whole || (w * scale * fh * scale > 1.2e7);
+      var img2 = new Image();
+      function draw(sc, retried) {
+        var c = document.createElement('canvas');
+        c.width = Math.round(w * sc); c.height = Math.round(fh * sc);
+        var ctx = c.getContext('2d');
+        ctx.fillStyle = BG; ctx.fillRect(0, 0, c.width, c.height);
+        ctx.drawImage(img2, 0, 0, c.width, c.height);
+        try {
+          c.toBlob(function (b) {
+            // an over-budget canvas yields a null blob rather than throwing
+            // — halve once and try again before giving up on the user
+            if (!b) {
+              if (!retried) { draw(sc / 2, true); return; }
+              toast('Could not save: too large, try a single block'); return;
+            }
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(b);
+            a.download = 'JAPAN 2026-' + THEME + '-' + label +
+              (jpeg ? '.jpg' : '.png');
+            document.body.appendChild(a); a.click(); a.remove();
+            setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+            toast('Saved · ' + label);
+          }, jpeg ? 'image/jpeg' : 'image/png', jpeg ? 0.92 : undefined);
+        } catch (e) {
+          if (!retried) { draw(sc / 2, true); return; }
+          toast('Could not save:' + e.message);
+        }
+      }
+      img2.onload = function () { draw(scale, false); };
+      img2.onerror = function () { toast('Could not save: browser unsupported, try Chrome'); };
+      img2.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgAt(fh));
+    };
     img.onerror = function () { toast('Could not save: browser unsupported, try Chrome'); };
-    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgAt(h + pad));
   }
   var tEl = null, tTimer = null;
   function toast(msg) {

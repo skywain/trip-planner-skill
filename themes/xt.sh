@@ -28,7 +28,10 @@ inject = ('<script>window.__e=[];window.onerror=function(m){window.__e.push(Stri
   'return _t.call(this,function(b){window.__last=C.width+"x"+C.height+" "+(ty?ty.replace("image/",""):"png")+" blob="+(b?b.size:"NULL");cb(b);},ty,q);};'
   'window.addEventListener("load",function(){setTimeout(function(){var b=' + pick + ';'
   'if(!b){document.title="NO-BTN";return;}b.click();'
-  'setTimeout(function(){document.title="RES "+(window.__last||"none")+" errs="+window.__e.length;},18000);},900);});</script>')
+  # 27000ms post-click: the engine decodes the capture SVG twice since the
+  # ink-bottom sizing fix (probe raster + final raster); stays under the
+  # 40000 virtual-time budget below
+  'setTimeout(function(){document.title="RES "+(window.__last||"none")+" errs="+window.__e.length;},27000);},900);});</script>')
 pathlib.Path(tmp).write_text(s.replace('</body>', inject + '</body>', 1), encoding='utf-8')
 PY
 CH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"

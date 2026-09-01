@@ -31,7 +31,7 @@ python3 themes/render_<x>.py plan.geo.json [--art F|none] [--assets DIR ...] -o 
 python3 themes/qc.py out.html                       # exit code = number of FAILs
 themes/xprobe.sh out.html module '#d5' out.png      # click the real export button, rasterise it
 themes/xprobe.sh out.html page   ''    out.png      # whole-page export (ANCHOR=bottom → last 2600px)
-themes/xt.sh    out.html module '#d5'               # title-only probe, ~15 s, no picture
+themes/xt.sh    out.html module '#d5'               # title-only probe, ~25 s, no picture
 python3 themes/render_picker.py plan.geo.json -o picker.html [--products DIR] [--prefix NAME]
     # the style-chooser page; expects the eight pages as {prefix}-{theme}.html
     # with the English theme key (japan-illustrated.html; pages exported under
@@ -439,7 +439,11 @@ images never `loading=lazy`; itinerary grids never `grid-auto-flow:dense`.
 - **Export probes**: `xprobe.sh` reports `OK <w>x<h> blob=<bytes> errs=<n>` and
   writes the export as PNG. Green is necessary, not sufficient — **open the image**:
   icons and particles present? no stray colour band at the top? last decoration
-  at the bottom intact? `ANCHOR=bottom … page ''` shows the tail. Both `xprobe.sh`
+  at the bottom intact? `ANCHOR=bottom … page ''` shows the tail. The tail bar is
+  **the page's last element, named**: the colophon / end card / credit line must be
+  readable in the image. "The bottom looks like plausible content" proves nothing —
+  a clipped export also ends in plausible prose, which is exactly how the
+  zine/splash tail clip hid from every bottom-anchored probe until 2026-09-01. Both `xprobe.sh`
   and `xt.sh` start Chrome in the background with a throwaway `--user-data-dir`,
   poll for output, then kill that Chrome by profile — do not wait on it in the
   foreground (Chrome 151 headless never exits on this machine) and do not run
@@ -502,6 +506,14 @@ images never `loading=lazy`; itinerary grids never `grid-auto-flow:dense`.
 - **Export engine defaults**: day blocks PNG 2×; blocks over ~1.2e7 px and whole
   pages JPEG 0.92; height cap 30000, page area budget 3.2e7 px, one half-size
   retry; viewport units are frozen to px before capture (skipping `url(...)`).
+  Canvas height comes from the **inked bottom of a padded probe raster**, not from
+  the live `scrollHeight` alone: the SVG image can lay the same markup out ~5–7%
+  taller than the live page (CJK prose worst) and a foreignObject clips silently
+  at its height attribute, so ink at or past the measured height grows the canvas
+  (+140px of paper) instead of vanishing; ink clear of it takes the pre-fix code
+  path — byte-identical to the old engine in a same-run comparison; rasterisation
+  is not deterministic across runs (2026-09-02 fix; before it, zine/splash whole
+  pages lost their decisions/colophon/end-card tail).
 
 ## 7. Recipes worth reusing
 
