@@ -402,160 +402,32 @@ now, re-shop 2-3 weeks out.
 
 ## Phase 6 — Assemble, self-check, deliver
 
-Assemble per references/output-template.md: overview → decisions made for the user →
-booking checklist → flights/intercity table → day-by-day cards → hotels → budget
-rollup → country brief.
+**Read `references/phase-6-assemble.md` now, before the final `plan.geo.json` is
+written** — it is the whole procedure for this phase (assembly order, cover title, the
+adversarial self-check list, delivery, the themed-render flow incl. stock mode, and the
+exit criteria). This section is only the contract; do not assemble or render from memory
+of the procedure.
 
-**Cover title (bilingual)**: when the deliverable is a rendered page, pick or adapt a
-poetic display title from references/cover-titles.md — zh 2-6 characters + an English
-line, matched to the trip archetype (road-trip / island / mountain / city / coast).
-Never ship a literal placeholder like "X国行"; never use the clichés on that file's
-blacklist. Cite the allusion honestly (the source line in the subtitle or a small
-credit line).
+Inputs: `plan.geo.json` assembled per references/output-template.md — the single
+editable source — plus Phase 0's `prefs.theme` / `prefs.pictures` / `plan.lang`.
+Outputs: chat summary + `trip-<theme>.html` (+ `trip.kml`; + gates `.ics` when the
+checklist has date-locked gates), handed over through the harness's artifact / file tool.
 
-**Adversarial self-check** — run this list against the finished plan, fix what it
-catches, then record "self-checked: N issues found and fixed" in `meta.self_check`
-(the plain page's footer) **and** as the last `decisions[]` row (seven of the eight
-themed pages render `decisions`; only journal also prints `meta.self_check`, and
-portal renders neither — on portal the chat summary carries it):
-- Closure scan: every anchor's closed-days vs its scheduled date (Mondays! holidays
-  from Phase 1 — including "closed Tue when Mon is a holiday" rules), **and** the
-  classes the holiday feed misses: festivals overlapping the window, seasonal
-  operating windows, venue maintenance shutdowns, Ramadan, worship-hour and siesta
-  closures (scheduling.md §Traps). Rain alternatives get scanned too — an alternative
-  that is closed on the day it backs up is the bug this scan exists to catch.
-- Open-jaw direction consistent across flights, hotels, and day order
-- Arrival/departure days respect Phase 2 §3; airport buffer = 3 h international + real
-  city→airport transfer time
-- Every intercity leg: plausible duration; separate-ticket air self-transfer ≥ 4 h;
-  rail connections ≥ 30 min — except a **timed meet** (a bus/boat that waits for the
-  train, e.g. Füssen train → Neuschwanstein bus, 9 min by design): keep it, name it as
-  a meet in the hop note, and give the next timed ticket the slack instead
-- Last-entry time vs planned arrival for each anchor
-- Timeline checks from scheduling.md §verification: chain arithmetic (block start ≥
-  prev end + hop + buffer), day walking totals ≤ 8 km, late hops vs last departures,
-  golden-hour blocks vs actual sunset — and every sunrise / sunset / dark-start time
-  in the prose was written **after** `sun --write`, matching `days[].sun` (the
-  script exited 0; any `sun_stop` override is on the right day); `route_tools check`
-  exits 0 (no BROKEN or SUSPICIOUS hops survived into the render)
-- Red-eye / timezone day-number arithmetic
-- No day exceeds pace; **an intercity moving day carries ≤2 anchors, and only when
-  the bags are solved before the first anchor (checked / stored / hotel-held);
-  otherwise 1** (same sentence in scheduling.md §Day types)
-- Every price has source + as-of date; every bookable line has a link — and the
-  link carries its dates and a disambiguated place name; hotel rows state explicit
-  local check-in→check-out calendar dates, with past-midnight-arrival and
-  date-line nights flagged (output-template §Booking-artifact conventions)
-- **Language**: `plan.lang` matches the language the user asked in, and every
-  reader-facing string in the plan (day titles, notes, tips, checklist rows,
-  decisions, hotel blurbs) is in that language — an English fragment copied verbatim
-  from a source into a zh plan gets translated, not shipped. Proper nouns stay in
-  their native form with a gloss where useful (浅草寺 Sensō-ji); machine fields are
-  exempt (`stops[].query` stays geocoder-friendly, `kind`/`tag`/`verify` keep their
-  English enum words)
-
-**Deliver — the deliverable is a themed page, never a plain text one.** Render
-`plan.geo.json` through the theme chosen in Phase 0 (`prefs.theme`, default
-**illustrated**) — see *Themed renders* below — and hand over: a chat summary (route
-one-liner, total budget, the 3 biggest decisions made for the user, and in stock mode
-the one-line picture notice) + `trip-<theme>.html`, one self-contained, phone-friendly
-file with its own share/export buttons and the appendix (checklist, legs, hotels,
-budget, brief). Publish through whatever artifact / file hand-off tool the harness
-has (in Claude Code: Artifact, else SendUserFile); otherwise save the file and give
-its absolute path. Ship the trip KML (`scripts/route_tools.py kml plan.geo.json -o
-trip.kml`) alongside for offline map apps; when the checklist carries date-locked
-gates, also offer the gates `.ics` (output-template.md §Booking-artifact
-conventions). The plain `scripts/render_plan.py plan.geo.json
--o trip.html` page (printable, checkbox checklist, offline route sketch per day) is an
-**extra** — add it when the user asks for a printable/plain version, or as the last
-resort if the theme renderer still fails after one honest fix attempt (then say so in
-the summary). **`plan.geo.json` is the single editable source** for all of it — every
-command above reads that one file — so a later "move day 3 to Nara" is a JSON edit
-plus geocode → check → links → kml → render, not a rewrite. The page chrome (section
-names, buttons, pills, weekdays) speaks `plan.lang` (set in Phase 0, `zh` default);
-`--lang zh|en` on any renderer overrides it, plan content prints as written.
-
-**Themed renders** — the same `plan.geo.json` through one of the eight themes in
-`themes/`. Themes: **illustrated 插画** (a painted book on paper — the default) ·
-**clay 黏土** (one continuous clay landscape with a road) · **noir 夜航** (a single
-night-negative tracking shot) · **glass 玻璃** (liquid-glass panes over crossfading
-photos) · **journal 手账** (a vintage travel journal: tape, stamps, polaroids) ·
-**zine** (torn riso-poster collage) · **splash 闪屏** (game-splash floating islands,
-chained sky gradients) · **portal 穿越** (scroll-scrubbed video fly-through — needs
-footage, see below). `render_picker.py` renders a one-page style chooser of all of
-them. Flow:
-1. Write `<plan>.art.json` next to the plan (contract: `themes/ART-SCHEMA.md`) — the
-   **common** block first (cover poem title from references/cover-titles.md, `kick`,
-   `home`, `end`, and per day `theme` 4 chars / `en` / `mark`), then one block per
-   theme you render. Pictures, by `prefs.pictures` (Phase 0):
-   - **native / key — generate for this trip.** The cover / hero / title sticker /
-     terrain bands are destination scenery and are ALWAYS generated for this trip, in
-     the theme's own style — priority: the trip's actual sights (Xi'an city wall, the
-     Great Wall) > a national landmark > a neutral scene, but never blank and never
-     another trip's band (a China page once opened on the New York skyline because a
-     default band was reused). The same ladder applies to `end.hero` / the tail cover,
-     with one twist: that picture is the **return to the departure city** (home skyline
-     at landing, not another destination view) — generated for this trip too. "Reuse
-     first" applies only to generic props: `themes/assets/IMAGE-LIBRARY.md` §Generic pieces (通用件)
-     lists what any trip may use; generate the rest — **with the agent's own native
-     image/video generation if it has one (no key to configure; same specs, same
-     prompts-as-style-anchors, same split/cutout/webp/manifest steps — ART-SCHEMA.md
-     §Generator choice), otherwise `gen.py` / `genvideo.py` over OpenRouter** — using the
-     sheet recipe in ART-SCHEMA.md (title stickers: one centred sticker, symmetric
-     lines, no icons inside the letters), then `towebp.py`, and keep the webp beside
-     the plan (or pass `--assets DIR`).
-   - **stock — no generator, no key: use the stock kit, still a themed page.**
-     Two commands, both from the skill root (absolute paths when your cwd is the
-     trip folder):
-     ```
-     python3 <skill>/themes/stock_art.py plan.geo.json --theme illustrated -o plan.art.json
-         # also --theme clay · --lang zh|en · --country ISO2 (when the plan's own words
-         # do not name the destination) · --index PATH · --force (overwrite)
-     python3 <skill>/themes/render_theme2.py plan.geo.json --art plan.art.json \
-         --assets <skill>/themes/assets/stock -o trip-illustrated.html
-         # --assets is REQUIRED in stock mode: data_uri() does not look inside
-         # themes/assets/stock on its own — without it the page renders, qc passes,
-         # and the stock pictures are silently missing. The script prints this exact
-         # render line on its last stderr line; paste it.
-     ```
-     `stock_art.py` builds the picture side of the art file from `themes/assets/stock/`
-     (region cover paintings, landmark and generic-scene cut-outs, matched to the
-     plan's country and each day's stops; `themes/assets/stock/README.md`) plus the
-     shared library's same-country pictures and generic props. It leaves the **words**
-     to you — fill `cover` title (references/cover-titles.md), each day's `theme` /
-     `en` / `mark`, captions and the closing line before rendering; a page shipped
-     with the script's placeholders is a defect. The script writes the stock notice
-     into `end.fine` (full) and `cover.credit` (short form; if the cover also cites a
-     poem, keep the citation first and the notice after it — the fine print carries
-     the full text anyway); keep both, and repeat the notice in the chat summary —
-     the exact strings are `notice.en` / `notice.zh` in `themes/assets/stock/index.json`
-     (en: "Pictures: built-in stock kit — no image generator or key was available;
-     provide one and the art is generated for this trip.").
-2. `python3 themes/render_<theme>.py plan.geo.json -o trip-<theme>.html`
-   (`--art F|none`, `--assets DIR`, `--lang zh|en`); a missing art file must still
-   render. Renderer files: illustrated = `render_theme2.py`, clay = `render_clay2.py`,
-   noir = `render_noir2.py`, glass = `render_glass2.py`; journal / zine / splash /
-   portal use their own name (`render_journal.py` …). All eight themes and the picker render in **en** as well as zh: the UI
-   shell (buttons, tags, section names, weekdays, cover fallbacks) follows
-   `plan.lang` / `--lang`, art copy renders in whatever language it was written
-   (ART-SCHEMA.md §language; English cover titles: references/cover-titles.md).
-3. `python3 themes/qc.py trip-<theme>.html` must exit 0, then
-   `themes/xprobe.sh trip-<theme>.html module '#d5' out.png` and **look at the PNG**
-   — a green probe title is not proof; blank icons and cropped tails only show visually.
-   No headless Chrome in this environment → open the HTML in whatever browser tool
-   you have (a browser pane may refuse `file://` — serve the folder with
-   `python3 -m http.server` and open `http://localhost:8000/trip-<theme>.html`) and
-   look at the cover and one day; if you have none, say so in the summary.
-Each of the seven still themes carries its own share buttons (保存这一天 / 保存附录 /
-生成长图 — Save this day / Save appendix / Save long image in en), offline, no
-dependencies; noir and glass export day modules only, portal (video) has none —
-screenshot it. Portal is the "only when footage exists" theme: it needs **its own**
-footage chain beside the HTML; the US 19-clip chain is the style reference and pipeline
-example, not a substitute (another trip's scenery on a cover is a logged defect). That
-chain is a release asset, **not in the tree** — `themes/assets/portal/` is empty in a
-fresh clone and its README.md has the one-line curl+unzip restore; the shipped portal
-case is Morocco (live on the demo site). Details, per-theme limits and the new-theme
-manual: references/themes.md.
+Gates — these decide pass/fail and do not move into the reference file:
+- **The deliverable is a themed page, never a plain text one.** The plain
+  `render_plan.py` page is an extra: on request for a printable version, or as the last
+  resort after one honest fix attempt of the theme renderer — and then the summary says so.
+- **The adversarial self-check runs in full before delivery**, fixes what it catches,
+  and is recorded as "self-checked: N issues found and fixed" in `meta.self_check` and
+  the last `decisions[]` row. The list lives in the reference file; a skipped item is
+  a defect, not a shortcut.
+- **Acceptance bars are exit codes and eyes, not prose**: `route_tools check` exits 0
+  before rendering, `themes/qc.py` exits 0 after, and the export-probe PNG or the page
+  in a browser was actually looked at — none available → say so in the summary.
+- **`plan.geo.json` stays the single editable source**: a later "move day 3 to Nara"
+  is a JSON edit plus geocode → check → links → kml → render, never a rewrite.
+- **Cover title** comes from references/cover-titles.md — never a literal placeholder,
+  never a blacklisted cliché.
 
 ## When things fail
 
@@ -589,6 +461,11 @@ directory is not the skill directory and shell cwd does not persist between call
 - `references/cover-titles.md` — bilingual poetic cover-title case library (poetry /
   prose / classic-literature sources + trip-archetype fit + cliché blacklist); read
   at Phase 6 when rendering.
+- `references/phase-6-assemble.md` — read at the start of Phase 6, before the final
+  plan is written: assembly order, cover title, the full adversarial self-check list,
+  delivery (themed page + KML + gates .ics), the themed-render flow incl. stock mode,
+  the qc / export-probe acceptance bars, and the exit criteria. SKILL.md Phase 6 is
+  only the contract; this file is the procedure.
 - `scripts/flight_scan.py` — Google Flights grid scanner; run with `--help` first.
 - `scripts/route_tools.py` — geocode stops, distance-check clustering, emit per-hop +
   whole-day map links and the trip KML; subcommands geocode / check / links / kml /

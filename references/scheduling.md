@@ -184,7 +184,7 @@ packed ×0.8, kids or mobility flags ×1.3.
   (opener at opening time) is suspended on a checkout day unless bags are already
   stored. **An intercity moving day carries ≤2 anchors, and only when the bags are
   solved before the first anchor (checked / stored / hotel-held); otherwise 1** (same
-  sentence in SKILL.md Phase 6 self-check). Two is for the day whose train leaves at
+  sentence in references/phase-6-assemble.md §Adversarial self-check). Two is for the day whose train leaves at
   16:00 and whose bags went into a locker at 09:00 (Göreme open-air museum + Dark
   Church, then Uçhisar, then the night bus); a day that drags a suitcase to the first
   sight is a one-anchor day whatever the timetable says. Third case,
