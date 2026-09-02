@@ -7,8 +7,10 @@ list runs in full, the acceptance bars are exit codes and eyes, and the exit cri
 the bottom are ticked before the chat summary goes out.
 
 Inputs: `plan.geo.json` assembled per references/output-template.md, plus Phase 0's
-`prefs.theme` / `prefs.pictures` / `plan.lang`. Outputs: the chat summary +
-`trip-<theme>.html` (+ `trip.kml`; + the gates `.ics` when date-locked gates exist).
+`prefs.theme` / `prefs.pictures` / `plan.lang`. Outputs, three things every time: (1) the
+chat summary — route one-liner, total budget, the 3 biggest decisions made for the user,
+and in stock mode the picture notice; (2) `trip-<theme>.html`; (3) `trip.kml` — plus the
+gates `.ics` when the checklist has date-locked gates.
 
 
 ## Assembly order

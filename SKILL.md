@@ -410,8 +410,10 @@ of the procedure.
 
 Inputs: `plan.geo.json` assembled per references/output-template.md — the single
 editable source — plus Phase 0's `prefs.theme` / `prefs.pictures` / `plan.lang`.
-Outputs: chat summary + `trip-<theme>.html` (+ `trip.kml`; + gates `.ics` when the
-checklist has date-locked gates), handed over through the harness's artifact / file tool.
+Outputs — three things every time, handed over through the harness's artifact / file
+tool: (1) the **chat summary** — route one-liner, total budget, the 3 biggest decisions
+made for the user, and in stock mode the picture notice; (2) `trip-<theme>.html`;
+(3) `trip.kml` — plus the gates `.ics` when the checklist has date-locked gates.
 
 Gates — these decide pass/fail and do not move into the reference file:
 - **The deliverable is a themed page, never a plain text one.** The plain
