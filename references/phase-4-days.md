@@ -114,7 +114,8 @@ Per city:
 ## Exit criteria — tick every line before Phase 5
 
 - [ ] Every city block came back as plan-JSON day objects in `plan.lang`, with machine
-      fields in schema form; no visa / entry / health / advisory / hazard rows in any
+      fields in schema form; no visa / entry / health / advisory / hazard / insurance
+      rows in any
       `checklist_items` or note (assembler-only facts).
 - [ ] Anchors per interest-fit, ≤ pace + 1 optional per day, clustered so the route
       never criss-crosses;

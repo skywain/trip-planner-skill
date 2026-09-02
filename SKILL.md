@@ -309,7 +309,8 @@ facts and `prefs`. Outputs: per city, plan-JSON day objects insertable verbatim 
 `hop_links`, `sun`, `rain_alt`, `ribbon` — plus the city's `checklist_items`.
 
 Gates — these decide pass/fail and do not move into the reference file:
-- **City agents never make visa / entry / health / advisory / hazard calls.** Those
+- **City agents never make visa / entry / health / advisory / hazard / insurance
+  calls.** Those
   facts are the assembler's Phase 1 job and override anything a city block says; a
   city agent's prompt carries **search budget ≤ 8**, an explicit **"do not run
   geocoding"** line, and the plan language.

@@ -144,7 +144,8 @@ pointer (recipes: data-sources.md §Travel health). Five lines:
    altitude) → one checklist row **"travel-clinic consult (vaccines / prophylaxis)"**,
    deadline departure − 4 to 6 weeks — or NOW when departure is already inside 6 weeks
    (the row then says "book this week; a late series may not cover the whole trip"), its
-   note = that agenda. The plan writes the consult
+   note = that agenda; the row sorts second in the booking checklist, right after visa
+   (output-template.md §Final deliverable item 3). The plan writes the consult
    date and the agenda; it never doses or prescribes (country-quick-notes.md §Travel
    clinic) — the Diamox rule generalised.
 2. Vector-borne diseases present and their season (dengue, malaria, Japanese
