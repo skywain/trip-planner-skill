@@ -100,8 +100,9 @@ Gates — these decide pass/fail and do not move into the reference file:
   ask for a key in chat, never read, print or copy `themes/.auth_header`; with no
   generator the page still ships in a theme on the stock kit — a plain text page is
   never the deliverable.
-- **`lang` follows the language the user asked in**, and every content string in the
-  plan is written in it too.
+- **`lang` follows the language the user asked in** — it drives the page chrome only
+  (`--lang` overrides); every content string in the plan is written in the user's
+  language too.
 
 ## Phase 1 — Country brief (once per destination)
 
@@ -171,7 +172,8 @@ baggage walkthrough for multi-leg trips.
 
 Gates — these decide pass/fail and do not move into the reference file:
 - **`assets/plan.example.json` is the single source of truth for the plan's shape** —
-  open it before writing a field; a wrong shape renders an empty section, silently.
+  open it before writing a field; a wrong shape does not fail loudly — the renderers
+  WARN and print an empty section.
 - **Every international pick and backup is priced in ≥ 2 sources** (flight_scan /
   Google + Skyscanner / Kayak / Trip.com / the carrier's site); `legs.note` names them
   with the as-of date; a > 10 % disagreement prints as a band; no browser pane → Google
