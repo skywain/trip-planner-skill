@@ -26,7 +26,8 @@ list of things every new country costs a first planner 6-9 searches to rediscove
 - **Visa/entry** for that passport: official government/embassy sources only; put the
   processing lead time on the booking checklist. Rules change — never answer from memory.
   Transit countries count too: a separate-ticket connection can force ENTERING the hub
-  country to re-check bags (Phase 3 §International, the separate-tickets bullet) — run
+  country to re-check bags (references/phase-3-legs.md §International, the separate-tickets
+  bullet) — run
   that audit here, before writing "no visa needed" anywhere.
   **This judgement is the assembler's alone**: city subagents (Phase 4) do not make
   visa/entry calls, and anything they say about it is overwritten by this line.
