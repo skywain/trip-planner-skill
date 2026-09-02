@@ -76,8 +76,9 @@ to crash on it, and `legs` still prints every cell blank).
 connectivity → insurance → baggage**, then the triggered cards (`season`, `altitude`,
 `navigation`, `lookalikes`, `packing`) only when the trip has the trigger. Required
 on every plan: `visa`, `safety`, `holidays`, `weather`, `money`, `connectivity`,
-`insurance`, `emergency`, `health` (phase-1-brief.md §Emergency card and §Health
-line) — the traveller's own foreign-ministry advisory page, the mission's own site,
+`insurance`, `emergency`, `health`.
+**Sources for `emergency` and `health`** (phase-1-brief.md §Emergency card and §Health
+line): the traveller's own foreign-ministry advisory page, the mission's own site,
 the CDC / TravelHealthPro page, the insurer's schedule and the browser Google Maps
 place card (ER only) are the only sources; a fact none of them carries → that line
 reads "n/a — see advisory" next to the URL it read, never numbers from memory.

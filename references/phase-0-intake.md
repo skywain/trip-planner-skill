@@ -16,11 +16,11 @@ assumptions block for checkpoint (a) — and at most one intake message.
 what matters — "帮我安排今年 10.1 到 10.7 的德国之旅" has the destination and the dates,
 and gets **zero questions**: infer the rest, list the assumptions in one block at the top
 of checkpoint (a), and move. Ask only when a *core* fact is missing **and** cannot be
-inferred — and then ask for everything in ONE message in the **intake format** below:
-core first, optional after, **only the items the user has not already answered**
-(anything stated in the request — destination, dates, party, "自驾", a style name, a
-budget — is settled and must not reappear as a question), each optional line with its
-default, one "all defaults" escape hatch.
+inferred — and then ask for everything in ONE message in the **intake format** below,
+under four rules: (1) core first, optional after; (2) **only the items the user has not
+already answered** — anything stated in the request (destination, dates, party, "自驾",
+a style name, a budget) is settled and must not reappear as a question; (3) **each
+optional line carries its default**; (4) **one "all defaults" escape hatch** (the 💡 line).
 
 ## Core and optional facts
 
@@ -101,9 +101,9 @@ from it) so Phases 2-6 read one place and a later replan does not re-ask.
    still a designed page, just less bespoke. If you have an OpenRouter key, put it in
    `themes/.auth_header` (one line: `Authorization: Bearer <key>`) and tell me; then I
    generate the art for this trip."* Never ask for a key in the chat, never handle one.
-   Stock mode is complete for **illustrated** (default) and works for **clay** (built-in
-   terrain kit); the other six themes need generated pictures — say so if the user asks
-   for one, and offer illustrated instead.
+4. **Stock mode covers two themes only**: complete for **illustrated** (default), works
+   for **clay** (built-in terrain kit); the other six themes need generated pictures —
+   a user asking for one of those in stock mode is told so and offered illustrated instead.
 
 ## Style line and plan language
 
@@ -129,4 +129,5 @@ receiving an English page is a shipped bug, not a style choice (self-check row, 
       language.
 - [ ] The picture-capability check ran silently before styles were mentioned;
       `prefs.pictures` ∈ native | key | stock, and in stock mode the user was told once
-      with the exact notice; no key was asked for or handled in chat.
+      with the exact notice; no key was asked for or handled in chat; a non-illustrated /
+      clay theme requested in stock mode was redirected to illustrated.

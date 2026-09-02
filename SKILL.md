@@ -91,14 +91,16 @@ for checkpoint (a) — and at most one intake message.
 Gates — these decide pass/fail and do not move into the reference file:
 - **One message, or none.** Ask only when a core fact (origin · destination · when /
   how long · page style) is missing **and** cannot be inferred; ask for everything in
-  ONE message in the intake format; anything the user already stated is settled and
+  ONE message in the intake format (core first, optional after, each optional line
+  with its default, one "all defaults" line); anything the user already stated is settled and
   never re-asked; never a follow-up "just one more thing".
 - **Origin is inferred and stated, not asked** — from the conversation language, the
   locale / timezone or earlier messages, as that country's main hub — unless it is
   genuinely unguessable, which makes it the one core question.
 - **The picture-capability check runs silently before styles are mentioned**; never
   ask for a key in chat, never read, print or copy `themes/.auth_header`; with no
-  generator the page still ships in a theme on the stock kit — a plain text page is
+  generator the page still ships in a theme on the stock kit (illustrated or clay only;
+  the other six need generated pictures — offer illustrated) — a plain text page is
   never the deliverable.
 - **`lang` follows the language the user asked in** — it drives the page chrome only
   (`--lang` overrides); every content string in the plan is written in the user's
