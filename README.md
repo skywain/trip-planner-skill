@@ -383,6 +383,7 @@ references/
   navigation.md               map links, hop-row format, verify-vs-estimate policy
   country-quick-notes.md      per-country passes, sell-outs, closure patterns (+ "destination not listed" checklist)
   output-template.md          the city-block hand-off + final deliverable structure
+  phase-6-assemble.md         Phase 6 procedure: assembly, adversarial self-check, delivery, themed-render flow, exit criteria
   cover-titles.md             bilingual poetic cover-title library + cliché blacklist
   themes.md                   themed-render manual: the eight themes, adding one, defect checklist
   art-schema.md               pointer to themes/ART-SCHEMA.md

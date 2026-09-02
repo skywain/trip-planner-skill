@@ -187,3 +187,39 @@ fix attempt at the theme renderer.
 the configuration stock mode exists for. Every run so far had a key. Stock coverage is
 also uneven by design today — complete for illustrated, working for clay, six themes still
 need generated pictures (KNOWN-ISSUES AST-7 / AST-8).
+
+## Layering the playbook — the Phase 6 split and its probe A/B (2026-09-03)
+
+SKILL.md had grown to 627 lines; the skill-authoring guideline is ~500, and the same rule
+that keeps a memory index usable applies: the top level routes, the detail lives one level
+down. Phase 6 (157 lines — assembly, self-check, delivery, themed renders) went first.
+
+*What moved:* the procedure went **verbatim** into `references/phase-6-assemble.md` (H2s
+plus an exit-criteria checklist); SKILL.md keeps a 30-line contract — inputs, outputs, the
+gates that decide pass/fail — that opens with an imperative "Read
+references/phase-6-assemble.md now". Red lines never fold into the reference file: a themed
+page, never a plain one; the self-check runs in full; acceptance bars are exit codes and
+eyes; `plan.geo.json` is the single source.
+
+*How it was tested:* a probe A/B. Ten stateless agents — opus / sonnet × low / medium effort
+and haiku × medium, each on the old tree and the new one — answered 16 Phase 6 questions
+from the files alone, citing file:line; a grader marked PASS / PARTIAL / FAIL against an
+answer key and classified every miss as MODEL_FAIL (text clear, model missed), SKILL_GAP
+(text missing or buried) or ROUTE_MISS (answered without opening the reference file). Route
+hits were counted from the agents' tool calls in their transcripts, not from self-reports.
+
+*Result:* old tree 76.0 / 80, new tree 76.5 / 80; all five new-tree probes opened the
+reference file, haiku included; 14 misses, all MODEL_FAIL. The stub's one-line acceptance
+bar lifted Q6 (exit codes + "look at it") from 3.0 to 4.5, because the old tree kept those
+two facts a hundred lines apart. One structural miss survived the first pass: on Q9
+("besides the HTML, what is handed over?") sonnet dropped the chat summary 3 times in 6 on
+the new tree and 0 in 6 on the old — a control run on the old tree proved the delta was
+real. The cause was the stub's terse `Outputs: chat summary + html (+ kml; + ics)` line,
+whose parenthesis read as the whole "besides" set. Naming the summary as deliverable (1)
+with its required contents fixed it: 6 / 6 after the change.
+
+*Rules that carry to the next phase:* the router line is an instruction, not a
+description; a contract line that names an output must also say what it contains, or a
+weak model reads the name as the whole thing; test a split with the same probe set on both
+trees, and run a control before attributing any delta to the structure; count route hits
+from tool calls. Next candidates by size: Phase 0 (97 lines), Phase 4 (92), Phase 3 (63).
