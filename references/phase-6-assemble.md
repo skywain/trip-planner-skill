@@ -199,6 +199,10 @@ manual: references/themes.md.
       (output-template.md §Brief templates), every card titled in `BRIEF_TITLES`;
       `brief.weather` and every weather line carry the mode (forecast / normals /
       climate model) + as-of.
+- [ ] Phase 1 still holds at delivery: `brief.safety` line 0 carries level · source ·
+      date and no base sits in an avoid area; the yellow-fever audit covered transit;
+      the hazard gate exists when the window hits a season; the travel-clinic row
+      exists when the health page recommends anything (phase-1-brief.md exit criteria).
 - [ ] The pre-departure re-check ladder (T-14 / T-7 / T-3 / T-1) closes the checklist
       and shipped as the gates `.ics`.
 - [ ] `trip.kml` shipped (the gates `.ics` is covered by the ladder line above — every

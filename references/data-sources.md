@@ -432,6 +432,81 @@ Web search `{nationality} citizens visa {destination}` restricted to official
 government/embassy domains — blogs and forums are how people miss rule changes.
 Capture: visa type, fee, processing days (→ checklist), passport-validity rule
 (the 6-month trap), onward-ticket requirement.
+- **The yellow-fever certificate (ICVP) is an entry document — audit it with the
+  visa**: for every entry country AND every transit airport read WHO Annex 1 (§Travel
+  health below) — is it a risk country, and does it require the certificate from
+  travellers arriving from one (transit footnotes: > 12 h / > 4 h / any duration /
+  > 24 h in Brazil-Bolivia-Peru-Venezuela — read the footnote number on that country's
+  row). A
+  hit → checklist row "yellow-fever vaccine + ICVP", deadline departure − 10 days −
+  clinic lead time.
+
+## Travel advisory — ✓ (2026-09-03)
+Primary source = the traveller's passport; one second source (US or UK, both keyless
+JSON) every time; the stricter level drives the plan, a disagreement goes to
+`unverified` (phase-1-brief.md §Advisory line).
+- **US State Department** — `curl -s "https://cadataapi.state.gov/api/TravelAdvisories"`
+  (✓ keyless JSON, ~220 entries): each row `Title` = "{Country} - Level N: …",
+  `Category` = FIPS-style code(s) — Japan `JA`, Germany `GM`, Australia `AS`, China
+  `CH`, NOT ISO-2 — `Updated` = as-of, `Link` = the full page. Filter by
+  Title; one call covers every destination on the route.
+- **UK FCDO** — `curl -s "https://www.gov.uk/api/content/foreign-travel-advice/{slug}"`
+  (✓ keyless JSON): `details.alert_status` (`[]` = no alert; otherwise statuses such as
+  `avoid_all_travel_to_parts`), `public_updated_at` = as-of, `details.parts[]` with the
+  slugs `warnings-and-insurance` · `entry-requirements` · `safety-and-security` ·
+  `regional-risks` · `health` · `getting-help` — the last four feed `brief.safety`,
+  `brief.health` and `brief.emergency`.
+- **中国领事服务网** — 旅行风险等级和安全提醒 (country pages under
+  `cs.mfa.gov.cn/zggmcg/ljmdd/…/lxfxdjhaqtx/`) and the 安全提醒 list
+  `https://cs.mfa.gov.cn/gyls/lsgz/lsyj/` — **browser pane only** (curl gets no
+  response); 领保热线 12308 / +86-10-12308.
+- **Smartraveller (AU)** — `https://www.smartraveller.gov.au/destinations` in the
+  browser pane (an export API exists but is unverified).
+- Other passports: the ministry's own advisory (Auswärtiges Amt, travel.gc.ca, MOFA
+  Japan 海外安全情報 …) in the browser pane.
+- **Level mapping**: US Level 4 = UK "avoid all travel" = CN 红色 / 暂勿前往 → stop and
+  ask; US Level 3 = UK "avoid all but essential travel" = CN 橙色 / 谨慎前往 → the user decides
+  with the line in front of them; "… to parts of" → every base, leg and day trip is
+  checked against the named areas.
+
+## Travel health — ✓ (2026-09-03)
+- **CDC destination page** — `https://wwwnc.cdc.gov/travel/destinations/traveler/none/{country-slug}`
+  (✓ static HTML, curl-readable; sections Travel Health Notices · Vaccines and
+  Medicines · Non-Vaccine-Preventable Diseases · Stay Healthy and Safe, incl. "Eat and
+  drink safely" · Healthy Travel Packing List · After Your Trip). One fetch per
+  destination; the "recommended for most / some travellers" rows are the consult agenda.
+- **TravelHealthPro (UK NaTHNaC)** — `curl -s -L -A "Mozilla/5.0" "https://travelhealthpro.org.uk/countries/{slug}"`
+  (✓ static HTML; send a browser UA — some clients get 406 without one; slugs from
+  `https://travelhealthpro.org.uk/countries`; the old `/country/{id}/…` form silently
+  resolves to another country):
+  Vaccine Recommendations · Malaria · Other Risks (dengue and co.).
+- **WHO yellow fever, Annex 1** —
+  `https://cdn.who.int/media/docs/default-source/travel-and-health/countries-with-risk-of-yellow-fever-transmission.pdf`
+  (✓ PDF, last modified 2026-09-02): per country, risk of transmission and the
+  certificate requirement for arrivals from risk countries, with the transit-hour
+  footnotes. Certificate valid 10 days after vaccination, for life (2016 IHR change).
+- **zh plans** cite the 海关总署 / 国际旅行卫生保健中心 (ithc.cn) 出入境健康提示 as the
+  user-facing pointer; the ICVP is issued at ITHC clinics only.
+- Rule: copy official recommendations and write the travel-clinic consult date; the
+  plan never doses or prescribes (country-quick-notes.md §Travel clinic).
+
+## Hazard feeds — ✓ (2026-09-03)
+The season table (country-quick-notes.md §Hazard seasons) gives the odds; these feeds
+give the present. Read them at Phase 1 for the season card and again at the T-14 /
+T-7 / T-3 ladder rows.
+- **GDACS** — `curl -s "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=EQ;TC;FL;VO;WF"`
+  (✓ keyless GeoJSON, the open event list — 94 events on test spanning a year of
+  `fromdate`, only 4 with `iscurrent` = "true"; filter `iscurrent` / `todate` ≥ today
+  and `country` or `iso3`; an orange tropical cyclone over Japan among them):
+  `properties.eventtype` / `eventname` / `alertlevel` /
+  `country`; show "GDACS" as attribution where the data is printed.
+- **USGS earthquakes** — `curl -s "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&latitude={lat}&longitude={lon}&maxradiuskm=300&minmagnitude=5&starttime={YYYY-MM-DD}"`
+  (✓ keyless GeoJSON).
+- **NOAA NHC active storms** — `curl -s "https://www.nhc.noaa.gov/CurrentStorms.json"`
+  (✓ keyless JSON, `activeStorms[]`; Atlantic + East Pacific).
+- USGS Volcano Hazards API (`https://volcanoes.usgs.gov/vsc/api/`, alert levels —
+  unverified), JMA 台風・警報, CWA, HKO, PAGASA, BoM, national fire services: browser
+  pane.
 
 ## Optional keyed upgrades (only if the user already has env vars set)
 - `AMADEUS_KEY` / `AMADEUS_SECRET` — Amadeus self-service flight/hotel search APIs.

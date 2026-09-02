@@ -354,6 +354,7 @@ references/
   navigation.md               地图链接、跳转行格式、核实 vs 估算的策略
   country-quick-notes.md      分国家的通票、易售罄项、闭馆规律(+「目的地不在列表里」清单)
   output-template.md          城市块交接格式 + 最终交付物结构
+  phase-1-brief.md            Phase 1 流程:事实行、官方警示行、应急卡、健康行 + 黄热病核对、灾害行、退出判据
   phase-4-days.md             Phase 4 流程:城市子 agent 契约、每城六步、route_tools 顺序、sun / check 规则、退出判据
   phase-6-assemble.md         Phase 6 流程:组装、对抗自检、交付、主题渲染流程、退出判据
   cover-titles.md             中英双语诗意封面标题库 + 陈词滥调黑名单

@@ -172,67 +172,38 @@ decisions, hotel blurbs — is in the user's language too.** The research source
 mostly English and will drag your prose toward English if you let them; a zh user
 receiving an English page is a shipped bug, not a style choice (self-check row, Phase 6).
 
-## Phase 1 — Country brief (once per destination; ≤10 lines in chat — the `brief` cards themselves follow output-template.md §Brief templates)
+## Phase 1 — Country brief (once per destination)
 
-Read the destination's section of references/country-quick-notes.md first. **Destination
-not in that file (Mexico, Morocco, Turkey and Vietnam all weren't)** → work through its
-"Destination not listed? — the checklist" section instead of improvising: it is the
-list of things every new country costs a first planner 6-9 searches to rediscover.
+**Read `references/phase-1-brief.md` now, before any fact about the destination is
+written** — it is the whole procedure for this phase (where each fact comes from; the
+visa / holiday / event / weather / money / insurance / safety lines; the advisory line,
+the emergency card, the health line with the yellow-fever audit, the hazard line; the
+exit criteria). This section is only the contract; never answer a Phase 1 fact from
+memory of the procedure or of the country. In chat, Phase 1 is ≤ 10 lines — the
+`brief` cards themselves follow output-template.md §Brief templates.
 
-- **Visa/entry** for that passport: official government/embassy sources only; put the
-  processing lead time on the booking checklist. Rules change — never answer from memory.
-  Transit countries count too: a separate-ticket connection can force ENTERING the hub
-  country to re-check bags (Phase 3 §International, the separate-tickets bullet) — run
-  that audit here, before writing "no visa needed" anywhere.
-  **This judgement is the assembler's alone**: city subagents (Phase 4) do not make
-  visa/entry calls, and anything they say about it is overwritten by this line.
-- **Holidays colliding with the window**:
-  `curl -s "https://date.nager.at/api/v3/PublicHolidays/{year}/{ISO2}"` (keyless ✓).
-  A national holiday means closures + crowds + hotel spikes — annotate affected days.
-- **What the holiday API can't see** — one budgeted search per city
-  (`{city} festival OR events {month} {year}`) plus, where relevant: seasonal
-  operating windows for mountain/garden/boat anchors, per-venue annual maintenance
-  shutdowns of headliners, and Ramadan dates in Muslim-majority destinations (daytime
-  food logistics, shifted hours, packed evenings). A local festival closes streets and
-  triples hotel rates while every holiday feed says the day is ordinary.
-- **User-named events get verified before anything else is planned.** A match,
-  concert or festival in the request is the hardest pin in the whole trip — confirm
-  team/venue/city, date, local kickoff time and ticket on-sale status FIRST, because
-  the skeleton hangs off it ("Columbus vs Miami" is a home game in Ohio, and a route
-  built around the wrong coast is a 13-day bug). US listings put the home side first
-  in "A vs B" — but verify, never parse. Kickoff times can move for TV ⚡: re-check
-  close to travel.
-- **Weather for those dates**: Open-Meteo recipes in data-sources.md (first call can
-  take ~10 s). One line: temps, rain odds, daylight — stamped with its mode
-  (forecast / 5-yr normals + climate model) and as-of date per data-sources.md
-  §Weather; the Phase 6 exit criteria check the stamp.
-- **Money & connectivity — fixed lines, not a vibe.** `brief.money` carries the five
-  lines of output-template.md §Brief templates (refuse DCC · card FX fee → buffer ·
-  ATM rule · cash number · which cards and wallets work) plus the **origin-conditional
-  block** when it applies (mainland-China origin: UnionPay vs Visa/MC acceptance,
-  Alipay+/WeChat coverage, foreign-cash pre-order); `brief.connectivity` carries the
-  eSIM ballpark, plug type and the digital-safety line (home-number SMS 2FA reachable
-  abroad, phone-theft plan, cloud + offline copies of passport / visa / policy).
-  Recipes and thresholds: data-sources.md §FX → Money safety.
-- **Insurance line**: travel-medical insurance with destination-appropriate coverage
-  goes on the checklist (US target: ≥$100k medical + medical evacuation — an ER visit
-  is four figures before insurance). Tours never substitute for it. When the plan
-  carries a monitored hazard gate, the insurance row's deadline is NOW, not "before
-  departure" (the user buys — Hard rule 1); the agent's jobs are the read-side ones:
-  verify the issued policy rather than the product page, and match the plan's
-  activities against the exclusion list by name — data-sources.md §Travel insurance.
-- **Emergency & health lines** (`brief.emergency`, `brief.health`): police / ambulance
-  numbers, the nearest mission's hotline and the vaccine / vector-borne / water lines
-  come only from the traveller's own foreign-ministry advisory page and the insurer's
-  assistance line — never from memory; nothing found → "n/a — see advisory" in the
-  card, not silence (output-template.md §Brief templates).
-- **Safety, written to the `brief.safety` template** (output-template.md §Brief
-  templates — six named lines: the destination's named scams · pickpocket hotspots ·
-  the taxi rule · the after-dark avoid list per base · what to do when it happens ·
-  legal & customs red lines). More useful than warnings: design the plan so night
-  movement is door-to-door by car — a route that never needs a dark walk beats a
-  list of cautions. Sources: country-quick-notes.md (the destination's section, or
-  the "Street safety" line of the not-listed checklist).
+Inputs: destination(s), dates, the traveller's passport and origin, the skeleton
+candidates. Outputs: the `brief` cards in canonical order, the Phase 1 checklist rows
+(visa lead time · travel-clinic consult · yellow-fever vaccine + ICVP · insurance ·
+hazard gate · copies + registration), and the facts later phases inherit.
+
+Gates — these decide pass/fail and do not move into the reference file:
+- **Every Phase 1 fact is the assembler's alone** — visa / entry, advisory, health,
+  hazard, insurance: city agents never decide them, and anything they say is
+  overwritten.
+- **Official sources only, never memory** — government, embassy and foreign-ministry
+  pages, CDC / TravelHealthPro / WHO, the insurer's schedule — each line stamped
+  source + as-of; nothing found → "n/a — see advisory", not a guess. The plan never
+  doses or prescribes: it writes the travel-clinic consult date and the agenda.
+- **The advisory level drives the plan**: a base, leg or day trip in a "do not travel"
+  / Level 4 / 暂勿前往 area stops the pipeline and asks the user; Level 3 / "avoid all
+  but essential" / 谨慎前往 goes to the user with the line in front of them; regional
+  "avoid" areas are checked base by base, leg by leg.
+- **Transit counts**: the visa audit and the yellow-fever certificate audit both run
+  over every transit airport before "no visa needed" is written anywhere.
+- **A hazard-season hit means a gate**: season card, hazard gate on the checklist and
+  in the `.ics`, insurance deadline NOW, exposed bookings kept refundable.
+- **User-named events are verified before anything else is planned.**
 
 ## Phase 2 — Route skeleton → checkpoint (a)
 
@@ -427,6 +398,12 @@ directory is not the skill directory and shell cwd does not persist between call
 - `references/cover-titles.md` — bilingual poetic cover-title case library (poetry /
   prose / classic-literature sources + trip-archetype fit + cliché blacklist); read
   at Phase 6 when rendering.
+- `references/phase-1-brief.md` — read at the start of Phase 1, before any destination
+  fact is written: where each fact comes from, the visa / holiday / event / weather /
+  money / insurance / safety lines, the advisory line (level → plan behaviour), the
+  emergency card, the health line with the yellow-fever audit, the hazard line (season
+  card + hazard gate), and the exit criteria. SKILL.md Phase 1 is only the contract;
+  this file is the procedure.
 - `references/phase-4-days.md` — read at the start of Phase 4, before any city is
   planned: the city-agent contract (what every fan-out prompt must carry), the six
   per-city steps, the route_tools order (geocode → tz → sun → links → check → kml),

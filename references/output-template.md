@@ -76,11 +76,11 @@ to crash on it, and `legs` still prints every cell blank).
 connectivity → insurance → baggage**, then the triggered cards (`season`, `altitude`,
 `navigation`, `lookalikes`, `packing`) only when the trip has the trigger. Required
 on every plan: `visa`, `safety`, `holidays`, `weather`, `money`, `connectivity`,
-`insurance`; `emergency` and `health` are required whenever the traveller's own
-foreign-ministry advisory page (Phase 1, "Emergency & health lines") carries an
-emergency-numbers or health section — that page and the insurer's assistance line
-are the only sources; nothing there → the key reads "n/a — see advisory", never
-numbers from memory.
+`insurance`, `emergency`, `health` (phase-1-brief.md §Emergency card and §Health
+line) — the traveller's own foreign-ministry advisory page, the mission's own site,
+the CDC / TravelHealthPro page, the insurer's schedule and the browser Google Maps
+place card (ER only) are the only sources; a fact none of them carries → that line
+reads "n/a — see advisory" next to the URL it read, never numbers from memory.
 A key that is not in `BRIEF_TITLES` prints as its raw English key on a zh page —
 add the title there (or via the art file's `brief_titles`) before inventing a key.
 
@@ -113,8 +113,11 @@ eSIM lock, cards freezable from
 a second device); no banking on public Wi-Fi; passport, visa and policy as cloud +
 offline copies.
 
-**`brief.safety` — six named lines** (one set per trip, with per-base detail where
-the bases differ):
+**`brief.safety` — the advisory line, then six named lines** (one set per trip, with
+per-base detail where the bases differ):
+0. Advisory: `{level} · {source} · as-of {date} (second source: {level})` —
+   phase-1-brief.md §Advisory line; a Level-4 / "do not travel" hit never reaches this
+   card, it stops the pipeline.
 1. Named scams: the destination's 2-3 current scams by name, with the tell.
 2. Pickpocket hotspots: the specific lines, stations and squares.
 3. Taxi rule: which app, the official airport rank, never the arrivals-hall tout.
@@ -126,10 +129,29 @@ the bases differ):
    same-sex relations law — ≤ 3 lines copied from the advisory page's "Local laws
    and customs" section, or "none beyond the usual".
 Tone model only: `examples/vietnam-2026/vietnam.geo.json` → `brief.safety` (written
-before this template — it covers lines 2-4 and lacks 1, 5, 6; do not copy its
+before this template — it covers lines 2-4 and lacks 0, 1, 5, 6; do not copy its
 shape). Sources per line:
 country-quick-notes.md (the destination's section, or the not-listed checklist's
 "Street safety" line).
+
+**`brief.emergency` — six lines, every number stamped as-of, none from memory**
+(phase-1-brief.md §Emergency card): 1 local police · ambulance · fire numbers · 2 the
+home consular hotline · 3 the nearest mission per base (name · address · phone · hours ·
+link) · 4 insurer assistance line + policy-number placeholder + the first-call rule ·
+5 lost-passport steps (police report → mission → exit-record rule) · 6 per base one
+24-hour ER with an international department + the local word for pharmacy and one near
+the hotel; a base > 2 h from an ER says so in the day note.
+
+**`brief.health` — five lines from one official page** (phase-1-brief.md §Health line):
+1 vaccines / prophylaxis "recommended for most / some travellers" + the travel-clinic
+consult date (a checklist row; the plan never doses) · 2 vector-borne diseases and their
+season · 3 water and food (tap water yes / bottled only · ice · raw and street food) ·
+4 rabies and animals · 5 notice level + as-of + the page URL. Yellow-fever hits add the
+ICVP checklist row.
+
+**`brief.season` — triggered only** (phase-1-brief.md §Hazard line): the hazard · its
+months · the official source URL · what the plan does about it (buffer day, refundable
+rows, the gate) — ≤ 5 lines, absent when the window hits nothing.
 
 ### §Intake prefs — top-level `prefs`
 
@@ -283,9 +305,10 @@ follow `scripts/render_plan.py`'s schema field-for-field.
 
 Field discipline (the merge breaks without it):
 - `checklist_items` = sell-outs, timed tickets, date-locked rail, tours — things the
-  city researcher verified. **No visa / entry / e-visa rows**: the assembler owns that
-  fact (SKILL Phase 1) and overwrites any city-block claim about it (two Turkey city
-  agents shipped an outdated "visa required" as item #1). The assembler merges these
+  city researcher verified. **No visa / entry / e-visa, health, advisory, hazard or
+  insurance rows**: the assembler owns those facts (SKILL Phase 1) and overwrites any
+  city-block claim about them (two Turkey city agents shipped an outdated "visa
+  required" as item #1). The assembler merges these
   rows into the top-level `checklist` (§Top-level plan skeleton).
 - `sun` is filled by the assembler's `sun --write`, not by you; if the day's sunrise
   anchor is at its first stop on a moving day, add `"sun_stop": "<that stop's name>"`
@@ -351,8 +374,8 @@ Both pages present the same material in the same order:
 2. **Decisions made for you**: 3-5 bullets (jaw direction, pass math, pace calls…) —
    each one vetoable by the user.
 3. **Booking checklist** (the action list lives near the top on purpose), sorted by
-   urgency: visa → sell-outs → intl flights → date-locked rail → refundable hotels →
-   the rest. Each row: item · deadline/lead time · price + as-of date · deep link ·
+   urgency: visa → travel-clinic consult → sell-outs → intl flights → date-locked
+   rail → refundable hotels → the rest (the pre-departure ladder closes the list). Each row: item · deadline/lead time · price + as-of date · deep link ·
    checkbox.
 4. **Flights & intercity table**: pick + backup per leg with all Phase 3 fields.
 5. **Day-by-day cards**: one card per day — header (date/city/label + sunrise/sunset),
@@ -474,6 +497,10 @@ makes the gates `.ics` mandatory (floating 09:00, rules above).
 | **T-7** | weather: re-run the forecast recipe (data-sources.md §Weather) for every base and re-apply scheduling.md rule 10 to hot / wet / windy days · the route's hazard sources (season card) | swap rain alternatives into the main line where the odds say so; note the swaps in `decisions[]` |
 | **T-3** | strikes / closures / protests on the route (rail operator + city transit notices) · advisory and forecast once more · timed tickets in the wallet | one line per moving day |
 | **T-1** | eSIM active and receiving home-number SMS · paper + cloud copies · cash in hand per `brief.money` · cards unblocked for travel | — |
+
+A **hazard gate** (phase-1-brief.md §Hazard line) is a fifth, named row when the
+window hits a hazard season: it carries the official source URL and the decision it
+gates, and gets its own VEVENT beside the ladder's.
 
 Write the rows as `{item, deadline: "T-14 · <date>", note: <what it covers>}`, keep
 them last as a block (anything else due inside T-14 — eSIM, cash, card notice — is

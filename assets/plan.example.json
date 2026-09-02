@@ -27,6 +27,9 @@
   "One line per decision you made on the traveller's behalf — each one vetoable"
  ],
  "checklist": [
+  {"item": "Travel-clinic consult (vaccines / prophylaxis per the health page)",
+   "deadline": "departure minus 4-6 weeks (NOW if inside 6 weeks) · PLACEHOLDER date",
+   "note": "PLACEHOLDER — agenda: the page's 'recommended for most / some travellers' rows + activity tags; the plan never doses"},
   {"item": "Timed-entry ticket X", "deadline": "opens 10th of prior month",
    "price": "PLACEHOLDER", "link": "https://example.org/tickets",
    "note": "sells out same day"},
@@ -117,9 +120,9 @@
  ],
  "brief": {
   "visa": "type · fee · processing days · passport-validity rule",
-  "emergency": "police / ambulance numbers · consular hotline + nearest mission · 24h ER per base · insurer assistance line · lost-passport steps",
-  "safety": "six lines: named scams · pickpocket hotspots · taxi rule · after-dark avoid list per base · what to do when it happens · legal red lines",
-  "health": "vaccine / consultation date · vector-borne season · water and raw-food rule · rabies line — official sources only",
+  "emergency": "six lines: local police / ambulance / fire · home consular hotline · nearest mission per base · insurer assistance line + policy no. · lost-passport steps · 24h ER + pharmacy per base — every number as-of",
+  "safety": "line 0 advisory level · source · as-of, then six lines: named scams · pickpocket hotspots · taxi rule · after-dark avoid list per base · what to do when it happens · legal red lines",
+  "health": "five lines from one CDC / TravelHealthPro page: vaccines + consult date · vector-borne season · water and food · rabies · notice level + as-of",
   "holidays": "collisions from date.nager.at + local festivals",
   "weather": "temps · rain odds · daylight · mode (forecast / normals) + as-of",
   "money": "five lines: refuse DCC · card FX fee → buffer · ATM fee and cap · cash number · which cards and wallets work (+ origin block)",

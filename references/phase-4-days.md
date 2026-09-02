@@ -35,7 +35,8 @@ insertable verbatim**, not a summary. Hard rule for the prompt: **city agents do
 make visa/entry judgements** — no visa rows in their `checklist_items`, no "you need
 a visa" in notes. Visa/entry facts are the assembler's Phase 1 job and override
 anything a city block says (Turkey test: both city agents put an outdated "visa
-required" as checklist item #1; entry had been visa-free since 2026-01-02).
+required" as checklist item #1; entry had been visa-free since 2026-01-02). The same
+holds for health, advisory, hazard and insurance lines — Phase 1 facts, assembler-only.
 When the user prefers group tours, the city agent's first job is
 finding real in-sale products with departure schedules (data-sources.md §Group
 tours) — the tour's schedule then dictates the surrounding legs, and a fly-in day

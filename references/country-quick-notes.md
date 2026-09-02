@@ -26,7 +26,9 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   visa-free for Chinese ordinary passports on 2026-01-02 and the old "e-Visa" answer is
   still all over the web. **The assembler owns this line — city subagents must not
   decide visa questions** (on the Turkey test both of them returned the stale answer and
-  put it first on the checklist, which is the expensive kind of wrong).
+  put it first on the checklist, which is the expensive kind of wrong). The same audit
+  carries the **yellow-fever certificate column** — every entry country and every
+  transit airport (data-sources.md §Visa / entry).
 - [ ] **Currency: closed or convertible, and does the FX source carry it?**
   `frankfurter.dev` carries exactly **30 currencies** (checked 2026-08: no MAD, no VND)
   and **silently drops** a symbol it doesn't have — HTTP 200, key just missing, so an
@@ -73,6 +75,12 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   foreign ministry (Auswärtiges Amt, travel.gc.ca, 中国领事服务网), then check the policy
   does not exclude the thing the trip is built on — ballooning, diving, motorbike
   pillion, altitude — and that it carries repatriation where hospitals want cash up front.
+- [ ] **hard — Health: vaccines, vectors, water, rabies — one CDC / TravelHealthPro
+  page, dated** (→ `brief.health` five lines + the travel-clinic consult row;
+  phase-1-brief.md §Health line). The plan never doses.
+- [ ] **hard — Hazard season: does the window hit one?** §Hazard seasons below, then the
+  live feeds (data-sources.md §Hazard feeds) → `brief.season` card + hazard gate +
+  insurance deadline NOW (phase-1-brief.md §Hazard line).
 - [ ] **hard — Street safety, six named lines** (the `brief.safety` template,
   output-template.md §Brief templates): ① 2-3 current scams by name — the advisory
   page's "Safety and security" section plus one `{city} scam tourists {year}` search;
@@ -107,7 +115,46 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   against the trip's highest point, and that illness cover (not just accident cover)
   is real, before buying — see data-sources.md §Travel insurance.
 
+## Travel clinic
+
+The Diamox rule, generalised to every vaccine and prophylaxis: **the plan writes the
+consult date and the agenda; it never doses or prescribes.** Consult = departure − 4 to
+6 weeks (rabies pre-exposure needs two doses in 7 days, Japanese encephalitis two in
+28, hepatitis A ≥ 2 weeks, malaria prophylaxis starts 1-2 days to 1-2 weeks before
+depending on the drug — all reasons the row sits early in the urgency sort). Agenda =
+the health page's "recommended for most / some travellers" rows + the route's activity
+tags (rural nights, hiking, animal contact, altitude, diving). The yellow-fever
+certificate has its own lead time: 10 days after the jab (phase-1-brief.md §Health
+line). Typhoid / hepatitis A "recommended for most travellers" and ORS in the kit are
+agenda items, not plan prescriptions.
+
+## Hazard seasons
+
+Window ∩ season ≠ ∅ → `brief.season` card + hazard gate + insurance deadline NOW +
+exposed bookings refundable + one buffer day at the peak (phase-1-brief.md §Hazard
+line). Months are the usual season, all ⚡ — the official source column is what the
+gate re-reads.
+
+| region | hazard | months | official source | plan action |
+|---|---|---|---|---|
+| Japan · Taiwan · Philippines · Vietnam · Hong Kong · S China | typhoon | Jul-Oct, peak Aug-Sep | JMA · CWA · PAGASA · HKO · NCHMF | ferries, islands and Shinkansen days refundable; +1 buffer day |
+| US Gulf + SE coasts · Caribbean · Mexico Caribbean | Atlantic hurricane | 1 Jun-30 Nov, peak Aug-Oct | NOAA NHC | same; cruise / island days keep a backup date |
+| Mexico Pacific · Central America Pacific | East Pacific hurricane | May-Nov | NOAA NHC · SMN | same |
+| India · Bangladesh · Sri Lanka SW · Thailand · Myanmar | monsoon floods | Jun-Oct | IMD · TMD | rail / road days with a fly-over fallback; rule 10 rain |
+| Central Vietnam (Huế-Hội An-Đà Nẵng) | floods | Oct-Dec | NCHMF | the evacuation plan in the city section (§Vietnam) |
+| Northern Australia | cyclone + stinger season | Nov-Apr | BoM | reef days weather-backed; stinger suits |
+| US West · Canada West · SE Australia · Mediterranean (GR/ES/PT/IT/FR) · Chile | wildfire + smoke | Jul-Oct N · Dec-Mar S · Jul-Sep Med | national fire service; AirNow / air-quality index | park days droppable; smoke = indoor rain_alt |
+| Middle East · Mediterranean · South Asia | heat ≥ 38 °C | Jul-Aug · Apr-Jun | national met office | scheduling.md rule 10 heat, every day |
+| Iceland · Italy (Etna, Stromboli) · Indonesia · Hawaii · Japan · Guatemala · Philippines | volcano | year-round | USGS HVO · INGV · PVMBG · JMA | base-rate rule (phase-4-days.md); gate on the observatory's alert level |
+| Japan · Taiwan · Turkey · Indonesia · Chile · Peru · Mexico · Italy · NZ · Nepal | earthquake / tsunami | year-round | USGS feed · JMA | one `brief.season` line: coastal bases know the high ground |
+| Alps · Nordic · Hokkaido · Rockies · Andes passes | avalanche + winter road closures | Nov-Apr | road authority (Vegvesen, NEXCO …) | mountain legs with a rail or fly alternative |
+| > 66°N | polar night · midnight sun | late Nov-mid Jan · Jun-Jul | — | a plan shaper, not a hazard: daylight in every day header, rule 10 cold |
+| Southern hemisphere | seasons reversed | Dec-Feb = summer | — | check the season card against the month, not the name |
+
 ## Japan
+- Hazards: typhoon season Jul-Oct, peak Aug-Sep (JMA) — island, ferry and Shinkansen
+  days refundable with one buffer day; earthquakes year-round (JMA / USGS feed) —
+  §Hazard seasons.
 - Entry: most treaty passports get 90-day visa-free stamps ⚡; **Chinese passports
   need a visa** — the JAPAN eVISA (single-entry tourism, 15/30-day stays) covers
   mainland residents ⚡, and there is no transit-without-visa landing for PRC
@@ -272,6 +319,10 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   carries the one-line dress note (scheduling.md Traps).
 
 ## USA (as of 2026-08)
+- Hazards: Atlantic hurricanes Jun-Nov on the Gulf and SE coasts (NOAA NHC), wildfire
+  smoke Jul-Oct in the West (AirNow), winter road closures in the Rockies / Sierra —
+  §Hazard seasons; the volcano gate on a Hawaii trip is the worked example of a
+  hazard gate.
 - Entry: VWP/ESTA covers treaty passports only — **Chinese passports need a B1/B2
   visa** (Beijing interview waits run weeks-months ⚡) **plus current EVUS enrollment**
   on 10-year visas ⚡. On any US trip, visa status is the first intake question.

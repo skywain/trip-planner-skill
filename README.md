@@ -383,6 +383,7 @@ references/
   navigation.md               map links, hop-row format, verify-vs-estimate policy
   country-quick-notes.md      per-country passes, sell-outs, closure patterns (+ "destination not listed" checklist)
   output-template.md          the city-block hand-off + final deliverable structure
+  phase-1-brief.md            Phase 1 procedure: fact lines, advisory line, emergency card, health line + yellow-fever audit, hazard line, exit criteria
   phase-4-days.md             Phase 4 procedure: city-agent contract, six per-city steps, route_tools order, sun / check rules, exit criteria
   phase-6-assemble.md         Phase 6 procedure: assembly, adversarial self-check, delivery, themed-render flow, exit criteria
   cover-titles.md             bilingual poetic cover-title library + cliché blacklist
