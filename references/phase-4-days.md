@@ -17,8 +17,9 @@ city's `checklist_items`.
 
 ## City-agent contract — fan out or go sequential
 
-When ≥3 cities and subagents are available, fan out one agent per city; each prompt
-must include: the dates, the user's interests + pace, **search budget ≤8**, an
+When ≥3 cities and subagents are available, fan out one agent per city (otherwise do
+the cities sequentially with the same structure); each prompt must include: the
+dates, the user's interests + pace, **search budget ≤8**, an
 explicit **"do not run geocoding"** line (parallel agents would break Nominatim's
 1 req/s policy — the assembler geocodes once, centrally), **the plan language**
 (`plan.lang`, with one line telling the agent every reader-facing string in its
@@ -35,8 +36,7 @@ make visa/entry judgements** — no visa rows in their `checklist_items`, no "yo
 a visa" in notes. Visa/entry facts are the assembler's Phase 1 job and override
 anything a city block says (Turkey test: both city agents put an outdated "visa
 required" as checklist item #1; entry had been visa-free since 2026-01-02).
-Otherwise do the cities sequentially with the
-same structure. When the user prefers group tours, the city agent's first job is
+When the user prefers group tours, the city agent's first job is
 finding real in-sale products with departure schedules (data-sources.md §Group
 tours) — the tour's schedule then dictates the surrounding legs, and a fly-in day
 tour must clear BOTH weekday grids (operator departure days AND feeder-flight
@@ -115,7 +115,8 @@ Per city:
 - [ ] Every city block came back as plan-JSON day objects in `plan.lang`, with machine
       fields in schema form; no visa / entry / health / advisory / hazard rows in any
       `checklist_items` or note (assembler-only facts).
-- [ ] Anchors per day ≤ pace + 1 optional, clustered so the route never criss-crosses;
+- [ ] Anchors per interest-fit, ≤ pace + 1 optional per day, clustered so the route
+      never criss-crosses;
       every anchor verified (hours, last entry, price, sell-out) or stamped "pattern as
       of {date}" with the T-14 ladder row carrying the re-confirmation.
 - [ ] Each day has its rain alternative (closure-checked), its food area, its `ribbon`.

@@ -349,8 +349,8 @@ Gates — these decide pass/fail and do not move into the reference file:
 - **`sun --write` runs before any sunrise / golden-hour / dark-start prose**, after
   the stops carry coordinates; a plan that crosses timezones stamps every day's `tz`
   first.
-- Every day has its rain alternative, its food area and its `ribbon`; anchors per day
-  ≤ pace + 1 optional.
+- Every day has its rain alternative, its food area and its `ribbon`; anchors are
+  chosen per interest-fit, ≤ pace + 1 optional per day.
 
 ## Phase 5 — Hotels
 
