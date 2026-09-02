@@ -166,6 +166,27 @@ packed ×0.8, kids or mobility flags ×1.3.
    Verified timetabled departures and arrivals are the exception and keep their
    published minutes ("09:15-11:31"), because that is exactly where the extra digits
    carry real information.
+10. **Weather shapes the day** — read the day's forecast or climate line
+    (data-sources.md §Weather) before ordering the blocks:
+    - **Heat** — max ≥ 32 °C, apparent max ≥ 35 °C or UV index ≥ 8 (UV exists only
+      in forecast mode; in normals mode a country note such as "UV extreme" is the
+      trigger): no unshaded
+      open-air anchor (ruins, markets, hikes) between 11:00 and 16:00 — they take the
+      opener slot or start after 16:30, and the early afternoon holds an indoor or
+      air-conditioned anchor or a long lunch; open-air dwell ×1.3 (the "hilly and
+      unshaded" surcharge above folds into it); the continuous on-feet cap drops from
+      3.5 h to 3 h; the day note carries "water · shade · hat".
+    - **Rain** — precipitation probability ≥ 60 %, or a rainy-season base (≥ 7 rain
+      days in 10 on the climate line): the `rain_alt` becomes the main line and the
+      outdoor version becomes the `[swap → …]`; every boat, cable-car and balloon
+      anchor carries "weather cancellation → backup date" in its note.
+    - **Wind** — gusts ≥ 50 km/h: balloons, boats, open decks and high towers get the
+      cancellation-risk note and a named fallback.
+    - **Cold** — min ≤ 5 °C, or min ≤ 0 °C at a dawn anchor (`temperature_2m_min`;
+      no recipe fetches an apparent minimum): shorter outdoor
+      blocks, lunch indoors, the dawn temperature printed in the day header note.
+    The same thresholds are what the T-7 re-check re-applies (output-template.md
+    §Pre-departure re-check ladder).
 
 ## Day types that need a different structure
 
@@ -263,6 +284,9 @@ packed ×0.8, kids or mobility flags ×1.3.
 - Departure day with an unconfirmed return time: the T-formula is visible in the
   timeline, `legs.dep` carries ⚠️, `unverified` names it (§Day types)
 - Worship/siesta/free-day traps checked for every affected block
+- Weather rule 10 applied: a heat day has no unshaded open-air anchor 11:00-16:00, a
+  wet day's main line is the indoor version, wind-sensitive anchors carry the
+  cancellation note and a fallback
 
 ## Scheduled-day format
 

@@ -73,6 +73,20 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   foreign ministry (Auswärtiges Amt, travel.gc.ca, 中国领事服务网), then check the policy
   does not exclude the thing the trip is built on — ballooning, diving, motorbike
   pillion, altitude — and that it carries repatriation where hospitals want cash up front.
+- [ ] **hard — Street safety, six named lines** (the `brief.safety` template,
+  output-template.md §Brief templates): ① 2-3 current scams by name — the advisory
+  page's "Safety and security" section plus one `{city} scam tourists {year}` search;
+  ② pickpocket hotspots by line / station / square; ③ the taxi rule (which app, the
+  official airport rank, never the arrivals-hall tout); ④ the after-dark avoid list per
+  base; ⑤ what to do when it happens (police report first — the report number is the
+  claim key, data-sources.md §Travel insurance); ⑥ legal & customs red lines (drones ·
+  vapes · biosecurity declarations · alcohol / dress / blasphemy · photographing
+  military sites · same-sex relations law) from the advisory page's "Local laws".
+- [ ] **Money lines, the universal five** (data-sources.md §FX → Money safety): refuse
+  DCC · card FX fee → buffer · ATM fee and cap · cash number · which cards and wallets
+  work — plus the **mainland-China origin trio** when the traveller departs from
+  there: UnionPay vs Visa/MC acceptance, Alipay+ / WeChat coverage ⚡, foreign cash
+  pre-ordered 1-2 days ahead.
 
 ## Altitude
 
@@ -141,15 +155,23 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   markets), read every resolved `display_name` against the query, and re-query
   with the Japanese name (`強羅駅`, `産寧坂`) before trusting a hit — see
   navigation.md "Geocoding discipline".
+- Street safety: crime is low; the real risks are bicycles on pavements, the last
+  train's drunk crowd, and left-side traffic when crossing — these are lines ② and ④
+  of the six-line `brief.safety` template; the other four lines are still written,
+  mostly "none of note", never imported warnings.
 
 ## Korea
 - Google Maps directions are crippled — plan with Naver Map (EN ok) or Kakao Map.
 - T-money card everywhere; KTX via Korail site/app ⚡.
 - DMZ tours book out ~1 week and require the passport on the day.
+- Street safety: low crime; the risks are late-night drinking districts and taxis
+  refusing short rides (Kakao T solves the second) — lines ② ④ of the six-line
+  `brief.safety` template; the other four are written short ("none of note").
 
 ## Thailand / SE Asia
 - Grab is the city-transport default; 12go.asia for intercity bus/train/ferry.
-- Temples: shoulders/knees covered; schedule temples 08:00-11:00 and beat the heat.
+- Temples: shoulders/knees covered; temples take the opener slot — scheduling.md rule
+  10 (heat) triggers most days of the year here.
 - Onward-ticket rules enforced unevenly ⚡ — check before booking one-ways.
 - **Vietnam has its own section below** — the visa, licence and FX traps there are not
   generic to the region.
@@ -209,6 +231,11 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   small-town Italy.
 - City tourist tax is collected at the hotel, sometimes cash-only — put it in the budget.
 - August: locals on holiday — Paris/Madrid partially shut, coasts jammed ⚡.
+- Street safety (`brief.safety` lines ① ②, all ⚡ — re-check against the advisory
+  page): Rome — Termini and metro lines A / B, buses 64 and 40, the "friendship
+  bracelet" and petition-clipboard scams; Barcelona — La Rambla and metro L3, the
+  "bird-dropping" distraction; Paris — metro line 1, RER B from CDG, the "gold ring"
+  and petition scams; everywhere, taxis only from the official rank or the app.
 
 ## Italy — Rome / Florence / Venice specifics (as of 2026-08, after the Singapore→Italy test)
 - Entry: **Singapore (and most treaty) passports are Schengen visa-free, 90 days in
@@ -376,8 +403,9 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   **date-sensitive** — capacity, weather cancellations, and stinger season from ~Nov
   ⚡; book the specific date and keep the next day free as weather backup. Prices on
   operator sites (sunlover.com.au, quicksilver-cruises.com…) beat aggregators.
-- Money: cards everywhere, cash nearly unnecessary; tipping not expected. Sun index
-  is extreme even in spring — build shade/hat/water into hikes.
+- Money: cards everywhere, cash nearly unnecessary; tipping not expected. UV index
+  is extreme even in spring — scheduling.md rule 10 (heat) triggers on UV ≥ 8, so
+  hikes take the opener slot with shade / hat / water in the day note.
 
 ## Nordic — Norway first; Sweden / Denmark / Finland notes (as of 2026-08)
 - Entry: all four are Schengen. **Chinese passports need a Schengen visa, lodged with
@@ -416,6 +444,10 @@ reserves its 2-3 extra searches for the lines marked **hard**.
 - Regional notes: Stockholm — SL tap-to-ride, archipelago boats also seasonal ⚡;
   Copenhagen — Rejsekort or contactless, city very bikeable; Helsinki — HSL app,
   ferry to Tallinn is a valid day trip.
+- Street safety: very low crime; the hazards are ice on pavements (Oct-Apr), the
+  midnight-sun / polar-night sleep disruption, and hiking weather turning in an hour —
+  lines ② and ④ of the six-line `brief.safety` template; the other four are written
+  short ("none of note"), never imported warnings.
 
 ## Turkey (as of 2026-08, after the Shanghai→Turkey test)
 - **Entry — this one flipped recently. Chinese ordinary passports have been visa-free

@@ -172,7 +172,7 @@ decisions, hotel blurbs — is in the user's language too.** The research source
 mostly English and will drag your prose toward English if you let them; a zh user
 receiving an English page is a shipped bug, not a style choice (self-check row, Phase 6).
 
-## Phase 1 — Country brief (once per destination, ≤10 lines of output)
+## Phase 1 — Country brief (once per destination; ≤10 lines in chat — the `brief` cards themselves follow output-template.md §Brief templates)
 
 Read the destination's section of references/country-quick-notes.md first. **Destination
 not in that file (Mexico, Morocco, Turkey and Vietnam all weren't)** → work through its
@@ -203,8 +203,17 @@ list of things every new country costs a first planner 6-9 searches to rediscove
   in "A vs B" — but verify, never parse. Kickoff times can move for TV ⚡: re-check
   close to travel.
 - **Weather for those dates**: Open-Meteo recipes in data-sources.md (first call can
-  take ~10 s). One line: temps, rain odds, daylight.
-- **Money & connectivity one-liners**: card vs cash norms, eSIM ballpark, plug type.
+  take ~10 s). One line: temps, rain odds, daylight — stamped with its mode
+  (forecast / 5-yr normals + climate model) and as-of date per data-sources.md
+  §Weather; the Phase 6 exit criteria check the stamp.
+- **Money & connectivity — fixed lines, not a vibe.** `brief.money` carries the five
+  lines of output-template.md §Brief templates (refuse DCC · card FX fee → buffer ·
+  ATM rule · cash number · which cards and wallets work) plus the **origin-conditional
+  block** when it applies (mainland-China origin: UnionPay vs Visa/MC acceptance,
+  Alipay+/WeChat coverage, foreign-cash pre-order); `brief.connectivity` carries the
+  eSIM ballpark, plug type and the digital-safety line (home-number SMS 2FA reachable
+  abroad, phone-theft plan, cloud + offline copies of passport / visa / policy).
+  Recipes and thresholds: data-sources.md §FX → Money safety.
 - **Insurance line**: travel-medical insurance with destination-appropriate coverage
   goes on the checklist (US target: ≥$100k medical + medical evacuation — an ER visit
   is four figures before insurance). Tours never substitute for it. When the plan
@@ -212,9 +221,18 @@ list of things every new country costs a first planner 6-9 searches to rediscove
   departure" (the user buys — Hard rule 1); the agent's jobs are the read-side ones:
   verify the issued policy rather than the product page, and match the plan's
   activities against the exclusion list by name — data-sources.md §Travel insurance.
-- **Safety paragraph, one per base**: which areas to avoid after dark, and — more
-  useful than warnings — design the plan so night movement is door-to-door by car.
-  A route that never needs a dark walk beats a list of cautions.
+- **Emergency & health lines** (`brief.emergency`, `brief.health`): police / ambulance
+  numbers, the nearest mission's hotline and the vaccine / vector-borne / water lines
+  come only from the traveller's own foreign-ministry advisory page and the insurer's
+  assistance line — never from memory; nothing found → "n/a — see advisory" in the
+  card, not silence (output-template.md §Brief templates).
+- **Safety, written to the `brief.safety` template** (output-template.md §Brief
+  templates — six named lines: the destination's named scams · pickpocket hotspots ·
+  the taxi rule · the after-dark avoid list per base · what to do when it happens ·
+  legal & customs red lines). More useful than warnings: design the plan so night
+  movement is door-to-door by car — a route that never needs a dark walk beats a
+  list of cautions. Sources: country-quick-notes.md (the destination's section, or
+  the "Street safety" line of the not-listed checklist).
 
 ## Phase 2 — Route skeleton → checkpoint (a)
 
@@ -250,7 +268,11 @@ empty section (they used to crash — the Vietnam test lost both themed pages to
 - Run `scripts/flight_scan.py` (Google Flights data, keyless; `--help` for usage) to
   grid-scan the date window and both open-jaw directions. Fails twice → browser on
   Google Flights (URL recipes in data-sources.md). Google unreachable (some CN
-  networks) → Trip.com/携程 in the browser.
+  networks) → Trip.com/携程 in the browser. **Every international pick and backup
+  is priced in ≥ 2 sources** (Google + Skyscanner / Kayak / Trip.com / the carrier's
+  site — data-sources.md §Flights → Second price source); `legs.note` names them
+  with the as-of date, a > 10 % disagreement prints as a band. No browser pane →
+  Google alone, and `legs.note` says "single source — no browser".
 - Multi-airport cities: compare fare + ground transfer cost + time (HND vs NRT,
   LHR vs LGW/STN…). A ¥400-cheaper fare into a far airport often loses.
 - Departing CN: also spot-check one LCC directly in the browser (Spring 春秋, Peach,
@@ -334,8 +356,9 @@ Per city:
    Sells out → booking checklist with lead time (Ghibli, teamLab, Uffizi, Alhambra,
    Sagrada Família… see country-quick-notes.md). For dates more than ~3 months out
    nobody publishes that day's hours yet, so verify the **seasonal pattern + closure
-   rule**, stamp it "pattern as of {date}", and put "re-confirm hours 2 weeks before
-   travel" on the checklist. Claiming date-specific verification you cannot have is
+   rule**, stamp it "pattern as of {date}", and let the **T-14 row of the pre-departure
+   re-check ladder** (output-template.md §Pre-departure re-check ladder) carry the
+   re-confirmation. Claiming date-specific verification you cannot have is
    worse than admitting the horizon — and prices move on their own schedule
    (admission fees jump at fiscal-year boundaries), so re-check the fee, not just
    the hours. National parks and other big nature anchors: also read the park's
@@ -413,7 +436,8 @@ editable source — plus Phase 0's `prefs.theme` / `prefs.pictures` / `plan.lang
 Outputs — three things every time, handed over through the harness's artifact / file
 tool: (1) the **chat summary** — route one-liner, total budget, the 3 biggest decisions
 made for the user, and in stock mode the picture notice; (2) `trip-<theme>.html`;
-(3) `trip.kml` — plus the gates `.ics` when the checklist has date-locked gates.
+(3) `trip.kml` — plus the gates `.ics`, always: the pre-departure ladder rows are
+date-locked gates (output-template.md §Pre-departure re-check ladder).
 
 Gates — these decide pass/fail and do not move into the reference file:
 - **The deliverable is a themed page, never a plain text one.** The plain
@@ -433,8 +457,10 @@ Gates — these decide pass/fail and do not move into the reference file:
 
 ## When things fail
 
-- flight_scan.py errors twice → browser; browser blocked → deep links marked "price
-  unverified", keep moving.
+- flight_scan.py errors twice → browser Google Flights; that blocked too → the second
+  price source (Skyscanner / Kayak, data-sources.md §Flights → Second price source);
+  only when every source fails do deep links go out marked "price unverified", keep
+  moving.
 - A venue's hours survive 2 searches unverified → schedule it flagged "confirm on
   arrival"; don't burn more budget.
 - Anything still unverified at delivery gets a ⚠️ in the plan — visible honesty beats

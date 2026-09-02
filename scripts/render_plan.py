@@ -38,7 +38,8 @@ Schema (all keys optional except days[].date):
                                                         // places, in visit order
  "hotels": [{"base","area","why","options":[{"name","band","link"}]}],
  "budget": [{"cat","per_person","total","note"}],
- "brief":  {"visa","holidays","weather","money","connectivity"},
+ "brief":  {"visa","emergency","safety","health","holidays","weather","money",
+            "connectivity","insurance","baggage", ...},   # canonical order: output-template §Brief templates
  "unverified": ["teamLab hours could not be confirmed", ...]
 }
 """

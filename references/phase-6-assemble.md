@@ -10,7 +10,7 @@ Inputs: `plan.geo.json` assembled per references/output-template.md, plus Phase 
 `prefs.theme` / `prefs.pictures` / `plan.lang`. Outputs, three things every time: (1) the
 chat summary — route one-liner, total budget, the 3 biggest decisions made for the user,
 and in stock mode the picture notice; (2) `trip-<theme>.html`; (3) `trip.kml` — plus the
-gates `.ics` when the checklist has date-locked gates.
+gates `.ics`, always (the pre-departure ladder rows are date-locked gates).
 
 
 ## Assembly order
@@ -195,6 +195,13 @@ manual: references/themes.md.
       blacklisted cliché; the allusion is credited.
 - [ ] Stock mode: the picture notice is in `end.fine`, `cover.credit` and the chat
       summary, and every script placeholder was replaced with real words.
-- [ ] `trip.kml` shipped; the gates `.ics` offered when the checklist has date-locked gates.
+- [ ] `brief` keys in the canonical order with the required cards present
+      (output-template.md §Brief templates), every card titled in `BRIEF_TITLES`;
+      `brief.weather` and every weather line carry the mode (forecast / normals /
+      climate model) + as-of.
+- [ ] The pre-departure re-check ladder (T-14 / T-7 / T-3 / T-1) closes the checklist
+      and shipped as the gates `.ics`.
+- [ ] `trip.kml` shipped (the gates `.ics` is covered by the ladder line above — every
+      plan has gates now).
 - [ ] The chat summary carries the route one-liner, total budget and the 3 biggest
       decisions made for the user.

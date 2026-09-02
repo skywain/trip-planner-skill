@@ -39,6 +39,28 @@ deep link marked "verify on click". Statuses marked ✓ were live-tested 2026-08
   language, e.g. `Flights from PVG to KIX on 2026-10-02 returning from NRT 2026-10-14
   for 2 adults` — the q= parser understands open-jaw phrasing. Currency follows the
   Google region.
+- **Second price source — the rule, then the recipes.** Every international leg's
+  pick and backup must appear in **≥ 2 sources** (or be re-checked once on the
+  carrier's own site) — the one exception is a harness with no browser pane, where
+  Google alone ships and `legs.note` says "single source — no browser";
+  `legs.note` names the sources with the as-of date ("sources: Google +
+  Skyscanner, 2026-08-15"). When the sources disagree by more than 10 %, the `price`
+  field carries the band, not one number ("¥6,900–7,600"). Google failing is a reason
+  to open the next source, not a reason to write "price unverified".
+  - Skyscanner (site URL, no partner id; parameter names checked 2026-09):
+    `https://www.skyscanner.net/transport/flights/{orig}/{dest}/{YYMMDD}/{YYMMDD}/?adultsv2={N}&cabinclass=economy&rtn=1&preferdirects=false&currency={HOME}&locale={en-GB|zh-CN}`
+    — one-way: drop the second date and set `rtn=0`; multi-city ⚡ (verify on first
+    use, no `rtn`):
+    `/transport/flights-multi-city/{o1}/{d1}/{YYMMDD}/{o2}/{d2}/{YYMMDD}/?adultsv2={N}`.
+    Carries OTA and LCC inventory Google's cache
+    misses, and a month view for flexible dates. Browser pane only (bot wall on curl).
+  - Kayak: `https://www.kayak.com/flights/{ORIG}-{DEST}/{YYYY-MM-DD}/{YYYY-MM-DD}/{N}adults?sort=bestflight_a`
+    ⚡ verify the first time it is used in a session.
+  - ITA Matrix (`matrix.itasoftware.com` — fare rules, booking classes, open-jaw
+    pricing; it cannot sell a ticket): read the rules there, then price on Google or
+    the carrier's site.
+  - Mainland-China networks reach neither Google nor Skyscanner: there the Trip.com
+    line below is the primary source and Google the backup.
 - **CN networks / CN carriers**: https://www.trip.com/flights/ (or flights.ctrip.com)
   in the browser pane. Also check one LCC direct (Spring 春秋, Peach, Scoot, AirAsia…).
 - **Never** curl airline/OTA sites — instant bot-block, wasted call.
@@ -289,11 +311,37 @@ holiday calendar page (timeanddate-style) for the year — and put the dates in
 
 ## Weather — ✓ (archive call can take ~10 s on first hit)
 1. Geocode the city: `curl -s "https://geocoding-api.open-meteo.com/v1/search?name={city}&count=1"`
-2. Same-dates-last-year climate:
-   `curl -s "https://archive-api.open-meteo.com/v1/archive?latitude={lat}&longitude={lon}&start_date={dates-1y}&end_date={dates-1y}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto"`
-3. Trip starts within 16 days → real forecast instead:
-   `https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`
-   Run these with `--max-time 90`, one city per call, and assert the body is
+2. **Normals for dates beyond the forecast window — two calls, never one year's
+   sample.** Last year's same dates is one draw (one typhoon week rewrites "October
+   in Tokyo"); use both of these and write what they agree on:
+   - 2a. Five-year archive window, one call per city (✓ 2026-09-02: the call spans the
+     whole {dates-5y}→{dates-1y} range — 1,471 daily rows for a 10-day trip, of which
+     only the rows whose month-day falls inside the trip's dates are used;
+     on 2026-09-03 the endpoint answered 502 to every
+     window for an hour — transient: retry with `--max-time 90`, and fall back to 2b
+     alone if it stays down; the three extra variables ⚡ re-verify on first use):
+     `curl -s --max-time 90 "https://archive-api.open-meteo.com/v1/archive?latitude={lat}&longitude={lon}&start_date={dates-5y}&end_date={dates-1y}&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,precipitation_sum,precipitation_hours,wind_gusts_10m_max&timezone=auto"`
+     Keep only the rows whose month-day lies inside the trip window (5 per date),
+     then aggregate per month-day: median max / min, the share of
+     rain days (≥ 1 mm), the wettest day, the gustiest day.
+   - 2b. Climate-model normals, three models averaged (✓ 2026-09-03, keyless, any
+     future date):
+     `curl -s --max-time 90 "https://climate-api.open-meteo.com/v1/climate?latitude={lat}&longitude={lon}&start_date={dates}&end_date={dates}&models=EC_Earth3P_HR,MRI_AGCM3_2_S,MPI_ESM1_2_XR&daily=temperature_2m_max,temperature_2m_min,precipitation_sum"`
+     The response carries one column per model (`temperature_2m_max_EC_Earth3P_HR` …):
+     **average them and never quote a single model** — two models put 5 mm and 70 mm
+     on the same day in testing.
+3. Trip dates within 16 days of today → the real forecast for those dates (✓
+   2026-09-03 with every variable below):
+   `curl -s --max-time 90 "https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,precipitation_probability_max,uv_index_max,wind_gusts_10m_max&timezone=auto&forecast_days=16"`
+   `apparent_temperature_max`, `uv_index_max` and `wind_gusts_10m_max` are what
+   scheduling.md rule 10 reads (heat / rain / wind / cold thresholds).
+   **Per-day source selection**: a date ≤ today + 15 → forecast; any later date →
+   normals (2a + 2b); a trip that straddles the boundary gets both, each day labelled.
+   **Every weather line is stamped** with its mode and date — `… · Open-Meteo
+   forecast · as-of 2026-09-02` or `… · 5-yr normals + climate model · as-of
+   2026-09-02` — in `brief.weather` and in any per-day weather note; the T-7 row of
+   the pre-departure ladder (output-template.md) re-runs step 3 and re-applies rule 10.
+   Run all of these with `--max-time 90`, one city per call, and assert the body is
    non-empty JSON before reading numbers out of it — an empty 200 looks identical
    to a stall.
 4. Sunrise/sunset for golden-hour scheduling — preferred path is
@@ -355,6 +403,27 @@ direct CAD call returned an empty body)`. An empty body twice → go to step 2's
 fallback.
 Closed currencies (MAD, TND, DZD, …) also get one line in the money brief: not
 buyable before departure, not exportable — exchange on arrival / ATM.
+
+**Money safety — the recipes behind `brief.money`** (the card's five lines and their
+order live in output-template.md §Brief templates; the numbers below are that card's
+line numbers — source notes, not a second list):
+1. DCC: always "charge in local currency" at POS and ATM; the machine's conversion
+   costs 3-8 % per swipe. Universal — country sections only record exceptions.
+2. Card FX fee: read the issuer's foreign-transaction fee (0 % on a travel card,
+   1.5-3 % on most others); unknown → the budget's buffer row takes +1.5-3 % with
+   that reason in its note.
+3. ATMs: bank-lobby machines, shield the PIN, few large withdrawals; write the
+   country's typical fee and per-withdrawal cap ⚡ ("check on arrival" when unknown).
+4. Cash: two cards on different networks (Visa + Mastercard; UnionPay where it
+   works), the cash number sized to the destination's cash habit, and the
+   cash-declaration threshold on entry — EU ≥ €10,000 · US > $10,000 · Japan
+   > ¥1,000,000 ⚡ (verify per trip); confusable banknotes get one line where they
+   exist (Vietnam ₫20,000 vs ₫500,000).
+5. Acceptance: which of Visa / Mastercard / UnionPay / Alipay+ / WeChat Pay work
+   where — one line.
+Origin block, mainland-China departure only: UnionPay vs Visa/MC acceptance,
+Alipay+ / WeChat cross-border coverage ⚡, foreign cash pre-ordered 1-2 days ahead
+at home.
 
 ## Visa / entry
 Web search `{nationality} citizens visa {destination}` restricted to official
