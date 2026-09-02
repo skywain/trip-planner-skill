@@ -267,8 +267,10 @@ empty section (they used to crash — the Vietnam test lost both themed pages to
 **International:**
 - Run `scripts/flight_scan.py` (Google Flights data, keyless; `--help` for usage) to
   grid-scan the date window and both open-jaw directions. Fails twice → browser on
-  Google Flights (URL recipes in data-sources.md). Google unreachable (some CN
-  networks) → Trip.com/携程 in the browser. **Every international pick and backup
+  Google Flights (URL recipes in data-sources.md); that blocked too → the second
+  price source (Skyscanner / Kayak; on CN networks Trip.com/携程 is the primary and
+  Google the backup); "price unverified" only when every source fails — §When
+  things fail. **Every international pick and backup
   is priced in ≥ 2 sources** (Google + Skyscanner / Kayak / Trip.com / the carrier's
   site — data-sources.md §Flights → Second price source); `legs.note` names them
   with the as-of date, a > 10 % disagreement prints as a band. No browser pane →

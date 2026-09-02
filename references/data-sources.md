@@ -31,8 +31,9 @@ deep link marked "verify on click". Statuses marked ✓ were live-tested 2026-08
   An **`AssertionError`** means Google returned a non-200 page (bot wall / consent
   page) and the fallback renderer failed too — the error line echoes route + date
   only so you can see which grid cell died; it is **not** a bad airport code
-  (CNS→PEK failed on three valid dates this way). Wait and retry, or fall back to
-  deep links marked "price unverified". The scan
+  (CNS→PEK failed on three valid dates this way). Wait and retry, then open Google
+  Flights in the browser and the second price source below; "price unverified" only
+  when every source fails. The scan
   returns **outbound legs only** for a return trip: the return leg's departure time
   is not in the output — read it off the deep link when the plan needs a clock.
 - **Browser**: `https://www.google.com/travel/flights?q=` + URL-encoded natural
@@ -333,8 +334,9 @@ holiday calendar page (timeanddate-style) for the year — and put the dates in
 3. Trip dates within 16 days of today → the real forecast for those dates (✓
    2026-09-03 with every variable below):
    `curl -s --max-time 90 "https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,precipitation_probability_max,uv_index_max,wind_gusts_10m_max&timezone=auto&forecast_days=16"`
-   `apparent_temperature_max`, `uv_index_max` and `wind_gusts_10m_max` are what
-   scheduling.md rule 10 reads (heat / rain / wind / cold thresholds).
+   `apparent_temperature_max` + `uv_index_max` (heat), `wind_gusts_10m_max` (wind),
+   `precipitation_probability_max` (rain) and `temperature_2m_min` (cold) are what
+   scheduling.md rule 10 reads.
    **Per-day source selection**: a date ≤ today + 15 → forecast; any later date →
    normals (2a + 2b); a trip that straddles the boundary gets both, each day labelled.
    **Every weather line is stamped** with its mode and date — `… · Open-Meteo
