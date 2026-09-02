@@ -354,6 +354,7 @@ references/
   navigation.md               地图链接、跳转行格式、核实 vs 估算的策略
   country-quick-notes.md      分国家的通票、易售罄项、闭馆规律(+「目的地不在列表里」清单)
   output-template.md          城市块交接格式 + 最终交付物结构
+  phase-6-assemble.md         Phase 6 流程:组装、对抗自检、交付、主题渲染流程、退出判据
   cover-titles.md             中英双语诗意封面标题库 + 陈词滥调黑名单
   themes.md                   主题渲染手册:八种主题、如何加一种、缺陷检查清单
   art-schema.md               指向 themes/ART-SCHEMA.md
