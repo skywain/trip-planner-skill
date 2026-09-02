@@ -183,6 +183,10 @@ WALK_MIN_PER_KM = 14          # tourist pace incl. lights/photos
 MAX_WALK_KM = 1.6             # beyond this, guess transit
 DAY_WALK_FLAG_KM = 8.0
 SUSPICIOUS_KM = 12.0          # undeclared hop longer than this: same day? same city?
+DECLARED_CITY_MAX_KM = 60.0   # a DECLARED transit/walk hop longer than this is a
+                              # mis-geocoded stop (or a train/bus/drive/fly in disguise),
+                              # never a city ride — 2026-09 test: a Nairobi hotel geocoded
+                              # to Kisumu, 257 km, and "mode": "transit" silenced check
 TRANSIT_EST_MAX_KM = 20.0     # beyond this a straight-line minute range is fiction
 LINK_MAX_KM = 100.0           # beyond this no Google Maps deep link at all
 SUN_MOVE_KM = 150.0           # first->last stop farther than this: the day moved city
@@ -317,6 +321,13 @@ def hop_estimate(km, mode=None):
     tag = " (declared)" if declared else " (guessed)"
     if mode in LONG_MODES:
         return mode, True, mode.upper() + tag, None
+    if declared and km > DECLARED_CITY_MAX_KM:
+        return ("suspicious", True,
+                "SUSPICIOUS (>{:.0f} km declared {} — a city hop does not cross {:.0f} km: "
+                "a stop is probably mis-geocoded (read geocache.json display_name), or "
+                "the ride is a train/bus/drive/fly and must say so; never keep the mode "
+                "just to silence this)".format(DECLARED_CITY_MAX_KM, mode,
+                                               DECLARED_CITY_MAX_KM), None)
     if not declared and km > SUSPICIOUS_KM:
         return ("suspicious", False,
                 "SUSPICIOUS (>{:.0f} km straight-line, no mode — same day? same "
@@ -1257,17 +1268,126 @@ def cmd_sun(args):
         sys.exit(1)
 
 
+def _ics_escape(t):
+    return (str(t).replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,")
+            .replace("\r\n", "\\n").replace("\n", "\\n"))
+
+
+def _ics_fold(line):
+    """RFC 5545 folding at 75 octets, never inside a UTF-8 sequence."""
+    b, out, first = line.encode("utf-8"), [], True
+    while b:
+        limit = 75 if first else 74
+        chunk = b[:limit]
+        while 0 < len(chunk) < len(b) and (b[len(chunk)] & 0xC0) == 0x80:
+            chunk = chunk[:-1]
+        out.append(("" if first else " ") + chunk.decode("utf-8"))
+        b, first = b[len(chunk):], False
+    return "\r\n".join(out)
+
+
+def cmd_ics(args):
+    """gates .ics from the checklist: one VEVENT per row whose deadline carries an ISO
+    date or a T-N marker (T-14 = departure - 14 days; departure = days[0].date), floating
+    local time (no Z / TZID), two VALARMs (-P1D, -PT30M), stable UID per row, SEQUENCE
+    from --sequence (bump it on every plan change)."""
+    import hashlib
+    plan = load_plan(args.plan)
+    rows = plan.get("checklist") or []
+    if not isinstance(rows, list):
+        sys.exit("checklist must be a list of rows")
+    dep = None
+    try:
+        dep = _dt.date.fromisoformat(str(plan["days"][0].get("date", ""))[:10])
+    except (ValueError, IndexError, KeyError):
+        pass
+    hh, mm = (args.hour.split(":") + ["00"])[:2]
+    trip = str(plan.get("trip", "trip"))
+    slug = re.sub(r"[^A-Za-z0-9]+", "-", trip).strip("-").lower()
+    if len(slug) < 3:                      # CJK trip names strip to nothing useful
+        slug = "trip"
+    stamp = _dt.datetime.now(_dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    events, skipped = [], []
+    for i, r in enumerate(rows, 1):
+        if not isinstance(r, dict):
+            skipped.append((i, "not an object"))
+            continue
+        item = str(r.get("item", "")).strip()
+        deadline = str(r.get("deadline", ""))
+        m = re.search(r"(\d{4})-(\d{2})-(\d{2})", deadline)
+        day = None
+        if m:
+            try:
+                day = _dt.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+            except ValueError:
+                day = None
+        if day is None:
+            t = re.search(r"\bT-(\d+)\b", deadline)
+            if t and dep:
+                day = dep - _dt.timedelta(days=int(t.group(1)))
+        if day is None:
+            skipped.append((i, item[:40] + " — deadline {!r} has no ISO date or T-N marker"
+                            .format(deadline[:40])))
+            continue
+        uid = "{}-{}@trip-planner".format(slug, hashlib.sha1(item.encode("utf-8")).hexdigest()[:10])
+        desc = "{}:{} local, wherever you are.\nDEADLINE: {}".format(hh, mm, deadline)
+        if r.get("note"):
+            desc += "\nDO: {}".format(r["note"])
+        if r.get("link"):
+            desc += "\nLINK: {}".format(r["link"])
+        if r.get("price"):
+            desc += "\nPRICE: {}".format(r["price"])
+        start = _dt.datetime(day.year, day.month, day.day, int(hh), int(mm))
+        end = start + _dt.timedelta(hours=1)
+        ev = ["BEGIN:VEVENT", "UID:" + uid, "DTSTAMP:" + stamp,
+              "SEQUENCE:{}".format(args.sequence),
+              "DTSTART:" + start.strftime("%Y%m%dT%H%M%S"),
+              "DTEND:" + end.strftime("%Y%m%dT%H%M%S"),
+              "SUMMARY:" + _ics_escape(item), "DESCRIPTION:" + _ics_escape(desc),
+              "BEGIN:VALARM", "ACTION:DISPLAY",
+              "DESCRIPTION:" + _ics_escape("Tomorrow: " + item), "TRIGGER:-P1D", "END:VALARM",
+              "BEGIN:VALARM", "ACTION:DISPLAY",
+              "DESCRIPTION:" + _ics_escape("Now: " + item), "TRIGGER:-PT30M", "END:VALARM",
+              "END:VEVENT"]
+        events.append((day, ev))
+    events.sort(key=lambda e: e[0])
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0",
+             "PRODID:-//trip-planner//{}-gates//EN".format(slug), "CALSCALE:GREGORIAN",
+             "METHOD:PUBLISH", "X-WR-CALNAME:" + _ics_escape(trip + " — booking gates")]
+    for _, ev in events:
+        lines.extend(ev)
+    lines.append("END:VCALENDAR")
+    Path(args.out).write_text("\r\n".join(_ics_fold(l) for l in lines) + "\r\n",
+                              encoding="utf-8")
+    for i, why in skipped:
+        warn("ics: checklist row {} skipped — {}".format(i, why))
+    print("ics: {} event(s) written to {} ({} row(s) skipped, SEQUENCE={})".format(
+        len(events), args.out, len(skipped), args.sequence))
+    if not events:
+        sys.exit(1)
+
+
 def main():
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     for name, fn in [("geocode", cmd_geocode), ("check", cmd_check),
-                     ("links", cmd_links), ("kml", cmd_kml), ("sun", cmd_sun)]:
+                     ("links", cmd_links), ("kml", cmd_kml), ("sun", cmd_sun),
+                     ("ics", cmd_ics)]:
         p = sub.add_parser(name, description={
             "check": "Straight-line hop distances, (est) durations, on-foot vs "
-                     "ridden totals split declared/guessed. Exit 2 only for an "
-                     "undeclared >12 km hop or missing coordinates; declared "
+                     "ridden totals split declared/guessed. Exit 2 for an "
+                     "undeclared >12 km hop, a DECLARED transit/walk hop >60 km "
+                     "(a mis-geocoded stop — read geocache.json — or a train/bus/"
+                     "drive/fly that must say so) or missing coordinates; declared "
                      "fly/drive/boat/train/bus hops are fine.",
+            "ics": "The gates .ics from the checklist: one VEVENT per row whose "
+                   "deadline carries an ISO date or a T-N marker (T-14 = days[0].date "
+                   "- 14), floating local time at --hour (default 09:00), DTEND +1 h, "
+                   "two VALARMs (-P1D, -PT30M), stable UID per row, SEQUENCE from "
+                   "--sequence (bump on every plan change), 75-octet folding. Rows "
+                   "without a parseable deadline are listed as WARN. Exit 1 when no "
+                   "row produced an event.",
             "geocode": "Resolve stops via Nominatim in place (+ geocache.json); "
                        "preset/hand-filled coordinates are kept. WARNs when a hit's "
                        "display_name lacks the query's head token (possible wrong "
@@ -1299,6 +1419,11 @@ def main():
         p.add_argument("plan", help="plan JSON path")
         if name == "kml":
             p.add_argument("-o", "--out", default="trip.kml")
+        if name == "ics":
+            p.add_argument("-o", "--out", default="gates.ics")
+            p.add_argument("--hour", default="09:00", help="floating local time of every gate (HH:MM)")
+            p.add_argument("--sequence", type=int, default=0,
+                           help="SEQUENCE for every VEVENT — bump it on each plan change")
         if name == "links":
             p.add_argument("--write", action="store_true",
                            help="inject the URLs into the plan's hop rows and "

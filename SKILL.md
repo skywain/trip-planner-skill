@@ -134,7 +134,8 @@ Gates — these decide pass/fail and do not move into the reference file:
   but essential" / 谨慎前往 goes to the user with the line in front of them; regional
   "avoid" areas are checked base by base, leg by leg.
 - **Transit counts**: the visa audit and the yellow-fever certificate audit both run
-  over every transit airport before "no visa needed" is written anywhere.
+  over every transit airport before "no visa needed" is written anywhere — and the
+  yellow-fever audit starts from the departure country, not the passport.
 - **A hazard-season hit means a gate**: season card, hazard gate on the checklist and
   in the `.ics`, insurance deadline NOW, exposed bookings kept refundable.
 - **User-named events are verified before anything else is planned.**
@@ -206,7 +207,8 @@ Gates — these decide pass/fail and do not move into the reference file:
   calls.** Those
   facts are the assembler's Phase 1 job and override anything a city block says; a
   city agent's prompt carries **search budget ≤ 8**, an explicit **"do not run
-  geocoding"** line, and the plan language.
+  geocoding"** line, the plan language, the §city-block return format, and the
+  visa / entry hard rule as its last line.
 - **Hour-level timelines are the default deliverable**; day-level only when the user
   asks for a rough cut.
 - **`route_tools.py check` exits 0 before rendering** — a BROKEN or SUSPICIOUS hop is
@@ -250,9 +252,10 @@ Gates — these decide pass/fail and do not move into the reference file:
   and is recorded as "self-checked: N issues found and fixed" in `meta.self_check` and
   the last `decisions[]` row. The list lives in the reference file; a skipped item is
   a defect, not a shortcut.
-- **Acceptance bars are exit codes and eyes, not prose**: `route_tools check` exits 0
-  before rendering, `themes/qc.py` exits 0 after, and the export-probe PNG or the page
-  in a browser was actually looked at — none available → say so in the summary.
+- **Acceptance bars are exit codes and eyes, not prose**: `route_tools check` and
+  `scripts/plan_lint.py --strict` exit 0 before rendering, `themes/qc.py` exits 0
+  after, and the export-probe PNG or the page in a browser was actually looked at —
+  none available → say so in the summary.
 - **`plan.geo.json` stays the single editable source**: a later "move day 3 to Nara"
   is a JSON edit plus geocode → check → links → kml → render, never a rewrite.
 - **Cover title** comes from references/cover-titles.md — never a literal placeholder,
@@ -323,12 +326,20 @@ directory is not the skill directory and shell cwd does not persist between call
 - `scripts/flight_scan.py` — Google Flights grid scanner; run with `--help` first.
 - `scripts/route_tools.py` — geocode stops, distance-check clustering, emit per-hop +
   whole-day map links and the trip KML; subcommands geocode / check / links / kml /
+  ics (the gates `.ics` from the checklist's dated rows — `-o gates.ics`, bump
+  `--sequence` on every plan change) /
   sun (civil dawn + sunrise/sunset per day from sunrise-sunset.org, sanity-checked,
   written into `days[].sun` in the canonical format; point = first stop, last stop
   on a moving day, or the day's `sun_stop` when set; non-zero exit = a day was
   skipped/rejected).
 - `scripts/render_plan.py` — turn the plan JSON into the final self-contained HTML.
   It reads the same file route_tools does, so write the plan once and render often.
+- `scripts/plan_lint.py` — the plan's **content** gate, run with `--strict` before any
+  renderer (exit = FAIL count, like qc.py): brief present, non-empty and in canonical
+  order; no placeholder / "awaiting" text; no markdown headings in cells; the
+  self-check line in `meta.self_check`; art placeholders filled and `prefs.pictures`
+  matching how the art was made; the gates `.ics` beside the plan. `check` proves the
+  geography and `qc.py` the HTML — this proves the words.
 - `assets/plan.example.json` — runnable schema example **and the single source of
   truth for the plan's top-level keys** (`prefs`/`budget`/`legs`/`checklist`/`hotels`/
   `brief`/`days[]`… shapes; output-template.md §Top-level plan skeleton mirrors it):

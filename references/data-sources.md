@@ -433,9 +433,11 @@ government/embassy domains — blogs and forums are how people miss rule changes
 Capture: visa type, fee, processing days (→ checklist), passport-validity rule
 (the 6-month trap), onward-ticket requirement.
 - **The yellow-fever certificate (ICVP) is an entry document — audit it with the
-  visa**: for every entry country AND every transit airport read WHO Annex 1 (§Travel
-  health below) — is it a risk country, and does it require the certificate from
-  travellers arriving from one (transit footnotes: > 12 h / > 4 h / any duration /
+  visa**: the inputs are the departure country, every transit airport and every entry
+  country — the passport is irrelevant (a Chinese passport departing Brazil for Kenya
+  needs the ICVP: Brazil is a risk country, Kenya requires it from arrivals from one).
+  For each read WHO Annex 1 (§Travel health below) — is it a risk country, and does it
+  require the certificate from travellers arriving from one (transit footnotes: > 12 h / > 4 h / any duration /
   > 24 h in Brazil-Bolivia-Peru-Venezuela — read the footnote number on that country's
   row). A
   hit → checklist row "yellow-fever vaccine + ICVP", deadline departure − 10 days −

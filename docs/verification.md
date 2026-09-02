@@ -223,3 +223,53 @@ description; a contract line that names an output must also say what it contains
 weak model reads the name as the whole thing; test a split with the same probe set on both
 trees, and run a control before attributing any delta to the structure; count route hits
 from tool calls. Next candidates by size: Phase 0 (97 lines), Phase 4 (92), Phase 3 (63).
+
+## The unattended gap-fix program (2026-09-03)
+
+The owner's brief was one sentence — check the skill for gaps in clothing / weather /
+temperature, pests and disease, safety, and price comparison across domestic and foreign
+sites — and the follow-up was "split the phases out, then probe A/B". Both ran as one
+overnight program, gated at every step by the probe method above, and the whole of it is
+one branch for review, never merged by the agent.
+
+*Order and gates.* (1) Seven S-level audit items; (2) Phase 4 split; (3) Phase 1 split
+carrying four new procedures (advisory line, emergency card, health line with the
+yellow-fever audit, hazard line); (4) Phase 0 + Phase 3 splits; (5) a final wave. Each
+step: an adversarial wording review (must-fix items applied verbatim), then a five-probe
+matrix (opus / sonnet × low / medium effort, haiku × medium) answering scenario questions
+from the files alone, graded PASS / PARTIAL / FAIL with every miss classified
+MODEL_FAIL / SKILL_GAP / ROUTE_MISS; only SKILL_GAPs were fixed, and each fix was
+retested on the combos that missed. Splits ran as A/B against a snapshot of the tree
+taken the moment before; route hits were counted from the agents' tool calls.
+
+| step | probe | score | FAIL | route hit | SKILL_GAP → fixed |
+|---|---|---|---|---|---|
+| S-level fixes | 10 q | 46 / 50 | 0 | — | 2 |
+| Phase 4 split | A/B, 16 q | 74.5 → 72.0 / 80 | 0 | 5 / 5 | 1 |
+| Phase 1 split + M-level | 10 q | 43 / 50 | 0 | 5 / 5 | 2 |
+| Phase 0 + 3 splits | A/B, 16 q | 79.0 → 77.5 / 80 | 0 | 5 / 5, both files | 2 |
+| Final wave A (P0 · P1 · templates) | 18 q | 82 / 90 | 0 | 5 / 5 | 2 |
+| Final wave B (P3 · P4 · P6) | 18 q | 82 / 90 | 0 | 5 / 5, three files | 3 |
+
+Every A/B delta was the same defect: a stub that restated a step and dropped a
+qualifier ("per interest-fit", "silently" for the body's WARN, `lang` without "chrome
+only", the optional-line defaults) — five probes take the majority wording. The rule
+now: a contract line that restates the body keeps every qualifier verbatim.
+
+*The end-to-end test that changed the tooling.* A fresh Haiku agent planned São Paulo →
+Kenya, nine days, in Chinese, stock mode, and a Fable grader audited the artefacts.
+The plan itself was mostly model failure (no `brief` at all, "awaiting qc.py" in
+`meta.self_check`, a `## 总计` heading inside a budget cell, nine unfilled art
+placeholders, English `decisions[]`), but three things were the skill's: `route_tools
+check` and `themes/qc.py` both exited 0 on that plan — the required sections had no
+machine gate; the yellow-fever audit named entry countries and transit airports but not
+the departure country, so the tester audited by passport (China) instead of by origin
+(Brazil, a WHO risk country) and wrote "no certificate needed"; and the gates `.ics`,
+declared mandatory, was the one deliverable with no generator, so it was skipped. Fixes:
+`scripts/plan_lint.py` (the content gate, `--strict` before any render; the seven examples
+pass its default checks), `route_tools check` flags a declared transit / walk hop over
+60 km (a Nairobi hotel had geocoded to Kisumu, 257 km, and `"mode": "transit"` had
+silenced the flag), `route_tools ics` writes the calendar from the checklist rows, the
+yellow-fever audit now starts from the departure country, `prefs.pictures` records how
+the art was actually made, and the not-listed checklist asks about the headline seasonal
+draw at skeleton time.

@@ -159,10 +159,12 @@ pointer (recipes: data-sources.md §Travel health). Five lines:
 4. Rabies and animals: the page's rabies line + "no touching dogs / monkeys / bats;
    any bite → wash 15 min → ER the same day".
 5. Notice level + as-of (CDC Travel Health Notice level, or "none"), and the page URL.
-**Yellow-fever certificate audit** — an entry document, run with the visa audit: for
-every entry country AND every transit airport read WHO Annex 1 (data-sources.md §Travel
-health): is it a risk country, and does it require the certificate from travellers
-arriving from one (the transit footnotes: > 12 h / > 4 h / any duration / > 24 h in
+**Yellow-fever certificate audit** — an entry document, run with the visa audit. The
+inputs are the **departure country, every transit airport and every entry country** —
+the passport is irrelevant to yellow fever (a Chinese passport flying GRU → NBO: Brazil
+is a WHO risk country and Kenya requires the ICVP from anyone arriving from one → the
+row must exist). For each of them read WHO Annex 1 (data-sources.md §Travel health): is
+it a risk country, and does it require the certificate from travellers arriving from one (the transit footnotes: > 12 h / > 4 h / any duration / > 24 h in
 Brazil-Bolivia-Peru-Venezuela — read the footnote per country). Any hit → checklist row
 "yellow-fever vaccine + ICVP" (小黄本), deadline departure − 10 days −
 clinic lead time (the certificate is valid 10 days after the jab, for life since 2016;
@@ -200,8 +202,9 @@ country can refuse boarding.
       with source + as-of, no
       line from memory, every absent fact written "n/a — see advisory" beside the URL +
       as-of of the page read for it (an "n/a" with no page read behind it is a fail).
-- [ ] The visa audit and the yellow-fever audit covered every entry country and every
-      transit airport.
+- [ ] The visa audit covered every entry country and transit airport; the yellow-fever
+      audit covered the departure country, every transit airport and every entry country
+      (passport irrelevant).
 - [ ] No base, leg or day trip inside a "do not travel" or regional-avoid area; a
       Level-4 hit stopped the pipeline and asked.
 - [ ] Checklist rows: visa lead time · travel-clinic consult (when the health page

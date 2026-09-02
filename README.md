@@ -393,7 +393,8 @@ references/
   art-schema.md               pointer to themes/ART-SCHEMA.md
 scripts/
   flight_scan.py              Google Flights grid scanner (keyless, centre-out)
-  route_tools.py              geocode → distance check → map links → KML → sun times
+  route_tools.py              geocode → distance check → map links → KML → gates .ics → sun times
+  plan_lint.py                the plan's content gate before rendering: brief, placeholders, self-check line, art, .ics (exit = FAIL count)
   render_plan.py              plan JSON → self-contained printable HTML
   build_site.py               examples + showcase → the GitHub Pages demo site (_site/)
 .github/workflows/

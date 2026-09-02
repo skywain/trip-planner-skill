@@ -101,6 +101,9 @@ from it) so Phases 2-6 read one place and a later replan does not re-ask.
    still a designed page, just less bespoke. If you have an OpenRouter key, put it in
    `themes/.auth_header` (one line: `Authorization: Bearer <key>`) and tell me; then I
    generate the art for this trip."* Never ask for a key in the chat, never handle one.
+   `prefs.pictures` records how the pictures were **actually** produced, not what the
+   check found: a session that ran `stock_art.py` sets it to `stock` before rendering,
+   whatever `.auth_header` said — the chat summary's picture notice keys off it.
 4. **Stock mode covers two themes only**: complete for **illustrated** (default), works
    for **clay** (built-in terrain kit); the other six themes need generated pictures —
    a user asking for one of those in stock mode is told so and offered illustrated instead.

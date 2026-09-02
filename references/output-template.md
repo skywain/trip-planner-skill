@@ -490,7 +490,9 @@ them toward this one.
 Every plan's checklist ends with the same four rows, each naming what it re-checks
 (the brief lines and the `legs` by number), so re-verification is one ladder instead
 of five unrelated "re-confirm" lines. They are date-locked gates, so the ladder alone
-makes the gates `.ics` mandatory (floating 09:00, rules above).
+makes the gates `.ics` mandatory (floating 09:00, rules above) — generated with
+`python3 scripts/route_tools.py ics plan.geo.json -o gates.ics`, which reads each row's
+ISO date or `T-N` marker; write deadlines as `T-14 · 2026-10-31` so both parse.
 
 | row | re-checks | how |
 |---|---|---|

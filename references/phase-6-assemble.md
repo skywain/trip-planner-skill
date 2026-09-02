@@ -82,9 +82,17 @@ file with its own share/export buttons and the appendix (checklist, legs, hotels
 budget, brief). Publish through whatever artifact / file hand-off tool the harness
 has (in Claude Code: Artifact, else SendUserFile); otherwise save the file and give
 its absolute path. Ship the trip KML (`scripts/route_tools.py kml plan.geo.json -o
-trip.kml`) alongside for offline map apps; when the checklist carries date-locked
-gates, also offer the gates `.ics` (output-template.md §Booking-artifact
-conventions). The plain `scripts/render_plan.py plan.geo.json
+trip.kml`) alongside for offline map apps, and the gates `.ics` — always, because the
+ladder rows are date-locked gates (output-template.md §Pre-departure re-check ladder
+and §Booking-artifact
+conventions) — `python3 scripts/route_tools.py ics plan.geo.json -o gates.ics` writes it
+from the checklist rows (ISO dates or `T-N` markers in `deadline`; bump `--sequence`
+on every plan change). Before any renderer runs, **`python3 scripts/plan_lint.py
+plan.geo.json --strict` must exit 0**: it is the machine gate for what the plan says —
+brief present and in canonical order, no placeholder or "awaiting" text, the self-check
+line written, art placeholders filled, the gates `.ics` beside the plan. `check` proves
+the geography and `qc.py` the HTML; neither looks at the words. The plain
+`scripts/render_plan.py plan.geo.json
 -o trip.html` page (printable, checkbox checklist, offline route sketch per day) is an
 **extra** — add it when the user asks for a printable/plain version, or as the last
 resort if the theme renderer still fails after one honest fix attempt (then say so in
@@ -149,6 +157,8 @@ them. Flow:
      into `end.fine` (full) and `cover.credit` (short form; if the cover also cites a
      poem, keep the citation first and the notice after it — the fine print carries
      the full text anyway); keep both, and repeat the notice in the chat summary —
+     `prefs.pictures` is set to `stock` the moment `stock_art.py` runs, whatever Phase 0
+     found — the summary's notice keys off it;
      the exact strings are `notice.en` / `notice.zh` in `themes/assets/stock/index.json`
      (en: "Pictures: built-in stock kit — no image generator or key was available;
      provide one and the art is generated for this trip.").
@@ -181,6 +191,8 @@ manual: references/themes.md.
 
 ## Exit criteria — tick every line before the chat summary goes out
 
+- [ ] `python3 scripts/plan_lint.py plan.geo.json --strict` exited 0 before rendering
+      (brief present and in order, no placeholders, self-check line, art filled, `.ics`).
 - [ ] Adversarial self-check ran in full; "self-checked: N issues found and fixed" is in
       `meta.self_check` **and** the last `decisions[]` row (portal: in the chat summary).
 - [ ] `route_tools check` exited 0 before rendering; every sunrise / sunset / dark-start

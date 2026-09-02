@@ -27,8 +27,9 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   still all over the web. **The assembler owns this line — city subagents must not
   decide visa questions** (on the Turkey test both of them returned the stale answer and
   put it first on the checklist, which is the expensive kind of wrong). The same audit
-  carries the **yellow-fever certificate column** — every entry country and every
-  transit airport (data-sources.md §Visa / entry).
+  carries the **yellow-fever certificate column** — departure country, every transit
+  airport and every entry country; the passport is irrelevant to it (data-sources.md
+  §Visa / entry).
 - [ ] **Currency: closed or convertible, and does the FX source carry it?**
   `frankfurter.dev` carries exactly **30 currencies** (checked 2026-08: no MAD, no VND)
   and **silently drops** a symbol it doesn't have — HTTP 200, key just missing, so an
@@ -67,6 +68,10 @@ reserves its 2-3 extra searches for the lines marked **hard**.
 - [ ] **Intercity ticket release windows, each with its own date on the checklist.**
   Vietnam rail 60 days, China 12306 15 days, Japan JR 1 month, Trenitalia/Italo 90-120
   days, Norway Vy ~90 — plus night-bus operators and seasonal ferry timetables.
+- [ ] **hard — The headline seasonal draw vs the window.** Migration, blossom, aurora,
+  whales, monsoon closures, the dry-season safari: one search at skeleton time, the
+  answer written into `decisions[]` (the trip is re-shaped or the user is told what
+  the window does and does not offer) — not discovered in a day plan.
 - [ ] **Highest sleeping altitude and the ladder to it.** Not the highest point
   visited — the highest **bed**, and the steps up to it. See §Altitude below: this
   line reshapes the route order, so it is answered at skeleton time, not at packing

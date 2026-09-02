@@ -28,6 +28,7 @@ Source pointers are `file → function / section`.
 | [PLN-6](#pln-6) | Geocoding | Nominatim: 1 req/s, quiet misses on non-Latin names | open |
 | [PLN-7](#pln-7) | FX | frankfurter covers ~30 currencies; fallback is external | open |
 | [PLN-8](#pln-8) | Holidays | nager.at has no religious / lunar holidays | open |
+| [PLN-9](#pln-9) | Geocoding | A mis-geocoded stop inside 60 km is not detected; `check` only catches the long ones | open |
 | [AST-1](#ast-1) | Asset pipeline | `towebp.py` silently makes a white square from an un-cut PNG | open |
 | [AST-2](#ast-2) | Asset library | Test-asset reclaim is a manual merge | open |
 | [AST-3](#ast-3) | Generation | Without native generation in the agent, image/video generation needs an OpenRouter key | open |
@@ -589,6 +590,26 @@ pictures without any error.**
 - **Status** — open
 
 ---
+
+### PLN-9
+**A stop geocoded to the wrong place is only caught when it lands far away.**
+
+- **Symptom** — on the 2026-09 São Paulo → Kenya test, "Nairobi city center hotels"
+  resolved to Kisumu (257 km away); the planner wrote `"mode": "transit"` on the hop
+  and `check` exited 0, so the KML, the day-1 sunrise point and the walking total were
+  all wrong with every light green.
+- **Mitigations in place** — `route_tools.py check` now flags a DECLARED transit /
+  walk hop longer than 60 km as SUSPICIOUS (exit 2) — a city ride does not cross 60 km,
+  so the stop is mis-geocoded or the ride is a train / bus / drive / fly that must say
+  so; `geocode` already WARNs when the hit's `display_name` lacks the query's head
+  token. A wrong hit *inside* 60 km (the next suburb, a same-name street) still passes.
+- **Workaround** — read `geocache.json`'s `display_name` for every stop of a day
+  before `sun --write`, and hand-fill coordinates from the Google Maps place card for
+  anything that names another town; never keep a `mode` that only exists to silence
+  the flag (SKILL.md Phase 4 gate; phase-4-days.md step 6).
+- **Source** — `scripts/route_tools.py → hop_estimate` (DECLARED_CITY_MAX_KM),
+  `cmd_geocode` (head-token WARN). **Status:** open — the fix is comparing the hit's
+  city / county token with the day's `city` and exiting non-zero on a mismatch.
 
 ## Method and scope
 

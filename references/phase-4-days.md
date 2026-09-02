@@ -31,7 +31,8 @@ geocoder-friendly romanized/destination-local, and `kind`/`tag`/`verify` keep
 the English enum words the renderers switch on),
 and the exact return
 format from references/output-template.md §city-block — **plan-JSON day objects,
-insertable verbatim**, not a summary. Hard rule for the prompt: **city agents do not
+insertable verbatim**, not a summary — and, as the prompt's own last line, the hard
+rule: **city agents do not
 make visa/entry judgements** — no visa rows in their `checklist_items`, no "you need
 a visa" in notes. Visa/entry facts are the assembler's Phase 1 job and override
 anything a city block says (Turkey test: both city agents put an outdated "visa
@@ -50,7 +51,8 @@ Per city:
    order clusters so the route never criss-crosses town.
 2. **Verify every anchor**: open days + hours, last-entry time, price, and sell-out
    pressure (official site beats blogs; treat blog data >12 months old as stale).
-   Sells out → booking checklist with lead time (Ghibli, teamLab, Uffizi, Alhambra,
+   **Any anchor that sells out goes on the booking checklist with its lead time**
+   (Ghibli, teamLab, Uffizi, Alhambra,
    Sagrada Família… see country-quick-notes.md). For dates more than ~3 months out
    nobody publishes that day's hours yet, so verify the **seasonal pattern + closure
    rule**, stamp it "pattern as of {date}", and let the **T-14 row of the pre-departure
@@ -119,7 +121,8 @@ Per city:
       `checklist_items` or note (assembler-only facts).
 - [ ] Anchors per interest-fit, ≤ pace + 1 optional per day, clustered so the route
       never criss-crosses;
-      every anchor verified (hours, last entry, price, sell-out) or stamped "pattern as
+      every anchor verified (hours, last entry, price, sell-out — sell-out anchors on the
+      booking checklist with lead time) or stamped "pattern as
       of {date}" with the T-14 ladder row carrying the re-confirmation.
 - [ ] Each day has its rain alternative (closure-checked), its food area, its `ribbon`.
 - [ ] `route_tools.py` ran geocode → tz sweep → sun --write → links --write → check →

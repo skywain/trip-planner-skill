@@ -67,7 +67,8 @@ empty section (they used to crash — the Vietnam test lost both themed pages to
   one-way drop fees noted, and the airport↔park drive budgeted honestly (Bozeman→Old
   Faithful ≈ 2.5 h, Fresno→Yosemite Valley ≈ 2.5 h — the map's "nearby airport" is
   half a day of driving).
-- Record per driving leg: pick-up/drop point + counter hours, car class, price +
+- Record per driving leg: pick-up/drop point + counter hours, one-way drop fee,
+  airport↔park drive time (budgeted honestly), car class, price +
   as-of date, insurance note, fuel estimate, park entrance fee (per **vehicle** in the
   US; 3+ parks → an annual pass wins — the $80 America the Beautiful is
   residents-only since 2026, non-residents take the $250 pass from the 2nd park,
@@ -101,7 +102,8 @@ overnight-bag-only). Output 1 pick + 1 backup per leg.
 - [ ] Every leg row: carrier · date · dep / arr local · price + currency + as-of ·
       checked-bag fee · refund / change class · deep link; one pick + one backup.
 - [ ] Self-drive: the rental is its own leg with pick-up / drop-off, counter hours, car
-      class, price + as-of, insurance note, fuel, park fees, licence requirement; the
+      class, price + as-of, one-way drop fee, airport↔park drive time, insurance note,
+      fuel, park fees, licence requirement; the
       rental and the first gateway night are on the checklist.
 - [ ] Multi-leg trips carry the baggage walkthrough (where the big bag is on every tour
       / venue day).
