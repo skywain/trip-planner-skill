@@ -383,13 +383,18 @@ references/
   navigation.md               map links, hop-row format, verify-vs-estimate policy
   country-quick-notes.md      per-country passes, sell-outs, closure patterns (+ "destination not listed" checklist)
   output-template.md          the city-block hand-off + final deliverable structure
+  phase-0-intake.md           Phase 0 procedure: core vs optional facts, origin inference, intake message, prefs, picture-capability check, exit criteria
+  phase-1-brief.md            Phase 1 procedure: fact lines, advisory line, emergency card, health line + yellow-fever audit, hazard line, exit criteria
+  phase-3-legs.md             Phase 3 procedure: plan shape, price-source ladder, separate-tickets audit, rail vs fly, driving legs, leg fields, exit criteria
+  phase-4-days.md             Phase 4 procedure: city-agent contract, six per-city steps, route_tools order, sun / check rules, exit criteria
   phase-6-assemble.md         Phase 6 procedure: assembly, adversarial self-check, delivery, themed-render flow, exit criteria
   cover-titles.md             bilingual poetic cover-title library + cliché blacklist
   themes.md                   themed-render manual: the eight themes, adding one, defect checklist
   art-schema.md               pointer to themes/ART-SCHEMA.md
 scripts/
   flight_scan.py              Google Flights grid scanner (keyless, centre-out)
-  route_tools.py              geocode → distance check → map links → KML → sun times
+  route_tools.py              geocode → distance check → map links → KML → gates .ics → sun times
+  plan_lint.py                the plan's content gate before rendering: brief, placeholders, self-check line, art, .ics + .kml; --strict adds a stop and a sun --write string per day (exit = FAIL count)
   render_plan.py              plan JSON → self-contained printable HTML
   build_site.py               examples + showcase → the GitHub Pages demo site (_site/)
 .github/workflows/

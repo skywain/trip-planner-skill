@@ -125,7 +125,7 @@ def t(k):
 def sun_text(day):
     """The plan's sun line; sun --write emits 天亮 in zh and dawn in en, but an
     older en plan may still carry 天亮 — swap it for the page language."""
-    s = day.get("sun", "")
+    s = day.get("sun") or ""
     if lang() != "zh" and isinstance(s, str):
         s = s.replace("天亮", T("sun.dawn"))
     return et(s)

@@ -354,13 +354,18 @@ references/
   navigation.md               地图链接、跳转行格式、核实 vs 估算的策略
   country-quick-notes.md      分国家的通票、易售罄项、闭馆规律(+「目的地不在列表里」清单)
   output-template.md          城市块交接格式 + 最终交付物结构
+  phase-0-intake.md           Phase 0 流程:核心/可选事实、出发地推断、意图收集消息、prefs、生图能力检查、退出判据
+  phase-1-brief.md            Phase 1 流程:事实行、官方警示行、应急卡、健康行 + 黄热病核对、灾害行、退出判据
+  phase-3-legs.md             Phase 3 流程:plan 形状、价源梯子、分票签证核对、铁路 vs 飞、自驾段、航段字段、退出判据
+  phase-4-days.md             Phase 4 流程:城市子 agent 契约、每城六步、route_tools 顺序、sun / check 规则、退出判据
   phase-6-assemble.md         Phase 6 流程:组装、对抗自检、交付、主题渲染流程、退出判据
   cover-titles.md             中英双语诗意封面标题库 + 陈词滥调黑名单
   themes.md                   主题渲染手册:八种主题、如何加一种、缺陷检查清单
   art-schema.md               指向 themes/ART-SCHEMA.md
 scripts/
   flight_scan.py              Google Flights 价格网格扫描器(免密钥,从中心往外扩)
-  route_tools.py              geocode → 距离检查 → 地图链接 → KML → 日出日落
+  route_tools.py              geocode → 距离检查 → 地图链接 → KML → 闸门 .ics → 日出日落
+  plan_lint.py                渲染前的内容门禁:简报、占位文案、自检行、art、.ics + .kml;--strict 下再查每天有 stop 和 sun --write 串(退出码 = FAIL 数)
   render_plan.py              plan JSON → 自包含可打印 HTML
   build_site.py               examples + showcase → GitHub Pages 演示站(_site/)
 .github/workflows/

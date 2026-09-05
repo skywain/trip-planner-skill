@@ -77,144 +77,70 @@ assumption prominently at the top of the output.
 
 ## Phase 0 — Intake (one message, or none)
 
-**Read the request before deciding whether to ask anything.** Most requests already carry
-what matters — "帮我安排今年 10.1 到 10.7 的德国之旅" has the destination and the dates,
-and gets **zero questions**: infer the rest, list the assumptions in one block at the top
-of checkpoint (a), and move. Ask only when a *core* fact is missing **and** cannot be
-inferred — and then ask for everything in ONE message in the **intake format** below:
-core first, optional after, **only the items the user has not already answered**
-(anything stated in the request — destination, dates, party, "自驾", a style name, a
-budget — is settled and must not reappear as a question), each optional line with its
-default, one "all defaults" escape hatch.
+**Read `references/phase-0-intake.md` now, before you decide whether to ask the user
+anything** — it is the whole procedure for this phase (what counts as a core fact, how
+origin is inferred, the intake message format and its rules, what goes into `prefs`,
+the picture-capability check, the style line and the plan language, the exit
+criteria). This section is only the contract; do not compose an intake message from
+memory of the format.
 
-**Core** — must be known or defensibly assumed:
-- **Origin** (city/airport). Missing → infer from the conversation language, the user's
-  locale/timezone or anything said earlier, pick that country's main international hub and
-  state it as an assumption; it costs one line to fix at checkpoint (a) and a whole round
-  trip to ask. Genuinely unguessable → it is the one core question.
-- **Destination** (country, city or a shortlist). Missing → ask; nothing to plan without it.
-- **When / how long** (dates, or a duration + rough month + flexibility). Missing → ask.
-- **Page style** — one of the eight themes (Phase 6). Default: **illustrated 插画版**.
-  Before you mention styles at all, run the **picture-capability check** below — its
-  result decides what you say about pictures.
+Inputs: the user's request and anything said earlier. Outputs: the plan's top-level
+`prefs` block and `lang`, `prefs.pictures` (native | key | stock), the assumptions block
+for checkpoint (a) — and at most one intake message.
 
-**Optional** — ask them in the same message only when you are already asking; never
-send a message just for these. Unanswered → default, and the assumptions block says so:
-- travel style: self-drive · group tour · public transport + walking (default: public
-  transport, or self-drive where the destination is car-first — Phase 3 §Driving legs)
-- lodging habit: hotel · hostel · B&B / guesthouse · apartment · ryokan/onsen-style
-  stays, and the band (default: mid-range hotel, refundable)
-- scenery taste: scenery/nature · city · beach · forest · lake · mountain (default: read
-  from the destination + interests)
-- party size & mobility (default: 2 adults, no kids) · budget style or number (mid) ·
-  interests ranked (food/history/nature/anime/hiking/shopping/photography/nightlife) ·
-  pace 2/3/4 anchors per day (3) · ±day flexibility (±2) · passport nationality
-  (visa! infer from origin, state it) · locked must-sees.
+Gates — these decide pass/fail and do not move into the reference file:
+- **One message, or none.** Ask only when a core fact (origin · destination · when /
+  how long · page style) is missing **and** cannot be inferred; ask for everything in
+  ONE message in the intake format (core first, optional after, each optional line
+  with its default, one "all defaults" line); anything the user already stated is settled and
+  never re-asked; never a follow-up "just one more thing".
+- **Origin is inferred and stated, not asked** — from the conversation language, the
+  locale / timezone or earlier messages, as that city's own international airport — or,
+  when only a language / locale is known, that country's largest international gateway
+  (phase-0-intake.md lists the common hubs; São Paulo is GRU, not GIG) — unless it is
+  genuinely unguessable, which makes it the one core question.
+- **The picture-capability check runs silently before styles are mentioned**; never
+  ask for a key in chat, never read, print or copy `themes/.auth_header`; with no
+  generator the page still ships in a theme on the stock kit (illustrated or clay only;
+  the other six need generated pictures — offer illustrated) — a plain text page is
+  never the deliverable.
+- **`lang` follows the language the user asked in** — it drives the page chrome only
+  (`--lang` overrides); every content string in the plan is written in the user's
+  language too.
 
-**Intake format** (user's language; markdown; full zh/en samples in
-references/output-template.md §Intake message). Keep it to one screen:
+## Phase 1 — Country brief (once per destination)
 
-```
-**先确认几件事 —— 一条消息回我,写序号+答案;没写的按默认**
+**Read `references/phase-1-brief.md` now, before any fact about the destination is
+written** — it is the whole procedure for this phase (where each fact comes from; the
+visa / holiday / event / weather / money / insurance / safety lines; the advisory line,
+the emergency card, the health line with the yellow-fever audit, the hazard line; the
+exit criteria). This section is only the contract; never answer a Phase 1 fact from
+memory of the procedure or of the country. In chat, Phase 1 is ≤ 10 lines — the
+`brief` cards themselves follow output-template.md §Brief templates.
 
-**必答**
-1. 出发城市 —— 我猜是上海(你用中文问的),对吗?
-2. 玩多久、大概什么时候 —— 例:10.1–10.7,或「7 天 · 10 月 · 前后可挪 2 天」
+Inputs: destination(s), dates, the traveller's passport and origin, the skeleton
+candidates. Outputs: the `brief` cards in canonical order, the Phase 1 checklist rows
+(visa lead time · travel-clinic consult · yellow-fever vaccine + ICVP · insurance ·
+hazard gate · copies + registration), and the facts later phases inherit.
 
-**选答(不答走默认)**
-3. 页面风格:插画(默认)· 黏土 · 夜航 · 玻璃 · 手账 · Zine · 闪屏 · 穿越 —— 样子见 https://skywain.github.io/trip-planner-skill/
-4. 出行方式:公共交通+步行(默认)· 自驾 · 跟团
-5. 住宿:中档酒店(默认)· 青旅 · 民宿 · 公寓 · 温泉旅馆
-6. 偏好:城市 · 自然风光 · 海滩 · 森林 · 湖泊 · 山 —— 默认按目的地定
-7. 人数 / 预算 / 节奏:默认 2 成人 · 中档 · 每天 3 个主要点
-
-ℹ️ 本次会话没有生图能力,页面会用内置插画素材(仍是成品页,只是不如定制图贴合);有 OpenRouter key 的话放进 themes/.auth_header 再告诉我,就能为这趟生成。
-💡 回「默认」= 全部按默认,直接开工。
-```
-
-Rules for the block: numbering runs continuously over whatever is left; a heading with
-nothing under it is dropped; the ℹ️ line appears only in stock mode (Picture-capability
-check below), the 💡 line only when at least one optional item is shown; a guessed core
-value is asked as a confirmation ("我猜是 X,对吗?"), not as an open question; never
-more than one message, never a follow-up "just one more thing". English sample:
-output-template.md. The same facts, answered or defaulted, go into `prefs` next.
-
-Write what you learned or assumed into the plan's top-level `prefs` block
-(`assets/plan.example.json`: `theme`, `pictures`, `travel_style`, `lodging`, `scenery`,
-`pace`, `budget`, and `notes` — the inferred values in one line, e.g. "assumed origin
-PVG (zh request, no origin given)"; the assumptions block at checkpoint (a) is written
-from it) so Phases 2-6 read one place and a later replan does not re-ask.
-
-**Picture-capability check** — silent, once, before styles come up:
-1. You have a **native image-generation tool** → bespoke art for this trip, nothing to
-   configure (`prefs.pictures = "native"`).
-2. Else `<skill>/themes/.auth_header` exists (`test -s`; never read, print or copy it) →
-   `gen.py` over OpenRouter with the user's key (`"key"`).
-3. Neither → **the page still ships in a theme** (Phase 6 — a plain text page is never
-   the deliverable): the built-in **stock kit** (`themes/assets/stock/`) supplies the
-   pictures (`"stock"`). Tell the user once — in the intake message if you are sending
-   one, otherwise in the assumptions block at checkpoint (a): *"No image generator is
-   available in this session, so the page will use the built-in stock illustrations —
-   still a designed page, just less bespoke. If you have an OpenRouter key, put it in
-   `themes/.auth_header` (one line: `Authorization: Bearer <key>`) and tell me; then I
-   generate the art for this trip."* Never ask for a key in the chat, never handle one.
-   Stock mode is complete for **illustrated** (default) and works for **clay** (built-in
-   terrain kit); the other six themes need generated pictures — say so if the user asks
-   for one, and offer illustrated instead.
-
-Style, when you do ask, is one line: the eight names with the showcase link
-(https://skywain.github.io/trip-planner-skill/; offline: render
-`themes/render_picker.py`), "skip = illustrated". Set the plan's top-level `"lang"` (`zh` | `en`,
-output-template.md §Plan language) from the language the user asked in — the rendered
-pages' UI follows it; `--lang` overrides. `lang` covers the page chrome only: **every
-content string you write into the plan — day titles, notes, tips, checklist rows,
-decisions, hotel blurbs — is in the user's language too.** The research sources are
-mostly English and will drag your prose toward English if you let them; a zh user
-receiving an English page is a shipped bug, not a style choice (self-check row, Phase 6).
-
-## Phase 1 — Country brief (once per destination, ≤10 lines of output)
-
-Read the destination's section of references/country-quick-notes.md first. **Destination
-not in that file (Mexico, Morocco, Turkey and Vietnam all weren't)** → work through its
-"Destination not listed? — the checklist" section instead of improvising: it is the
-list of things every new country costs a first planner 6-9 searches to rediscover.
-
-- **Visa/entry** for that passport: official government/embassy sources only; put the
-  processing lead time on the booking checklist. Rules change — never answer from memory.
-  Transit countries count too: a separate-ticket connection can force ENTERING the hub
-  country to re-check bags (Phase 3 §International, the separate-tickets bullet) — run
-  that audit here, before writing "no visa needed" anywhere.
-  **This judgement is the assembler's alone**: city subagents (Phase 4) do not make
-  visa/entry calls, and anything they say about it is overwritten by this line.
-- **Holidays colliding with the window**:
-  `curl -s "https://date.nager.at/api/v3/PublicHolidays/{year}/{ISO2}"` (keyless ✓).
-  A national holiday means closures + crowds + hotel spikes — annotate affected days.
-- **What the holiday API can't see** — one budgeted search per city
-  (`{city} festival OR events {month} {year}`) plus, where relevant: seasonal
-  operating windows for mountain/garden/boat anchors, per-venue annual maintenance
-  shutdowns of headliners, and Ramadan dates in Muslim-majority destinations (daytime
-  food logistics, shifted hours, packed evenings). A local festival closes streets and
-  triples hotel rates while every holiday feed says the day is ordinary.
-- **User-named events get verified before anything else is planned.** A match,
-  concert or festival in the request is the hardest pin in the whole trip — confirm
-  team/venue/city, date, local kickoff time and ticket on-sale status FIRST, because
-  the skeleton hangs off it ("Columbus vs Miami" is a home game in Ohio, and a route
-  built around the wrong coast is a 13-day bug). US listings put the home side first
-  in "A vs B" — but verify, never parse. Kickoff times can move for TV ⚡: re-check
-  close to travel.
-- **Weather for those dates**: Open-Meteo recipes in data-sources.md (first call can
-  take ~10 s). One line: temps, rain odds, daylight.
-- **Money & connectivity one-liners**: card vs cash norms, eSIM ballpark, plug type.
-- **Insurance line**: travel-medical insurance with destination-appropriate coverage
-  goes on the checklist (US target: ≥$100k medical + medical evacuation — an ER visit
-  is four figures before insurance). Tours never substitute for it. When the plan
-  carries a monitored hazard gate, the insurance row's deadline is NOW, not "before
-  departure" (the user buys — Hard rule 1); the agent's jobs are the read-side ones:
-  verify the issued policy rather than the product page, and match the plan's
-  activities against the exclusion list by name — data-sources.md §Travel insurance.
-- **Safety paragraph, one per base**: which areas to avoid after dark, and — more
-  useful than warnings — design the plan so night movement is door-to-door by car.
-  A route that never needs a dark walk beats a list of cautions.
+Gates — these decide pass/fail and do not move into the reference file:
+- **Every Phase 1 fact is the assembler's alone** — visa / entry, advisory, health,
+  hazard, insurance: city agents never decide them, and anything they say is
+  overwritten.
+- **Official sources only, never memory** — government, embassy and foreign-ministry
+  pages, CDC / TravelHealthPro / WHO, the insurer's schedule — each line stamped
+  source + as-of; nothing found → "n/a — see advisory", not a guess. The plan never
+  doses or prescribes: it writes the travel-clinic consult date and the agenda.
+- **The advisory level drives the plan**: a base, leg or day trip in a "do not travel"
+  / Level 4 / 暂勿前往 area stops the pipeline and asks the user; Level 3 / "avoid all
+  but essential" / 谨慎前往 goes to the user with the line in front of them; regional
+  "avoid" areas are checked base by base, leg by leg.
+- **Transit counts**: the visa audit and the yellow-fever certificate audit both run
+  over every transit airport before "no visa needed" is written anywhere — and the
+  yellow-fever audit starts from the departure country, not the passport.
+- **A hazard-season hit means a gate**: season card, hazard gate on the checklist and
+  in the `.ics`, insurance deadline NOW, exposed bookings kept refundable.
+- **User-named events are verified before anything else is planned.**
 
 ## Phase 2 — Route skeleton → checkpoint (a)
 
@@ -238,158 +164,66 @@ list of things every new country costs a first planner 6-9 searches to rediscove
 
 ## Phase 3 — Flights & intercity legs
 
-From here on you are writing `plan.geo.json`. **`assets/plan.example.json` is the single
-source of truth for the plan's top-level shape** — `legs`, `checklist`, `budget`,
-`hotels`, `brief`, `days[]`… — so open it (or output-template.md §Top-level plan
-skeleton, copied from it) before writing a field. `budget` is a list of
-`{cat, per_person, total, note}` rows, not `{note, rows}`; `legs` rows use
-`from/to/dep/arr`. A wrong shape does not fail loudly: the renderers WARN and print an
-empty section (they used to crash — the Vietnam test lost both themed pages to it).
+**Read `references/phase-3-legs.md` now, before the first flight scan** — it is the
+whole procedure for this phase (the plan shape, the international price-source ladder,
+multi-airport and LCC arithmetic, the separate-tickets audit, intercity rail vs fly,
+driving legs, what every leg row records, the exit criteria). This section is only the
+contract; do not price a leg from memory of the procedure.
 
-**International:**
-- Run `scripts/flight_scan.py` (Google Flights data, keyless; `--help` for usage) to
-  grid-scan the date window and both open-jaw directions. Fails twice → browser on
-  Google Flights (URL recipes in data-sources.md). Google unreachable (some CN
-  networks) → Trip.com/携程 in the browser.
-- Multi-airport cities: compare fare + ground transfer cost + time (HND vs NRT,
-  LHR vs LGW/STN…). A ¥400-cheaper fare into a far airport often loses.
-- Departing CN: also spot-check one LCC directly in the browser (Spring 春秋, Peach,
-  Scoot…) — aggregators miss or misprice some LCC inventory.
-- **Separate tickets across an international connection are a visa trap, not just
-  a baggage nuisance** — audit whenever two PNRs meet at a foreign hub, including
-  tickets the user bought before coming to you. Separate-journey policies tag bags
-  only to the first ticket's endpoint, and carousels sit landside — so claiming +
-  re-checking can REQUIRE entering the transit country. Before writing "no visa
-  needed", check: the first carrier's separate-PNR interline stance (assume no
-  through-check), the passport's transit-country visa need, and airside overnight
-  options if the layover crosses a night. A needed transit visa goes on the
-  checklist with its deadline counted back from the departure date.
-- LCC arithmetic: add the checked-bag fee before comparing — a "cheap" fare + ¥280 bag
-  usually isn't.
+Inputs: the chosen skeleton (Phase 2), `prefs.travel_style`, the Phase 1 visa / entry
+facts (transit countries included). Outputs: `legs[]` — one pick + one backup per leg —
+the checklist rows for flights, date-locked rail and rentals, their budget rows, and the
+baggage walkthrough for multi-leg trips.
 
-**Intercity within the destination:**
-- Mode rule: rail wins under ~5 h station-to-station (city-center to city-center, no
-  airport buffers); fly beyond that or across water; overnight options only for
-  shoestring budgets.
-- Price on the **operator's** site — resellers add fees. Country-quick-notes.md lists
-  the operators and their booking-window rules (high-speed fares rise as buckets sell).
-
-**Driving legs (parks and car-first destinations):**
-- A national park without a car is a bus-tour compromise — decide that explicitly with
-  the user, never by default. A rental is its own leg: pick-up/drop-off at airports,
-  one-way drop fees noted, and the airport↔park drive budgeted honestly (Bozeman→Old
-  Faithful ≈ 2.5 h, Fresno→Yosemite Valley ≈ 2.5 h — the map's "nearby airport" is
-  half a day of driving).
-- Record per driving leg: pick-up/drop point + counter hours, car class, price +
-  as-of date, insurance note, fuel estimate, park entrance fee (per **vehicle** in the
-  US; 3+ parks → an annual pass wins — the $80 America the Beautiful is
-  residents-only since 2026, non-residents take the $250 pass from the 2nd park,
-  country notes §USA), and the license requirement for the driver's
-  passport (see country notes).
-- Gateway towns run out of cars and rooms in season — the rental and the first night
-  go on the booking checklist, not the "later" pile.
-
-**Record for every leg**: carrier, date, dep/arr local times, price + currency + as-of
-date, **checked-bag fee** (US domestic: $35-45 per bag per one-way on every major
-since Southwest ended free bags in 2025 — 4 legs is a real budget line; UA Basic
-Economy is personal-item-only on domestic and short-haul Latin America routes,
-while long-haul international Basic Economy does include the carry-on ⚡),
-refund/change class, deep link. Multi-leg trips get a
-**baggage walkthrough**: where the big bag physically is on every tour/venue day
-(day tours = bag stays at hotel; stadiums ban bags; 2-day tours are often
-overnight-bag-only). Output 1 pick + 1 backup per leg.
+Gates — these decide pass/fail and do not move into the reference file:
+- **`assets/plan.example.json` is the single source of truth for the plan's shape** —
+  open it before writing a field; a wrong shape does not fail loudly — the renderers
+  WARN and print an empty section.
+- **Every international pick and backup is priced in ≥ 2 sources** (flight_scan /
+  Google + Skyscanner / Kayak / Trip.com / the carrier's site); `legs.note` names them
+  with the as-of date; a > 10 % disagreement prints as a band; no browser pane → Google
+  alone and the note says so. "Price unverified" only when every source fails.
+- **Separate tickets across a foreign hub are a visa trap**: the audit runs before "no
+  visa needed" is written anywhere — including tickets the user already holds.
+- **Rail wins under ~5 h station-to-station; price on the operator's site.** A park
+  without a car is decided with the user, never by default.
+- **Every leg row carries price + currency + as-of, the checked-bag fee, the refund /
+  change class and a deep link**; one pick + one backup per leg.
 
 ## Phase 4 — City day-plans
 
-When ≥3 cities and subagents are available, fan out one agent per city; each prompt
-must include: the dates, the user's interests + pace, **search budget ≤8**, an
-explicit **"do not run geocoding"** line (parallel agents would break Nominatim's
-1 req/s policy — the assembler geocodes once, centrally), **the plan language**
-(`plan.lang`, with one line telling the agent every reader-facing string in its
-returned block — `label`, `what`, `note`, `why`, hotel blurbs, checklist rows,
-`unverified[]` — is written in that language; its sources will mostly be
-English, and English notes pasted verbatim are how a zh plan goes half-English.
-Machine fields keep the schema's form regardless: `stops[].query` stays
-geocoder-friendly romanized/destination-local, and `kind`/`tag`/`verify` keep
-the English enum words the renderers switch on),
-and the exact return
-format from references/output-template.md §city-block — **plan-JSON day objects,
-insertable verbatim**, not a summary. Hard rule for the prompt: **city agents do not
-make visa/entry judgements** — no visa rows in their `checklist_items`, no "you need
-a visa" in notes. Visa/entry facts are the assembler's Phase 1 job and override
-anything a city block says (Turkey test: both city agents put an outdated "visa
-required" as checklist item #1; entry had been visa-free since 2026-01-02).
-Otherwise do the cities sequentially with the
-same structure. When the user prefers group tours, the city agent's first job is
-finding real in-sale products with departure schedules (data-sources.md §Group
-tours) — the tour's schedule then dictates the surrounding legs, and a fly-in day
-tour must clear BOTH weekday grids (operator departure days AND feeder-flight
-schedules — same section) before its day is fixed in the skeleton.
+**Read `references/phase-4-days.md` now, before any city is planned or any city agent
+is launched** — it is the whole procedure for this phase (the city-agent contract, the
+six per-city steps, the route_tools order, the `sun` / `check` rules, and the exit
+criteria). This section is only the contract; do not plan a city from memory of the
+procedure, and build every city-agent prompt from that file's §City-agent contract
+(paste its lines, or pass the file's absolute path — the agent never sees SKILL.md).
 
-Per city:
-1. Anchors per interest-fit, ≤ pace + 1 optional per day. Cluster by geography per day;
-   order clusters so the route never criss-crosses town.
-2. **Verify every anchor**: open days + hours, last-entry time, price, and sell-out
-   pressure (official site beats blogs; treat blog data >12 months old as stale).
-   Sells out → booking checklist with lead time (Ghibli, teamLab, Uffizi, Alhambra,
-   Sagrada Família… see country-quick-notes.md). For dates more than ~3 months out
-   nobody publishes that day's hours yet, so verify the **seasonal pattern + closure
-   rule**, stamp it "pattern as of {date}", and put "re-confirm hours 2 weeks before
-   travel" on the checklist. Claiming date-specific verification you cannot have is
-   worse than admitting the horizon — and prices move on their own schedule
-   (admission fees jump at fiscal-year boundaries), so re-check the fee, not just
-   the hours. National parks and other big nature anchors: also read the park's
-   official Alerts/Current Conditions page — storm, fire and eruption closures
-   outlast news cycles, and a partially-open park may hold 2-3 hours of content
-   where the brochure promises a day (resize the day; design it droppable while
-   the region is in disaster recovery). When the draw is a natural phenomenon
-   (lava fountains, aurora), plan the day to work WITHOUT it: base rate ≈ event
-   duration ÷ recurrence interval, the official forecast horizon (days, not
-   weeks) sets a decision gate on the checklist — keep every related booking
-   cancellable until that gate, and pay no premium for a lottery ticket.
-3. Transit: day-pass vs pay-per-ride arithmetic — sum the day's expected rides and
-   recommend the pass only when it actually wins. Note the local IC card / transit app.
-4. Each day gets one rain alternative and a food **area** (market/street/neighborhood)
-   near the evening cluster — named restaurants only on request; they churn too fast.
-5. Timing realism: transit between clusters from Google Maps (browser) or mark the
-   estimate unverified; hard stop = last entry, and nothing scheduled after it.
-6. **Timeline assembly — hour-level is the default deliverable.** Read
-   references/scheduling.md (dwell times, tiered ticket margins, buffer policy,
-   arrival/moving/departure day structures, worship + siesta + crowd-calendar traps,
-   degradation tags) and references/navigation.md (hop links, canonical hop-row
-   format, exit numbers, verify-vs-estimate rules), then run scripts/route_tools.py
-   in this order: **geocode → per-day tz sweep → sun --write → links --write →
-   check → kml**, so every hop carries a distance-sane duration and a tappable map
-   link written into the plan for you. **`check` must exit 0 before rendering** —
-   a BROKEN hop is a stop with no lat/lon (geocode it, or hand-fill: navigation.md
-   §2), a SUSPICIOUS hop is an undeclared hop over 12 km (the day is mis-clustered,
-   or the ride needs its `mode`); fix the plan, never explain the flag away — not in
-   prose, and not with a `mode` slapped on to silence it (a tester shipped exit-2
-   output rationalised as "expected for a multi-city trip" — every flagged hop was
-   a real defect).
-   `sun --write` runs once the stops carry coordinates: it fills every day's
-   `sun` (civil dawn · sunrise / sunset) in one canonical string and refuses data
-   that fails a solar sanity check — never hand-copy sunrise numbers, and **run it
-   before writing any sunrise / golden-hour / dark-start prose**: tz changes live in
-   tzdata, not in your head (Morocco moves to UTC+0 on 2026-09-20 — the tester's
-   hand-written times were an hour off on all ten days, and neither `check` nor
-   `qc.py` compares prose against `sun`). A moving day defaults to the last stop;
-   when the day's sunrise anchor is at the *first* stop, set the day's `sun_stop`
-   (scheduling.md rule 7). **A plan that crosses timezones stamps every day's `tz`
-   (IANA name) before `sun --write`** — sun refuses any day whose zone it would
-   have to guess from longitude (the guess puts Hawaii at UTC-11), and it refuses
-   per-day, so one sweep over `days[].tz` beats fifteen retries.
-   **`sun`: non-zero exit = at least one day was skipped or rejected** — the written
-   days are fine, re-run `--only DATE` for the ones it names before writing prose
-   for them. Mark ridden
-   hops with a `mode` on the arriving stop (`transit`/`train`/`bus`/`drive`/`boat`/
-   `fly`; long signature walks `walk`), or the walking total and the links will
-   both be wrong — `check` says (guessed) next to anything you left it to infer.
-   Transit durations come back as ranges — keep them ranges unless you
-   browser-verified the hop. Deliver day-level granularity only if the user asks for
-   a rough cut. Each finished day also gets its `ribbon` one-liner (Stop1 →walk 12′→
-   Stop2 →metro 9′→ …, output-template.md §5) — no script writes it; seven blank
-   ribbons is the usual way to find out you forgot.
+Inputs: the chosen skeleton (Phase 2), the legs table (Phase 3), the Phase 1 brief
+facts and `prefs`. Outputs: per city, plan-JSON day objects insertable verbatim into
+`days[]` (output-template.md §city-block) — `stops`, hour-level `timeline`,
+`hop_links`, `sun`, `rain_alt`, `ribbon` — plus the city's `checklist_items`.
+
+Gates — these decide pass/fail and do not move into the reference file:
+- **City agents never make visa / entry / health / advisory / hazard / insurance
+  calls.** Those
+  facts are the assembler's Phase 1 job and override anything a city block says; a
+  city agent's prompt carries **search budget ≤ 8**, an explicit **"do not run
+  geocoding"** line, the plan language, the §city-block return format, and the
+  visa / entry hard rule as its last line.
+- **Hour-level timelines are the default deliverable**; day-level only when the user
+  asks for a rough cut.
+- **`route_tools.py check` exits 0 before rendering** — a BROKEN or SUSPICIOUS hop is
+  fixed in the plan, never explained away in prose. A SUSPICIOUS hop has exactly two
+  fixes: a vehicle really runs it (fly / drive / boat / train / bus) → declare that
+  `mode` on the arriving stop and give it its `legs[]` row (add the row if the leg has
+  none); nothing runs it (a 250 km hop inside one city is a mis-geocoded stop) → fix
+  the stop, never the `mode`.
+- **`sun --write` runs before any sunrise / golden-hour / dark-start prose**, after
+  the stops carry coordinates; a plan that crosses timezones stamps every day's `tz`
+  first.
+- Every day has its rain alternative, its food area and its `ribbon`; anchors are
+  chosen per interest-fit, ≤ pace + 1 optional per day.
 
 ## Phase 5 — Hotels
 
@@ -413,7 +247,8 @@ editable source — plus Phase 0's `prefs.theme` / `prefs.pictures` / `plan.lang
 Outputs — three things every time, handed over through the harness's artifact / file
 tool: (1) the **chat summary** — route one-liner, total budget, the 3 biggest decisions
 made for the user, and in stock mode the picture notice; (2) `trip-<theme>.html`;
-(3) `trip.kml` — plus the gates `.ics` when the checklist has date-locked gates.
+(3) `trip.kml` — plus the gates `.ics`, always: the pre-departure ladder rows are
+date-locked gates (output-template.md §Pre-departure re-check ladder).
 
 Gates — these decide pass/fail and do not move into the reference file:
 - **The deliverable is a themed page, never a plain text one.** The plain
@@ -423,9 +258,11 @@ Gates — these decide pass/fail and do not move into the reference file:
   and is recorded as "self-checked: N issues found and fixed" in `meta.self_check` and
   the last `decisions[]` row. The list lives in the reference file; a skipped item is
   a defect, not a shortcut.
-- **Acceptance bars are exit codes and eyes, not prose**: `route_tools check` exits 0
-  before rendering, `themes/qc.py` exits 0 after, and the export-probe PNG or the page
-  in a browser was actually looked at — none available → say so in the summary.
+- **Acceptance bars are exit codes and eyes, not prose**: `route_tools check` and
+  `scripts/plan_lint.py --strict` exit 0 before rendering (the only tolerated FAIL: a
+  polar day's `sun`, PLN-11), `themes/qc.py` exits 0 after, and the export-probe PNG
+  or the page in a browser was actually looked at — none available → say so in the
+  summary.
 - **`plan.geo.json` stays the single editable source**: a later "move day 3 to Nara"
   is a JSON edit plus geocode → check → links → kml → render, never a rewrite.
 - **Cover title** comes from references/cover-titles.md — never a literal placeholder,
@@ -433,8 +270,13 @@ Gates — these decide pass/fail and do not move into the reference file:
 
 ## When things fail
 
-- flight_scan.py errors twice → browser; browser blocked → deep links marked "price
-  unverified", keep moving.
+- flight_scan.py errors twice (or cannot be installed — data-sources.md §Flights has
+  the PEP 668 variants) → browser Google Flights; that blocked too → the second price
+  source (Skyscanner / Kayak, data-sources.md §Flights → Second price source); only
+  when every source fails do deep links go out marked "price unverified", keep moving.
+  A harness with no browser pane is the one case a single source is acceptable — then
+  `legs.note` says "single source — no browser"; a web search is never the rung after
+  a failed scan while a browser exists.
 - A venue's hours survive 2 searches unverified → schedule it flagged "confirm on
   arrival"; don't burn more budget.
 - Anything still unverified at delivery gets a ⚠️ in the plan — visible honesty beats
@@ -463,6 +305,29 @@ directory is not the skill directory and shell cwd does not persist between call
 - `references/cover-titles.md` — bilingual poetic cover-title case library (poetry /
   prose / classic-literature sources + trip-archetype fit + cliché blacklist); read
   at Phase 6 when rendering.
+- `references/phase-0-intake.md` — read at the start of Phase 0, before deciding whether
+  to ask anything: core vs optional facts and their defaults, origin inference, the
+  intake message format and rules (zh sample inline, en in output-template.md), the
+  `prefs` block, the picture-capability check (native | key | stock), the style line and
+  plan language, and the exit criteria. SKILL.md Phase 0 is only the contract; this
+  file is the procedure.
+- `references/phase-1-brief.md` — read at the start of Phase 1, before any destination
+  fact is written: where each fact comes from, the visa / holiday / event / weather /
+  money / insurance / safety lines, the advisory line (level → plan behaviour), the
+  emergency card, the health line with the yellow-fever audit, the hazard line (season
+  card + hazard gate), and the exit criteria. SKILL.md Phase 1 is only the contract;
+  this file is the procedure.
+- `references/phase-3-legs.md` — read at the start of Phase 3, before the first flight
+  scan: the plan shape and its two traps, the international price-source ladder and the
+  ≥ 2-sources rule, multi-airport and LCC arithmetic, the separate-tickets visa audit,
+  intercity rail vs fly, driving legs, the fields every leg row records, the baggage
+  walkthrough, and the exit criteria. SKILL.md Phase 3 is only the contract; this file
+  is the procedure.
+- `references/phase-4-days.md` — read at the start of Phase 4, before any city is
+  planned: the city-agent contract (what every fan-out prompt must carry), the six
+  per-city steps, the route_tools order (geocode → tz → sun → links → check → kml),
+  the `sun` / `check` acceptance rules, and the exit criteria. SKILL.md Phase 4 is
+  only the contract; this file is the procedure.
 - `references/phase-6-assemble.md` — read at the start of Phase 6, before the final
   plan is written: assembly order, cover title, the full adversarial self-check list,
   delivery (themed page + KML + gates .ics), the themed-render flow incl. stock mode,
@@ -471,12 +336,21 @@ directory is not the skill directory and shell cwd does not persist between call
 - `scripts/flight_scan.py` — Google Flights grid scanner; run with `--help` first.
 - `scripts/route_tools.py` — geocode stops, distance-check clustering, emit per-hop +
   whole-day map links and the trip KML; subcommands geocode / check / links / kml /
+  ics (the gates `.ics` from the checklist's dated rows — `-o gates.ics`, bump
+  `--sequence` on every plan change) /
   sun (civil dawn + sunrise/sunset per day from sunrise-sunset.org, sanity-checked,
   written into `days[].sun` in the canonical format; point = first stop, last stop
   on a moving day, or the day's `sun_stop` when set; non-zero exit = a day was
   skipped/rejected).
 - `scripts/render_plan.py` — turn the plan JSON into the final self-contained HTML.
   It reads the same file route_tools does, so write the plan once and render often.
+- `scripts/plan_lint.py` — the plan's **content** gate, run with `--strict` before any
+  renderer (exit = FAIL count, like qc.py): brief present, non-empty and in canonical
+  order; no placeholder / "awaiting" text; no markdown headings in cells; the
+  self-check line in `meta.self_check`; art placeholders filled and `prefs.pictures`
+  matching how the art was made; the gates `.ics` and `trip.kml` beside the plan;
+  under `--strict` every day has at least one stop and a `sun` written by `sun --write`.
+  `check` proves the geography and `qc.py` the HTML — this proves the words.
 - `assets/plan.example.json` — runnable schema example **and the single source of
   truth for the plan's top-level keys** (`prefs`/`budget`/`legs`/`checklist`/`hotels`/
   `brief`/`days[]`… shapes; output-template.md §Top-level plan skeleton mirrors it):

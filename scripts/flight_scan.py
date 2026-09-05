@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Google Flights grid scanner (keyless) — part of the trip-planner skill.
 
-Requires once:  pip3 install --user fast-flights
+Requires once:  python3 -m pip install --user fast-flights
+  (externally-managed-environment / PEP 668 on Homebrew or Debian Python: add
+   --break-system-packages, or install into a venv and run this script with its python)
 
 Examples:
   # round trip, nights ranging 10-15, departure date +/- 2 days
@@ -201,8 +203,12 @@ def main():
         from fast_flights import FlightData, Passengers   # noqa: F401
     except ImportError:
         print("fast-flights is not installed. Run:\n"
-              "  pip3 install --user fast-flights\n"
-              "If that fails, skip this script and open the browser instead:\n  "
+              "  python3 -m pip install --user fast-flights\n"
+              "  (externally-managed-environment / PEP 668 on Homebrew or Debian Python:\n"
+              "   python3 -m pip install --user --break-system-packages fast-flights\n"
+              "   or: python3 -m venv ~/.trip-venv && ~/.trip-venv/bin/pip install fast-flights\n"
+              "       then run this script with ~/.trip-venv/bin/python3)\n"
+              "If that fails too, skip this script and open the browser instead:\n  "
               + gflights_link(args.orig, args.dest, args.depart,
                               None if args.oneway else args.depart, args.adults))
         sys.exit(2)

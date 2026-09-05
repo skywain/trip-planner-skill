@@ -27,11 +27,22 @@
   "One line per decision you made on the traveller's behalf — each one vetoable"
  ],
  "checklist": [
+  {"item": "Travel-clinic consult (vaccines / prophylaxis per the health page)",
+   "deadline": "departure minus 4-6 weeks (NOW if inside 6 weeks) · PLACEHOLDER date",
+   "note": "PLACEHOLDER — agenda: the page's 'recommended for most / some travellers' rows + activity tags; the plan never doses"},
   {"item": "Timed-entry ticket X", "deadline": "opens 10th of prior month",
    "price": "PLACEHOLDER", "link": "https://example.org/tickets",
    "note": "sells out same day"},
-  {"item": "Re-confirm opening hours + fees", "deadline": "2 weeks before travel",
-   "note": "dates >3 months out only have a seasonal pattern, not published hours"}
+  {"item": "T-14 re-check: hours + fees of every anchor, advisory level, visa rule",
+   "deadline": "T-14 · PLACEHOLDER date",
+   "note": "PLACEHOLDER — the anchors and legs[] numbers this T-14 row covers"},
+  {"item": "T-7 re-check: forecast for every base, re-apply weather rule 10",
+   "deadline": "T-7 · PLACEHOLDER date",
+   "note": "PLACEHOLDER — the bases whose forecast this T-7 row re-runs"},
+  {"item": "T-3 re-check: strikes / closures on the route, forecast, tickets in wallet",
+   "deadline": "T-3 · PLACEHOLDER date", "note": "PLACEHOLDER — one line per moving day: operator + transit-notice URL"},
+  {"item": "T-1: eSIM live + home-number SMS, copies, cash per brief.money, cards unblocked",
+   "deadline": "T-1 · PLACEHOLDER date", "note": "PLACEHOLDER — eSIM provider · cash figure from brief.money · cards to unblock"}
  ],
  "legs": [
   {"type": "international flight", "date": "2026-10-05", "carrier": "PLACEHOLDER",
@@ -109,10 +120,14 @@
  ],
  "brief": {
   "visa": "type · fee · processing days · passport-validity rule",
+  "emergency": "six lines: local police / ambulance / fire · home consular hotline · nearest mission per base · insurer assistance line + policy no. · lost-passport steps · 24h ER + pharmacy per base — every number as-of",
+  "safety": "line 0 advisory level · source · as-of, then six lines: named scams · pickpocket hotspots · taxi rule · after-dark avoid list per base · what to do when it happens · legal red lines",
+  "health": "five lines from one CDC / TravelHealthPro page: vaccines + consult date · vector-borne season · water and food · rabies · notice level + as-of",
   "holidays": "collisions from date.nager.at + local festivals",
-  "weather": "temps · rain odds · daylight",
-  "money": "card vs cash norms",
-  "connectivity": "eSIM ballpark"
+  "weather": "temps · rain odds · daylight · mode (forecast / normals) + as-of",
+  "money": "five lines: refuse DCC · card FX fee → buffer · ATM fee and cap · cash number · which cards and wallets work (+ origin block)",
+  "connectivity": "eSIM ballpark · plug type · digital-safety line",
+  "insurance": "cover floor · exclusions matched by activity name · assistance hotline"
  },
  "unverified": [
   "everything that survived two searches unverified goes here, visibly"

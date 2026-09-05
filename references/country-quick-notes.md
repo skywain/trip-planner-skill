@@ -26,7 +26,10 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   visa-free for Chinese ordinary passports on 2026-01-02 and the old "e-Visa" answer is
   still all over the web. **The assembler owns this line — city subagents must not
   decide visa questions** (on the Turkey test both of them returned the stale answer and
-  put it first on the checklist, which is the expensive kind of wrong).
+  put it first on the checklist, which is the expensive kind of wrong). The same audit
+  carries the **yellow-fever certificate column** — departure country, every transit
+  airport and every entry country; the passport is irrelevant to it (data-sources.md
+  §Visa / entry).
 - [ ] **Currency: closed or convertible, and does the FX source carry it?**
   `frankfurter.dev` carries exactly **30 currencies** (checked 2026-08: no MAD, no VND)
   and **silently drops** a symbol it doesn't have — HTTP 200, key just missing, so an
@@ -65,6 +68,10 @@ reserves its 2-3 extra searches for the lines marked **hard**.
 - [ ] **Intercity ticket release windows, each with its own date on the checklist.**
   Vietnam rail 60 days, China 12306 15 days, Japan JR 1 month, Trenitalia/Italo 90-120
   days, Norway Vy ~90 — plus night-bus operators and seasonal ferry timetables.
+- [ ] **hard — The headline seasonal draw vs the window.** Migration, blossom, aurora,
+  whales, monsoon closures, the dry-season safari: one search at skeleton time, the
+  answer written into `decisions[]` (the trip is re-shaped or the user is told what
+  the window does and does not offer) — not discovered in a day plan.
 - [ ] **Highest sleeping altitude and the ladder to it.** Not the highest point
   visited — the highest **bed**, and the steps up to it. See §Altitude below: this
   line reshapes the route order, so it is answered at skeleton time, not at packing
@@ -73,6 +80,26 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   foreign ministry (Auswärtiges Amt, travel.gc.ca, 中国领事服务网), then check the policy
   does not exclude the thing the trip is built on — ballooning, diving, motorbike
   pillion, altitude — and that it carries repatriation where hospitals want cash up front.
+- [ ] **hard — Health: vaccines, vectors, water, rabies — one CDC / TravelHealthPro
+  page, dated** (→ `brief.health` five lines + the travel-clinic consult row;
+  phase-1-brief.md §Health line). The plan never doses.
+- [ ] **hard — Hazard season: does the window hit one?** §Hazard seasons below, then the
+  live feeds (data-sources.md §Hazard feeds) → `brief.season` card + hazard gate +
+  insurance deadline NOW (phase-1-brief.md §Hazard line).
+- [ ] **hard — Street safety, six named lines** (the `brief.safety` template,
+  output-template.md §Brief templates): ① 2-3 current scams by name — the advisory
+  page's "Safety and security" section plus one `{city} scam tourists {year}` search;
+  ② pickpocket hotspots by line / station / square; ③ the taxi rule (which app, the
+  official airport rank, never the arrivals-hall tout); ④ the after-dark avoid list per
+  base; ⑤ what to do when it happens (police report first — the report number is the
+  claim key, data-sources.md §Travel insurance); ⑥ legal & customs red lines (drones ·
+  vapes · biosecurity declarations · alcohol / dress / blasphemy · photographing
+  military sites · same-sex relations law) from the advisory page's "Local laws".
+- [ ] **Money lines, the universal five** (data-sources.md §FX → Money safety): refuse
+  DCC · card FX fee → buffer · ATM fee and cap · cash number · which cards and wallets
+  work — plus the **mainland-China origin trio** when the traveller departs from
+  there: UnionPay vs Visa/MC acceptance, Alipay+ / WeChat coverage ⚡, foreign cash
+  pre-ordered 1-2 days ahead.
 
 ## Altitude
 
@@ -93,7 +120,46 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   against the trip's highest point, and that illness cover (not just accident cover)
   is real, before buying — see data-sources.md §Travel insurance.
 
+## Travel clinic
+
+The Diamox rule, generalised to every vaccine and prophylaxis: **the plan writes the
+consult date and the agenda; it never doses or prescribes.** Consult = departure − 4 to
+6 weeks (rabies pre-exposure needs two doses in 7 days, Japanese encephalitis two in
+28, hepatitis A ≥ 2 weeks, malaria prophylaxis starts 1-2 days to 1-2 weeks before
+depending on the drug — all reasons the row sits early in the urgency sort). Agenda =
+the health page's "recommended for most / some travellers" rows + the route's activity
+tags (rural nights, hiking, animal contact, altitude, diving). The yellow-fever
+certificate has its own lead time: 10 days after the jab (phase-1-brief.md §Health
+line). Typhoid / hepatitis A "recommended for most travellers" and ORS in the kit are
+agenda items, not plan prescriptions.
+
+## Hazard seasons
+
+Window ∩ season ≠ ∅ → `brief.season` card + hazard gate + insurance deadline NOW +
+exposed bookings refundable + one buffer day at the peak (phase-1-brief.md §Hazard
+line). Months are the usual season, all ⚡ — the official source column is what the
+gate re-reads.
+
+| region | hazard | months | official source | plan action |
+|---|---|---|---|---|
+| Japan · Taiwan · Philippines · Vietnam · Hong Kong · S China | typhoon | Jul-Oct, peak Aug-Sep | JMA · CWA · PAGASA · HKO · NCHMF | ferries, islands and Shinkansen days refundable; +1 buffer day |
+| US Gulf + SE coasts · Caribbean · Mexico Caribbean | Atlantic hurricane | 1 Jun-30 Nov, peak Aug-Oct | NOAA NHC | same; cruise / island days keep a backup date |
+| Mexico Pacific · Central America Pacific | East Pacific hurricane | May-Nov | NOAA NHC · SMN | same |
+| India · Bangladesh · Sri Lanka SW · Thailand · Myanmar | monsoon floods | Jun-Oct | IMD · TMD | rail / road days with a fly-over fallback; rule 10 rain |
+| Central Vietnam (Huế-Hội An-Đà Nẵng) | floods | Oct-Dec | NCHMF | the evacuation plan in the city section (§Vietnam) |
+| Northern Australia | cyclone + stinger season | Nov-Apr | BoM | reef days weather-backed; stinger suits |
+| US West · Canada West · SE Australia · Mediterranean (GR/ES/PT/IT/FR) · Chile | wildfire + smoke | Jul-Oct N · Dec-Mar S · Jul-Sep Med | national fire service; AirNow / air-quality index | park days droppable; smoke = indoor rain_alt |
+| Middle East · Mediterranean · South Asia | heat ≥ 38 °C | Jul-Aug · Apr-Jun | national met office | scheduling.md rule 10 heat, every day |
+| Iceland · Italy (Etna, Stromboli) · Indonesia · Hawaii · Japan · Guatemala · Philippines | volcano | year-round | USGS HVO · INGV · PVMBG · JMA | base-rate rule (phase-4-days.md); gate on the observatory's alert level |
+| Japan · Taiwan · Turkey · Indonesia · Chile · Peru · Mexico · Italy · NZ · Nepal | earthquake / tsunami | year-round | USGS feed · JMA | one `brief.season` line: coastal bases know the high ground |
+| Alps · Nordic · Hokkaido · Rockies · Andes passes | avalanche + winter road closures | Nov-Apr | road authority (Vegvesen, NEXCO …) | mountain legs with a rail or fly alternative |
+| > 66°N | polar night · midnight sun | late Nov-mid Jan · Jun-Jul | — | a plan shaper, not a hazard: daylight in every day header, rule 10 cold |
+| Southern hemisphere | seasons reversed | Dec-Feb = summer | — | check the season card against the month, not the name |
+
 ## Japan
+- Hazards: typhoon season Jul-Oct, peak Aug-Sep (JMA) — island, ferry and Shinkansen
+  days refundable with one buffer day; earthquakes year-round (JMA / USGS feed) —
+  §Hazard seasons.
 - Entry: most treaty passports get 90-day visa-free stamps ⚡; **Chinese passports
   need a visa** — the JAPAN eVISA (single-entry tourism, 15/30-day stays) covers
   mainland residents ⚡, and there is no transit-without-visa landing for PRC
@@ -141,15 +207,23 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   markets), read every resolved `display_name` against the query, and re-query
   with the Japanese name (`強羅駅`, `産寧坂`) before trusting a hit — see
   navigation.md "Geocoding discipline".
+- Street safety: crime is low; the real risks are bicycles on pavements, the last
+  train's drunk crowd, and left-side traffic when crossing — these are lines ② and ④
+  of the six-line `brief.safety` template; the other four lines are still written,
+  mostly "none of note", never imported warnings.
 
 ## Korea
 - Google Maps directions are crippled — plan with Naver Map (EN ok) or Kakao Map.
 - T-money card everywhere; KTX via Korail site/app ⚡.
 - DMZ tours book out ~1 week and require the passport on the day.
+- Street safety: low crime; the risks are late-night drinking districts and taxis
+  refusing short rides (Kakao T solves the second) — lines ② ④ of the six-line
+  `brief.safety` template; the other four are written short ("none of note").
 
 ## Thailand / SE Asia
 - Grab is the city-transport default; 12go.asia for intercity bus/train/ferry.
-- Temples: shoulders/knees covered; schedule temples 08:00-11:00 and beat the heat.
+- Temples: shoulders/knees covered; temples take the opener slot — scheduling.md rule
+  10 (heat) triggers most days of the year here.
 - Onward-ticket rules enforced unevenly ⚡ — check before booking one-ways.
 - **Vietnam has its own section below** — the visa, licence and FX traps there are not
   generic to the region.
@@ -209,6 +283,11 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   small-town Italy.
 - City tourist tax is collected at the hotel, sometimes cash-only — put it in the budget.
 - August: locals on holiday — Paris/Madrid partially shut, coasts jammed ⚡.
+- Street safety (`brief.safety` lines ① ②, all ⚡ — re-check against the advisory
+  page): Rome — Termini and metro lines A / B, buses 64 and 40, the "friendship
+  bracelet" and petition-clipboard scams; Barcelona — La Rambla and metro L3, the
+  "bird-dropping" distraction; Paris — metro line 1, RER B from CDG, the "gold ring"
+  and petition scams; everywhere, taxis only from the official rank or the app.
 
 ## Italy — Rome / Florence / Venice specifics (as of 2026-08, after the Singapore→Italy test)
 - Entry: **Singapore (and most treaty) passports are Schengen visa-free, 90 days in
@@ -245,6 +324,10 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   carries the one-line dress note (scheduling.md Traps).
 
 ## USA (as of 2026-08)
+- Hazards: Atlantic hurricanes Jun-Nov on the Gulf and SE coasts (NOAA NHC), wildfire
+  smoke Jul-Oct in the West (AirNow), winter road closures in the Rockies / Sierra —
+  §Hazard seasons; the volcano gate on a Hawaii trip is the worked example of a
+  hazard gate.
 - Entry: VWP/ESTA covers treaty passports only — **Chinese passports need a B1/B2
   visa** (Beijing interview waits run weeks-months ⚡) **plus current EVUS enrollment**
   on 10-year visas ⚡. On any US trip, visa status is the first intake question.
@@ -376,8 +459,9 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   **date-sensitive** — capacity, weather cancellations, and stinger season from ~Nov
   ⚡; book the specific date and keep the next day free as weather backup. Prices on
   operator sites (sunlover.com.au, quicksilver-cruises.com…) beat aggregators.
-- Money: cards everywhere, cash nearly unnecessary; tipping not expected. Sun index
-  is extreme even in spring — build shade/hat/water into hikes.
+- Money: cards everywhere, cash nearly unnecessary; tipping not expected. UV index
+  is extreme even in spring — scheduling.md rule 10 (heat) triggers on UV ≥ 8, so
+  hikes take the opener slot with shade / hat / water in the day note.
 
 ## Nordic — Norway first; Sweden / Denmark / Finland notes (as of 2026-08)
 - Entry: all four are Schengen. **Chinese passports need a Schengen visa, lodged with
@@ -416,6 +500,10 @@ reserves its 2-3 extra searches for the lines marked **hard**.
 - Regional notes: Stockholm — SL tap-to-ride, archipelago boats also seasonal ⚡;
   Copenhagen — Rejsekort or contactless, city very bikeable; Helsinki — HSL app,
   ferry to Tallinn is a valid day trip.
+- Street safety: very low crime; the hazards are ice on pavements (Oct-Apr), the
+  midnight-sun / polar-night sleep disruption, and hiking weather turning in an hour —
+  lines ② and ④ of the six-line `brief.safety` template; the other four are written
+  short ("none of note"), never imported warnings.
 
 ## Turkey (as of 2026-08, after the Shanghai→Turkey test)
 - **Entry — this one flipped recently. Chinese ordinary passports have been visa-free

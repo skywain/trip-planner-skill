@@ -272,7 +272,7 @@ def render_day(i, day):
                 if art else "")
     # sun --write may say 天亮 or dawn depending on the language it ran in;
     # print the current language's word either way
-    sun_raw = esc(day.get("sun", "").replace("天亮", T("sun.dawn")).replace("dawn", T("sun.dawn")))
+    sun_raw = esc((day.get("sun") or "").replace("天亮", T("sun.dawn")).replace("dawn", T("sun.dawn")))
     sun_raw = sun_raw.replace("☀", ic("sunrise")).replace("🌇", ic("sunset"))
     sun = f'<span class="sun">{sun_raw}</span>' if sun_raw else ""
     # no 4-char title in art → the plan's city, so the plate never loses its h2

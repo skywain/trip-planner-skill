@@ -933,7 +933,7 @@ def day_marginalia(day):
         i = frees[RNG.randrange(len(frees))]
         picks.setdefault(i, _mgn(RNG.choice(_MGN_POOL["free"])))
     head = ""
-    sun = day.get("sun", "")
+    sun = day.get("sun") or ""
     if "🌇" in sun:
         # take the HH:MM right after 🌇 — a suffix like "(AEST" or "(弗洛姆)"
         # glued to the time used to ride along and truncate the margin line

@@ -121,19 +121,23 @@ packed ×0.8, kids or mobility flags ×1.3.
    non-empty, so a "9/10 written" run cannot pass unnoticed in a pipeline (Vietnam
    test F6: one TLS failure, exit 0, nearly shipped). The written days are kept;
    fix the named ones with `--only` and re-run until it exits 0. Exit **3** = a day
-   was REJECTED by the sanity checks (look before retrying). A day with **no stops
-   at all** (pure travel/rest day) is informational only — not counted, no exit 1.
+   was REJECTED by the sanity checks (look before retrying — a "polar day/night"
+   rejection is not retried: remove that day's `sun` key (absent — not `null`, not
+   `""`), output-template.md §`sun`, PLN-11). A day with **no stops
+   at all** (pure travel/rest day) is informational only here — not counted, no exit 1 —
+   but `plan_lint --strict` fails a stop-less day, so give a move day its airport stop.
    **Redirect sun's output to a file rather than piping it** (`… sun plan.geo.json
    --write > sun.log 2>&1`, then read the file) — a pipe makes `$?` the *last*
    command's exit and loses sun's non-zero signal. A transient TLS failure on one
    day is expected, not breakage: re-run with `--only DATE` for the day it names.
    Canonical `sun` format — the renderers parse it, so keep the shape:
-   `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]`
-   e.g. `天亮 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org`
+   `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM · TZ · sunrise-sunset.org`
+   e.g. `天亮 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org` —
+   `plan_lint --strict` accepts this shape only; never hand-write it.
    (TZ may be a numeric offset like `-05` where the zone has no abbreviation — normal).
    The dawn word follows the plan language: `sun --write` picks it from `--lang` >
    `plan.lang` > `plan.meta.lang` > zh, so an `en` plan gets
-   `dawn HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]`
+   `dawn HH:MM · ☀ HH:MM / 🌇 HH:MM · TZ · sunrise-sunset.org`
    e.g. `dawn 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org`; the renderers
    accept either spelling (zh output is unchanged).
    **A space always follows a time**; never glue a bracket to it — `🌇 18:00(AEST`
@@ -142,11 +146,13 @@ packed ×0.8, kids or mobility flags ×1.3.
    daylight-saving switch** need a fetch on both sides of the switch (the script
    does this per day; if you hand-fetch, take one date before and one after — the
    Sydney 10-04 jump from 18:00 to 19:00 only shows up that way).
-   Manual fallback if the script cannot run:
+   Manual fallback only when python itself cannot run (then `plan_lint` cannot run
+   either):
    `curl -s "https://api.sunrise-sunset.org/json?lat={lat}&lng={lon}&date={YYYY-MM-DD}&formatted=0&tzid={Area/City}"`
    — once per city (plus once per side of any DST switch), not per day; apply the
-   same sanity rules by eye (data-sources.md lists them); credit sunrise-sunset.org
-   in the footer either way.
+   same sanity rules by eye (data-sources.md lists them); type the result in the
+   canonical shape above and stamp the day `note` "sun hand-fetched"; credit
+   sunrise-sunset.org in the footer either way.
    The response carries `civil_twilight_begin/end` — that is 天亮/天黑 as a
    traveller experiences it, ~25-30 min outside sunrise/sunset. Pre-dawn departures
    and sunrise hikes schedule against **civil dawn**, not sunrise: a 06:00 trailhead
@@ -166,6 +172,27 @@ packed ×0.8, kids or mobility flags ×1.3.
    Verified timetabled departures and arrivals are the exception and keep their
    published minutes ("09:15-11:31"), because that is exactly where the extra digits
    carry real information.
+10. **Weather shapes the day** — read the day's forecast or climate line
+    (data-sources.md §Weather) before ordering the blocks:
+    - **Heat** — max ≥ 32 °C, apparent max ≥ 35 °C or UV index ≥ 8 (UV exists only
+      in forecast mode; in normals mode a country note such as "UV extreme" is the
+      trigger): no unshaded
+      open-air anchor (ruins, markets, hikes) between 11:00 and 16:00 — they take the
+      opener slot or start after 16:30, and the early afternoon holds an indoor or
+      air-conditioned anchor or a long lunch; open-air dwell ×1.3 (the "hilly and
+      unshaded" surcharge above folds into it); the continuous on-feet cap drops from
+      3.5 h to 3 h; the day note carries "water · shade · hat".
+    - **Rain** — precipitation probability ≥ 60 %, or a rainy-season base (≥ 7 rain
+      days in 10 on the climate line): the `rain_alt` becomes the main line and the
+      outdoor version becomes the `[swap → …]`; every boat, cable-car and balloon
+      anchor carries "weather cancellation → backup date" in its note.
+    - **Wind** — gusts ≥ 50 km/h: balloons, boats, open decks and high towers get the
+      cancellation-risk note and a named fallback.
+    - **Cold** — min ≤ 5 °C, or min ≤ 0 °C at a dawn anchor (`temperature_2m_min`;
+      no recipe fetches an apparent minimum): shorter outdoor
+      blocks, lunch indoors, the dawn temperature printed in the day header note.
+    The same thresholds are what the T-7 re-check re-applies (output-template.md
+    §Pre-departure re-check ladder).
 
 ## Day types that need a different structure
 
@@ -263,6 +290,9 @@ packed ×0.8, kids or mobility flags ×1.3.
 - Departure day with an unconfirmed return time: the T-formula is visible in the
   timeline, `legs.dep` carries ⚠️, `unverified` names it (§Day types)
 - Worship/siesta/free-day traps checked for every affected block
+- Weather rule 10 applied: a heat day has no unshaded open-air anchor 11:00-16:00, a
+  wet day's main line is the indoor version, wind-sensitive anchors carry the
+  cancellation note and a fallback
 
 ## Scheduled-day format
 

@@ -389,21 +389,25 @@ def date_span(meta_dates):
 
 
 # Country-brief section titles: plan.brief keys are English identifiers
-# (visa / holidays / weather / money / connectivity …). Every theme labels
-# them from this one table, overlaid by the trip's art common `brief_titles`
-# (e.g. "签证 · EVUS"); unknown keys (a trip's own Chinese headings) print
-# as they are.
+# (visa / emergency / safety / health / holidays / weather / money …). Every
+# theme labels them from this one table, overlaid by the trip's art common
+# `brief_titles` (e.g. "签证 · EVUS"); unknown keys (a trip's own Chinese
+# headings) print as they are. Cards render in the plan's insertion order —
+# the canonical order (and which keys are required) is in
+# references/output-template.md §Brief templates; the dicts below follow it.
 BRIEF_TITLES = {
-    "visa": "签证", "holidays": "节假与人流", "weather": "天气",
-    "money": "货币与小费", "connectivity": "通信", "insurance": "保险",
-    "safety": "安全", "baggage": "行李", "altitude": "高原与海拔",
-    "navigation": "导航",
+    "visa": "签证", "emergency": "应急", "safety": "安全", "health": "健康与防护",
+    "holidays": "节假与人流", "weather": "天气", "money": "货币与小费",
+    "connectivity": "通信", "insurance": "保险", "baggage": "行李",
+    "season": "季节与灾害", "altitude": "高原与海拔", "navigation": "导航",
+    "packing": "穿衣与打包",
 }
 BRIEF_TITLES_EN = {
-    "visa": "Visa & entry", "holidays": "Holidays & crowds", "weather": "Weather",
-    "money": "Money & tipping", "connectivity": "Connectivity", "insurance": "Insurance",
-    "safety": "Safety", "baggage": "Baggage", "altitude": "Altitude",
-    "navigation": "Maps & navigation",
+    "visa": "Visa & entry", "emergency": "Emergency", "safety": "Safety",
+    "health": "Health & protection", "holidays": "Holidays & crowds",
+    "weather": "Weather", "money": "Money & tipping", "connectivity": "Connectivity",
+    "insurance": "Insurance", "baggage": "Baggage", "season": "Season & hazards",
+    "altitude": "Altitude", "navigation": "Maps & navigation", "packing": "Packing",
 }
 
 

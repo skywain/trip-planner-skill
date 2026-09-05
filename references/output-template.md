@@ -39,7 +39,8 @@ to crash on it, and `legs` still prints every cell blank).
            "stops": [{"name", "query", "lat", "lon", "mode"}]}],
  "hotels": [{"base", "area", "why", "options": [{"name", "band", "link"}]}],
  "budget": [{"cat", "per_person", "total", "note"}],   // a LIST of rows, not {rows:[]}
- "brief":  {"visa", "holidays", "weather", "money", "connectivity"},
+ "brief":  {"visa", "emergency", "safety", "health", "holidays", "weather", "money",
+            "connectivity", "insurance", "baggage"},   // in this order — §Brief templates;
                                                 // extra keys become their own card
                                                 // inside the Country-brief section;
                                                 // titles from theme_common.BRIEF_TITLES
@@ -66,6 +67,92 @@ to crash on it, and `legs` still prints every cell blank).
 - Field-level meaning of the `days[]` object (timeline `kind`/`tag`/`verify`,
   `map:false`, `stops` ↔ hop rows) is in §city-block right below — the day objects
   are byte-identical in both places.
+
+### §Brief templates — canonical order, required keys, and the fixed-line cards
+
+`brief` renders in **insertion order**, one card per key, titled from
+`theme_common.BRIEF_TITLES` — so write the keys in this order and keep every card
+≤ 8 lines: **visa → emergency → safety → health → holidays → weather → money →
+connectivity → insurance → baggage**, then the triggered cards (`season`, `altitude`,
+`navigation`, `lookalikes`, `packing`) only when the trip has the trigger. Required
+on every plan: `visa`, `safety`, `holidays`, `weather`, `money`, `connectivity`,
+`insurance`, `emergency`, `health`.
+**Sources for `emergency` and `health`** (phase-1-brief.md §Emergency card and §Health
+line): the traveller's own foreign-ministry advisory page, the mission's own site,
+the CDC / TravelHealthPro page, the insurer's schedule and the browser Google Maps
+place card (ER only) are the only sources; a fact none of them carries → that line
+reads "n/a — see advisory" next to the URL it read, never numbers from memory.
+A key that is not in `BRIEF_TITLES` prints as its raw English key on a zh page —
+add the title there (or via the art file's `brief_titles`) before inventing a key.
+
+Three cards have fixed lines. Fill every line; "n/a" is an answer, silence is not.
+
+**`brief.money` — five lines, then the origin block when it applies**
+1. DCC: at any terminal or ATM choose "pay in local currency", never the machine's
+   home-currency conversion (3-8 % per swipe).
+2. Card FX fee: prefer a zero-FX card; otherwise the budget's buffer row gets
+   +1.5-3 % with that reason in its note.
+3. ATM: bank-lobby machines, few large withdrawals; state the typical local fee and
+   per-withdrawal cap ⚡ (unknown → "check on arrival").
+4. Cash: one number — "carry ≈ {home currency} X for {N} days of small spend" —
+   sized to how cash-first the destination is; add the cash-declaration threshold
+   on entry when the trip's cash reaches it (EU ≥ €10,000 · US > $10,000 ·
+   JP > ¥1,000,000 ⚡).
+5. Acceptance: Visa / Mastercard / UnionPay / Alipay+ / WeChat Pay — which of them
+   work where, in one line.
+Origin block, **mainland-China departure only**: UnionPay vs Visa/MC acceptance at
+the destination (a single-brand UnionPay card stalls in Europe and North America —
+carry a Visa/MC too); Alipay+ / WeChat cross-border coverage ⚡; foreign cash needs
+a 1-2 day bank pre-order at home. Other origins get a block only when a documented
+rule exists for them. The recipes behind these lines: data-sources.md §FX → Money
+safety.
+
+**`brief.connectivity` — eSIM ballpark, plug type, then the digital-safety line**:
+the roaming / eSIM setup must still receive SMS from the home number (bank 2FA;
+12306 too for a mainland-China origin); a phone-theft plan (Find My / SIM PIN /
+eSIM lock, cards freezable from
+a second device); no banking on public Wi-Fi; passport, visa and policy as cloud +
+offline copies.
+
+**`brief.safety` — the advisory line, then six named lines** (one set per trip, with
+per-base detail where the bases differ):
+0. Advisory: `{level} · {source} · as-of {date} (second source: {level})` —
+   phase-1-brief.md §Advisory line; a Level-4 / "do not travel" hit never reaches this
+   card, it stops the pipeline.
+1. Named scams: the destination's 2-3 current scams by name, with the tell.
+2. Pickpocket hotspots: the specific lines, stations and squares.
+3. Taxi rule: which app, the official airport rank, never the arrivals-hall tout.
+4. After-dark avoid list, per base, and the door-to-door rule for night moves.
+5. When it happens: police report first — the report number is the insurance claim
+   key; embassy and assistance numbers live in `brief.emergency`.
+6. Legal & customs red lines: drones · vapes · food / biosecurity declarations ·
+   alcohol / dress / blasphemy · photographing military or government sites ·
+   same-sex relations law — ≤ 3 lines copied from the advisory page's "Local laws
+   and customs" section, or "none beyond the usual".
+Tone model only: `examples/vietnam-2026/vietnam.geo.json` → `brief.safety` (written
+before this template — it covers lines 2-4 and lacks 0, 1, 5, 6; do not copy its
+shape). Sources per line:
+country-quick-notes.md (the destination's section, or the not-listed checklist's
+"Street safety" line).
+
+**`brief.emergency` — six lines, every number stamped as-of, none from memory**
+(phase-1-brief.md §Emergency card): 1 local police · ambulance · fire numbers · 2 the
+home consular hotline · 3 the nearest mission per base (name · address · phone · hours ·
+link) · 4 insurer assistance line + policy-number placeholder + the first-call rule ·
+5 lost-passport steps (police report → mission → exit-record rule) · 6 per base one
+24-hour ER with an international department + the local word for pharmacy and one near
+the hotel; a base > 2 h from an ER says so in the day note.
+
+**`brief.health` — five lines from one official page** (phase-1-brief.md §Health line):
+1 vaccines / prophylaxis "recommended for most / some travellers" + the travel-clinic
+consult date (a checklist row; the plan never doses) · 2 vector-borne diseases and their
+season · 3 water and food (tap water yes / bottled only · ice · raw and street food) ·
+4 rabies and animals · 5 notice level + as-of + the page URL. Yellow-fever hits add the
+ICVP checklist row.
+
+**`brief.season` — triggered only** (phase-1-brief.md §Hazard line): the hazard · its
+months · the official source URL · what the plan does about it (buffer day, refundable
+rows, the gate) — ≤ 5 lines, absent when the window hits nothing.
 
 ### §Intake prefs — top-level `prefs`
 
@@ -219,9 +306,10 @@ follow `scripts/render_plan.py`'s schema field-for-field.
 
 Field discipline (the merge breaks without it):
 - `checklist_items` = sell-outs, timed tickets, date-locked rail, tours — things the
-  city researcher verified. **No visa / entry / e-visa rows**: the assembler owns that
-  fact (SKILL Phase 1) and overwrites any city-block claim about it (two Turkey city
-  agents shipped an outdated "visa required" as item #1). The assembler merges these
+  city researcher verified. **No visa / entry / e-visa, health, advisory, hazard or
+  insurance rows**: the assembler owns those facts (SKILL Phase 1) and overwrites any
+  city-block claim about them (two Turkey city agents shipped an outdated "visa
+  required" as item #1). The assembler merges these
   rows into the top-level `checklist` (§Top-level plan skeleton).
 - `sun` is filled by the assembler's `sun --write`, not by you; if the day's sunrise
   anchor is at its first stop on a moving day, add `"sun_stop": "<that stop's name>"`
@@ -234,11 +322,20 @@ Field discipline (the merge breaks without it):
   last-stop→lodging rows, and rides that are themselves the sight (cruise, scenic
   train, ferry) are the two places this slips — see navigation.md step 1.
 - `sun` is written by `route_tools.py sun --write` in the canonical shape
-  `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]` — for an `en` plan
+  `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM · TZ · sunrise-sunset.org` — for an `en` plan
   (`plan.lang`, or `sun --lang en`) the dawn word is `dawn`:
-  `dawn HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]`; the renderers accept
-  either spelling. If you hand-write it, keep a space after every time (no
-  `18:00(AEST`).
+  `dawn HH:MM · ☀ HH:MM / 🌇 HH:MM · TZ · sunrise-sunset.org`; the renderers accept
+  either spelling. Never hand-write it — `plan_lint --strict` fails any other shape;
+  a day `sun --write` skipped is re-run with `--only DATE` once the day has a stop.
+  Polar day / night (Tromsø in December, Nordkapp in June): `sun --write` refuses the
+  day (exit 3, "polar day/night … remove this day's sun key") and writes nothing for
+  it — the other days are still written; remove the `sun` key from that day yourself
+  (the key is absent — not `null`, not `""`: absent is the schema's own shape for a day
+  without sun — `assets/plan.example.json` day 2 has no `sun` key — and renderer
+  copies older than 2026-09-05 crash on `null` or print a literal "None"), put the
+  polar note in the day's `note`, and expect `--strict` to fail that day until the
+  tool writes a polar shape (KNOWN-ISSUES PLN-11; phase-6-assemble.md names it as the
+  one tolerated FAIL).
 - `walking_km` is the honest total (`{"total", "how"}` form preferred).
 - Do NOT run geocoding — the assembler runs route_tools once, centrally (five agents
   in parallel would break Nominatim's 1 req/s policy).
@@ -255,8 +352,8 @@ buttons, tags, weekdays, the "天亮/dawn" word, `<html lang>`), while every str
 wrote into the plan (labels, notes, stops, brief) is printed exactly as written.
 `scripts/render_plan.py`, every `themes/render_*.py` and `route_tools.py sun --write`
 read it (`--lang zh|en` overrides per run); the shared word table lives in
-`themes/theme_common.STRINGS`. An `en` plan whose `sun` was written by hand uses the
-`dawn …` form (see the `sun` bullet above).
+`themes/theme_common.STRINGS`. An `en` plan gets the `dawn …` form from `sun --write`
+(see the `sun` bullet above).
 
 ```json
 {"trip": "Japan 12 days", "lang": "en", "meta": {"dates": "…", "route": "…"}, "days": [ … ]}
@@ -287,8 +384,8 @@ Both pages present the same material in the same order:
 2. **Decisions made for you**: 3-5 bullets (jaw direction, pass math, pace calls…) —
    each one vetoable by the user.
 3. **Booking checklist** (the action list lives near the top on purpose), sorted by
-   urgency: visa → sell-outs → intl flights → date-locked rail → refundable hotels →
-   the rest. Each row: item · deadline/lead time · price + as-of date · deep link ·
+   urgency: visa → travel-clinic consult → sell-outs → intl flights → date-locked
+   rail → refundable hotels → the rest (the pre-departure ladder closes the list). Each row: item · deadline/lead time · price + as-of date · deep link ·
    checkbox.
 4. **Flights & intercity table**: pick + backup per leg with all Phase 3 fields.
 5. **Day-by-day cards**: one card per day — header (date/city/label + sunrise/sunset),
@@ -308,8 +405,10 @@ Both pages present the same material in the same order:
 6. **Hotels**: per base — neighborhood rationale, 2-3 properties, band, dated links.
 7. **Budget table**: category rows (flights/lodging/intercity/local/entries/food),
    per-person and total columns, 10-15% buffer line, FX note, as-of dates.
-8. **Country brief**: visa summary, holiday collisions, weather line, money +
-   connectivity notes.
+8. **Country brief**: cards in the canonical order of §Brief templates — visa ·
+   emergency · safety · health · holidays · weather · money · connectivity ·
+   insurance · baggage — then the triggered cards (season, altitude, navigation,
+   lookalikes, packing) only when the trip has the trigger.
 9. **Footer**: generation date · "prices move — links are the source of truth" ·
    the self-check result (N issues found and fixed) — write that line into
    `meta.self_check`, which the plain page's footer prints, **and** repeat it as the
@@ -395,3 +494,29 @@ them toward this one.
   change instruct
   "delete the old events, then import the new file".
 
+### §Pre-departure re-check ladder — four fixed checklist rows, always with the .ics
+
+Every plan's checklist ends with the same four rows, each naming what it re-checks
+(the brief lines and the `legs` by number), so re-verification is one ladder instead
+of five unrelated "re-confirm" lines. They are date-locked gates, so the ladder alone
+makes the gates `.ics` mandatory (floating 09:00, rules above) — generated with
+`python3 scripts/route_tools.py ics plan.geo.json -o gates.ics`, which reads each row's
+ISO date or `T-N` marker; write deadlines as `T-14 · 2026-10-31` so both parse.
+
+| row | re-checks | how |
+|---|---|---|
+| **T-14** | opening hours + fees of every anchor (pattern-verified ones first) · advisory level · visa / entry rule · ticket-release dates still ahead | the row lists the anchors and the `legs` numbers it covers |
+| **T-7** | weather: re-run the forecast recipe (data-sources.md §Weather) for every base and re-apply scheduling.md rule 10 to hot / wet / windy days · the route's hazard sources (season card) | swap rain alternatives into the main line where the odds say so; note the swaps in `decisions[]` |
+| **T-3** | strikes / closures / protests on the route (rail operator + city transit notices) · advisory and forecast once more · timed tickets in the wallet | one line per moving day |
+| **T-1** | eSIM active and receiving home-number SMS · paper + cloud copies · cash in hand per `brief.money` · cards unblocked for travel | — |
+
+A **hazard gate** (phase-1-brief.md §Hazard line) is a fifth, named row when the
+window hits a hazard season: it carries the official source URL and the decision it
+gates, and gets its own VEVENT beside the ladder's.
+
+Write the rows as `{item, deadline: "T-14 · <date>", note: <what it covers>}`, keep
+them last as a block (anything else due inside T-14 — eSIM, cash, card notice — is
+folded into the matching ladder row, not kept as its own row; a ticket drop inside
+T-14 stays its own gate and sorts by date ahead of the block), and do not add a
+separate "re-confirm opening hours" row — the T-14 row is that row. `assets/plan.example.json` carries the four rows as
+placeholders.

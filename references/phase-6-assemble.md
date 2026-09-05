@@ -10,7 +10,7 @@ Inputs: `plan.geo.json` assembled per references/output-template.md, plus Phase 
 `prefs.theme` / `prefs.pictures` / `plan.lang`. Outputs, three things every time: (1) the
 chat summary — route one-liner, total budget, the 3 biggest decisions made for the user,
 and in stock mode the picture notice; (2) `trip-<theme>.html`; (3) `trip.kml` — plus the
-gates `.ics` when the checklist has date-locked gates.
+gates `.ics`, always (the pre-departure ladder rows are date-locked gates).
 
 
 ## Assembly order
@@ -82,9 +82,22 @@ file with its own share/export buttons and the appendix (checklist, legs, hotels
 budget, brief). Publish through whatever artifact / file hand-off tool the harness
 has (in Claude Code: Artifact, else SendUserFile); otherwise save the file and give
 its absolute path. Ship the trip KML (`scripts/route_tools.py kml plan.geo.json -o
-trip.kml`) alongside for offline map apps; when the checklist carries date-locked
-gates, also offer the gates `.ics` (output-template.md §Booking-artifact
-conventions). The plain `scripts/render_plan.py plan.geo.json
+trip.kml`) alongside for offline map apps, and the gates `.ics` — always, because the
+ladder rows are date-locked gates (output-template.md §Pre-departure re-check ladder
+and §Booking-artifact
+conventions) — `python3 scripts/route_tools.py ics plan.geo.json -o gates.ics` writes it
+from the checklist rows (ISO dates or `T-N` markers in `deadline`; bump `--sequence`
+on every plan change). Before any renderer runs, **`python3 scripts/plan_lint.py
+plan.geo.json --strict` must exit 0**: it is the machine gate for what the plan says —
+brief present and in canonical order, no placeholder or "awaiting" text, the self-check
+line written, art placeholders filled, the gates `.ics` and `trip.kml` beside the plan,
+every day with at least one stop and a `sun` that `sun --write` wrote. The one FAIL
+the gate tolerates: a polar day's `sun` (output-template.md §`sun`; KNOWN-ISSUES
+PLN-11) — `sun --write` refuses such a day, so render with exactly those FAIL lines and
+no other, name the dates in the chat summary, and never type a `sun` string to turn
+them green. `check` proves the geography and `qc.py` the HTML; neither looks at the
+words. The plain
+`scripts/render_plan.py plan.geo.json
 -o trip.html` page (printable, checkbox checklist, offline route sketch per day) is an
 **extra** — add it when the user asks for a printable/plain version, or as the last
 resort if the theme renderer still fails after one honest fix attempt (then say so in
@@ -149,6 +162,8 @@ them. Flow:
      into `end.fine` (full) and `cover.credit` (short form; if the cover also cites a
      poem, keep the citation first and the notice after it — the fine print carries
      the full text anyway); keep both, and repeat the notice in the chat summary —
+     `prefs.pictures` is set to `stock` the moment `stock_art.py` runs, whatever Phase 0
+     found — the summary's notice keys off it;
      the exact strings are `notice.en` / `notice.zh` in `themes/assets/stock/index.json`
      (en: "Pictures: built-in stock kit — no image generator or key was available;
      provide one and the art is generated for this trip.").
@@ -181,6 +196,10 @@ manual: references/themes.md.
 
 ## Exit criteria — tick every line before the chat summary goes out
 
+- [ ] `python3 scripts/plan_lint.py plan.geo.json --strict` exited 0 before rendering
+      (brief present and in order, no placeholders, self-check line, art filled, `.ics`
+      and `trip.kml` beside the plan, a stop and a `sun --write` string on every day) —
+      or exited with only the polar-day `sun` FAILs (PLN-11), named in the chat summary.
 - [ ] Adversarial self-check ran in full; "self-checked: N issues found and fixed" is in
       `meta.self_check` **and** the last `decisions[]` row (portal: in the chat summary).
 - [ ] `route_tools check` exited 0 before rendering; every sunrise / sunset / dark-start
@@ -195,6 +214,17 @@ manual: references/themes.md.
       blacklisted cliché; the allusion is credited.
 - [ ] Stock mode: the picture notice is in `end.fine`, `cover.credit` and the chat
       summary, and every script placeholder was replaced with real words.
-- [ ] `trip.kml` shipped; the gates `.ics` offered when the checklist has date-locked gates.
+- [ ] `brief` keys in the canonical order with the required cards present
+      (output-template.md §Brief templates), every card titled in `BRIEF_TITLES`;
+      `brief.weather` and every weather line carry the mode (forecast / normals /
+      climate model) + as-of.
+- [ ] Phase 1 still holds at delivery: `brief.safety` line 0 carries level · source ·
+      date and no base sits in an avoid area; the yellow-fever audit covered transit;
+      the hazard gate exists when the window hits a season; the travel-clinic row
+      exists when the health page recommends anything (phase-1-brief.md exit criteria).
+- [ ] The pre-departure re-check ladder (T-14 / T-7 / T-3 / T-1) closes the checklist
+      and shipped as the gates `.ics`.
+- [ ] `trip.kml` shipped (the gates `.ics` is covered by the ladder line above — every
+      plan has gates now).
 - [ ] The chat summary carries the route one-liner, total budget and the 3 biggest
       decisions made for the user.

@@ -422,6 +422,13 @@ Runtime half (browser only): 390px cold-load per-element overflow (`docOv=0` is
 not proof — `overflow-x:clip` hides content silently); grid children holding long
 text need `minmax(0,1fr)` + `min-width:0` + `overflow-wrap:anywhere`; data-URI
 images never `loading=lazy`; itinerary grids never `grid-auto-flow:dense`.
+11. **A `brief` key with no title** — every theme titles brief cards with
+    `theme_common.brief_titles()` and falls back to the raw key, so a plan key that is
+    not in `BRIEF_TITLES` prints as an English identifier on a zh page (as "health"
+    did before 2026-09; today `lookalikes` is the known one — it takes an art
+    `brief_titles` override). Add
+    the key to both dicts (canonical order: output-template.md §Brief templates) before
+    any plan uses it.
 
 ## 6. Verification discipline
 
