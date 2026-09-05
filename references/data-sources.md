@@ -5,8 +5,16 @@ deep link marked "verify on click". Statuses marked ✓ were live-tested 2026-08
 
 ## Flights
 - **scripts/flight_scan.py** (Google Flights via fast-flights, no key). One-time
-  dependency: `pip3 install --user fast-flights` — the script says so and prints a
-  browser link if the import fails, so a missing dependency never blocks a plan.
+  dependency: `python3 -m pip install --user fast-flights`. A Homebrew / Debian Python
+  refuses that with `externally-managed-environment` (PEP 668) — then run
+  `python3 -m pip install --user --break-system-packages fast-flights`, or make a venv
+  (`python3 -m venv ~/.trip-venv && ~/.trip-venv/bin/pip install fast-flights`) and run
+  the script with `~/.trip-venv/bin/python3`. The script prints these lines and a
+  browser link when the import fails, so a missing dependency never blocks a plan —
+  and "cannot install" is not a reason to price from a web search: the next rung is
+  the browser (SKILL.md §When things fail; §Second price source below); only a harness
+  with no browser pane drops to the web-search rung, and `legs.note` then says
+  "single source — no browser".
   `python3 scripts/flight_scan.py --from PVG --to NRT --depart 2026-10-01 --nights 10-15 --flex 2 --max-fetches 30`
   That grid is 5 dates × 6 trip lengths = 30 combos against a default cap of 12, so
   either pass `--max-fetches` as shown (~5-10 s per combo) or let it scan centre-out
@@ -358,7 +366,9 @@ holiday calendar page (timeanddate-style) for the year — and put the dates in
    knows about time-zone changes you don't (Morocco returns to UTC+0 on 2026-09-20 —
    the tester's hand-written times were an hour off for all ten days); `sun`'s
    output is the truth, prose follows it.
-   Manual fallback (keyless, any future date; `tzid`
+   Manual fallback — only when python itself cannot run, so `plan_lint` cannot either;
+   type the result in the canonical `sun` shape and stamp the day `note` "sun
+   hand-fetched" (keyless, any future date; `tzid`
    on the `/json` endpoint verified working 2026-08-01):
    `curl -s "https://api.sunrise-sunset.org/json?lat={lat}&lng={lon}&date={YYYY-MM-DD}&formatted=0&tzid={Area/City}"`
    The service requires **visible attribution** wherever the data is shown — put

@@ -580,7 +580,7 @@
     {
      "name": "Myrdal 站",
      "query": "Myrdal stasjon, Norway",
-     "mode": "transit",
+     "mode": "train",
      "lat": 60.7351714,
      "lon": 7.1228288
     },
@@ -837,7 +837,7 @@
      "query": "Bergen stasjon, Norway",
      "lat": 60.39,
      "lon": 5.333,
-     "mode": "transit"
+     "mode": "train"
     },
     {
      "name": "布吕根 Bryggen",

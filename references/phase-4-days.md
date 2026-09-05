@@ -84,11 +84,16 @@ Per city:
    check → kml**, so every hop carries a distance-sane duration and a tappable map
    link written into the plan for you. **`check` must exit 0 before rendering** —
    a BROKEN hop is a stop with no lat/lon (geocode it, or hand-fill: navigation.md
-   §2), a SUSPICIOUS hop is an undeclared hop over 12 km (the day is mis-clustered,
-   or the ride needs its `mode`); fix the plan, never explain the flag away — not in
-   prose, and not with a `mode` slapped on to silence it (a tester shipped exit-2
-   output rationalised as "expected for a multi-city trip" — every flagged hop was
-   a real defect).
+   §2), a SUSPICIOUS hop is an undeclared hop over 12 km, or a declared walk / transit
+   hop over 60 km. It has two fixes and no third. A vehicle really runs the hop (fly /
+   drive / boat / train / bus) → declare that `mode` on the arriving stop and give it
+   its `legs[]` row (add the row if the leg has none) — an undeclared real flight is a
+   defect too (a tester shipped exit 2 on Wilson → Seronera rather than write
+   `mode: fly`). Nothing runs it (a 250 km hop inside one city is a mis-geocoded stop)
+   → fix the stop (read `geocache.json`'s `display_name`, re-query or hand-fill), never
+   the `mode` (a tester silenced a hotel geocoded to Kisumu with `mode: transit`). And
+   never explain the flag away in prose (a tester shipped exit-2 output rationalised as
+   "expected for a multi-city trip" — every flagged hop was a real defect).
    `sun --write` runs once the stops carry coordinates: it fills every day's
    `sun` (civil dawn · sunrise / sunset) in one canonical string and refuses data
    that fails a solar sanity check — never hand-copy sunrise numbers, and **run it
@@ -103,7 +108,13 @@ Per city:
    per-day, so one sweep over `days[].tz` beats fifteen retries.
    **`sun`: non-zero exit = at least one day was skipped or rejected** — the written
    days are fine, re-run `--only DATE` for the ones it names before writing prose
-   for them. Mark ridden
+   for them. The one exception: a day `sun` REJECTS as "polar day/night" (Tromsø in
+   December, Nordkapp in June) is never re-run into green — remove that day's `sun`
+   key (absent — not `null`, not `""`: the schema's own shape for a day without sun;
+   renderer copies older than 2026-09-05 crash on `null`), put the polar note in the
+   day's `note`, and carry it to Phase 6 as the one
+   tolerated `plan_lint --strict` FAIL (output-template.md §`sun`; KNOWN-ISSUES
+   PLN-11). Mark ridden
    hops with a `mode` on the arriving stop (`transit`/`train`/`bus`/`drive`/`boat`/
    `fly`; long signature walks `walk`), or the walking total and the links will
    both be wrong — `check` says (guessed) next to anything you left it to infer.
@@ -126,8 +137,12 @@ Per city:
       of {date}" with the T-14 ladder row carrying the re-confirmation.
 - [ ] Each day has its rain alternative (closure-checked), its food area, its `ribbon`.
 - [ ] `route_tools.py` ran geocode → tz sweep → sun --write → links --write → check →
-      kml; `check` exited 0 (no BROKEN / SUSPICIOUS hop survived, none silenced with a
-      bare `mode`); `sun` exited 0 or every named day was re-run with `--only DATE`.
+      kml; `check` exited 0 (no BROKEN / SUSPICIOUS hop survived; every `mode`
+      written to clear a flag names a vehicle that really runs the hop — fly / drive /
+      boat / train / bus — and that leg has its `legs[]` row; none added to silence a
+      flag); `sun` exited 0 or every named day was re-run with `--only DATE` — except
+      a polar day it REJECTED, whose `sun` key stays absent (never `null`, never `""`)
+      and is named in the summary (PLN-11).
 - [ ] No sunrise / sunset / dark-start prose was written before `sun --write`; every
       ridden hop carries its `mode` on the arriving stop; unverified transit durations
       stay ranges.

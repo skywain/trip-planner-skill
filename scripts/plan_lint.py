@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """plan_lint.py — the machine gate for plan.geo.json before rendering.
 
-    python3 scripts/plan_lint.py plan.geo.json [--strict] [--art plan.art.json] [--ics gates.ics]
+    python3 scripts/plan_lint.py plan.geo.json [--strict] [--art plan.art.json] [--ics gates.ics] [--kml trip.kml]
 
 Exit code = number of FAIL lines (0 = clean), like themes/qc.py. WARN lines go to
 stderr and never change the exit code.
@@ -26,6 +26,8 @@ Default checks (every plan, including the pre-2026-09 examples):
     `_stock` block present ⇔ prefs.pictures == "stock" (when prefs.pictures is set)
   - gates .ics beside the plan (--ics, or gates.ics / trip.ics next to the plan): WARN
     when missing (FAIL under --strict — since 2026-09 every plan has ladder gates)
+  - trip.kml beside the plan (--kml, or trip.kml next to the plan): WARN when missing
+    (FAIL under --strict — the offline map ships with every plan)
 --strict adds the 2026-09 contract (new plans; the older examples predate it):
   - brief keys in canonical order and the required cards present (visa · emergency ·
     safety · health · holidays · weather · money · connectivity · insurance)
@@ -33,6 +35,9 @@ Default checks (every plan, including the pre-2026-09 examples):
   - checklist carries a visa row, a travel-clinic row, and the T-14 / T-7 / T-3 / T-1
     ladder rows; the last decisions[] row repeats the self-check line
   - prefs.pictures present (native | key | stock)
+  - every day has at least one stop (airports on move days) and a `sun` that is the
+    canonical `route_tools.py sun --write` string — a stop-less day is skipped by `sun`
+    and a hand-written or "待计算" value is what ends up in the page
 """
 import argparse
 import json
@@ -49,6 +54,7 @@ AWAITING = re.compile(r"\bawaiting\b", re.I)
 SELF_CHECK = re.compile(r"(self-checked:\s*\d+|自检[::]?\s*发现并修复\s*\d+)")
 ADVISORY = re.compile(r"^\s*(advisory|警示|旅行警示)\s*[::]", re.I)
 LADDER = ["T-14", "T-7", "T-3", "T-1"]
+SUN_OK = re.compile(r"^(?:天亮|dawn) \d{2}:\d{2} · ☀ \d{2}:\d{2} / 🌇 \d{2}:\d{2} · \S+ · sunrise-sunset\.org$")
 
 fails, warns = [], []
 
@@ -86,6 +92,7 @@ def main():
                     help="also enforce the 2026-09 brief / checklist contract")
     ap.add_argument("--art", default=None, help="art file (default: <plan>.art.json beside it)")
     ap.add_argument("--ics", default=None, help="gates .ics (default: gates.ics / trip.ics beside it)")
+    ap.add_argument("--kml", default=None, help="trip .kml (default: trip.kml beside it)")
     args = ap.parse_args()
 
     try:
@@ -177,12 +184,45 @@ def main():
     ics_candidates = [args.ics] if args.ics else [os.path.join(plan_dir, n) for n in ("gates.ics", "trip.ics")]
     if not any(c and os.path.exists(c) for c in ics_candidates):
         msg = ("no gates .ics beside the plan ({}) — every plan carries the ladder gates; "
-               "generate it: python3 scripts/route_tools.py ics {} -o gates.ics"
-               .format(", ".join(os.path.basename(c) for c in ics_candidates if c), args.plan))
+               "generate it: python3 scripts/route_tools.py ics {} -o {}"
+               .format(", ".join(os.path.basename(c) for c in ics_candidates if c), args.plan,
+                       ics_candidates[0]))
+        (fail if args.strict else warn)(msg)
+
+    # ---- trip.kml ----
+    kml_candidates = [args.kml] if args.kml else [os.path.join(plan_dir, "trip.kml")]
+    if not any(c and os.path.exists(c) for c in kml_candidates):
+        msg = ("no trip.kml beside the plan ({}) — the offline map ships with every plan; "
+               "generate it: python3 scripts/route_tools.py kml {} -o {}"
+               .format(os.path.basename(kml_candidates[0]), args.plan, kml_candidates[0]))
         (fail if args.strict else warn)(msg)
 
     # ---- strict: the 2026-09 contract ----
     if args.strict:
+        if isinstance(days, list):
+            for i, d in enumerate(days, 1):
+                if not isinstance(d, dict):
+                    continue
+                if not d.get("stops"):
+                    fail("day {} ({}) has no stops — every day carries at least one (the airport "
+                         "on a move day); `sun --write` skips a stop-less day and the sunrise "
+                         "prose has nothing to stand on".format(i, d.get("date")))
+                sun = d.get("sun")
+                if not isinstance(sun, str) or not SUN_OK.fullmatch(sun):
+                    polar = "sun" not in d and any(
+                        isinstance(st, dict) and st.get("lat") is not None and st.get("lon") is not None
+                        for st in (d.get("stops") or []))
+                    if "sun" in d and sun is None:
+                        why = ("sun is null — remove the key instead (absent, never null: renderer copies "
+                               "older than 2026-09-05 crash on null; a polar day keeps the key absent)")
+                    elif polar:
+                        why = ("if `sun --write` REJECTED this day as polar day/night this is the one "
+                               "tolerated FAIL (KNOWN-ISSUES PLN-11), otherwise run `sun --write --only {}`; "
+                               "sun is never hand-written".format(d.get("date")))
+                    else:
+                        why = "run `sun --write --only {}`; sun is never hand-written".format(d.get("date"))
+                    fail("day {} ({}) sun is not the canonical `route_tools.py sun --write` string ({}) — {}"
+                         .format(i, d.get("date"), repr(sun)[:30], why))
         for r in REQUIRED:
             if r not in keys:
                 fail("brief.{} missing (required, output-template.md §Brief templates)".format(r))

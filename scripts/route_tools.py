@@ -15,7 +15,8 @@ KML and the written plan can never drift apart:
   ]
 }
 "query" defaults to "name"; a stop with lat/lon pre-filled skips geocoding; a day
-with no stops (a travel day) is fine.
+with no stops (a travel day) still passes geocode/check, but plan_lint --strict
+requires one stop and a sun on every day.
 
 Optional stop "mode" describes the hop INTO that stop and overrides the distance
 guess. Values: "walk" | "transit" | "fly" | "drive" | "boat" | "train" | "bus".
@@ -24,9 +25,10 @@ decides both the walking total and which directions the tappable link opens. Mod
 a long stroll as a stop at its midpoint, otherwise its kilometres never reach the
 walking total. A hop with NO mode is GUESSED from straight-line distance
 (<=1.6 km walk, else transit); `check` reports guessed and declared totals apart
-and only a hop that is both undeclared AND >12 km counts as SUSPICIOUS (exit 2) —
-a declared fly/drive/boat/train/bus hop of any length is a normal itinerary shape,
-never a failure.
+and flags as SUSPICIOUS (exit 2) an undeclared hop >12 km or a declared walk/transit
+hop >60 km (a city ride does not cross 60 km: fix the mis-geocoded stop, or say
+train/bus/boat/drive/fly if a vehicle really runs it) — a declared fly/drive/boat/train/bus
+hop of any length is a normal itinerary shape, never a failure.
 
 Timeline hop rows and map links (links --write): hop rows (kind:"hop", map != false)
 correspond 1:1, IN ORDER, with the stop-to-stop hops of that day. Two shapes break
@@ -81,8 +83,8 @@ Subcommands:
                                  estimates marked (est), on-foot vs ridden totals
                                  split into declared / guessed; warns (stderr) when a
                                  day has 0 km on foot but >=2 anchor rows; exits 2
-                                 only on an undeclared suspicious hop or a hop with
-                                 missing coordinates
+                                 on an undeclared hop >12 km, a declared walk/transit
+                                 hop >60 km, or a hop with missing coordinates
   links   plan.geo.json [--write] [--provider google|apple|amap]
                               -> per-hop map links + whole-day chain links;
                                  --write injects them into the plan's hop rows and
@@ -127,7 +129,8 @@ counted). Exit codes of `sun`: 0 = every day handled; 1 = at
 least one day NOT written (the others ARE written — re-run `sun --write --only
 DATE[,DATE]` for the listed dates; a request/TLS failure just needs the retry, a
 missing date / coordinates / approximate tz needs the plan fixed); 3 = a day was
-REJECTED by the sanity checks (look before retrying). Non-zero always means "some
+REJECTED by the sanity checks (look before retrying — a polar day/night rejection is
+never retried, PLN-11). Non-zero always means "some
 day has no sun value from this run" — the file may still have been updated.
 
 Nominatim usage policy is enforced here (User-Agent, 1 req/s, cache) — do not
@@ -184,7 +187,7 @@ MAX_WALK_KM = 1.6             # beyond this, guess transit
 DAY_WALK_FLAG_KM = 8.0
 SUSPICIOUS_KM = 12.0          # undeclared hop longer than this: same day? same city?
 DECLARED_CITY_MAX_KM = 60.0   # a DECLARED transit/walk hop longer than this is a
-                              # mis-geocoded stop (or a train/bus/drive/fly in disguise),
+                              # mis-geocoded stop (or a train/bus/boat/drive/fly in disguise),
                               # never a city ride — 2026-09 test: a Nairobi hotel geocoded
                               # to Kisumu, 257 km, and "mode": "transit" silenced check
 TRANSIT_EST_MAX_KM = 20.0     # beyond this a straight-line minute range is fiction
@@ -325,13 +328,16 @@ def hop_estimate(km, mode=None):
         return ("suspicious", True,
                 "SUSPICIOUS (>{:.0f} km declared {} — a city hop does not cross {:.0f} km: "
                 "a stop is probably mis-geocoded (read geocache.json display_name), or "
-                "the ride is a train/bus/drive/fly and must say so; never keep the mode "
-                "just to silence this)".format(DECLARED_CITY_MAX_KM, mode,
+                "the ride is a train/bus/boat/drive/fly and must say so; never swap in a "
+                "vehicle mode just to silence this)".format(DECLARED_CITY_MAX_KM, mode,
                                                DECLARED_CITY_MAX_KM), None)
     if not declared and km > SUSPICIOUS_KM:
         return ("suspicious", False,
-                "SUSPICIOUS (>{:.0f} km straight-line, no mode — same day? same "
-                "city? declare mode fly/drive/boat/train/bus if intended)"
+                "SUSPICIOUS (>{:.0f} km straight-line, no mode — does a vehicle really "
+                "run this hop? then declare its mode fly/drive/boat/train/bus on the "
+                "arriving stop and give it its legs[] row (add one if the leg has none); "
+                "nothing runs it? then the day is "
+                "mis-clustered or a stop is mis-geocoded — fix the stop, not the mode)"
                 .format(SUSPICIOUS_KM), None)
     walking = mode == "walk" or (not declared and km <= MAX_WALK_KM)
     if walking:
@@ -1095,11 +1101,13 @@ def cmd_sun(args):
             # sample's day 2) has nothing to compute from — informational, not
             # counted as "not written" (no exit 1 for it).
             print("{}\n  no stops (travel/rest day) — nothing to compute, not "
-                  "counted; add one city-level stop if you want a sun line".format(head))
+                  "counted here; add one city-level stop (the airport on a move day): "
+                  "plan_lint --strict fails a stop-less day".format(head))
             continue
         if not with_c:
-            print("{}\n  skipped: no stop with lat/lon (travel/rest day) — set one "
-                  "city-level stop or leave sun as is".format(head))
+            print("{}\n  skipped: no stop with lat/lon — set one city-level stop (the "
+                  "airport on a move day) and re-run --only DATE; plan_lint --strict "
+                  "fails the day until it has one".format(head))
             skip(date, head, "no stop with lat/lon — set one city-level stop")
             continue
         # A moving day (travel_day, or the day's first and last stop are more than
@@ -1181,7 +1189,8 @@ def cmd_sun(args):
             m_rise, m_set = solar_events_utc(lat, lon, d)
             if m_rise is None:
                 problems.append("polar day/night at {:.2f}N — model has no "
-                                "sunrise; check by hand".format(lat))
+                                "sunrise; remove this day's sun key (absent — no null, "
+                                "no \"\") and note it (KNOWN-ISSUES PLN-11)".format(lat))
             else:
                 for what, t, m in (("sunrise", rise, m_rise), ("sunset", sset, m_set)):
                     diff = abs((t - m).total_seconds()) / 60.0
@@ -1378,7 +1387,7 @@ def main():
             "check": "Straight-line hop distances, (est) durations, on-foot vs "
                      "ridden totals split declared/guessed. Exit 2 for an "
                      "undeclared >12 km hop, a DECLARED transit/walk hop >60 km "
-                     "(a mis-geocoded stop — read geocache.json — or a train/bus/"
+                     "(a mis-geocoded stop — read geocache.json — or a train/bus/boat/"
                      "drive/fly that must say so) or missing coordinates; declared "
                      "fly/drive/boat/train/bus hops are fine.",
             "ics": "The gates .ics from the checklist: one VEVENT per row whose "
@@ -1414,7 +1423,8 @@ def main():
                    "unwritten day is a WARN and listed at the end. Exit 0 = all "
                    "days handled; 1 = some day NOT written (others are; re-run "
                    "--write --only DATE,... for the listed dates); 3 = a day was "
-                   "REJECTED by the sanity checks.",
+                   "REJECTED by the sanity checks (look before retrying — a polar "
+                   "day/night rejection is never retried, PLN-11).",
         }.get(name), formatter_class=argparse.RawDescriptionHelpFormatter)
         p.add_argument("plan", help="plan JSON path")
         if name == "kml":

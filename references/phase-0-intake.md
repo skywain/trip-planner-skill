@@ -26,9 +26,21 @@ optional line carries its default**; (4) **one "all defaults" escape hatch** (th
 
 **Core** — must be known or defensibly assumed:
 - **Origin** (city/airport). Missing → infer from the conversation language, the user's
-  locale/timezone or anything said earlier, pick that country's main international hub and
-  state it as an assumption; it costs one line to fix at checkpoint (a) and a whole round
-  trip to ask. Genuinely unguessable → it is the one core question.
+  locale/timezone or anything said earlier, pick that city's own international airport
+  (language or locale alone names a country, not a city: take that country's largest
+  international gateway — Brazil → São Paulo GRU, Mexico → MEX, Japan → Tokyo HND / NRT,
+  mainland China → Shanghai PVG — unless a city was mentioned, and say so) and state it
+  as an assumption; it costs one line to fix at checkpoint (a) and a whole round trip to
+  ask. Genuinely unguessable → it is the one core question.
+  A city named anywhere in the request ("我住在圣保罗", "from Toronto") overrides the
+  language inference: a Chinese-language request from someone living in São Paulo
+  departs GRU, never PVG. When a city is known, the hub is *that city's* main
+  international airport, not the country's biggest — the ones that recur:
+  São Paulo GRU (GIG is Rio) · Buenos Aires EZE · Mexico City MEX ·
+  Shanghai PVG · Beijing PEK / PKX · Guangzhou CAN · Shenzhen SZX · Hong Kong HKG ·
+  Taipei TPE · Singapore SIN · Seoul ICN · Tokyo HND / NRT · Sydney SYD · Melbourne MEL ·
+  Toronto YYZ · New York JFK / EWR · London LHR · Paris CDG · Frankfurt FRA · Dubai DXB.
+  A city not on this line: look its airport up; never guess it from the country.
 - **Destination** (country, city or a shortlist). Missing → ask; nothing to plan without it.
 - **When / how long** (dates, or a duration + rough month + flexibility). Missing → ask.
 - **Page style** — one of the eight themes (Phase 6). Default: **illustrated 插画版**.

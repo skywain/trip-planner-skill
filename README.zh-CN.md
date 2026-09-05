@@ -365,7 +365,7 @@ references/
 scripts/
   flight_scan.py              Google Flights 价格网格扫描器(免密钥,从中心往外扩)
   route_tools.py              geocode → 距离检查 → 地图链接 → KML → 闸门 .ics → 日出日落
-  plan_lint.py                渲染前的内容门禁:简报、占位文案、自检行、art、.ics(退出码 = FAIL 数)
+  plan_lint.py                渲染前的内容门禁:简报、占位文案、自检行、art、.ics + .kml;--strict 下再查每天有 stop 和 sun --write 串(退出码 = FAIL 数)
   render_plan.py              plan JSON → 自包含可打印 HTML
   build_site.py               examples + showcase → GitHub Pages 演示站(_site/)
 .github/workflows/

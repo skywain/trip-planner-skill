@@ -30,8 +30,8 @@ Source pointers are `file → function / section`.
 | [PLN-8](#pln-8) | Holidays | nager.at has no religious / lunar holidays | open |
 | [PLN-9](#pln-9) | Geocoding | A mis-geocoded stop inside 60 km is not detected; `check` only catches the long ones | open |
 | [PLN-10](#pln-10) | Gates | The exit-code gates are advisory: renderers run with `plan_lint --strict` and `check` red | open |
-| [PLN-11](#pln-11) | Lint | `plan_lint --strict` is blind to language, source stamps, empty-stop days and a missing KML | open |
-| [PLN-12](#pln-12) | Text | Mode wording in the Phase 4 gate, `fast-flights` under PEP 668, origin → hub, cover-title fallback | open |
+| [PLN-11](#pln-11) | Lint | `plan_lint --strict` is blind to language and source stamps (the KML and empty-stop / `sun` checks landed 2026-09-05) | partly resolved |
+| [PLN-12](#pln-12) | Text | Cover-title fallback (mode wording, the `fast-flights` install line and origin → hub landed 2026-09-05) | partly resolved |
 | [AST-1](#ast-1) | Asset pipeline | `towebp.py` silently makes a white square from an un-cut PNG | open |
 | [AST-2](#ast-2) | Asset library | Test-asset reclaim is a manual merge | open |
 | [AST-3](#ast-3) | Generation | Without native generation in the agent, image/video generation needs an OpenRouter key | open |
@@ -603,8 +603,8 @@ pictures without any error.**
   all wrong with every light green.
 - **Mitigations in place** — `route_tools.py check` now flags a DECLARED transit /
   walk hop longer than 60 km as SUSPICIOUS (exit 2) — a city ride does not cross 60 km,
-  so the stop is mis-geocoded or the ride is a train / bus / drive / fly that must say
-  so; `geocode` already WARNs when the hit's `display_name` lacks the query's head
+  so the stop is mis-geocoded or the ride is a train / bus / boat / drive / fly that must
+  say so; `geocode` already WARNs when the hit's `display_name` lacks the query's head
   token. A wrong hit *inside* 60 km (the next suburb, a same-name street) still passes.
 - **Workaround** — read `geocache.json`'s `display_name` for every stop of a day
   before `sun --write`, and hand-fill coordinates from the Google Maps place card for
@@ -651,11 +651,20 @@ pictures without any error.**
   ladder checks; `sun --write` exits non-zero on skipped days.
 - **Workaround** — read the page in the user's language for thirty seconds; grep the
   plan for `"sun"` per day and for a `Source` / `as-of` on every brief line.
-- **Source** — `scripts/plan_lint.py`. **Status:** open — add under `--strict`: a CJK
-  ratio over reader-facing fields when `lang` is zh (FAIL under 80 %), a source + as-of
-  on every brief line with as-of ≤ the generation date and no "memory" / "local
-  knowledge" source, at least one stop and a canonical `sun` string on every day, and
-  `trip.kml` beside the plan with the same WARN / strict-FAIL rule as the `.ics`.
+- **Source** — `scripts/plan_lint.py`. **Status:** partly resolved (2026-09-05) — the
+  `trip.kml` check (WARN by default, FAIL under `--strict`, the `.ics` rule) and the
+  per-day checks (at least one stop; `sun` is the canonical `sun --write` string)
+  landed. Still open under `--strict`: a CJK ratio over reader-facing fields when
+  `lang` is zh (FAIL under 80 %), and a source + as-of on every brief line with as-of
+  ≤ the generation date and no "memory" / "local knowledge" source. Also open: polar
+  day / night — `sun --write` refuses such a day (exit 3) and writes nothing, so the
+  per-day `sun` check has no passing shape for Tromsø in December; the fix is for
+  `cmd_sun` to write a canonical polar string and for the lint to accept it (and to
+  raise the polar test above the time-parsing block — today an API reply with
+  unparseable times on a polar day is rejected as "unparseable times" without the
+  "polar day/night" words the docs key on). Until then: remove that day's `sun` key
+  (absent — not `null`, not `""`), note it, render with exactly those FAIL lines and
+  name the dates in the chat summary (phase-6-assemble.md Deliver / exit criteria).
 
 ### PLN-12
 **Four small text and tool items from the 2026-09-05 pair of end-to-end runs.**
@@ -680,7 +689,9 @@ pictures without any error.**
   themselves "旅程" although `plan.trip` carried a real title; the fallback chain
   should be `art.cover.zh` → `plan.trip` → "旅程" (and the `<title>` likewise),
   without changing lint's FAIL on the unfilled placeholders.
-- **Status:** open, all four.
+- **Status:** the first three resolved 2026-09-05 (the Phase 4 gate, phase-4-days.md and
+  `check`'s own hint now separate the two cases; the install line carries the PEP 668
+  variants; phase-0-intake.md lists the common hubs); the cover-title fallback stays open.
 
 ## Method and scope
 

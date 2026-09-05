@@ -95,7 +95,9 @@ Gates — these decide pass/fail and do not move into the reference file:
   with its default, one "all defaults" line); anything the user already stated is settled and
   never re-asked; never a follow-up "just one more thing".
 - **Origin is inferred and stated, not asked** — from the conversation language, the
-  locale / timezone or earlier messages, as that country's main hub — unless it is
+  locale / timezone or earlier messages, as that city's own international airport — or,
+  when only a language / locale is known, that country's largest international gateway
+  (phase-0-intake.md lists the common hubs; São Paulo is GRU, not GIG) — unless it is
   genuinely unguessable, which makes it the one core question.
 - **The picture-capability check runs silently before styles are mentioned**; never
   ask for a key in chat, never read, print or copy `themes/.auth_header`; with no
@@ -212,7 +214,11 @@ Gates — these decide pass/fail and do not move into the reference file:
 - **Hour-level timelines are the default deliverable**; day-level only when the user
   asks for a rough cut.
 - **`route_tools.py check` exits 0 before rendering** — a BROKEN or SUSPICIOUS hop is
-  fixed in the plan, never explained away in prose or silenced with a `mode`.
+  fixed in the plan, never explained away in prose. A SUSPICIOUS hop has exactly two
+  fixes: a vehicle really runs it (fly / drive / boat / train / bus) → declare that
+  `mode` on the arriving stop and give it its `legs[]` row (add the row if the leg has
+  none); nothing runs it (a 250 km hop inside one city is a mis-geocoded stop) → fix
+  the stop, never the `mode`.
 - **`sun --write` runs before any sunrise / golden-hour / dark-start prose**, after
   the stops carry coordinates; a plan that crosses timezones stamps every day's `tz`
   first.
@@ -253,9 +259,10 @@ Gates — these decide pass/fail and do not move into the reference file:
   the last `decisions[]` row. The list lives in the reference file; a skipped item is
   a defect, not a shortcut.
 - **Acceptance bars are exit codes and eyes, not prose**: `route_tools check` and
-  `scripts/plan_lint.py --strict` exit 0 before rendering, `themes/qc.py` exits 0
-  after, and the export-probe PNG or the page in a browser was actually looked at —
-  none available → say so in the summary.
+  `scripts/plan_lint.py --strict` exit 0 before rendering (the only tolerated FAIL: a
+  polar day's `sun`, PLN-11), `themes/qc.py` exits 0 after, and the export-probe PNG
+  or the page in a browser was actually looked at — none available → say so in the
+  summary.
 - **`plan.geo.json` stays the single editable source**: a later "move day 3 to Nara"
   is a JSON edit plus geocode → check → links → kml → render, never a rewrite.
 - **Cover title** comes from references/cover-titles.md — never a literal placeholder,
@@ -263,10 +270,13 @@ Gates — these decide pass/fail and do not move into the reference file:
 
 ## When things fail
 
-- flight_scan.py errors twice → browser Google Flights; that blocked too → the second
-  price source (Skyscanner / Kayak, data-sources.md §Flights → Second price source);
-  only when every source fails do deep links go out marked "price unverified", keep
-  moving.
+- flight_scan.py errors twice (or cannot be installed — data-sources.md §Flights has
+  the PEP 668 variants) → browser Google Flights; that blocked too → the second price
+  source (Skyscanner / Kayak, data-sources.md §Flights → Second price source); only
+  when every source fails do deep links go out marked "price unverified", keep moving.
+  A harness with no browser pane is the one case a single source is acceptable — then
+  `legs.note` says "single source — no browser"; a web search is never the rung after
+  a failed scan while a browser exists.
 - A venue's hours survive 2 searches unverified → schedule it flagged "confirm on
   arrival"; don't burn more budget.
 - Anything still unverified at delivery gets a ⚠️ in the plan — visible honesty beats
@@ -338,8 +348,9 @@ directory is not the skill directory and shell cwd does not persist between call
   renderer (exit = FAIL count, like qc.py): brief present, non-empty and in canonical
   order; no placeholder / "awaiting" text; no markdown headings in cells; the
   self-check line in `meta.self_check`; art placeholders filled and `prefs.pictures`
-  matching how the art was made; the gates `.ics` beside the plan. `check` proves the
-  geography and `qc.py` the HTML — this proves the words.
+  matching how the art was made; the gates `.ics` and `trip.kml` beside the plan;
+  under `--strict` every day has at least one stop and a `sun` written by `sun --write`.
+  `check` proves the geography and `qc.py` the HTML — this proves the words.
 - `assets/plan.example.json` — runnable schema example **and the single source of
   truth for the plan's top-level keys** (`prefs`/`budget`/`legs`/`checklist`/`hotels`/
   `brief`/`days[]`… shapes; output-template.md §Top-level plan skeleton mirrors it):

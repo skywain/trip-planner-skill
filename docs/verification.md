@@ -359,3 +359,42 @@ for language, source stamps, empty-stop days and the KML, the Phase 4 gate's mod
 wording that contradicts `check`'s own hint, the `fast-flights` install line under
 PEP 668, an origin → hub table (both trees put São Paulo at GIG), and the cover-title
 fallback. Cost of the comparison: three workflows, 58 agents, about 6.5 M tokens.
+
+One claim from the 09-03 program did not survive the follow-up either: "all seven
+examples still exit 0" under the new 60 km rule was false — `check` on the Nordic
+example flagged Oslo S → Myrdal (220 km) and Voss → Bergen (65 km), two legs of the
+Bergen Railway that the plan had declared `transit`. The rule was right and the example
+was wrong: intercity trains are `train`, `transit` is the city ride. Both stops now say
+`train`, `check` exits 0 on all seven, and the rendered page is byte-identical (the
+renderers do not read a stop's `mode`, and `stock_art.py` looks only for fly / bus /
+drive, so a transit → train edit changes no picture). The lesson is the one PLN-10 is about — a gate that is
+run by hand is a gate that is sometimes not run.
+
+### The must-do patch before merge (2026-09-05)
+
+Four items from PLN-11 / PLN-12 were judged blocking and landed on this branch as one
+patch: the Phase 4 gate's mode rule split into its two cases (a vehicle really runs the
+hop → declare its `mode` on the arriving stop and give it its `legs[]` row; nothing
+runs it → fix the mis-geocoded stop, never the `mode`), with `check`'s own hint,
+navigation.md and PLN-9 aligned; the `fast-flights` install line with its PEP 668
+variants and the rule that "cannot install" leads to the browser rung, not a web
+search; an origin → hub table in phase-0-intake.md with the rule that a city named in
+the request overrides the language inference; and two lint additions — `trip.kml`
+beside the plan and, under `--strict`, a stop and a canonical `sun --write` string on
+every day. The patch went through seven adversarial review rounds before a probe was
+allowed to run. R1 caught the `SUN_OK` regex accepting hand-written strings (a gate
+green without looking — the Nordic example's eight hand-typed values all passed); R2
+caught the exit criteria demanding a `legs[]` row for every declared vehicle mode (the
+examples' taxi and tour-bus stops have none); R3 to R6 chased the polar-day exception
+the new sun rule had no exit for — first in Phase 6, then in Phase 4 where `sun --write`
+actually runs, then the discovery that "leave `sun` unset" reads as `null`, which two
+renderers crashed on — so four renderers now tolerate a null `sun` (the seven examples
+still re-render byte-identical) and every text says "remove the key". R7 approved. The
+probe (haiku-4.5 medium, sonnet-5 low, opus-4.6 medium, sonnet-4.6 medium × 5
+questions) scored 16.5 / 20 with 0 FAIL, the patch's own four items 4 / 4 on every
+combination; two peripheral SKILL_GAPs (the named-city-overrides-language sentence,
+the no-browser rung in §When things fail) were fixed and retested on the three
+combinations that had missed: 0 SKILL_GAP left, the remaining PARTIALs are single-probe
+omissions of text the probe itself cited. Cost: eight workflows, 27 agents, about
+1.7 M tokens. Still open from the pair of runs: PLN-10 (renderers that enforce the
+gates) and the rest of PLN-11 / PLN-12.

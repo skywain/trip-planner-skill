@@ -322,11 +322,20 @@ Field discipline (the merge breaks without it):
   last-stop→lodging rows, and rides that are themselves the sight (cruise, scenic
   train, ferry) are the two places this slips — see navigation.md step 1.
 - `sun` is written by `route_tools.py sun --write` in the canonical shape
-  `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]` — for an `en` plan
+  `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM · TZ · sunrise-sunset.org` — for an `en` plan
   (`plan.lang`, or `sun --lang en`) the dawn word is `dawn`:
-  `dawn HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]`; the renderers accept
-  either spelling. If you hand-write it, keep a space after every time (no
-  `18:00(AEST`).
+  `dawn HH:MM · ☀ HH:MM / 🌇 HH:MM · TZ · sunrise-sunset.org`; the renderers accept
+  either spelling. Never hand-write it — `plan_lint --strict` fails any other shape;
+  a day `sun --write` skipped is re-run with `--only DATE` once the day has a stop.
+  Polar day / night (Tromsø in December, Nordkapp in June): `sun --write` refuses the
+  day (exit 3, "polar day/night … remove this day's sun key") and writes nothing for
+  it — the other days are still written; remove the `sun` key from that day yourself
+  (the key is absent — not `null`, not `""`: absent is the schema's own shape for a day
+  without sun — `assets/plan.example.json` day 2 has no `sun` key — and renderer
+  copies older than 2026-09-05 crash on `null` or print a literal "None"), put the
+  polar note in the day's `note`, and expect `--strict` to fail that day until the
+  tool writes a polar shape (KNOWN-ISSUES PLN-11; phase-6-assemble.md names it as the
+  one tolerated FAIL).
 - `walking_km` is the honest total (`{"total", "how"}` form preferred).
 - Do NOT run geocoding — the assembler runs route_tools once, centrally (five agents
   in parallel would break Nominatim's 1 req/s policy).
@@ -343,8 +352,8 @@ buttons, tags, weekdays, the "天亮/dawn" word, `<html lang>`), while every str
 wrote into the plan (labels, notes, stops, brief) is printed exactly as written.
 `scripts/render_plan.py`, every `themes/render_*.py` and `route_tools.py sun --write`
 read it (`--lang zh|en` overrides per run); the shared word table lives in
-`themes/theme_common.STRINGS`. An `en` plan whose `sun` was written by hand uses the
-`dawn …` form (see the `sun` bullet above).
+`themes/theme_common.STRINGS`. An `en` plan gets the `dawn …` form from `sun --write`
+(see the `sun` bullet above).
 
 ```json
 {"trip": "Japan 12 days", "lang": "en", "meta": {"dates": "…", "route": "…"}, "days": [ … ]}

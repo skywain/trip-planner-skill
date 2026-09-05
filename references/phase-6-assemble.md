@@ -90,8 +90,13 @@ from the checklist rows (ISO dates or `T-N` markers in `deadline`; bump `--seque
 on every plan change). Before any renderer runs, **`python3 scripts/plan_lint.py
 plan.geo.json --strict` must exit 0**: it is the machine gate for what the plan says —
 brief present and in canonical order, no placeholder or "awaiting" text, the self-check
-line written, art placeholders filled, the gates `.ics` beside the plan. `check` proves
-the geography and `qc.py` the HTML; neither looks at the words. The plain
+line written, art placeholders filled, the gates `.ics` and `trip.kml` beside the plan,
+every day with at least one stop and a `sun` that `sun --write` wrote. The one FAIL
+the gate tolerates: a polar day's `sun` (output-template.md §`sun`; KNOWN-ISSUES
+PLN-11) — `sun --write` refuses such a day, so render with exactly those FAIL lines and
+no other, name the dates in the chat summary, and never type a `sun` string to turn
+them green. `check` proves the geography and `qc.py` the HTML; neither looks at the
+words. The plain
 `scripts/render_plan.py plan.geo.json
 -o trip.html` page (printable, checkbox checklist, offline route sketch per day) is an
 **extra** — add it when the user asks for a printable/plain version, or as the last
@@ -192,7 +197,9 @@ manual: references/themes.md.
 ## Exit criteria — tick every line before the chat summary goes out
 
 - [ ] `python3 scripts/plan_lint.py plan.geo.json --strict` exited 0 before rendering
-      (brief present and in order, no placeholders, self-check line, art filled, `.ics`).
+      (brief present and in order, no placeholders, self-check line, art filled, `.ics`
+      and `trip.kml` beside the plan, a stop and a `sun --write` string on every day) —
+      or exited with only the polar-day `sun` FAILs (PLN-11), named in the chat summary.
 - [ ] Adversarial self-check ran in full; "self-checked: N issues found and fixed" is in
       `meta.self_check` **and** the last `decisions[]` row (portal: in the chat summary).
 - [ ] `route_tools check` exited 0 before rendering; every sunrise / sunset / dark-start

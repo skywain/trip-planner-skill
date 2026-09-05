@@ -121,19 +121,23 @@ packed ×0.8, kids or mobility flags ×1.3.
    non-empty, so a "9/10 written" run cannot pass unnoticed in a pipeline (Vietnam
    test F6: one TLS failure, exit 0, nearly shipped). The written days are kept;
    fix the named ones with `--only` and re-run until it exits 0. Exit **3** = a day
-   was REJECTED by the sanity checks (look before retrying). A day with **no stops
-   at all** (pure travel/rest day) is informational only — not counted, no exit 1.
+   was REJECTED by the sanity checks (look before retrying — a "polar day/night"
+   rejection is not retried: remove that day's `sun` key (absent — not `null`, not
+   `""`), output-template.md §`sun`, PLN-11). A day with **no stops
+   at all** (pure travel/rest day) is informational only here — not counted, no exit 1 —
+   but `plan_lint --strict` fails a stop-less day, so give a move day its airport stop.
    **Redirect sun's output to a file rather than piping it** (`… sun plan.geo.json
    --write > sun.log 2>&1`, then read the file) — a pipe makes `$?` the *last*
    command's exit and loses sun's non-zero signal. A transient TLS failure on one
    day is expected, not breakage: re-run with `--only DATE` for the day it names.
    Canonical `sun` format — the renderers parse it, so keep the shape:
-   `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]`
-   e.g. `天亮 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org`
+   `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM · TZ · sunrise-sunset.org`
+   e.g. `天亮 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org` —
+   `plan_lint --strict` accepts this shape only; never hand-write it.
    (TZ may be a numeric offset like `-05` where the zone has no abbreviation — normal).
    The dawn word follows the plan language: `sun --write` picks it from `--lang` >
    `plan.lang` > `plan.meta.lang` > zh, so an `en` plan gets
-   `dawn HH:MM · ☀ HH:MM / 🌇 HH:MM[ · TZ · sunrise-sunset.org]`
+   `dawn HH:MM · ☀ HH:MM / 🌇 HH:MM · TZ · sunrise-sunset.org`
    e.g. `dawn 05:28 · ☀ 05:53 / 🌇 17:38 · JST · sunrise-sunset.org`; the renderers
    accept either spelling (zh output is unchanged).
    **A space always follows a time**; never glue a bracket to it — `🌇 18:00(AEST`
@@ -142,11 +146,13 @@ packed ×0.8, kids or mobility flags ×1.3.
    daylight-saving switch** need a fetch on both sides of the switch (the script
    does this per day; if you hand-fetch, take one date before and one after — the
    Sydney 10-04 jump from 18:00 to 19:00 only shows up that way).
-   Manual fallback if the script cannot run:
+   Manual fallback only when python itself cannot run (then `plan_lint` cannot run
+   either):
    `curl -s "https://api.sunrise-sunset.org/json?lat={lat}&lng={lon}&date={YYYY-MM-DD}&formatted=0&tzid={Area/City}"`
    — once per city (plus once per side of any DST switch), not per day; apply the
-   same sanity rules by eye (data-sources.md lists them); credit sunrise-sunset.org
-   in the footer either way.
+   same sanity rules by eye (data-sources.md lists them); type the result in the
+   canonical shape above and stamp the day `note` "sun hand-fetched"; credit
+   sunrise-sunset.org in the footer either way.
    The response carries `civil_twilight_begin/end` — that is 天亮/天黑 as a
    traveller experiences it, ~25-30 min outside sunrise/sunset. Pre-dawn departures
    and sunrise hikes schedule against **civil dawn**, not sunrise: a 06:00 trailhead
