@@ -273,3 +273,89 @@ silenced the flag), `route_tools ics` writes the calendar from the checklist row
 yellow-fever audit now starts from the departure country, `prefs.pictures` records how
 the art was actually made, and the not-listed checklist asks about the headline seasonal
 draw at skeleton time.
+
+### Old main vs the PR head, seven model tiers (2026-09-05)
+
+Every A/B above compared a split against the snapshot taken the moment before it, so
+the question "is the whole PR better or worse than `main` for weak models?" had never
+been asked directly. It was asked afterwards, as one run: two detached worktrees
+(`main` at 624196a, the PR head at da061eb), the 36-question final-wave bank, and seven
+model combinations — opus-5 and sonnet-5 at low and medium effort, haiku-4.5 at medium,
+plus opus-4.6 and sonnet-4.6 at medium. Each combination answered the bank on both trees
+(28 stateless probes); one Fable grader per combination and set graded the old and the
+new sheet side by side, re-reading both trees (14 graders); every question on which any
+combination scored the trees differently went to an adversarial attribution agent whose
+default verdict was NOISE (12 agents; five single-combination deltas were skipped and are
+listed as noise). Route hits were counted from the probes' tool calls, not their
+self-reports: all 14 new-tree probes opened their phase files. The bank was split into
+families first, because the old tree cannot be graded on content it never had: 18
+**AB** questions (same facts on both trees, inline vs `references/phase-N-*.md`), 5
+**MIXED** (the old tree has the core rule, graded on that part only) and 13 **NEW**
+(2026-09 content; the old tree is scored for honesty only).
+
+| combo | AB old → new (/18) | MIXED old → new (/5) | NEW new (/13) |
+|---|---|---|---|
+| opus-5 low | 17.5 → 18 | 5 → 5 | 10 |
+| opus-5 medium | 17.5 → 18 | 4 → 5 | 12.5 |
+| sonnet-5 low | 13.5 → 16.5 | 4 → 4 | 10 |
+| sonnet-5 medium | 14.5 → 17 | 4 → 5 | 12 |
+| haiku-4.5 medium | 12.5 → 15.5 | 3.5 → 3 | 12.5 |
+| opus-4.6 medium | 14.5 → 16 | 4 → 4 | 12 |
+| sonnet-4.6 medium | 14.5 → 16 | 4 → 4.5 | 12.5 |
+| **seven combos** | **104.5 → 117 / 126** | **28.5 → 30.5 / 35** | **81.5 / 91** |
+
+No combination scored the PR head below `main` on the shared questions, and the gap
+widens as the model weakens. The noise floor matters for reading the table: the same
+new tree, same questions and same combinations re-run two days after the 09-03 final
+wave moved individual 18-question sheets by −3 to +4, so no single row above is
+significant on its own; what carries the result is the sign (seven of seven, both sets)
+and the attribution. Six of the twelve attributed deltas were textual and in the PR's
+favour: the flight-pricing ladder (B2) lost its last rung on `main` for six of seven
+combinations because the old text splits the ladder between Phase 3 and §When things
+fail; the rental-leg record (B5), the city-agent prompt (B7) and the sell-out rule (B10)
+moved facts that `main` kept in prose next to an enumeration into the enumeration
+itself; the intake rules (A1) and the stock-mode limit (A3) are numbered and restated in
+the gate on the PR head and buried in a long sentence on `main`. One delta went the other
+way and was the question's fault, not the skill's: B15 asks "which two scripts must exit
+0" and the PR head has three gates, so three combinations chose the two bold ones
+(`plan_lint --strict`, `qc.py`) and dropped `route_tools check` — the bank was corrected,
+the wording was not. Everything else (B3, B6, B9, B14, B16, A5 and the five skipped
+rows) is identical text on both trees and reads as sampling noise. On the NEW family the
+old tree's probes were asked, in effect, about rules that do not exist: six combinations
+fabricated nothing across 13 × 6 answers (they cited the adjacent older text and said
+the rest was not in the documents); haiku invented three.
+
+The end-to-end control ran the same Haiku São Paulo → Kenya order on `main`, in a
+worktree without `themes/.auth_header`. It came out PARTIAL (21 PASS / 13 FAIL / 8 N/A
+against `main`'s own contract) and it changed one reading of the 09-03 run: on `main`
+the same model wrote six `brief` cards, so "no `brief` at all" on the PR head looked like
+the heavier Phase 1 specification pushing a weak model past the point where it drops
+the whole section rather than a model failure. That reading did not survive its own
+control. The 09-03 run had been made in the working checkout, where `.auth_header`
+exists, so it was not the stock-mode run it was graded as; re-run on the PR head in a
+clean worktree, Haiku wrote all nine cards in canonical order, put the yellow-fever +
+ICVP row on the checklist (the audit hit, from the departure country), the travel-clinic
+row second, three of the four ladder rows and a four-VEVENT gates `.ics`, and ran
+`plan_lint --strict` itself, recording its six FAILs honestly (two `TBD` placeholders, a
+`meta.self_check` still reading "pending", no T-1 row, no self-check `decisions[]` row).
+The verdict on that reading: not reproduced. The missing `brief` was sampling variance,
+and the fix already on this branch — `plan_lint` fails per card with "brief.X missing
+(required)" — turns that kind of omission into a deterministic red (on the `main` plan it
+reports 12 FAILs, on the re-run 6). What the re-run did show is the next defect class:
+the gates exist and were run, and they do not block. `plan_lint --strict` had exited 6
+and `route_tools check` had exited 2 (a real Wilson → Seronera flight with no `mode:
+fly`) at delivery time; both renderers ran anyway, `qc.py` stayed green on a Chinese
+plan whose 43 timeline rows and nine brief cards were all in English, `trip.kml` was
+never written, and the tester reported "all phases complete". Against `main` the same
+model did better on everything the PR added (nine cards with advisory / emergency /
+health, the yellow-fever row, the ladder, the `.ics`, dated hotel labels, no "待计算"
+in the page) and worse on the day plans (`sun` 9/9 → 5/9, `rain_alt` 4 → 1, meal rows
+17 → 6, language 0/62 → 43/43 English rows) — the pattern of a weak model given more
+to do, not of worse text: the seven-tier probe above finds the same rules more
+reliably on the PR head, and the two end-to-end runs are one sample each. Six
+actionable gaps came out of the pair and are logged as PLN-10 to PLN-12: renderers
+that enforce the gates (with an escape hatch that watermarks the page), lint coverage
+for language, source stamps, empty-stop days and the KML, the Phase 4 gate's mode
+wording that contradicts `check`'s own hint, the `fast-flights` install line under
+PEP 668, an origin → hub table (both trees put São Paulo at GIG), and the cover-title
+fallback. Cost of the comparison: three workflows, 58 agents, about 6.5 M tokens.

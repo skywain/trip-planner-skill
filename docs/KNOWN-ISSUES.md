@@ -29,6 +29,9 @@ Source pointers are `file → function / section`.
 | [PLN-7](#pln-7) | FX | frankfurter covers ~30 currencies; fallback is external | open |
 | [PLN-8](#pln-8) | Holidays | nager.at has no religious / lunar holidays | open |
 | [PLN-9](#pln-9) | Geocoding | A mis-geocoded stop inside 60 km is not detected; `check` only catches the long ones | open |
+| [PLN-10](#pln-10) | Gates | The exit-code gates are advisory: renderers run with `plan_lint --strict` and `check` red | open |
+| [PLN-11](#pln-11) | Lint | `plan_lint --strict` is blind to language, source stamps, empty-stop days and a missing KML | open |
+| [PLN-12](#pln-12) | Text | Mode wording in the Phase 4 gate, `fast-flights` under PEP 668, origin → hub, cover-title fallback | open |
 | [AST-1](#ast-1) | Asset pipeline | `towebp.py` silently makes a white square from an un-cut PNG | open |
 | [AST-2](#ast-2) | Asset library | Test-asset reclaim is a manual merge | open |
 | [AST-3](#ast-3) | Generation | Without native generation in the agent, image/video generation needs an OpenRouter key | open |
@@ -610,6 +613,74 @@ pictures without any error.**
 - **Source** — `scripts/route_tools.py → hop_estimate` (DECLARED_CITY_MAX_KM),
   `cmd_geocode` (head-token WARN). **Status:** open — the fix is comparing the hit's
   city / county token with the day's `city` and exiting non-zero on a mismatch.
+
+### PLN-10
+**The exit-code gates are advisory — a renderer runs whether or not they passed.**
+
+- **Symptom** — on the 2026-09-05 São Paulo → Kenya re-run (PR head, clean worktree,
+  Haiku) the tester ran `plan_lint --strict` (exit 6: two `TBD` placeholders,
+  `meta.self_check` still "pending", no T-1 row, no self-check `decisions[]` row) and
+  `route_tools check` (exit 2: a real Wilson → Seronera flight with no `mode: fly`),
+  fixed the two items a single command could fix (`gates.ics`, the art file), and
+  rendered both themes with the other four FAILs in place; `qc.py` exited 0 on both
+  pages and the summary said "all phases complete".
+- **Mitigations in place** — the text says "exit 0 before rendering" in four places
+  (SKILL.md Phase 4 and Phase 6 gates, phase-6-assemble.md Deliver and exit criteria);
+  a weak model reads it as advice.
+- **Workaround** — run the three gates yourself before opening a page from a plan you
+  did not write: `route_tools check`, `plan_lint --strict`, `qc.py` after.
+- **Source** — `themes/render_theme2.py`, `scripts/render_plan.py`, `themes/theme_common.py`.
+  **Status:** open — the fix is for the renderers to call `plan_lint --strict` and
+  `route_tools check` themselves and refuse on a non-zero exit, with an
+  `--allow-failing-gates` escape hatch that watermarks the cover and the fine print
+  ("content gates: N FAIL"), writes `_gates_failed` into the art file, and makes
+  `qc.py` non-zero on a watermarked page. Note the conflict to resolve first: the seven
+  `examples/` predate the 2026-09 brief contract and fail `--strict` by design, so the
+  enforced level for them is the default checks, or their briefs are re-authored.
+
+### PLN-11
+**`plan_lint --strict` does not look at the four defects that were heaviest on the re-run.**
+
+- **Symptom** — same run: `lang: zh` with 43 of 43 timeline rows, all nine brief
+  cards, legs, hotels and budget categories in English (0 FAIL); brief lines with no
+  source, a `visa` as-of dated in the future (2026-11-01 on a plan generated
+  2026-09-05) and `money` sourced to "local knowledge" (0 FAIL); four days with
+  `stops: []` and therefore no `sun` (the non-zero `sun --write` exit was ignored; 0
+  FAIL); no `trip.kml` beside the plan (0 FAIL, while the `.ics` is checked).
+- **Mitigations in place** — the existence / order / placeholder / self-check /
+  ladder checks; `sun --write` exits non-zero on skipped days.
+- **Workaround** — read the page in the user's language for thirty seconds; grep the
+  plan for `"sun"` per day and for a `Source` / `as-of` on every brief line.
+- **Source** — `scripts/plan_lint.py`. **Status:** open — add under `--strict`: a CJK
+  ratio over reader-facing fields when `lang` is zh (FAIL under 80 %), a source + as-of
+  on every brief line with as-of ≤ the generation date and no "memory" / "local
+  knowledge" source, at least one stop and a canonical `sun` string on every day, and
+  `trip.kml` beside the plan with the same WARN / strict-FAIL rule as the `.ics`.
+
+### PLN-12
+**Four small text and tool items from the 2026-09-05 pair of end-to-end runs.**
+
+- **Mode wording** — SKILL.md's Phase 4 gate says a SUSPICIOUS hop is "never …
+  silenced with a mode" while `check`'s own hint says "declare mode fly/drive/… if
+  intended"; one tester silenced a mis-geocoded hotel with `mode: transit`, the next
+  left a real flight undeclared and shipped exit 2. The sentence should separate the
+  two cases: a vehicle really runs the hop → declare its mode on the arriving stop and
+  have a `legs[]` row for it; nothing runs it (a 250 km hop inside one city is a
+  geocoding error) → fix the stop, never the mode.
+- **`fast-flights` under PEP 668** — `pip3 install --user fast-flights`
+  (data-sources.md §Flights, the `flight_scan.py` import-failure hint) is refused by
+  Homebrew / Debian Python ("externally-managed-environment"); the line needs the
+  `--break-system-packages`, `venv` or `pipx` variant, or a weak model declares the
+  scanner uninstallable and prices every leg from one web search.
+- **Origin → hub** — both trees put "São Paulo" at GIG (Rio's Galeão); the Phase 0
+  rule "pick that country's main international hub" wants a short city → hub table
+  for the departure cities that recur (GRU · GIG · EZE · MEX · PVG · PEK/PKX · CAN ·
+  SZX · HKG · TPE · SIN · …).
+- **Cover-title fallback** — with the art placeholders unfilled both pages titled
+  themselves "旅程" although `plan.trip` carried a real title; the fallback chain
+  should be `art.cover.zh` → `plan.trip` → "旅程" (and the `<title>` likewise),
+  without changing lint's FAIL on the unfilled placeholders.
+- **Status:** open, all four.
 
 ## Method and scope
 
