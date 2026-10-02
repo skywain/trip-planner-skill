@@ -38,7 +38,8 @@ ART CONTRACT (schema: ART-SCHEMA.md → themes.portal):
   themes.portal.outro        {"tag": "DIAMOND HEAD · SUNRISE", "zh": "落在日出里", "text": "…"} → TOUCHDOWN / 落地 / generic
   (day overlay card: plan day.label ≤64 chars and up to four anchor rows' `what`
    ≤52 chars are shown; longer copy is cut at a word/punctuation boundary with an
-   ellipsis — soft_cut() — so keep labels short or accept the "…")
+   ellipsis — soft_cut() — so keep labels short or accept the "…". A row's
+   sub_stops list under it as ★ / name / tier only, without map links)
                              (no world count in the outro defaults — nothing
                              to keep in sync there)
   themes.portal.video_dir    directory holding the clips, relative to the ART
@@ -82,7 +83,8 @@ import re
 import sys
 
 from theme_common import (T, Art, add_art_arg, esc, init_lang, lang,
-                          load_art, load_plan, short_dates, theme_name, title_head)
+                          load_art, load_plan, short_dates, sub_stops_html, theme_name,
+                          title_head)
 
 HERE = pathlib.Path(__file__).parent
 
@@ -161,7 +163,11 @@ def day_payload(day, i, art):
     rows = []
     for r in day.get("timeline", []):
         if r.get("kind") in (None, "anchor") and len(rows) < 4:
-            rows.append({"t": r.get("t", ""), "w": soft_cut(r.get("what", ""), 52)})
+            # sub-stops ride along brief (★ / name / tier, no links): the card
+            # is aria-hidden, pointer-events:none and on a text budget, and it
+            # shows no map link for its rows either
+            rows.append({"t": r.get("t", ""), "w": soft_cut(r.get("what", ""), 52),
+                         "subs": sub_stops_html(r, brief=True)})
     return {
         "n": i, "date": day.get("date", ""),
         "theme": art.day_theme(day.get("date", ""), day.get("city", "")),
@@ -479,7 +485,7 @@ def main():
         clips_js.append({"src": src, "dur": dur, "off": off})
         if kind == "dive" and dayi and dayi <= len(days):
             d = day_payload(days[dayi - 1], dayi, art)
-            rows = "".join(f'<li><b>{esc(r["t"])}</b>{esc(r["w"])}</li>'
+            rows = "".join(f'<li><b>{esc(r["t"])}</b>{esc(r["w"])}{r["subs"]}</li>'
                            for r in d["rows"])
             overlays.append(
                 f'<aside class="ov" data-clip="{ci}" aria-hidden="true">'

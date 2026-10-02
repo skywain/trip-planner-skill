@@ -19,7 +19,7 @@ Contents: dwell times · assembly method · day types · traps · verification �
 | Amphitheatre / arena (Colosseum, Arena di Verona) | 1-1.5 h |
 | Major complex (Fushimi Inari full hike, Alhambra, Forbidden City) | 2-3 h |
 | Castle / palace | 1.5-2.5 h |
-| Observation deck / viewpoint | 45-60 min + queue |
+| Observation deck / viewpoint | 45-60 min + queue (sunset slot: also the queue for the lift down, up to ~1 h) |
 | Market / food street | 60-90 min |
 | Historic district stroll | 1.5-2 h |
 | Garden / park | 45-90 min |
@@ -44,7 +44,12 @@ packed ×0.8, kids or mobility flags ×1.3.
    City, teamLab…). And never plan to buy at the door at a flagship — ticket-office
    queues run 30-60+ min against near-zero online. If it can be bought online, even
    same-day, that IS the plan; an unavoidable door purchase gets its own +45 min block
-   in the chain so the arithmetic sees it.
+   in the chain so the arithmetic sees it. **Activity operators publish their own
+   check-in lead** (rides, boats, helicopters, ziplines — often longer than the tier):
+   read it off the booking confirmation, where it replaces the tier, and take the
+   activity's real duration from the same page, not the product title (live case: a
+   ride sold as 1.5 h ran 2 h, and a "take the later slot if late" fallback would have
+   collided with the next check-in).
 2. **Anchor the opener**: put the day's most crowd-sensitive venue at its opening
    time. Top sites are empty in their first hour; the same visit at 11:00 costs
    30-60 min of queueing. Crowd calendar beats the clock, though: put flagships on
@@ -158,7 +163,11 @@ packed ×0.8, kids or mobility flags ×1.3.
    and sunrise hikes schedule against **civil dawn**, not sunrise: a 06:00 trailhead
    entry for an 06:22 sunrise is a dark-start (headlamp) only if civil dawn is 06:01.
    Any day that starts before civil dawn gets the 天亮 time printed in its header and
-   a "prebooked car, no street-hailing in the dark" note.
+   a "prebooked car, no street-hailing in the dark" note. The mirror case at dusk: a
+   sunset viewpoint with no transit (a headland, a car-park lookout) is the hardest
+   place to get a ride — everyone leaves at once and the signal is often weak — so its
+   return ride is requested ~30 min early or pre-booked, the row names an alternate
+   pickup point, and nobody walks an unlit road or trail after dark.
    Photography interest → schedule one viewpoint or walk at golden hour. Always check
    evening blocks against sunset: an unlit garden at 19:30 in November is a bug; a
    night-view deck is a feature — know which one you scheduled.
@@ -191,16 +200,39 @@ packed ×0.8, kids or mobility flags ×1.3.
     - **Cold** — min ≤ 5 °C, or min ≤ 0 °C at a dawn anchor (`temperature_2m_min`;
       no recipe fetches an apparent minimum): shorter outdoor
       blocks, lunch indoors, the dawn temperature printed in the day header note.
-    The same thresholds are what the T-7 re-check re-applies (output-template.md
-    §Pre-departure re-check ladder).
+    - **Visibility** — an anchor whose whole point is the view (a bridge or skyline in
+      a fog-prone coastal city, a crater rim, a summit): a clear point forecast is not
+      evidence, because fog and low cloud sit under it. The row links the official
+      live webcam or visibility page and names a go / no-go time (when the traveller
+      leaves the lodging) with its `[swap → …]`.
+    - **Smoke** — in a wildfire season (country-quick-notes.md §Hazard seasons), read
+      the air-quality index (US AQI ≥ 151 "Unhealthy"; ≥ 101 with kids or a
+      respiratory condition; elsewhere the local index's equivalent) and the park's
+      cameras and conditions page the day before — or by the free-cancellation cutoff
+      of a booking that hangs on the day, if that comes first. A hit swaps the outdoor
+      anchors for the `rain_alt`. Trip-level gates stay in phase-1-brief.md §Hazard
+      line.
+    The T-7 re-check (output-template.md §Pre-departure re-check ladder) re-applies
+    the forecast thresholds above; visibility and smoke are read the day before and
+    on the day.
 
 ## Day types that need a different structure
 
 - **Arrival day** — landing before 15:00 = half a sightseeing day, later = **zero
   sightseeing days for the count** — but the evening still gets one free, walkable,
-  unticketed block near the hotel (same rule in SKILL.md Phase 2 §3). The
-  first morning after a long-haul arrival starts no earlier than 10:00. Plan the first
-  evening within walking distance of the hotel; nothing ticketed.
+  unticketed block near the hotel (same rule in SKILL.md Phase 2 §3). Time the rest
+  of the arrival day from the **hotel door**, not touchdown (the 15:00 day-count
+  threshold stays on landing): landing + immigration (a late
+  international arrival at a big hub can take hours — use the airport's published
+  wait times or plan the worst case) + bags + transfer. The first morning after a
+  long-haul arrival, or after a hotel-door time past ~midnight, starts no earlier than
+  10:00. Plan the first evening within walking distance of the hotel; nothing
+  ticketed; dinner after a late arrival within ~500 m of the hotel, or inside it.
+  **Landing straight into a pinned activity** (a tour, a ride, a boat): write the chain
+  link by link — deplane 10-20 min + checked bags 20-40 min (the top end off a
+  wide-body) + the walk to the taxi / ride-hail zone (find its level; some airports put
+  ride-hail on departures) + the ride + the operator's check-in lead (rule 1). It fits
+  with 30 min to spare, or the activity or the flight moves.
 - **Moving day (base change)** — luggage-encumbered from checkout (10:00-11:00) to
   next check-in (~15:00), so this is a day-structure problem, not a buffer problem.
   Solve bags before scheduling anything: (a) store at the departing hotel and loop
@@ -233,13 +265,27 @@ packed ×0.8, kids or mobility flags ×1.3.
   next to the clock, and `unverified` gets one line: "return flight departure time
   not confirmed — day 10 timeline is built on T ≈ 12:30". A confidently wrong 08:00
   taxi is worse than an honest formula.
-- **Tour day (跟团日)** — the pickup is `[pinned]` with a 10-15 min margin, and the
+- **Tour day (跟团日)** — the pickup is `[pinned]` with a 10-15 min margin counted
+  from the **start** of the pickup window (14:00-14:30 → in the lobby by 13:45-13:50);
+  the exact time and point the operator sends later replace the window. The
   operator owns the clock: no `late_cut` authority inside the tour, so the day's
   degradation plan covers only what the traveller controls (meals, the evening, the
   next morning's buffer). The evening BEFORE a tour day carries its own pins: buy
   provisions, pack per the tour's luggage rule (2-day tours are often
   overnight-bag-only), sleep early enough for the pickup. A "free activity" block
   inside a tour = the bus waits for latecomers — schedule an alarm, not an itinerary.
+- **Early start at a small lodging** — motels, inns and B&Bs often staff the front
+  desk only by day. When the day leaves before the desk opens (a pickup, an airport
+  run, a sunrise drive), the evening before carries the pins: settle the bill, agree
+  the key drop, store the bags that stay behind. Read the desk hours when the lodging
+  is shortlisted.
+- **Safe-version day (精简安全版)** — when the traveller says a place feels
+  overwhelming or unsafe, offer this first, before any rebuilt full day: one anchor
+  (the one they would most regret missing), door-to-door rides for every hop, back
+  at the lodging before dark, on foot only around the hotel block; add blocks only
+  when they ask. Empty is not unsafe — business districts empty out on Sunday
+  afternoons and after office hours; say so in the day note, or give the ride, so a
+  quiet street does not cancel the outing.
 - **Dateline day** — a westbound trans-Pacific return to East Asia consumes **two
   calendar days** (depart HNL Oct 5 → land Oct 7); eastbound you land the same day
   you left. Lock the return leg FIRST and allocate the final city's days from it —
@@ -274,7 +320,9 @@ packed ×0.8, kids or mobility flags ×1.3.
 
 - Chain arithmetic: every block starts ≥ previous block end + hop time + buffer
 - Anchors: arrival ≥ opening; arrival ≤ last entry; planned exit ≤ closing
-- Pinned tickets: arrival margin matches the tier in rule 1 (15 vs 30-45 min)
+- Pinned tickets: arrival margin matches the tier in rule 1 (15 vs 30-45 min, or the
+  operator's published check-in lead); a tour pickup's margin counts from the start
+  of its window (§Day types)
 - No more than ~3.5 h of continuous on-feet anchor time without a sit-down block
 - Walking total ≤ 8 km, counted honestly: `check`'s **on-foot** line ×1.3 (its ridden
   line is not walking — mark those hops `"mode": "transit"` so it can tell), **plus**
@@ -283,7 +331,9 @@ packed ×0.8, kids or mobility flags ×1.3.
   `walking_km: {total, how}` rather than asserting a bare number.
 - Late evenings: last planned hop vs the line's last departure (verify, don't assume).
   If lodging isn't in scope, say "day starts at {first block} / ends at {last block};
-  add your hotel hops" and mark this check N/A rather than passed.
+  add your hotel hops" and mark this check N/A rather than passed. A sunset viewpoint
+  without transit has its early-requested or pre-booked ride and an alternate pickup
+  point (rule 7).
 - Meal blocks exist and actually sit near the clusters they claim
 - Moving days: bags solved in writing, no anchor before storage; ≤2 anchors only if
   the bags are solved before the first one, otherwise ≤1 (§Day types)
@@ -292,7 +342,8 @@ packed ×0.8, kids or mobility flags ×1.3.
 - Worship/siesta/free-day traps checked for every affected block
 - Weather rule 10 applied: a heat day has no unshaded open-air anchor 11:00-16:00, a
   wet day's main line is the indoor version, wind-sensitive anchors carry the
-  cancellation note and a fallback
+  cancellation note and a fallback, view anchors link their webcam with a go / no-go
+  time
 
 ## Scheduled-day format
 

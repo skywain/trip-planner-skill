@@ -296,6 +296,10 @@ python3 themes/stock_art.py plan.geo.json --theme illustrated -o plan.art.json
    field optional with the neutral fallbacks documented in your docstring; a
    `--art none` render of `examples/kyoto-sample.plan.geo.json` must work with no
    trace of any other trip (`grep` the renderer for place names: zero hits).
+   The timeline loop appends `theme_common.sub_stops_html(row, pin, et)` inside each
+   row's cell — `pin(href, label)` is the theme's own row-pin markup and both arguments
+   arrive escaped — so a row's `sub_stops` (output-template.md §city-block) print under
+   it in every theme; a card with no room or no pointer events passes `brief=True`.
 5. Share buttons: wire `theme_common.export_js(theme, page_bg, extra_css,
    page_root)`. Buttons are `class="xbtn no-export"` with `data-x-for="#dN"
    data-x-label="DAY0N"` (module) or `data-x-page` (whole page); build-time

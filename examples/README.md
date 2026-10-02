@@ -169,5 +169,23 @@ python3 themes/render_picker.py examples/japan-2026/japan.geo.json \
     --prefix japan --products examples/japan-2026 -o picker.html
 ```
 
+## Fixtures — sub-stops and the lint's bad samples
+
+`fixtures/substops.plan.geo.json` is a small invented plan (not advice) whose rows carry
+`sub_stops`, a `tier` on each view and a guided-tour row with a confirmed must-see — the
+fields defined in [`../references/output-template.md`](../references/output-template.md)
+§city-block. It is a test input, not a showcase:
+
+```
+python3 scripts/plan_lint.py examples/fixtures/substops.plan.geo.json        # exit 0
+python3 themes/render_theme2.py examples/fixtures/substops.plan.geo.json -o substops-illustrated.html
+python3 scripts/render_plan.py  examples/fixtures/substops.plan.geo.json -o substops.html
+```
+
+Each file under `fixtures/bad/` breaks exactly one rule and names it in its `_expect`
+key; `plan_lint.py` must exit 1 on every one of them. `route_tools.py links --write`
+rewrites a plan in place — run it on a copy of the fixture, never on the file here (a
+second run leaves the copy unchanged).
+
 Full manual for the theme system: [`../references/themes.md`](../references/themes.md);
 the art.json field contract: [`../themes/ART-SCHEMA.md`](../themes/ART-SCHEMA.md).

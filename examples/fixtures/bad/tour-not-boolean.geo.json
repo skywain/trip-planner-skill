@@ -1,0 +1,25 @@
+{
+ "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: tour is a string, not true (WARNs go to stderr and do not count)",
+ "trip": "Fixture — bad: tour-not-boolean",
+ "lang": "en",
+ "meta": {
+  "budget_total": "n/a — fixture",
+  "self_check": "self-checked: 0 issues found and fixed"
+ },
+ "days": [
+  {
+   "date": "2026-11-10",
+   "timeline": [
+    {
+     "t": "09:00-11:00",
+     "what": "Example Canyon viewpoints",
+     "kind": "anchor",
+     "tour": "yes"
+    }
+   ]
+  }
+ ],
+ "brief": {
+  "visa": "fixture card — content is not under test"
+ }
+}

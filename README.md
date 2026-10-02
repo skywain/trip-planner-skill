@@ -143,7 +143,9 @@ Say *"Japan, 12–15 days in October, mid budget, history and food."* The skill 
   of dates and a train-vs-fly call for every intercity leg.
 - **An hour-level plan for every day** — opening hours and closure days checked with tools,
   dwell times and buffers from a written scheduling method, a holiday and festival collision
-  scan, and a tappable map link on every hop.
+  scan, and a tappable map link on every hop — and inside a large sight, the named spots
+  worth stopping at, which view each one gives (eye level, overlook, from below), where to
+  stand, and a walking chain between them.
 - **A designed page as the deliverable, not a wall of text** — the plan is rendered
   through one of the **eight themed renderers** above (default **illustrated**) into one
   self-contained, phone-friendly file: `trip-<theme>.html`. The seven still themes carry
@@ -393,8 +395,8 @@ references/
   art-schema.md               pointer to themes/ART-SCHEMA.md
 scripts/
   flight_scan.py              Google Flights grid scanner (keyless, centre-out)
-  route_tools.py              geocode → distance check → map links → KML → gates .ics → sun times
-  plan_lint.py                the plan's content gate before rendering: brief, placeholders, self-check line, art, .ics + .kml; --strict adds a stop and a sun --write string per day (exit = FAIL count)
+  route_tools.py              geocode → distance check → map links (hops, sub-stops, walking chains) → KML → gates .ics → sun times
+  plan_lint.py                the plan's content gate before rendering: brief (incl. the driving card when a self-drive option exists), placeholders, self-check line, art, .ics + .kml, sub-stop fields; --strict adds a stop and a sun --write string per day (exit = FAIL count)
   render_plan.py              plan JSON → self-contained printable HTML
   build_site.py               examples + showcase → the GitHub Pages demo site (_site/)
 .github/workflows/
@@ -420,10 +422,11 @@ examples/
   README.md                   the seven trips: themes, routes, costs, every render command
   japan-2026/ …               one folder per trip: <trip>.geo.json + <trip>.art.json + <trip>-<theme>.html
   kyoto-sample.*              the plain page's sample plan, its HTML and its KML
+  fixtures/                   a small plan with sub-stops and a guided-tour row (lint + links + render test), and fourteen bad plans that must each FAIL once
 docs/
   showcase/                   README images (hero grid, per-theme cover / day / end frames, portal motion capture)
   verification.md             how the skill was hardened, and what the reviews caught
-  KNOWN-ISSUES.md             30 defects and hard limits (29 open / planned, 1 resolved), each with a source pointer, plus the roadmap
+  KNOWN-ISSUES.md             36 defects and hard limits (32 open / planned, 2 partly resolved, 2 resolved), each with a source pointer, plus the roadmap
 ```
 
 Not in the repo: personal trip data (`trips/`), PNG originals, the US portal reference
@@ -460,8 +463,8 @@ Working, personal-use software under active development, and **harness-agnostic 
 purpose**: an Agent Skill, not a Claude Code plugin — verified end-to-end in Claude Code,
 expected to run in the ten other agents listed under [Compatibility](#compatibility), and
 untested there until someone files a report. Every defect and hard limit in the current
-tree is listed in [`docs/KNOWN-ISSUES.md`](docs/KNOWN-ISSUES.md) — 30 entries (29 open or
-planned, 1 resolved) across export/renderers, planning scripts, assets and scope, each with
+tree is listed in [`docs/KNOWN-ISSUES.md`](docs/KNOWN-ISSUES.md) — 36 entries (32 open or
+planned, 2 partly resolved, 2 resolved) across export/renderers, planning scripts, assets and scope, each with
 a symptom, workaround and source pointer, plus a short roadmap (whole-page export sizing,
 journal `zh` cover fix, picker copy, a portrait portal chain, a post-trip photo album,
 affiliate rails for a hosted version).

@@ -29,8 +29,12 @@ Schema (all keys optional except days[].date):
            "timeline": [{"t","what","kind":"anchor|hop|meal|free","price","note",
                          "tag":"pinned|opener|skippable|swap→X",
                          "verify":"verified|est","link",
-                         "map": false}],   // map:false = flight/rail hop covered by
+                         "map": false,     // map:false = flight/rail hop covered by
                                            // legs — excluded from links --write
+                         "tour", "sub_stops", "sub_map"}],
+                                           // the points inside one sight, listed
+                                           // under the row; fields defined only in
+                                           // references/output-template.md §city-block
            "hop_links": ["url", ...],      // parked by route_tools when rows and
                                            // mapped hops don't align; rendered as
                                            // a hop-by-hop maps row under the day card
@@ -67,6 +71,9 @@ STRINGS = {
         "sec.days": "每日行程 / Day by day",
         "map.here": "↗地图", "map.day": "整日路线图", "hop.map": "逐跳导航: ",
         "hop.n": "第{}跳",
+        "tier.eye-level": "平视", "tier.overlook": "俯瞰", "tier.from-below": "仰视",
+        "sub.must": "必看", "sub.stand": "站位: ", "sub.walk": "步行 {} 分钟",
+        "sub.written": "已书面确认", "sub.pending": "待确认", "sub.chain": "按顺序步行导航",
         "walk.how": "步行约 {} km<span class=\"note\"> — {}</span>",
         "walk": "步行约 {} km(含街道系数、散步段与馆内)",
         "rain_alt": "雨天备选: ",
@@ -93,6 +100,10 @@ STRINGS = {
         "sec.days": "Day by day",
         "map.here": "↗map", "map.day": "full-day route map", "hop.map": "hop-by-hop maps: ",
         "hop.n": "hop {}",
+        "tier.eye-level": "eye level", "tier.overlook": "overlook", "tier.from-below": "from below",
+        "sub.must": "must-see", "sub.stand": "Stand here: ", "sub.walk": "{} min walk",
+        "sub.written": "confirmed in writing", "sub.pending": "to confirm",
+        "sub.chain": "walk this chain",
         "walk.how": "walk ~{} km<span class=\"note\"> — {}</span>",
         "walk": "walk ~{} km (street factor, strolls and in-venue included)",
         "rain_alt": "Rain plan: ",
@@ -216,6 +227,63 @@ def pills(item):
     return out
 
 
+def _http(v):
+    return isinstance(v, str) and v.startswith(("https://", "http://"))
+
+
+def sub_stops(row):
+    """row["sub_stops"] as an <ol> under the row, or "" when the row has none
+    or the value is malformed (plan_lint reports it; this never raises). The
+    plain-page twin of themes/theme_common.sub_stops_html — same content, but
+    on this page's .pill / .note classes, so no CSS is added."""
+    subs = row.get("sub_stops")
+    if not isinstance(subs, list):
+        return ""
+    tour = row.get("tour") is True
+    items = []
+    for s in subs:
+        name = (s.get("name") or s.get("query")) if isinstance(s, dict) else None
+        if not name:
+            continue
+        must = s.get("must") is True
+        li = ('<span role="img" aria-label="{0}" title="{0}">★</span> '.format(
+            e(T("sub.must"))) if must else "") + "<b>{}</b>".format(e(name))
+        tier = s.get("tier")
+        if tier:
+            key = "tier." + str(tier)
+            li += '<span class="pill">{}</span>'.format(
+                e(T(key) if key in STRINGS["zh"] else tier))
+        if _http(s.get("link")):
+            li += " " + link(s["link"], T("map.here"))
+        meta = []
+        walk = s.get("walk_min")
+        if walk not in (None, "") and not isinstance(walk, bool):
+            meta.append(e(T("sub.walk").format(walk)))
+        conf = s.get("confirmed")
+        if tour and (must or conf):
+            conf = conf.strip() if isinstance(conf, str) else ""
+            low = conf.lower()                  # plan_lint reads the prefix case-insensitively
+            done = low.startswith("in writing")
+            for pre in ("in writing", "pending"):
+                if low.startswith(pre):
+                    conf = conf[len(pre):]
+                    break
+            conf = conf.strip(" ·:-—")
+            meta.append(e(T("sub.written" if done else "sub.pending"))
+                        + (" · " + e(conf) if conf else ""))
+        if meta:
+            li += '<span class="note"> · {}</span>'.format(" · ".join(meta))
+        if s.get("stand"):
+            li += '<div class="note">{}{}</div>'.format(e(T("sub.stand")), e(s["stand"]))
+        items.append("<li>{}</li>".format(li))
+    if not items:
+        return ""
+    chain = ('<div class="note">{}</div>'.format(link(row["sub_map"], T("sub.chain")))
+             if _http(row.get("sub_map")) else "")
+    return ('<ol style="margin:4px 0 2px;padding-left:20px">{}</ol>{}'
+            .format("".join(items), chain))
+
+
 def section(title, body):
     return "<h2>{}</h2>\n{}".format(e(title), body) if body else ""
 
@@ -337,8 +405,8 @@ def render(p):
                 if bits:
                     what += '<div class="note">{}</div>'.format(" — ".join(bits))
                 rows.append('<tr class="{}"><td class="t">{}</td>'
-                            '<td class="what">{}{}</td></tr>'.format(
-                                e(kind), e(it.get("t")), what, pills(it)))
+                            '<td class="what">{}{}{}</td></tr>'.format(
+                                e(kind), e(it.get("t")), what, pills(it), sub_stops(it)))
             foot = []
             if d.get("day_map"):
                 foot.append(link(d["day_map"], T("map.day")))

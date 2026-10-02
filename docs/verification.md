@@ -398,3 +398,141 @@ combinations that had missed: 0 SKILL_GAP left, the remaining PARTIALs are singl
 omissions of text the probe itself cited. Cost: eight workflows, 27 agents, about
 1.7 M tokens. Still open from the pair of runs: PLN-10 (renderers that enforce the
 gates) and the rest of PLN-11 / PLN-12.
+
+## Field lessons from a trip actually travelled (2026-10)
+
+The first plan this skill produced that somebody then travelled for two weeks came back
+with three headline lessons and some forty small ones. The headline three: whether the
+law lets a visitor drive on their licence is a different question from whether a rental
+desk hands over the keys, and the plan had only ever asked the second; self-drive versus
+a guided tour on a car-first segment was being decided by the planner's default instead
+of shown to the traveller as two priced options; and a must-see whose draw is a view is
+a *standing position*, not a place name — a tour that "visits" the sight from the
+boardwalk does not deliver the picture taken from the overlook above it. The change
+that feeds them back (the `brief.driving` card and its lint gate, the priced pair,
+`sub_stops` with a viewpoint tier, `tour` / `confirmed`, the on-trip re-audit rows, the
+independent review) was built by five readers mapping lessons to files, a written
+spec, five implementers with disjoint file ownership and one integrator — and then
+tested the way everything above was tested. Nothing that identifies the trip is in the
+repository; every lesson was generalised first, and that was itself a review lens.
+
+### Four review rounds
+
+Round 1 put five independent reviewers on the whole diff (privacy and generality, the
+project's editing rules and cross-file routing, facts a traveller will act on, the code,
+and "would a less capable agent do the right thing"), each followed by a refuter whose
+default was to reject. 48 findings; the refuters killed 12, confirmed 16 and cut 20 down
+to a smaller real problem. No name, number or booking code had leaked, but several
+"live case" parentheticals were specific enough to be read together as one trip, and
+were flattened. The factual lens was the most valuable: the card ranked the traveller's
+own consulate notice above the jurisdiction's statute (backwards for a legal fact, and
+with no rule for when they disagree); "a stop means a fine" understated an offence that
+carries jail in the worked-example state; "a fellow passenger's pass with a free slot
+counts" said more than the park service's own FAQ does; a pre-registration service was
+written as an entry requirement; "China issues no IDP" was true of the mainland only.
+The editing-rules lens found a self-check line that inverted the must-catch rule it
+restated, and a known-issues entry that claimed exit-criteria ticks which did not exist.
+
+Rounds 2 to 4 each reviewed only the fixes of the round before, and each found that a
+fix had introduced something. The rental-leg matcher that gates the driving card is the
+clearest case: round 1 said it missed "rent a car" and fired on "bike rental"; the fix
+excluded any string mentioning a bike or skis, so round 2 showed "car rental (ski
+rack)" slipping the gate; the rebuilt matcher then read "不含司机" (no driver included)
+as "with driver" (round 3), and the reordering that fixed it let a self-drive word
+anywhere in the string outvote the rental noun (round 4). It is now five ordered tests with a table of seventy
+strings behind it. Other things a later round caught: on-trip rows written exactly as
+the template said collapsed into one calendar event, because the `.ics` UID is derived
+from the row's item text (the item now carries its D+N); a timeline row that is not an
+object passed lint while the renderer crashed on it; the zh self-check pattern accepted
+only the half-width colon — on `main` as well; and the integrator's own slice
+replacement deleted the line that declares the FAIL list, which the regression script
+turned into eight red examples within a minute. That script (compile, the seven themed
+pages and the plain page re-rendered and compared byte for byte, lint baselines on the
+eight examples, the good fixture, every bad fixture exiting exactly 1, `links --write`
+idempotent) ran after every batch; plans without the new fields still render
+byte-identically, and the stock-art selection for all eight examples is unchanged.
+
+### Old `main` versus the branch, five model tiers
+
+A 30-question bank of scenario questions — none names a file, a field or a rule — was
+written by an agent that read both trees and split by family as in the 2026-09 run: 12
+**AB** (same facts on both trees, nine of them in passages the change touched), 6
+**MIXED** (the old tree has the core rule) and 12 **NEW**. Five combinations (opus-5
+and sonnet-5 at low and medium effort, haiku-4.5 at medium) answered it on each tree,
+stateless and from the documents only; one grader per combination scored the two sheets
+side by side against the key, re-reading both trees.
+
+| combo | AB old → new (/12) | MIXED old → new (/6) | NEW new (/12) |
+|---|---|---|---|
+| opus-5 low | 11.5 → 12 | 6 → 6 | 11.5 |
+| opus-5 medium | 12 → 11.5 | 6 → 6 | 12 |
+| sonnet-5 low | 11.5 → 11.5 | 6 → 5.5 | 12 |
+| sonnet-5 medium | 11.5 → 11.5 | 6 → 6 | 12 |
+| haiku-4.5 medium | 9 → 10 | 3 → 3.5 | 8 |
+| **five combos** | **55.5 → 56.5 / 60** | **27 → 27 / 30** | **55.5 / 60** |
+
+The shared questions did not move, which is the result wanted from a change that adds
+content: the nine touched passages still drive the behaviour they drove before. No
+grader classed any miss as a text gap, no question was lower on the new tree for two
+combinations, and so the attribution stage had nothing to attribute. The one pattern
+was the bank's: four of five combinations dropped the same third key point of one AB
+question on *both* trees — the key asked for more than the scenario prompts. Route hits,
+counted from the probes' tool calls rather than their own lists: nine of ten probes
+opened all nine routed files; the tenth (Haiku, new tree) never opened the country
+notes, and its grader pointed out that the only pointer to the new luggage-medicines
+section sat in the output template. The pointer was added to the brief procedure and
+two Haiku probes and a sonnet-low probe then found the section (3 / 3). On the NEW
+family the old tree was graded for honesty only: 59 of 60 answers said the documents
+did not cover it or answered from the adjacent older text; Haiku fabricated once (three
+lint checks that `main` does not have).
+
+### Four end-to-end runs, and what a gate can and cannot do
+
+The probe shows the text can be found; it does not show a weak model acting on it. One
+headless order was written to exercise the change — eight days on two islands of the
+worked-example state, in Chinese, from a traveller who wants to self-drive on a
+mainland-China licence, with two view must-sees and one guided block — and Haiku was
+given it four times, in clean copies of the tree with no picture key; an inspector then
+re-ran every gate and opened every artifact instead of reading the self-report.
+
+The first run on the branch collapsed: thirteen minutes, a plain page, lint exit 1,
+`--strict` 20, `check` 2, all three reported as 0. It dropped long-standing items that
+are lint-gated and in the example file, so it could not be read as evidence about the
+new text, and it was not: the same order was run again as a pair, one run per tree.
+Both delivered a themed page, a KML and a calendar file, and the difference between
+them is the change. On `main` the plan stated from memory that the state "honors most
+valid foreign licenses", built all eight days on a rental car with no fallback, and its
+three gates exited 0 — over coordinates typed from memory (nine of fifteen places more
+than 1.5 km off), with no Chinese in a Chinese plan and an art gate turned green by
+deleting its marker. On the branch the plan carried a driving card reading *not legal*
+with its source, the driver's licence country and the party's languages in `prefs`, and
+both view must-sees as sub-stops with a tier, a place to stand and script-written
+links. It also dropped the on-trip rows and the review clause, still wrote the second
+island's days as drives without making the headless pick, and opened on a fjord: the
+stock-art country table carried "Island" as an alias of Iceland, and the plan had an
+"inter-island flight".
+
+Three of those became gates rather than better prose, on the evidence that two of two
+runs had dropped what was procedure only: under `--strict`, a trip of seven days or more
+needs an on-trip row, a plan with a self-drive option needs the review clause in the
+self-check line, and on a tour row a `pending` confirmation must name the checklist row
+that asks the operator; every brief card must be a string (the driving card had been
+written as a nested object and printed raw). The alias was removed. The fourth run, on
+the final tree, answers what such gates buy. Haiku ran `plan_lint --strict` three
+times, saw each new FAIL line and cleared it within seconds: the on-trip rows appeared,
+dated and distinct; the pending confirmation named a real row. And the review clause
+appeared — "single pass", typed fourteen seconds after the FAIL line, with no export, no
+lenses and no review anywhere in the transcript. A gate that checks presence gets
+presence. That is recorded as it is (PLN-13: three gates that check presence, not
+substance), not dressed up as coverage. The same run exposed the last text gap: told
+"not legal" by its own card, the model kept the self-drive days because "the user
+explicitly asked for it" — the intake rule that a stated wish is settled against the
+gate that no skeleton recommends an illegal drive, with nothing saying which wins when
+nobody can be asked. One sentence now does: a wish voiced before the fact is not the
+choice, and headless the days are built on the legal option with the self-drive column
+shown beside it.
+
+Cost of the verification: seven workflows after the build, 43 agents, about 6.6 M
+tokens. Still open from it: PLN-13 (a view must-see with no sub-stops at all, same-day
+hours and decision points, and the three presence-only gates) and PLN-14 (the sub-stop
+links have not been tapped on a phone).

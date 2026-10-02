@@ -109,8 +109,8 @@ import urllib.parse
 
 from theme_common import (Art, LUCIDE, T, add_art_arg, asset_count, brief_titles,
                           data_uri, day_embed_url, esc, et, export_js, export_prefix, ic,
-                          init_lang, lang, load_art, load_plan, short_dates, theme_name, title_head,
-                          title_kick)
+                          init_lang, lang, load_art, load_plan, short_dates, sub_stops_html,
+                          theme_name, title_head, title_kick)
 
 HERE = pathlib.Path(__file__).parent
 THEME = "zine"
@@ -529,9 +529,16 @@ def render_timeline(day):
         rows.append(
             f'<div class="r k-{kind}">'
             f'<span class="t">{esc(r.get("t", ""))}{est}</span>'
-            f'<span class="w">{et(r.get("what", ""))} {price}{tag}{nav}{note}</span>'
+            f'<span class="w">{et(r.get("what", ""))} {price}{tag}{nav}{note}'
+            f'{sub_stops_html(r, sub_pin, et)}</span>'
             f'</div>')
     return f'<div class="tl reveal">{"".join(rows)}</div>'
+
+
+def sub_pin(href, label):
+    """The row's map pin, for one sub-stop (arguments arrive escaped)."""
+    return (f' <a class="go" href="{href}" target="_blank" rel="noopener"'
+            f' aria-label="{esc(t("nav_to")).format(what=label)}">{ic("pin")}</a>')
 
 
 def render_mapfold(day):

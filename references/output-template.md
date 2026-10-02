@@ -25,7 +25,7 @@ to crash on it, and `legs` still prints every cell blank).
                                                 // overrides — cross-tz plans need one
                                                 // of the two set or `sun` refuses
  "prefs": {"theme", "pictures", "travel_style", "lodging", "scenery", "pace", "budget",
-           "notes"},                            // Phase 0 intake — see §Intake prefs
+           "drivers", "languages", "notes"},    // Phase 0 intake — see §Intake prefs
  "meta": {"dates", "party", "route", "budget_total", "fx", "generated", "self_check"},
  "decisions": ["one line per decision made for the traveller — each vetoable", ...],
  "checklist": [{"item", "deadline", "price", "link", "link_text", "note"}],
@@ -34,7 +34,9 @@ to crash on it, and `legs` still prints every cell blank).
  "days": [{"date", "city", "label", "sun", "sun_stop", "day_map", "ribbon", "rain_alt",
            "late_cut", "walking_km", "travel_day", "tz",
            "timeline": [{"t", "what", "kind", "price", "note", "tag", "verify",
-                         "link", "map"}],
+                         "link", "map", "tour", "sub_map",
+                         "sub_stops": [{"name", "query", "lat", "lon", "tier", "stand",
+                                        "walk_min", "must", "confirmed", "link"}]}],
            "hop_links": ["url", ...],           // written by links --write when parked
            "stops": [{"name", "query", "lat", "lon", "mode"}]}],
  "hotels": [{"base", "area", "why", "options": [{"name", "band", "link"}]}],
@@ -65,8 +67,8 @@ to crash on it, and `legs` still prints every cell blank).
   (Chefchaouen sunrise → fly to Casablanca; Erg Chebbi sunrise → Fes).
 - `days[].tz` (optional, IANA name) overrides the plan-level `tz` for `sun`.
 - Field-level meaning of the `days[]` object (timeline `kind`/`tag`/`verify`,
-  `map:false`, `stops` ↔ hop rows) is in §city-block right below — the day objects
-  are byte-identical in both places.
+  `map:false`, `stops` ↔ hop rows, `sub_stops`/`tour`) is in §city-block right
+  below — the day objects are byte-identical in both places.
 
 ### §Brief templates — canonical order, required keys, and the fixed-line cards
 
@@ -74,7 +76,7 @@ to crash on it, and `legs` still prints every cell blank).
 `theme_common.BRIEF_TITLES` — so write the keys in this order and keep every card
 ≤ 8 lines: **visa → emergency → safety → health → holidays → weather → money →
 connectivity → insurance → baggage**, then the triggered cards (`season`, `altitude`,
-`navigation`, `lookalikes`, `packing`) only when the trip has the trigger. Required
+`navigation`, `lookalikes`, `packing`, `driving`) only when the trip has the trigger. Required
 on every plan: `visa`, `safety`, `holidays`, `weather`, `money`, `connectivity`,
 `insurance`, `emergency`, `health`.
 **Sources for `emergency` and `health`** (phase-1-brief.md §Emergency card and §Health
@@ -107,8 +109,12 @@ a 1-2 day bank pre-order at home. Other origins get a block only when a document
 rule exists for them. The recipes behind these lines: data-sources.md §FX → Money
 safety.
 
-**`brief.connectivity` — eSIM ballpark, plug type, then the digital-safety line**:
-the roaming / eSIM setup must still receive SMS from the home number (bank 2FA;
+**`brief.connectivity` — the handset line, eSIM ballpark, plug type, then the
+digital-safety line**: the handset line comes first — every phone in the party by model
+and market variant, and whether it takes an eSIM, a physical SIM or both; the eSIM
+ballpark says whether a voice- and SMS-capable local number is needed (operators and
+small lodgings confirm by phone) and whether the eSIM activates only in-country
+(phase-1-brief.md §The fact lines, Money & connectivity). Then: the roaming / eSIM setup must still receive SMS from the home number (bank 2FA;
 12306 too for a mainland-China origin); a phone-theft plan (Find My / SIM PIN /
 eSIM lock, cards freezable from
 a second device); no banking on public Wi-Fi; passport, visa and policy as cloud +
@@ -127,8 +133,11 @@ per-base detail where the bases differ):
    key; embassy and assistance numbers live in `brief.emergency`.
 6. Legal & customs red lines: drones · vapes · food / biosecurity declarations ·
    alcohol / dress / blasphemy · photographing military or government sites ·
-   same-sex relations law — ≤ 3 lines copied from the advisory page's "Local laws
-   and customs" section, or "none beyond the usual".
+   same-sex relations law · medicines in luggage (the destination's rule for
+   prescription drugs and for common cold-medicine ingredients it restricts —
+   country-quick-notes.md §Medicines in luggage) — ≤ 3 lines copied from the advisory
+   page's "Local laws and customs" section and the customs page, or "none beyond the
+   usual".
 Tone model only: `examples/vietnam-2026/vietnam.geo.json` → `brief.safety` (written
 before this template — it covers lines 2-4 and lacks 0, 1, 5, 6; do not copy its
 shape). Sources per line:
@@ -154,6 +163,15 @@ ICVP checklist row.
 months · the official source URL · what the plan does about it (buffer day, refundable
 rows, the gate) — ≤ 5 lines, absent when the window hits nothing.
 
+**`brief.driving` — triggered whenever a self-drive option exists** (phase-1-brief.md
+§Driving card is its only definition): one line per jurisdiction driven with the
+licence's **legality** (`legal` · `legal with IDP / official translation` · `not legal`
+· `unverified`) and its **rentability** at each candidate desk, each with source +
+as-of, then the insurance consequence once — written like every card, as one string
+with a line per jurisdiction, never a nested object (the page prints that raw).
+`plan_lint.py` FAILs a plan that has a self-drive option and no `driving` card, and
+any card that is not a string.
+
 ### §Intake prefs — top-level `prefs`
 
 What Phase 0 (Intake) learned or **assumed**, written down once so Phases 2-6 and any
@@ -165,12 +183,14 @@ byte-identical) — it is a note the planning agent leaves for itself.
 "prefs": {
   "theme": "illustrated",
   "pictures": "stock",
-  "travel_style": "public",
+  "travel_style": "mixed",
   "lodging": "hotel · mid-range, refundable",
   "scenery": ["city", "nature"],
   "pace": 3,
   "budget": "mid",
-  "notes": "assumed origin PVG (zh request, no origin given)"
+  "drivers": [{"who": "traveller 1", "licence_country": "CN"}],
+  "languages": ["zh"],
+  "notes": "assumed origin PVG (zh request, no origin given); car-first park segment undecided"
 }
 ```
 
@@ -182,14 +202,30 @@ byte-identical) — it is a note the planning agent leaves for itself.
   the art file gets built at Phase 6, and `stock` is what puts the picture notice into
   the chat summary and the page's fine print.
 - `travel_style` ∈ `public|self-drive|group-tour|mixed` (default `public`) — Phase 2
-  shapes the legs from it and Phase 3 adds a rental leg for `self-drive`.
+  shapes the legs from it and Phase 3 adds a rental leg for `self-drive` (where
+  `brief.driving` reads not legal / unverified, the priced pair instead —
+  phase-1-brief.md §Driving card step 4). A car-first
+  segment the traveller has not decided is `mixed`, never defaulted to self-drive or to
+  a tour (phase-0-intake.md) — so `mixed` means a self-drive option is on the table and
+  `plan_lint.py` then requires `brief.driving`; public transport plus tours with no car
+  is `public` or `group-tour`.
 - `lodging` — free text: type + band (default mid-range hotel, refundable), read by
   Phase 5.
 - `scenery` ⊂ `nature|city|beach|forest|lake|mountain` — Phase 2 scores the longlist
   against it.
 - `pace` — anchors per day (2/3/4, default 3); `budget` — a band word or a number.
-- `notes` — every value that was **inferred rather than told**, in one string, so the
-  assumptions block at checkpoint (a) can be written straight from this object.
+- `drivers` — present when a self-drive option exists: a list of `{"who",
+  "licence_country"}` (ISO 3166 alpha-2 of the country that **issued** the licence, not
+  the passport). `brief.driving` checks each one; a non-empty list makes `plan_lint.py`
+  require that card.
+- `languages` — present when a guided option may be priced: the language codes the
+  party can follow spoken commentary in. Read where a tour is weighed against
+  self-drive (phase-3-legs.md §Driving legs) and where any guided product is
+  shortlisted (data-sources.md §Group tours).
+- `notes` — every value that was **inferred rather than told**, plus the locked
+  must-sees with the view expected of each scenic one (eye-level · overlook ·
+  from-below), in one string, so the assumptions block at checkpoint (a) can be written
+  straight from this object.
 
 Only what is known or defensibly assumed goes in; a key the user never touched and the
 agent never needed is simply absent. An intake that asked nothing (the request already
@@ -269,7 +305,15 @@ follow `scripts/render_plan.py`'s schema field-for-field.
    "walking_km": {"total": 5.4, "how": "on-foot 2.4×1.3 + 散步 1.5 + 馆内 ~0.8"},
    "timeline": [
     {"t": "09:00-11:00", "what": "清水寺", "kind": "anchor", "price": "¥500",
-     "note": "开门即到避人流;最晚入场 17:30 — 官网核 2026-08-01", "tag": "opener"},
+     "note": "开门即到避人流;最晚入场 17:30 — 官网核 2026-08-01", "tag": "opener",
+     "sub_stops": [
+      {"name": "本堂舞台", "query": "Kiyomizu-dera Main Hall, Kyoto, Japan",
+       "tier": "overlook", "stand": "舞台栏杆边,朝西看市区"},
+      {"name": "奥之院", "query": "Okunoin, Kiyomizu-dera, Kyoto, Japan",
+       "tier": "eye-level", "stand": "奥之院平台南端,回望整座舞台", "walk_min": 3,
+       "must": true},
+      {"name": "音羽瀑布", "query": "Otowa Waterfall, Kiyomizu-dera, Kyoto, Japan",
+       "tier": "from-below", "stand": "瀑布前石阶下,仰看舞台木架", "walk_min": 4}]},
     {"t": "11:00-11:25", "what": "步行 清水寺→二年坂 1.2 km · 25分", "kind": "hop",
      "verify": "est"},
     {"t": "12:00-13:15", "what": "午餐 · 锦市场周边", "kind": "meal",
@@ -321,6 +365,33 @@ Field discipline (the merge breaks without it):
   `links --write` place every URL automatically. Lodging→first-stop and
   last-stop→lodging rows, and rides that are themselves the sight (cruise, scenic
   train, ferry) are the two places this slips — see navigation.md step 1.
+- `sub_stops` (optional, on the `kind: anchor` row of one big sight) — the photo
+  positions inside it, in walking order. Each needs `name` plus `query` or
+  `lat`/`lon`; `name` and `stand` (where to stand, which way to face) follow
+  `plan.lang`, `query` stays geocoder-friendly like `stops[].query`. `tier` =
+  eye-level | overlook | from-below (English enum, like `tag`); `walk_min` = minutes
+  on foot from the previous sub-stop (the first: from the drop-off); `must: true`
+  marks the picture the traveller came for and requires a `tier`. Read
+  phase-4-days.md §Per city step 2 before choosing them. **Never copy a sub-stop into
+  `stops`**: stops drive geocode, check, the hop pairing, the KML route, `sun` and
+  the day art, and one extra stop shifts every hop link after it.
+- `tour: true` on a row = a guided tour owns that block, so the operator decides which
+  tier it reaches (data-sources.md §Group tours). Every `must: true` sub-stop on such
+  a row carries `confirmed`: `in writing · <date> · <channel>`, or `pending · <the item
+  text of the checklist row that asks it>` — that row is the one drafted message to
+  the operator (data-sources.md §Group tours), and `plan_lint.py` fails a `pending`
+  that names no checklist row — the two prefixes stay English, like the enums. A written
+  refusal is not `in writing`: switch product, day or mode (data-sources.md §Group
+  tours), or, when the traveller keeps the tour, drop `must` from that sub-stop and say
+  in the row which tier the tour reaches.
+- `link` on each sub-stop and the row's `sub_map` (one walking-mode chain through the
+  sub-stops in order, when there are two or more) are script-owned: `links --write`
+  builds them from `lat,lon`, else from `query` (no geocoding), and rewrites them on
+  every run — never by hand (Korea aside, navigation.md step 0). Each of these keys
+  is absent when unused, never `null`; `plan_lint.py` fails a wrong shape of
+  `sub_stops`, `tour`, `must` or `tier` wherever they are present and a missing or
+  unprefixed `confirmed` on a `tour: true` row's must-sees, and warns on a `link` or
+  `sub_map` that is not an http(s) URL.
 - `sun` is written by `route_tools.py sun --write` in the canonical shape
   `天亮 HH:MM · ☀ HH:MM / 🌇 HH:MM · TZ · sunrise-sunset.org` — for an `en` plan
   (`plan.lang`, or `sun --lang en`) the dawn word is `dawn`:
@@ -385,7 +456,7 @@ Both pages present the same material in the same order:
    each one vetoable by the user.
 3. **Booking checklist** (the action list lives near the top on purpose), sorted by
    urgency: visa → travel-clinic consult → sell-outs → intl flights → date-locked
-   rail → refundable hotels → the rest (the pre-departure ladder closes the list). Each row: item · deadline/lead time · price + as-of date · deep link ·
+   rail → refundable hotels → the rest (the pre-departure ladder closes the pre-departure rows; on-trip re-audit rows follow it). Each row: item · deadline/lead time · price + as-of date · deep link ·
    checkbox.
 4. **Flights & intercity table**: pick + backup per leg with all Phase 3 fields.
 5. **Day-by-day cards**: one card per day — header (date/city/label + sunrise/sunset),
@@ -408,7 +479,7 @@ Both pages present the same material in the same order:
 8. **Country brief**: cards in the canonical order of §Brief templates — visa ·
    emergency · safety · health · holidays · weather · money · connectivity ·
    insurance · baggage — then the triggered cards (season, altitude, navigation,
-   lookalikes, packing) only when the trip has the trigger.
+   lookalikes, packing, driving) only when the trip has the trigger.
 9. **Footer**: generation date · "prices move — links are the source of truth" ·
    the self-check result (N issues found and fixed) — write that line into
    `meta.self_check`, which the plain page's footer prints, **and** repeat it as the
@@ -496,7 +567,8 @@ them toward this one.
 
 ### §Pre-departure re-check ladder — four fixed checklist rows, always with the .ics
 
-Every plan's checklist ends with the same four rows, each naming what it re-checks
+Every plan's pre-departure rows end with the same four rows (a trip of seven days or
+more continues with §On-trip re-audit rows), each naming what it re-checks
 (the brief lines and the `legs` by number), so re-verification is one ladder instead
 of five unrelated "re-confirm" lines. They are date-locked gates, so the ladder alone
 makes the gates `.ics` mandatory (floating 09:00, rules above) — generated with
@@ -508,15 +580,45 @@ ISO date or `T-N` marker; write deadlines as `T-14 · 2026-10-31` so both parse.
 | **T-14** | opening hours + fees of every anchor (pattern-verified ones first) · advisory level · visa / entry rule · ticket-release dates still ahead | the row lists the anchors and the `legs` numbers it covers |
 | **T-7** | weather: re-run the forecast recipe (data-sources.md §Weather) for every base and re-apply scheduling.md rule 10 to hot / wet / windy days · the route's hazard sources (season card) | swap rain alternatives into the main line where the odds say so; note the swaps in `decisions[]` |
 | **T-3** | strikes / closures / protests on the route (rail operator + city transit notices) · advisory and forecast once more · timed tickets in the wallet | one line per moving day |
-| **T-1** | eSIM active and receiving home-number SMS · paper + cloud copies · cash in hand per `brief.money` · cards unblocked for travel | — |
+| **T-1** | eSIM active (or set to activate on landing, where the carrier only activates in-country) and receiving home-number SMS · paper + cloud copies · cash in hand per `brief.money` · cards unblocked for travel | — |
 
 A **hazard gate** (phase-1-brief.md §Hazard line) is a fifth, named row when the
 window hits a hazard season: it carries the official source URL and the decision it
 gates, and gets its own VEVENT beside the ladder's.
 
 Write the rows as `{item, deadline: "T-14 · <date>", note: <what it covers>}`, keep
-them last as a block (anything else due inside T-14 — eSIM, cash, card notice — is
+them as one block at the end of the pre-departure rows — on-trip re-audit rows, when
+the trip has them, come after it (anything else due inside T-14 — eSIM, cash, card notice — is
 folded into the matching ladder row, not kept as its own row; a ticket drop inside
 T-14 stays its own gate and sorts by date ahead of the block), and do not add a
 separate "re-confirm opening hours" row — the T-14 row is that row. `assets/plan.example.json` carries the four rows as
 placeholders.
+
+### §On-trip re-audit rows — trips of seven days or more
+
+The ladder stops at T-1, but facts keep moving after departure: carriers change
+check-in cutoffs and move check-in lobbies, timetables switch with the season,
+operators restate their check-in lead, a storm or a smoke plume arrives
+(data-sources.md §Flights, Carrier rules and clocks move after booking; §Hazard feeds).
+A trip of seven days or more therefore adds one checklist row every 3-4 days of travel,
+written `{item: "On-trip re-audit · D+3", deadline: "D+3 · <date>", note}` (the item
+in the plan language — a zh plan: "途中复核 · D+3") —
+`route_tools.py ics` reads the ISO date and derives each event's UID from `item`, so
+the D+N in the item is what keeps the rows from merging into one calendar event. Each row re-audits **only
+the days still ahead**, and its `note` names what it covers:
+
+- every remaining flight — departure time, check-in and bag-drop cutoff, terminal or lobby;
+- every timed check-in — the operator's lead time and the real duration of the activity
+  (scheduling.md rule 1);
+- every landing-to-activity chain (scheduling.md §Day types, Arrival day);
+- every self-drive day — `brief.driving`, the desk's hours, the no-car fallback
+  (phase-3-legs.md §Driving legs);
+- the route's hazard feeds, and for view-dependent days the live visibility and smoke
+  checks (scheduling.md rule 10);
+- every item the plan still marks `est`, ⚠️ or "confirm on arrival" — those are the
+  re-audit's worklist.
+
+A finding that changes a choice the traveller already made goes back to them as facts
+and options (SKILL.md Interaction contract). On the road this is the *On-trip re-audit*
+quick mode in SKILL.md. `plan_lint.py --strict` fails a plan of seven days or more
+with no row whose item carries `D+N` and whose deadline carries the ISO date.

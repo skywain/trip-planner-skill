@@ -86,8 +86,8 @@ import sys
 
 from theme_common import (LUCIDE, T, add_art_arg, asset_count, brief_titles, data_uri,
                           day_embed_url, esc, export_js, export_prefix, init_lang, lang,
-                          load_art, load_plan, short_dates, theme_name, title_head,
-                          title_kick)
+                          load_art, load_plan, short_dates, sub_stops_html, theme_name,
+                          title_head, title_kick)
 
 HERE = pathlib.Path(__file__).parent
 THEME = "glass"
@@ -206,8 +206,15 @@ def tl_rows(day):
                f' aria-label="{esc(t("nav_in_maps"))}{esc(r.get("what", "")[:16])}">{ic("pin")}</a>'
                if r.get("link") else "")
         rows.append(f'<div class="li k-{kind}"><span class="tchip">{esc(r.get("t",""))}{est}</span>'
-                    f'<span class="w">{et(r.get("what",""))}{price}{chip}{nav}</span></div>')
+                    f'<span class="w">{et(r.get("what",""))}{price}{chip}{nav}'
+                    f'{sub_stops_html(r, sub_pin, et)}</span></div>')
     return "".join(rows)
+
+
+def sub_pin(href, label):
+    """The row's map pin, for one sub-stop (arguments arrive escaped)."""
+    return (f' <a class="rownav" href="{href}" target="_blank" rel="noopener"'
+            f' aria-label="{esc(t("nav_in_maps"))}{label}">{ic("pin")}</a>')
 
 
 def meta_pills(day):

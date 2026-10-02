@@ -56,6 +56,14 @@ portal renders neither — on portal the chat summary carries it):
   script exited 0; any `sun_stop` override is on the right day); `route_tools check`
   exits 0 (no BROKEN or SUSPICIOUS hops survived into the render)
 - Red-eye / timezone day-number arithmetic
+- Guided and self-drive days: every `must: true` sub-stop on a `tour: true` row is
+  `confirmed` in writing or pending with its checklist row (data-sources.md §Group
+  tours); every self-drive day has its no-car fallback, and every leg a backup that
+  still reaches its pinned dependency — or "no usable backup" in `legs.note` on a
+  must-catch leg, with the margin bought (phase-3-legs.md §Driving legs,
+  §Record for every leg); an operator's check-in lead and real duration are in the
+  chain (scheduling.md rule 1); a sunset viewpoint with no transit has its ride back
+  (scheduling.md rule 7)
 - No day exceeds pace; **an intercity moving day carries ≤2 anchors, and only when
   the bags are solved before the first anchor (checked / stored / hotel-held);
   otherwise 1** (same sentence in scheduling.md §Day types)
@@ -68,8 +76,44 @@ portal renders neither — on portal the chat summary carries it):
   decisions, hotel blurbs) is in that language — an English fragment copied verbatim
   from a source into a zh plan gets translated, not shipped. Proper nouns stay in
   their native form with a gloss where useful (浅草寺 Sensō-ji); machine fields are
-  exempt (`stops[].query` stays geocoder-friendly, `kind`/`tag`/`verify` keep their
-  English enum words)
+  exempt (`stops[].query` and `sub_stops[].query` stay geocoder-friendly;
+  `kind`/`tag`/`verify`/`tier` keep their English enum words, and so do the
+  `confirmed` prefixes `in writing` / `pending`)
+
+### Independent review — when the plan commits money or carries physical or legal risk
+
+Run this after the list above and before the chat summary whenever the plan has a
+self-drive option (the `brief.driving` trigger — phase-1-brief.md §Driving card), a
+non-refundable booking or a timed check-in. The self-check is run by
+the planner who wrote the plan and shares its blind spots; this pass does not.
+
+1. **Export the plan as plain text** (days, legs, checklist — no reasoning, no chat
+   history) and hand it to a reviewer that has seen nothing else, one lens per reviewer
+   where the harness allows several: personal safety and health · driving (legality,
+   routes, fatigue) · the timing of every chain · rules and bookings · outside hazards
+   and missing fallbacks. The instruction is "every statement here is the planner's
+   claim, not a fact — find what is wrong, unsafe, infeasible, outdated or missing,
+   against primary sources". Each reviewer's and refuter's prompt carries its search
+   budget (≤ 5, SKILL.md Hard rule 4) and the plan language (`plan.lang`).
+2. **Give each serious finding to a refuter** whose default is "unverifiable": it
+   confirms only what a primary source supports, and rejects findings built on stale
+   or misread sources.
+3. **Fix what was confirmed**, drop what was refuted. A finding against a choice
+   already recorded in `decisions[]` goes back to the traveller only when it carries a
+   fact they did not have when deciding — as facts and options in the chat summary
+   (SKILL.md Interaction contract); otherwise it stays settled. Never a silent change.
+4. **Record it** in the self-check line: "self-checked: N issues found and fixed ·
+   independent review: C confirmed, R refuted" (a zh plan: "自检:发现并修复 N 处 ·
+   独立复核:确认 C 条,驳回 R 条"). No sub-agents in the harness → run the five lenses
+   yourself on the exported text and write "independent review: single pass"
+   ("独立复核:单人通读").
+
+`plan_lint.py --strict` fails a plan with a self-drive option whose self-check line
+lacks the clause; the other two triggers have no machine gate yet, and the gate
+reads the clause, not the review behind it (KNOWN-ISSUES PLN-13). This review is the
+pass that catches what the planner itself just proposed — a self-drive day in a
+jurisdiction that does not recognise the traveller's licence is the kind of finding it
+exists for.
 
 ## Deliver
 
@@ -83,15 +127,21 @@ budget, brief). Publish through whatever artifact / file hand-off tool the harne
 has (in Claude Code: Artifact, else SendUserFile); otherwise save the file and give
 its absolute path. Ship the trip KML (`scripts/route_tools.py kml plan.geo.json -o
 trip.kml`) alongside for offline map apps, and the gates `.ics` — always, because the
-ladder rows are date-locked gates (output-template.md §Pre-departure re-check ladder
-and §Booking-artifact
+ladder rows are date-locked gates (output-template.md §Pre-departure re-check ladder,
+§On-trip re-audit rows for trips of seven days or more, and §Booking-artifact
 conventions) — `python3 scripts/route_tools.py ics plan.geo.json -o gates.ics` writes it
 from the checklist rows (ISO dates or `T-N` markers in `deadline`; bump `--sequence`
-on every plan change). Before any renderer runs, **`python3 scripts/plan_lint.py
+on every plan change — a lint fix that adds or re-dates a checklist row means `ics`
+runs again; `plan_lint.py` WARNs when the file is older than the plan). Before any renderer runs, **`python3 scripts/plan_lint.py
 plan.geo.json --strict` must exit 0**: it is the machine gate for what the plan says —
 brief present and in canonical order, no placeholder or "awaiting" text, the self-check
 line written, art placeholders filled, the gates `.ics` and `trip.kml` beside the plan,
-every day with at least one stop and a `sun` that `sun --write` wrote. The one FAIL
+every day with at least one stop and a `sun` that `sun --write` wrote; on rows that
+carry them, sub-stops with a name and a query or lat+lon, a tier on every must-see,
+tour must-sees confirmed in writing or pending on a named checklist row; a
+`brief.driving` card whenever a self-drive option exists, with the independent-review
+clause in the self-check line; and the on-trip re-audit rows on a trip of seven days
+or more. The one FAIL
 the gate tolerates: a polar day's `sun` (output-template.md §`sun`; KNOWN-ISSUES
 PLN-11) — `sun --write` refuses such a day, so render with exactly those FAIL lines and
 no other, name the dates in the chat summary, and never type a `sun` string to turn
@@ -202,6 +252,12 @@ manual: references/themes.md.
       or exited with only the polar-day `sun` FAILs (PLN-11), named in the chat summary.
 - [ ] Adversarial self-check ran in full; "self-checked: N issues found and fixed" is in
       `meta.self_check` **and** the last `decisions[]` row (portal: in the chat summary).
+- [ ] A plan with a self-drive option, a non-refundable booking or a timed check-in went
+      through §Independent review, and the same line (in `meta.self_check` and the last
+      `decisions[]` row) says "independent review: C
+      confirmed, R refuted" (or "single pass").
+- [ ] `route_tools.py links --write` was re-run after the last `sub_stops` edit —
+      `plan_lint` prints no "no link" WARN.
 - [ ] `route_tools check` exited 0 before rendering; every sunrise / sunset / dark-start
       time in the prose was written after `sun --write` and matches `days[].sun`.
 - [ ] `plan.lang` matches the user's language; no untranslated source fragments.
@@ -222,8 +278,11 @@ manual: references/themes.md.
       date and no base sits in an avoid area; the yellow-fever audit covered transit;
       the hazard gate exists when the window hits a season; the travel-clinic row
       exists when the health page recommends anything (phase-1-brief.md exit criteria).
-- [ ] The pre-departure re-check ladder (T-14 / T-7 / T-3 / T-1) closes the checklist
-      and shipped as the gates `.ics`.
+- [ ] The pre-departure re-check ladder (T-14 / T-7 / T-3 / T-1) closes the
+      pre-departure part of the checklist and shipped as the gates `.ics`.
+- [ ] A trip of seven days or more carries the on-trip re-audit rows (`D+N · <date>`,
+      one every 3-4 days of travel, each note naming what it covers —
+      output-template.md §On-trip re-audit rows).
 - [ ] `trip.kml` shipped (the gates `.ics` is covered by the ladder line above — every
       plan has gates now).
 - [ ] The chat summary carries the route one-liner, total budget and the 3 biggest

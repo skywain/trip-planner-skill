@@ -11,15 +11,16 @@ Inputs: the chosen route skeleton (Phase 2), the legs table (Phase 3), the Phase
 brief facts (visa / entry, holidays, health, advisory — the assembler's, never a city
 agent's) and `prefs` (interests, pace, language). Outputs: per city, plan-JSON day
 objects insertable verbatim into `days[]` (output-template.md §city-block) with
-`stops`, the hour-level `timeline`, `hop_links`, `sun`, `rain_alt`, `ribbon`, plus the
-city's `checklist_items`.
+`stops`, the hour-level `timeline` (view anchors carry their `sub_stops`),
+`hop_links`, `sun`, `rain_alt`, `ribbon`, plus the city's `checklist_items`.
 
 
 ## City-agent contract — fan out or go sequential
 
 When ≥3 cities and subagents are available, fan out one agent per city (otherwise do
 the cities sequentially with the same structure); each prompt must include: the
-dates, the user's interests + pace, **search budget ≤8**, an
+dates, the user's interests + pace, the locked must-sees with the view tier expected
+of each (`prefs.notes`), **search budget ≤8**, an
 explicit **"do not run geocoding"** line (parallel agents would break Nominatim's
 1 req/s policy — the assembler geocodes once, centrally), **the plan language**
 (`plan.lang`, with one line telling the agent every reader-facing string in its
@@ -27,7 +28,7 @@ returned block — `label`, `what`, `note`, `why`, hotel blurbs, checklist rows,
 `unverified[]` — is written in that language; its sources will mostly be
 English, and English notes pasted verbatim are how a zh plan goes half-English.
 Machine fields keep the schema's form regardless: `stops[].query` stays
-geocoder-friendly romanized/destination-local, and `kind`/`tag`/`verify` keep
+geocoder-friendly romanized/destination-local, and `kind`/`tag`/`verify`/`tier` keep
 the English enum words the renderers switch on),
 and the exact return
 format from references/output-template.md §city-block — **plan-JSON day objects,
@@ -69,6 +70,18 @@ Per city:
    duration ÷ recurrence interval, the official forecast horizon (days, not
    weeks) sets a decision gate on the checklist — keep every related booking
    cancellable until that gate, and pay no premium for a lottery ticket.
+   **Name the picture, not just the place.** For every must-see whose draw is a view,
+   record its viewpoint tier (`eye-level` — boardwalk, street, shore; `overlook` —
+   from above; `from-below`), where to stand for the picture the user means, and the
+   walk to it (`walk_min`).
+   The same landmark at two tiers is two sights (live case: a group tour stopped only
+   at the eye-level boardwalk; the picture the traveller came for is taken from an
+   overlook trail above it). A view named in the locked must-sees sets the tier and is
+   the `must: true` sub-stop; a plan that reaches only another tier says so in the
+   row. On a guided day, check which tier the tour actually reaches before the day is
+   fixed (data-sources.md §Group tours). Write them as `sub_stops` on the anchor row,
+   and mark a block a guided tour owns `tour: true` so its must-sees carry `confirmed`
+   (shape: output-template.md §city-block).
 3. Transit: day-pass vs pay-per-ride arithmetic — sum the day's expected rides and
    recommend the pass only when it actually wins. Note the local IC card / transit app.
 4. Each day gets one rain alternative and a food **area** (market/street/neighborhood)
@@ -135,6 +148,9 @@ Per city:
       every anchor verified (hours, last entry, price, sell-out — sell-out anchors on the
       booking checklist with lead time) or stamped "pattern as
       of {date}" with the T-14 ladder row carrying the re-confirmation.
+- [ ] Every must-see whose draw is a view has `sub_stops` on its anchor row with tier,
+      where to stand and `walk_min`; on a guided day, the row carries `tour: true` and
+      the tier the tour reaches was checked.
 - [ ] Each day has its rain alternative (closure-checked), its food area, its `ribbon`.
 - [ ] `route_tools.py` ran geocode → tz sweep → sun --write → links --write → check →
       kml; `check` exited 0 (no BROKEN / SUSPICIOUS hop survived; every `mode`

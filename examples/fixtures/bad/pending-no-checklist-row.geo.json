@@ -1,0 +1,35 @@
+{
+  "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: confirmed is pending but names no checklist row (WARNs go to stderr and do not count)",
+  "trip": "Fixture — bad: pending-no-checklist-row",
+  "lang": "en",
+  "meta": {
+    "budget_total": "n/a — fixture",
+    "self_check": "self-checked: 0 issues found and fixed"
+  },
+  "days": [
+    {
+      "date": "2026-11-10",
+      "timeline": [
+        {
+          "t": "09:00-11:00",
+          "what": "Example Canyon viewpoints",
+          "kind": "anchor",
+          "tour": true,
+          "sub_stops": [
+            {
+              "name": "Rim overlook",
+              "query": "Rim Overlook, Example Canyon",
+              "tier": "overlook",
+              "stand": "the upper deck, facing down the canyon",
+              "must": true,
+              "confirmed": "pending · operator will confirm"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "brief": {
+    "visa": "fixture card — content is not under test"
+  }
+}

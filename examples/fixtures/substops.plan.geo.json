@@ -1,0 +1,149 @@
+{
+ "_fixture": "Regression fixture for the optional timeline-row fields sub_stops / tier / must / tour / confirmed / link / sub_map (defined in references/output-template.md §city-block). Invented two-day plan, not advice; renderable as is. Expected: scripts/plan_lint.py exits 0 (two WARNs: no gates .ics, no trip.kml). Every link and sub_map here was written by scripts/route_tools.py links --write on a scratch copy; re-running it must leave the file byte-identical. Day 1 has one stop (sub-stop links still written), day 2 has a hop row that must keep its own link. The bad/ folder holds one known-bad plan per lint rule, each with its expected result in _expect.",
+ "trip": "Fixture — sub-stops, 2 days",
+ "lang": "en",
+ "tz": "Asia/Tokyo",
+ "prefs": {
+  "travel_style": "public"
+ },
+ "meta": {
+  "dates": "2026-11-10 → 2026-11-11",
+  "party": "2 adults",
+  "route": "Kyoto",
+  "budget_total": "n/a — fixture, no prices",
+  "generated": "2026-10-02",
+  "self_check": "self-checked: 0 issues found and fixed"
+ },
+ "decisions": [
+  "Day 1 is a guided half-day walk; the operator confirmed the gorge lookout in writing before booking",
+  "self-checked: 0 issues found and fixed"
+ ],
+ "checklist": [
+  {
+   "item": "Guided walk: ask in writing whether the group climbs to the gorge lookout",
+   "deadline": "2026-10-20",
+   "note": "answered in writing 2026-10-15 — yes, 20 min at the deck"
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-11-10",
+   "city": "Kyoto",
+   "label": "Arashiyama, guided",
+   "timeline": [
+    {
+     "t": "09:00-12:30",
+     "what": "Arashiyama guided half-day walk",
+     "kind": "anchor",
+     "tag": "pinned",
+     "tour": true,
+     "note": "meeting point: the bridge's north end",
+     "sub_stops": [
+      {
+       "name": "Bamboo grove path",
+       "query": "Arashiyama Bamboo Grove, Kyoto, Japan",
+       "tier": "eye-level",
+       "stand": "the path's upper bend, facing uphill",
+       "link": "https://www.google.com/maps/search/?api=1&query=Arashiyama+Bamboo+Grove%2C+Kyoto%2C+Japan"
+      },
+      {
+       "name": "Gorge lookout",
+       "query": "Kameyama Park, Arashiyama, Kyoto, Japan",
+       "tier": "overlook",
+       "stand": "the hilltop deck, facing up the river gorge",
+       "walk_min": 15,
+       "must": true,
+       "confirmed": "in writing · 2026-10-15 · operator email",
+       "link": "https://www.google.com/maps/search/?api=1&query=Kameyama+Park%2C+Arashiyama%2C+Kyoto%2C+Japan"
+      }
+     ],
+     "sub_map": "https://www.google.com/maps/dir/?api=1&origin=Arashiyama+Bamboo+Grove%2C+Kyoto%2C+Japan&destination=Kameyama+Park%2C+Arashiyama%2C+Kyoto%2C+Japan&travelmode=walking"
+    },
+    {
+     "t": "12:30-13:30",
+     "what": "lunch near the station",
+     "kind": "meal",
+     "tag": "swap→riverside stalls"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Togetsukyo Bridge",
+     "query": "Togetsukyo Bridge, Kyoto, Japan",
+     "lat": 35.0129,
+     "lon": 135.6777
+    }
+   ]
+  },
+  {
+   "date": "2026-11-11",
+   "city": "Kyoto",
+   "label": "Fushimi Inari, on our own",
+   "timeline": [
+    {
+     "t": "08:30-08:45",
+     "what": "train Kyoto Station → Inari Station",
+     "kind": "hop",
+     "verify": "est",
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.985800%2C135.758800&destination=34.967100%2C135.772700&travelmode=transit"
+    },
+    {
+     "t": "08:45-11:30",
+     "what": "Fushimi Inari Taisha",
+     "kind": "anchor",
+     "tag": "opener",
+     "sub_stops": [
+      {
+       "name": "Tower gate",
+       "query": "Romon Gate, Fushimi Inari Taisha, Kyoto, Japan",
+       "lat": 34.9671,
+       "lon": 135.7727,
+       "tier": "from-below",
+       "stand": "the forecourt steps, facing the gate",
+       "link": "https://www.google.com/maps/search/?api=1&query=34.967100%2C135.772700"
+      },
+      {
+       "name": "Thousand gates",
+       "query": "Senbon Torii, Fushimi Inari Taisha, Kyoto, Japan",
+       "tier": "eye-level",
+       "stand": "where the twin tunnels split, facing uphill",
+       "walk_min": 5,
+       "link": "https://www.google.com/maps/search/?api=1&query=Senbon+Torii%2C+Fushimi+Inari+Taisha%2C+Kyoto%2C+Japan"
+      },
+      {
+       "name": "Crossroads lookout",
+       "query": "Yotsutsuji Intersection, Fushimi Inari, Kyoto, Japan",
+       "tier": "overlook",
+       "stand": "the terrace rail, facing west over the city",
+       "walk_min": 35,
+       "must": true,
+       "link": "https://www.google.com/maps/search/?api=1&query=Yotsutsuji+Intersection%2C+Fushimi+Inari%2C+Kyoto%2C+Japan"
+      }
+     ],
+     "sub_map": "https://www.google.com/maps/dir/?api=1&origin=34.967100%2C135.772700&destination=Yotsutsuji+Intersection%2C+Fushimi+Inari%2C+Kyoto%2C+Japan&travelmode=walking&waypoints=Senbon+Torii%2C+Fushimi+Inari+Taisha%2C+Kyoto%2C+Japan"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Kyoto Station",
+     "query": "Kyoto Station, Japan",
+     "lat": 34.9858,
+     "lon": 135.7588
+    },
+    {
+     "name": "Fushimi Inari Taisha",
+     "query": "Fushimi Inari Taisha, Kyoto, Japan",
+     "lat": 34.9671,
+     "lon": 135.7727,
+     "mode": "train"
+    }
+   ],
+   "day_map": "https://www.google.com/maps/dir/?api=1&origin=34.985800%2C135.758800&destination=34.967100%2C135.772700&travelmode=walking"
+  }
+ ],
+ "brief": {
+  "visa": "fixture card — content is not under test",
+  "safety": "fixture card — content is not under test",
+  "weather": "fixture card — content is not under test"
+ }
+}

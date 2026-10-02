@@ -117,7 +117,7 @@ import urllib.parse
 from theme_common import (T, tag_pretty, lang, weekday, theme_name, init_lang,
                           asset_count, brief_titles, data_uri, export_js,
                           export_prefix, day_embed_url, esc, et, ic, load_plan, sprite,
-                          Art, load_art, add_art_arg, short_dates, title_kick)
+                          Art, load_art, add_art_arg, short_dates, sub_stops_html, title_kick)
 
 HERE = pathlib.Path(__file__).parent
 THEME = "journal"
@@ -977,8 +977,15 @@ def render_rows(day, marg=None):
             f'<div class="en k-{kind}"><span class="mk" aria-hidden="true">{mark}</span>'
             f'<span class="en-t">{esc(r.get("t", ""))}</span>'
             f'<div class="en-x">{et(r.get("what", ""))}{est}{price} '
-            f'{render_tag(r.get("tag", ""))}{marg.get(n, "")}{nav}</div></div>')
+            f'{render_tag(r.get("tag", ""))}{marg.get(n, "")}{nav}'
+            f'{sub_stops_html(r, sub_pin, et)}</div></div>')
     return "".join(rows)
+
+
+def sub_pin(href, label):
+    """The row's map pin, for one sub-stop (arguments arrive escaped)."""
+    return (f' <a class="gonav" href="{href}" target="_blank" rel="noopener"'
+            f' aria-label="{esc(t("nav_to"))}{label}">{ic("pin")}</a>')
 
 
 def render_pocket(day, i):

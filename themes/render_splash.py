@@ -169,7 +169,7 @@ import re
 from theme_common import (T, add_art_arg, asset_count, brief_titles,
                           data_uri, day_embed_url, esc, et, export_js, export_prefix,
                           ic, init_lang, lang, load_art, load_plan, short_dates, sprite, title_head,
-                          tag_pretty, theme_name, title_kick)
+                          sub_stops_html, tag_pretty, theme_name, title_kick)
 
 HERE = pathlib.Path(__file__).parent
 THEME = "splash"
@@ -654,8 +654,14 @@ def render_timeline(day):
             f'<div class="row k-{esc(kind)}">'
             f'<div class="t">{esc(r.get("t", ""))}{est}</div>'
             f'<div class="w">{ic(icn, icls)}{et(r.get("what", ""))}{price}'
-            f'{tag_html(r.get("tag", ""))}{nav}</div></div>')
+            f'{tag_html(r.get("tag", ""))}{nav}{sub_stops_html(r, sub_pin, et)}</div></div>')
     return "".join(rows)
+
+
+def sub_pin(href, label):
+    """The row's map pin, for one sub-stop (arguments arrive escaped)."""
+    return (f' <a class="rownav" href="{href}" target="_blank" rel="noopener"'
+            f' aria-label="{esc(t("nav.to"))}{label}">{ic("pin")}</a>')
 
 
 def day_notes(day):

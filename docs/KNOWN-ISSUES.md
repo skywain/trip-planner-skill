@@ -32,6 +32,8 @@ Source pointers are `file → function / section`.
 | [PLN-10](#pln-10) | Gates | The exit-code gates are advisory: renderers run with `plan_lint --strict` and `check` red | open |
 | [PLN-11](#pln-11) | Lint | `plan_lint --strict` is blind to language and source stamps (the KML and empty-stop / `sun` checks landed 2026-09-05) | partly resolved |
 | [PLN-12](#pln-12) | Text | Cover-title fallback (mode wording, the `fast-flights` install line and origin → hub landed 2026-09-05) | partly resolved |
+| [PLN-13](#pln-13) | Lint | 2026-10 rules with no gate or a presence-only one: a view must-see without `sub_stops`, same-day opening hours / decision points, the independent review, the on-trip rows, the content of `brief.driving` | planned |
+| [PLN-14](#pln-14) | Links | The sub-stop link forms are untested on a phone; Apple chains need coordinates, 高德 has no chain, and the portal theme shows sub-stops in brief form | open |
 | [AST-1](#ast-1) | Asset pipeline | `towebp.py` silently makes a white square from an un-cut PNG | open |
 | [AST-2](#ast-2) | Asset library | Test-asset reclaim is a manual merge | open |
 | [AST-3](#ast-3) | Generation | Without native generation in the agent, image/video generation needs an OpenRouter key | open |
@@ -693,6 +695,65 @@ pictures without any error.**
   `check`'s own hint now separate the two cases; the install line carries the PEP 668
   variants; phase-0-intake.md lists the common hubs); the cover-title fallback stays open.
 
+### PLN-13
+**Two rules from the 2026-10 field lessons have no gate that can fail, and three gates check presence, not substance.**
+
+- **Symptom** — nothing has failed yet; this entry exists because the project's own
+  rule is that a mandatory deliverable needs a generator and a failing gate. No gate:
+  (1) a must-see whose draw is a view can ship with no `sub_stops`
+  at all (the lint only checks rows that already carry them — a `must: true` sub-stop
+  needs a `tier`, a tour's must-sees need `confirmed`); (2) an anchor's opening hours
+  verified for the day itself, and day-of decision points (smoke, visibility, a
+  free-cancellation deadline) — both live in prose and `note` today. Presence-only
+  gate: (3) the independent-review clause is required under `--strict` only where a
+  self-drive option exists — a non-refundable booking or a timed check-in is not
+  machine-readable — and the gate reads the clause, not the review: a Haiku
+  end-to-end run saw the FAIL and typed "single pass" fourteen seconds later with no
+  review in its transcript; (4) the on-trip check wants one `D+N` row with a date,
+  not the one-every-3-4-days spacing or what the note covers; (5) the `brief.driving`
+  check keys on `prefs` and a rental-typed `legs[]` row, so a
+  self-drive day that exists only as stops with `mode: drive` is not seen (the
+  examples use that mode for taxis and hired drivers), the `legs[]` test is a keyword
+  heuristic, and the check is
+  presence-only — a one-sentence card with no rentability line and no as-of date
+  passes (seen in the 2026-10 Haiku end-to-end run).
+- **Mitigations in place** — (1), (3) and the opening-hours half of (2) have
+  exit-criteria ticks in their phase files (day-of decision points have none); the
+  on-trip re-audit rows, which two of two Haiku end-to-end runs dropped while they
+  were procedure only, have a `--strict` presence check since 2026-10 (the next run
+  wrote them); and the hazard gate (phase-1-brief.md §Hazard line) covers the
+  trip-level decision.
+- **Workaround** — before trusting a plan with bookings that cannot be undone, ask
+  for the findings behind the "independent review:" clause in the last `decisions[]`
+  row (what was confirmed and refuted, or the five lenses' notes for "single pass") —
+  the clause alone proves nothing, see (3) — and read the driving card for a
+  rentability line and an as-of date.
+- **Source** — `scripts/plan_lint.py` → `check_rows`, the ladder check;
+  `scripts/route_tools.py` → `cmd_ics`. **Status:** planned — a row-level `hours`
+  field (`{text, as_of, src}` or `"unverified"`), a day-level `decision_points` list
+  that `ics` reads directly, a content check for the driving card (a legality
+  word, a desk line, an as-of date), and a review clause that carries per-lens
+  counts; all presence-triggered so the seven examples
+  keep their current results.
+
+### PLN-14
+**The sub-stop map links are written but not yet tapped on a phone.**
+
+- **Symptom** — `route_tools.py links --write` writes a place link per sub-stop and a
+  `sub_map` walking chain per row (2026-10). The URL forms follow the providers'
+  published URL schemes, but none has been opened on a real device, so they carry no ✓.
+  Provider limits: an Apple chain needs coordinates on every sub-stop and 高德 has no
+  keyless multi-point link, so in those cases `sub_map` is left unwritten with a WARN;
+  a 高德 pin needs `lat`/`lon`. A chain holds at most 11 points.
+- **Also** — the portal theme prints sub-stops in brief form (★, name, tier) with no
+  links: its day cards are non-interactive overlays. The "save this day" PNG export
+  has not been exercised on a day that carries sub-stops.
+- **Workaround** — give sub-stops `lat`/`lon` when the page will be used with Apple
+  Maps or 高德; open one link of each kind before relying on a plan offline.
+- **Source** — `scripts/route_tools.py` → `place_url`, `chain_url`, `cmd_links`;
+  `themes/theme_common.py` → `sub_stops_html`; `themes/render_portal.py`.
+  **Status:** open.
+
 ## Method and scope
 
 ### SCO-1
@@ -757,3 +818,7 @@ Short list, roughly in the order the work makes sense:
 6. **Affiliate rails for a hosted version** — the only route from personal-use
    posture to something usable by other people (SCO-1).
 7. **Publishing** — name is settled (SCO-4); on the first push set the repo description and the topic list from SCO-4, then submit the awesome-list entries.
+8. **Gates for the field-lesson rules** — the `hours` field, `decision_points` in the
+   gates `.ics`, the content of the driving card and per-lens counts in the review
+   clause (PLN-13),
+   after the renderer-enforced gates of PLN-10.

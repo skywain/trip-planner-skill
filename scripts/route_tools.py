@@ -73,6 +73,17 @@ apple. A Chinese stop by itself (the usual departure airport, its rows map:false
 does not warn (Turkey F8). Whole-day DAY CHAIN links (multi-point) exist for google
 and apple only; amap gets per-hop links and no day_map.
 
+Sub-stops (links --write): a timeline row may carry "sub_stops" — the photo positions
+inside one anchor (output-template.md §city-block). They are never in stops[], so
+geocode, check, the hop pairing, the kml route line and sun never see them. On every
+day (a day with < 2 stops too) --write sets each sub-stop's "link" (a place pin) and,
+for a row with 2+ sub-stops, the row's "sub_map" (one walking-mode chain through
+them in order). Both come from lat,lon when present, else from the query text, so
+no geocoding is needed; both are rewritten on every run, and a stale sub_map is
+removed. Pins: google maps/search/?api=1&query=, apple ?ll=&q= or ?q=, amap
+uri.amap.com/marker (lat/lon only). The chain is google, or apple when every
+sub-stop has lat/lon; amap has none. A WARN names every link or chain not written.
+
 Name the file plan.geo.json from the start: geocode then edits it in place and every
 later command reads the one file that has everything.
 
@@ -88,8 +99,10 @@ Subcommands:
   links   plan.geo.json [--write] [--provider google|apple|amap]
                               -> per-hop map links + whole-day chain links;
                                  --write injects them into the plan's hop rows and
-                                 ends with a "wrote / parked / suspicious" summary
-  kml     plan.geo.json -o trip.kml  -> numbered pins + day route lines
+                                 ends with a "wrote / parked / suspicious" summary;
+                                 sub-stop links + sub_map as above
+  kml     plan.geo.json -o trip.kml  -> numbered pins + day route lines, plus an
+                                        un-numbered pin per sub-stop with lat/lon
                                         (import into Organic Maps / Google My Maps)
   sun     plan.geo.json [--write] [--tz auto|Area/City] [--only DATE,...] [--lang zh|en]
                               -> per-day civil dawn / sunrise / sunset from
@@ -169,6 +182,10 @@ Change log (2026-08-16, after the Mexico / Morocco / Turkey / Vietnam runs):
 - sun: day["sun_stop"] (name or 0-based index) overrides the first/last-stop pick
   (Morocco F5); exit 1 whenever a day was skipped / failed, after writing the good
   days (Vietnam F6); a request failure is a skip (exit 1), not a "rejection" (3).
+Change log (2026-10, after a two-week multi-region run):
+- links --write: sub-stop place links + the row's sub_map chain (a tour skipped the
+  overlook the traveller came for; the plan had named only the park). kml: pins for
+  sub-stops with lat/lon. gmaps_dir takes a query string as a point.
 """
 import argparse
 import datetime as _dt
@@ -353,17 +370,75 @@ def hop_estimate(km, mode=None):
 
 def gmaps_dir(o, d, mode, waypoints=None):
     p = [("api", "1"),
-         ("origin", "{:.6f},{:.6f}".format(*o)),
-         ("destination", "{:.6f},{:.6f}".format(*d)),
+         ("origin", _pt(o)),
+         ("destination", _pt(d)),
          ("travelmode", mode)]
     if waypoints:
-        p.append(("waypoints",
-                  "|".join("{:.6f},{:.6f}".format(*w) for w in waypoints)))
+        p.append(("waypoints", "|".join(_pt(w) for w in waypoints)))
     return "https://www.google.com/maps/dir/?" + urllib.parse.urlencode(p)
 
 
 def _ll(c):
     return "{:.6f},{:.6f}".format(*c)
+
+
+def _pt(p):
+    """A link point: (lat, lon) -> "lat,lon"; a str is place text (a sub-stop's
+    query — Google resolves names; "|" would split the waypoint list)."""
+    return p.replace("|", " ") if isinstance(p, str) else _ll(p)
+
+
+def timeline_rows(day):
+    """day.timeline as a list — a malformed (non-list) value reads as no rows."""
+    tl = day.get("timeline")
+    return tl if isinstance(tl, list) else []
+
+
+def sub_point(s):
+    """A sub-stop's link point: (lat, lon) when both are numbers, else its query
+    text, else None. Never the name — it follows plan.lang, not the geocoder."""
+    try:
+        if s.get("lat") is not None and s.get("lon") is not None:
+            return float(s["lat"]), float(s["lon"])
+    except (TypeError, ValueError):
+        pass
+    q = s.get("query")
+    return q.strip() if isinstance(q, str) and q.strip() else None
+
+
+def place_url(provider, p, name=None):
+    """One place (pin) link for a sub-stop; p is (lat, lon) or query text:
+      google  maps/search/?api=1&query=lat,lon | text
+      apple   maps.apple.com/?ll=lat,lon&q=NAME (pin labelled) | ?q=text (search)
+      amap    uri.amap.com/marker?position=lon,lat&name=NAME — coordinates only:
+              a text point returns None (the caller WARNs)."""
+    if provider == "google":
+        return ("https://www.google.com/maps/search/?"
+                + urllib.parse.urlencode([("api", "1"), ("query", _pt(p))]))
+    if provider == "apple":
+        if isinstance(p, str):
+            return "https://maps.apple.com/?q={}".format(urllib.parse.quote(p, safe=""))
+        return "https://maps.apple.com/?ll={}{}".format(
+            _ll(p), "&q=" + urllib.parse.quote(str(name), safe="") if name else "")
+    if provider == "amap":
+        if isinstance(p, str):
+            return None
+        return ("https://uri.amap.com/marker?position={:.6f},{:.6f}&name={}"
+                "&src=trip-planner".format(
+                    p[1], p[0], urllib.parse.quote(str(name or "")[:40], safe="")))
+    raise ValueError("unknown provider {!r}".format(provider))
+
+
+def chain_url(provider, pts):
+    """A row's sub_map: one walking-mode chain through 2+ points in order. Returns
+    (url, None) or (None, why not)."""
+    if provider == "amap":
+        return None, "amap has no keyless multi-point link"
+    if len(pts) > 11:
+        return None, "{} points — a chained link takes at most 11".format(len(pts))
+    if provider == "apple" and any(isinstance(p, str) for p in pts):
+        return None, "apple chains coordinates only — give every sub-stop lat/lon"
+    return dir_url(provider, pts[0], pts[-1], "walking", pts[1:-1] or None), None
 
 
 def dir_url(provider, o, d, mode, waypoints=None, names=None):
@@ -375,7 +450,8 @@ def dir_url(provider, o, d, mode, waypoints=None, names=None):
     waypoints (list of (lat, lon)) build a multi-point chain: google via
     &waypoints=, apple via daddr=A+to:B+to:C (iOS 16+ multi-stop; older iOS opens
     only the last leg). amap has no keyless multi-point form -> ValueError, callers
-    print per-hop links only."""
+    print per-hop links only. google alone also takes query text for any point
+    (sub-stops without coordinates); apple and amap need (lat, lon)."""
     if provider == "google":
         return gmaps_dir(o, d, mode, waypoints)
     if provider == "apple":
@@ -555,7 +631,7 @@ def cmd_geocode(args):
 
 
 def anchor_rows(day):
-    return [it for it in (day.get("timeline") or [])
+    return [it for it in timeline_rows(day)
             if isinstance(it, dict) and it.get("kind") == "anchor"]
 
 
@@ -760,10 +836,70 @@ def arrow_context(what):
     return left + " " + right
 
 
+def sub_stop_links(row, day_no, provider, write, cn_links):
+    """Place links for one row's sub_stops plus its sub_map chain (output-template.md
+    §city-block). Prints every URL; with write, sets sub["link"] / row["sub_map"] and
+    removes what this run cannot build — script-owned like hop_links, so a re-run
+    gives the same file. Returns (sub-stop links, chains)."""
+    what = str(row.get("what", ""))[:48]
+    subs = row.get("sub_stops")
+    if not isinstance(subs, list):
+        if "sub_stops" in row:
+            warn("Day {} row “{}”: sub_stops is not a list — skipped (plan_lint "
+                 "fails it)".format(day_no, what))
+        if write and row.pop("sub_map", None) is not None:
+            print("  ✎ row “{}”: stale sub_map removed (no sub_stops)".format(what))
+        return 0, 0
+    print("  sub-stops of “{}”:".format(what))
+    pts, n = [], 0
+    for k, s in enumerate(subs, 1):
+        if not isinstance(s, dict):
+            warn("Day {} row “{}” sub-stop {} is not an object — skipped"
+                 .format(day_no, what, k))
+            continue
+        p = sub_point(s)
+        url = place_url(provider, p, s.get("name")) if p is not None else None
+        if p is not None:
+            pts.append(p)
+        if url is None:
+            warn("Day {} row “{}” sub-stop {!r}: no link — {}".format(
+                day_no, what, s.get("name"),
+                "no query and no lat/lon" if p is None else
+                "amap pins need lat/lon (or use --provider apple)"))
+            if write:
+                s.pop("link", None)
+            continue
+        if provider == "google" and not isinstance(p, str) and in_mainland_china(p):
+            cn_links.append((day_no, "sub-stop {}".format(s.get("name"))))
+        print("    {}. {} [{}]\n       {}".format(
+            k, s.get("name"), "query" if isinstance(p, str) else "lat,lon", url))
+        if write:
+            s["link"] = url
+        n += 1
+    chain = None
+    if len(pts) >= 2:
+        chain, why = chain_url(provider, pts)
+        if chain:
+            print("    SUB-STOP CHAIN ({} points, walking):\n       {}".format(
+                len(pts), chain))
+            if provider == "google" and any(not isinstance(p, str) and in_mainland_china(p)
+                                            for p in pts):
+                cn_links.append((day_no, "sub_map of {}".format(what)))
+        else:
+            warn("Day {} row “{}”: sub_map not written — {}".format(day_no, what, why))
+    if write:
+        if chain:
+            row["sub_map"] = chain
+        else:
+            row.pop("sub_map", None)
+    return n, 1 if chain else 0
+
+
 def cmd_links(args):
     plan = load_plan(args.plan)
     provider = getattr(args, "provider", "google") or "google"
     n_wrote = n_parked = n_susp = n_long = 0
+    n_sub_rows = n_sub = n_chain = 0
     parked_log = []      # human lines for the closing WARN (Morocco F6)
     cn_links = []        # (day, "A → B") google links whose ends lie in mainland CN
     print("map provider: {}".format(provider))
@@ -812,7 +948,7 @@ def cmd_links(args):
             # no link (long leg) but keeps the count aligned. Position pairing is
             # still weak, so every write is printed with its place names and
             # checked against the other stops' names (AU F1).
-            rows = [it for it in (day.get("timeline") or [])
+            rows = [it for it in timeline_rows(day)
                     if isinstance(it, dict) and it.get("kind") == "hop"
                     and it.get("map") is not False]
             parked = []
@@ -873,6 +1009,14 @@ def cmd_links(args):
                 day["hop_links"] = parked
             else:
                 day.pop("hop_links", None)
+        # Sub-stops sit on timeline rows, never in stops[], so the pairing above never
+        # saw them — and a day with < 2 stops still gets them (before the continue).
+        for row in timeline_rows(day):
+            if isinstance(row, dict) and ("sub_stops" in row or "sub_map" in row):
+                n_sub_rows += 1
+                a, b = sub_stop_links(row, i, provider, args.write, cn_links)
+                n_sub += a
+                n_chain += b
         if len(pts) < 2:
             continue
         if provider == "amap":
@@ -919,8 +1063,10 @@ def cmd_links(args):
         # n_long is NOT a failure counter: those rows are rail/flight/boat hops
         # whose ends are in stops[] — kept for alignment, deliberately unlinked.
         print("\nupdated {} in place — wrote {} link(s) onto hop rows / parked {} in "
-              "hop_links / suspicious {}; long legs kept unlinked (expected): {}"
-              .format(args.plan, n_wrote, n_parked, n_susp, n_long))
+              "hop_links / suspicious {}; long legs kept unlinked (expected): {}{}"
+              .format(args.plan, n_wrote, n_parked, n_susp, n_long,
+                      "; sub-stop links {} + sub_map chains {}".format(n_sub, n_chain)
+                      if n_sub_rows else ""))
         if n_susp or n_parked:
             print("Read the WARN lines on stderr before rendering.")
         if n_parked:
@@ -943,7 +1089,7 @@ def cmd_kml(args):
     parts = ['<?xml version="1.0" encoding="UTF-8"?>',
              '<kml xmlns="http://www.opengis.net/kml/2.2"><Document>',
              "<name>{}</name>".format(esc(plan.get("trip", "trip")))]
-    total, dropped = 0, []
+    total, dropped, n_sub = 0, [], 0
     for i, day in enumerate(plan["days"], 1):
         color = DAY_COLORS[(i - 1) % len(DAY_COLORS)]
         parts.append("<Folder><name>Day {} {} — {}</name>".format(
@@ -966,6 +1112,21 @@ def cmd_kml(args):
                 "<color>{}</color><width>3</width></LineStyle></Style>"
                 "<LineString><coordinates>{}</coordinates></LineString>"
                 "</Placemark>".format(i, color, " ".join(line)))
+        # Sub-stops with lat/lon: un-numbered pins, off the route line (text-only
+        # sub-stops have no position until someone hand-fills it).
+        for row in timeline_rows(day):
+            if not isinstance(row, dict) or not isinstance(row.get("sub_stops"), list):
+                continue
+            for s in row["sub_stops"]:
+                p = sub_point(s) if isinstance(s, dict) else None
+                if p is None or isinstance(p, str):
+                    continue
+                parts.append(
+                    "<Placemark><name>{} › {}</name>"
+                    "<Point><coordinates>{:.6f},{:.6f},0</coordinates></Point>"
+                    "</Placemark>".format(esc(str(row.get("what", ""))[:24]),
+                                          esc(s.get("name", "")), p[1], p[0]))
+                n_sub += 1
         parts.append("</Folder>")
         if miss:
             dropped.append("Day {}: {}".format(i, ", ".join(miss)))
@@ -975,6 +1136,8 @@ def cmd_kml(args):
         fh.write("\n".join(parts))
     print("wrote {} — {} pin(s) — import into Organic Maps (bookmarks) or "
           "Google My Maps".format(args.out, total))
+    if n_sub:
+        print("  + {} sub-stop pin(s) (sub-stops with lat/lon, un-numbered)".format(n_sub))
     for d in dropped:
         print("  omitted (no coords) — {}".format(d))
     if total == 0:
@@ -1185,6 +1348,12 @@ def cmd_sun(args):
                 if t.date() != d:
                     problems.append("{} dated {} but asked {}".format(
                         what, t.date(), d))
+            if any(abs((t.date() - d).days) == 1 for t in (rise, sset)):
+                # off by exactly one day = the picked stop and the day disagree on the date
+                problems.append("one day off: the picked stop is across the date line or in "
+                                "another timezone than this day's tz — set days[].sun_stop to a "
+                                "stop inside the day's tz (usually 0) and re-run with --only {}"
+                                .format(d))
             # 2. and for the place we asked (the "equator" bug): local solar model
             m_rise, m_set = solar_events_utc(lat, lon, d)
             if m_rise is None:
@@ -1413,7 +1582,10 @@ def main():
                      "both stations in stops[] -> keep the row mappable (no link, "
                      "count aligned); stations NOT in stops[] (legs[] only) "
                      "-> \"map\": false. Mainland-China WARN only when a Google link "
-                     "actually points there.",
+                     "actually points there. Rows with sub_stops: each sub-stop gets a "
+                     "place link and a row with 2+ gets a sub_map walking chain (from "
+                     "lat,lon, else the query; on every day; amap: pins need lat/lon, "
+                     "no chain).",
             "sun": "Civil dawn / sunrise / sunset per day from sunrise-sunset.org "
                    "with local sanity checks; writes day['sun'] only with --write. "
                    "Point: the day's first stop, or the LAST stop on a moving day "
@@ -1436,8 +1608,9 @@ def main():
                            help="SEQUENCE for every VEVENT — bump it on each plan change")
         if name == "links":
             p.add_argument("--write", action="store_true",
-                           help="inject the URLs into the plan's hop rows and "
-                                "day_map, in place, instead of only printing them; "
+                           help="inject the URLs into the plan's hop rows, "
+                                "day_map, sub-stop links and sub_map, in place, "
+                                "instead of only printing them; "
                                 "prints each link's origin -> destination against "
                                 "the row text and a wrote/parked/suspicious summary")
             p.add_argument("--provider", choices=PROVIDERS, default="google",

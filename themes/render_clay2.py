@@ -106,7 +106,7 @@ import sys
 from theme_common import (LUCIDE, T, add_art_arg, asset_count, brief_titles,
                           data_uri, day_embed_url, esc, et, export_js, export_prefix, ic,
                           init_lang, lang, load_art, load_plan, set_icon_base, short_dates, title_head,
-                          sprite, tag_pretty, theme_name, title_kick)
+                          sprite, sub_stops_html, tag_pretty, theme_name, title_kick)
 
 HERE = pathlib.Path(__file__).parent
 
@@ -471,7 +471,14 @@ def tl_row(r):
            f' aria-label="{esc(t("nav.to"))}{esc(r.get("what", ""))[:18]}">{ic("pin")}</a>'
            if r.get("link") else "")
     return (f'<div class="row k-{kind}"><span class="t">{esc(r.get("t",""))}{est}</span>'
-            f'<span class="w">{et(r.get("what",""))}{price}{chip}{nav}</span></div>')
+            f'<span class="w">{et(r.get("what",""))}{price}{chip}{nav}'
+            f'{sub_stops_html(r, sub_pin, et)}</span></div>')
+
+
+def sub_pin(href, label):
+    """The row's map pin, for one sub-stop (arguments arrive escaped)."""
+    return (f' <a class="rownav" href="{href}" target="_blank" rel="noopener"'
+            f' aria-label="{esc(t("nav.to"))}{label}">{ic("pin")}</a>')
 
 
 def note_pills(day):

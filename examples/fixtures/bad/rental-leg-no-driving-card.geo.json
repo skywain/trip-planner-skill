@@ -1,0 +1,32 @@
+{
+  "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: brief.driving missing while a legs[] row is a rental, spelled without hyphens (WARNs go to stderr and do not count)",
+  "trip": "Fixture — bad: rental-leg-no-driving-card",
+  "lang": "en",
+  "meta": {
+    "budget_total": "n/a — fixture",
+    "self_check": "self-checked: 0 issues found and fixed"
+  },
+  "days": [
+    {
+      "date": "2026-11-10",
+      "timeline": [
+        {
+          "t": "09:00-17:00",
+          "what": "Example Canyon scenic drive",
+          "kind": "anchor"
+        }
+      ]
+    }
+  ],
+  "brief": {
+    "visa": "fixture card — content is not under test"
+  },
+  "legs": [
+    {
+      "type": "Rent a car",
+      "from": "Example Canyon Visitor Center",
+      "to": "Example Canyon Visitor Center",
+      "note": "fixture"
+    }
+  ]
+}

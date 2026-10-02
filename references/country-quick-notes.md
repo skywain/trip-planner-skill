@@ -59,12 +59,19 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   DiDi, Uber-on-licensed-taxis), how cash-first the country really is, and whether a
   local SIM is a trap — Turkey IMEI-blocks an unregistered foreign handset after ~120
   days, so eSIM or roaming.
-- [ ] **Driving licence and insurance: the 1968 Vienna Convention test.** An IDP is only
-  recognised where both countries are parties. **China is not a party and issues no IDP**
-  — self-driving or riding anything over 50 cc is unlicensed driving, and the insurer
-  refuses the claim outright. Answer with pillion seats, drivers and bicycles, never
-  "just rent a scooter". (US: party to 1949 Geneva but China to neither convention,
-  so no recognition either way — see §USA Driving for the counter reality.)
+- [ ] **hard whenever a self-drive option exists — Driving licence: legality first, then
+  the desk.** Which rule does the destination apply to a visitor's licence: the **1949
+  Geneva** Convention, the **1968 Vienna** Convention, or its own statute? Federal
+  countries decide per state or province (US states, Canadian provinces, Australian
+  states), so a multi-state route has several answers. An IDP counts only under a
+  convention the jurisdiction applies (phase-1-brief.md §Driving card); **mainland
+  China is party to neither and issues no IDP** (a Hong Kong licence differs: Hong Kong
+  issues 1949 Geneva IDPs ⚡) — where the law gives it no other
+  route, driving or riding anything over 50 cc is unlicensed, and the insurer refuses
+  the claim outright. Only then read the rental brand's terms: a desk that rents is not
+  legal recognition. The card and its sources: `brief.driving` (phase-1-brief.md
+  §Driving card); worked example: §USA Driving. A failed first gate is answered with
+  tours, drivers, pillion seats, bicycles or transit, never "just rent a scooter".
 - [ ] **Intercity ticket release windows, each with its own date on the checklist.**
   Vietnam rail 60 days, China 12306 15 days, Japan JR 1 month, Trenitalia/Italo 90-120
   days, Norway Vy ~90 — plus night-bus operators and seasonal ferry timetables.
@@ -133,6 +140,28 @@ certificate has its own lead time: 10 days after the jab (phase-1-brief.md §Hea
 line). Typhoid / hepatitis A "recommended for most travellers" and ORS in the kit are
 agenda items, not plan prescriptions.
 
+## Medicines in luggage
+
+Feeds `brief.safety` line 6, Legal & customs red lines (output-template.md §Brief
+templates). Same rule as
+§Travel clinic: **the plan copies the official rule with its source and date; it never
+advises on a drug's use.**
+- **Copy the destination's own rule, dated**: the customs authority's or health
+  ministry's "bringing medicines" page — the personal-use quantity cap, which
+  ingredients are banned or need advance permission, and the form if one exists. One
+  entry per destination on that line, with URL and as-of ⚡.
+- **Prescription medicines**: original labelled packaging, plus the prescription or a
+  doctor's letter in English (or the destination's language), quantity within the cap.
+- **Check common remedies by ingredient, not brand**: cold, cough and herbal medicines
+  that are ordinary at home can be controlled abroad — stimulant ingredients
+  (pseudoephedrine, ephedra), opioids (codeine, opium-containing remedies), animal
+  parts under CITES. Worked example — Japan: the health ministry's Narcotics Control
+  Department lists pseudoephedrine as a stimulants' raw material and codeine as a
+  narcotic: a product at or below the strength threshold (pseudoephedrine 10 %,
+  codeine 1 % ⚡) falls under the ordinary personal-use cap, above it advance permission
+  is needed (ncd.mhlw.go.jp, as of 2026-10 ⚡); read the box's ingredient list against that list
+  before packing.
+
 ## Hazard seasons
 
 Window ∩ season ≠ ∅ → `brief.season` card + hazard gate + insurance deadline NOW +
@@ -164,7 +193,12 @@ gate re-reads.
   need a visa** — the JAPAN eVISA (single-entry tourism, 15/30-day stays) covers
   mainland residents ⚡, and there is no transit-without-visa landing for PRC
   passports: airside-only connections are fine, but stepping landside (e.g. to
-  re-check bags on separate tickets) needs the visa.
+  re-check bags on separate tickets) needs the visa. Every passport: **Visit Japan
+  Web** (services.digital.go.jp, as of 2026-10 ⚡) pre-registers immigration + customs
+  before the flight — optional (the paper forms are still accepted ⚡) but faster at
+  the gates; a checklist row. A multiple-entry visa carries its
+  own conditions (some bind the first entry) — read them on the visa and copy them
+  onto the checklist.
 - Transit: Suica/ICOCA in Apple Wallet works for visitors ⚡; Google Maps transit is
   reliable countrywide.
 - JR Pass: since the Oct-2023 price hike the nationwide pass usually LOSES on the
@@ -331,18 +365,31 @@ gate re-reads.
 - Entry: VWP/ESTA covers treaty passports only — **Chinese passports need a B1/B2
   visa** (Beijing interview waits run weeks-months ⚡) **plus current EVUS enrollment**
   on 10-year visas ⚡. On any US trip, visa status is the first intake question.
-- Driving: state law and the rental counter are **two different gates** ⚡.
-  UT/ID/MT-style statutes accept any home-country license for visitors, but Hertz's
-  published policy requires an IDP for **non-Latin-alphabet** licenses (with a
-  separate PRC-license certification-form path ⚡) and Enterprise strongly
-  recommends one — and mainland China cannot issue a genuine IDP (party to neither
-  road-traffic convention), so a Chinese-license renter can be refused at the
-  counter even where state law is fine. Translations work often in practice but are
-  not policy: get written confirmation from the specific pickup branch before
-  building a self-drive plan, and treat counter refusal — plus the insurer
-  re-examining license validity after an accident — as the headline risk, ahead of
-  road skills. Car essential outside NYC/SF/Boston/Chicago/DC; city parking
-  $40-70/night.
+- **Driving — two gates, legality first (as of 2026-10 ⚡).** **Gate 1, the law**:
+  whether a visitor may drive on a foreign licence is **state law, state by state** —
+  the answer for one state says nothing about the next. Worked example: **Hawaii** —
+  the Honolulu licensing office's published guidance lets a visitor 18+ drive on a
+  licence from a country that ratified the **1949 Geneva Convention**, with the
+  passport, for up to one year after US entry; a licence from a non-party (mainland
+  China) is therefore not valid there, and there is no IDP to fix it. Source per
+  state: the state or county licensing page, with the traveller's own consulate notice
+  for that state as a cross-check, dated, into `brief.driving`. **Gate 2, the desk** — each brand's
+  published US policy for a licence not in English or not in Latin script, read
+  2026-10: Hertz and Dollar — IDP *recommended* to aid translation; Thrifty — IDP
+  *required* for any licence not in English; Enterprise and National — IDP *required*
+  for non-Latin script, a professional typed translation accepted where the home
+  country cannot issue an IDP; Budget — the licence "needs to be written in the Roman
+  alphabet", otherwise an IDP as well; Avis — accepts licences from 1949 Geneva or 1943
+  Inter-American convention countries (or with US reciprocity); SIXT — an official
+  translation for countries that issue no IDP (search snippet — confirm on the page);
+  Alamo not checked. Read the pickup location's own terms and get the branch's answer
+  in writing. **A desk that rents to you does not make the driving legal** — a brand
+  that only *recommends* an IDP rents to a licence a Geneva-only state does not
+  recognise: a traffic stop can be a criminal charge, not just a ticket (Hawaii: up to
+  $1,000 and/or 30 days, HRS §286-136 ⚡), and the damage waiver and the travel policy normally require a *valid*
+  licence, so a crash can go uninsured (quote both clauses — phase-1-brief.md §Driving
+  card). Car essential outside
+  NYC/SF/Boston/Chicago/DC; city parking $40-70/night.
 - Parks: entrance fees are per **vehicle** (~$35); 3+ parks → an annual pass wins,
   but the $80 America the Beautiful is **residents-only since 2026** ⚡ —
   non-residents see the surcharge bullet below for the $250 pass that replaces it. Timed-entry policy
@@ -356,7 +403,14 @@ gate re-reads.
   annual pass waives it, admitting the whole private vehicle at per-vehicle parks
   or the holder + 3 adults at per-person parks, so it wins from the 2nd park even
   solo ($135×2 > $250). Tour smallprint now reads "park fees included **for US
-  residents**" — that wording excludes the surcharge; ask who collects it.
+  residents**" — that wording excludes the surcharge; ask who collects it. **On a
+  commercial tour** (NPS "Nonresident fees on commercial tours" FAQ, as of 2026-10 ⚡):
+  every non-resident passenger 16+ owes the $100 unless a pass covers them; one
+  pass covers its holder + 3 others aged 16+ on the tour; whether a fellow passenger's
+  free slot is applied to you the FAQ does not say — ask the operator; a pass held by a tour-company employee is not valid;
+  the operator reports non-resident and pass-holder counts to the fee collector before
+  the gate — so "pass holder: yes / no" goes in the first message to the operator
+  (data-sources.md §Group tours).
 - Bags ⚡: domestic carriers don't weigh carry-ons (size 22×14×9 in only) but
   charge ~$35-45 **per checked bag per one-way** (connections included; separate
   tickets and directions are what multiply) — so one case beats two across a
@@ -364,6 +418,15 @@ gate re-reads.
   bags (5-10 kg), so "carry-on only" dies at international check-in, not domestic.
   UA Basic Economy is personal-item-only on domestic/short-haul Latin America
   routes (long-haul international keeps the carry-on).
+- **Phone ⚡**: US tour operators, motels and drivers confirm by **voice call or SMS
+  to a US number**, so a data-only eSIM is not enough (data-sources.md §Group tours);
+  the home number must still receive SMS as well (`brief.connectivity`). Keep two
+  numbers apart: a short-lived **trip number** (store prepaid, dropped after the
+  trip) and — only if the traveller wants a US number long-term — a **keeper** that
+  works over Wi-Fi Calling abroad. Bind long-term US accounts (bank, ride apps,
+  ticketing) **only to the keeper**: a lapsed prepaid number is reissued to someone
+  else. Some eSIMs activate only on a US network after landing — an activation error
+  at home can be expected; read the carrier's activation page before relying on it.
 - Hotels ⚡: resort strips (Waikiki, Las Vegas) carry resort/urban fees of
   $30-56/night plus ~19% taxes — sometimes inside the list price, sometimes at the
   property; quote the checkout all-in (data-sources.md §Hotels), and expect NYC
@@ -376,8 +439,9 @@ gate re-reads.
   Entry) — leave it blank; never the passport number. (A mismatched KTN is
   silently ignored, so the mistake is harmless — but it buys nothing, and the
   passport goes only in the travel-documents section at check-in.)
-- Sports tickets: team site first, then SeatGeek/StubHub resale — marquee fixtures
-  (Messi, playoffs) run 3-10× ⚡; kickoff times can shift for TV after on-sale ⚡.
+- Sports tickets: marquee fixtures (Messi, playoffs) run 3-10× ⚡;
+  kickoff times can shift for TV after on-sale ⚡. Where to buy and the purchase traps:
+  data-sources.md §Venues, tours, tickets.
 - Distances are the trap — one region per 10-15 days.
 
 ## Mexico — CDMX / Oaxaca, Día de Muertos (as of 2026-08, after the Berlin→Mexico test)

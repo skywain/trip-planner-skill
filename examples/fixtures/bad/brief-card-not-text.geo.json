@@ -1,0 +1,35 @@
+{
+  "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: a brief card is an object, not a string (WARNs go to stderr and do not count)",
+  "trip": "Fixture — bad: brief-card-not-text",
+  "lang": "en",
+  "meta": {
+    "budget_total": "n/a — fixture",
+    "self_check": "self-checked: 0 issues found and fixed"
+  },
+  "days": [
+    {
+      "date": "2026-11-10",
+      "timeline": [
+        {
+          "t": "09:00-11:00",
+          "what": "Example Canyon viewpoints",
+          "kind": "anchor",
+          "sub_stops": [
+            {
+              "name": "Rim overlook",
+              "query": "Rim Overlook, Example Canyon",
+              "stand": "the upper deck, facing down the canyon",
+              "must": true,
+              "tier": "overlook"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "brief": {
+    "visa": {
+      "line": "fixture card — content is not under test"
+    }
+  }
+}
