@@ -536,3 +536,90 @@ Cost of the verification: seven workflows after the build, 43 agents, about 6.6 
 tokens. Still open from it: PLN-13 (a view must-see with no sub-stops at all, same-day
 hours and decision points, and the three presence-only gates) and PLN-14 (the sub-stop
 links have not been tapped on a phone).
+
+### Round 2: gates behind the words (2026-10)
+
+The first round left three gates that checked presence, not substance, and two rules
+with no gate at all (PLN-13). Round 2, on the same branch, gave each a field the lint
+can read and a check that can fail: `hours` on a timeline row (an object with its
+as-of and source, or one of two literals — never a bare string of hours), a day's
+`decision_points` with `route_tools.py ics` as their generator, `stops[].driver` so a
+self-drive day written only as stops is seen, `prefs.must_see` whose tiered entries
+must match a `must` sub-stop of that tier, `meta.review` as the record behind the
+review clause (lenses with notes, the findings, counts that must agree with the
+clause), the driving card read per legality line, and an explicit `refundable: false`
+flag instead of a keyword match. The second half of the trip's lessons rode along as
+text: check-out and bag hold from the property's own page, trading a flight for a
+weather window, the self-drive pull-out list, the carrier's record locator versus the
+OTA order number, shopping requests, keeping the local number, what to do after the
+trip. Every check fires only where its key is present, so the eight example plans
+keep their lint results and the shipped pages still re-render byte for byte.
+
+The build followed the same shape as round 1, with one addition in front: the spec
+itself went through a stateless review before anyone implemented it. Five readers
+mapped the six gates and twelve lessons onto the files first (90 mappings, 63 points
+of critique against the draft spec — among them that the "each bad fixture exits 1"
+convention could not hold for `--strict`-only checks, which moved every content check
+into default mode and gave the two existence requirements their own `strict/` fixture
+folder). Three reviewers then read the rewritten spec with a refuter each: 35
+findings, 32 confirmed or partly, twelve of them high. The driving-card desk regex
+failed the spec's own line form (`\bdesk\b` cannot match "desks"); the hours window
+was +15 days while its freshness test was −14, so hours read on the as-of day failed
+on the window's last day; the must-see example in the spec failed the spec's own
+matching rule; a plan without `meta.generated` would have switched the window off
+silently; the decision-point UID hashed the optional date, so moving a decision to the
+evening before orphaned its calendar event; and on the facts, Washington DC bans right
+on red too, Japan's 2026-11 refund scheme is a kiosk before bag drop rather than
+"goods unopened in hand luggage", the NWS discussion lives at `/latest`, and JMA's
+storm-warning radius already contains the probability circle. Five implementers with
+disjoint file ownership then built it (the lint, the `ics` generator, the fixtures and
+the field definitions by one owner who mutation-checked thirty rules; the nine
+renderers by another who proved byte-identity old-versus-new on the portal theme and
+the fixture; three text owners, one with web access who fetched every endpoint once
+and stamped ✓ only where the body carried the expected text), and the integrator
+closed the cross-file pointers and the docs.
+
+Two review rounds followed. Round 1 put five lenses on the whole diff (privacy and
+generality, editing rules and routing, facts, code, "would a weaker agent do the right
+thing"), each with a refuter: 40 findings, 32 confirmed or partly, two high. The high
+ones were both about Chinese typography — the as-of regex used `\b`, which Python
+does not place between a CJK character and a digit, so a card stamped 截至2026-10 the
+natural way failed, and the fix is a digit lookaround; the other found that the
+integrator's own replacement tooling had swallowed the newlines before three README
+tree lines. The rest: two decision points with the same `what` collapse into one
+calendar event (now a FAIL), a date inside a source URL satisfied the as-of test and a
+"rental" in the licence part satisfied the desk test (the URL is stripped and the desk
+part is searched after the verdict), `gridId` is the forecast grid and not always the
+office that issues the discussion (`cwa` is), one used item voids the refund for a
+whole Japanese receipt, and several places where a round-2 rule had been restated in
+full rather than pointed to. Round 2 reviewed only those fixes: 21 findings, 19
+confirmed or partly, three high — the must-see FAIL message had the old wording and
+the new one side by side, the fresh "as_of after the as-of date" check turned a
+correctly re-read plan red whenever `meta.generated` had not been re-stamped (the
+message now names the remedy, and the T-3 and on-trip rows say to re-stamp), and this
+subsection did not yet exist. Three more bad fixtures came out of it. The regression
+script now gates the eight default exits, the `strict/` folder, the `.ics` output of
+the Kyoto and Nordic examples against 09b0f98 (byte-identical apart from DTSTAMP) and
+the portal theme old-versus-new, besides the seven themed pages, the plain page, the
+eight `--strict` counts, 42 bad fixtures and the links idempotence it already had.
+
+The probe and the end-to-end run were repeated on the round-2 tree (after review round
+1, before the round-2 wording fixes). Thirty new scenario questions (12 AB, 6 MIXED,
+12 NEW; a third in Chinese), five combinations, old 09b0f98 tree against the new one,
+graded side by side: NEW 46.5 / 60; AB 49.5 → 46.0 / 60 and MIXED 27.5 → 25.0 / 30 —
+every shared-question drop was attributed to byte-identical passages and judged noise
+(a second old-tree run to measure the floor was still in flight when this was written;
+its journal is the record). Two text gaps were real and are fixed: §After the trip never
+said that the traveller submits the claim themselves, and §Shopping requests pointed the
+"next border" question at a `brief.safety` line that did not carry the home country's
+allowance. The paired Haiku end-to-end run failed on both trees for the same reason as
+before — it skipped the routed reads, made no web call, never ran `--strict` and
+reported gates it had not run as green — so it says nothing about the new text; but the
+inspector found six lint blind spots on the way, all now gated with fixtures: an English
+verdict after a zh legality label was rejected; `tour` on a day object was ignored; a
+not-legal verdict on a self-drive plan with no recorded choice passed `--strict`; a
+bracketed "[to be added …]" note passed the placeholder check; a guided option priced
+with no tour row drew no warning; a T-N ladder date that did not match departure − N
+went straight into the calendar file. The fixture folders now hold 44 bad plans and a
+`strict/` folder of one clean plan and eight bad ones. A third, lighter review of that
+last batch was also still running when this was written.

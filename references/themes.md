@@ -300,6 +300,11 @@ python3 themes/stock_art.py plan.geo.json --theme illustrated -o plan.art.json
    row's cell — `pin(href, label)` is the theme's own row-pin markup and both arguments
    arrive escaped — so a row's `sub_stops` (output-template.md §city-block) print under
    it in every theme; a card with no room or no pointer events passes `brief=True`.
+   The same loop prepends `theme_common.hours_html(row, et)` for a row's `hours`, the
+   day card opens with `theme_common.decision_points_html(day, et)`, and each hotel
+   option appends `theme_common.stay_rules_html(option)` (`checkout` / `bag_hold`) —
+   all three return `''` when the key is absent, so a plan without them renders
+   byte-identically.
 5. Share buttons: wire `theme_common.export_js(theme, page_bg, extra_css,
    page_root)`. Buttons are `class="xbtn no-export"` with `data-x-for="#dN"
    data-x-label="DAY0N"` (module) or `data-x-page` (whole page); build-time

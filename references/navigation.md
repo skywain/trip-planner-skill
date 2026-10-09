@@ -28,7 +28,8 @@ together with scheduling.md before Phase 4 timeline assembly.
    `walk | transit | fly | drive | boat | train | bus` — because 1.4 km can be a
    two-stop metro ride or a pleasant walk, and only the plan knows which; the field
    decides the walking total, which directions the tappable link opens, and whether
-   a 45 km boat or a 1,900 km flight is a declared long hop or a clustering mistake.
+   a 45 km boat or a 1,900 km flight is a declared long hop or a clustering mistake
+   (who drives a `drive` hop: §Self-drive days).
    **A signature walk longer than 1.6 km must carry `mode: walk`** or `check` counts
    it as ridden and the day's on-foot total silently reads 0 (the Bondi→Coogee case). **`stops` must mirror that day's anchors plus any modelled strolls, in
    visit order** — every map artifact and the walking total are computed from it, so
@@ -291,13 +292,31 @@ an estimate into a single confident number just because it looks tidier.
 - Default link recipe stays Google because the link opens the native app on both iOS
   and Android.
 
+## Self-drive days
+
+Every `drive` stop the traveller drives carries `driver: self` — that is what
+`plan_lint.py` sees (the full self-drive trigger list: phase-1-brief.md §Driving card);
+a drive someone else runs carries `taxi` / `hired` / `tour` (output-template.md
+§city-block). Before pulling
+out of the rental car park:
+- **Hear the voice.** Play the navigation app's test voice through the car's
+  speakers — a muted guidance toggle is the silent killer on a two-lane road, where
+  one missed fork is a long way round.
+- **A cable, not a mount.** CarPlay / Android Auto over a cable puts the map on the
+  dash and replaces a phone mount: ask the desk to pair it at pick-up, and carry both
+  a USB-A and a USB-C cable (whether the class has it: phase-3-legs.md §Driving legs).
+- **An offline area for the whole route**, downloaded on Wi-Fi before the day — park
+  and mountain roads lose signal. Offline, Google Maps gives driving directions only —
+  transit, cycling and walking directions are unavailable offline (Google Maps Help,
+  as of 2026-10 ⚡).
+
 ## Offline fallback
 
 - **Organic Maps** (free, OSM): imports the trip KML — numbered pins + day lines work
   fully offline. Recommend it in every plan footer with a one-line import hint
   (download country map → bookmarks → import KML).
-- Google Maps offline areas: download per city; note transit routing does not work
-  offline, walking does.
+- Google Maps offline areas: download per city; offline they give driving directions
+  only — no transit, cycling or walking routing (§Self-drive days, as of 2026-10 ⚡).
 
 ## Geocoding discipline
 

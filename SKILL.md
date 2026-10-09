@@ -55,8 +55,9 @@ data, not on prose — fixing exactly that is this skill's job, so verification 
 
 Three moments at most, usually two: (0) **one intake message, only if a core fact is
 missing and can't be inferred** (Phase 0 — most requests need none); (a) after Phase 2 —
-present 2-3 route skeletons, get a pick; (b) final delivery. Everything else runs without
-questions. If the user says "一次到位 / don't ask, just plan" or the session is clearly
+present 2-3 route skeletons, get a pick; (b) final delivery — then one hand-off per
+version the traveller agrees to; while a change is discussed the plan moves in the JSON
+only (phase-6-assemble.md §Deliver). Everything else runs without questions. If the user says "一次到位 / don't ask, just plan" or the session is clearly
 headless, skip (0) and (a): assume, pick the best skeleton yourself and state every
 assumption prominently at the top of the output.
 
@@ -66,7 +67,9 @@ or your plan against how travellers who share the user's language do this destin
 (phase-1-brief.md §Where the facts come from). The options ride on moment (a); headless,
 you pick and the assumptions block shows both with their prices. **A risk is stated once,
 with its source**: after the traveller decides, the choice is a `decisions[]` row and is
-not raised again unless a new fact changes it.
+not raised again unless a new fact changes it. **An optional paid extra** (a spa, an
+upgrade, a lounge, an excursion) is named with its price in the first sentence, and
+"free for guests" only from the property's own page.
 
 ## Quick modes (no full pipeline)
 
@@ -84,14 +87,19 @@ not raised again unless a new fact changes it.
   leave the rest closed. This is the most common request that is not a whole trip.
 - **Live replan** — "missed the train / it's pouring": rebuild only the affected day
   from its degradation tags (`[skippable]`/`[swap→…]`/late_cut line) instead of
-  re-planning the trip. `[pinned]` blocks hold; `[opener]` may move but costs a queue;
+  re-planning the trip. `[pinned]` blocks hold — unless the traveller chooses to trade
+  one for a weather window (scheduling.md §Day types, Weather-window day); `[opener]`
+  may move but costs a queue;
   re-verify only the hops that changed. The traveller says a place feels overwhelming
   or unsafe → offer scheduling.md §Day types, Safe-version day first, before any
   rebuilt full day.
 - **On-trip re-audit** — "we're on day 5, check the rest": re-verify only the days
   still ahead against output-template.md §On-trip re-audit rows — every flight (time,
-  check-in cutoff, terminal), timed check-in, self-drive day and hazard feed — and
-  report only what changed, each with the action it needs.
+  check-in cutoff, terminal), timed check-in, self-drive day, hazard feed, each
+  anchor's `hours` up to today + 14 and the `decision_points` (then `plan_lint.py
+  --strict --asof <today>`) — and report only what changed, each with the action it needs.
+- **After the trip** — a refund, a receipt, a complaint or a review once the traveller
+  is home: read phase-6-assemble.md §After the trip now, before drafting anything.
 
 ## Phase 0 — Intake (one message, or none)
 
@@ -106,7 +114,8 @@ Inputs: the user's request and anything said earlier. Outputs: the plan's top-le
 `prefs` block and `lang` — `prefs.pictures` (native | key | stock), `prefs.drivers` (who
 drives + the issuing country of each licence) when a self-drive option exists, and
 `prefs.languages` (the languages the party can follow spoken commentary in) when a
-guided option may be priced — the assumptions block for checkpoint (a) — and at most one intake message.
+guided option may be priced, and `prefs.must_see` (each locked must-see by name, a
+scenic one with its viewpoint tier) when a must-see is locked — the assumptions block for checkpoint (a) — and at most one intake message.
 
 Gates — these decide pass/fail and do not move into the reference file:
 - **One message, or none.** Ask only when a core fact (origin · destination · when /
@@ -141,8 +150,9 @@ memory of the procedure or of the country. In chat, Phase 1 is ≤ 10 lines — 
 
 Inputs: destination(s), dates, the traveller's passport and origin, the skeleton
 candidates, `prefs.drivers`. Outputs: the `brief` cards in canonical order (+
-`brief.driving` whenever a self-drive option exists: per jurisdiction driven, the
-licence's legality and its rentability at the desks, each with source + as-of), the
+`brief.driving` whenever a self-drive option exists: one labelled line per
+jurisdiction driven — the licence's legality verdict and its rentability at the desks,
+with source + as-of), the
 Phase 1 checklist rows (visa lead time · arrival registration · travel-clinic consult ·
 yellow-fever vaccine + ICVP · insurance · hazard gate · copies + registration), and the
 facts later phases inherit.
@@ -236,10 +246,12 @@ procedure, and build every city-agent prompt from that file's §City-agent contr
 
 Inputs: the chosen skeleton (Phase 2), the legs table (Phase 3), the Phase 1 brief
 facts and `prefs`. Outputs: per city, plan-JSON day objects insertable verbatim into
-`days[]` (output-template.md §city-block) — `stops`, hour-level `timeline` (a row may
-carry `sub_stops`: the named spots inside a big sight, each with its viewpoint tier —
-that section is their only definition), `hop_links`, `sun`, `rain_alt`, `ribbon` — plus
-the city's `checklist_items`.
+`days[]` (output-template.md §city-block) — `stops` (a drive stop the traveller drives
+carries `driver: self`), hour-level `timeline` (a row may carry `sub_stops`: the named
+spots inside a big sight, each with its viewpoint tier — that section is their only
+definition — and an anchor carries `hours`: the venue's own hours with as-of + source,
+or "unverified" / "open access"), `decision_points` (the day's go / no-go calls),
+`hop_links`, `sun`, `rain_alt`, `ribbon` — plus the city's `checklist_items`.
 
 Gates — these decide pass/fail and do not move into the reference file:
 - **City agents never make visa / entry / health / advisory / hazard / insurance
@@ -269,7 +281,13 @@ after dark, luggage-friendly), in the lodging type and band from `prefs.lodging`
 (default mid-range hotel; a ryokan/onsen or B&B habit changes which properties you list). Browser spot-check Google Hotels/Booking with the real
 dates for a price band, then list 2-3 concrete properties: name, area, band per night,
 deep link with dates baked in (recipes in data-sources.md). Advise: book refundable
-now, re-shop 2-3 weeks out. For a small property note the front-desk hours — a start
+now, re-shop 2-3 weeks out. Read each option's check-out time and bag hold off the
+property's own policies page into `checkout` / `bag_hold` on its `hotels[].options[]`
+entry — never the 12:00 in your head; a small lodging's late check-out stops where the
+desk says, and the leaving day is timed from that line (scheduling.md §Day types,
+Moving day). A stay booked non-refundable gets `"refundable": false` on its checklist
+booking row (output-template.md §Booking-artifact conventions), never on the hotels
+option. For a small property note the front-desk hours — a start
 before the desk opens moves checkout to the night before (scheduling.md §Day types,
 Early start at a small lodging).
 
@@ -278,7 +296,7 @@ Early start at a small lodging).
 **Read `references/phase-6-assemble.md` now, before the final `plan.geo.json` is
 written** — it is the whole procedure for this phase (assembly order, cover title, the
 adversarial self-check list, the independent review, delivery, the themed-render flow
-incl. stock mode, and the exit criteria). This section is only the contract; do not assemble or render from memory
+incl. stock mode, after the trip, and the exit criteria). This section is only the contract; do not assemble or render from memory
 of the procedure.
 
 Inputs: `plan.geo.json` assembled per references/output-template.md — the single
@@ -287,7 +305,8 @@ Outputs — three things every time, handed over through the harness's artifact 
 tool: (1) the **chat summary** — route one-liner, total budget, the 3 biggest decisions
 made for the user, and in stock mode the picture notice; (2) `trip-<theme>.html`;
 (3) `trip.kml` — plus the gates `.ics`, always: the pre-departure ladder rows are
-date-locked gates (output-template.md §Pre-departure re-check ladder).
+date-locked gates (output-template.md §Pre-departure re-check ladder), and each day's
+`decision_points` ride in the same file.
 
 Gates — these decide pass/fail and do not move into the reference file:
 - **The deliverable is a themed page, never a plain text one.** The plain
@@ -298,9 +317,12 @@ Gates — these decide pass/fail and do not move into the reference file:
   the last `decisions[]` row. The list lives in the reference file; a skipped item is
   a defect, not a shortcut. A plan with a self-drive option, a non-refundable booking
   or a timed check-in also runs the independent review — a stateless reviewer, then a
-  refuter (phase-6-assemble.md §Independent review) — recorded in the same line;
-  `plan_lint.py --strict` fails a plan with a self-drive option whose line lacks the
-  clause.
+  refuter (phase-6-assemble.md §Independent review) — recorded in the same line and
+  in `meta.review`; the lint keys on the machine-readable part of that trigger, listed
+  once in `scripts/plan_lint.py`'s docstring (a self-drive option, `tour: true`,
+  `"refundable": false` — a timed check-in without a tour block stays procedure-only):
+  on it `plan_lint.py --strict` fails a plan whose line lacks the clause or that has no
+  `meta.review`, and the record is checked for consistency, not for the review itself.
 - **Acceptance bars are exit codes and eyes, not prose**: `route_tools check` and
   `scripts/plan_lint.py --strict` exit 0 before rendering (the only tolerated FAIL: a
   polar day's `sun`, PLN-11), `themes/qc.py` exits 0 after, and the export-probe PNG
@@ -342,20 +364,23 @@ directory is not the skill directory and shell cwd does not persist between call
   passes, sell-outs, closure patterns, transit apps per country; destination absent →
   its "Destination not listed? — the checklist" section.
 - `references/output-template.md` — read before Phase 4 fan-out (city-block format —
-  the only definition of the row fields `sub_stops` / `tier` / `tour` / `confirmed`)
-  and Phase 6 (deliverable structure, the pre-departure ladder, the on-trip re-audit
-  rows).
+  the only definition of the row fields `sub_stops` / `tier` / `tour` / `confirmed` /
+  `hours`, the day's `decision_points` and a stop's `driver`) and Phase 6 (deliverable
+  structure, `meta.review`, `prefs.must_see`, the `refundable` flag, hotel `checkout` /
+  `bag_hold`, the pre-departure ladder, the on-trip re-audit rows and the before-leaving
+  row).
 - `references/scheduling.md` — read before building any hour-level timeline: dwell
   times, buffers, meals, energy curve, degradation tags, timeline verification.
 - `references/navigation.md` — read with it: hop-link recipes, transit-row format,
-  exit numbers, verify-vs-estimate policy, offline-maps (KML) workflow.
+  exit numbers, verify-vs-estimate policy, offline-maps (KML) workflow, and the
+  self-drive day list (voice test, CarPlay / Android Auto, offline area, `driver: self`).
 - `references/cover-titles.md` — bilingual poetic cover-title case library (poetry /
   prose / classic-literature sources + trip-archetype fit + cliché blacklist); read
   at Phase 6 when rendering.
 - `references/phase-0-intake.md` — read at the start of Phase 0, before deciding whether
   to ask anything: core vs optional facts and their defaults, origin inference, the
   intake message format and rules (zh sample inline, en in output-template.md), the
-  `prefs` block (incl. `drivers` and `languages`), the picture-capability check (native | key | stock), the style line and
+  `prefs` block (incl. `drivers`, `languages` and `must_see`), the picture-capability check (native | key | stock), the style line and
   plan language, and the exit criteria. SKILL.md Phase 0 is only the contract; this
   file is the procedure.
 - `references/phase-1-brief.md` — read at the start of Phase 1, before any destination
@@ -380,14 +405,14 @@ directory is not the skill directory and shell cwd does not persist between call
 - `references/phase-6-assemble.md` — read at the start of Phase 6, before the final
   plan is written: assembly order, cover title, the full adversarial self-check list,
   the independent review, delivery (themed page + KML + gates .ics), the themed-render flow incl. stock mode,
-  the qc / export-probe acceptance bars, and the exit criteria. SKILL.md Phase 6 is
+  the qc / export-probe acceptance bars, after the trip, and the exit criteria. SKILL.md Phase 6 is
   only the contract; this file is the procedure.
 - `scripts/flight_scan.py` — Google Flights grid scanner; run with `--help` first.
 - `scripts/route_tools.py` — geocode stops, distance-check clustering, emit per-hop +
   whole-day map links (`links --write` also writes each sub-stop's place link and the
   row's `sub_map` walking chain) and the trip KML; subcommands geocode / check / links / kml /
-  ics (the gates `.ics` from the checklist's dated rows — `-o gates.ics`, bump
-  `--sequence` on every plan change) /
+  ics (the gates `.ics` from the checklist's dated rows and each day's
+  `decision_points` — `-o gates.ics`, bump `--sequence` on every plan change) /
   sun (civil dawn + sunrise/sunset per day from sunrise-sunset.org, sanity-checked,
   written into `days[].sun` in the canonical format; point = first stop, last stop
   on a moving day, or the day's `sun_stop` when set; non-zero exit = a day was
@@ -403,10 +428,15 @@ directory is not the skill directory and shell cwd does not persist between call
   rows that carry them, sub-stops with a name and a query or lat+lon, a tier on every
   must-see, tour must-sees confirmed in writing or pending on a named checklist row;
   every brief card a string; a `brief.driving` card whenever a self-drive option exists
-  (`prefs.travel_style` self-drive | mixed, `prefs.drivers`, or a rental leg);
-  under `--strict` every day has at least one stop and a `sun` written by `sun --write`,
-  a trip of seven days or more has its on-trip re-audit rows, and a plan with a
-  self-drive option records the independent review.
+  (the four conditions: phase-1-brief.md §Driving card), read per legality line (verdict · desk part · as-of); where
+  present, a row's `hours`, a day's `decision_points`, a stop's `driver`, hotel
+  `checkout` / `bag_hold`, the `refundable` flag, `meta.review` (shape, and its counts
+  against every review clause) and every tiered `prefs.must_see` entry matched to a
+  must sub-stop; under `--strict` every day has at least one stop and a `sun` written
+  by `sun --write`, a trip of seven days or more has its on-trip re-audit rows, the
+  review clause and `meta.review` exist on the review trigger, and every anchor inside
+  the hours window (`--asof`, default `meta.generated`, through +14 days) carries fresh
+  `hours`; the full list is its module docstring.
   `check` proves the geography and `qc.py` the HTML — this proves the words.
 - `assets/plan.example.json` — runnable schema example **and the single source of
   truth for the plan's top-level keys** (`prefs`/`budget`/`legs`/`checklist`/`hotels`/

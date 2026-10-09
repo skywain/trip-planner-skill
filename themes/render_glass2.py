@@ -85,9 +85,9 @@ import pathlib
 import sys
 
 from theme_common import (LUCIDE, T, add_art_arg, asset_count, brief_titles, data_uri,
-                          day_embed_url, esc, export_js, export_prefix, init_lang, lang,
-                          load_art, load_plan, short_dates, sub_stops_html, theme_name,
-                          title_head, title_kick)
+                          day_embed_url, decision_points_html, esc, export_js, export_prefix,
+                          hours_html, init_lang, lang, load_art, load_plan, short_dates,
+                          stay_rules_html, sub_stops_html, theme_name, title_head, title_kick)
 
 HERE = pathlib.Path(__file__).parent
 THEME = "glass"
@@ -207,7 +207,7 @@ def tl_rows(day):
                if r.get("link") else "")
         rows.append(f'<div class="li k-{kind}"><span class="tchip">{esc(r.get("t",""))}{est}</span>'
                     f'<span class="w">{et(r.get("what",""))}{price}{chip}{nav}'
-                    f'{sub_stops_html(r, sub_pin, et)}</span></div>')
+                    f'{hours_html(r, et)}{sub_stops_html(r, sub_pin, et)}</span></div>')
     return "".join(rows)
 
 
@@ -254,7 +254,7 @@ def day_block(i, day, art, zone):
     {f'<p class="sun">{sun}</p>' if sun else ""}
     {xbtn(f"#d{i}", f"DAY{i:02d}", esc(T("btn.save_day")), esc(t("save_day_tip")))}
   </header>
-  <div class="glass sheet">{tl_rows(day)}</div>
+  <div class="glass sheet">{decision_points_html(day, et)}{tl_rows(day)}</div>
   <div class="pills">{meta_pills(day)}{embed_html}</div>
 </section>"""
 
@@ -271,7 +271,7 @@ def appendix(p, total, az, titles):
         f'<span class="w">{esc(h.get("area",""))} <span class="dim">{esc(h.get("why",""))}</span><br>'
         + " · ".join(
             f'<a href="{esc(o.get("link","#"))}" target="_blank" rel="noopener">{esc(o.get("name",""))}</a>'
-            f' <span class="dim">{esc(o.get("band",""))}</span>'
+            f' <span class="dim">{esc(o.get("band",""))}</span>{stay_rules_html(o)}'
             for o in h.get("options", [])) + "</span></div>"
         for h in p.get("hotels", []))
     budget = "".join(

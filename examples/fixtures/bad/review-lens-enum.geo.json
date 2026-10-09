@@ -1,0 +1,49 @@
+{
+ "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: a review lens outside safety | driving | timing | rules | hazards (WARNs go to stderr and do not count)",
+ "trip": "Fixture — bad: review-lens-enum",
+ "lang": "en",
+ "meta": {
+  "budget_total": "n/a — fixture",
+  "self_check": "self-checked: 0 issues found and fixed · independent review: 1 confirmed, 0 refuted",
+  "review": {
+   "mode": "reviewers",
+   "lenses": [
+    {
+     "lens": "safety",
+     "note": "fixture note — what was checked and against what"
+    },
+    {
+     "lens": "bookings",
+     "note": "fixture note — what was checked and against what"
+    },
+    {
+     "lens": "timing",
+     "note": "fixture note — what was checked and against what"
+    },
+    {
+     "lens": "rules",
+     "note": "fixture note — what was checked and against what"
+    }
+   ],
+   "confirmed": [
+    "one finding, fixed"
+   ],
+   "refuted": []
+  }
+ },
+ "days": [
+  {
+   "date": "2026-11-10",
+   "timeline": [
+    {
+     "t": "09:00-11:00",
+     "what": "Example Canyon viewpoints",
+     "kind": "anchor"
+    }
+   ]
+  }
+ ],
+ "brief": {
+  "visa": "fixture card — content is not under test"
+ }
+}

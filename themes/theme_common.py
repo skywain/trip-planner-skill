@@ -4,8 +4,10 @@
 Anything a theme can share WITHOUT flattening its identity lives here:
 plan-JSON reading helpers (load_plan → norm_plan type-normalises the plan's
 sections and WARNs instead of crashing), the lucide sprite, the keyless
-Google-Maps embed recipe, the sub-stop list under a timeline row
-(sub_stops_html), the art layer (Art / load_art), the <title> /
+Google-Maps embed recipe, the sub-stop list and the hours line under a
+timeline row (sub_stops_html / hours_html), the day's decision strip
+(decision_points_html), a hotel option's check-out and bag-hold lines
+(stay_rules_html), the art layer (Art / load_art), the <title> /
 filename words (title_kick / title_head / export_prefix) and the PNG export
 engine (export_js). Everything that carries the look —
 layout, type, colour, motion, affordances — deliberately stays inside each
@@ -31,7 +33,7 @@ __all__ = [
     "Art", "load_art", "add_art_arg", "short_dates", "export_prefix", "title_kick", "title_head",
     "add_asset_dir", "asset_dirs", "date_span", "BRIEF_TITLES", "BRIEF_TITLES_EN", "brief_titles",
     "STRINGS", "THEME_NAMES", "set_lang", "lang", "T", "tag_pretty", "theme_name", "weekday", "init_lang", "ASSETS",
-    "sub_stops_html",
+    "sub_stops_html", "hours_html", "decision_points_html", "stay_rules_html",
 ]
 
 HERE = pathlib.Path(__file__).parent
@@ -79,6 +81,10 @@ STRINGS = {
         "sub.must": "必看", "sub.stand": "站位: ", "sub.walk": "步行 {} 分钟",
         "sub.written": "已书面确认", "sub.pending": "待确认", "sub.map": "地图",
         "sub.chain": "按顺序步行导航",
+        "hours.label": "开放时间", "hours.unverified": "开放时间未核实", "hours.open": "无固定开放时间",
+        "decide.by": "{t} 前决定", "decide.check": "查看", "decide.if_no": "否则",
+        "decide.cutoff": "截止", "link.source": "来源",
+        "stay.checkout": "退房", "stay.bag_hold": "寄存行李",
         "week": ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
         "html_lang": "zh-CN",
     },
@@ -103,6 +109,10 @@ STRINGS = {
         "sub.must": "must-see", "sub.stand": "Stand here: ", "sub.walk": "{} min walk",
         "sub.written": "confirmed in writing", "sub.pending": "to confirm", "sub.map": "map",
         "sub.chain": "walk this chain",
+        "hours.label": "Hours", "hours.unverified": "hours unverified", "hours.open": "open access",
+        "decide.by": "Decide by {t}", "decide.check": "check", "decide.if_no": "if no",
+        "decide.cutoff": "cut-off", "link.source": "source",
+        "stay.checkout": "Check-out", "stay.bag_hold": "Bags",
         "week": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         "html_lang": "en",
     },
@@ -379,6 +389,90 @@ def sub_stops_html(row, pin=None, text=esc, brief=False):
     chain_html = (f'<div style="{_SUB_SMALL}"><a href="{esc(chain)}" target="_blank" '
                   f'rel="noopener">{esc(T("sub.chain"))} ↗</a></div>' if chain else "")
     return f'<ol style="{_SUB_OL}">{"".join(items)}</ol>{chain_html}'
+
+
+# ------------------------------------------ hours / decision points / stays --
+# Three more optional fields print the sub_stops way: inline styles, "" when
+# the key is absent or malformed (plan_lint reports it), never a raise — so a
+# plan without them renders byte-identically. Field contracts: references/
+# output-template.md §city-block (hours, decision_points) and §Top-level plan
+# skeleton (a hotel option's checkout / bag_hold). flow-root: beside a floated
+# print (zine) the strip narrows like the grid rows instead of running under it.
+_DP_BOX = ("display:flow-root;margin:.2em 0 .8em;padding:.2em 0 .2em .8em;border-left:3px solid;"
+           "font-size:.9em;line-height:1.55;text-align:left;white-space:normal")
+
+
+def _src_link(href, label):
+    return f'<a href="{esc(href)}" target="_blank" rel="noopener">{label} ↗</a>'
+
+
+def hours_html(row, text=esc, brief=False):
+    """row["hours"] as one small line under the row, or "". An object prints
+    the label, its text exactly as written and "· as_of", the date linked to
+    src when src is http(s); the literals "unverified" / "open access" print
+    as localised words. brief=True drops the date and the link."""
+    h = row.get("hours") if isinstance(row, dict) else None
+    if h in ("unverified", "open access"):
+        word = T("hours.unverified" if h == "unverified" else "hours.open")
+        return f'<div style="{_SUB_SMALL}">{esc(word)}</div>'
+    if not (isinstance(h, dict) and isinstance(h.get("text"), str) and h["text"].strip()):
+        return ""
+    out = f'{esc(T("hours.label"))}: {text(h["text"])}'
+    asof = h.get("as_of")
+    stamp = text(asof) if isinstance(asof, str) and asof.strip() else ""
+    href = _sub_url(h.get("src"))
+    if not brief and href:
+        out += " · " + _src_link(href, stamp or esc(T("link.source")))
+    elif not brief and stamp:
+        out += f" · {stamp}"
+    return f'<div style="{_SUB_SMALL}">{out}</div>'
+
+
+def decision_points_html(day, text=esc, brief=False):
+    """day["decision_points"] as a short strip, one line per point, or "".
+    Per point: "Decide by {t}" (its own date in front of t when that is not
+    the day's — the evening before), what, then check / if no / cut-off (the
+    `by` field) and src as a link. An entry without a string t and what is
+    skipped. brief=True keeps the time and what only."""
+    dps = day.get("decision_points") if isinstance(day, dict) else None
+    if not isinstance(dps, list):
+        return ""
+    lines = []
+    for x in dps:
+        if not isinstance(x, dict):
+            continue
+        t, what = x.get("t"), x.get("what")
+        if not (isinstance(t, str) and t.strip() and isinstance(what, str) and what.strip()):
+            continue
+        date = x.get("date")
+        if isinstance(date, str) and date.strip() and date != day.get("date"):
+            t = f"{date} {t}"
+        out = (f'<span style="font-weight:700">{esc(T("decide.by").format(t=t))}</span>'
+               f' · {text(what)}')
+        if not brief:
+            for key, label in (("check", "decide.check"), ("if_no", "decide.if_no"),
+                               ("by", "decide.cutoff")):
+                v = x.get(key)
+                if isinstance(v, str) and v.strip():
+                    out += f" · {esc(T(label))}: {text(v)}"
+            href = _sub_url(x.get("src"))
+            if href:
+                out += " · " + _src_link(href, esc(T("link.source")))
+        lines.append(f'<div style="margin:.15em 0">{out}</div>')
+    return f'<div style="{_DP_BOX}">{"".join(lines)}</div>' if lines else ""
+
+
+def stay_rules_html(option, text=esc):
+    """A hotel option's checkout / bag_hold as two small lines under it, each
+    only when it is a non-empty string, or ""."""
+    if not isinstance(option, dict):
+        return ""
+    out = ""
+    for key, label in (("checkout", "stay.checkout"), ("bag_hold", "stay.bag_hold")):
+        v = option.get(key)
+        if isinstance(v, str) and v.strip():
+            out += f'<div style="{_SUB_SMALL}">{esc(T(label))}: {text(v)}</div>'
+    return out
 
 
 # Top-level plan sections and the shape every renderer assumes for them.

@@ -364,8 +364,8 @@ references/
   art-schema.md               指向 themes/ART-SCHEMA.md
 scripts/
   flight_scan.py              Google Flights 价格网格扫描器(免密钥,从中心往外扩)
-  route_tools.py              geocode → 距离检查 → 地图链接(逐跳、子景点、步行链)→ KML → 闸门 .ics → 日出日落
-  plan_lint.py                渲染前的内容门禁:简报(有自驾选项时含驾驶卡)、占位文案、自检行、art、.ics + .kml、子景点字段;--strict 下再查每天有 stop 和 sun --write 串(退出码 = FAIL 数)
+  route_tools.py              geocode → 距离检查 → 地图链接(逐跳、子景点、步行链)→ KML → 闸门 .ics(清单闸门 + 决策点)→ 日出日落
+  plan_lint.py                渲染前的内容门禁:简报(含驾驶卡逐行的合法性结论)、占位文案、自检行、art、.ics + .kml、子景点字段,以及出现即查的 hours / 决策点 / driver / must_see / meta.review / refundable;--strict 下再查每天有 stop 和 sun --write 串、触发时的复核记录、--asof 窗口内的新鲜 hours(退出码 = FAIL 数)
   render_plan.py              plan JSON → 自包含可打印 HTML
   build_site.py               examples + showcase → GitHub Pages 演示站(_site/)
 .github/workflows/
@@ -391,11 +391,11 @@ examples/
   README.md                   七趟旅行:主题、路线、成本、每一条渲染命令
   japan-2026/ …               每趟旅行一个目录:<trip>.geo.json + <trip>.art.json + <trip>-<theme>.html
   kyoto-sample.*              朴素页面的样例 plan、它的 HTML 和它的 KML
-  fixtures/                   一份带子景点和跟团行的小 plan(lint + links + 渲染测试),外加十四份各自必须恰好 FAIL 一条的坏 plan
+  fixtures/                   一份带子景点、跟团行、自驾跳、hours、决策点和复核记录的小 plan(lint + links + 渲染测试),44 份各自必须恰好 FAIL 一条的坏 plan,以及 strict/(一份干净的 --strict plan + 八份各自恰好 FAIL 一条)
 docs/
   showcase/                   README 用图(hero 拼图、每种主题的封面 / 单日 / 结尾三帧、portal 动态录屏)
   verification.md             这个 skill 是怎么被打磨硬的,以及评审抓到了什么
-  KNOWN-ISSUES.md             36 条缺陷与硬性限制(32 条未修 / 已排期,2 条部分解决,2 条已解决),每条带来源指针,外加路线图
+  KNOWN-ISSUES.md             36 条缺陷与硬性限制(31 条未修 / 已排期,3 条部分解决,2 条已解决),每条带来源指针,外加路线图
 ```
 
 不在仓库里的东西:个人旅行数据(`trips/`)、PNG 原图、美国 portal 参考链条
@@ -426,7 +426,7 @@ docs/
 不是 Claude Code 的插件 —— 在 Claude Code 里端到端验证过,预期也能跑在[兼容性](#兼容性)
 一节列出的另外十个 agent 里,在有人反馈之前那些都算没测过。当前代码树里每一条缺陷和硬性
 限制都列在 [`docs/KNOWN-ISSUES.md`](docs/KNOWN-ISSUES.md) 里 —— 横跨导出 / 渲染器、规划
-脚本、素材与范围的 36 条(32 条未修或已排期,2 条部分解决,2 条已解决),每条都有症状、绕行办法和来源
+脚本、素材与范围的 36 条(31 条未修或已排期,3 条部分解决,2 条已解决),每条都有症状、绕行办法和来源
 指针,外加一份简短路线图(整页导出的尺寸、journal 的 `zh` 封面修复、picker 文案、竖版
 portal 链条、旅行后的相册、给托管版本准备的联盟营销通路)。
 

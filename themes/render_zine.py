@@ -108,9 +108,10 @@ import re
 import urllib.parse
 
 from theme_common import (Art, LUCIDE, T, add_art_arg, asset_count, brief_titles,
-                          data_uri, day_embed_url, esc, et, export_js, export_prefix, ic,
-                          init_lang, lang, load_art, load_plan, short_dates, sub_stops_html,
-                          theme_name, title_head, title_kick)
+                          data_uri, day_embed_url, decision_points_html, esc, et, export_js,
+                          export_prefix, hours_html, ic, init_lang, lang, load_art, load_plan,
+                          short_dates, stay_rules_html, sub_stops_html, theme_name, title_head,
+                          title_kick)
 
 HERE = pathlib.Path(__file__).parent
 THEME = "zine"
@@ -530,9 +531,9 @@ def render_timeline(day):
             f'<div class="r k-{kind}">'
             f'<span class="t">{esc(r.get("t", ""))}{est}</span>'
             f'<span class="w">{et(r.get("what", ""))} {price}{tag}{nav}{note}'
-            f'{sub_stops_html(r, sub_pin, et)}</span>'
+            f'{hours_html(r, et)}{sub_stops_html(r, sub_pin, et)}</span>'
             f'</div>')
-    return f'<div class="tl reveal">{"".join(rows)}</div>'
+    return f'<div class="tl reveal">{decision_points_html(day, et)}{"".join(rows)}</div>'
 
 
 def sub_pin(href, label):
@@ -688,7 +689,7 @@ def render_hotels(hotels):
         opts = "".join(
             f'<li><a href="{esc(o.get("link", "#"))}" target="_blank" rel="noopener">'
             f'{esc(o.get("name", ""))}</a> <span class="mini">{esc(o.get("band", ""))}'
-            f'</span></li>' for o in h.get("options", []))
+            f'</span>{stay_rules_html(o)}</li>' for o in h.get("options", []))
         out.append(
             f'<div class="hotel"><h4>{esc(h.get("base", ""))} · {esc(h.get("area", ""))}'
             f'</h4><p class="mini">{esc(h.get("why", ""))}</p><ul>{opts}</ul></div>')

@@ -469,6 +469,27 @@ holiday calendar page (timeanddate-style) for the year — and put the dates in
    From Python, `urllib` direct hits get **HTTP 403 without a User-Agent** — set one
    (`{"User-Agent": "trip-planner-skill/1.x (personal trip planning)"}`, which the
    script already does); curl works because it sends its own.
+5. **Live conditions (same day)** — for a go / no-go decided the evening before or on
+   the day (when, and what it decides: scheduling.md §Day types, "Weather-window
+   day"). Two kinds of evidence, never the point forecast alone:
+   - **The forecast and the forecaster's reasoning — US only** (✓ 2026-10, NWS keyless
+     JSON; a User-Agent header is required — without one the API answers 403):
+     `curl -s --max-time 30 -A "trip-planner-skill/1.x (personal trip planning)" "https://api.weather.gov/points/{lat},{lon}"`
+     → `properties.forecastHourly` (a URL: fetch it for `properties.periods[]`, hour by
+     hour) and `properties.cwa` (the forecast office — `gridId` is the forecast grid and can
+     differ, Alaska for one) →
+     `curl -s --max-time 30 -A "…" "https://api.weather.gov/products/types/AFD/locations/{cwa}/latest"`
+     → `productText`, the Area Forecast Discussion: the forecaster's timing and
+     confidence in prose. Outside the US: the national weather service's forecast text
+     in the browser pane ⚡.
+   - **The present — worldwide**: the nearest airport's METAR (✓ 2026-10, keyless,
+     plain text, one line per station — wind, visibility, cloud):
+     `curl -s --max-time 30 -A "trip-planner-skill/1.x" "https://aviationweather.gov/api/data/metar?ids={ICAO}"`;
+     satellite imagery in the browser pane — RAMMB SLIDER
+     (`https://rammb-slider.cira.colostate.edu`, GOES-East / GOES-West / Himawari ⚡);
+     for a view, the official webcam (§Hazard feeds).
+   Stamp each line with what was read and when: `… · METAR {ICAO} {HHMM}Z + NWS AFD ·
+   as-of YYYY-MM-DD`.
 
 ## FX — ✓
 `curl -s "https://api.frankfurter.dev/v1/latest?base={HOME}&symbols={DEST}"`
@@ -517,6 +538,22 @@ line numbers — source notes, not a second list):
 Origin block, mainland-China departure only: UnionPay vs Visa/MC acceptance,
 Alipay+ / WeChat cross-border coverage ⚡, foreign cash pre-ordered 1-2 days ahead
 at home.
+
+## Shopping requests
+A "buy it there" wish is a price comparison and a version check.
+- **Price it against the home market's sale price, not its list price**: today's home
+  price (official store, a marketplace promotion) against the destination's tag plus
+  its sales tax or VAT, less a tourist refund only where one applies, plus the card's
+  FX fee (§FX, Money safety line 2). "Cheaper there" from a forum is not a number.
+- **Identify the version by the box, not by folklore**: "the origin-country version is
+  better" is forum folklore. A market version is read off its regulatory label and its
+  **full** barcode, compared with the brand's own domestic site — a GS1 prefix (the
+  first digits) proves only which GS1 office issued the code, not where or for which
+  market the item was made (GS1, as of 2026-10). Worked cases: country-quick-notes.md
+  §Japan, §USA.
+- What travels on to the next border — the next country's entry rules, and the home
+  country's allowance on the way back — is `brief.safety` line 6 (output-template.md
+  §Brief templates).
 
 ## Visa / entry
 Web search `{nationality} citizens visa {destination}` restricted to official
@@ -601,8 +638,18 @@ T-7 / T-3 ladder rows.
   (✓ 2026-10-02, keyless JSON: one row per tracked system — `tropicalCyclone` id,
   `typhoonNumber`, `category` (`LOW` = no longer a tropical cyclone; act on TD / TS /
   STS / TY), `issue`; per storm,
-  `…/typhoon/data/{tropicalCyclone}/specifications.json` carries the name, analysis
-  and winds) — the NW Pacific, which NHC does not cover.
+  `…/typhoon/data/{tropicalCyclone}/specifications.json` carries the name, then the
+  analysis and forecast parts, each with `position.deg` = `[lat, lon]`, `validtime.JST`,
+  `category.en` and `pressure` (hPa), plus `probabilityCircleRadius.km` on forecast
+  parts and `stormWarning[].range.km` where present — ✓ 2026-10, parsed live)
+  — the NW Pacific, which NHC does not cover. **Reading it against the trip**: at each
+  `validtime` near a flight or ferry day, the great-circle distance from `position.deg`
+  to the destination airport against that part's radii. On a forecast part
+  `stormWarning` is the storm-warning area (暴風警戒域), whose radius JMA builds as
+  probability circle + storm-wind radius — so compare with `stormWarning[].range.km`
+  alone (largest sector when it is split); inside = the airport is within the possible
+  storm-wind area. On the analysis part it is today's storm-wind radius. What follows is
+  phase-1-brief.md §Hazard line — no km threshold of our own.
 - **Wildfire and smoke (US)** — InciWeb incident pages (`https://inciweb.wildfire.gov`),
   the park's `https://www.nps.gov/{park_code}/planyourvisit/conditions.htm` for road
   closures, and an AQI number:

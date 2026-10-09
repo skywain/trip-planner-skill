@@ -111,7 +111,7 @@ Write what you learned or assumed into the plan's top-level `prefs` block
 (`assets/plan.example.json`: `theme`, `pictures`, `travel_style`, `lodging`, `scenery`,
 `pace`, `budget`, and `notes` — the inferred values in one line, e.g. "assumed origin
 PVG (zh request, no origin given)"; the assumptions block at checkpoint (a) is written
-from it) so Phases 2-6 read one place and a later replan does not re-ask. Two more
+from it) so Phases 2-6 read one place and a later replan does not re-ask. Three more
 keys, each only when something reads it:
 - `drivers` — whenever a self-drive option exists: a list of
   `{"who", "licence_country"}` (ISO2 of the issuing country), one per intended driver;
@@ -119,8 +119,16 @@ keys, each only when something reads it:
 - `languages` — whenever a guided option may be priced: the language codes the party
   can follow spoken commentary in (read in phase-3-legs.md §Driving legs and
   data-sources.md §Group tours).
-Locked must-sees and the view tier of each go into `notes`; Phase 4 carries each
-scenic one as a `must: true` sub-stop with that `tier` (output-template.md §city-block).
+- `must_see` — whenever a must-see is locked: a list of `{"name", "tier"}`, one per
+  must-see. `name` is the sight's own name as a timeline row's `what` will carry it, in
+  `plan.lang`, without view words; `tier` (eye-level · overlook · from-below) only on a
+  scenic one, told or assumed and stated. Phase 4 carries each tiered entry as a
+  `must: true` sub-stop of that tier (output-template.md §city-block), and `plan_lint.py`
+  FAILs a tiered entry no such sub-stop matches. A must-see the traveller drops, or a
+  tier lowered after a written refusal, edits or removes the entry's `tier` and
+  writes the `decisions[]` row — the gate never relitigates a recorded decision.
+`notes` names the locked must-sees and marks which tiers were assumed — the list itself
+is `must_see`.
 
 ## Picture-capability check
 
@@ -167,8 +175,9 @@ receiving an English page is a shipped bug, not a style choice (self-check row, 
       budget · notes (the inferred values in one line) — plus `drivers` when a
       self-drive option exists and `languages` when a guided option may be priced;
       `lang` is set from the user's language.
-- [ ] No car-first segment was defaulted to self-drive or to a tour; each scenic locked
-      must-see carries its view tier, told or assumed and stated.
+- [ ] No car-first segment was defaulted to self-drive or to a tour; every locked
+      must-see is a `prefs.must_see` entry, each scenic one with its `tier`, told or
+      assumed and stated (an assumed tier marked in `notes`).
 - [ ] The picture-capability check ran silently before styles were mentioned;
       `prefs.pictures` ∈ native | key | stock, and in stock mode the user was told once
       with the exact notice; no key was asked for or handled in chat; a non-illustrated /

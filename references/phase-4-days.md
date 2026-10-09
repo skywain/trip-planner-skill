@@ -11,16 +11,17 @@ Inputs: the chosen route skeleton (Phase 2), the legs table (Phase 3), the Phase
 brief facts (visa / entry, holidays, health, advisory — the assembler's, never a city
 agent's) and `prefs` (interests, pace, language). Outputs: per city, plan-JSON day
 objects insertable verbatim into `days[]` (output-template.md §city-block) with
-`stops`, the hour-level `timeline` (view anchors carry their `sub_stops`),
-`hop_links`, `sun`, `rain_alt`, `ribbon`, plus the city's `checklist_items`.
+`stops`, the hour-level `timeline` (anchors carry `hours`, view anchors their
+`sub_stops`), `decision_points` on the days that have one, `hop_links`, `sun`,
+`rain_alt`, `ribbon`, plus the city's `checklist_items`.
 
 
 ## City-agent contract — fan out or go sequential
 
 When ≥3 cities and subagents are available, fan out one agent per city (otherwise do
 the cities sequentially with the same structure); each prompt must include: the
-dates, the user's interests + pace, the locked must-sees with the view tier expected
-of each (`prefs.notes`), **search budget ≤8**, an
+dates, the user's interests + pace, the locked must-sees — `prefs.must_see` pasted
+verbatim (each entry's `tier` is the view expected of it) — **search budget ≤8**, an
 explicit **"do not run geocoding"** line (parallel agents would break Nominatim's
 1 req/s policy — the assembler geocodes once, centrally), **the plan language**
 (`plan.lang`, with one line telling the agent every reader-facing string in its
@@ -28,8 +29,12 @@ returned block — `label`, `what`, `note`, `why`, hotel blurbs, checklist rows,
 `unverified[]` — is written in that language; its sources will mostly be
 English, and English notes pasted verbatim are how a zh plan goes half-English.
 Machine fields keep the schema's form regardless: `stops[].query` stays
-geocoder-friendly romanized/destination-local, and `kind`/`tag`/`verify`/`tier` keep
-the English enum words the renderers switch on),
+geocoder-friendly romanized/destination-local, and `kind`/`tag`/`verify`/`tier`/`driver`, the
+`hours` literals `unverified` / `open access` and `meta.review`'s `mode` / `lens` keep
+the English enum words the lint and renderers read),
+the paid-extras line (**an optional paid extra — spa, upgrade, lounge, excursion — is
+named with its price in the first sentence; "free for guests" only from the property's
+own page**; SKILL.md Interaction contract),
 and the exact return
 format from references/output-template.md §city-block — **plan-JSON day objects,
 insertable verbatim**, not a summary — and, as the prompt's own last line, the hard
@@ -57,19 +62,26 @@ Per city:
    Sagrada Família… see country-quick-notes.md). For dates more than ~3 months out
    nobody publishes that day's hours yet, so verify the **seasonal pattern + closure
    rule**, stamp it "pattern as of {date}", and let the **T-14 row of the pre-departure
-   re-check ladder** (output-template.md §Pre-departure re-check ladder) carry the
-   re-confirmation. Claiming date-specific verification you cannot have is
-   worse than admitting the horizon — and prices move on their own schedule
+   re-check ladder** carry the re-confirmation and the **T-3 row** write the fresh
+   `hours` (output-template.md §Pre-departure re-check ladder). Claiming date-specific
+   verification you cannot have is worse than admitting the horizon — and prices move on their own schedule
    (admission fees jump at fiscal-year boundaries), so re-check the fee, not just
-   the hours. National parks and other big nature anchors: also read the park's
-   official Alerts/Current Conditions page — storm, fire and eruption closures
-   outlast news cycles, and a partially-open park may hold 2-3 hours of content
+   the hours. **Write what you read into the anchor row's `hours`**:
+   `{text, as_of, src}` (a seasonal pattern says so in `text`), `"unverified"` when
+   nothing could be read, or `"open access"` for a place with no opening hours (a
+   street, beach, public viewpoint, a tour-owned block) — never bare hours, which carry
+   no date (shape: output-template.md §city-block); the row's `what` and `note` then drop
+   the hours they used to carry, so the page prints them once. National parks and other big
+   nature anchors: also read the park's official Alerts/Current Conditions page —
+   storm, fire and eruption closures outlast news cycles, and a partially-open park may hold 2-3 hours of content
    where the brochure promises a day (resize the day; design it droppable while
    the region is in disaster recovery). When the draw is a natural phenomenon
    (lava fountains, aurora), plan the day to work WITHOUT it: base rate ≈ event
    duration ÷ recurrence interval, the official forecast horizon (days, not
    weeks) sets a decision gate on the checklist — keep every related booking
-   cancellable until that gate, and pay no premium for a lottery ticket.
+   cancellable until that gate, and pay no premium for a lottery ticket. Which days
+   carry `decision_points`, and how one differs from a checklist gate: scheduling.md
+   rule 10 and §Day types (shape: output-template.md §city-block).
    **Name the picture, not just the place.** For every must-see whose draw is a view,
    record its viewpoint tier (`eye-level` — boardwalk, street, shore; `overlook` —
    from above; `from-below`), where to stand for the picture the user means, and the
@@ -77,9 +89,12 @@ Per city:
    The same landmark at two tiers is two sights (live case: a group tour stopped only
    at the eye-level boardwalk; the picture the traveller came for is taken from an
    overlook trail above it). A view named in the locked must-sees sets the tier and is
-   the `must: true` sub-stop; a plan that reaches only another tier says so in the
-   row. On a guided day, check which tier the tour actually reaches before the day is
-   fixed (data-sources.md §Group tours). Write them as `sub_stops` on the anchor row,
+   the `must: true` sub-stop; the anchor row's `what` carries the must-see's name as it
+   stands in `prefs.must_see` (the lint matches the two). A plan that reaches only
+   another tier says so in the row; the entry's `tier` changes only through the
+   traveller's recorded decision (phase-0-intake.md §`prefs` and the assumptions
+   block). On a guided day, check which tier the tour actually reaches before the day
+   is fixed (data-sources.md §Group tours). Write them as `sub_stops` on the anchor row,
    and mark a block a guided tour owns `tour: true` so its must-sees carry `confirmed`
    (shape: output-template.md §city-block).
 3. Transit: day-pass vs pay-per-ride arithmetic — sum the day's expected rides and
@@ -130,7 +145,8 @@ Per city:
    PLN-11). Mark ridden
    hops with a `mode` on the arriving stop (`transit`/`train`/`bus`/`drive`/`boat`/
    `fly`; long signature walks `walk`), or the walking total and the links will
-   both be wrong — `check` says (guessed) next to anything you left it to infer.
+   both be wrong — `check` says (guessed) next to anything you left it to infer. Every drive
+   stop the traveller drives carries `driver: self` (navigation.md §Self-drive days).
    Transit durations come back as ranges — keep them ranges unless you
    browser-verified the hop. Deliver day-level granularity only if the user asks for
    a rough cut. Each finished day also gets its `ribbon` one-liner (Stop1 →walk 12′→
@@ -147,10 +163,17 @@ Per city:
       never criss-crosses;
       every anchor verified (hours, last entry, price, sell-out — sell-out anchors on the
       booking checklist with lead time) or stamped "pattern as
-      of {date}" with the T-14 ladder row carrying the re-confirmation.
+      of {date}" with the T-14 ladder row carrying the re-confirmation and the T-3 row
+      writing the fresh `hours`; every anchor
+      carries `hours` (`{text, as_of, src}`, `"unverified"` or `"open access"`) and its
+      `what` / `note` no longer print them.
 - [ ] Every must-see whose draw is a view has `sub_stops` on its anchor row with tier,
       where to stand and `walk_min`; on a guided day, the row carries `tour: true` and
-      the tier the tour reaches was checked.
+      the tier the tour reaches was checked; every `prefs.must_see` name stands in its
+      anchor row's `what` as written there.
+- [ ] Every decision scheduling.md rule 10 or §Day types places on the day or the
+      evening before is in that day's `decision_points`; a gate days ahead stays a
+      checklist row only.
 - [ ] Each day has its rain alternative (closure-checked), its food area, its `ribbon`.
 - [ ] `route_tools.py` ran geocode → tz sweep → sun --write → links --write → check →
       kml; `check` exited 0 (no BROKEN / SUSPICIOUS hop survived; every `mode`
@@ -160,5 +183,6 @@ Per city:
       a polar day it REJECTED, whose `sun` key stays absent (never `null`, never `""`)
       and is named in the summary (PLN-11).
 - [ ] No sunrise / sunset / dark-start prose was written before `sun --write`; every
-      ridden hop carries its `mode` on the arriving stop; unverified transit durations
+      ridden hop carries its `mode` on the arriving stop, and every drive stop the
+      traveller drives carries `driver: self`; unverified transit durations
       stay ranges.

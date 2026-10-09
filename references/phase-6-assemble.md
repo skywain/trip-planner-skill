@@ -77,15 +77,18 @@ portal renders neither — on portal the chat summary carries it):
   from a source into a zh plan gets translated, not shipped. Proper nouns stay in
   their native form with a gloss where useful (浅草寺 Sensō-ji); machine fields are
   exempt (`stops[].query` and `sub_stops[].query` stay geocoder-friendly;
-  `kind`/`tag`/`verify`/`tier` keep their English enum words, and so do the
-  `confirmed` prefixes `in writing` / `pending`)
+  `kind`/`tag`/`verify`/`tier`/`driver` keep their English enum words, and so do the
+  `confirmed` prefixes `in writing` / `pending`, the `hours` literals `unverified` /
+  `open access` and `meta.review`'s `mode` / `lens` — the lint and the renderers read
+  them; the renderers print the `hours` literals in `plan.lang`)
 
 ### Independent review — when the plan commits money or carries physical or legal risk
 
 Run this after the list above and before the chat summary whenever the plan has a
-self-drive option (the `brief.driving` trigger — phase-1-brief.md §Driving card), a
-non-refundable booking or a timed check-in. The self-check is run by
-the planner who wrote the plan and shares its blind spots; this pass does not.
+self-drive option (the four conditions in phase-1-brief.md §Driving card), a
+non-refundable booking or a timed check-in — the procedure's trigger, wider than the
+part the lint can see (the paragraph after step 4). The self-check is run by the
+planner who wrote the plan and shares its blind spots; this pass does not.
 
 1. **Export the plan as plain text** (days, legs, checklist — no reasoning, no chat
    history) and hand it to a reviewer that has seen nothing else, one lens per reviewer
@@ -106,14 +109,24 @@ the planner who wrote the plan and shares its blind spots; this pass does not.
    independent review: C confirmed, R refuted" (a zh plan: "自检:发现并修复 N 处 ·
    独立复核:确认 C 条,驳回 R 条"). No sub-agents in the harness → run the five lenses
    yourself on the exported text and write "independent review: single pass"
-   ("独立复核:单人通读").
+   ("独立复核:单人通读"). Then write the review behind the line into `meta.review`
+   (shape, lens enum and the count rule: output-template.md §Top-level plan skeleton):
+   one lens entry per lens actually run — step 1's five, each note saying what was
+   checked against which source —
+   a lens with nothing to look at is left out, not padded; `confirmed` holds every
+   finding a refuter confirmed (fixed, or under step 3 sent back to the traveller or
+   left settled — say which), `refuted` the findings dropped.
 
-`plan_lint.py --strict` fails a plan with a self-drive option whose self-check line
-lacks the clause; the other two triggers have no machine gate yet, and the gate
-reads the clause, not the review behind it (KNOWN-ISSUES PLN-13). This review is the
-pass that catches what the planner itself just proposed — a self-drive day in a
-jurisdiction that does not recognise the traveller's licence is the kind of finding it
-exists for.
+`plan_lint.py` sees the machine-readable part of the trigger — the self-drive set,
+`"refundable": false` on a legs or checklist row, `tour: true` on a timeline row (the
+one list: `plan_lint.py`'s module docstring); a timed check-in without a tour block
+stays procedure-only. On that trigger `--strict` fails a plan whose `meta.self_check`
+or last `decisions[]` row lacks the clause, or that has no `meta.review`; a
+`meta.review` that is present is checked against every clause present, in every mode.
+The gate reads a record that is specific and consistent, not proof that the review ran
+(KNOWN-ISSUES PLN-13). This review is the pass that catches what the planner itself
+just proposed — a self-drive day in a jurisdiction that does not recognise the
+traveller's licence is the kind of finding it exists for.
 
 ## Deliver
 
@@ -130,18 +143,12 @@ trip.kml`) alongside for offline map apps, and the gates `.ics` — always, beca
 ladder rows are date-locked gates (output-template.md §Pre-departure re-check ladder,
 §On-trip re-audit rows for trips of seven days or more, and §Booking-artifact
 conventions) — `python3 scripts/route_tools.py ics plan.geo.json -o gates.ics` writes it
-from the checklist rows (ISO dates or `T-N` markers in `deadline`; bump `--sequence`
-on every plan change — a lint fix that adds or re-dates a checklist row means `ics`
-runs again; `plan_lint.py` WARNs when the file is older than the plan). Before any renderer runs, **`python3 scripts/plan_lint.py
-plan.geo.json --strict` must exit 0**: it is the machine gate for what the plan says —
-brief present and in canonical order, no placeholder or "awaiting" text, the self-check
-line written, art placeholders filled, the gates `.ics` and `trip.kml` beside the plan,
-every day with at least one stop and a `sun` that `sun --write` wrote; on rows that
-carry them, sub-stops with a name and a query or lat+lon, a tier on every must-see,
-tour must-sees confirmed in writing or pending on a named checklist row; a
-`brief.driving` card whenever a self-drive option exists, with the independent-review
-clause in the self-check line; and the on-trip re-audit rows on a trip of seven days
-or more. The one FAIL
+from the checklist rows (ISO dates or `T-N` markers in `deadline`) and each day's
+`decision_points`; bump `--sequence` on every plan change — a lint fix that adds or
+re-dates a checklist row means `ics` runs again; `plan_lint.py` WARNs when the file is
+older than the plan. Before any renderer runs, **`python3 scripts/plan_lint.py
+plan.geo.json --strict` must exit 0**: it is the machine gate for what the plan says,
+and its module docstring is the one list of what it checks. The one FAIL
 the gate tolerates: a polar day's `sun` (output-template.md §`sun`; KNOWN-ISSUES
 PLN-11) — `sun --write` refuses such a day, so render with exactly those FAIL lines and
 no other, name the dates in the chat summary, and never type a `sun` string to turn
@@ -153,8 +160,13 @@ words. The plain
 resort if the theme renderer still fails after one honest fix attempt (then say so in
 the summary). **`plan.geo.json` is the single editable source** for all of it — every
 command above reads that one file — so a later "move day 3 to Nara" is a JSON edit
-plus geocode → check → links → kml → render, not a rewrite. The page chrome (section
-names, buttons, pills, weekdays) speaks `plan.lang` (set in Phase 0, `zh` default);
+plus geocode → check → links → kml → render, not a rewrite. **One hand-off per agreed
+version**: while a change is being discussed it moves in `plan.geo.json` only; once the
+traveller agrees it, re-stamp `meta.generated`, re-render, re-run `ics` with the next
+`--sequence`, and hand the
+page, `trip.kml` and the `.ics` over once, with one line restating what changed. The
+page chrome (section names, buttons, pills, weekdays) speaks `plan.lang` (set in
+Phase 0, `zh` default);
 `--lang zh|en` on any renderer overrides it, plan content prints as written.
 
 ## Themed renders
@@ -243,6 +255,22 @@ fresh clone and its README.md has the one-line curl+unzip restore; the shipped p
 case is Morocco (live on the demo site). Details, per-theme limits and the new-theme
 manual: references/themes.md.
 
+## After the trip
+
+Read this when the traveller is home and asks about a refund, a receipt, a complaint or
+a review; nothing here runs before delivery, and the exit criteria below do not cover it.
+Each item below is a draft: the traveller submits the claim, the receipt request and the
+complaint themselves (SKILL.md Hard rule 1 — a claim form carries personal data).
+- **A refund claim starts from the leg row**: quote its refund/change class and
+  checked-bag fee (phase-3-legs.md §Record for every leg) verbatim before raising it —
+  no refund exists for a bag a basic fare never included.
+- **A flown trip drops out of the carrier's "my trips"**: the 13-digit e-ticket number
+  (phase-3-legs.md §Record for every leg) finds the receipt; an OTA order number does not.
+- **Reviews and complaints go inside the operator's window**, through the operator's
+  own form first.
+- **The other post-trip output** is the photo album — on the roadmap
+  (docs/KNOWN-ISSUES.md §Roadmap), not built yet.
+
 
 ## Exit criteria — tick every line before the chat summary goes out
 
@@ -253,9 +281,9 @@ manual: references/themes.md.
 - [ ] Adversarial self-check ran in full; "self-checked: N issues found and fixed" is in
       `meta.self_check` **and** the last `decisions[]` row (portal: in the chat summary).
 - [ ] A plan with a self-drive option, a non-refundable booking or a timed check-in went
-      through §Independent review, and the same line (in `meta.self_check` and the last
-      `decisions[]` row) says "independent review: C
-      confirmed, R refuted" (or "single pass").
+      through §Independent review, the same line (in `meta.self_check` and the last
+      `decisions[]` row) says "independent review: C confirmed, R refuted" (or "single
+      pass"), and `meta.review` records the lenses and findings behind it.
 - [ ] `route_tools.py links --write` was re-run after the last `sub_stops` edit —
       `plan_lint` prints no "no link" WARN.
 - [ ] `route_tools check` exited 0 before rendering; every sunrise / sunset / dark-start

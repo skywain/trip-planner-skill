@@ -16,12 +16,14 @@ have not filled in yet simply do not appear.
 Schema (all keys optional except days[].date):
 {
  "trip": "Japan 12 days",
- "meta": {"dates","party","route","budget_total","fx","generated","self_check"},
+ "prefs": {"must_see", ...},   // Phase 0 intake — read by plan_lint, not rendered
+ "meta": {"dates","party","route","budget_total","fx","generated","self_check","review"},
  "decisions": ["open-jaw into KIX out of NRT: refunds a backtracking day", ...],
- "checklist": [{"item","deadline","price","link","link_text","note"}],
+ "checklist": [{"item","deadline","price","link","link_text","note","refundable"}],
  "legs":      [{"type","date","carrier","from","to","dep","arr","price","bags",
-                "link","note","backup"}],
+                "link","note","backup","refundable"}],
  "days": [{"date","city","label","sun","day_map","ribbon","rain_alt","late_cut",
+           "decision_points",
            // HONEST total: on-foot ×1.3 + strolls + in-venue. Either a number or
            // {"total": 7.5, "how": "on foot 2.1×1.3 + in-station 0.8 + in-venue 4.0"}
            "walking_km": 5.4,
@@ -31,16 +33,16 @@ Schema (all keys optional except days[].date):
                          "verify":"verified|est","link",
                          "map": false,     // map:false = flight/rail hop covered by
                                            // legs — excluded from links --write
-                         "tour", "sub_stops", "sub_map"}],
-                                           // the points inside one sight, listed
-                                           // under the row; fields defined only in
+                         "hours", "tour", "sub_stops", "sub_map"}],
+                                           // sub_stops: the points inside one sight,
+                                           // listed under the row; fields defined only in
                                            // references/output-template.md §city-block
            "hop_links": ["url", ...],      // parked by route_tools when rows and
                                            // mapped hops don't align; rendered as
                                            // a hop-by-hop maps row under the day card
-           "stops": [{"name","query","lat","lon"}]}],   // mirrors the timeline's
-                                                        // places, in visit order
- "hotels": [{"base","area","why","options":[{"name","band","link"}]}],
+           "stops": [{"name","query","lat","lon","mode","driver"}]}],   // mirrors the
+                                                        // timeline's places, in visit order
+ "hotels": [{"base","area","why","options":[{"name","band","link","checkout","bag_hold"}]}],
  "budget": [{"cat","per_person","total","note"}],
  "brief":  {"visa","emergency","safety","health","holidays","weather","money",
             "connectivity","insurance","baggage", ...},   # canonical order: output-template §Brief templates
@@ -74,6 +76,10 @@ STRINGS = {
         "tier.eye-level": "平视", "tier.overlook": "俯瞰", "tier.from-below": "仰视",
         "sub.must": "必看", "sub.stand": "站位: ", "sub.walk": "步行 {} 分钟",
         "sub.written": "已书面确认", "sub.pending": "待确认", "sub.chain": "按顺序步行导航",
+        "hours.label": "开放时间", "hours.unverified": "开放时间未核实", "hours.open": "无固定开放时间",
+        "decide.by": "{t} 前决定", "decide.check": "查看", "decide.if_no": "否则",
+        "decide.cutoff": "截止", "link.source": "来源",
+        "stay.checkout": "退房", "stay.bag_hold": "寄存行李",
         "walk.how": "步行约 {} km<span class=\"note\"> — {}</span>",
         "walk": "步行约 {} km(含街道系数、散步段与馆内)",
         "rain_alt": "雨天备选: ",
@@ -104,6 +110,10 @@ STRINGS = {
         "sub.must": "must-see", "sub.stand": "Stand here: ", "sub.walk": "{} min walk",
         "sub.written": "confirmed in writing", "sub.pending": "to confirm",
         "sub.chain": "walk this chain",
+        "hours.label": "Hours", "hours.unverified": "hours unverified", "hours.open": "open access",
+        "decide.by": "Decide by {t}", "decide.check": "check", "decide.if_no": "if no",
+        "decide.cutoff": "cut-off", "link.source": "source",
+        "stay.checkout": "Check-out", "stay.bag_hold": "Bags",
         "walk.how": "walk ~{} km<span class=\"note\"> — {}</span>",
         "walk": "walk ~{} km (street factor, strolls and in-venue included)",
         "rain_alt": "Rain plan: ",
@@ -284,6 +294,59 @@ def sub_stops(row):
             .format("".join(items), chain))
 
 
+# The twins of theme_common.hours_html / decision_points_html / stay_rules_html:
+# same content on this page's classes, "" when the key is absent or malformed.
+def hours(row):
+    """row["hours"] as one .note line under the row."""
+    h = row.get("hours") if isinstance(row, dict) else None
+    if h in ("unverified", "open access"):
+        return '<div class="note">{}</div>'.format(
+            e(T("hours.unverified" if h == "unverified" else "hours.open")))
+    if not (isinstance(h, dict) and isinstance(h.get("text"), str) and h["text"].strip()):
+        return ""
+    out = "{}: {}".format(e(T("hours.label")), e(h["text"]))
+    asof = h.get("as_of") if isinstance(h.get("as_of"), str) else ""
+    if _http(h.get("src")):
+        out += " · " + link(h["src"], asof.strip() or T("link.source"))
+    elif asof.strip():
+        out += " · " + e(asof)
+    return '<div class="note">{}</div>'.format(out)
+
+
+def decision_points(day):
+    """day["decision_points"] as a strip above the timeline, one line per point."""
+    dps = day.get("decision_points") if isinstance(day, dict) else None
+    lines = []
+    for x in dps if isinstance(dps, list) else []:
+        t, what = (x.get("t"), x.get("what")) if isinstance(x, dict) else (None, None)
+        if not (isinstance(t, str) and t.strip() and isinstance(what, str) and what.strip()):
+            continue
+        date = x.get("date")
+        if isinstance(date, str) and date.strip() and date != day.get("date"):
+            t = "{} {}".format(date, t)
+        bits = ["{}: {}".format(e(T(k)), e(x[f])) for f, k in
+                (("check", "decide.check"), ("if_no", "decide.if_no"), ("by", "decide.cutoff"))
+                if isinstance(x.get(f), str) and x[f].strip()]
+        if _http(x.get("src")):
+            bits.append(link(x["src"], T("link.source")))
+        lines.append("<div><b>{}</b> · {}{}</div>".format(
+            e(T("decide.by").format(t=t)), e(what),
+            '<span class="note"> · {}</span>'.format(" · ".join(bits)) if bits else ""))
+    if not lines:
+        return ""
+    return ('<div style="margin:0 0 8px;padding-left:8px;border-left:3px solid var(--warn);'
+            'font-size:.87rem">{}</div>'.format("".join(lines)))
+
+
+def stay_rules(option):
+    """A hotel option's checkout / bag_hold as two .note lines under it."""
+    if not isinstance(option, dict):
+        return ""
+    return "".join('<div class="note">{}: {}</div>'.format(e(T(k)), e(option[f])) for f, k in
+                   (("checkout", "stay.checkout"), ("bag_hold", "stay.bag_hold"))
+                   if isinstance(option.get(f), str) and option[f].strip())
+
+
 def section(title, body):
     return "<h2>{}</h2>\n{}".format(e(title), body) if body else ""
 
@@ -405,8 +468,9 @@ def render(p):
                 if bits:
                     what += '<div class="note">{}</div>'.format(" — ".join(bits))
                 rows.append('<tr class="{}"><td class="t">{}</td>'
-                            '<td class="what">{}{}{}</td></tr>'.format(
-                                e(kind), e(it.get("t")), what, pills(it), sub_stops(it)))
+                            '<td class="what">{}{}{}{}</td></tr>'.format(
+                                e(kind), e(it.get("t")), what, pills(it), hours(it),
+                                sub_stops(it)))
             foot = []
             if d.get("day_map"):
                 foot.append(link(d["day_map"], T("map.day")))
@@ -429,9 +493,9 @@ def render(p):
             if d.get("ribbon"):
                 lc = '<div class="ribbon">{}</div>'.format(e(d["ribbon"])) + lc
             cards.append(
-                '<div class="day{}"><h3>{} {}</h3><table class="tl">{}</table>'
+                '<div class="day{}"><h3>{} {}</h3>{}<table class="tl">{}</table>'
                 "{}{}{}</div>".format(" travel" if d.get("travel_day") else "",
-                                      head, sun, "".join(rows), fl, lc,
+                                      head, sun, decision_points(d), "".join(rows), fl, lc,
                                       day_svg(d.get("stops") or [])))
         out.append(section(T("sec.days"), "".join(cards)))
 
@@ -439,8 +503,8 @@ def render(p):
         blocks = []
         for h in p["hotels"]:
             opts = "".join(
-                "<li>{} — {} {}</li>".format(e(o.get("name")), e(o.get("band")),
-                                             link(o.get("link"), T("link.view")))
+                "<li>{} — {} {}{}</li>".format(e(o.get("name")), e(o.get("band")),
+                                               link(o.get("link"), T("link.view")), stay_rules(o))
                 for o in h.get("options", []))
             blocks.append("<h3>{} · {}</h3><p class='note'>{}</p><ul>{}</ul>".format(
                 e(h.get("base")), e(h.get("area")), e(h.get("why")), opts))

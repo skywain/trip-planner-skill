@@ -214,7 +214,11 @@ packed ×0.8, kids or mobility flags ×1.3.
       line.
     The T-7 re-check (output-template.md §Pre-departure re-check ladder) re-applies
     the forecast thresholds above; visibility and smoke are read the day before and
-    on the day.
+    on the day. A gate days ahead (a forecast horizon, a hazard season) stays a
+    checklist row; a decision on the day or the evening before — the visibility go /
+    no-go, the smoke read — is a **decision point** in the day's `decision_points`
+    (shape: output-template.md §city-block), so `route_tools.py ics` never emits the
+    same gate twice.
 
 ## Day types that need a different structure
 
@@ -233,11 +237,14 @@ packed ×0.8, kids or mobility flags ×1.3.
   wide-body) + the walk to the taxi / ride-hail zone (find its level; some airports put
   ride-hail on departures) + the ride + the operator's check-in lead (rule 1). It fits
   with 30 min to spare, or the activity or the flight moves.
-- **Moving day (base change)** — luggage-encumbered from checkout (10:00-11:00) to
-  next check-in (~15:00), so this is a day-structure problem, not a buffer problem.
-  Solve bags before scheduling anything: (a) store at the departing hotel and loop
-  back, (b) coin lockers or staffed storage at the rail hub actually used — large
-  lockers at major stations sell out by mid-morning, so name a fallback, (c) in Japan,
+- **Moving day (base change)** — luggage-encumbered from checkout to next check-in
+  (~15:00), so this is a day-structure problem, not a buffer problem. The day's first
+  row is timed from the booked option's `checkout` (`hotels[].options[]`, read off the
+  property's own page — SKILL.md Phase 5), else from the earliest checkout among the
+  options, marked est; a late check-out is asked the evening before and recorded on
+  that row. Solve bags before scheduling anything: (a) store at the departing hotel
+  (its `bag_hold` says until when) and loop back, (b) coin lockers or staffed storage
+  at the rail hub actually used — large lockers at major stations sell out by mid-morning, so name a fallback, (c) in Japan,
   takkyubin hotel→hotel forwarding is usually **next-day**: arrange it the evening
   before and keep an overnight kit. Never schedule an anchor with bags in tow — rule 2
   (opener at opening time) is suspended on a checkout day unless bags are already
@@ -254,7 +261,10 @@ packed ×0.8, kids or mobility flags ×1.3.
   the *first* stop, set `sun_stop` (rule 7).
 - **Departure day** — zero sightseeing unless the flight leaves after 18:00. Work
   backwards from the airport-arrival deadline (3 h international) through the real
-  city→airport transfer time, and put the luggage solution in writing again.
+  city→airport transfer time, time the first row from the checkout as on a moving
+  day, and put the luggage solution in writing again. Where the country refunds tax at
+  departure, that kiosk step sits before bag drop and its queue is added to the
+  airport deadline (country-quick-notes.md for the country).
   **Return-flight time unknown** (`flight_scan.py` lists outbound legs only, and the
   deep link may not show it statically): pick a plausible departure `T` from the
   carrier's published schedule (or the outbound's mirror), and write the day
@@ -291,6 +301,16 @@ packed ×0.8, kids or mobility flags ×1.3.
   you left. Lock the return leg FIRST and allocate the final city's days from it —
   planned the other way round, the dateline silently deletes a day from the last
   stop (learned live: it cost Hawaii its circle-island day).
+- **Weather-window day** — trading a booked flight for a clear day elsewhere. Read
+  every same-day flight the fare can change to, with its real change price, in the
+  carrier's app — fare buckets move within minutes, so a price seen is not a quote:
+  re-read it at the moment of changing. Nothing moves without two kinds of evidence:
+  the forecast (hourly, plus the forecaster's written discussion) and the present
+  (satellite, METAR, an official camera) — recipes in data-sources.md §Weather step
+  5. Decide the evening before and re-read the present at breakfast; both are the
+  day's `decision_points` (rule 10), each with its own `what`. The leaving day's clock re-derives from the
+  booked option's `checkout` (Moving day). The change goes to the traveller as a
+  priced option they choose (SKILL.md Interaction contract).
 
 ## Traps that break otherwise-correct timelines
 
@@ -315,6 +335,10 @@ packed ×0.8, kids or mobility flags ×1.3.
   seasonal operating windows (cable cars, mountain huts, gardens, boats), per-venue
   annual maintenance, and Ramadan in Muslim-majority destinations. SKILL.md Phase 1
   budgets a search for these; the Phase 6 closure scan re-checks them.
+- **A boarding pass with no seat number is not a seat.** "See agent" or a seat
+  assigned at the gate means no seat is held yet: check in the moment check-in opens,
+  be at the gate desk as soon as it is staffed, and on a must-catch leg
+  (phase-3-legs.md §Record for every leg) treat it as a denied-boarding risk.
 
 ## Timeline verification (runs inside the Phase 6 self-check)
 
@@ -335,15 +359,16 @@ packed ×0.8, kids or mobility flags ×1.3.
   without transit has its early-requested or pre-booked ride and an alternate pickup
   point (rule 7).
 - Meal blocks exist and actually sit near the clusters they claim
-- Moving days: bags solved in writing, no anchor before storage; ≤2 anchors only if
-  the bags are solved before the first one, otherwise ≤1 (§Day types)
+- Moving days: first row timed from the booked `checkout` (or est); bags solved in
+  writing, no anchor before storage; ≤2 anchors only if the bags are solved before the
+  first one, otherwise ≤1 (§Day types)
 - Departure day with an unconfirmed return time: the T-formula is visible in the
   timeline, `legs.dep` carries ⚠️, `unverified` names it (§Day types)
 - Worship/siesta/free-day traps checked for every affected block
 - Weather rule 10 applied: a heat day has no unshaded open-air anchor 11:00-16:00, a
   wet day's main line is the indoor version, wind-sensitive anchors carry the
   cancellation note and a fallback, view anchors link their webcam with a go / no-go
-  time
+  time in the day's `decision_points`
 
 ## Scheduled-day format
 

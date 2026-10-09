@@ -104,9 +104,10 @@ import re
 import sys
 
 from theme_common import (LUCIDE, T, add_art_arg, asset_count, brief_titles,
-                          data_uri, day_embed_url, esc, et, export_js, export_prefix, ic,
-                          init_lang, lang, load_art, load_plan, set_icon_base, short_dates, title_head,
-                          sprite, sub_stops_html, tag_pretty, theme_name, title_kick)
+                          data_uri, day_embed_url, decision_points_html, esc, et, export_js,
+                          export_prefix, hours_html, ic, init_lang, lang, load_art, load_plan,
+                          set_icon_base, short_dates, title_head, sprite, stay_rules_html,
+                          sub_stops_html, tag_pretty, theme_name, title_kick)
 
 HERE = pathlib.Path(__file__).parent
 
@@ -472,7 +473,7 @@ def tl_row(r):
            if r.get("link") else "")
     return (f'<div class="row k-{kind}"><span class="t">{esc(r.get("t",""))}{est}</span>'
             f'<span class="w">{et(r.get("what",""))}{price}{chip}{nav}'
-            f'{sub_stops_html(r, sub_pin, et)}</span></div>')
+            f'{hours_html(r, et)}{sub_stops_html(r, sub_pin, et)}</span></div>')
 
 
 def sub_pin(href, label):
@@ -525,7 +526,7 @@ def render_day(i, day, art):
     </div>
   </header>
   <div class="mist reveal">
-    {tl}
+    {decision_points_html(day, et)}{tl}
     <div class="pills">{note_pills(day)}<button class="xbtn no-export"
       data-x-for="#d{i}" data-x-label="DAY{i:02d}"
       title="{esc(t("save_day.title"))}">{esc(T("btn.save_day"))}</button>{embed_html}</div>
@@ -544,7 +545,7 @@ def appendix(p, total_budget, titles):
         f'<details class="sub"><summary>{esc(h.get("base",""))} · {esc(h.get("area",""))}</summary>'
         f'<p class="dim">{esc(h.get("why",""))}</p><ul>' + "".join(
             f'<li><a href="{esc(o.get("link","#"))}" target="_blank" rel="noopener">{esc(o.get("name",""))}</a>'
-            f' <span class="dim">{esc(o.get("band",""))}</span></li>'
+            f' <span class="dim">{esc(o.get("band",""))}</span>{stay_rules_html(o)}</li>'
             for o in h.get("options", [])) + "</ul></details>"
         for h in p.get("hotels", []))
     budget = "".join(

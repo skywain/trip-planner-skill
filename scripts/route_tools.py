@@ -124,6 +124,11 @@ Subcommands:
                                  (renderers take the first HH:MM after 🌇 — keep a
                                  space after every time). Cached in suncache.json next
                                  to the plan, so re-runs on the same day are free.
+  ics     plan.geo.json -o gates.ics [--hour HH:MM] [--sequence N]
+                              -> the calendar gates: one VEVENT per checklist row whose
+                                 deadline carries an ISO date or T-N (at --hour) and
+                                 one per days[].decision_points entry (at its date +
+                                 t); floating local times, stable UIDs
 
 Time zone for `sun`: day["tz"] > --tz Area/City > plan["tz"] / plan["meta"]["tz"] >
 longitude-derived UTC offset (approximate, no DST — printed but NEVER written; pass
@@ -186,6 +191,11 @@ Change log (2026-10, after a two-week multi-region run):
 - links --write: sub-stop place links + the row's sub_map chain (a tour skipped the
   overlook the traveller came for; the plan had named only the park). kml: pins for
   sub-stops with lat/lon. gmaps_dir takes a query string as a point.
+Change log (2026-10 b, round 2):
+- ics: one VEVENT per days[].decision_points entry (its date — the day, or the evening
+  before — + t, DTEND +30 min, alarms -PT12H / -PT30M, UID from the owning day's date
+  and `what` so a re-timed point keeps its UID); all events sorted by start. The
+  checklist events are byte-identical to before.
 """
 import argparse
 import datetime as _dt
@@ -1464,11 +1474,18 @@ def _ics_fold(line):
     return "\r\n".join(out)
 
 
+_HHMM = re.compile(r"(?:[01]\d|2[0-3]):[0-5]\d")
+
+
 def cmd_ics(args):
-    """gates .ics from the checklist: one VEVENT per row whose deadline carries an ISO
-    date or a T-N marker (T-14 = departure - 14 days; departure = days[0].date), floating
-    local time (no Z / TZID), two VALARMs (-P1D, -PT30M), stable UID per row, SEQUENCE
-    from --sequence (bump it on every plan change)."""
+    """gates .ics: one VEVENT per checklist row whose deadline carries an ISO date or a
+    T-N marker (T-14 = departure - 14 days; departure = days[0].date) at --hour, DTEND
+    +1 h, VALARMs -P1D / -PT30M, UID from the item text; plus one VEVENT per
+    days[].decision_points entry (output-template.md §city-block) at its date (the
+    day, or the evening before) + t, DTEND +30 min, VALARMs -PT12H / -PT30M, UID from
+    the owning day's date and `what` — moving the point to the evening before keeps
+    the UID and SEQUENCE carries the change. Floating local times (no Z / TZID),
+    events sorted by start, SEQUENCE from --sequence (bump it on every plan change)."""
     import hashlib
     plan = load_plan(args.plan)
     rows = plan.get("checklist") or []
@@ -1486,9 +1503,22 @@ def cmd_ics(args):
         slug = "trip"
     stamp = _dt.datetime.now(_dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     events, skipped = [], []
+
+    def vevent(uid, start, end, summary, desc, alarms):
+        ev = ["BEGIN:VEVENT", "UID:" + uid, "DTSTAMP:" + stamp,
+              "SEQUENCE:{}".format(args.sequence),
+              "DTSTART:" + start.strftime("%Y%m%dT%H%M%S"),
+              "DTEND:" + end.strftime("%Y%m%dT%H%M%S"),
+              "SUMMARY:" + _ics_escape(summary), "DESCRIPTION:" + _ics_escape(desc)]
+        for trigger, text in alarms:
+            ev += ["BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + _ics_escape(text),
+                   "TRIGGER:" + trigger, "END:VALARM"]
+        ev.append("END:VEVENT")
+        events.append((start, ev))
+
     for i, r in enumerate(rows, 1):
         if not isinstance(r, dict):
-            skipped.append((i, "not an object"))
+            skipped.append(("checklist row {}".format(i), "not an object"))
             continue
         item = str(r.get("item", "")).strip()
         deadline = str(r.get("deadline", ""))
@@ -1504,8 +1534,8 @@ def cmd_ics(args):
             if t and dep:
                 day = dep - _dt.timedelta(days=int(t.group(1)))
         if day is None:
-            skipped.append((i, item[:40] + " — deadline {!r} has no ISO date or T-N marker"
-                            .format(deadline[:40])))
+            skipped.append(("checklist row {}".format(i), item[:40] + " — deadline {!r} has "
+                            "no ISO date or T-N marker".format(deadline[:40])))
             continue
         uid = "{}-{}@trip-planner".format(slug, hashlib.sha1(item.encode("utf-8")).hexdigest()[:10])
         desc = "{}:{} local, wherever you are.\nDEADLINE: {}".format(hh, mm, deadline)
@@ -1516,18 +1546,48 @@ def cmd_ics(args):
         if r.get("price"):
             desc += "\nPRICE: {}".format(r["price"])
         start = _dt.datetime(day.year, day.month, day.day, int(hh), int(mm))
-        end = start + _dt.timedelta(hours=1)
-        ev = ["BEGIN:VEVENT", "UID:" + uid, "DTSTAMP:" + stamp,
-              "SEQUENCE:{}".format(args.sequence),
-              "DTSTART:" + start.strftime("%Y%m%dT%H%M%S"),
-              "DTEND:" + end.strftime("%Y%m%dT%H%M%S"),
-              "SUMMARY:" + _ics_escape(item), "DESCRIPTION:" + _ics_escape(desc),
-              "BEGIN:VALARM", "ACTION:DISPLAY",
-              "DESCRIPTION:" + _ics_escape("Tomorrow: " + item), "TRIGGER:-P1D", "END:VALARM",
-              "BEGIN:VALARM", "ACTION:DISPLAY",
-              "DESCRIPTION:" + _ics_escape("Now: " + item), "TRIGGER:-PT30M", "END:VALARM",
-              "END:VEVENT"]
-        events.append((day, ev))
+        vevent(uid, start, start + _dt.timedelta(hours=1), item, desc,
+               [("-P1D", "Tomorrow: " + item), ("-PT30M", "Now: " + item)])
+    # Decision points: the on-the-day / evening-before calls (plan_lint checks the
+    # shape; here a point without an HH:MM t or a `what` is skipped with a WARN).
+    for i, d in enumerate(plan["days"], 1):
+        dps = d.get("decision_points")
+        if dps is None:
+            continue
+        head = "day {} {}".format(i, d.get("date", "?"))
+        if not isinstance(dps, list):
+            skipped.append((head, "decision_points is not a list"))
+            continue
+        try:
+            owner = _dt.date.fromisoformat(str(d.get("date", ""))[:10])
+        except ValueError:
+            skipped.append((head, "decision points need the day's ISO date"))
+            continue
+        for k, x in enumerate(dps, 1):
+            what = str(x.get("what", "")).strip() if isinstance(x, dict) else ""
+            t = str(x.get("t", "")) if isinstance(x, dict) else ""
+            if not what or not _HHMM.fullmatch(t):
+                skipped.append((head, "decision point {} — needs `what` and `t` as HH:MM"
+                                .format(k)))
+                continue
+            on = owner
+            if x.get("date") is not None:
+                try:
+                    on = _dt.date.fromisoformat(str(x["date"])[:10])
+                except ValueError:
+                    skipped.append((head, "decision point {} — date {!r} is not YYYY-MM-DD"
+                                    .format(k, x["date"])))
+                    continue
+            start = _dt.datetime(on.year, on.month, on.day, *(int(p) for p in t.split(":")))
+            uid = "{}-dp-{}@trip-planner".format(
+                slug, hashlib.sha1("{}|{}".format(owner, what).encode("utf-8")).hexdigest()[:10])
+            desc = "{} local, wherever you are.".format(t)
+            for key, label in (("check", "CHECK"), ("if_no", "IF NO"), ("by", "BY"),
+                               ("src", "SRC")):
+                if x.get(key):
+                    desc += "\n{}: {}".format(label, x[key])
+            vevent(uid, start, start + _dt.timedelta(minutes=30), "Decide: " + what, desc,
+                   [("-PT12H", "Decide: " + what), ("-PT30M", "Now: " + what)])
     events.sort(key=lambda e: e[0])
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0",
              "PRODID:-//trip-planner//{}-gates//EN".format(slug), "CALSCALE:GREGORIAN",
@@ -1537,9 +1597,9 @@ def cmd_ics(args):
     lines.append("END:VCALENDAR")
     Path(args.out).write_text("\r\n".join(_ics_fold(l) for l in lines) + "\r\n",
                               encoding="utf-8")
-    for i, why in skipped:
-        warn("ics: checklist row {} skipped — {}".format(i, why))
-    print("ics: {} event(s) written to {} ({} row(s) skipped, SEQUENCE={})".format(
+    for where, why in skipped:
+        warn("ics: {} skipped — {}".format(where, why))
+    print("ics: {} event(s) written to {} ({} skipped, SEQUENCE={})".format(
         len(events), args.out, len(skipped), args.sequence))
     if not events:
         sys.exit(1)
@@ -1559,13 +1619,16 @@ def main():
                      "(a mis-geocoded stop — read geocache.json — or a train/bus/boat/"
                      "drive/fly that must say so) or missing coordinates; declared "
                      "fly/drive/boat/train/bus hops are fine.",
-            "ics": "The gates .ics from the checklist: one VEVENT per row whose "
-                   "deadline carries an ISO date or a T-N marker (T-14 = days[0].date "
-                   "- 14), floating local time at --hour (default 09:00), DTEND +1 h, "
-                   "two VALARMs (-P1D, -PT30M), stable UID per row, SEQUENCE from "
-                   "--sequence (bump on every plan change), 75-octet folding. Rows "
-                   "without a parseable deadline are listed as WARN. Exit 1 when no "
-                   "row produced an event.",
+            "ics": "The gates .ics: one VEVENT per checklist row whose deadline "
+                   "carries an ISO date or a T-N marker (T-14 = days[0].date - 14), "
+                   "floating local time at --hour (default 09:00), DTEND +1 h, two "
+                   "VALARMs (-P1D, -PT30M), stable UID per row; plus one VEVENT per "
+                   "days[].decision_points entry at its date (the day, or the evening "
+                   "before) + t, DTEND +30 min, VALARMs -PT12H / -PT30M, UID from the "
+                   "owning day's date + what. Sorted by start; SEQUENCE from --sequence "
+                   "(bump on every plan change), 75-octet folding. Rows and points "
+                   "without a usable date / time are listed as WARN. Exit 1 when "
+                   "nothing produced an event.",
             "geocode": "Resolve stops via Nominatim in place (+ geocache.json); "
                        "preset/hand-filled coordinates are kept. WARNs when a hit's "
                        "display_name lacks the query's head token (possible wrong "

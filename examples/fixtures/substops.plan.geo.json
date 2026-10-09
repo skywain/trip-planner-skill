@@ -1,10 +1,19 @@
 {
- "_fixture": "Regression fixture for the optional timeline-row fields sub_stops / tier / must / tour / confirmed / link / sub_map (defined in references/output-template.md §city-block). Invented two-day plan, not advice; renderable as is. Expected: scripts/plan_lint.py exits 0 (two WARNs: no gates .ics, no trip.kml). Every link and sub_map here was written by scripts/route_tools.py links --write on a scratch copy; re-running it must leave the file byte-identical. Day 1 has one stop (sub-stop links still written), day 2 has a hop row that must keep its own link. The bad/ folder holds one known-bad plan per lint rule, each with its expected result in _expect.",
+ "_fixture": "Regression fixture for the optional plan fields: timeline-row sub_stops / tier / must / tour / confirmed / link / sub_map and hours, a day's decision_points, stops[].driver, prefs.must_see, meta.review behind the review clause, brief.driving's labelled lines and hotels[].options[].checkout / bag_hold (all defined in references/output-template.md; the driving card in references/phase-1-brief.md §Driving card, the review in references/phase-6-assemble.md §Independent review). Invented two-day plan, not advice; renderable as is. Day 2 is a self-drive day — its hop row drives a rental and its arriving stop carries driver: self — which is why the plan carries brief.driving, the review clause in meta.self_check and the last decisions[] row, and meta.review with a driving lens. Expected: scripts/plan_lint.py exits 0 (two WARNs: no gates .ics, no trip.kml); --strict exits 18 (no .ics / .kml, no sun, missing cards, no ladder — not under test). Every link, sub_map and day_map here was written by scripts/route_tools.py links --write; re-running it must leave the file byte-identical. Day 1 has one stop (sub-stop links still written), day 2 has a hop row that must keep its own driving link. The bad/ folder holds one known-bad plan per default-mode lint rule, each with its expected result in _expect; strict/ holds the --strict-only cases beside the clean plan they vary.",
  "trip": "Fixture — sub-stops, 2 days",
  "lang": "en",
  "tz": "Asia/Tokyo",
  "prefs": {
-  "travel_style": "public"
+  "travel_style": "mixed",
+  "must_see": [
+   {
+    "name": "Fushimi Inari",
+    "tier": "overlook"
+   },
+   {
+    "name": "Bamboo grove"
+   }
+  ]
  },
  "meta": {
   "dates": "2026-11-10 → 2026-11-11",
@@ -12,11 +21,33 @@
   "route": "Kyoto",
   "budget_total": "n/a — fixture, no prices",
   "generated": "2026-10-02",
-  "self_check": "self-checked: 0 issues found and fixed"
+  "self_check": "self-checked: 0 issues found and fixed · independent review: 1 confirmed, 0 refuted",
+  "review": {
+   "mode": "reviewers",
+   "lenses": [
+    {
+     "lens": "driving",
+     "note": "day 2 rental: licence legality and the desks' policy re-read against the card's sources (https://example.org/licensing)"
+    },
+    {
+     "lens": "timing",
+     "note": "day 1 walk start against the first train; day 2 car-park opening against the 08:45 arrival"
+    },
+    {
+     "lens": "rules",
+     "note": "the operator's written confirmation of the gorge lookout re-read against its terms"
+    }
+   ],
+   "confirmed": [
+    "day 2 arrival moved to 08:45 — the car park opens at 08:30, not 08:00 (fixed)"
+   ],
+   "refuted": []
+  }
  },
  "decisions": [
   "Day 1 is a guided half-day walk; the operator confirmed the gorge lookout in writing before booking",
-  "self-checked: 0 issues found and fixed"
+  "Day 2 is self-drive: the traveller chose the rental over the train after both were priced",
+  "self-checked: 0 issues found and fixed · independent review: 1 confirmed, 0 refuted"
  ],
  "checklist": [
   {
@@ -30,6 +61,15 @@
    "date": "2026-11-10",
    "city": "Kyoto",
    "label": "Arashiyama, guided",
+   "decision_points": [
+    {
+     "t": "07:30",
+     "what": "go / no-go for the gorge lookout climb",
+     "check": "rain radar and the river level in the operator's morning message",
+     "if_no": "bamboo grove only; the lookout moves to day 2 after the shrine",
+     "by": "the operator moves the walk free until 08:00 · booking terms"
+    }
+   ],
    "timeline": [
     {
      "t": "09:00-12:30",
@@ -37,6 +77,7 @@
      "kind": "anchor",
      "tag": "pinned",
      "tour": true,
+     "hours": "open access",
      "note": "meeting point: the bridge's north end",
      "sub_stops": [
       {
@@ -78,20 +119,36 @@
   {
    "date": "2026-11-11",
    "city": "Kyoto",
-   "label": "Fushimi Inari, on our own",
+   "label": "Fushimi Inari, self-drive",
+   "decision_points": [
+    {
+     "t": "19:00",
+     "what": "rental or train for Fushimi Inari",
+     "check": "the morning forecast and the road-closure notice for the hill road",
+     "if_no": "train — the hop row and the car park drop, the rental is cancelled free",
+     "by": "free cancellation until 20:00 the evening before · rental terms",
+     "src": "https://example.org/road-notices",
+     "date": "2026-11-10"
+    }
+   ],
    "timeline": [
     {
-     "t": "08:30-08:45",
-     "what": "train Kyoto Station → Inari Station",
+     "t": "08:15-08:45",
+     "what": "drive (rental) Kyoto Station → Fushimi Inari car park",
      "kind": "hop",
      "verify": "est",
-     "link": "https://www.google.com/maps/dir/?api=1&origin=34.985800%2C135.758800&destination=34.967100%2C135.772700&travelmode=transit"
+     "link": "https://www.google.com/maps/dir/?api=1&origin=34.985800%2C135.758800&destination=34.967100%2C135.772700&travelmode=driving"
     },
     {
      "t": "08:45-11:30",
      "what": "Fushimi Inari Taisha",
      "kind": "anchor",
      "tag": "opener",
+     "hours": {
+      "text": "grounds open 24 h · car park 08:30-17:00",
+      "as_of": "2026-10-02",
+      "src": "https://example.org/fushimi-inari-hours"
+     },
      "sub_stops": [
       {
        "name": "Tower gate",
@@ -135,15 +192,32 @@
      "query": "Fushimi Inari Taisha, Kyoto, Japan",
      "lat": 34.9671,
      "lon": 135.7727,
-     "mode": "train"
+     "mode": "drive",
+     "driver": "self"
     }
    ],
    "day_map": "https://www.google.com/maps/dir/?api=1&origin=34.985800%2C135.758800&destination=34.967100%2C135.772700&travelmode=walking"
   }
  ],
+ "hotels": [
+  {
+   "base": "Kyoto 2 nights",
+   "area": "station north",
+   "why": "fixture — one line",
+   "options": [
+    {
+     "name": "Property 1",
+     "band": "n/a — fixture",
+     "checkout": "11:00 · property FAQ · as of 2026-10",
+     "bag_hold": "held at the desk until 18:00 · ask at check-in"
+    }
+   ]
+  }
+ ],
  "brief": {
   "visa": "fixture card — content is not under test",
   "safety": "fixture card — content is not under test",
-  "weather": "fixture card — content is not under test"
+  "weather": "fixture card — content is not under test",
+  "driving": "Example Prefecture · country-A licence — Legality: legal with IDP · desks: both station brands rent on it with the IDP · fixture source · as of 2026-10\nExample Island · country-A licence — legality: legal with official translation · rentals: the airport desk wants the translation on paper · fixture source · as of 2026-10\n示例县 · B国驾照 — 合法性:合法 · 租车柜台:两家都租 · 县交通部门页面 · 截至2026-10\n示例岛 · A国驾照 — 合法性: legal with IDP · 租车柜台:两家都租 · 岛交通局页面 · 截至2026-10\nInsurance: the rental waiver covers a named second driver only · fixture"
  }
 }

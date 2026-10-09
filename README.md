@@ -158,7 +158,8 @@ Say *"Japan, 12–15 days in October, mid budget, history and food."* The skill 
 - **A hotel shortlist by neighbourhood** (dated deep links, not invented nightly rates), a
   budget rollup in your home currency, a travel-insurance line calibrated to the
   destination, and a **booking checklist sorted by deadline** — with date-locked gates
-  (ticket-release instants, decision deadlines, on-trip re-checks) also delivered as a
+  (ticket-release instants, decision deadlines, on-trip re-checks, plus each day's go / no-go
+  decision points as their own events) also delivered as a
   **`.ics` calendar file**: dual alarms per gate, the full action list in the event
   body, and floating local times so an on-trip reminder rings wherever you are.
 - **Pictures, whatever your agent can do** — three rungs, checked silently before the
@@ -395,8 +396,8 @@ references/
   art-schema.md               pointer to themes/ART-SCHEMA.md
 scripts/
   flight_scan.py              Google Flights grid scanner (keyless, centre-out)
-  route_tools.py              geocode → distance check → map links (hops, sub-stops, walking chains) → KML → gates .ics → sun times
-  plan_lint.py                the plan's content gate before rendering: brief (incl. the driving card when a self-drive option exists), placeholders, self-check line, art, .ics + .kml, sub-stop fields; --strict adds a stop and a sun --write string per day (exit = FAIL count)
+  route_tools.py              geocode → distance check → map links (hops, sub-stops, walking chains) → KML → gates .ics (checklist gates + decision points) → sun times
+  plan_lint.py                the plan's content gate before rendering: brief (incl. the driving card's legality lines), placeholders, self-check line, art, .ics + .kml, sub-stop fields, hours / decision points / driver / must_see / meta.review / refundable where present; --strict adds a stop and a sun --write string per day, the review record on its trigger and fresh hours inside the --asof window (exit = FAIL count)
   render_plan.py              plan JSON → self-contained printable HTML
   build_site.py               examples + showcase → the GitHub Pages demo site (_site/)
 .github/workflows/
@@ -422,11 +423,11 @@ examples/
   README.md                   the seven trips: themes, routes, costs, every render command
   japan-2026/ …               one folder per trip: <trip>.geo.json + <trip>.art.json + <trip>-<theme>.html
   kyoto-sample.*              the plain page's sample plan, its HTML and its KML
-  fixtures/                   a small plan with sub-stops and a guided-tour row (lint + links + render test), and fourteen bad plans that must each FAIL once
+  fixtures/                   a small plan with sub-stops, a guided-tour row, a self-drive hop, hours, decision points and a review record (lint + links + render test), 44 bad plans that must each FAIL once, and strict/ (one clean --strict plan + eight that must each FAIL once)
 docs/
   showcase/                   README images (hero grid, per-theme cover / day / end frames, portal motion capture)
   verification.md             how the skill was hardened, and what the reviews caught
-  KNOWN-ISSUES.md             36 defects and hard limits (32 open / planned, 2 partly resolved, 2 resolved), each with a source pointer, plus the roadmap
+  KNOWN-ISSUES.md             36 defects and hard limits (31 open / planned, 3 partly resolved, 2 resolved), each with a source pointer, plus the roadmap
 ```
 
 Not in the repo: personal trip data (`trips/`), PNG originals, the US portal reference
@@ -463,8 +464,8 @@ Working, personal-use software under active development, and **harness-agnostic 
 purpose**: an Agent Skill, not a Claude Code plugin — verified end-to-end in Claude Code,
 expected to run in the ten other agents listed under [Compatibility](#compatibility), and
 untested there until someone files a report. Every defect and hard limit in the current
-tree is listed in [`docs/KNOWN-ISSUES.md`](docs/KNOWN-ISSUES.md) — 36 entries (32 open or
-planned, 2 partly resolved, 2 resolved) across export/renderers, planning scripts, assets and scope, each with
+tree is listed in [`docs/KNOWN-ISSUES.md`](docs/KNOWN-ISSUES.md) — 36 entries (31 open or
+planned, 3 partly resolved, 2 resolved) across export/renderers, planning scripts, assets and scope, each with
 a symptom, workaround and source pointer, plus a short roadmap (whole-page export sizing,
 journal `zh` cover fix, picker copy, a portrait portal chain, a post-trip photo album,
 affiliate rails for a hosted version).

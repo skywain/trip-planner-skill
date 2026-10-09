@@ -1,0 +1,28 @@
+{
+ "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: the driving card's legality line carries no verdict from the enum right after the label ('legal with an IDP' is not one) (WARNs go to stderr and do not count)",
+ "trip": "Fixture — bad: driving-card-no-verdict",
+ "lang": "en",
+ "meta": {
+  "budget_total": "n/a — fixture",
+  "self_check": "self-checked: 0 issues found and fixed"
+ },
+ "days": [
+  {
+   "date": "2026-11-10",
+   "timeline": [
+    {
+     "t": "09:00-11:00",
+     "what": "Example Canyon viewpoints",
+     "kind": "anchor"
+    }
+   ]
+  }
+ ],
+ "brief": {
+  "visa": "fixture card — content is not under test",
+  "driving": "Example State · country-A licence — legality: legal with an IDP · desks: all three brands rent on it · state licensing page · as of 2026-10\nInsurance: the rental waiver needs a licence valid where the car is driven · fixture"
+ },
+ "prefs": {
+  "travel_style": "self-drive"
+ }
+}

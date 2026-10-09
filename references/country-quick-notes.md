@@ -212,6 +212,17 @@ gate re-reads.
 - Closures: many museums close Mondays; when Monday is a national holiday they close
   Tuesday instead.
 - Cash still matters at small restaurants and shrines; 7-Eleven ATMs take foreign cards.
+- **Tax-free becomes a refund at departure from 2026-11-01 (JNTO, as of 2026-10 ⚡).**
+  For purchases from that date, tax-free shops charge the tax-inclusive price; within
+  90 days of purchase, take the passport and every item of the purchase, unused, to the
+  tax-free kiosk in the international departure lobby **before bag drop**; once customs
+  confirms the export, the shop refunds. Sealed bags are no longer required. Each
+  receipt is checked on its own: one item missing or used voids the refund for that
+  whole receipt, so ring up consumables apart from goods that leave Japan unopened.
+- **The Japanese-market version (as of 2026-10 ⚡)**: 「医薬部外品」 on the box
+  confirms the domestic version; its absence proves nothing — most cosmetics are
+  化粧品. Compare the full JAN barcode with the brand's Japanese site (why not the
+  prefix: data-sources.md §Shopping requests).
 - Luggage on move days: takkyubin (ヤマト等) hotel→hotel is usually **next-day** — book
   it the evening before and keep an overnight kit; station coin lockers, especially the
   large ones at Kyoto/Tokyo/Shinjuku, are gone by mid-morning in peak season.
@@ -390,6 +401,13 @@ gate re-reads.
   licence, so a crash can go uninsured (quote both clauses — phase-1-brief.md §Driving
   card). Car essential outside
   NYC/SF/Boston/Chicago/DC; city parking $40-70/night.
+- **Road rules that differ from home (as of 2026-10 ⚡).** Right turn on red after a
+  full stop unless a sign forbids it — except **New York City** (forbidden unless a
+  sign allows it) and **Washington DC** (banned citywide since 2025, enforced where
+  signed), and some city centres with local bans. Red-light and speed cameras are set
+  state by state and county by county. A camera ticket reaches the rental company,
+  which charges an admin fee and either bills the fine to the renter's card or
+  transfers the ticket to the renter where the jurisdiction allows it.
 - Parks: entrance fees are per **vehicle** (~$35); 3+ parks → an annual pass wins,
   but the $80 America the Beautiful is **residents-only since 2026** ⚡ —
   non-residents see the surcharge bullet below for the $250 pass that replaces it. Timed-entry policy
@@ -427,10 +445,23 @@ gate re-reads.
   ticketing) **only to the keeper**: a lapsed prepaid number is reissued to someone
   else. Some eSIMs activate only on a US network after landing — an activation error
   at home can be expected; read the carrier's activation page before relying on it.
+  What needs the traveller in the US (as of 2026-10 ⚡): the carrier asks for an
+  emergency (E911) street address before Wi-Fi Calling turns on — set it before flying
+  home; a US-region App Store account without a US card is created only from inside
+  the US; moving Google Play to the US needs presence there and a US payment method,
+  then locks for 90 days. Retail memberships and online marketplaces are opened from
+  home; a bank account is not a trip errand.
 - Hotels ⚡: resort strips (Waikiki, Las Vegas) carry resort/urban fees of
   $30-56/night plus ~19% taxes — sometimes inside the list price, sometimes at the
   property; quote the checkout all-in (data-sources.md §Hotels), and expect NYC
   boutiques to do the same with "urban" fees.
+- **Hawaii shopping (as of 2026-10 ⚡)**: the town duty-free store closed in January
+  2026; airport duty-free for international departures continues under a new operator
+  since 2026-04 — not a reason to shop in town. Luxury brands carry no island discount.
+  US-model iPhones from the 14 on have no SIM tray (handset line, phase-1-brief.md §The
+  fact lines). Local produce costs less at supermarkets than at the resort-strip
+  convenience chains. Anything else: data-sources.md §Shopping requests, against the
+  traveller's home market.
 - Lookalike names bite bookings: **JAC** (Jackson Hole, WY) vs **JAX**
   (Jacksonville, FL) is one airport-code letter; Columbus OH vs GA, Jackson
   WY/MS/TN; SFO searches on aggregators mix in OAK/SJC departures. Booking links
