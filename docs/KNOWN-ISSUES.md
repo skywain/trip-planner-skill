@@ -733,8 +733,9 @@ and a check; this entry now lists what each check still cannot see.**
   stops carry `driver: self` (a WARN fires when a day mixes tagged and untagged drive
   stops), the rental-leg matcher stays a heuristic, and the card check reads the
   line's parts, not the source behind them; under `--strict` a card whose every verdict
-  is not legal / unverified on a self-drive plan needs a `decisions[]` row with the
-  traveller's choice, which is again a presence test on a recorded line.
+  is not legal / unverified while a stop carries `driver: self` needs a `decisions[]`
+  row with the traveller's choice — a presence test on a recorded line, and one legal
+  line anywhere on a multi-jurisdiction card clears it.
 - **Workaround** — before trusting a plan with bookings that cannot be undone, read
   `meta.review`'s findings and lens notes (not just the counts) and the driving card's
   sources; on the road run `plan_lint.py plan.geo.json --strict --asof <today>` so the

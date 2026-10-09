@@ -57,7 +57,8 @@ Default checks (every plan, including the pre-2026-09 examples):
     for a card with no legality line (WARN: no insurance word on the card); after a zh
     label the English enum word is accepted too; a `tour` key on a day object FAILs
     (it belongs on the row); `prefs.languages` set with no tour: true row → WARN;
-    a bracketed "[to be added …]" / 待补充 counts as placeholder text; a T-N deadline
+    a bracketed "[to be added / filled …]" note, or 待补充 / 待填写 standing alone or in
+    brackets, counts as placeholder text; a T-N deadline
     whose ISO date is not departure − N → WARN (FAIL under --strict);
     `meta.review` is {mode, lenses: [{lens, note}], confirmed, refuted} — mode
     reviewers | single pass, three or more distinct lenses of safety | driving | timing
@@ -87,9 +88,10 @@ Default checks (every plan, including the pre-2026-09 examples):
     kind: anchor row carries `hours`, and an object's as_of on such a day is no older
     than that day − 14 and no later than the as-of date — the T-3 ladder row and every on-trip re-audit row re-run
     this with --asof <that row's date>
-  - a driving card whose every verdict is not legal / unverified while the plan is
-    self-drive (prefs.travel_style or a driver: self stop) needs a decisions[] row that
-    records the traveller's choice (a self-drive word in it) — else FAIL
+  - a driving card whose every verdict is not legal / unverified while a stop carries
+    driver: self needs a decisions[] row that records the traveller's choice (a
+    self-drive word in it that is not a negation) — else FAIL; one legal line anywhere
+    on the card clears it (a multi-jurisdiction blind spot, KNOWN-ISSUES PLN-13)
   - the independent review — its trigger set is stated here, once (phase-6-assemble.md
     §Independent review and SKILL.md point here): a self-drive option exists (the four
     conditions above), or any timeline row carries `tour: true`, or any checklist or
@@ -110,7 +112,7 @@ CANON = ["visa", "emergency", "safety", "health", "holidays", "weather", "money"
          "connectivity", "insurance", "baggage"]
 REQUIRED = ["visa", "emergency", "safety", "health", "holidays", "weather", "money",
             "connectivity", "insurance"]
-PLACEHOLDER = re.compile(r"\b(PLACEHOLDER|TODO|TBD)\b|\[to be (?:added|filled|confirmed|done)[^\]]*\]|待补充|待填写", re.I)
+PLACEHOLDER = re.compile(r"\b(PLACEHOLDER|TODO|TBD)\b|\[to be (?:added|filled)[^\]]*\]|^\s*(?:待补充|待填写)\s*$|[\[(（【]\s*(?:待补充|待填写)\s*[\])）】]", re.I)
 AWAITING = re.compile(r"\bawaiting\b", re.I)
 SELF_CHECK = re.compile(r"(self-checked:\s*\d+|自检[:\uff1a]?\s*发现并修复\s*\d+)")
 ADVISORY = re.compile(r"^\s*(advisory|警示|旅行警示)\s*[:\uff1a]", re.I)
@@ -951,13 +953,13 @@ def main():
         elif review_why and REVIEW.search(sc) and not REVIEW.search(str(decisions[-1])):
             fail("last decisions[] row repeats the self-check count but not its "
                  "independent-review clause — the page prints this row, not meta.self_check")
-        if verdicts and not any(v in LEGAL_OK for v in verdicts) \
-                and (prefs.get("travel_style") == "self-drive" or self_stops) \
-                and not any(SELF_DRIVE.search(str(x)) for x in (decisions if isinstance(decisions, list) else [])):
+        if verdicts and not any(v in LEGAL_OK for v in verdicts) and self_stops \
+                and not any(SELF_DRIVE.search(str(x)) and not NOT_SELF_DRIVE.search(str(x))
+                            for x in (decisions if isinstance(decisions, list) else [])):
             fail("brief.driving reads {!r} but the plan is self-drive ({}) and no decisions[] row "
                  "records the traveller's choice — build the days on the legal option, or record "
                  "the choice with its source (phase-1-brief.md §Driving card step 4)"
-                 .format(" / ".join(verdicts), "prefs.travel_style" if prefs.get("travel_style") == "self-drive" else ", ".join(self_stops)))
+                 .format(" / ".join(verdicts), ", ".join(self_stops)))
         if review_why and "review" not in meta:
             fail("meta.review missing although {} — the clause is the summary, meta.review is "
                  "the review behind it: {{mode, lenses: [{{lens, note}}], confirmed, refuted}} "

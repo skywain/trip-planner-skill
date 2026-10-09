@@ -1,5 +1,5 @@
 {
- "_expect": "python3 scripts/plan_lint.py examples/fixtures/strict/self-drive-not-legal-no-decision.geo.json --strict --ics examples/gates-sample.ics --kml examples/kyoto-sample.kml exits 1 — the one FAIL: the driving card reads not legal while prefs.travel_style is self-drive and no decisions[] row records the traveller's choice",
+ "_expect": "python3 scripts/plan_lint.py examples/fixtures/strict/self-drive-not-legal-no-decision.geo.json --strict --ics examples/gates-sample.ics --kml examples/kyoto-sample.kml exits 1 — the one FAIL: the driving card reads not legal while a stop carries driver: self and no decisions[] row records the traveller's choice",
  "trip": "Fixture — strict bad: self-drive-not-legal-no-decision",
  "lang": "en",
  "tz": "Asia/Tokyo",
@@ -101,6 +101,14 @@
      "query": "Togetsukyo Bridge, Kyoto, Japan",
      "lat": 35.0129,
      "lon": 135.6777
+    },
+    {
+     "name": "Fixture car park",
+     "query": "Example Prefecture car park",
+     "lat": 35.0,
+     "lon": 135.0,
+     "mode": "drive",
+     "driver": "self"
     }
    ]
   },
