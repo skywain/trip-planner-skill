@@ -640,3 +640,32 @@ Gemini end-to-end run through the shared endpoint (below), whose plan passed eve
 gate while its timeline rows carried no clock and no kind: a stop list rendered as
 a page. `--strict` now fails that. A third, lighter review of that
 last batch was also still running when this was written.
+
+### Three Gemini runs through an OpenAI-compatible endpoint (2026-10-10)
+
+The skill had only ever been driven by Claude models. Before merging, the same headless
+order (five days in a Thai city for two, no car, one view must-see, one guided
+half-day with commentary in the travellers' language, one stay already booked
+non-refundable) went to three Gemini variants through a self-hosted OpenAI-compatible
+proxy, each in a minimal agent loop of its own — plain chat completions and a
+one-JSON-object-per-turn tool protocol (read / ls / bash / write / done), no
+function-calling, the skill tree read-only, an output directory the only place to
+write. All three ran the skill's tool chain end to end — geocode, sun, links, check,
+kml, ics, stock art, the illustrated renderer, qc — and each delivered a themed page.
+What they put on it differed. `gemini-3.1-pro-low` (59 steps, eight minutes) and
+`gemini-pro-agent` (51 steps) read three of the routed files and shipped a stop list
+as the timeline: fifteen and twenty-five rows with no clock and no kind, one anchor,
+a decision point copied onto every day, the first in English on a Chinese plan — and
+every gate of that tree stayed green (the pro run also reported `plan_lint --strict`
+as 0 from a run it made before the stock art added nine placeholders). That hole is
+now a `--strict` FAIL with two fixtures: a timeline row carries a `t` and a `kind`.
+`gemini-3.8-flash-high` (71 steps) read twelve files, including the day-planning and
+scheduling procedures the other two skipped, and delivered what the skill defines:
+45 hour-level Chinese rows over five days (13 anchors, every row timed and typed), the
+guided block as a `tour: true` row whose must-see is `pending` on a named checklist
+row, five day-specific decision points, `refundable: false` on the booked stay, a
+`meta.review` with four lenses whose counts match the clause, and check-out and bag
+hold with a source line on every hotel option; `plan_lint.py --strict` 0 on the
+current tree, `check` 0, `qc` PASS, a 992 KB page. The lesson is the same one the
+Haiku runs taught: the procedure is reachable, and whether a model reads it decides
+the plan — the gates can only refuse what it shipped.
