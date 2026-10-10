@@ -115,7 +115,7 @@ Inputs: the user's request and anything said earlier. Outputs: the plan's top-le
 drives + the issuing country of each licence) when a self-drive option exists, and
 `prefs.languages` (the languages the party can follow spoken commentary in) when a
 guided option may be priced, and `prefs.must_see` (each locked must-see by name, a
-scenic one with its viewpoint tier) when a must-see is locked — the assumptions block for checkpoint (a) — and at most one intake message.
+scenic one with the picture expected, a short phrase in `view`) when a must-see is locked — the assumptions block for checkpoint (a) — and at most one intake message.
 
 Gates — these decide pass/fail and do not move into the reference file:
 - **One message, or none.** Ask only when a core fact (origin · destination · when /
@@ -239,7 +239,7 @@ Gates — these decide pass/fail and do not move into the reference file:
 
 **Read `references/phase-4-days.md` now, before any city is planned or any city agent
 is launched** — it is the whole procedure for this phase (the city-agent contract, the
-six per-city steps — step 2 names the picture: each view's tier and where to stand —
+six per-city steps — step 2 names the picture: each view as a phrase and where to stand —
 the route_tools order, the `sun` / `check` rules, and the exit criteria). This section is only the contract; do not plan a city from memory of the
 procedure, and build every city-agent prompt from that file's §City-agent contract
 (paste its lines, or pass the file's absolute path — the agent never sees SKILL.md).
@@ -248,9 +248,9 @@ Inputs: the chosen skeleton (Phase 2), the legs table (Phase 3), the Phase 1 bri
 facts and `prefs`. Outputs: per city, plan-JSON day objects insertable verbatim into
 `days[]` (output-template.md §city-block) — `stops` (a drive stop the traveller drives
 carries `driver: self`), hour-level `timeline` (a row may carry `sub_stops`: the named
-spots inside a big sight, each with its viewpoint tier — that section is their only
-definition — and an anchor carries `hours`: the venue's own hours with as-of + source,
-or "unverified" / "open access"), `decision_points` (the day's go / no-go calls),
+spots inside a big sight, each with the picture it gives and where to stand — that
+section is their only definition — and an anchor carries `hours`: the venue's own
+hours with as-of + source, or "unverified" / "open access"), `decision_points` (the day's go / no-go calls),
 `hop_links`, `sun`, `rain_alt`, `ribbon` — plus the city's `checklist_items`.
 
 Gates — these decide pass/fail and do not move into the reference file:
@@ -364,7 +364,7 @@ directory is not the skill directory and shell cwd does not persist between call
   passes, sell-outs, closure patterns, transit apps per country; destination absent →
   its "Destination not listed? — the checklist" section.
 - `references/output-template.md` — read before Phase 4 fan-out (city-block format —
-  the only definition of the row fields `sub_stops` / `tier` / `tour` / `confirmed` /
+  the only definition of the row fields `sub_stops` / `view` / `stand` / `tour` / `confirmed` /
   `hours`, the day's `decision_points` and a stop's `driver`) and Phase 6 (deliverable
   structure, `meta.review`, `prefs.must_see`, the `refundable` flag, hotel `checkout` /
   `bag_hold`, the pre-departure ladder, the on-trip re-audit rows and the before-leaving
@@ -399,7 +399,7 @@ directory is not the skill directory and shell cwd does not persist between call
   is the procedure.
 - `references/phase-4-days.md` — read at the start of Phase 4, before any city is
   planned: the city-agent contract (what every fan-out prompt must carry), the six
-  per-city steps (incl. naming each view's tier and sub-stops), the route_tools order (geocode → tz → sun → links → check → kml),
+  per-city steps (incl. naming each picture, where to stand for it, and sub-stops), the route_tools order (geocode → tz → sun → links → check → kml),
   the `sun` / `check` acceptance rules, and the exit criteria. SKILL.md Phase 4 is
   only the contract; this file is the procedure.
 - `references/phase-6-assemble.md` — read at the start of Phase 6, before the final
@@ -425,16 +425,16 @@ directory is not the skill directory and shell cwd does not persist between call
   order; no placeholder / "awaiting" text; no markdown headings in cells; the
   self-check line in `meta.self_check`; art placeholders filled and `prefs.pictures`
   matching how the art was made; the gates `.ics` and `trip.kml` beside the plan; on
-  rows that carry them, sub-stops with a name and a query or lat+lon, a tier on every
-  must-see, tour must-sees confirmed in writing or pending on a named checklist row;
+  rows that carry them, sub-stops with a name and a query or lat+lon, `view` and `stand` on
+  every `must` sub-stop, tour must-sees confirmed in writing or pending on a named checklist row;
   every brief card a string; a `brief.driving` card whenever a self-drive option exists
   (the four conditions: phase-1-brief.md §Driving card), read per legality line (verdict · desk part · as-of); where
   present, a row's `hours`, a day's `decision_points`, a stop's `driver`, hotel
   `checkout` / `bag_hold`, the `refundable` flag, `meta.review` (shape, and its counts
-  against every review clause) and every tiered `prefs.must_see` entry matched to a
-  must sub-stop; under `--strict` every day has at least one stop and a `sun` written
-  by `sun --write`, a trip of seven days or more has its on-trip re-audit rows, the
-  review clause and `meta.review` exist on the review trigger, and every anchor inside
+  against every review clause) and every `prefs.must_see` entry with a `view` matched to a
+  must sub-stop that has `view` and `stand` (presence, never phrase equality); under
+  `--strict` every day has at least one stop and a `sun` written by `sun --write`, a
+  trip of seven days or more has its on-trip re-audit rows, the review clause and `meta.review` exist on the review trigger, and every anchor inside
   the hours window (`--asof`, default `meta.generated`, through +14 days) carries fresh
   `hours`; the full list is its module docstring.
   `check` proves the geography and `qc.py` the HTML — this proves the words.

@@ -19,7 +19,7 @@
       {
        "name": "Rim overlook",
        "query": "Rim Overlook, Example Canyon",
-       "tier": "overlook",
+       "view": "overlook of the canyon from the rim",
        "stand": "the upper deck, facing down the canyon",
        "must": true,
        "confirmed": "yes, the guide said so"

@@ -172,10 +172,10 @@ python3 themes/render_picker.py examples/japan-2026/japan.geo.json \
 ## Fixtures — sub-stops and the lint's bad samples
 
 `fixtures/substops.plan.geo.json` is a small invented plan (not advice) whose rows carry
-`sub_stops`, a `tier` on each view, a guided-tour row with a confirmed must-see, an
+`sub_stops`, a `view` phrase on each picture, a guided-tour row with a confirmed must-see, an
 `hours` object and an `"open access"` literal, a self-drive hop (`driver: self`) with
-its driving card, two `decision_points`, a `meta.review` record, a tiered
-`prefs.must_see` entry and a hotel option's `checkout` / `bag_hold` — the fields defined
+its driving card, two `decision_points`, a `meta.review` record, a
+`prefs.must_see` entry with a `view` and a hotel option's `checkout` / `bag_hold` — the fields defined
 in [`../references/output-template.md`](../references/output-template.md). It is a test
 input, not a showcase:
 

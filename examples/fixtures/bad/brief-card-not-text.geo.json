@@ -20,7 +20,7 @@
               "query": "Rim Overlook, Example Canyon",
               "stand": "the upper deck, facing down the canyon",
               "must": true,
-              "tier": "overlook"
+              "view": "overlook of the canyon from the rim"
             }
           ]
         }

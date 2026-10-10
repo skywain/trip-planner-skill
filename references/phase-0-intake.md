@@ -68,10 +68,10 @@ send a message just for these. Unanswered → default, and the assumptions block
 - party size & mobility (default: 2 adults, no kids) · budget style or number (mid) ·
   interests ranked (food/history/nature/anime/hiking/shopping/photography/nightlife) ·
   pace 2/3/4 anchors per day (3) · ±day flexibility (±2) · passport nationality
-  (visa! infer from origin, state it) · locked must-sees, each scenic one with the view
-  expected: eye-level · overlook · from-below (default: the view behind its best-known
-  picture, stated as an assumption — a boardwalk past a feature and the overlook above
-  it are different must-sees).
+  (visa! infer from origin, state it) · locked must-sees, each scenic one with the
+  picture expected, in a short phrase — any angle, side, level, composition or detail
+  (default: its best-known picture, stated as an assumption — a boardwalk past a feature
+  and the overlook above it are different must-sees).
 
 ## The intake message
 
@@ -119,15 +119,17 @@ keys, each only when something reads it:
 - `languages` — whenever a guided option may be priced: the language codes the party
   can follow spoken commentary in (read in phase-3-legs.md §Driving legs and
   data-sources.md §Group tours).
-- `must_see` — whenever a must-see is locked: a list of `{"name", "tier"}`, one per
+- `must_see` — whenever a must-see is locked: a list of `{"name", "view"}`, one per
   must-see. `name` is the sight's own name as a timeline row's `what` will carry it, in
-  `plan.lang`, without view words; `tier` (eye-level · overlook · from-below) only on a
-  scenic one, told or assumed and stated. Phase 4 carries each tiered entry as a
-  `must: true` sub-stop of that tier (output-template.md §city-block), and `plan_lint.py`
-  FAILs a tiered entry no such sub-stop matches. A must-see the traveller drops, or a
-  tier lowered after a written refusal, edits or removes the entry's `tier` and
-  writes the `decisions[]` row — the gate never relitigates a recorded decision.
-`notes` names the locked must-sees and marks which tiers were assumed — the list itself
+  `plan.lang`, without view words; `view` (free text in `plan.lang`: the picture the
+  traveller described, or the one assumed) only on a scenic one, told or assumed and stated. Phase 4 carries
+  each entry with a `view` as a `must: true` sub-stop with `view` and `stand`
+  (output-template.md §city-block), and `plan_lint.py` FAILs an entry with a `view` that no such sub-stop
+  matches (it checks presence; it never compares the phrases). A must-see
+  the traveller drops, or a picture the operator refused in writing, edits or removes
+  the entry's `view` and writes the `decisions[]` row — the gate never relitigates a
+  recorded decision.
+`notes` names the locked must-sees and marks which views were assumed — the list itself
 is `must_see`.
 
 ## Picture-capability check
@@ -176,8 +178,8 @@ receiving an English page is a shipped bug, not a style choice (self-check row, 
       self-drive option exists and `languages` when a guided option may be priced;
       `lang` is set from the user's language.
 - [ ] No car-first segment was defaulted to self-drive or to a tour; every locked
-      must-see is a `prefs.must_see` entry, each scenic one with its `tier`, told or
-      assumed and stated (an assumed tier marked in `notes`).
+      must-see is a `prefs.must_see` entry, each scenic one with its `view`, told or
+      assumed and stated (an assumed view marked in `notes`).
 - [ ] The picture-capability check ran silently before styles were mentioned;
       `prefs.pictures` ∈ native | key | stock, and in stock mode the user was told once
       with the exact notice; no key was asked for or handled in chat; a non-illustrated /

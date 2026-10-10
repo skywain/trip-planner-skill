@@ -8,7 +8,7 @@
   "must_see": [
    {
     "name": "Fushimi Inari",
-    "tier": "overlook"
+    "view": "the whole city from above"
    },
    {
     "name": "Bamboo grove"
@@ -83,14 +83,14 @@
       {
        "name": "Bamboo grove path",
        "query": "Arashiyama Bamboo Grove, Kyoto, Japan",
-       "tier": "eye-level",
+       "view": "eye level along the bamboo path",
        "stand": "the path's upper bend, facing uphill",
        "link": "https://www.google.com/maps/search/?api=1&query=Arashiyama+Bamboo+Grove%2C+Kyoto%2C+Japan"
       },
       {
        "name": "Gorge lookout",
        "query": "Kameyama Park, Arashiyama, Kyoto, Japan",
-       "tier": "overlook",
+       "view": "overlook of the gorge from the deck",
        "stand": "the hilltop deck, facing up the river gorge",
        "walk_min": 15,
        "must": true,
@@ -155,14 +155,14 @@
        "query": "Romon Gate, Fushimi Inari Taisha, Kyoto, Japan",
        "lat": 34.9671,
        "lon": 135.7727,
-       "tier": "from-below",
+       "view": "the classic front view of the gate",
        "stand": "the forecourt steps, facing the gate",
        "link": "https://www.google.com/maps/search/?api=1&query=34.967100%2C135.772700"
       },
       {
        "name": "Thousand gates",
        "query": "Senbon Torii, Fushimi Inari Taisha, Kyoto, Japan",
-       "tier": "eye-level",
+       "view": "the twin tunnels of gates, side by side",
        "stand": "where the twin tunnels split, facing uphill",
        "walk_min": 5,
        "link": "https://www.google.com/maps/search/?api=1&query=Senbon+Torii%2C+Fushimi+Inari+Taisha%2C+Kyoto%2C+Japan"
@@ -170,7 +170,7 @@
       {
        "name": "Crossroads lookout",
        "query": "Yotsutsuji Intersection, Fushimi Inari, Kyoto, Japan",
-       "tier": "overlook",
+       "view": "overlook of the city from the crossroads terrace",
        "stand": "the terrace rail, facing west over the city",
        "walk_min": 35,
        "must": true,

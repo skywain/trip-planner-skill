@@ -77,7 +77,6 @@ STRINGS = {
         "sec.appendix": "附录", "sec.route": "路线", "sec.map": "沿途地图",
         "sun.dawn": "天亮", "walk": "步行", "rain_alt": "雨备", "late_cut": "晚点剪法",
         "hop.map": "逐跳导航", "verify.est": "est", "price.check": "查价", "link": "链接",
-        "tier.eye-level": "平视", "tier.overlook": "俯瞰", "tier.from-below": "仰视",
         "sub.must": "必看", "sub.stand": "站位: ", "sub.walk": "步行 {} 分钟",
         "sub.written": "已书面确认", "sub.pending": "待确认", "sub.map": "地图",
         "sub.chain": "按顺序步行导航",
@@ -105,7 +104,6 @@ STRINGS = {
         "sec.appendix": "Appendix", "sec.route": "Route", "sec.map": "Maps along the way",
         "sun.dawn": "dawn", "walk": "walk", "rain_alt": "rain plan", "late_cut": "if running late",
         "hop.map": "hop-by-hop maps", "verify.est": "est", "price.check": "check price", "link": "link",
-        "tier.eye-level": "eye level", "tier.overlook": "overlook", "tier.from-below": "from below",
         "sub.must": "must-see", "sub.stand": "Stand here: ", "sub.walk": "{} min walk",
         "sub.written": "confirmed in writing", "sub.pending": "to confirm", "sub.map": "map",
         "sub.chain": "walk this chain",
@@ -309,7 +307,7 @@ _SUB_OL = ("margin:.35em 0 .2em;padding:0 0 0 1.4em;list-style:decimal outside;"
            "font-size:.9em;line-height:1.55;text-align:left;white-space:normal")
 _SUB_LI = "margin:.25em 0 0;padding:0;font-size:inherit;line-height:inherit"
 _SUB_CHIP = ("display:inline-block;margin-left:.45em;padding:0 .5em;border:1px solid;"
-             "border-radius:99px;font-size:.82em;line-height:1.45;white-space:nowrap")
+             "border-radius:.8em;font-size:.82em;line-height:1.45")   # a phrase: it may wrap
 _SUB_SMALL = "font-size:.9em"
 
 
@@ -323,7 +321,7 @@ def sub_stops_html(row, pin=None, text=esc, brief=False):
     or "" when the row has none. A malformed value (not a list, no objects
     in it) also gives "" — plan_lint reports it; this never raises.
 
-    Per sub-stop: ★ when must is true, the name, the localised tier chip,
+    Per sub-stop: ★ when must is true, the name, the view phrase as a chip,
     the theme's map pin when `link` is set, "N min walk" from walk_min, on a
     tour:true row the confirmation state read from the prefix of `confirmed`
     ("in writing" → confirmed in writing; "pending", anything else, or no
@@ -333,7 +331,7 @@ def sub_stops_html(row, pin=None, text=esc, brief=False):
     pin(href, label) returns the theme's own per-row map-link markup
     (rownav / gonav / go …); both arguments arrive escaped. None → a plain
     text link. text(s) escapes reader strings — pass the theme's et() to
-    keep its glyphs. brief=True keeps only ★ / name / tier: no links, no
+    keep its glyphs. brief=True keeps only ★ / name / view: no links, no
     walk / confirmation / stand (a non-interactive card with a text budget)."""
     subs = row.get("sub_stops") if isinstance(row, dict) else None
     if not isinstance(subs, list):
@@ -353,9 +351,9 @@ def sub_stops_html(row, pin=None, text=esc, brief=False):
         mark = esc(T("sub.must"))
         out = f'<span role="img" aria-label="{mark}" title="{mark}">★</span> ' if must else ""
         out += f'<span style="font-weight:700">{text(name)}</span>'   # not <b>: themes style "li b"
-        tier = s.get("tier")
-        if tier:
-            out += f'<span style="{_SUB_CHIP}">{text(T("tier." + str(tier), str(tier)))}</span>'
+        view = s.get("view")
+        if isinstance(view, str) and view.strip():
+            out += f'<span style="{_SUB_CHIP}">{text(view)}</span>'
         if brief:
             items.append(f'<li style="{_SUB_LI}">{out}</li>')
             continue

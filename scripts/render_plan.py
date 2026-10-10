@@ -73,7 +73,6 @@ STRINGS = {
         "sec.days": "每日行程 / Day by day",
         "map.here": "↗地图", "map.day": "整日路线图", "hop.map": "逐跳导航: ",
         "hop.n": "第{}跳",
-        "tier.eye-level": "平视", "tier.overlook": "俯瞰", "tier.from-below": "仰视",
         "sub.must": "必看", "sub.stand": "站位: ", "sub.walk": "步行 {} 分钟",
         "sub.written": "已书面确认", "sub.pending": "待确认", "sub.chain": "按顺序步行导航",
         "hours.label": "开放时间", "hours.unverified": "开放时间未核实", "hours.open": "无固定开放时间",
@@ -106,7 +105,6 @@ STRINGS = {
         "sec.days": "Day by day",
         "map.here": "↗map", "map.day": "full-day route map", "hop.map": "hop-by-hop maps: ",
         "hop.n": "hop {}",
-        "tier.eye-level": "eye level", "tier.overlook": "overlook", "tier.from-below": "from below",
         "sub.must": "must-see", "sub.stand": "Stand here: ", "sub.walk": "{} min walk",
         "sub.written": "confirmed in writing", "sub.pending": "to confirm",
         "sub.chain": "walk this chain",
@@ -258,11 +256,9 @@ def sub_stops(row):
         must = s.get("must") is True
         li = ('<span role="img" aria-label="{0}" title="{0}">★</span> '.format(
             e(T("sub.must"))) if must else "") + "<b>{}</b>".format(e(name))
-        tier = s.get("tier")
-        if tier:
-            key = "tier." + str(tier)
-            li += '<span class="pill">{}</span>'.format(
-                e(T(key) if key in STRINGS["zh"] else tier))
+        view = s.get("view")
+        if isinstance(view, str) and view.strip():   # a phrase, so it may wrap
+            li += '<span class="pill" style="white-space:normal">{}</span>'.format(e(view))
         if _http(s.get("link")):
             li += " " + link(s["link"], T("map.here"))
         meta = []
