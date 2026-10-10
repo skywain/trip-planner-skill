@@ -618,8 +618,10 @@ tree's answers spend their 120-word cap on the round-2 content that now sits bes
 the old rule and leave an older point out — an abbreviation, not a wrong behaviour,
 and the attributors found every one of those passages byte-identical. Moving the
 round-2 sentences behind the old ones did not change it. It is recorded here as the
-measured cost of adding content next to old rules (a 200-word run is the test of
-whether it is the cap or the text; its result is appended below when it lands). Two
+measured cost of adding content next to old rules — and the 200-word run then settled
+which it was: with the cap relaxed, the four stronger combinations scored AB 46.5 →
+47.5 / 48 and MIXED 24 → 23 / 24 on the two trees, the new content 46.5 / 48, with no
+fabrication on the old tree, so the 120-word drop was the abbreviation, not the text. Two
 text gaps were real and are fixed: §After the trip never
 said that the traveller submits the claim themselves, and §Shopping requests pointed the
 "next border" question at a `brief.safety` line that did not carry the home country's
