@@ -281,15 +281,15 @@ after dark, luggage-friendly), in the lodging type and band from `prefs.lodging`
 (default mid-range hotel; a ryokan/onsen or B&B habit changes which properties you list). Browser spot-check Google Hotels/Booking with the real
 dates for a price band, then list 2-3 concrete properties: name, area, band per night,
 deep link with dates baked in (recipes in data-sources.md). Advise: book refundable
-now, re-shop 2-3 weeks out. Read each option's check-out time and bag hold off the
-property's own policies page into `checkout` / `bag_hold` on its `hotels[].options[]`
-entry — never the 12:00 in your head; a small lodging's late check-out stops where the
-desk says, and the leaving day is timed from that line (scheduling.md §Day types,
-Moving day). A stay booked non-refundable gets `"refundable": false` on its checklist
-booking row (output-template.md §Booking-artifact conventions), never on the hotels
-option. For a small property note the front-desk hours — a start
+now, re-shop 2-3 weeks out. For a small property note the front-desk hours — a start
 before the desk opens moves checkout to the night before (scheduling.md §Day types,
-Early start at a small lodging).
+Early start at a small lodging). Read each option's check-out time and bag hold off
+the property's own policies page into `checkout` / `bag_hold` on its
+`hotels[].options[]` entry — never the 12:00 in your head; a small lodging's late
+check-out stops where the desk says, and the leaving day is timed from that line
+(scheduling.md §Day types, Moving day). A stay booked non-refundable gets
+`"refundable": false` on its checklist booking row (output-template.md
+§Booking-artifact conventions), never on the hotels option.
 
 ## Phase 6 — Assemble, self-check, deliver
 

@@ -629,10 +629,9 @@ them toward this one.
   checklist row (and on a non-refundable fare's `legs[]` row — phase-3-legs.md §Record
   for every leg) is what triggers the independent review; the lint reads the flag,
   never the row's text.
-- **Date-locked rows also ship as a calendar file** — always (the ladder rows are
-  gates): every checklist gate (a ticket-release instant, a decision deadline, an
-  on-trip re-check) and each day's `decision_points` go into the `.ics` beside the
-  page (worked example: `examples/gates-sample.ics`)
+- **Date-locked rows also ship as a calendar file**: when the checklist carries
+  gates (a ticket-release instant, a decision deadline, an on-trip re-check),
+  the `.ics` goes beside the page (worked example: `examples/gates-sample.ics`)
   — one VEVENT per gate, with the FULL action
   list in DESCRIPTION (the user acts from the alarm, not from memory: what to
   do, the fallback if it fails, the linked bookings by number), two VALARMs
@@ -653,8 +652,9 @@ them toward this one.
   Calendar honours floating times and VALARMs) — so open each DESCRIPTION
   with the intended hour ("09:00 local, wherever you are"), and after a plan
   change instruct
-  "delete the old events, then import the new file". A decision point's event follows
-  the same rules with its own alarms (`-PT12H` — the evening-before read — and
+  "delete the old events, then import the new file". The file is never optional — the
+  ladder rows are gates on every plan — and each day's `decision_points` go into it
+  too: a decision point's event follows the same rules with its own alarms (`-PT12H` — the evening-before read — and
   `-PT30M`), a 30-minute slot and a UID from the owning day and `what`, so re-timing it
   to the evening before keeps the UID (§city-block, `decision_points`).
 

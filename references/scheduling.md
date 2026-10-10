@@ -261,10 +261,8 @@ packed ×0.8, kids or mobility flags ×1.3.
   the *first* stop, set `sun_stop` (rule 7).
 - **Departure day** — zero sightseeing unless the flight leaves after 18:00. Work
   backwards from the airport-arrival deadline (3 h international) through the real
-  city→airport transfer time, time the first row from the checkout as on a moving
-  day, and put the luggage solution in writing again. Where the country refunds tax at
-  departure, that kiosk step sits before bag drop and its queue is added to the
-  airport deadline (country-quick-notes.md for the country).
+  city→airport transfer time (the first row timed from the checkout as on a moving
+  day), and put the luggage solution in writing again.
   **Return-flight time unknown** (`flight_scan.py` lists outbound legs only, and the
   deep link may not show it statically): pick a plausible departure `T` from the
   carrier's published schedule (or the outbound's mirror), and write the day
@@ -274,7 +272,9 @@ packed ×0.8, kids or mobility flags ×1.3.
   `"dep": "⚠️ ~12:30 — verify"` (not a bare time), the timeline blocks say "T−4h30"
   next to the clock, and `unverified` gets one line: "return flight departure time
   not confirmed — day 10 timeline is built on T ≈ 12:30". A confidently wrong 08:00
-  taxi is worse than an honest formula.
+  taxi is worse than an honest formula. Where the country refunds tax at departure,
+  that kiosk step sits before bag drop and its queue is added to the airport deadline
+  (country-quick-notes.md for the country).
 - **Tour day (跟团日)** — the pickup is `[pinned]` with a 10-15 min margin counted
   from the **start** of the pickup window (14:00-14:30 → in the lobby by 13:45-13:50);
   the exact time and point the operator sends later replace the window. The
