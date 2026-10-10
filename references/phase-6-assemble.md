@@ -73,11 +73,11 @@ portal renders neither — on portal the chat summary carries it):
   date-line nights flagged (output-template §Booking-artifact conventions)
 - **Language**: `plan.lang` matches the language the user asked in, and every
   reader-facing string in the plan (day titles, notes, tips, checklist rows,
-  decisions, hotel blurbs) is in that language — an English fragment copied verbatim
+  decisions, hotel blurbs, sub-stop `view` / `stand`) is in that language — an English fragment copied verbatim
   from a source into a zh plan gets translated, not shipped. Proper nouns stay in
   their native form with a gloss where useful (浅草寺 Sensō-ji); machine fields are
   exempt (`stops[].query` and `sub_stops[].query` stay geocoder-friendly;
-  `kind`/`tag`/`verify`/`tier`/`driver` keep their English enum words, and so do the
+  `kind`/`tag`/`verify`/`driver` keep their English enum words, and so do the
   `confirmed` prefixes `in writing` / `pending`, the `hours` literals `unverified` /
   `open access` and `meta.review`'s `mode` / `lens` — the lint and the renderers read
   them; the renderers print the `hours` literals in `plan.lang`)

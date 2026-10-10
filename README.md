@@ -144,7 +144,7 @@ Say *"Japan, 12–15 days in October, mid budget, history and food."* The skill 
 - **An hour-level plan for every day** — opening hours and closure days checked with tools,
   dwell times and buffers from a written scheduling method, a holiday and festival collision
   scan, and a tappable map link on every hop — and inside a large sight, the named spots
-  worth stopping at, which view each one gives (eye level, overlook, from below), where to
+  worth stopping at, the picture each one gives (a side, the front, an overlook, a detail), where to
   stand, and a walking chain between them.
 - **A designed page as the deliverable, not a wall of text** — the plan is rendered
   through one of the **eight themed renderers** above (default **illustrated**) into one

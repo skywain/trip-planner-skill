@@ -119,13 +119,13 @@ schedule dictates the surrounding legs, not the other way around.
   X:00" — obey it); overnight-bag-only luggage rules on 2-day tours; the product's
   stated guide or audio language against `prefs.languages` (none matches → say so on
   the row: it has no commentary advantage; price one that does beside it when one
-  exists — an own-language operator, an audio guide); whether the advertised sight is a stop or a drive-by, and for a view, **which viewpoint tier**
+  exists — an own-language operator, an audio guide); whether the advertised sight is a stop or a drive-by, and for a view, **which of the must-see pictures**
   the stop reaches (phase-4-days.md step 2). Group tours stop only where the whole
   group can go: a viewpoint that needs a 30-60 min walk (an overlook trail, a long stair) is
   usually skipped even when the product says it visits the sight ("boardwalks",
   "see X"), and a multi-day tour rarely backtracks for a skipped stop — the next day
-  runs another part of the route. When a must-see is an overlook-tier picture: ask in
-  writing before booking, pick a product that names the overlook, or price that day
+  runs another part of the route. When a must-see picture is taken from such a spot: ask in
+  writing before booking, pick a product that names that spot, or price that day
   self-driven once `brief.driving` covers that jurisdiction and driver
   (phase-1-brief.md §Driving card; phase-3-legs.md §Driving legs).
 - **Audit the finalists like a hostile lawyer** (1-2 shortlisted products, not the

@@ -36,7 +36,7 @@ to crash on it, and `legs` still prints every cell blank).
            "decision_points": [{"t", "what", "check", "if_no", "by", "src", "date"}],
            "timeline": [{"t", "what", "kind", "price", "note", "tag", "verify",
                          "link", "map", "tour", "sub_map", "hours",
-                         "sub_stops": [{"name", "query", "lat", "lon", "tier", "stand",
+                         "sub_stops": [{"name", "query", "lat", "lon", "view", "stand",
                                         "walk_min", "must", "confirmed", "link"}]}],
            "hop_links": ["url", ...],           // written by links --write when parked
            "stops": [{"name", "query", "lat", "lon", "mode", "driver"}]}],
@@ -227,7 +227,7 @@ byte-identical) — it is a note the planning agent leaves for itself.
   "budget": "mid",
   "drivers": [{"who": "traveller 1", "licence_country": "CN"}],
   "languages": ["zh"],
-  "must_see": [{"name": "Fushimi Inari", "tier": "overlook"}, {"name": "Kinkaku-ji"}],
+  "must_see": [{"name": "Fushimi Inari", "view": "the whole city from above"}, {"name": "Kinkaku-ji"}],
   "notes": "assumed origin PVG (zh request, no origin given); car-first park segment undecided"
 }
 ```
@@ -261,17 +261,17 @@ byte-identical) — it is a note the planning agent leaves for itself.
   self-drive (phase-3-legs.md §Driving legs) and where any guided product is
   shortlisted (data-sources.md §Group tours).
 - `must_see` — present when the traveller named must-sees: a list of `{"name",
-  "tier"?}` — `name` as the anchor row's `what` will carry it, in `plan.lang`, without
-  view words; `tier` ∈ eye-level · overlook · from-below (the sub-stop enum, one
-  concept one name) only when the draw is a view. Phase 4 reads it (phase-4-days.md
-  §City-agent contract), and `plan_lint.py` fails a tiered entry that no `must: true`
-  sub-stop of that tier is named for (by its name / query, or by its row's `what`). A
-  must-see the traveller drops, or a tier lowered after a written refusal, edits or
-  removes the entry's `tier` and records the `decisions[]` row — the gate never
-  relitigates a recorded decision.
+  "view"?}` — `name` as the anchor row's `what` will carry it, in `plan.lang`, without
+  view words; `view` (free text, in `plan.lang`, like the sub-stop's `view` —
+  §city-block) only when the draw is a picture: the one the traveller described, or
+  the one assumed. Phase 4 reads it (phase-4-days.md §City-agent contract), and
+  `plan_lint.py` fails an entry with a `view` when no `must: true` sub-stop with a
+  `view` and a `stand` is named for it (by its name / query, or by its row's `what`);
+  it never compares the two phrases. Exit path for a dropped must-see or a refused picture: phase-0-intake.md §`prefs`
+  and the assumptions block.
 - `notes` — every value that was **inferred rather than told**, in one string, so the
   assumptions block at checkpoint (a) can be written straight from this object; it
-  names the locked must-sees and marks which tiers were assumed — the list itself is
+  names the locked must-sees and marks which views were assumed — the list itself is
   `must_see`.
 
 Only what is known or defensibly assumed goes in; a key the user never touched and the
@@ -359,12 +359,12 @@ follow `scripts/render_plan.py`'s schema field-for-field.
      "note": "开门即到避人流", "tag": "opener",
      "sub_stops": [
       {"name": "本堂舞台", "query": "Kiyomizu-dera Main Hall, Kyoto, Japan",
-       "tier": "overlook", "stand": "舞台栏杆边,朝西看市区"},
+       "view": "从舞台俯瞰京都市区", "stand": "舞台栏杆边,朝西看市区"},
       {"name": "奥之院", "query": "Okunoin, Kiyomizu-dera, Kyoto, Japan",
-       "tier": "eye-level", "stand": "奥之院平台南端,回望整座舞台", "walk_min": 3,
+       "view": "经典构图:悬空的整座舞台", "stand": "奥之院平台南端,回望整座舞台", "walk_min": 3,
        "must": true},
       {"name": "音羽瀑布", "query": "Otowa Waterfall, Kiyomizu-dera, Kyoto, Japan",
-       "tier": "from-below", "stand": "瀑布前石阶下,仰看舞台木架", "walk_min": 4}]},
+       "view": "仰视木舞台", "stand": "瀑布前石阶下,仰看舞台木架", "walk_min": 4}]},
     {"t": "11:00-11:25", "what": "步行 清水寺→二年坂 1.2 km · 25分", "kind": "hop",
      "verify": "est"},
     {"t": "12:00-13:15", "what": "午餐 · 锦市场周边", "kind": "meal",
@@ -421,34 +421,38 @@ Field discipline (the merge breaks without it):
   train, ferry) are the two places this slips — see navigation.md step 1.
 - `sub_stops` (optional, on the `kind: anchor` row of one big sight) — the photo
   positions inside it, in walking order. Each needs `name` plus `query` or
-  `lat`/`lon`; `name` and `stand` (where to stand, which way to face) follow
-  `plan.lang`, `query` stays geocoder-friendly like `stops[].query`. `tier` =
-  eye-level | overlook | from-below (English enum, like `tag`); `walk_min` = minutes
+  `lat`/`lon`; `name`, `view` and `stand` follow `plan.lang`, `query` stays
+  geocoder-friendly like `stops[].query`. `view` = a short free-text phrase naming the
+  picture: the angle, side, level, composition or detail ("overlook of the whole city
+  from the terrace", "the gate from the left colonnade", "the classic front view",
+  "detail: the fox statues"; zh "从观景台俯瞰全城", "仰视木舞台") — no enum, renderers
+  print it as given; `stand` = where to stand, which way to face; `walk_min` = minutes
   on foot from the previous sub-stop (the first: from the drop-off); `must: true`
-  marks the picture the traveller came for and requires a `tier`. Read
+  marks the picture the traveller came for and requires a `view` and a `stand`. Read
   phase-4-days.md §Per city step 2 before choosing them. **Never copy a sub-stop into
   `stops`**: stops drive geocode, check, the hop pairing, the KML route, `sun` and
   the day art, and one extra stop shifts every hop link after it.
 - `tour: true` on a row (never on the day object — the lint fails a day-level `tour`)
-  = a guided tour owns that block, so the operator decides which
-  tier it reaches (data-sources.md §Group tours). Every `must: true` sub-stop on such
+  = a guided tour owns that block, so the operator decides which of these pictures it
+  reaches (data-sources.md §Group tours). Every `must: true` sub-stop on such
   a row carries `confirmed`: `in writing · <date> · <channel>`, or `pending · <the item
   text of the checklist row that asks it>` — that row is the one drafted message to
   the operator (data-sources.md §Group tours), and `plan_lint.py` fails a `pending`
   that names no checklist row — the two prefixes stay English, like the enums. A written
   refusal is not `in writing`: switch product, day or mode (data-sources.md §Group
   tours), or, when the traveller keeps the tour, drop `must` from that sub-stop, edit or
-  remove that entry's `tier` in `prefs.must_see` with its `decisions[]` row
-  (phase-0-intake.md §`prefs` and the assumptions block), and say in the row which tier
-  the tour reaches.
+  remove that entry's `view` in `prefs.must_see` with its `decisions[]` row
+  (phase-0-intake.md §`prefs` and the assumptions block), and say in the row which of
+  these pictures the tour reaches.
 - `link` on each sub-stop and the row's `sub_map` (one walking-mode chain through the
   sub-stops in order, when there are two or more) are script-owned: `links --write`
   builds them from `lat,lon`, else from `query` (no geocoding), and rewrites them on
   every run — never by hand (Korea aside, navigation.md step 0). Each of these keys
   is absent when unused, never `null`; `plan_lint.py` fails a wrong shape of
-  `sub_stops`, `tour`, `must` or `tier` wherever they are present and a missing or
-  unprefixed `confirmed` on a `tour: true` row's must-sees, and warns on a `link` or
-  `sub_map` that is not an http(s) URL.
+  `sub_stops`, `tour`, `must` or `view` wherever they are present, a `must: true`
+  sub-stop without its `view` and `stand`, and a missing or unprefixed `confirmed` on
+  a `tour: true` row's must-sees, and warns on a `link` or `sub_map` that is not an
+  http(s) URL.
 - `hours` (optional, on a timeline row — normally an anchor): what the venue's own
   page says for this date, `{"text": "09:00-17:00 · last entry 16:30", "as_of":
   "YYYY-MM-DD", "src": "https://…"}`, or the literal `"unverified"`, or `"open access"`

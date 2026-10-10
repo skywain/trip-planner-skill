@@ -1,6 +1,6 @@
 {
- "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: must:true with no tier (WARNs go to stderr and do not count)",
- "trip": "Fixture — bad: must-no-tier",
+ "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: must:true with no stand, though it has a view (WARNs go to stderr and do not count)",
+ "trip": "Fixture — bad: must-no-stand",
  "lang": "en",
  "meta": {
   "budget_total": "n/a — fixture",
@@ -18,7 +18,7 @@
       {
        "name": "Rim overlook",
        "query": "Rim Overlook, Example Canyon",
-       "stand": "the upper deck, facing down the canyon",
+       "view": "overlook of the canyon from the rim",
        "must": true
       }
      ]

@@ -1,5 +1,5 @@
 {
- "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: a tiered prefs.must_see entry that no must: true sub-stop of that tier is named for (WARNs go to stderr and do not count)",
+ "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: a prefs.must_see entry with a view that no must: true sub-stop with a view and a stand is named for (WARNs go to stderr and do not count)",
  "trip": "Fixture — bad: must-see-unmatched",
  "lang": "en",
  "meta": {
@@ -18,7 +18,7 @@
       {
        "name": "Rim overlook",
        "query": "Rim Overlook, Example Canyon",
-       "tier": "overlook",
+       "view": "overlook of the canyon from the rim",
        "stand": "the upper deck, facing down the canyon"
       }
      ]
@@ -33,7 +33,7 @@
   "must_see": [
    {
     "name": "Example Canyon",
-    "tier": "overlook"
+    "view": "the canyon from above"
    }
   ]
  }

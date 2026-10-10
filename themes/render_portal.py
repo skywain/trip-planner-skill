@@ -39,7 +39,7 @@ ART CONTRACT (schema: ART-SCHEMA.md → themes.portal):
   (day overlay card: plan day.label ≤64 chars and up to four anchor rows' `what`
    ≤52 chars are shown; longer copy is cut at a word/punctuation boundary with an
    ellipsis — soft_cut() — so keep labels short or accept the "…". A row's
-   sub_stops list under it as ★ / name / tier only, without map links; its
+   sub_stops list under it as ★ / name / view only, without map links; its
    hours print without the as-of date, and the day's decision_points as
    "Decide by {t} · what" above the rows)
                              (no world count in the outro defaults — nothing

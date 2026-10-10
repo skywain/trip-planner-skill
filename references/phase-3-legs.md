@@ -68,8 +68,8 @@ empty section (they used to crash — the Vietnam test lost both themed pages to
   all-in for the same days: **self-drive** (base + taxes + collision waiver /
   liability + fuel + one-way fee + park entry) against **the tour** (fare + nights the
   traveller books themselves + surcharges + tips — data-sources.md §Group tours, Price
-  anatomy). Each side shows what it actually reaches (viewpoint tiers,
-  phase-4-days.md step 2); the tour side shows its commentary language against
+  anatomy). Each side shows which must-see pictures it actually reaches
+  (phase-4-days.md step 2); the tour side shows its commentary language against
   `prefs.languages` (data-sources.md §Group tours, Structure quirks to check); the
   self-drive side shows the two licence columns from
   `brief.driving` (phase-1-brief.md §Driving card), legality first. The own-language

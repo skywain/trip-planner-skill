@@ -35,10 +35,10 @@ Default checks (every plan, including the pre-2026-09 examples):
   - a row's `kind`, when present, is anchor | hop | meal | free
   - timeline rows, only where the keys are present (output-template.md §city-block):
     `sub_stops` a non-empty list of objects, each with a `name` and a `query` or
-    `lat`+`lon`; `tier` ∈ eye-level | overlook | from-below; `must` / `tour` are true
-    or absent; `must: true` carries a `tier`; on a `tour: true` row every `must`
-    sub-stop's `confirmed` starts "in writing" or "pending". WARN: `pending`, a
-    sub-stop `link` or a row `sub_map` that is not an http(s) URL (run
+    `lat`+`lon`; `view` (free text: the picture) a non-empty string; `must` / `tour`
+    are true or absent; `must: true` carries a `view` and a `stand`; on a `tour: true`
+    row every `must` sub-stop's `confirmed` starts "in writing" or "pending". WARN:
+    `pending`, a sub-stop `link` or a row `sub_map` that is not an http(s) URL (run
     `route_tools.py links --write`), `sub_stops` on a row that is not `kind: anchor`
   - a self-drive option (prefs.travel_style self-drive | mixed, prefs.drivers, a
     legs[] row whose type names a rental / self-drive, or a stop with driver: self)
@@ -67,10 +67,11 @@ Default checks (every plan, including the pre-2026-09 examples):
     agrees with it (WARN: no http(s) source in any note or finding); `stops[].driver`
     ∈ self | hired | taxi | tour (WARN: driver on a stop that is not mode: drive; a
     day mixing driver: self with drive stops that carry none); every `prefs.must_see`
-    entry with a `tier` matches a must: true sub-stop of that tier by name / query, or
-    by its row's `what`; `hotels[].options[].checkout` / `bag_hold` are non-empty
-    strings (WARN: checkout without HH:MM); `refundable` on a checklist or legs row
-    is true or false
+    entry has a `name` and, when present, a non-empty `view`; one with a `view` needs
+    a must: true sub-stop carrying a view and a stand, matched by name / query or by
+    its row's `what` (the phrases are never compared); `hotels[].options[].checkout` /
+    `bag_hold` are non-empty strings (WARN: checkout without HH:MM); `refundable` on a
+    checklist or legs row is true or false
 --strict adds the 2026-09 contract (new plans; the older examples predate it):
   - brief keys in canonical order and the required cards present (visa · emergency ·
     safety · health · holidays · weather · money · connectivity · insurance)
@@ -124,7 +125,6 @@ ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 PENDING_SEP = re.compile(r"^\s*[·・•\-—–:\uff1a]\s*")
 REVIEW = re.compile(r"independent review\s*[:\uff1a]|独立复核\s*[:\uff1a]", re.I)
 SUN_OK = re.compile(r"^(?:天亮|dawn) \d{2}:\d{2} · ☀ \d{2}:\d{2} / 🌇 \d{2}:\d{2} · \S+ · sunrise-sunset\.org$")
-TIERS = ("eye-level", "overlook", "from-below")
 HOURS_LITERALS = ("unverified", "open access")
 KINDS = ("anchor", "hop", "meal", "free")
 HOURS_WINDOW_DAYS = 14         # --strict: as-of .. as-of + 14 carry hours; there as_of >= day - 14
@@ -240,6 +240,11 @@ def has_latlon(s):
 def is_http(v):
     """The test the renderers apply before they emit an href."""
     return isinstance(v, str) and v.startswith(("https://", "http://"))
+
+
+def is_text(v):
+    """A non-empty string — the shape of a free-text field such as `view` or `stand`."""
+    return isinstance(v, str) and bool(v.strip())
 
 
 def iso_date(v):
@@ -485,10 +490,11 @@ def check_review(review, clauses, drive):
              "against primary sources names one")
 
 
-def must_see_hit(name, tier, days):
-    """True when some must: true sub-stop of `tier` is named for the must-see: its
-    name or query contains or is contained in the entry's name, or its row's `what`
-    does (case-folded; the shorter side ≥ 4 chars, 2 when the name carries CJK)."""
+def must_see_hit(name, days):
+    """True when some must: true sub-stop with a view and a stand is named for the
+    must-see: its name or query contains or is contained in the entry's name, or its
+    row's `what` does (case-folded; the shorter side ≥ 4 chars, 2 when the name
+    carries CJK). The two view phrases are free text and never compared."""
     n = name.casefold().strip()
     need = 2 if _CJK.search(n) else 4
 
@@ -501,7 +507,8 @@ def must_see_hit(name, tier, days):
             if not isinstance(row, dict) or not isinstance(row.get("sub_stops"), list):
                 continue
             subs = [s for s in row["sub_stops"] if isinstance(s, dict)
-                    and s.get("must") is True and s.get("tier") == tier]
+                    and s.get("must") is True and is_text(s.get("view"))
+                    and is_text(s.get("stand"))]
             if subs and (near(row.get("what"))
                          or any(near(s.get("name")) or near(s.get("query")) for s in subs)):
                 return True
@@ -552,14 +559,18 @@ def check_rows(i, d, items=()):
             if not (isinstance(q, str) and q.strip()) and not has_latlon(s):
                 fail("{}: no query and no lat+lon — its map link is built from one of "
                      "them".format(sw))
-            if "tier" in s and s["tier"] not in TIERS:
-                fail("{}: tier {!r} is not one of {}".format(sw, s["tier"], " | ".join(TIERS)))
+            missing = [k for k in ("view", "stand") if not is_text(s.get(k))]
+            if "view" in s and not is_text(s["view"]) and s.get("must") is not True:
+                fail("{}: view is {!r} — a short phrase naming the picture, or leave the key "
+                     "out (absent, never null)".format(sw, s["view"]))
             if "must" in s and s["must"] is not True:
                 fail("{}: must is {!r} — true, or leave the key out (absent, never null)"
                      .format(sw, s["must"]))
-            if s.get("must") is True and "tier" not in s:
-                fail("{}: must:true with no tier — say which level the picture is taken "
-                     "from ({})".format(sw, " | ".join(TIERS)))
+            if s.get("must") is True and missing:
+                said = [("no " + k) if k not in s else "{} {!r}".format(k, s[k]) for k in missing]
+                fail("{}: must:true with {} — name the picture the traveller came for "
+                     "(view) and where to stand for it (stand), both non-empty text"
+                     .format(sw, " and ".join(said)))
             conf = s.get("confirmed")
             c = conf.strip().lower() if isinstance(conf, str) else ""
             if row.get("tour") is True and s.get("must") is True \
@@ -683,28 +694,29 @@ def main():
              "true; only there are its must-sees' confirmations checked (output-template.md "
              "§city-block)")
 
-    # ---- prefs.must_see: every tiered entry has its must sub-stop ----
+    # ---- prefs.must_see: every entry with a view has its must sub-stop ----
     if "must_see" in prefs:
         ms = prefs["must_see"]
         if not isinstance(ms, list) or not ms or not all(
                 isinstance(e, dict) and isinstance(e.get("name"), str) and e["name"].strip()
                 for e in ms):
-            fail("prefs.must_see must be a non-empty list of {{\"name\", \"tier\"?}} objects, got "
+            fail("prefs.must_see must be a non-empty list of {{\"name\", \"view\"?}} objects, got "
                  "{} — absent, never null (output-template.md §Intake prefs)".format(repr(ms)[:40]))
         else:
             for e in ms:
-                if "tier" not in e:
+                if "view" not in e:
                     continue
-                if e["tier"] not in TIERS:
-                    fail("prefs.must_see {!r}: tier {!r} is not one of {}"
-                         .format(e["name"], e["tier"], " | ".join(TIERS)))
-                elif not must_see_hit(e["name"], e["tier"], days if isinstance(days, list) else []):
-                    fail("prefs.must_see {!r} ({}): no must: true sub-stop of that tier is named "
-                         "for it — write the sub-stop (name, query, stand) on the anchor row whose "
-                         "`what` carries the must-see's name (phase-4-days.md §Per city step 2); a "
-                         "tier the traveller dropped, or lowered after a written refusal: edit or "
-                         "remove this entry's tier and write the decisions[] row (phase-0-intake.md "
-                         "§prefs)".format(e["name"], e["tier"]))
+                if not is_text(e["view"]):
+                    fail("prefs.must_see {!r}: view is {!r} — the picture the traveller described "
+                         "(or the one assumed, said so in prefs.notes), or leave the key out "
+                         "(absent, never null)".format(e["name"], e["view"]))
+                elif not must_see_hit(e["name"], days if isinstance(days, list) else []):
+                    fail("prefs.must_see {!r} ({!r}): no must: true sub-stop with a view and a stand "
+                         "is named for it — write or complete the must sub-stop (name, query, view, stand) on the "
+                         "anchor row whose `what` carries the must-see's name (phase-4-days.md §Per "
+                         "city step 2); a must-see the traveller dropped, or a picture the operator "
+                         "refused in writing: edit or remove this entry's view and write the "
+                         "decisions[] row (phase-0-intake.md §prefs)".format(e["name"], e["view"][:40]))
 
     # ---- hotels: check-out and bag hold sit on the booked option ----
     hotels = plan.get("hotels") if isinstance(plan.get("hotels"), list) else []

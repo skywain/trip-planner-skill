@@ -21,15 +21,15 @@ objects insertable verbatim into `days[]` (output-template.md §city-block) with
 When ≥3 cities and subagents are available, fan out one agent per city (otherwise do
 the cities sequentially with the same structure); each prompt must include: the
 dates, the user's interests + pace, the locked must-sees — `prefs.must_see` pasted
-verbatim (each entry's `tier` is the view expected of it) — **search budget ≤8**, an
+verbatim (each entry's `view` is the picture expected of it) — **search budget ≤8**, an
 explicit **"do not run geocoding"** line (parallel agents would break Nominatim's
 1 req/s policy — the assembler geocodes once, centrally), **the plan language**
 (`plan.lang`, with one line telling the agent every reader-facing string in its
-returned block — `label`, `what`, `note`, `why`, hotel blurbs, checklist rows,
-`unverified[]` — is written in that language; its sources will mostly be
+returned block — `label`, `what`, `note`, `view`, `stand`, `why`, hotel blurbs,
+checklist rows, `unverified[]` — is written in that language; its sources will mostly be
 English, and English notes pasted verbatim are how a zh plan goes half-English.
 Machine fields keep the schema's form regardless: `stops[].query` stays
-geocoder-friendly romanized/destination-local, and `kind`/`tag`/`verify`/`tier`/`driver`, the
+geocoder-friendly romanized/destination-local, and `kind`/`tag`/`verify`/`driver`, the
 `hours` literals `unverified` / `open access` and `meta.review`'s `mode` / `lens` keep
 the English enum words the lint and renderers read),
 the paid-extras line (**an optional paid extra — spa, upgrade, lounge, excursion — is
@@ -82,20 +82,20 @@ Per city:
    cancellable until that gate, and pay no premium for a lottery ticket. Which days
    carry `decision_points`, and how one differs from a checklist gate: scheduling.md
    rule 10 and §Day types (shape: output-template.md §city-block).
-   **Name the picture, not just the place.** For every must-see whose draw is a view,
-   record its viewpoint tier (`eye-level` — boardwalk, street, shore; `overlook` —
-   from above; `from-below`), where to stand for the picture the user means, and the
-   walk to it (`walk_min`).
-   The same landmark at two tiers is two sights (live case: a group tour stopped only
-   at the eye-level boardwalk; the picture the traveller came for is taken from an
-   overlook trail above it). A view named in the locked must-sees sets the tier and is
-   the `must: true` sub-stop; the anchor row's `what` carries the must-see's name as it
+   **Name the picture, not just the place.** For every must-see whose draw is a picture,
+   write the picture the user means as a short phrase in `view` (any angle, side,
+   level, composition or detail — output-template.md §city-block), where to stand for
+   it in `stand`, and the walk to it (`walk_min`).
+   The same sight seen two ways is two sub-stops (live case: a group tour stopped only
+   at the boardwalk; the picture the traveller came for is taken from an overlook trail
+   above it). A picture named in the locked must-sees is the `must: true` sub-stop, with
+   `view` and `stand`; the anchor row's `what` carries the must-see's name as it
    stands in `prefs.must_see` (the lint matches the two). A plan that reaches only
-   another tier says so in the row; the entry's `tier` changes only through the
+   another picture says so in the row; the entry's `view` changes only through the
    traveller's recorded decision (phase-0-intake.md §`prefs` and the assumptions
-   block). On a guided day, check which tier the tour actually reaches before the day
-   is fixed (data-sources.md §Group tours). Write them as `sub_stops` on the anchor row,
-   and mark a block a guided tour owns `tour: true` so its must-sees carry `confirmed`
+   block). On a guided day, check which of these pictures the tour actually reaches
+   before the day is fixed (data-sources.md §Group tours). Write them as `sub_stops` on
+   the anchor row, and mark a block a guided tour owns `tour: true` so its must-sees carry `confirmed`
    (shape: output-template.md §city-block).
 3. Transit: day-pass vs pay-per-ride arithmetic — sum the day's expected rides and
    recommend the pass only when it actually wins. Note the local IC card / transit app.
@@ -167,10 +167,10 @@ Per city:
       writing the fresh `hours`; every anchor
       carries `hours` (`{text, as_of, src}`, `"unverified"` or `"open access"`) and its
       `what` / `note` no longer print them.
-- [ ] Every must-see whose draw is a view has `sub_stops` on its anchor row with tier,
-      where to stand and `walk_min`; on a guided day, the row carries `tour: true` and
-      the tier the tour reaches was checked; every `prefs.must_see` name stands in its
-      anchor row's `what` as written there.
+- [ ] Every must-see whose draw is a picture has `sub_stops` on its anchor row with the
+      picture in `view`, where to stand in `stand` and `walk_min`; on a guided day, the
+      row carries `tour: true` and which of these pictures the tour reaches was checked;
+      every `prefs.must_see` name stands in its anchor row's `what` as written there.
 - [ ] Every decision scheduling.md rule 10 or §Day types places on the day or the
       evening before is in that day's `decision_points`; a gate days ahead stays a
       checklist row only.

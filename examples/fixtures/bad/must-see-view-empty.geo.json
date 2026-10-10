@@ -1,6 +1,6 @@
 {
- "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: tier outside eye-level | overlook | from-below (WARNs go to stderr and do not count)",
- "trip": "Fixture — bad: tier-enum",
+ "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: a prefs.must_see view that is an empty string (WARNs go to stderr and do not count)",
+ "trip": "Fixture — bad: must-see-view-empty",
  "lang": "en",
  "meta": {
   "budget_total": "n/a — fixture",
@@ -18,7 +18,7 @@
       {
        "name": "Rim overlook",
        "query": "Rim Overlook, Example Canyon",
-       "tier": "aerial",
+       "view": "overlook of the canyon from the rim",
        "stand": "the upper deck, facing down the canyon",
        "must": true
       }
@@ -29,5 +29,13 @@
  ],
  "brief": {
   "visa": "fixture card — content is not under test"
+ },
+ "prefs": {
+  "must_see": [
+   {
+    "name": "Example Canyon",
+    "view": ""
+   }
+  ]
  }
 }

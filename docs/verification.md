@@ -669,3 +669,17 @@ hold with a source line on every hotel option; `plan_lint.py --strict` 0 on the
 current tree, `check` 0, `qc` PASS, a 992 KB page. The lesson is the same one the
 Haiku runs taught: the procedure is reachable, and whether a model reads it decides
 the plan — the gates can only refuse what it shipped.
+
+### The owner's correction: `view`, not `tier` (2026-10-10)
+
+**The owner's correction (2026-10-10).** One incident — a guided tour that reached the
+boardwalk but not the overlook — had been turned into a three-value ladder (`tier`:
+eye-level · overlook · from-below) that a must-see sub-stop had to carry and its
+`prefs.must_see` entry had to equal. A must-see picture can be any angle: a side, the
+front, an overlook, from below, a classic composition, a detail. So `tier` became
+`view`, a short phrase in the plan's language naming the picture; a `must: true`
+sub-stop needs `view` and `stand`; and the must-see gate checks that a matching row
+carries such a sub-stop — presence, never phrase equality, since free text cannot be
+compared. No example plan or shipped page changed; must-no-tier became must-no-view, and the two enum
+fixtures were replaced by must-no-stand and must-see-view-empty; the renderers print
+the phrase as given, in a chip that wraps.

@@ -1,5 +1,5 @@
 {
- "_fixture": "Regression fixture for the optional plan fields: timeline-row sub_stops / tier / must / tour / confirmed / link / sub_map and hours, a day's decision_points, stops[].driver, prefs.must_see, meta.review behind the review clause, brief.driving's labelled lines and hotels[].options[].checkout / bag_hold (all defined in references/output-template.md; the driving card in references/phase-1-brief.md §Driving card, the review in references/phase-6-assemble.md §Independent review). Invented two-day plan, not advice; renderable as is. Day 2 is a self-drive day — its hop row drives a rental and its arriving stop carries driver: self — which is why the plan carries brief.driving, the review clause in meta.self_check and the last decisions[] row, and meta.review with a driving lens. Expected: scripts/plan_lint.py exits 0 (two WARNs: no gates .ics, no trip.kml); --strict exits 18 (no .ics / .kml, no sun, missing cards, no ladder — not under test). Every link, sub_map and day_map here was written by scripts/route_tools.py links --write; re-running it must leave the file byte-identical. Day 1 has one stop (sub-stop links still written), day 2 has a hop row that must keep its own driving link. The bad/ folder holds one known-bad plan per default-mode lint rule, each with its expected result in _expect; strict/ holds the --strict-only cases beside the clean plan they vary.",
+ "_fixture": "Regression fixture for the optional plan fields: timeline-row sub_stops / view / must / tour / confirmed / link / sub_map and hours, a day's decision_points, stops[].driver, prefs.must_see, meta.review behind the review clause, brief.driving's labelled lines and hotels[].options[].checkout / bag_hold (all defined in references/output-template.md; the driving card in references/phase-1-brief.md §Driving card, the review in references/phase-6-assemble.md §Independent review). Invented two-day plan, not advice; renderable as is. Day 2 is a self-drive day — its hop row drives a rental and its arriving stop carries driver: self — which is why the plan carries brief.driving, the review clause in meta.self_check and the last decisions[] row, and meta.review with a driving lens. Expected: scripts/plan_lint.py exits 0 (two WARNs: no gates .ics, no trip.kml); --strict exits 18 (no .ics / .kml, no sun, missing cards, no ladder — not under test). Every link, sub_map and day_map here was written by scripts/route_tools.py links --write; re-running it must leave the file byte-identical. Day 1 has one stop (sub-stop links still written), day 2 has a hop row that must keep its own driving link. The bad/ folder holds one known-bad plan per default-mode lint rule, each with its expected result in _expect; strict/ holds the --strict-only cases beside the clean plan they vary.",
  "trip": "Fixture — sub-stops, 2 days",
  "lang": "en",
  "tz": "Asia/Tokyo",
@@ -8,7 +8,7 @@
   "must_see": [
    {
     "name": "Fushimi Inari",
-    "tier": "overlook"
+    "view": "the whole city from above"
    },
    {
     "name": "Bamboo grove"
@@ -83,14 +83,14 @@
       {
        "name": "Bamboo grove path",
        "query": "Arashiyama Bamboo Grove, Kyoto, Japan",
-       "tier": "eye-level",
+       "view": "eye level along the bamboo path",
        "stand": "the path's upper bend, facing uphill",
        "link": "https://www.google.com/maps/search/?api=1&query=Arashiyama+Bamboo+Grove%2C+Kyoto%2C+Japan"
       },
       {
        "name": "Gorge lookout",
        "query": "Kameyama Park, Arashiyama, Kyoto, Japan",
-       "tier": "overlook",
+       "view": "overlook of the gorge from the deck",
        "stand": "the hilltop deck, facing up the river gorge",
        "walk_min": 15,
        "must": true,
@@ -155,14 +155,14 @@
        "query": "Romon Gate, Fushimi Inari Taisha, Kyoto, Japan",
        "lat": 34.9671,
        "lon": 135.7727,
-       "tier": "from-below",
+       "view": "the classic front view of the gate",
        "stand": "the forecourt steps, facing the gate",
        "link": "https://www.google.com/maps/search/?api=1&query=34.967100%2C135.772700"
       },
       {
        "name": "Thousand gates",
        "query": "Senbon Torii, Fushimi Inari Taisha, Kyoto, Japan",
-       "tier": "eye-level",
+       "view": "the twin tunnels of gates, side by side",
        "stand": "where the twin tunnels split, facing uphill",
        "walk_min": 5,
        "link": "https://www.google.com/maps/search/?api=1&query=Senbon+Torii%2C+Fushimi+Inari+Taisha%2C+Kyoto%2C+Japan"
@@ -170,7 +170,7 @@
       {
        "name": "Crossroads lookout",
        "query": "Yotsutsuji Intersection, Fushimi Inari, Kyoto, Japan",
-       "tier": "overlook",
+       "view": "overlook of the city from the crossroads terrace",
        "stand": "the terrace rail, facing west over the city",
        "walk_min": 35,
        "must": true,
