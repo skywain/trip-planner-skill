@@ -1,0 +1,32 @@
+{
+ "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: brief.driving missing while a stop carries driver: self (WARNs go to stderr and do not count)",
+ "trip": "Fixture — bad: driver-self-no-driving-card",
+ "lang": "en",
+ "meta": {
+  "budget_total": "n/a — fixture",
+  "self_check": "self-checked: 0 issues found and fixed"
+ },
+ "days": [
+  {
+   "date": "2026-11-10",
+   "timeline": [
+    {
+     "t": "09:00-11:00",
+     "what": "Example Canyon viewpoints",
+     "kind": "anchor"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Example Canyon",
+     "query": "Example Canyon Visitor Center",
+     "mode": "drive",
+     "driver": "self"
+    }
+   ]
+  }
+ ],
+ "brief": {
+  "visa": "fixture card — content is not under test"
+ }
+}

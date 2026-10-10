@@ -32,6 +32,8 @@ Source pointers are `file → function / section`.
 | [PLN-10](#pln-10) | Gates | The exit-code gates are advisory: renderers run with `plan_lint --strict` and `check` red | open |
 | [PLN-11](#pln-11) | Lint | `plan_lint --strict` is blind to language and source stamps (the KML and empty-stop / `sun` checks landed 2026-09-05) | partly resolved |
 | [PLN-12](#pln-12) | Text | Cover-title fallback (mode wording, the `fast-flights` install line and origin → hub landed 2026-09-05) | partly resolved |
+| [PLN-13](#pln-13) | Lint | The 2026-10 field-lesson rules got fields and checks in round 2 (`hours`, `decision_points`, the driving card's legality lines, `meta.review`, `driver: self`, tiered `prefs.must_see`) — the entry lists what each check still cannot see | partly resolved |
+| [PLN-14](#pln-14) | Links | The sub-stop link forms are untested on a phone; Apple chains need coordinates, 高德 has no chain, and the portal theme shows sub-stops in brief form | open |
 | [AST-1](#ast-1) | Asset pipeline | `towebp.py` silently makes a white square from an un-cut PNG | open |
 | [AST-2](#ast-2) | Asset library | Test-asset reclaim is a manual merge | open |
 | [AST-3](#ast-3) | Generation | Without native generation in the agent, image/video generation needs an OpenRouter key | open |
@@ -693,6 +695,76 @@ pictures without any error.**
   `check`'s own hint now separate the two cases; the install line carries the PEP 668
   variants; phase-0-intake.md lists the common hubs); the cover-title fallback stays open.
 
+### PLN-13
+**Two rules from the 2026-10 field lessons had no gate that could fail, and three gates
+checked presence, not substance. Round 2 (2026-10) gave each a machine-readable field
+and a check; this entry now lists what each check still cannot see.**
+
+- **Symptom (before round 2)** — (1) a must-see whose draw is a view could ship with no
+  `sub_stops` at all; (2) an anchor's opening hours verified for the day itself, and
+  day-of decision points (smoke, visibility, a free-cancellation deadline), lived in
+  prose and `note`; (3) the independent-review clause was required only where a
+  self-drive option existed, and the gate read the clause, not the review — a Haiku
+  end-to-end run saw the FAIL and typed "single pass" fourteen seconds later; (4) the
+  on-trip check wanted one `D+N` row with a date, not the one-every-3-4-days spacing or
+  what the note covers; (5) a self-drive day that existed only as stops with
+  `mode: drive` was not seen, the `legs[]` test is a keyword heuristic, and a
+  one-sentence driving card with no rentability line and no as-of passed.
+- **What round 2 added** — a row's `hours` (`{text, as_of, src}` or the literal
+  `"unverified"` / `"open access"`), a day's `decision_points` (with `route_tools.py
+  ics` as their generator), `stops[].driver` (`self` joins the self-drive trigger),
+  `prefs.must_see` whose tiered entries are matched against the `must` sub-stops,
+  `meta.review` (mode, three or more distinct lenses with notes, the findings; its
+  counts checked against every review clause present), the driving card read per
+  legality line (verdict right after the label · desk part · as-of), and the explicit
+  `"refundable": false` flag as a review trigger. Every check fires only where its key
+  is present, so the eight example plans keep their lint results; `examples/fixtures/`
+  carries one bad plan per check (`bad/`, default mode) and a `strict/` folder for the
+  the `--strict`-only checks — one clean plan and eight bad (output-template.md
+  defines each field).
+- **What the gates still cannot see** — (1) a tiered `prefs.must_see` entry must match
+  a `must` sub-stop of that tier, but a plan that writes no tiered entry is unchecked;
+  (2) the `hours` requirement bites only inside the `--asof` window (`meta.generated`
+  by default, through +14 days — a plan built weeks ahead is checked only when it is
+  re-linted with `--asof` at T-3 or on the road, output-template.md §Pre-departure
+  re-check ladder), and `decision_points` have no trigger at all; (3) `meta.review` is a
+  record — specific and consistent with the clause — not proof that the review ran,
+  and a timed check-in without a tour block is still not machine-readable; (4) on-trip
+  row spacing and coverage are unchecked; (5) a self-drive day is seen only when its
+  stops carry `driver: self` (a WARN fires when a day mixes tagged and untagged drive
+  stops), the rental-leg matcher stays a heuristic, and the card check reads the
+  line's parts, not the source behind them; under `--strict` a card whose every verdict
+  is not legal / unverified while a stop carries `driver: self` needs a `decisions[]`
+  row naming self-drive / 自驾 — a keyword test on a recorded line, judged per
+  jurisdiction (the text before the line's first " · ").
+- **Workaround** — before trusting a plan with bookings that cannot be undone, read
+  `meta.review`'s findings and lens notes (not just the counts) and the driving card's
+  sources; on the road run `plan_lint.py plan.geo.json --strict --asof <today>` so the
+  hours window reaches the days ahead.
+- **Source** — `scripts/plan_lint.py` → `check_hours`, `check_decision_points`,
+  `check_stops`, `check_driving_card`, `check_review`, `must_see_hit` and the `--asof`
+  window block in `main()`; `scripts/route_tools.py` → `cmd_ics`. **Status:** partly
+  resolved (2026-10, round 2) — still open: a trigger for `decision_points`, the
+  on-trip spacing, a view must-see the planner never tiered (Roadmap 8).
+
+### PLN-14
+**The sub-stop map links are written but not yet tapped on a phone.**
+
+- **Symptom** — `route_tools.py links --write` writes a place link per sub-stop and a
+  `sub_map` walking chain per row (2026-10). The URL forms follow the providers'
+  published URL schemes, but none has been opened on a real device, so they carry no ✓.
+  Provider limits: an Apple chain needs coordinates on every sub-stop and 高德 has no
+  keyless multi-point link, so in those cases `sub_map` is left unwritten with a WARN;
+  a 高德 pin needs `lat`/`lon`. A chain holds at most 11 points.
+- **Also** — the portal theme prints sub-stops in brief form (★, name, tier) with no
+  links: its day cards are non-interactive overlays. The "save this day" PNG export
+  has not been exercised on a day that carries sub-stops.
+- **Workaround** — give sub-stops `lat`/`lon` when the page will be used with Apple
+  Maps or 高德; open one link of each kind before relying on a plan offline.
+- **Source** — `scripts/route_tools.py` → `place_url`, `chain_url`, `cmd_links`;
+  `themes/theme_common.py` → `sub_stops_html`; `themes/render_portal.py`.
+  **Status:** open.
+
 ## Method and scope
 
 ### SCO-1
@@ -757,3 +829,7 @@ Short list, roughly in the order the work makes sense:
 6. **Affiliate rails for a hosted version** — the only route from personal-use
    posture to something usable by other people (SCO-1).
 7. **Publishing** — name is settled (SCO-4); on the first push set the repo description and the topic list from SCO-4, then submit the awesome-list entries.
+8. **The rest of PLN-13** — a trigger for `decision_points`, the on-trip row spacing
+   and coverage, and a way to see a view must-see the planner never tiered; the
+   round-2 fields (`hours`, `decision_points`, `driver`, `must_see`, `meta.review`, the
+   driving card's legality lines) landed 2026-10.

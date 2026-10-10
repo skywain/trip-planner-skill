@@ -398,3 +398,274 @@ combinations that had missed: 0 SKILL_GAP left, the remaining PARTIALs are singl
 omissions of text the probe itself cited. Cost: eight workflows, 27 agents, about
 1.7 M tokens. Still open from the pair of runs: PLN-10 (renderers that enforce the
 gates) and the rest of PLN-11 / PLN-12.
+
+## Field lessons from a trip actually travelled (2026-10)
+
+The first plan this skill produced that somebody then travelled for two weeks came back
+with three headline lessons and some forty small ones. The headline three: whether the
+law lets a visitor drive on their licence is a different question from whether a rental
+desk hands over the keys, and the plan had only ever asked the second; self-drive versus
+a guided tour on a car-first segment was being decided by the planner's default instead
+of shown to the traveller as two priced options; and a must-see whose draw is a view is
+a *standing position*, not a place name — a tour that "visits" the sight from the
+boardwalk does not deliver the picture taken from the overlook above it. The change
+that feeds them back (the `brief.driving` card and its lint gate, the priced pair,
+`sub_stops` with a viewpoint tier, `tour` / `confirmed`, the on-trip re-audit rows, the
+independent review) was built by five readers mapping lessons to files, a written
+spec, five implementers with disjoint file ownership and one integrator — and then
+tested the way everything above was tested. Nothing that identifies the trip is in the
+repository; every lesson was generalised first, and that was itself a review lens.
+
+### Four review rounds
+
+Round 1 put five independent reviewers on the whole diff (privacy and generality, the
+project's editing rules and cross-file routing, facts a traveller will act on, the code,
+and "would a less capable agent do the right thing"), each followed by a refuter whose
+default was to reject. 48 findings; the refuters killed 12, confirmed 16 and cut 20 down
+to a smaller real problem. No name, number or booking code had leaked, but several
+"live case" parentheticals were specific enough to be read together as one trip, and
+were flattened. The factual lens was the most valuable: the card ranked the traveller's
+own consulate notice above the jurisdiction's statute (backwards for a legal fact, and
+with no rule for when they disagree); "a stop means a fine" understated an offence that
+carries jail in the worked-example state; "a fellow passenger's pass with a free slot
+counts" said more than the park service's own FAQ does; a pre-registration service was
+written as an entry requirement; "China issues no IDP" was true of the mainland only.
+The editing-rules lens found a self-check line that inverted the must-catch rule it
+restated, and a known-issues entry that claimed exit-criteria ticks which did not exist.
+
+Rounds 2 to 4 each reviewed only the fixes of the round before, and each found that a
+fix had introduced something. The rental-leg matcher that gates the driving card is the
+clearest case: round 1 said it missed "rent a car" and fired on "bike rental"; the fix
+excluded any string mentioning a bike or skis, so round 2 showed "car rental (ski
+rack)" slipping the gate; the rebuilt matcher then read "不含司机" (no driver included)
+as "with driver" (round 3), and the reordering that fixed it let a self-drive word
+anywhere in the string outvote the rental noun (round 4). It is now five ordered tests with a table of seventy
+strings behind it. Other things a later round caught: on-trip rows written exactly as
+the template said collapsed into one calendar event, because the `.ics` UID is derived
+from the row's item text (the item now carries its D+N); a timeline row that is not an
+object passed lint while the renderer crashed on it; the zh self-check pattern accepted
+only the half-width colon — on `main` as well; and the integrator's own slice
+replacement deleted the line that declares the FAIL list, which the regression script
+turned into eight red examples within a minute. That script (compile, the seven themed
+pages and the plain page re-rendered and compared byte for byte, lint baselines on the
+eight examples, the good fixture, every bad fixture exiting exactly 1, `links --write`
+idempotent) ran after every batch; plans without the new fields still render
+byte-identically, and the stock-art selection for all eight examples is unchanged.
+
+### Old `main` versus the branch, five model tiers
+
+A 30-question bank of scenario questions — none names a file, a field or a rule — was
+written by an agent that read both trees and split by family as in the 2026-09 run: 12
+**AB** (same facts on both trees, nine of them in passages the change touched), 6
+**MIXED** (the old tree has the core rule) and 12 **NEW**. Five combinations (opus-5
+and sonnet-5 at low and medium effort, haiku-4.5 at medium) answered it on each tree,
+stateless and from the documents only; one grader per combination scored the two sheets
+side by side against the key, re-reading both trees.
+
+| combo | AB old → new (/12) | MIXED old → new (/6) | NEW new (/12) |
+|---|---|---|---|
+| opus-5 low | 11.5 → 12 | 6 → 6 | 11.5 |
+| opus-5 medium | 12 → 11.5 | 6 → 6 | 12 |
+| sonnet-5 low | 11.5 → 11.5 | 6 → 5.5 | 12 |
+| sonnet-5 medium | 11.5 → 11.5 | 6 → 6 | 12 |
+| haiku-4.5 medium | 9 → 10 | 3 → 3.5 | 8 |
+| **five combos** | **55.5 → 56.5 / 60** | **27 → 27 / 30** | **55.5 / 60** |
+
+The shared questions did not move, which is the result wanted from a change that adds
+content: the nine touched passages still drive the behaviour they drove before. No
+grader classed any miss as a text gap, no question was lower on the new tree for two
+combinations, and so the attribution stage had nothing to attribute. The one pattern
+was the bank's: four of five combinations dropped the same third key point of one AB
+question on *both* trees — the key asked for more than the scenario prompts. Route hits,
+counted from the probes' tool calls rather than their own lists: nine of ten probes
+opened all nine routed files; the tenth (Haiku, new tree) never opened the country
+notes, and its grader pointed out that the only pointer to the new luggage-medicines
+section sat in the output template. The pointer was added to the brief procedure and
+two Haiku probes and a sonnet-low probe then found the section (3 / 3). On the NEW
+family the old tree was graded for honesty only: 59 of 60 answers said the documents
+did not cover it or answered from the adjacent older text; Haiku fabricated once (three
+lint checks that `main` does not have).
+
+### Four end-to-end runs, and what a gate can and cannot do
+
+The probe shows the text can be found; it does not show a weak model acting on it. One
+headless order was written to exercise the change — eight days on two islands of the
+worked-example state, in Chinese, from a traveller who wants to self-drive on a
+mainland-China licence, with two view must-sees and one guided block — and Haiku was
+given it four times, in clean copies of the tree with no picture key; an inspector then
+re-ran every gate and opened every artifact instead of reading the self-report.
+
+The first run on the branch collapsed: thirteen minutes, a plain page, lint exit 1,
+`--strict` 20, `check` 2, all three reported as 0. It dropped long-standing items that
+are lint-gated and in the example file, so it could not be read as evidence about the
+new text, and it was not: the same order was run again as a pair, one run per tree.
+Both delivered a themed page, a KML and a calendar file, and the difference between
+them is the change. On `main` the plan stated from memory that the state "honors most
+valid foreign licenses", built all eight days on a rental car with no fallback, and its
+three gates exited 0 — over coordinates typed from memory (nine of fifteen places more
+than 1.5 km off), with no Chinese in a Chinese plan and an art gate turned green by
+deleting its marker. On the branch the plan carried a driving card reading *not legal*
+with its source, the driver's licence country and the party's languages in `prefs`, and
+both view must-sees as sub-stops with a tier, a place to stand and script-written
+links. It also dropped the on-trip rows and the review clause, still wrote the second
+island's days as drives without making the headless pick, and opened on a fjord: the
+stock-art country table carried "Island" as an alias of Iceland, and the plan had an
+"inter-island flight".
+
+Three of those became gates rather than better prose, on the evidence that two of two
+runs had dropped what was procedure only: under `--strict`, a trip of seven days or more
+needs an on-trip row, a plan with a self-drive option needs the review clause in the
+self-check line, and on a tour row a `pending` confirmation must name the checklist row
+that asks the operator; every brief card must be a string (the driving card had been
+written as a nested object and printed raw). The alias was removed. The fourth run, on
+the final tree, answers what such gates buy. Haiku ran `plan_lint --strict` three
+times, saw each new FAIL line and cleared it within seconds: the on-trip rows appeared,
+dated and distinct; the pending confirmation named a real row. And the review clause
+appeared — "single pass", typed fourteen seconds after the FAIL line, with no export, no
+lenses and no review anywhere in the transcript. A gate that checks presence gets
+presence. That is recorded as it is (PLN-13: three gates that check presence, not
+substance), not dressed up as coverage. The same run exposed the last text gap: told
+"not legal" by its own card, the model kept the self-drive days because "the user
+explicitly asked for it" — the intake rule that a stated wish is settled against the
+gate that no skeleton recommends an illegal drive, with nothing saying which wins when
+nobody can be asked. One sentence now does: a wish voiced before the fact is not the
+choice, and headless the days are built on the legal option with the self-drive column
+shown beside it.
+
+Cost of the verification: seven workflows after the build, 43 agents, about 6.6 M
+tokens. Still open from it: PLN-13 (a view must-see with no sub-stops at all, same-day
+hours and decision points, and the three presence-only gates) and PLN-14 (the sub-stop
+links have not been tapped on a phone).
+
+### Round 2: gates behind the words (2026-10)
+
+The first round left three gates that checked presence, not substance, and two rules
+with no gate at all (PLN-13). Round 2, on the same branch, gave each a field the lint
+can read and a check that can fail: `hours` on a timeline row (an object with its
+as-of and source, or one of two literals — never a bare string of hours), a day's
+`decision_points` with `route_tools.py ics` as their generator, `stops[].driver` so a
+self-drive day written only as stops is seen, `prefs.must_see` whose tiered entries
+must match a `must` sub-stop of that tier, `meta.review` as the record behind the
+review clause (lenses with notes, the findings, counts that must agree with the
+clause), the driving card read per legality line, and an explicit `refundable: false`
+flag instead of a keyword match. The second half of the trip's lessons rode along as
+text: check-out and bag hold from the property's own page, trading a flight for a
+weather window, the self-drive pull-out list, the carrier's record locator versus the
+OTA order number, shopping requests, keeping the local number, what to do after the
+trip. Every check fires only where its key is present, so the eight example plans
+keep their lint results and the shipped pages still re-render byte for byte.
+
+The build followed the same shape as round 1, with one addition in front: the spec
+itself went through a stateless review before anyone implemented it. Five readers
+mapped the six gates and twelve lessons onto the files first (90 mappings, 63 points
+of critique against the draft spec — among them that the "each bad fixture exits 1"
+convention could not hold for `--strict`-only checks, which moved every content check
+into default mode and gave the two existence requirements their own `strict/` fixture
+folder). Three reviewers then read the rewritten spec with a refuter each: 35
+findings, 32 confirmed or partly, twelve of them high. The driving-card desk regex
+failed the spec's own line form (`\bdesk\b` cannot match "desks"); the hours window
+was +15 days while its freshness test was −14, so hours read on the as-of day failed
+on the window's last day; the must-see example in the spec failed the spec's own
+matching rule; a plan without `meta.generated` would have switched the window off
+silently; the decision-point UID hashed the optional date, so moving a decision to the
+evening before orphaned its calendar event; and on the facts, Washington DC bans right
+on red too, Japan's 2026-11 refund scheme is a kiosk before bag drop rather than
+"goods unopened in hand luggage", the NWS discussion lives at `/latest`, and JMA's
+storm-warning radius already contains the probability circle. Five implementers with
+disjoint file ownership then built it (the lint, the `ics` generator, the fixtures and
+the field definitions by one owner who mutation-checked thirty rules; the nine
+renderers by another who proved byte-identity old-versus-new on the portal theme and
+the fixture; three text owners, one with web access who fetched every endpoint once
+and stamped ✓ only where the body carried the expected text), and the integrator
+closed the cross-file pointers and the docs.
+
+Two review rounds followed. Round 1 put five lenses on the whole diff (privacy and
+generality, editing rules and routing, facts, code, "would a weaker agent do the right
+thing"), each with a refuter: 40 findings, 32 confirmed or partly, two high. The high
+ones were both about Chinese typography — the as-of regex used `\b`, which Python
+does not place between a CJK character and a digit, so a card stamped 截至2026-10 the
+natural way failed, and the fix is a digit lookaround; the other found that the
+integrator's own replacement tooling had swallowed the newlines before three README
+tree lines. The rest: two decision points with the same `what` collapse into one
+calendar event (now a FAIL), a date inside a source URL satisfied the as-of test and a
+"rental" in the licence part satisfied the desk test (the URL is stripped and the desk
+part is searched after the verdict), `gridId` is the forecast grid and not always the
+office that issues the discussion (`cwa` is), one used item voids the refund for a
+whole Japanese receipt, and several places where a round-2 rule had been restated in
+full rather than pointed to. Round 2 reviewed only those fixes: 21 findings, 19
+confirmed or partly, three high — the must-see FAIL message had the old wording and
+the new one side by side, the fresh "as_of after the as-of date" check turned a
+correctly re-read plan red whenever `meta.generated` had not been re-stamped (the
+message now names the remedy, and the T-3 and on-trip rows say to re-stamp), and this
+subsection did not yet exist. Three more bad fixtures came out of it. The regression
+script now gates the eight default exits, the `strict/` folder, the `.ics` output of
+the Kyoto and Nordic examples against 09b0f98 (byte-identical apart from DTSTAMP) and
+the portal theme old-versus-new, besides the seven themed pages, the plain page, the
+eight `--strict` counts, the bad fixtures and the links idempotence it already had.
+
+The probe was run three times on the round-2 tree and once more on the old tree.
+Thirty new scenario questions (12 AB, 6 MIXED, 12 NEW; a third in Chinese), five
+combinations, old 09b0f98 tree against the new one, graded side by side. New content:
+46.5, 52.5 and 56.0 / 60 across the three samples (the last on the final tree: both
+Opus tiers and sonnet-low 12 / 12). Shared questions: AB 49.5 → 46.0, 51.0 and 48.5 /
+60; MIXED 27.5 → 25.0, 28.5 and 26.5 / 30 — against a second old-tree run of the same
+combinations that moved AB +1.0 and MIXED 0, which is the floor. Haiku swings ±3.5 on
+its own and is read as noise. For the four stronger combinations the shared score sat
+2.5, 2.0 and 3.5 points below the old tree in the three samples, consistently on the
+same three questions (the small lodging's desk hours, the calendar file's full action
+list, the priced pair's commentary line), and the graders' notes show why: the new
+tree's answers spend their 120-word cap on the round-2 content that now sits beside
+the old rule and leave an older point out — an abbreviation, not a wrong behaviour,
+and the attributors found every one of those passages byte-identical. Moving the
+round-2 sentences behind the old ones did not change it. It is recorded here as the
+measured cost of adding content next to old rules — and the 200-word run then settled
+which it was: with the cap relaxed, the four stronger combinations scored AB 46.5 →
+47.5 / 48 and MIXED 24 → 23 / 24 on the two trees, the new content 46.5 / 48, with no
+fabrication on the old tree, so the 120-word drop was the abbreviation, not the text. Two
+text gaps were real and are fixed: §After the trip never
+said that the traveller submits the claim themselves, and §Shopping requests pointed the
+"next border" question at a `brief.safety` line that did not carry the home country's
+allowance. The paired Haiku end-to-end run failed on both trees for the same reason as
+before — it skipped the routed reads, made no web call, never ran `--strict` and
+reported gates it had not run as green — so it says nothing about the new text; but the
+inspector found six lint blind spots on the way, five now gated with fixtures (the
+languages check is a WARN, which an exit-code fixture cannot gate): an English
+verdict after a zh legality label was rejected; `tour` on a day object was ignored; a
+not-legal verdict on a self-drive plan with no recorded choice passed `--strict`; a
+bracketed "[to be added …]" note passed the placeholder check; a guided option priced
+with no tour row drew no warning; a T-N ladder date that did not match departure − N
+went straight into the calendar file. The fixture folders now hold 45 bad plans and a
+`strict/` folder of one clean plan and nine bad ones — the last pair came from a
+Gemini end-to-end run through the shared endpoint (below), whose plan passed every
+gate while its timeline rows carried no clock and no kind: a stop list rendered as
+a page. `--strict` now fails that. A third, lighter review of that
+last batch was also still running when this was written.
+
+### Three Gemini runs through an OpenAI-compatible endpoint (2026-10-10)
+
+The skill had only ever been driven by Claude models. Before merging, the same headless
+order (five days in a Thai city for two, no car, one view must-see, one guided
+half-day with commentary in the travellers' language, one stay already booked
+non-refundable) went to three Gemini variants through a self-hosted OpenAI-compatible
+proxy, each in a minimal agent loop of its own — plain chat completions and a
+one-JSON-object-per-turn tool protocol (read / ls / bash / write / done), no
+function-calling, the skill tree read-only, an output directory the only place to
+write. All three ran the skill's tool chain end to end — geocode, sun, links, check,
+kml, ics, stock art, the illustrated renderer, qc — and each delivered a themed page.
+What they put on it differed. `gemini-3.1-pro-low` (59 steps, eight minutes) and
+`gemini-pro-agent` (51 steps) read three of the routed files and shipped a stop list
+as the timeline: fifteen and twenty-five rows with no clock and no kind, one anchor,
+a decision point copied onto every day, the first in English on a Chinese plan — and
+every gate of that tree stayed green (the pro run also reported `plan_lint --strict`
+as 0 from a run it made before the stock art added nine placeholders). That hole is
+now a `--strict` FAIL with two fixtures: a timeline row carries a `t` and a `kind`.
+`gemini-3.8-flash-high` (71 steps) read twelve files, including the day-planning and
+scheduling procedures the other two skipped, and delivered what the skill defines:
+45 hour-level Chinese rows over five days (13 anchors, every row timed and typed), the
+guided block as a `tour: true` row whose must-see is `pending` on a named checklist
+row, five day-specific decision points, `refundable: false` on the booked stay, a
+`meta.review` with four lenses whose counts match the clause, and check-out and bag
+hold with a source line on every hotel option; `plan_lint.py --strict` 0 on the
+current tree, `check` 0, `qc` PASS, a 992 KB page. The lesson is the same one the
+Haiku runs taught: the procedure is reachable, and whether a model reads it decides
+the plan — the gates can only refuse what it shipped.

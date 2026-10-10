@@ -55,25 +55,51 @@ data, not on prose — fixing exactly that is this skill's job, so verification 
 
 Three moments at most, usually two: (0) **one intake message, only if a core fact is
 missing and can't be inferred** (Phase 0 — most requests need none); (a) after Phase 2 —
-present 2-3 route skeletons, get a pick; (b) final delivery. Everything else runs without
-questions. If the user says "一次到位 / don't ask, just plan" or the session is clearly
+present 2-3 route skeletons, get a pick; (b) final delivery — then one hand-off per
+version the traveller agrees to; while a change is discussed the plan moves in the JSON
+only (phase-6-assemble.md §Deliver). Everything else runs without questions. If the user says "一次到位 / don't ask, just plan" or the session is clearly
 headless, skip (0) and (a): assume, pick the best skeleton yourself and state every
 assumption prominently at the top of the output.
+
+**A choice with a real trade-off goes to the traveller as priced options, never as your
+default** — self-drive vs guided on a car-first segment (phase-3-legs.md §Driving legs),
+or your plan against how travellers who share the user's language do this destination
+(phase-1-brief.md §Where the facts come from). The options ride on moment (a); headless,
+you pick and the assumptions block shows both with their prices. **A risk is stated once,
+with its source**: after the traveller decides, the choice is a `decisions[]` row and is
+not raised again unless a new fact changes it. **An optional paid extra** (a spa, an
+upgrade, a lounge, an excursion) is named with its price in the first sentence, and
+"free for guests" only from the property's own page.
 
 ## Quick modes (no full pipeline)
 
 - **Gap filler** — "I'm near X with 2 free hours": offer 2-3 options within a 15-min
   radius, one per energy level (a sight / food / a sit-down), each with walk time, a
   map link, a turn-back deadline, and — the one thing worth a search — confirmation
-  that it is open right now. ≤3 searches; answer in minutes, not a report.
+  that it is open right now: today's hours at the hour the traveller arrives, not the
+  usual ones (none found → say so), plus one option that needs no going out (delivery,
+  or inside the hotel). The same check covers any place recommended while the traveller
+  is on the road; a view-dependent option is checked on a live camera, not the forecast
+  (scheduling.md rule 10). ≤3 searches; answer in minutes, not a report.
 - **Single day** — "we have one day in Rome, what do we do?": run Phase 1's holiday +
   festival check, Phase 4 for that one day, and the Phase 6 self-check. Skip route
   skeletons, flights and hotels entirely; read scheduling.md and navigation.md and
   leave the rest closed. This is the most common request that is not a whole trip.
 - **Live replan** — "missed the train / it's pouring": rebuild only the affected day
   from its degradation tags (`[skippable]`/`[swap→…]`/late_cut line) instead of
-  re-planning the trip. `[pinned]` blocks hold; `[opener]` may move but costs a queue;
-  re-verify only the hops that changed.
+  re-planning the trip. `[pinned]` blocks hold — unless the traveller chooses to trade
+  one for a weather window (scheduling.md §Day types, Weather-window day); `[opener]`
+  may move but costs a queue;
+  re-verify only the hops that changed. The traveller says a place feels overwhelming
+  or unsafe → offer scheduling.md §Day types, Safe-version day first, before any
+  rebuilt full day.
+- **On-trip re-audit** — "we're on day 5, check the rest": re-verify only the days
+  still ahead against output-template.md §On-trip re-audit rows — every flight (time,
+  check-in cutoff, terminal), timed check-in, self-drive day, hazard feed, each
+  anchor's `hours` up to today + 14 and the `decision_points` (then `plan_lint.py
+  --strict --asof <today>`) — and report only what changed, each with the action it needs.
+- **After the trip** — a refund, a receipt, a complaint or a review once the traveller
+  is home: read phase-6-assemble.md §After the trip now, before drafting anything.
 
 ## Phase 0 — Intake (one message, or none)
 
@@ -85,8 +111,11 @@ criteria). This section is only the contract; do not compose an intake message f
 memory of the format.
 
 Inputs: the user's request and anything said earlier. Outputs: the plan's top-level
-`prefs` block and `lang`, `prefs.pictures` (native | key | stock), the assumptions block
-for checkpoint (a) — and at most one intake message.
+`prefs` block and `lang` — `prefs.pictures` (native | key | stock), `prefs.drivers` (who
+drives + the issuing country of each licence) when a self-drive option exists, and
+`prefs.languages` (the languages the party can follow spoken commentary in) when a
+guided option may be priced, and `prefs.must_see` (each locked must-see by name, a
+scenic one with its viewpoint tier) when a must-see is locked — the assumptions block for checkpoint (a) — and at most one intake message.
 
 Gates — these decide pass/fail and do not move into the reference file:
 - **One message, or none.** Ask only when a core fact (origin · destination · when /
@@ -111,17 +140,22 @@ Gates — these decide pass/fail and do not move into the reference file:
 ## Phase 1 — Country brief (once per destination)
 
 **Read `references/phase-1-brief.md` now, before any fact about the destination is
-written** — it is the whole procedure for this phase (where each fact comes from; the
-visa / holiday / event / weather / money / insurance / safety lines; the advisory line,
-the emergency card, the health line with the yellow-fever audit, the hazard line; the
-exit criteria). This section is only the contract; never answer a Phase 1 fact from
+written** — it is the whole procedure for this phase (where each fact comes from,
+including the same-language community check; the visa / holiday / event / weather /
+money / insurance / safety lines; the advisory line, the emergency card, the health
+line with the yellow-fever audit, the hazard line; the driving card — legality before
+rentability; the exit criteria). This section is only the contract; never answer a Phase 1 fact from
 memory of the procedure or of the country. In chat, Phase 1 is ≤ 10 lines — the
 `brief` cards themselves follow output-template.md §Brief templates.
 
 Inputs: destination(s), dates, the traveller's passport and origin, the skeleton
-candidates. Outputs: the `brief` cards in canonical order, the Phase 1 checklist rows
-(visa lead time · travel-clinic consult · yellow-fever vaccine + ICVP · insurance ·
-hazard gate · copies + registration), and the facts later phases inherit.
+candidates, `prefs.drivers`. Outputs: the `brief` cards in canonical order (+
+`brief.driving` whenever a self-drive option exists: one labelled line per
+jurisdiction driven — the licence's legality verdict and its rentability at the desks,
+with source + as-of), the
+Phase 1 checklist rows (visa lead time · arrival registration · travel-clinic consult ·
+yellow-fever vaccine + ICVP · insurance · hazard gate · copies + registration), and the
+facts later phases inherit.
 
 Gates — these decide pass/fail and do not move into the reference file:
 - **Every Phase 1 fact is the assembler's alone** — visa / entry, advisory, health,
@@ -141,6 +175,11 @@ Gates — these decide pass/fail and do not move into the reference file:
 - **A hazard-season hit means a gate**: season card, hazard gate on the checklist and
   in the `.ics`, insurance deadline NOW, exposed bookings kept refundable.
 - **User-named events are verified before anything else is planned.**
+- **Driving legality is not rental acceptance**: a desk that hands over keys has not
+  made the driving legal. Where `brief.driving` reads not legal / unverified, no
+  skeleton recommends self-drive there — a self-drive wish in the request included —
+  the guided or transit option is priced beside it and the traveller chooses
+  (Interaction contract); headless, the days are built on the legal option.
 
 ## Phase 2 — Route skeleton → checkpoint (a)
 
@@ -148,7 +187,10 @@ Gates — these decide pass/fail and do not move into the reference file:
    `prefs.scenery` (nature / city / beach / forest / lake / mountain); shortlist by
    geography — order as a line or loop, never a star with backtracking. `prefs.travel_style`
    shapes the legs: self-drive → a rental leg and park/countryside bases (Phase 3
-   §Driving legs); group tour → the tour's own schedule is the spine (Phase 4).
+   §Driving legs) — unless `brief.driving` reads not legal / unverified there, which
+   makes it the priced pair below (Phase 1 gate); group tour → the tour's own schedule is the spine (Phase 4); `mixed`
+   with an undecided car-first segment → read phase-3-legs.md §Driving legs now and
+   price both sides all-in; the pair is shown with the skeletons at (a).
 2. Nights allocation: ≥2 nights per base (each 1-night stay burns a half day on packing
    and transit); prefer "base + day-trips" over hotel-hopping when the day-trip is
    <90 min each way. 10-15 days ≈ 8-13 usable days ≈ 2-4 bases, and 2-3 beats 4.
@@ -171,7 +213,8 @@ driving legs, what every leg row records, the exit criteria). This section is on
 contract; do not price a leg from memory of the procedure.
 
 Inputs: the chosen skeleton (Phase 2), `prefs.travel_style`, the Phase 1 visa / entry
-facts (transit countries included). Outputs: `legs[]` — one pick + one backup per leg —
+facts (transit countries included) and, for a car-first segment, `prefs.languages` and
+`brief.driving`. Outputs: `legs[]` — one pick + one backup per leg —
 the checklist rows for flights, date-locked rail and rentals, their budget rows, and the
 baggage walkthrough for multi-leg trips.
 
@@ -186,22 +229,28 @@ Gates — these decide pass/fail and do not move into the reference file:
 - **Separate tickets across a foreign hub are a visa trap**: the audit runs before "no
   visa needed" is written anywhere — including tickets the user already holds.
 - **Rail wins under ~5 h station-to-station; price on the operator's site.** A park
-  without a car is decided with the user, never by default.
+  without a car is decided with the user, never by default — as an all-in priced pair
+  with the licence's legality beside it (phase-3-legs.md §Driving legs).
 - **Every leg row carries price + currency + as-of, the checked-bag fee, the refund /
-  change class and a deep link**; one pick + one backup per leg.
+  change class and a deep link**; one pick + one backup per leg — a backup that still
+  reaches the leg's pinned dependency, or "no usable backup" on a must-catch leg.
 
 ## Phase 4 — City day-plans
 
 **Read `references/phase-4-days.md` now, before any city is planned or any city agent
 is launched** — it is the whole procedure for this phase (the city-agent contract, the
-six per-city steps, the route_tools order, the `sun` / `check` rules, and the exit
-criteria). This section is only the contract; do not plan a city from memory of the
+six per-city steps — step 2 names the picture: each view's tier and where to stand —
+the route_tools order, the `sun` / `check` rules, and the exit criteria). This section is only the contract; do not plan a city from memory of the
 procedure, and build every city-agent prompt from that file's §City-agent contract
 (paste its lines, or pass the file's absolute path — the agent never sees SKILL.md).
 
 Inputs: the chosen skeleton (Phase 2), the legs table (Phase 3), the Phase 1 brief
 facts and `prefs`. Outputs: per city, plan-JSON day objects insertable verbatim into
-`days[]` (output-template.md §city-block) — `stops`, hour-level `timeline`,
+`days[]` (output-template.md §city-block) — `stops` (a drive stop the traveller drives
+carries `driver: self`), hour-level `timeline` (a row may carry `sub_stops`: the named
+spots inside a big sight, each with its viewpoint tier — that section is their only
+definition — and an anchor carries `hours`: the venue's own hours with as-of + source,
+or "unverified" / "open access"), `decision_points` (the day's go / no-go calls),
 `hop_links`, `sun`, `rain_alt`, `ribbon` — plus the city's `checklist_items`.
 
 Gates — these decide pass/fail and do not move into the reference file:
@@ -232,14 +281,22 @@ after dark, luggage-friendly), in the lodging type and band from `prefs.lodging`
 (default mid-range hotel; a ryokan/onsen or B&B habit changes which properties you list). Browser spot-check Google Hotels/Booking with the real
 dates for a price band, then list 2-3 concrete properties: name, area, band per night,
 deep link with dates baked in (recipes in data-sources.md). Advise: book refundable
-now, re-shop 2-3 weeks out.
+now, re-shop 2-3 weeks out. For a small property note the front-desk hours — a start
+before the desk opens moves checkout to the night before (scheduling.md §Day types,
+Early start at a small lodging). Read each option's check-out time and bag hold off
+the property's own policies page into `checkout` / `bag_hold` on its
+`hotels[].options[]` entry — never the 12:00 in your head; a small lodging's late
+check-out stops where the desk says, and the leaving day is timed from that line
+(scheduling.md §Day types, Moving day). A stay booked non-refundable gets
+`"refundable": false` on its checklist booking row (output-template.md
+§Booking-artifact conventions), never on the hotels option.
 
 ## Phase 6 — Assemble, self-check, deliver
 
 **Read `references/phase-6-assemble.md` now, before the final `plan.geo.json` is
 written** — it is the whole procedure for this phase (assembly order, cover title, the
-adversarial self-check list, delivery, the themed-render flow incl. stock mode, and the
-exit criteria). This section is only the contract; do not assemble or render from memory
+adversarial self-check list, the independent review, delivery, the themed-render flow
+incl. stock mode, after the trip, and the exit criteria). This section is only the contract; do not assemble or render from memory
 of the procedure.
 
 Inputs: `plan.geo.json` assembled per references/output-template.md — the single
@@ -248,7 +305,8 @@ Outputs — three things every time, handed over through the harness's artifact 
 tool: (1) the **chat summary** — route one-liner, total budget, the 3 biggest decisions
 made for the user, and in stock mode the picture notice; (2) `trip-<theme>.html`;
 (3) `trip.kml` — plus the gates `.ics`, always: the pre-departure ladder rows are
-date-locked gates (output-template.md §Pre-departure re-check ladder).
+date-locked gates (output-template.md §Pre-departure re-check ladder), and each day's
+`decision_points` ride in the same file.
 
 Gates — these decide pass/fail and do not move into the reference file:
 - **The deliverable is a themed page, never a plain text one.** The plain
@@ -257,7 +315,14 @@ Gates — these decide pass/fail and do not move into the reference file:
 - **The adversarial self-check runs in full before delivery**, fixes what it catches,
   and is recorded as "self-checked: N issues found and fixed" in `meta.self_check` and
   the last `decisions[]` row. The list lives in the reference file; a skipped item is
-  a defect, not a shortcut.
+  a defect, not a shortcut. A plan with a self-drive option, a non-refundable booking
+  or a timed check-in also runs the independent review — a stateless reviewer, then a
+  refuter (phase-6-assemble.md §Independent review) — recorded in the same line and
+  in `meta.review`; the lint keys on the machine-readable part of that trigger, listed
+  once in `scripts/plan_lint.py`'s docstring (a self-drive option, `tour: true`,
+  `"refundable": false` — a timed check-in without a tour block stays procedure-only):
+  on it `plan_lint.py --strict` fails a plan whose line lacks the clause or that has no
+  `meta.review`, and the record is checked for consistency, not for the review itself.
 - **Acceptance bars are exit codes and eyes, not prose**: `route_tools check` and
   `scripts/plan_lint.py --strict` exit 0 before rendering (the only tolerated FAIL: a
   polar day's `sun`, PLN-11), `themes/qc.py` exits 0 after, and the export-probe PNG
@@ -291,65 +356,87 @@ directory is not the skill directory and shell cwd does not persist between call
 - `references/data-sources.md` — read before Phase 1: every API/URL recipe + fallback
   chain (flights, hotels, rail, venues, weather, FX, holidays, geocoding) — **plus
   the booking-judgment rules that decide plans**: §Group tours (weekday grids,
-  min-party, calendar-vs-marketing, zero-cost holds and booking order) and §Hotels
-  (checkout all-in pricing). Not just a curl cookbook.
+  min-party, calendar-vs-marketing, zero-cost holds and booking order, the one written
+  message after booking), §Hotels (checkout all-in pricing), §Car rental and §Traveller
+  consensus (how people who share the user's language do the destination). Not just a
+  curl cookbook.
 - `references/country-quick-notes.md` — read the destination's section before Phase 2:
   passes, sell-outs, closure patterns, transit apps per country; destination absent →
   its "Destination not listed? — the checklist" section.
-- `references/output-template.md` — read before Phase 4 fan-out (city-block format)
-  and Phase 6 (deliverable structure).
+- `references/output-template.md` — read before Phase 4 fan-out (city-block format —
+  the only definition of the row fields `sub_stops` / `tier` / `tour` / `confirmed` /
+  `hours`, the day's `decision_points` and a stop's `driver`) and Phase 6 (deliverable
+  structure, `meta.review`, `prefs.must_see`, the `refundable` flag, hotel `checkout` /
+  `bag_hold`, the pre-departure ladder, the on-trip re-audit rows and the before-leaving
+  row).
 - `references/scheduling.md` — read before building any hour-level timeline: dwell
   times, buffers, meals, energy curve, degradation tags, timeline verification.
 - `references/navigation.md` — read with it: hop-link recipes, transit-row format,
-  exit numbers, verify-vs-estimate policy, offline-maps (KML) workflow.
+  exit numbers, verify-vs-estimate policy, offline-maps (KML) workflow, and the
+  self-drive day list (voice test, CarPlay / Android Auto, offline area, `driver: self`).
 - `references/cover-titles.md` — bilingual poetic cover-title case library (poetry /
   prose / classic-literature sources + trip-archetype fit + cliché blacklist); read
   at Phase 6 when rendering.
 - `references/phase-0-intake.md` — read at the start of Phase 0, before deciding whether
   to ask anything: core vs optional facts and their defaults, origin inference, the
   intake message format and rules (zh sample inline, en in output-template.md), the
-  `prefs` block, the picture-capability check (native | key | stock), the style line and
+  `prefs` block (incl. `drivers`, `languages` and `must_see`), the picture-capability check (native | key | stock), the style line and
   plan language, and the exit criteria. SKILL.md Phase 0 is only the contract; this
   file is the procedure.
 - `references/phase-1-brief.md` — read at the start of Phase 1, before any destination
-  fact is written: where each fact comes from, the visa / holiday / event / weather /
-  money / insurance / safety lines, the advisory line (level → plan behaviour), the
-  emergency card, the health line with the yellow-fever audit, the hazard line (season
-  card + hazard gate), and the exit criteria. SKILL.md Phase 1 is only the contract;
+  fact is written: where each fact comes from (incl. the same-language community
+  check), the visa / holiday / event / weather / money / insurance / safety lines, the
+  advisory line (level → plan behaviour), the emergency card, the health line with the
+  yellow-fever audit, the hazard line (season card + hazard gate), the driving card
+  (legality before rentability), and the exit criteria. SKILL.md Phase 1 is only the contract;
   this file is the procedure.
 - `references/phase-3-legs.md` — read at the start of Phase 3, before the first flight
   scan: the plan shape and its two traps, the international price-source ladder and the
   ≥ 2-sources rule, multi-airport and LCC arithmetic, the separate-tickets visa audit,
-  intercity rail vs fly, driving legs, the fields every leg row records, the baggage
-  walkthrough, and the exit criteria. SKILL.md Phase 3 is only the contract; this file
+  intercity rail vs fly, driving legs (the self-drive vs guided priced pair, the no-car
+  fallback), the fields every leg row records, the baggage walkthrough, and the exit
+  criteria. SKILL.md Phase 3 is only the contract; this file
   is the procedure.
 - `references/phase-4-days.md` — read at the start of Phase 4, before any city is
   planned: the city-agent contract (what every fan-out prompt must carry), the six
-  per-city steps, the route_tools order (geocode → tz → sun → links → check → kml),
+  per-city steps (incl. naming each view's tier and sub-stops), the route_tools order (geocode → tz → sun → links → check → kml),
   the `sun` / `check` acceptance rules, and the exit criteria. SKILL.md Phase 4 is
   only the contract; this file is the procedure.
 - `references/phase-6-assemble.md` — read at the start of Phase 6, before the final
   plan is written: assembly order, cover title, the full adversarial self-check list,
-  delivery (themed page + KML + gates .ics), the themed-render flow incl. stock mode,
-  the qc / export-probe acceptance bars, and the exit criteria. SKILL.md Phase 6 is
+  the independent review, delivery (themed page + KML + gates .ics), the themed-render flow incl. stock mode,
+  the qc / export-probe acceptance bars, after the trip, and the exit criteria. SKILL.md Phase 6 is
   only the contract; this file is the procedure.
 - `scripts/flight_scan.py` — Google Flights grid scanner; run with `--help` first.
 - `scripts/route_tools.py` — geocode stops, distance-check clustering, emit per-hop +
-  whole-day map links and the trip KML; subcommands geocode / check / links / kml /
-  ics (the gates `.ics` from the checklist's dated rows — `-o gates.ics`, bump
-  `--sequence` on every plan change) /
+  whole-day map links (`links --write` also writes each sub-stop's place link and the
+  row's `sub_map` walking chain) and the trip KML; subcommands geocode / check / links / kml /
+  ics (the gates `.ics` from the checklist's dated rows and each day's
+  `decision_points` — `-o gates.ics`, bump `--sequence` on every plan change) /
   sun (civil dawn + sunrise/sunset per day from sunrise-sunset.org, sanity-checked,
   written into `days[].sun` in the canonical format; point = first stop, last stop
   on a moving day, or the day's `sun_stop` when set; non-zero exit = a day was
   skipped/rejected).
-- `scripts/render_plan.py` — turn the plan JSON into the final self-contained HTML.
+- `scripts/render_plan.py` — the plain printable page from the plan JSON: an extra,
+  never the deliverable (Phase 6 gate — the deliverable is a themed page).
   It reads the same file route_tools does, so write the plan once and render often.
 - `scripts/plan_lint.py` — the plan's **content** gate, run with `--strict` before any
   renderer (exit = FAIL count, like qc.py): brief present, non-empty and in canonical
   order; no placeholder / "awaiting" text; no markdown headings in cells; the
   self-check line in `meta.self_check`; art placeholders filled and `prefs.pictures`
-  matching how the art was made; the gates `.ics` and `trip.kml` beside the plan;
-  under `--strict` every day has at least one stop and a `sun` written by `sun --write`.
+  matching how the art was made; the gates `.ics` and `trip.kml` beside the plan; on
+  rows that carry them, sub-stops with a name and a query or lat+lon, a tier on every
+  must-see, tour must-sees confirmed in writing or pending on a named checklist row;
+  every brief card a string; a `brief.driving` card whenever a self-drive option exists
+  (the four conditions: phase-1-brief.md §Driving card), read per legality line (verdict · desk part · as-of); where
+  present, a row's `hours`, a day's `decision_points`, a stop's `driver`, hotel
+  `checkout` / `bag_hold`, the `refundable` flag, `meta.review` (shape, and its counts
+  against every review clause) and every tiered `prefs.must_see` entry matched to a
+  must sub-stop; under `--strict` every day has at least one stop and a `sun` written
+  by `sun --write`, a trip of seven days or more has its on-trip re-audit rows, the
+  review clause and `meta.review` exist on the review trigger, and every anchor inside
+  the hours window (`--asof`, default `meta.generated`, through +14 days) carries fresh
+  `hours`; the full list is its module docstring.
   `check` proves the geography and `qc.py` the HTML — this proves the words.
 - `assets/plan.example.json` — runnable schema example **and the single source of
   truth for the plan's top-level keys** (`prefs`/`budget`/`legs`/`checklist`/`hotels`/

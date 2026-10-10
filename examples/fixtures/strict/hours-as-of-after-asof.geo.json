@@ -1,0 +1,147 @@
+{
+ "_expect": "python3 scripts/plan_lint.py examples/fixtures/strict/hours-as-of-after-asof.geo.json --strict --ics examples/gates-sample.ics --kml examples/kyoto-sample.kml exits 1 — the one FAIL: an in-window anchor's hours carry an as_of later than the as-of date (meta.generated 2026-11-01): re-stamp meta.generated or pass --asof",
+ "trip": "Fixture — strict bad: hours-as-of-after-asof",
+ "lang": "en",
+ "tz": "Asia/Tokyo",
+ "prefs": {
+  "travel_style": "public",
+  "pictures": "native"
+ },
+ "meta": {
+  "dates": "2026-11-10 → 2026-11-11",
+  "party": "2 adults",
+  "route": "Kyoto",
+  "budget_total": "n/a — fixture, no prices",
+  "generated": "2026-11-01",
+  "self_check": "self-checked: 0 issues found and fixed · independent review: 1 confirmed, 0 refuted",
+  "review": {
+   "mode": "reviewers",
+   "lenses": [
+    {
+     "lens": "timing",
+     "note": "day 1 walk start against the first train"
+    },
+    {
+     "lens": "rules",
+     "note": "the bridge's closure notice re-read (https://example.org/notices)"
+    },
+    {
+     "lens": "hazards",
+     "note": "rain plan for both days against the forecast page"
+    }
+   ],
+   "confirmed": [
+    "day 2 start moved to 08:45 — the first train is 08:30 (fixed)"
+   ],
+   "refuted": []
+  }
+ },
+ "decisions": [
+  "Day 1 is on foot; day 2 goes by train",
+  "self-checked: 0 issues found and fixed · independent review: 1 confirmed, 0 refuted"
+ ],
+ "checklist": [
+  {
+   "item": "Visa / entry rule read on the embassy page",
+   "deadline": "2026-10-20",
+   "note": "fixture"
+  },
+  {
+   "item": "Travel-clinic consult",
+   "deadline": "2026-10-20",
+   "note": "fixture"
+  },
+  {
+   "item": "T-14 re-check: hours + fees of every anchor, advisory level, visa rule",
+   "deadline": "T-14 · 2026-10-27",
+   "note": "fixture"
+  },
+  {
+   "item": "T-7 re-check: forecast for every base",
+   "deadline": "T-7 · 2026-11-03",
+   "note": "fixture"
+  },
+  {
+   "item": "T-3 re-check: strikes / closures on the route; hours re-read and written for every anchor up to 2026-11-21",
+   "deadline": "T-3 · 2026-11-07",
+   "note": "then: python3 scripts/plan_lint.py plan.geo.json --strict --asof 2026-11-07"
+  },
+  {
+   "item": "T-1: eSIM live, copies, cash per brief.money, cards unblocked",
+   "deadline": "T-1 · 2026-11-09",
+   "note": "fixture"
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-11-10",
+   "city": "Kyoto",
+   "label": "Arashiyama",
+   "sun": "dawn 06:00 · ☀ 06:25 / 🌇 16:52 · JST · sunrise-sunset.org",
+   "timeline": [
+    {
+     "t": "09:00-12:30",
+     "what": "Arashiyama bamboo grove and the river",
+     "kind": "anchor",
+     "tag": "opener",
+     "hours": {
+      "text": "open 24 h · fixture",
+      "as_of": "2026-11-05",
+      "src": "https://example.org/hours"
+     }
+    },
+    {
+     "t": "12:30-13:30",
+     "what": "lunch near the station",
+     "kind": "meal"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Togetsukyo Bridge",
+     "query": "Togetsukyo Bridge, Kyoto, Japan",
+     "lat": 35.0129,
+     "lon": 135.6777
+    }
+   ]
+  },
+  {
+   "date": "2026-11-11",
+   "city": "Kyoto",
+   "label": "Fushimi Inari",
+   "sun": "dawn 06:01 · ☀ 06:26 / 🌇 16:51 · JST · sunrise-sunset.org",
+   "timeline": [
+    {
+     "t": "08:45-11:30",
+     "what": "Fushimi Inari Taisha",
+     "kind": "anchor",
+     "tag": "opener",
+     "hours": {
+      "text": "open 24 h · fixture",
+      "as_of": "2026-11-01",
+      "src": "https://example.org/hours"
+     }
+    }
+   ],
+   "stops": [
+    {
+     "name": "Fushimi Inari Taisha",
+     "query": "Fushimi Inari Taisha, Kyoto, Japan",
+     "lat": 34.9671,
+     "lon": 135.7727
+    }
+   ]
+  }
+ ],
+ "brief": {
+  "visa": "fixture card — content is not under test",
+  "emergency": "fixture card — content is not under test",
+  "safety": "advisory: level 1 · fixture · as of 2026-10",
+  "health": "fixture card — content is not under test",
+  "holidays": "fixture card — content is not under test",
+  "weather": "fixture card — content is not under test",
+  "money": "fixture card — content is not under test",
+  "connectivity": "fixture card — content is not under test",
+  "insurance": "fixture card — content is not under test"
+ }
+}

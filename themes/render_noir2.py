@@ -70,9 +70,9 @@ import pathlib
 import sys
 
 from theme_common import (LUCIDE, T, add_art_arg, asset_count, brief_titles, data_uri,
-                          day_embed_url, esc, export_js, export_prefix, init_lang, lang,
-                          load_art, load_plan, short_dates, theme_name, title_head,
-                          title_kick)
+                          day_embed_url, decision_points_html, esc, export_js, export_prefix,
+                          hours_html, init_lang, lang, load_art, load_plan, short_dates,
+                          stay_rules_html, sub_stops_html, theme_name, title_head, title_kick)
 
 HERE = pathlib.Path(__file__).parent
 
@@ -155,9 +155,16 @@ def ledger_rows(day):
                if r.get("link") else "")
         rows.append(
             f'<div class="row k-{kind}" role="listitem"><span class="t">{esc(r.get("t",""))}{est}</span>'
-            f'<span class="w">{et(r.get("what",""))}{price}{chip}</span>'
+            f'<span class="w">{et(r.get("what",""))}{price}{chip}'
+            f'{hours_html(r, et)}{sub_stops_html(r, sub_pin, et)}</span>'
             f'<span class="n">{nav}</span></div>')
     return "".join(rows)
+
+
+def sub_pin(href, label):
+    """The row's map pin, for one sub-stop (arguments arrive escaped)."""
+    return (f' <a class="rownav" href="{href}" target="_blank" rel="noopener"'
+            f' aria-label="{esc(t("nav_to"))}{label}">{ic("pin")}</a>')
 
 
 def meta_line(day):
@@ -195,6 +202,9 @@ def chapter(i, day, art, day_plate, default_plate):
                   f'<div class="map-embed" data-src="{esc(embed)}">'
                   f'<p class="map-ph">{esc(t("map_ph"))}</p></div></details>' if embed else "")
     plate = day_plate.get(date, day_plate.get(str(i), default_plate))
+    # the decision strip takes .log's gutter but stays out of its role="list"
+    dps = decision_points_html(day, et)
+    dps_html = f'<div class="log">{dps}</div>' if dps else ""
     return f"""
 <section class="chapter" id="d{i}" data-layer="{plate}"
          data-export="DAY {i:02d}" aria-labelledby="ct{i}">
@@ -205,7 +215,7 @@ def chapter(i, day, art, day_plate, default_plate):
     <span class="lb">{esc(day.get("label",""))}</span>
     {f'<span class="sn">{sun}</span>' if sun else ""}
   </div>
-  <div class="log" role="list">{ledger_rows(day)}</div>
+  {dps_html}<div class="log" role="list">{ledger_rows(day)}</div>
   {meta_line(day)}
   {embed_html}
   <button class="xbtn no-export" data-x-for="#d{i}" data-x-label="DAY{i:02d}"
@@ -301,7 +311,7 @@ def main():
         f'<span class="w">{esc(h.get("area",""))} <span class="dim">{esc(h.get("why",""))}</span><br>'
         + " · ".join(
             f'<a href="{esc(o.get("link","#"))}" target="_blank" rel="noopener">{esc(o.get("name",""))}</a>'
-            f' <span class="dim">{esc(o.get("band",""))}</span>'
+            f' <span class="dim">{esc(o.get("band",""))}</span>{stay_rules_html(o)}'
             for o in h.get("options", []))
         + '</span><span class="n"></span></div>' for h in p.get("hotels", []))
     budget = "".join(

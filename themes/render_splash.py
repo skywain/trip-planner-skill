@@ -167,9 +167,10 @@ import random
 import re
 
 from theme_common import (T, add_art_arg, asset_count, brief_titles,
-                          data_uri, day_embed_url, esc, et, export_js, export_prefix,
-                          ic, init_lang, lang, load_art, load_plan, short_dates, sprite, title_head,
-                          tag_pretty, theme_name, title_kick)
+                          data_uri, day_embed_url, decision_points_html, esc, et, export_js,
+                          export_prefix, hours_html, ic, init_lang, lang, load_art, load_plan,
+                          short_dates, sprite, stay_rules_html, title_head,
+                          sub_stops_html, tag_pretty, theme_name, title_kick)
 
 HERE = pathlib.Path(__file__).parent
 THEME = "splash"
@@ -654,8 +655,15 @@ def render_timeline(day):
             f'<div class="row k-{esc(kind)}">'
             f'<div class="t">{esc(r.get("t", ""))}{est}</div>'
             f'<div class="w">{ic(icn, icls)}{et(r.get("what", ""))}{price}'
-            f'{tag_html(r.get("tag", ""))}{nav}</div></div>')
+            f'{tag_html(r.get("tag", ""))}{nav}{hours_html(r, et)}'
+            f'{sub_stops_html(r, sub_pin, et)}</div></div>')
     return "".join(rows)
+
+
+def sub_pin(href, label):
+    """The row's map pin, for one sub-stop (arguments arrive escaped)."""
+    return (f' <a class="rownav" href="{href}" target="_blank" rel="noopener"'
+            f' aria-label="{esc(t("nav.to"))}{label}">{ic("pin")}</a>')
 
 
 def day_notes(day):
@@ -768,7 +776,7 @@ def render_day(i, day, ART, kit, stops, pal):
       <p class="lbl">{et(day.get("label", ""))}</p>
       {rib}
       {meta}
-      <div class="tl">{render_timeline(day)}</div>
+      <div class="tl">{decision_points_html(day, et)}{render_timeline(day)}</div>
       {day_notes(day)}
       {map_fold(day)}
       <div class="xrow no-export"><button type="button" class="xbtn"
@@ -803,7 +811,7 @@ def render_hotels(hotels):
         opts = "".join(
             f'<li><a href="{esc(o.get("link", "#"))}" target="_blank" '
             f'rel="noopener">{esc(o.get("name", ""))}</a>'
-            f' <span class="mini">{esc(o.get("band", ""))}</span></li>'
+            f' <span class="mini">{esc(o.get("band", ""))}</span>{stay_rules_html(o)}</li>'
             for o in h.get("options", []))
         out.append(
             f'<div class="hotel"><h3>{esc(h.get("base", ""))} · {esc(h.get("area", ""))}</h3>'

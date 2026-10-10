@@ -19,7 +19,9 @@ of checkpoint (a), and move. Ask only when a *core* fact is missing **and** cann
 inferred — and then ask for everything in ONE message in the **intake format** below,
 under four rules: (1) core first, optional after; (2) **only the items the user has not
 already answered** — anything stated in the request (destination, dates, party, "自驾",
-a style name, a budget) is settled and must not reappear as a question; (3) **each
+a style name, a budget) is settled and must not reappear as a question (a "自驾"
+reopens only when the driving card reads not legal / unverified — phase-1-brief.md
+§Driving card step 4); (3) **each
 optional line carries its default**; (4) **one "all defaults" escape hatch** (the 💡 line).
 
 ## Core and optional facts
@@ -50,7 +52,15 @@ optional line carries its default**; (4) **one "all defaults" escape hatch** (th
 **Optional** — ask them in the same message only when you are already asking; never
 send a message just for these. Unanswered → default, and the assumptions block says so:
 - travel style: self-drive · group tour · public transport + walking (default: public
-  transport, or self-drive where the destination is car-first — Phase 3 §Driving legs)
+  transport where it reaches the anchors. **A car-first segment gets no default —
+  neither self-drive nor a tour**: `travel_style` is `mixed`, `notes` names the
+  undecided segment, and Phase 2 shows it as the priced pair of phase-3-legs.md
+  §Driving legs)
+- drivers, only when a self-drive option exists: who drives and the country that issued
+  each licence — the licence, not the passport (default: one driver, licence from the
+  origin country — inferred and stated, never a fifth core question)
+- languages the party can follow spoken commentary in (default: the language the user
+  wrote in, and only that — reading English pages is not following a guide in English)
 - lodging habit: hotel · hostel · B&B / guesthouse · apartment · ryokan/onsen-style
   stays, and the band (default: mid-range hotel, refundable)
 - scenery taste: scenery/nature · city · beach · forest · lake · mountain (default: read
@@ -58,7 +68,10 @@ send a message just for these. Unanswered → default, and the assumptions block
 - party size & mobility (default: 2 adults, no kids) · budget style or number (mid) ·
   interests ranked (food/history/nature/anime/hiking/shopping/photography/nightlife) ·
   pace 2/3/4 anchors per day (3) · ±day flexibility (±2) · passport nationality
-  (visa! infer from origin, state it) · locked must-sees.
+  (visa! infer from origin, state it) · locked must-sees, each scenic one with the view
+  expected: eye-level · overlook · from-below (default: the view behind its best-known
+  picture, stated as an assumption — a boardwalk past a feature and the overlook above
+  it are different must-sees).
 
 ## The intake message
 
@@ -86,9 +99,11 @@ references/output-template.md §Intake message). Keep it to one screen:
 Rules for the block: numbering runs continuously over whatever is left; a heading with
 nothing under it is dropped; the ℹ️ line appears only in stock mode (Picture-capability
 check below), the 💡 line only when at least one optional item is shown; a guessed core
-value is asked as a confirmation ("我猜是 X,对吗?"), not as an open question; never
-more than one message, never a follow-up "just one more thing". English sample:
-output-template.md. The same facts, answered or defaulted, go into `prefs` next.
+value is asked as a confirmation ("我猜是 X,对吗?"), not as an open question; on a
+car-first destination the travel-style line names no default ("自驾 · 跟团 —— 不答 =
+两种都报价,你来选"); never more than one message, never a follow-up "just one more
+thing". English sample: output-template.md. The same facts, answered or defaulted, go
+into `prefs` next.
 
 ## `prefs` and the assumptions block
 
@@ -96,7 +111,24 @@ Write what you learned or assumed into the plan's top-level `prefs` block
 (`assets/plan.example.json`: `theme`, `pictures`, `travel_style`, `lodging`, `scenery`,
 `pace`, `budget`, and `notes` — the inferred values in one line, e.g. "assumed origin
 PVG (zh request, no origin given)"; the assumptions block at checkpoint (a) is written
-from it) so Phases 2-6 read one place and a later replan does not re-ask.
+from it) so Phases 2-6 read one place and a later replan does not re-ask. Three more
+keys, each only when something reads it:
+- `drivers` — whenever a self-drive option exists: a list of
+  `{"who", "licence_country"}` (ISO2 of the issuing country), one per intended driver;
+  `brief.driving` checks each licence (phase-1-brief.md §Driving card).
+- `languages` — whenever a guided option may be priced: the language codes the party
+  can follow spoken commentary in (read in phase-3-legs.md §Driving legs and
+  data-sources.md §Group tours).
+- `must_see` — whenever a must-see is locked: a list of `{"name", "tier"}`, one per
+  must-see. `name` is the sight's own name as a timeline row's `what` will carry it, in
+  `plan.lang`, without view words; `tier` (eye-level · overlook · from-below) only on a
+  scenic one, told or assumed and stated. Phase 4 carries each tiered entry as a
+  `must: true` sub-stop of that tier (output-template.md §city-block), and `plan_lint.py`
+  FAILs a tiered entry no such sub-stop matches. A must-see the traveller drops, or a
+  tier lowered after a written refusal, edits or removes the entry's `tier` and
+  writes the `decisions[]` row — the gate never relitigates a recorded decision.
+`notes` names the locked must-sees and marks which tiers were assumed — the list itself
+is `must_see`.
 
 ## Picture-capability check
 
@@ -140,8 +172,12 @@ receiving an English page is a shipped bug, not a style choice (self-check row, 
 - [ ] Origin, destination, dates / duration and page style are known or defensibly
       assumed, each assumption written for the checkpoint (a) block.
 - [ ] `prefs` carries theme · pictures · travel_style · lodging · scenery · pace ·
-      budget · notes (the inferred values in one line); `lang` is set from the user's
-      language.
+      budget · notes (the inferred values in one line) — plus `drivers` when a
+      self-drive option exists and `languages` when a guided option may be priced;
+      `lang` is set from the user's language.
+- [ ] No car-first segment was defaulted to self-drive or to a tour; every locked
+      must-see is a `prefs.must_see` entry, each scenic one with its `tier`, told or
+      assumed and stated (an assumed tier marked in `notes`).
 - [ ] The picture-capability check ran silently before styles were mentioned;
       `prefs.pictures` ∈ native | key | stock, and in stock mode the user was told once
       with the exact notice; no key was asked for or handled in chat; a non-illustrated /

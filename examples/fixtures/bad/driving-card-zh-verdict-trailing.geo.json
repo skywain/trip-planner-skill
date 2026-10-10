@@ -1,0 +1,28 @@
+{
+ "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: the driving card's zh legality line carries no verdict from the enum right after the label ('合法但需IDP' is not one — a verdict ends at '·' or the end of the line) (WARNs go to stderr and do not count)",
+ "trip": "Fixture — bad: driving-card-zh-verdict-trailing",
+ "lang": "en",
+ "meta": {
+  "budget_total": "n/a — fixture",
+  "self_check": "self-checked: 0 issues found and fixed"
+ },
+ "days": [
+  {
+   "date": "2026-11-10",
+   "timeline": [
+    {
+     "t": "09:00-11:00",
+     "what": "Example Canyon viewpoints",
+     "kind": "anchor"
+    }
+   ]
+  }
+ ],
+ "brief": {
+  "visa": "fixture card — content is not under test",
+  "driving": "示例州 · A国驾照 — 合法性:合法但需IDP · 租车柜台:三家都租 · 州交通局页面 · 截至 2026年10月\n保险:租车免赔协议要求驾照在驾驶地有效 · 测试样本"
+ },
+ "prefs": {
+  "travel_style": "self-drive"
+ }
+}

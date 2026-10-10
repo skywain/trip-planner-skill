@@ -7,7 +7,8 @@ separate tickets, LCC arithmetic), intercity rail vs fly, driving legs, and what
 leg row records.
 
 Inputs: the chosen route skeleton (Phase 2), `prefs.travel_style`, the Phase 1 visa /
-entry facts (transit countries included). Outputs: `legs[]` rows — one pick + one backup
+entry facts (transit countries included) and, for a car-first segment,
+`prefs.languages` and `brief.driving`. Outputs: `legs[]` rows — one pick + one backup
 per leg — the checklist rows for flights, date-locked rail and rentals, the budget rows
 they imply, and the baggage walkthrough for multi-leg trips.
 
@@ -63,17 +64,45 @@ empty section (they used to crash — the Vietnam test lost both themed pages to
 
 **Driving legs (parks and car-first destinations):**
 - A national park without a car is a bus-tour compromise — decide that explicitly with
-  the user, never by default. A rental is its own leg: pick-up/drop-off at airports,
-  one-way drop fees noted, and the airport↔park drive budgeted honestly (Bozeman→Old
-  Faithful ≈ 2.5 h, Fresno→Yosemite Valley ≈ 2.5 h — the map's "nearby airport" is
+  the user, never by default. The user sees it at checkpoint (a) as a pair priced
+  all-in for the same days: **self-drive** (base + taxes + collision waiver /
+  liability + fuel + one-way fee + park entry) against **the tour** (fare + nights the
+  traveller books themselves + surcharges + tips — data-sources.md §Group tours, Price
+  anatomy). Each side shows what it actually reaches (viewpoint tiers,
+  phase-4-days.md step 2); the tour side shows its commentary language against
+  `prefs.languages` (data-sources.md §Group tours, Structure quirks to check); the
+  self-drive side shows the two licence columns from
+  `brief.driving` (phase-1-brief.md §Driving card), legality first. The own-language
+  consensus line (phase-1-brief.md §Where the facts come from) sits beside the pair.
+  A rental is its own leg, its `type` saying so ("car rental" / 租车 — a self-drive
+  trigger, phase-1-brief.md §Driving card): pick-up/drop-off at airports, one-way drop
+  fees noted, and the airport↔park drive budgeted honestly (Las Vegas→Grand Canyon
+  South Rim ≈ 4.5 h, Salt Lake City→Moab ≈ 3.5-4 h — the map's "nearby airport" is
   half a day of driving).
 - Record per driving leg: pick-up/drop point + counter hours, one-way drop fee,
-  airport↔park drive time (budgeted honestly), car class, price +
+  airport↔park drive time (budgeted honestly), car class (and whether it has CarPlay /
+  Android Auto — navigation.md §Self-drive days), price +
   as-of date, insurance note, fuel estimate, park entrance fee (per **vehicle** in the
   US; 3+ parks → an annual pass wins — the $80 America the Beautiful is
   residents-only since 2026, non-residents take the $250 pass from the 2nd park,
-  country notes §USA), and the license requirement for the driver's
-  passport (see country notes).
+  country notes §USA), and the licence's legal status and the desk's terms from
+  `brief.driving`. **Rental tactics** go in the same record: price the class on the
+  brand's site for the traveller's home market too ⚡ (country sites often bundle the
+  waiver and liability for less than the destination rate plus counter add-ons); pay
+  at the counter, not prepaid, while the drive decision is open; book the return a
+  little late — the slack is free where early returns cost nothing (read the terms);
+  skip prepaid fuel, toll packs where the route has no toll roads, and accident cover
+  the traveller's insurance already gives; take the class locals actually rent on that
+  terrain instead of assuming a compact. Price surfaces and what an inclusive rate
+  must contain: data-sources.md §Car rental.
+- **Every self-drive day carries a no-car fallback, worked out before anything is
+  cancelled**: the bus or park shuttle, taxi and walking chain that still reaches the
+  day's main anchor, with timetable (weekday grid included) and price — for a refused
+  licence at the counter, a missing car, or a driver unfit to drive. When the drive
+  goes ahead, a free-cancellation booking held against it (data-sources.md §Group
+  tours, Reserve-now-pay-later) does not wait for its cutoff if no new information
+  will arrive before it (the counter's answer comes only at pick-up): release it at a
+  calm moment once the fallback is walked on the map, not at the last one.
 - Gateway towns run out of cars and rooms in season — the rental and the first night
   go on the booking checklist, not the "later" pile.
 
@@ -84,10 +113,23 @@ date, **checked-bag fee** (US domestic: $35-45 per bag per one-way on every majo
 since Southwest ended free bags in 2025 — 4 legs is a real budget line; UA Basic
 Economy is personal-item-only on domestic and short-haul Latin America routes,
 while long-haul international Basic Economy does include the carry-on ⚡),
-refund/change class, deep link. Multi-leg trips get a
+refund/change class, deep link. A non-refundable fare sets `"refundable": false` on
+its legs row (shape: output-template.md §Top-level plan skeleton; it triggers the
+independent review — phase-6-assemble.md §Independent review). Once booked,
+`legs.note` says which reference does what: the carrier's **record locator** (usually
+6 characters, on the e-ticket receipt) is what the carrier's app and check-in want —
+an OTA's order number is not — and the 13-digit e-ticket number finds the receipt
+after the trip; the codes themselves stay out of the rendered page. Multi-leg trips
+get a
 **baggage walkthrough**: where the big bag physically is on every tour/venue day
 (day tours = bag stays at hotel; stadiums ban bags; 2-day tours are often
-overnight-bag-only). Output 1 pick + 1 backup per leg.
+overnight-bag-only). Output 1 pick + 1 backup per leg. **A backup counts only if it
+still reaches the leg's pinned dependency** (tour pickup, event, onward flight); when
+none does, the leg is **must-catch** — `legs.note` says "no usable backup" and the plan
+buys margin instead (arrive the day before, or take the earliest departure). The ground
+run to a dawn must-catch goes by pre-booked car, with rail as the backup: early weekend
+trains are the thinnest (live case: a Sunday-dawn commuter train cancelled outright, on
+a non-refundable ticket).
 
 ## Exit criteria — tick every line before Phase 4
 
@@ -100,10 +142,17 @@ overnight-bag-only). Output 1 pick + 1 backup per leg.
       "no visa needed" was written anywhere; a needed transit visa is on the checklist
       with its deadline.
 - [ ] Every leg row: carrier · date · dep / arr local · price + currency + as-of ·
-      checked-bag fee · refund / change class · deep link; one pick + one backup.
+      checked-bag fee · refund / change class · deep link; a non-refundable fare
+      carries `"refundable": false`; one pick + one backup that
+      still reaches the pinned dependency (or "no usable backup" on a must-catch leg).
+- [ ] A car-first segment went to the user as the all-in pair (self-drive vs tour,
+      what each reaches, commentary language, licence legality) — decided with the
+      user, never by default; headless, the days run on the legal option and the
+      assumptions block shows both columns (phase-1-brief.md §Driving card step 4).
 - [ ] Self-drive: the rental is its own leg with pick-up / drop-off, counter hours, car
       class, price + as-of, one-way drop fee, airport↔park drive time, insurance note,
-      fuel, park fees, licence requirement; the
+      fuel, park fees, licence status from `brief.driving`; every self-drive day has
+      its no-car fallback (timetable + price); the
       rental and the first gateway night are on the checklist.
 - [ ] Multi-leg trips carry the baggage walkthrough (where the big bag is on every tour
       / venue day).

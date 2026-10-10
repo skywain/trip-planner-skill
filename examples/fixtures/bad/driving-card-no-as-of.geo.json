@@ -1,0 +1,28 @@
+{
+ "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: the driving card's legality line has no as-of stamp (WARNs go to stderr and do not count)",
+ "trip": "Fixture — bad: driving-card-no-as-of",
+ "lang": "en",
+ "meta": {
+  "budget_total": "n/a — fixture",
+  "self_check": "self-checked: 0 issues found and fixed"
+ },
+ "days": [
+  {
+   "date": "2026-11-10",
+   "timeline": [
+    {
+     "t": "09:00-11:00",
+     "what": "Example Canyon viewpoints",
+     "kind": "anchor"
+    }
+   ]
+  }
+ ],
+ "brief": {
+  "visa": "fixture card — content is not under test",
+  "driving": "Example State · country-A licence — legality: legal with IDP · desks: all three brands rent on it with the IDP · state licensing page\nInsurance: the rental waiver needs a licence valid where the car is driven · fixture"
+ },
+ "prefs": {
+  "travel_style": "self-drive"
+ }
+}

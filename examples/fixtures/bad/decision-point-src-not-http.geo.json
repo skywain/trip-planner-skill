@@ -1,0 +1,33 @@
+{
+ "_expect": "scripts/plan_lint.py exits 1 — the one FAIL: a decision point's src is not an http(s) URL (WARNs go to stderr and do not count)",
+ "trip": "Fixture — bad: decision-point-src-not-http",
+ "lang": "en",
+ "meta": {
+  "budget_total": "n/a — fixture",
+  "self_check": "self-checked: 0 issues found and fixed"
+ },
+ "days": [
+  {
+   "date": "2026-11-10",
+   "timeline": [
+    {
+     "t": "09:00-11:00",
+     "what": "Example Canyon viewpoints",
+     "kind": "anchor"
+    }
+   ],
+   "decision_points": [
+    {
+     "t": "07:30",
+     "what": "go / no-go for the rim walk",
+     "check": "wind gusts on the park's conditions page",
+     "if_no": "canyon floor loop instead",
+     "src": "park webcam"
+    }
+   ]
+  }
+ ],
+ "brief": {
+  "visa": "fixture card — content is not under test"
+ }
+}

@@ -146,7 +146,8 @@ TOUR_RE = re.compile(r"guided tour|day tour|day trip|excursion|small-group|"
 # already save us from japanese / Indiana / Chinatown; CJK has no boundaries to
 # work with, and these two Istanbul names are in every itinerary of the city:
 # 埃及香料市场 = the Egyptian (Spice) Bazaar, 苏丹艾哈迈德 = Sultanahmet. `Island`
-# is the German/Icelandic name of Iceland and reads Museum Island as a country.
+# (the German/Icelandic name of Iceland) is deliberately not an alias in index.json:
+# in an en plan it is an English word, and it once put a fjord on a Hawaii cover.
 FALSE_FRIENDS = ("new mexico", "new england", "little india", "india pale ale",
                  "museum island", "long island", "coney island", "rhode island",
                  "easter island", "island hopping",

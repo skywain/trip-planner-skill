@@ -73,6 +73,13 @@ deep link marked "verify on click". Statuses marked ✓ were live-tested 2026-08
 - **CN networks / CN carriers**: https://www.trip.com/flights/ (or flights.ctrip.com)
   in the browser pane. Also check one LCC direct (Spring 春秋, Peach, Scoot, AirAsia…).
 - **Never** curl airline/OTA sites — instant bot-block, wasted call.
+- **Carrier rules and clocks move after booking ⚡**: check-in and bag-drop cutoffs
+  (live case: a regional carrier lengthened its cutoff mid-season), the
+  check-in terminal or lobby, and seasonal timetables (IATA seasons switch on the last
+  Sunday of March and of October; a booked departure can move by tens of minutes).
+  Source = the carrier's own travel-alerts page and the booking itself, not the
+  original confirmation email. When to re-read them on the road: output-template.md
+  §On-trip re-audit rows.
 
 ## Group tours (跟团) — when the traveller prefers not to self-drive
 The tour product replaces flights+car+hotel for its days, so research it FIRST — its
@@ -109,8 +116,18 @@ schedule dictates the surrounding legs, not the other way around.
   country-quick-notes.md §USA); driver-guide tips $10-15/person/day (often cash).
 - **Structure quirks to check**: which day is a pickup/dropoff day (not a touring
   day); what time it returns on the last day (operators state "book flights after
-  X:00" — obey it); overnight-bag-only luggage rules on 2-day tours; whether the
-  advertised sight is a stop or a drive-by.
+  X:00" — obey it); overnight-bag-only luggage rules on 2-day tours; the product's
+  stated guide or audio language against `prefs.languages` (none matches → say so on
+  the row: it has no commentary advantage; price one that does beside it when one
+  exists — an own-language operator, an audio guide); whether the advertised sight is a stop or a drive-by, and for a view, **which viewpoint tier**
+  the stop reaches (phase-4-days.md step 2). Group tours stop only where the whole
+  group can go: a viewpoint that needs a 30-60 min walk (an overlook trail, a long stair) is
+  usually skipped even when the product says it visits the sight ("boardwalks",
+  "see X"), and a multi-day tour rarely backtracks for a skipped stop — the next day
+  runs another part of the route. When a must-see is an overlook-tier picture: ask in
+  writing before booking, pick a product that names the overlook, or price that day
+  self-driven once `brief.driving` covers that jurisdiction and driver
+  (phase-1-brief.md §Driving card; phase-3-legs.md §Driving legs).
 - **Audit the finalists like a hostile lawyer** (1-2 shortlisted products, not the
   longlist): the date-specific fare beats the "From $X" banner (select the date,
   read the fare row — live case: $229 banner, $239 on every bookable date); "park
@@ -131,11 +148,20 @@ schedule dictates the surrounding legs, not the other way around.
   bookings silently kept an empty pickup field). The reliable channel is
   written, not the UI, and **the user sends it** (SKILL.md Hard rule 1: the
   agent never enters personal data anywhere — a hotel address plus booking
-  reference through a live booking is exactly that): the plan ships a
-  checklist row telling the user to message the operator through the booking
-  (hotel name + full street address + booking reference) and get pickup time
-  and point confirmed **in writing**, plus a second deadline row "written
-  pickup confirmation received" — the empty field is harmless once the
+  reference through a live booking is exactly that): the plan drafts **one
+  message** and ships it as a checklist row — the user sends it through the
+  booking right after booking, because operators otherwise ask in batches, one
+  round-trip each. It carries: pickup lodging + full street address + booking
+  reference; the **must-stop viewpoints, stated as needs, not as a route** (what
+  it is, why it matters, what the traveller accepts — an extra fee, a later
+  return, walking it alone while the group does something else); meal choices and
+  dietary needs; on US park tours, non-resident park-pass holders
+  (country-quick-notes.md §USA); a
+  reachable local voice number. A second deadline row, "written confirmation
+  received (pickup + must-stop viewpoints)", closes it; the reply fills each must
+  sub-stop's `confirmed` (output-template.md §city-block). A written "no" before
+  the tour still leaves time to switch product, day or mode; asking the guide on
+  the day depends on goodwill. The empty pickup field is harmless once the
   operator's reply exists. Operator silent for ~3 days — or half the time
   remaining to pickup, whichever is shorter — the row escalates: the user
   quotes the booking reference in the OTA's support chat.
@@ -246,6 +272,27 @@ No good keyless API exists — use browser + deep links; recommend neighborhoods
   jewellery is often an excluded or sub-limited property class, so advise
   leaving it home.
 
+## Car rental
+Legality comes first and is not a rental question: whether the destination's law
+recognises the licence is the `brief.driving` card (phase-1-brief.md §Driving card;
+country facts in country-quick-notes.md, "Destination not listed?" driving line and §USA
+Driving) — price nothing until it passes. The booking tactics (pay at the counter,
+late return, add-ons to skip, car class) are phase-3-legs.md §Driving legs; this section
+is where the numbers come from.
+- **Three price surfaces, same car class** ⚡: an aggregator in the browser pane for
+  the spread; the brand's site for the pickup country; the same brand's site for the
+  renter's **home market** (country selector or home-market partner), which often
+  sells an inclusive rate the destination site sells as base + counter add-ons.
+  Read each on the final screen, pay-at-counter rate where offered, all-in: base +
+  taxes and airport fees + one-way fee + the cover lines below.
+- **What "inclusive" must contain before it compares**: a collision / loss damage
+  waiver (CDW/LDW) and third-party liability, with the excess amount — the layer the
+  travel policy's rental rider sits on top of (§Travel insurance, "a self-drive day is
+  a stack"). A rate missing either is priced plus the counter's version.
+- **The desk's licence terms** are read on the brand's own page for the pickup
+  country, dated, and the branch's written answer goes into `brief.driving`.
+  The user books (SKILL.md Hard rule 1).
+
 ## Intercity rail / bus / local transit
 - Durations & connections (browser, keyless):
   `https://www.google.com/maps/dir/?api=1&origin={A}&destination={B}&travelmode=transit`
@@ -295,6 +342,19 @@ Details: references/navigation.md.
   195-285). Timetable = operator site (country-quick-notes.md lists them) or the
   Google Maps transit deep link above at the hour the plan uses it.
 
+## Traveller consensus — how people actually do it
+Where travellers who share the user's language post about a destination: evidence for
+the trip's shape (self-drive or tour, which base, which viewpoint is the point, what
+disappointed), never for prices, hours or rules. When to read it, the one
+`decisions[]` row and showing a disagreement to the user: phase-1-brief.md §Where the
+facts come from; for tour vs drive, phase-3-legs.md §Driving legs. Sources ⚡:
+- Mainland-Chinese travellers: Xiaohongshu 小红书, Mafengwo 马蜂窝, Qyer 穷游 —
+  search `{destination} 自驾` / `跟团` / `攻略`.
+- Korean: Naver blogs and cafés. Japanese: 4travel, note.com. English: Reddit
+  r/{destination} and the Tripadvisor destination forum.
+- Login wall or app-only → the browser pane; still walled → write "community
+  consensus not checked". Never log in for the user, never fill it from memory.
+
 ## Venues, tours, tickets
 - Hours/closures: official venue site first; Google Maps place card second (watch for
   "Temporarily closed"); blogs last and only if <12 months old.
@@ -302,6 +362,27 @@ Details: references/navigation.md.
   Klook `https://www.klook.com/search/?query={q}` ·
   GetYourGuide `https://www.getyourguide.com/s/?q={q}` · KKday · Viator.
   Platforms sometimes cost MORE than the official site — compare before recommending.
+- **Event tickets (sports, concerts) ⚡**: team or venue site → the primary seller →
+  resale marketplaces (StubHub, SeatGeek, Vivid Seats…); compare resale on the
+  **checkout all-in** — the fees appear only on the last screen. A primary seller's
+  fraud screen can reject the mix foreign card + VPN + brand-new account with a
+  generic error: the user retries from a home network without the VPN, or buys
+  resale. A declined attempt can leave a **pending authorisation — not a charge**; it
+  drops off. Resale tickets usually land in an account on the primary platform as a
+  **mobile-only rotating code**: the user creates that account and installs its app
+  before the trip (checklist row). The user buys (SKILL.md Hard rule 1).
+- **Timed entry — read the remaining slots before choosing a release window**:
+  recreation.gov ticket facilities (US federal sites; the page URL is
+  `/ticket/facility/{id}`) answer
+  `curl -s -A "Mozilla/5.0" "https://www.recreation.gov/api/ticket/availability/facility/{id}?date={YYYY-MM-DD}"`
+  (undocumented; answered live 2026-10-02 ⚡ — fields may change): one row per
+  `tour_time`, with `inventory_count` and `reservation_count` per sale channel and
+  `booking_windows` (`PRIMARY` / `SECONDARY` release windows, each with its open and
+  close instant); `[]` =
+  wrong id or nothing that date. Vehicle timed-entry products (`/timed-entry/{id}`)
+  use another endpoint, not checked. An advance window that still has seats beats
+  sending the user to gamble on a next-day release; a sold-out slot's release instant
+  becomes a checklist gate.
 
 ## Public holidays — ✓
 `curl -s "https://date.nager.at/api/v3/PublicHolidays/{year}/{ISO2}"` (keyless,
@@ -388,6 +469,27 @@ holiday calendar page (timeanddate-style) for the year — and put the dates in
    From Python, `urllib` direct hits get **HTTP 403 without a User-Agent** — set one
    (`{"User-Agent": "trip-planner-skill/1.x (personal trip planning)"}`, which the
    script already does); curl works because it sends its own.
+5. **Live conditions (same day)** — for a go / no-go decided the evening before or on
+   the day (when, and what it decides: scheduling.md §Day types, "Weather-window
+   day"). Two kinds of evidence, never the point forecast alone:
+   - **The forecast and the forecaster's reasoning — US only** (✓ 2026-10, NWS keyless
+     JSON; a User-Agent header is required — without one the API answers 403):
+     `curl -s --max-time 30 -A "trip-planner-skill/1.x (personal trip planning)" "https://api.weather.gov/points/{lat},{lon}"`
+     → `properties.forecastHourly` (a URL: fetch it for `properties.periods[]`, hour by
+     hour) and `properties.cwa` (the forecast office — `gridId` is the forecast grid and can
+     differ, Alaska for one) →
+     `curl -s --max-time 30 -A "…" "https://api.weather.gov/products/types/AFD/locations/{cwa}/latest"`
+     → `productText`, the Area Forecast Discussion: the forecaster's timing and
+     confidence in prose. Outside the US: the national weather service's forecast text
+     in the browser pane ⚡.
+   - **The present — worldwide**: the nearest airport's METAR (✓ 2026-10, keyless,
+     plain text, one line per station — wind, visibility, cloud):
+     `curl -s --max-time 30 -A "trip-planner-skill/1.x" "https://aviationweather.gov/api/data/metar?ids={ICAO}"`;
+     satellite imagery in the browser pane — RAMMB SLIDER
+     (`https://rammb-slider.cira.colostate.edu`, GOES-East / GOES-West / Himawari ⚡);
+     for a view, the official webcam (§Hazard feeds).
+   Stamp each line with what was read and when: `… · METAR {ICAO} {HHMM}Z + NWS AFD ·
+   as-of YYYY-MM-DD`.
 
 ## FX — ✓
 `curl -s "https://api.frankfurter.dev/v1/latest?base={HOME}&symbols={DEST}"`
@@ -436,6 +538,22 @@ line numbers — source notes, not a second list):
 Origin block, mainland-China departure only: UnionPay vs Visa/MC acceptance,
 Alipay+ / WeChat cross-border coverage ⚡, foreign cash pre-ordered 1-2 days ahead
 at home.
+
+## Shopping requests
+A "buy it there" wish is a price comparison and a version check.
+- **Price it against the home market's sale price, not its list price**: today's home
+  price (official store, a marketplace promotion) against the destination's tag plus
+  its sales tax or VAT, less a tourist refund only where one applies, plus the card's
+  FX fee (§FX, Money safety line 2). "Cheaper there" from a forum is not a number.
+- **Identify the version by the box, not by folklore**: "the origin-country version is
+  better" is forum folklore. A market version is read off its regulatory label and its
+  **full** barcode, compared with the brand's own domestic site — a GS1 prefix (the
+  first digits) proves only which GS1 office issued the code, not where or for which
+  market the item was made (GS1, as of 2026-10). Worked cases: country-quick-notes.md
+  §Japan, §USA.
+- What travels on to the next border — the next country's entry rules, and the home
+  country's allowance on the way back — is `brief.safety` line 6 (output-template.md
+  §Brief templates).
 
 ## Visa / entry
 Web search `{nationality} citizens visa {destination}` restricted to official
@@ -516,11 +634,53 @@ T-7 / T-3 ladder rows.
   (✓ keyless GeoJSON).
 - **NOAA NHC active storms** — `curl -s "https://www.nhc.noaa.gov/CurrentStorms.json"`
   (✓ keyless JSON, `activeStorms[]`; Atlantic + East Pacific).
+- **JMA typhoons** — `curl -s "https://www.jma.go.jp/bosai/typhoon/data/targetTc.json"`
+  (✓ 2026-10-02, keyless JSON: one row per tracked system — `tropicalCyclone` id,
+  `typhoonNumber`, `category` (`LOW` = no longer a tropical cyclone; act on TD / TS /
+  STS / TY), `issue`; per storm,
+  `…/typhoon/data/{tropicalCyclone}/specifications.json` carries the name, then the
+  analysis and forecast parts, each with `position.deg` = `[lat, lon]`, `validtime.JST`,
+  `category.en` and `pressure` (hPa), plus `probabilityCircleRadius.km` on forecast
+  parts and `stormWarning[].range.km` where present — ✓ 2026-10, parsed live)
+  — the NW Pacific, which NHC does not cover. **Reading it against the trip**: at each
+  `validtime` near a flight or ferry day, the great-circle distance from `position.deg`
+  to the destination airport against that part's radii. On a forecast part
+  `stormWarning` is the storm-warning area (暴風警戒域), whose radius JMA builds as
+  probability circle + storm-wind radius — so compare with `stormWarning[].range.km`
+  alone (largest sector when it is split); inside = the airport is within the possible
+  storm-wind area. On the analysis part it is today's storm-wind radius. What follows is
+  phase-1-brief.md §Hazard line — no km threshold of our own.
+- **Wildfire and smoke (US)** — InciWeb incident pages (`https://inciweb.wildfire.gov`),
+  the park's `https://www.nps.gov/{park_code}/planyourvisit/conditions.htm` for road
+  closures, and an AQI number:
+  `curl -s "https://air-quality-api.open-meteo.com/v1/air-quality?latitude={lat}&longitude={lon}&hourly=us_aqi,pm2_5&timezone=auto&forecast_days=2"`
+  (✓ 2026-10-02, keyless) or the AirNow Fire and Smoke Map (`https://fire.airnow.gov`,
+  browser).
+- **View-dependent stops: official webcams over point forecasts** — a clear point
+  forecast does not mean the bridge, crater or summit is visible (live case: a coastal
+  bridge viewpoint sat in fog all afternoon under a "sunny" forecast). Look at the
+  official webcam before leaving — NPS parks:
+  `https://www.nps.gov/{park_code}/learn/photosmultimedia/webcams.htm`; observatory,
+  city or bridge cams elsewhere — and put its link on that stop's row (advised, not
+  linted).
 - USGS Volcano Hazards API (`https://volcanoes.usgs.gov/vsc/api/`, alert levels —
-  unverified), JMA 台風・警報, CWA, HKO, PAGASA, BoM, national fire services: browser
-  pane.
+  unverified), JMA warnings (警報), CWA, HKO, PAGASA, BoM, national fire services:
+  browser pane.
 
 ## Optional keyed upgrades (only if the user already has env vars set)
 - `AMADEUS_KEY` / `AMADEUS_SECRET` — Amadeus self-service flight/hotel search APIs.
 - `SERPAPI_KEY` — Google Flights/Hotels as JSON without a browser.
 Never ask the user to sign up for keys mid-plan; the keyless path is the default.
+
+## Browser-pane reading recipes and known walls ⚡ (as of 2026-10)
+- **Read accessible labels and visible text, not brittle selectors**: result rows on
+  Google Flights and Google Maps carry price, times, stops and baggage notes in their
+  accessible label (`aria-label`) — read them through the pane's accessibility-tree /
+  find tools or `innerText` with a regex; generated class names churn. A screenshot
+  is the last resort for reading a number.
+- **A bot wall is read by the user, never bypassed**: a CAPTCHA, a Cloudflare-type
+  challenge or a login wall stops the agent — hand the user the link, mark the row
+  "verify on click", move to the next source; never retry a 403 in a loop. Seen in
+  2026: primary ticket sellers and some resale sites, some hotel-chain brand sites,
+  some mobile-carrier sites; one page of a site can read fine while another is
+  walled, so a wall is recorded per page, not per site.

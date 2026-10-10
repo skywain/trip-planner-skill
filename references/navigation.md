@@ -11,7 +11,7 @@ together with scheduling.md before Phase 4 timeline assembly.
    Still run `check` and `kml` — distances, clustering and offline pins stay valid.
    Mainland China: run `links --provider amap` (or `apple`) instead of the default
    Google links. Korea: skip the `links` output and substitute Naver search links in
-   the plan, including the day-overview link.
+   the plan, including the day-overview link and the sub-stop links.
 1. Write the plan JSON — **name it `plan.geo.json` from the start**, because geocode
    edits a file with that stem in place and every later command then reads the one
    file that has everything. It feeds the maps, the KML and the final HTML, which is
@@ -28,7 +28,8 @@ together with scheduling.md before Phase 4 timeline assembly.
    `walk | transit | fly | drive | boat | train | bus` — because 1.4 km can be a
    two-stop metro ride or a pleasant walk, and only the plan knows which; the field
    decides the walking total, which directions the tappable link opens, and whether
-   a 45 km boat or a 1,900 km flight is a declared long hop or a clustering mistake.
+   a 45 km boat or a 1,900 km flight is a declared long hop or a clustering mistake
+   (who drives a `drive` hop: §Self-drive days).
    **A signature walk longer than 1.6 km must carry `mode: walk`** or `check` counts
    it as ridden and the day's on-foot total silently reads 0 (the Bondi→Coogee case). **`stops` must mirror that day's anchors plus any modelled strolls, in
    visit order** — every map artifact and the walking total are computed from it, so
@@ -96,6 +97,9 @@ together with scheduling.md before Phase 4 timeline assembly.
    the day. Declared `fly`/`boat` rows and legs over 100 km stay in the
    count and simply get no link (a declared `train`/`bus` under 100 km still gets a transit link) (the script says so per row) — do **not** answer
    that note by adding `map:false`, or every pairing after it shifts.
+   **Photo positions inside one anchor** (the overlook, the stair down, the rail with
+   the view) go into that anchor row's `sub_stops`, never into `stops` — the fields
+   and the reason: output-template.md §city-block.
 2. `python3 scripts/route_tools.py geocode plan.geo.json` — Nominatim/OSM, keyless; the
    script enforces the usage policy (User-Agent, 1 req/s throttle, cache) and prints
    what each stop resolved to, so a wrong-city hit is visible immediately, and
@@ -124,9 +128,12 @@ together with scheduling.md before Phase 4 timeline assembly.
    scheduling, not after.
 4. `... links plan.geo.json --write [--provider google|apple|amap]` — per-hop deep
    links (mode from each stop's `mode`, else guessed from distance) + a whole-day
-   overview link, written straight into the timeline's hop rows and `day_map`.
-   Default provider is Google; for mainland China pass `--provider amap` (or
-   `apple`) — see "Google Maps is unavailable in some destinations". Use `--write`: transcribing
+   overview link, written straight into the timeline's hop rows and `day_map`. It
+   also writes each sub-stop's place `link` and, on a row with two or more
+   sub-stops, the row's `sub_map` walking chain — on every day, including one with
+   fewer than two stops. Default provider is Google; for mainland China pass
+   `--provider amap` (or `apple`) — see "Google Maps is unavailable in some
+   destinations". Use `--write`: transcribing
    180-character URLs by hand is the most error-prone step in the pipeline, and a
    mis-paste puts the wrong directions on a stop with nothing to catch it.
    **Read its output, don't just look for "wrote"** — the first unfamiliar-trip
@@ -176,7 +183,8 @@ together with scheduling.md before Phase 4 timeline assembly.
      trip). If you do see it, some written link *is* dead on the ground: fix it.
    After it runs, spot-check by opening two links per day on the browser pane — a
    deep link is the one artifact the reader taps blind on the street.
-5. `... kml plan.geo.json -o trip.kml` — numbered pins + a route line per day.
+5. `... kml plan.geo.json -o trip.kml` — numbered pins + a route line per day, plus
+   an un-numbered pin for each sub-stop that carries `lat`/`lon`.
    Deliver the KML next to the HTML plan.
 6. Browser-verify the load-bearing hops (rules below), then write the hop rows into
    the timeline.
@@ -192,6 +200,9 @@ together with scheduling.md before Phase 4 timeline assembly.
   day's visual overview only: real navigation on the road uses the per-hop links,
   which have no waypoints. More than ~11 stops → the script splits the chain into
   overlapping segments.
+- Sub-stop pin: `https://www.google.com/maps/search/?api=1&query={lat},{lon}` (or the
+  URL-encoded `query` text); the row's `sub_map` is the chain form in walking mode,
+  through the sub-stops, where a point may be query text.
 
 ## Google Maps is unavailable in some destinations
 
@@ -212,7 +223,8 @@ test shipped 30 of them before anyone noticed. `route_tools.py links` therefore 
   (`https://uri.amap.com/navigation?from=lon,lat,name&to=lon,lat,name&mode=walk|bus|car`,
   keyless). **Per-hop links only: no DAY CHAIN / `day_map` is emitted** (高德's
   keyless URI has no multi-point form; the script prints "DAY CHAIN not available
-  for amap — per-hop links only" and, with `--write`, removes a stale `day_map`) —
+  for amap — per-hop links only" and, with `--write`, removes a stale `day_map`; no
+  `sub_map` either, and a sub-stop gets a pin only when it carries `lat`/`lon`) —
   the day-overview slot stays empty and the plan says so; navigation on the ground
   is per hop anyway. Spot-check two links per day in the browser pane as usual: OSM
   coordinates are WGS-84 and Chinese map apps draw on the GCJ-02 datum, so a pin
@@ -221,8 +233,8 @@ test shipped 30 of them before anyone noticed. `route_tools.py links` therefore 
 - `--provider apple` — Apple Maps links
   (`https://maps.apple.com/?saddr=lat,lon&daddr=lat,lon&dirflg=w|r|d`); works
   inside China (Apple Maps runs on local data there) and elsewhere, keeps the DAY
-  CHAIN, opens the Apple Maps app on iOS. Use it for an iPhone traveller; Android
-  users get `amap`.
+  CHAIN (a `sub_map` only when every sub-stop carries `lat`/`lon`), opens the Apple
+  Maps app on iOS. Use it for an iPhone traveller; Android users get `amap`.
 
 Whatever the provider, **the trip KML in Organic Maps is the hard fallback** — it
 needs no network and no provider — and in China the connectivity note belongs in the
@@ -280,13 +292,31 @@ an estimate into a single confident number just because it looks tidier.
 - Default link recipe stays Google because the link opens the native app on both iOS
   and Android.
 
+## Self-drive days
+
+Every `drive` stop the traveller drives carries `driver: self` — that is what
+`plan_lint.py` sees (the full self-drive trigger list: phase-1-brief.md §Driving card);
+a drive someone else runs carries `taxi` / `hired` / `tour` (output-template.md
+§city-block). Before pulling
+out of the rental car park:
+- **Hear the voice.** Play the navigation app's test voice through the car's
+  speakers — a muted guidance toggle is the silent killer on a two-lane road, where
+  one missed fork is a long way round.
+- **A cable, not a mount.** CarPlay / Android Auto over a cable puts the map on the
+  dash and replaces a phone mount: ask the desk to pair it at pick-up, and carry both
+  a USB-A and a USB-C cable (whether the class has it: phase-3-legs.md §Driving legs).
+- **An offline area for the whole route**, downloaded on Wi-Fi before the day — park
+  and mountain roads lose signal. Offline, Google Maps gives driving directions only —
+  transit, cycling and walking directions are unavailable offline (Google Maps Help,
+  as of 2026-10 ⚡).
+
 ## Offline fallback
 
 - **Organic Maps** (free, OSM): imports the trip KML — numbered pins + day lines work
   fully offline. Recommend it in every plan footer with a one-line import hint
   (download country map → bookmarks → import KML).
-- Google Maps offline areas: download per city; note transit routing does not work
-  offline, walking does.
+- Google Maps offline areas: download per city; offline they give driving directions
+  only — no transit, cycling or walking routing (§Self-drive days, as of 2026-10 ⚡).
 
 ## Geocoding discipline
 

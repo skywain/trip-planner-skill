@@ -136,7 +136,7 @@ agent 或 `themes/genvideo.py` 出的是同样的一条链)。视频素材不随
 - **一条跨城路线** —— 先给 2–3 套骨架让你挑,再给一个日期网格的真实机票价格,以及每一段
   城际交通的火车 vs 飞机结论。
 - **每一天的逐小时安排** —— 营业时间和闭馆日都用工具查过,停留时长和缓冲来自一套写下来的
-  排程方法,附带节假日与节庆撞车扫描,每一跳都有可点开的地图链接。
+  排程方法,附带节假日与节庆撞车扫描,每一跳都有可点开的地图链接;大景点内部还会列出值得停的具体位置——各是什么视角(平视 / 俯瞰 / 仰视)、站哪里、以及把它们串起来的步行链接。
 - **交付物是一个设计版页面,不是一堵文字墙** —— 计划会经上面那**八种主题渲染器**里的一种
   (默认 **illustrated 插画版**)渲染成一个自包含、手机友好的文件:`trip-<theme>.html`。
   七种静态主题自带离线分享图按钮(*存这一天* / *存附录* / *存一张长图*;八种里有五种支持
@@ -364,8 +364,8 @@ references/
   art-schema.md               指向 themes/ART-SCHEMA.md
 scripts/
   flight_scan.py              Google Flights 价格网格扫描器(免密钥,从中心往外扩)
-  route_tools.py              geocode → 距离检查 → 地图链接 → KML → 闸门 .ics → 日出日落
-  plan_lint.py                渲染前的内容门禁:简报、占位文案、自检行、art、.ics + .kml;--strict 下再查每天有 stop 和 sun --write 串(退出码 = FAIL 数)
+  route_tools.py              geocode → 距离检查 → 地图链接(逐跳、子景点、步行链)→ KML → 闸门 .ics(清单闸门 + 决策点)→ 日出日落
+  plan_lint.py                渲染前的内容门禁:简报(含驾驶卡逐行的合法性结论)、占位文案、自检行、art、.ics + .kml、子景点字段,以及出现即查的 hours / 决策点 / driver / must_see / meta.review / refundable;--strict 下再查每天有 stop 和 sun --write 串、触发时的复核记录、--asof 窗口内的新鲜 hours(退出码 = FAIL 数)
   render_plan.py              plan JSON → 自包含可打印 HTML
   build_site.py               examples + showcase → GitHub Pages 演示站(_site/)
 .github/workflows/
@@ -391,10 +391,11 @@ examples/
   README.md                   七趟旅行:主题、路线、成本、每一条渲染命令
   japan-2026/ …               每趟旅行一个目录:<trip>.geo.json + <trip>.art.json + <trip>-<theme>.html
   kyoto-sample.*              朴素页面的样例 plan、它的 HTML 和它的 KML
+  fixtures/                   一份带子景点、跟团行、自驾跳、hours、决策点和复核记录的小 plan(lint + links + 渲染测试),45 份各自必须恰好 FAIL 一条的坏 plan,以及 strict/(一份干净的 --strict plan + 九份各自恰好 FAIL 一条)
 docs/
   showcase/                   README 用图(hero 拼图、每种主题的封面 / 单日 / 结尾三帧、portal 动态录屏)
   verification.md             这个 skill 是怎么被打磨硬的,以及评审抓到了什么
-  KNOWN-ISSUES.md             30 条缺陷与硬性限制(29 条未修 / 已排期,1 条已解决),每条带来源指针,外加路线图
+  KNOWN-ISSUES.md             36 条缺陷与硬性限制(31 条未修 / 已排期,3 条部分解决,2 条已解决),每条带来源指针,外加路线图
 ```
 
 不在仓库里的东西:个人旅行数据(`trips/`)、PNG 原图、美国 portal 参考链条
@@ -425,7 +426,7 @@ docs/
 不是 Claude Code 的插件 —— 在 Claude Code 里端到端验证过,预期也能跑在[兼容性](#兼容性)
 一节列出的另外十个 agent 里,在有人反馈之前那些都算没测过。当前代码树里每一条缺陷和硬性
 限制都列在 [`docs/KNOWN-ISSUES.md`](docs/KNOWN-ISSUES.md) 里 —— 横跨导出 / 渲染器、规划
-脚本、素材与范围的 30 条(29 条未修或已排期,1 条已解决),每条都有症状、绕行办法和来源
+脚本、素材与范围的 36 条(31 条未修或已排期,3 条部分解决,2 条已解决),每条都有症状、绕行办法和来源
 指针,外加一份简短路线图(整页导出的尺寸、journal 的 `zh` 封面修复、picker 文案、竖版
 portal 链条、旅行后的相册、给托管版本准备的联盟营销通路)。
 

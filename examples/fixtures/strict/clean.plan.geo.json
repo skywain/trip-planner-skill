@@ -1,0 +1,137 @@
+{
+ "_fixture": "The --strict-clean plan the files beside it vary: python3 scripts/plan_lint.py examples/fixtures/strict/clean.plan.geo.json --strict --ics examples/gates-sample.ics --kml examples/kyoto-sample.kml exits 0 (one WARN: gates-sample.ics is older than the plan — expected; never re-run ics onto a shipped example file). Invented two-day plan, not advice. It carries what the --strict block of scripts/plan_lint.py demands — prefs.pictures, meta.generated as an ISO date, budget_total, the brief cards in canonical order with safety opening 'advisory:', visa + travel-clinic + T-14/T-7/T-3/T-1 rows, a stop and a canonical sun string per day, fewer than seven days, the self-check line repeated as the last decisions[] row, no art — and, although nothing triggers the independent review (no tour row, no self-drive marker, no refundable: false), the review clause in both places with a matching meta.review, so that each bad variant removes or adds one thing and exits exactly 1 under the same command; its _expect names the rule.",
+ "trip": "Fixture — strict clean, 2 days",
+ "lang": "en",
+ "tz": "Asia/Tokyo",
+ "prefs": {
+  "travel_style": "public",
+  "pictures": "native"
+ },
+ "meta": {
+  "dates": "2026-11-10 → 2026-11-11",
+  "party": "2 adults",
+  "route": "Kyoto",
+  "budget_total": "n/a — fixture, no prices",
+  "generated": "2026-10-02",
+  "self_check": "self-checked: 0 issues found and fixed · independent review: 1 confirmed, 0 refuted",
+  "review": {
+   "mode": "reviewers",
+   "lenses": [
+    {
+     "lens": "timing",
+     "note": "day 1 walk start against the first train"
+    },
+    {
+     "lens": "rules",
+     "note": "the bridge's closure notice re-read (https://example.org/notices)"
+    },
+    {
+     "lens": "hazards",
+     "note": "rain plan for both days against the forecast page"
+    }
+   ],
+   "confirmed": [
+    "day 2 start moved to 08:45 — the first train is 08:30 (fixed)"
+   ],
+   "refuted": []
+  }
+ },
+ "decisions": [
+  "Day 1 is on foot; day 2 goes by train",
+  "self-checked: 0 issues found and fixed · independent review: 1 confirmed, 0 refuted"
+ ],
+ "checklist": [
+  {
+   "item": "Visa / entry rule read on the embassy page",
+   "deadline": "2026-10-20",
+   "note": "fixture"
+  },
+  {
+   "item": "Travel-clinic consult",
+   "deadline": "2026-10-20",
+   "note": "fixture"
+  },
+  {
+   "item": "T-14 re-check: hours + fees of every anchor, advisory level, visa rule",
+   "deadline": "T-14 · 2026-10-27",
+   "note": "fixture"
+  },
+  {
+   "item": "T-7 re-check: forecast for every base",
+   "deadline": "T-7 · 2026-11-03",
+   "note": "fixture"
+  },
+  {
+   "item": "T-3 re-check: strikes / closures on the route; hours re-read and written for every anchor up to 2026-11-21",
+   "deadline": "T-3 · 2026-11-07",
+   "note": "then: python3 scripts/plan_lint.py plan.geo.json --strict --asof 2026-11-07"
+  },
+  {
+   "item": "T-1: eSIM live, copies, cash per brief.money, cards unblocked",
+   "deadline": "T-1 · 2026-11-09",
+   "note": "fixture"
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-11-10",
+   "city": "Kyoto",
+   "label": "Arashiyama",
+   "sun": "dawn 06:00 · ☀ 06:25 / 🌇 16:52 · JST · sunrise-sunset.org",
+   "timeline": [
+    {
+     "t": "09:00-12:30",
+     "what": "Arashiyama bamboo grove and the river",
+     "kind": "anchor",
+     "tag": "opener"
+    },
+    {
+     "t": "12:30-13:30",
+     "what": "lunch near the station",
+     "kind": "meal"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Togetsukyo Bridge",
+     "query": "Togetsukyo Bridge, Kyoto, Japan",
+     "lat": 35.0129,
+     "lon": 135.6777
+    }
+   ]
+  },
+  {
+   "date": "2026-11-11",
+   "city": "Kyoto",
+   "label": "Fushimi Inari",
+   "sun": "dawn 06:01 · ☀ 06:26 / 🌇 16:51 · JST · sunrise-sunset.org",
+   "timeline": [
+    {
+     "t": "08:45-11:30",
+     "what": "Fushimi Inari Taisha",
+     "kind": "anchor",
+     "tag": "opener"
+    }
+   ],
+   "stops": [
+    {
+     "name": "Fushimi Inari Taisha",
+     "query": "Fushimi Inari Taisha, Kyoto, Japan",
+     "lat": 34.9671,
+     "lon": 135.7727
+    }
+   ]
+  }
+ ],
+ "brief": {
+  "visa": "fixture card — content is not under test",
+  "emergency": "fixture card — content is not under test",
+  "safety": "advisory: level 1 · fixture · as of 2026-10",
+  "health": "fixture card — content is not under test",
+  "holidays": "fixture card — content is not under test",
+  "weather": "fixture card — content is not under test",
+  "money": "fixture card — content is not under test",
+  "connectivity": "fixture card — content is not under test",
+  "insurance": "fixture card — content is not under test"
+ }
+}
