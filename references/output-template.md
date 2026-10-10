@@ -409,7 +409,10 @@ Field discipline (the merge breaks without it):
 - `sun` is filled by the assembler's `sun --write`, not by you; if the day's sunrise
   anchor is at its first stop on a moving day, add `"sun_stop": "<that stop's name>"`
   so the assembler's run keys the day there.
-- `timeline` rows: `kind` = anchor|hop|meal|free;anchors/meals carry `tag`
+- `timeline` rows: every row carries a `t` (a clock, a range, or the departure-day
+  T-formula) and a `kind` = anchor|hop|meal|free — `plan_lint.py` fails a `kind`
+  outside that list, and under `--strict` a row with no `t` or no `kind` (a stop list copied into the timeline is
+  not an hour-level plan);anchors/meals carry `tag`
   (pinned|opener|skippable|swap→X);hops carry `verify` (verified|est);flight/rail
   hops already covered by the legs table carry `"map": false`. Never mix tag/verify.
 - N mapped `stops` ⇒ N−1 hop rows without `map:false` — that alignment is what lets

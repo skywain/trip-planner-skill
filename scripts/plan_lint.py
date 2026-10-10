@@ -32,6 +32,7 @@ Default checks (every plan, including the pre-2026-09 examples):
   - checklist, when present, is a list
   - trip.kml beside the plan (--kml, or trip.kml next to the plan): WARN when missing
     (FAIL under --strict — the offline map ships with every plan)
+  - a row's `kind`, when present, is anchor | hop | meal | free
   - timeline rows, only where the keys are present (output-template.md §city-block):
     `sub_stops` a non-empty list of objects, each with a `name` and a `query` or
     `lat`+`lon`; `tier` ∈ eye-level | overlook | from-below; `must` / `tour` are true
@@ -77,6 +78,8 @@ Default checks (every plan, including the pre-2026-09 examples):
   - checklist carries a visa row, a travel-clinic row, and the T-14 / T-7 / T-3 / T-1
     ladder rows; the last decisions[] row repeats the self-check line
   - prefs.pictures present (native | key | stock)
+  - every timeline row carries a `t` (a clock, a range or the departure-day T-formula)
+    and a `kind` — a stop list copied into the timeline is not an hour-level plan
   - every day has at least one stop (airports on move days) and a `sun` that is the
     canonical `route_tools.py sun --write` string — a stop-less day is skipped by `sun`
     and a hand-written or "待计算" value is what ends up in the page
@@ -123,6 +126,7 @@ REVIEW = re.compile(r"independent review\s*[:\uff1a]|独立复核\s*[:\uff1a]", 
 SUN_OK = re.compile(r"^(?:天亮|dawn) \d{2}:\d{2} · ☀ \d{2}:\d{2} / 🌇 \d{2}:\d{2} · \S+ · sunrise-sunset\.org$")
 TIERS = ("eye-level", "overlook", "from-below")
 HOURS_LITERALS = ("unverified", "open access")
+KINDS = ("anchor", "hop", "meal", "free")
 HOURS_WINDOW_DAYS = 14         # --strict: as-of .. as-of + 14 carry hours; there as_of >= day - 14
 HHMM = re.compile(r"(?:[01]\d|2[0-3]):[0-5]\d")
 CLOCK = re.compile(r"(?<!\d)\d{1,2}:\d{2}(?!\d)")
@@ -519,6 +523,9 @@ def check_rows(i, d, items=()):
             continue
         where = "day {} ({}) row {} {!r}".format(i, d.get("date"), r,
                                                  str(row.get("what", ""))[:40])
+        if "kind" in row and row["kind"] not in KINDS:
+            fail("{}: kind {!r} is not one of {} (output-template.md §city-block)"
+                 .format(where, row["kind"], " | ".join(KINDS)))
         if "tour" in row and row["tour"] is not True:
             fail("{}: tour is {!r} — true, or leave the key out (absent, never null)"
                  .format(where, row["tour"]))
@@ -912,6 +919,17 @@ def main():
                  "whose item carries D+N ('On-trip re-audit · D+3' / '途中复核 · D+3') and whose "
                  "deadline carries the ISO date, one every 3-4 days of travel "
                  "(output-template.md §On-trip re-audit rows)")
+        # every timeline row is an hour-level row: a clock and a kind (a stop list copied
+        # into timeline[] passed every other gate in a 2026-10 Gemini end-to-end run)
+        for i, d in enumerate(days if isinstance(days, list) else [], 1):
+            rows = d.get("timeline") if isinstance(d, dict) and isinstance(d.get("timeline"), list) else []
+            thin = [r for r, row in enumerate(rows, 1) if isinstance(row, dict)
+                    and not (isinstance(row.get("t"), str) and row["t"].strip() and row.get("kind") in KINDS)]
+            if thin:
+                fail("day {} ({}): {} of {} timeline row(s) lack a t (a clock, a range or a T-formula) or a kind "
+                     "({}) — a timeline is hour-level, not a stop list (scheduling.md §Scheduled-day "
+                     "format; output-template.md §city-block)"
+                     .format(i, d.get("date"), len(thin), len(rows), " | ".join(KINDS)))
         # the hours window, measured from --asof (default meta.generated) — never today
         asof = args.asof or iso_date(meta.get("generated"))
         if asof is None:

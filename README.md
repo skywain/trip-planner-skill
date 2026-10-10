@@ -423,7 +423,7 @@ examples/
   README.md                   the seven trips: themes, routes, costs, every render command
   japan-2026/ …               one folder per trip: <trip>.geo.json + <trip>.art.json + <trip>-<theme>.html
   kyoto-sample.*              the plain page's sample plan, its HTML and its KML
-  fixtures/                   a small plan with sub-stops, a guided-tour row, a self-drive hop, hours, decision points and a review record (lint + links + render test), 44 bad plans that must each FAIL once, and strict/ (one clean --strict plan + eight that must each FAIL once)
+  fixtures/                   a small plan with sub-stops, a guided-tour row, a self-drive hop, hours, decision points and a review record (lint + links + render test), 45 bad plans that must each FAIL once, and strict/ (one clean --strict plan + nine that must each FAIL once)
 docs/
   showcase/                   README images (hero grid, per-theme cover / day / end frames, portal motion capture)
   verification.md             how the skill was hardened, and what the reviews caught

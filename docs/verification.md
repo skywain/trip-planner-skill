@@ -634,6 +634,9 @@ verdict after a zh legality label was rejected; `tour` on a day object was ignor
 not-legal verdict on a self-drive plan with no recorded choice passed `--strict`; a
 bracketed "[to be added …]" note passed the placeholder check; a guided option priced
 with no tour row drew no warning; a T-N ladder date that did not match departure − N
-went straight into the calendar file. The fixture folders now hold 44 bad plans and a
-`strict/` folder of one clean plan and eight bad ones. A third, lighter review of that
+went straight into the calendar file. The fixture folders now hold 45 bad plans and a
+`strict/` folder of one clean plan and nine bad ones — the last pair came from a
+Gemini end-to-end run through the shared endpoint (below), whose plan passed every
+gate while its timeline rows carried no clock and no kind: a stop list rendered as
+a page. `--strict` now fails that. A third, lighter review of that
 last batch was also still running when this was written.

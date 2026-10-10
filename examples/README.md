@@ -185,9 +185,9 @@ python3 themes/render_theme2.py examples/fixtures/substops.plan.geo.json -o subs
 python3 scripts/render_plan.py  examples/fixtures/substops.plan.geo.json -o substops.html
 ```
 
-Each of the 44 files under `fixtures/bad/` breaks exactly one default-mode rule and names
+Each of the 45 files under `fixtures/bad/` breaks exactly one default-mode rule and names
 it in its `_expect` key; `plan_lint.py` must exit 1 on every one of them. `fixtures/strict/`
-holds the `--strict`-only cases: `clean.plan.geo.json` exits 0 and the eight files beside
+holds the `--strict`-only cases: `clean.plan.geo.json` exits 0 and the nine files beside
 it exit 1, all run as
 `python3 scripts/plan_lint.py examples/fixtures/strict/<file> --strict --ics examples/gates-sample.ics --kml examples/kyoto-sample.kml`
 (the mtime WARN on the shipped `.ics` is expected). `route_tools.py links --write`

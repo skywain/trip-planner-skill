@@ -391,7 +391,7 @@ examples/
   README.md                   七趟旅行:主题、路线、成本、每一条渲染命令
   japan-2026/ …               每趟旅行一个目录:<trip>.geo.json + <trip>.art.json + <trip>-<theme>.html
   kyoto-sample.*              朴素页面的样例 plan、它的 HTML 和它的 KML
-  fixtures/                   一份带子景点、跟团行、自驾跳、hours、决策点和复核记录的小 plan(lint + links + 渲染测试),44 份各自必须恰好 FAIL 一条的坏 plan,以及 strict/(一份干净的 --strict plan + 八份各自恰好 FAIL 一条)
+  fixtures/                   一份带子景点、跟团行、自驾跳、hours、决策点和复核记录的小 plan(lint + links + 渲染测试),45 份各自必须恰好 FAIL 一条的坏 plan,以及 strict/(一份干净的 --strict plan + 九份各自恰好 FAIL 一条)
 docs/
   showcase/                   README 用图(hero 拼图、每种主题的封面 / 单日 / 结尾三帧、portal 动态录屏)
   verification.md             这个 skill 是怎么被打磨硬的,以及评审抓到了什么
