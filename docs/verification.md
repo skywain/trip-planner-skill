@@ -682,4 +682,8 @@ sub-stop needs `view` and `stand`; and the must-see gate checks that a matching 
 carries such a sub-stop — presence, never phrase equality, since free text cannot be
 compared. No example plan or shipped page changed; must-no-tier became must-no-view, and the two enum
 fixtures were replaced by must-no-stand and must-see-view-empty; the renderers print
-the phrase as given, in a chip that wraps.
+the phrase as given, in a chip that wraps. The same Gemini flash run was repeated on this
+tree as acceptance: 67 steps, every gate green, and the must-see pictures came out as
+phrases of three different kinds — an overlook from a named railing, a close-up beside the
+animals at eye level, a detail of the gilded stupa shot upward at 45° — each with where to
+stand, which is the point of the change.
