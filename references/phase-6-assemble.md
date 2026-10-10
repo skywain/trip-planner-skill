@@ -259,8 +259,9 @@ manual: references/themes.md.
 
 Read this when the traveller is home and asks about a refund, a receipt, a complaint or
 a review; nothing here runs before delivery, and the exit criteria below do not cover it.
-Each item below is a draft: the traveller submits the claim, the receipt request and the
-complaint themselves (SKILL.md Hard rule 1 — a claim form carries personal data).
+Anything written here is a draft: the traveller submits the claim, the receipt request,
+the complaint and the review themselves (SKILL.md Hard rule 1 — a claim form carries
+personal data).
 - **A refund claim starts from the leg row**: quote its refund/change class and
   checked-bag fee (phase-3-legs.md §Record for every leg) verbatim before raising it —
   no refund exists for a bag a basic fare never included.

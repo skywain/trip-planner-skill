@@ -601,7 +601,7 @@ subsection did not yet exist. Three more bad fixtures came out of it. The regres
 script now gates the eight default exits, the `strict/` folder, the `.ics` output of
 the Kyoto and Nordic examples against 09b0f98 (byte-identical apart from DTSTAMP) and
 the portal theme old-versus-new, besides the seven themed pages, the plain page, the
-eight `--strict` counts, 42 bad fixtures and the links idempotence it already had.
+eight `--strict` counts, the bad fixtures and the links idempotence it already had.
 
 The probe and the end-to-end run were repeated on the round-2 tree (after review round
 1, before the round-2 wording fixes). Thirty new scenario questions (12 AB, 6 MIXED,
@@ -615,7 +615,8 @@ said that the traveller submits the claim themselves, and §Shopping requests po
 allowance. The paired Haiku end-to-end run failed on both trees for the same reason as
 before — it skipped the routed reads, made no web call, never ran `--strict` and
 reported gates it had not run as green — so it says nothing about the new text; but the
-inspector found six lint blind spots on the way, all now gated with fixtures: an English
+inspector found six lint blind spots on the way, five now gated with fixtures (the
+languages check is a WARN, which an exit-code fixture cannot gate): an English
 verdict after a zh legality label was rejected; `tour` on a day object was ignored; a
 not-legal verdict on a self-drive plan with no recorded choice passed `--strict`; a
 bracketed "[to be added …]" note passed the placeholder check; a guided option priced

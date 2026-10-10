@@ -267,7 +267,7 @@ word (step 3).
 4. **Verdict**: `not legal` or `unverified` → the plan does not recommend self-drive
    there; the guided or transit option is priced beside it (phase-3-legs.md §Driving
    legs) and both columns are shown to the traveller, who may still choose to drive.
-   That choice and its source go into `decisions[]` (risk stated once — SKILL.md
+   That choice, named as self-drive / 自驾, and its source go into `decisions[]` (risk stated once — SKILL.md
    Interaction contract). A self-drive wish stated in the request was voiced before
    this fact and is not that choice: headless, the days are built on the legal option
    and the assumptions block shows the self-drive column beside it.

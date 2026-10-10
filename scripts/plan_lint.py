@@ -17,7 +17,8 @@ Weak planners trust exit codes; this file makes the required sections part of th
 Default checks (every plan, including the pre-2026-09 examples):
   - JSON parses; `days[]` present, each with a date and a non-empty timeline (a list of row objects)
   - `brief` present, a dict, non-empty; every card non-empty
-  - no placeholder text anywhere: PLACEHOLDER / TODO / TBD; "awaiting" in meta,
+  - no placeholder text anywhere: PLACEHOLDER / TODO / TBD, a bracketed "[to be added |
+    filled …]" note, 待补充 / 待填写 standing alone or in brackets; "awaiting" in meta,
     budget, legs.price, checklist.price, hotels
   - no markdown heading in a table cell (a value starting with "#") in budget /
     checklist / legs / hotels / brief
@@ -52,14 +53,12 @@ Default checks (every plan, including the pre-2026-09 examples):
     when present, the day or the day before; no two on one day share a `what`;
     `brief.driving`
     is read per line carrying "legality:" / "合法性:" — a verdict from the enum right
-    after the label (followed by '·' or the end of the line), a desk part after the
-    verdict and an as-of stamp on that line, one FAIL each, one
-    for a card with no legality line (WARN: no insurance word on the card); after a zh
-    label the English enum word is accepted too; a `tour` key on a day object FAILs
-    (it belongs on the row); `prefs.languages` set with no tour: true row → WARN;
-    a bracketed "[to be added / filled …]" note, or 待补充 / 待填写 standing alone or in
-    brackets, counts as placeholder text; a T-N deadline
-    whose ISO date is not departure − N → WARN (FAIL under --strict);
+    after the label (followed by '·' or the end of the line; after a zh label the
+    English enum word is accepted too), a desk part after the verdict and an as-of
+    stamp on that line, one FAIL each, one for a card with no legality line (WARN: no
+    insurance word on the card); a `tour` key on a day object FAILs (it belongs on the
+    row); `prefs.languages` set with no tour: true row → WARN; a T-N deadline whose ISO
+    date is not departure − N → WARN (FAIL under --strict);
     `meta.review` is {mode, lenses: [{lens, note}], confirmed, refuted} — mode
     reviewers | single pass, three or more distinct lenses of safety | driving | timing
     | rules | hazards each with a note, `driving` whenever a self-drive option exists,
@@ -88,10 +87,10 @@ Default checks (every plan, including the pre-2026-09 examples):
     kind: anchor row carries `hours`, and an object's as_of on such a day is no older
     than that day − 14 and no later than the as-of date — the T-3 ladder row and every on-trip re-audit row re-run
     this with --asof <that row's date>
-  - a driving card whose every verdict is not legal / unverified while a stop carries
-    driver: self needs a decisions[] row that records the traveller's choice (a
-    self-drive word in it that is not a negation) — else FAIL; one legal line anywhere
-    on the card clears it (a multi-jurisdiction blind spot, KNOWN-ISSUES PLN-13)
+  - a driving card with a jurisdiction (the text before a line's first " · ") whose
+    verdict is not legal / unverified while a stop carries driver: self needs a
+    decisions[] row naming self-drive / 自驾 (not a negation) that records the
+    traveller's choice — else FAIL, naming the jurisdiction
   - the independent review — its trigger set is stated here, once (phase-6-assemble.md
     §Independent review and SKILL.md point here): a self-drive option exists (the four
     conditions above), or any timeline row carries `tour: true`, or any checklist or
@@ -388,7 +387,8 @@ def check_driving_card(card):
             verdict = VERDICT_EN.match(bare, m.end())
             tail = bare[verdict.end() if verdict else m.end():]
         if verdict:
-            verdicts.append(re.sub(r"\s+", " ", verdict.group(0)).strip().casefold())
+            verdicts.append((ln.split("·")[0].strip().casefold(),
+                             re.sub(r"\s+", " ", verdict.group(0)).strip().casefold()))
         if not verdict:
             fail("{}: no verdict right after the legality label — one of {} (zh: 合法 · 持 IDP "
                  "合法 · 持官方翻译件合法 · 不合法 · 未核实), followed by ' ·' or the end of the "
@@ -666,14 +666,15 @@ def main():
     card = next((v for k, v in brief.items() if norm_key(k) == "driving"), None)
     verdicts = check_driving_card(card) if isinstance(card, str) and card.strip() else []
 
-    # ---- a guided option was priced (prefs.languages) but no row is a tour row ----
+    # ---- prefs.languages (a guided option may have been priced) but no row is a tour row ----
     has_tour_row = any(isinstance(r, dict) and r.get("tour") is True
                        for d in (days if isinstance(days, list) else []) if isinstance(d, dict)
                        for r in (d.get("timeline") if isinstance(d.get("timeline"), list) else []))
     if prefs.get("languages") and not has_tour_row:
-        warn("prefs.languages is set (a guided option was priced) but no timeline row carries "
-             "tour: true — a guided block is a tour: true row, and only there are its must-sees' "
-             "confirmations checked (output-template.md §city-block)")
+        warn("prefs.languages is set (a guided option may have been priced) and no timeline row "
+             "carries tour: true — if the traveller chose the guided block, mark that row tour: "
+             "true; only there are its must-sees' confirmations checked (output-template.md "
+             "§city-block)")
 
     # ---- prefs.must_see: every tiered entry has its must sub-stop ----
     if "must_see" in prefs:
@@ -897,7 +898,6 @@ def main():
         text = " \n ".join(json.dumps(r, ensure_ascii=False) for r in rows)
         if not re.search(r"visa|签证|e-?visa|入境", text, re.I):
             fail("checklist has no visa / entry row")
-        # (set up below: T-N dates checked in both modes, FAIL only under --strict)
         if not re.search(r"clinic|门诊|疫苗|vaccin", text, re.I):
             fail("checklist has no travel-clinic consult row")
         for t in LADDER:
@@ -953,13 +953,17 @@ def main():
         elif review_why and REVIEW.search(sc) and not REVIEW.search(str(decisions[-1])):
             fail("last decisions[] row repeats the self-check count but not its "
                  "independent-review clause — the page prints this row, not meta.self_check")
-        if verdicts and not any(v in LEGAL_OK for v in verdicts) and self_stops \
+        bad_j = sorted({j for j, v in verdicts
+                        if not any(v2 in LEGAL_OK for j2, v2 in verdicts if j2 == j)})
+        if bad_j and self_stops \
                 and not any(SELF_DRIVE.search(str(x)) and not NOT_SELF_DRIVE.search(str(x))
                             for x in (decisions if isinstance(decisions, list) else [])):
-            fail("brief.driving reads {!r} but the plan is self-drive ({}) and no decisions[] row "
-                 "records the traveller's choice — build the days on the legal option, or record "
-                 "the choice with its source (phase-1-brief.md §Driving card step 4)"
-                 .format(" / ".join(verdicts), ", ".join(self_stops)))
+            fail("brief.driving reads {} for {!r} but the plan is self-drive ({}) and no decisions[] "
+                 "row records the traveller's choice — build the days on the legal option, or "
+                 "record the choice as a decisions[] row naming self-drive / 自驾 with its source "
+                 "(phase-1-brief.md §Driving card step 4)"
+                 .format(" / ".join(v for j, v in verdicts if j == bad_j[0]), bad_j[0][:40],
+                         ", ".join(self_stops)))
         if review_why and "review" not in meta:
             fail("meta.review missing although {} — the clause is the summary, meta.review is "
                  "the review behind it: {{mode, lenses: [{{lens, note}}], confirmed, refuted}} "

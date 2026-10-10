@@ -720,7 +720,8 @@ and a check; this entry now lists what each check still cannot see.**
   `"refundable": false` flag as a review trigger. Every check fires only where its key
   is present, so the eight example plans keep their lint results; `examples/fixtures/`
   carries one bad plan per check (`bad/`, default mode) and a `strict/` folder for the
-  two `--strict`-only requirements (output-template.md defines each field).
+  the `--strict`-only checks — one clean plan and eight bad (output-template.md
+  defines each field).
 - **What the gates still cannot see** — (1) a tiered `prefs.must_see` entry must match
   a `must` sub-stop of that tier, but a plan that writes no tiered entry is unchecked;
   (2) the `hours` requirement bites only inside the `--asof` window (`meta.generated`
@@ -734,8 +735,8 @@ and a check; this entry now lists what each check still cannot see.**
   stops), the rental-leg matcher stays a heuristic, and the card check reads the
   line's parts, not the source behind them; under `--strict` a card whose every verdict
   is not legal / unverified while a stop carries `driver: self` needs a `decisions[]`
-  row with the traveller's choice — a presence test on a recorded line, and one legal
-  line anywhere on a multi-jurisdiction card clears it.
+  row naming self-drive / 自驾 — a keyword test on a recorded line, judged per
+  jurisdiction (the text before the line's first " · ").
 - **Workaround** — before trusting a plan with bookings that cannot be undone, read
   `meta.review`'s findings and lens notes (not just the counts) and the driving card's
   sources; on the road run `plan_lint.py plan.geo.json --strict --asof <today>` so the

@@ -99,9 +99,8 @@ reserves its 2-3 extra searches for the lines marked **hard**.
   ② pickpocket hotspots by line / station / square; ③ the taxi rule (which app, the
   official airport rank, never the arrivals-hall tout); ④ the after-dark avoid list per
   base; ⑤ what to do when it happens (police report first — the report number is the
-  claim key, data-sources.md §Travel insurance); ⑥ legal & customs red lines (drones ·
-  vapes · biosecurity declarations · alcohol / dress / blasphemy · photographing
-  military sites · same-sex relations law) from the advisory page's "Local laws".
+  claim key, data-sources.md §Travel insurance); ⑥ legal & customs red lines —
+  output-template.md §Brief templates, `brief.safety` line 6.
 - [ ] **Money lines, the universal five** (data-sources.md §FX → Money safety): refuse
   DCC · card FX fee → buffer · ATM fee and cap · cash number · which cards and wallets
   work — plus the **mainland-China origin trio** when the traveller departs from

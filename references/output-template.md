@@ -171,9 +171,10 @@ per-base detail where the bases differ):
    same-sex relations law · medicines in luggage (the destination's rule for
    prescription drugs and for common cold-medicine ingredients it restricts —
    country-quick-notes.md §Medicines in luggage) — ≤ 3 lines copied from the advisory
-   page's "Local laws and customs" section and the customs page, plus one line for the
-   home country's duty-free allowance on the way back when goods are bought on the trip
-   (data-sources.md §Shopping requests), or "none beyond the usual".
+   page's "Local laws and customs" section and the customs page, plus one line, from the
+   home customs authority's allowance page (dated), for the home country's duty-free
+   allowance on the way back when goods are bought on the trip (data-sources.md
+   §Shopping requests), or "none beyond the usual".
 Tone model only: `examples/vietnam-2026/vietnam.geo.json` → `brief.safety` (written
 before this template — it covers lines 2-4 and lacks 0, 1, 5, 6; do not copy its
 shape). Sources per line:
@@ -665,7 +666,9 @@ more continues with §On-trip re-audit rows), each naming what it re-checks
 of five unrelated "re-confirm" lines. They are date-locked gates, so the ladder alone
 makes the gates `.ics` mandatory (floating 09:00, rules above) — generated with
 `python3 scripts/route_tools.py ics plan.geo.json -o gates.ics`, which reads each row's
-ISO date or `T-N` marker; write deadlines as `T-14 · 2026-10-31` so both parse.
+ISO date or `T-N` marker; write deadlines as `T-14 · 2026-10-31` so both parse, with the
+date = `days[0].date` − N (`plan_lint.py` checks it: WARN, FAIL under `--strict`; the
+`.ics` trusts the date).
 
 | row | re-checks | how |
 |---|---|---|
