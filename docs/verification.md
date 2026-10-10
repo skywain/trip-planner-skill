@@ -603,13 +603,24 @@ the Kyoto and Nordic examples against 09b0f98 (byte-identical apart from DTSTAMP
 the portal theme old-versus-new, besides the seven themed pages, the plain page, the
 eight `--strict` counts, the bad fixtures and the links idempotence it already had.
 
-The probe and the end-to-end run were repeated on the round-2 tree (after review round
-1, before the round-2 wording fixes). Thirty new scenario questions (12 AB, 6 MIXED,
-12 NEW; a third in Chinese), five combinations, old 09b0f98 tree against the new one,
-graded side by side: NEW 46.5 / 60; AB 49.5 → 46.0 / 60 and MIXED 27.5 → 25.0 / 30 —
-every shared-question drop was attributed to byte-identical passages and judged noise
-(a second old-tree run to measure the floor was still in flight when this was written;
-its journal is the record). Two text gaps were real and are fixed: §After the trip never
+The probe was run three times on the round-2 tree and once more on the old tree.
+Thirty new scenario questions (12 AB, 6 MIXED, 12 NEW; a third in Chinese), five
+combinations, old 09b0f98 tree against the new one, graded side by side. New content:
+46.5, 52.5 and 56.0 / 60 across the three samples (the last on the final tree: both
+Opus tiers and sonnet-low 12 / 12). Shared questions: AB 49.5 → 46.0, 51.0 and 48.5 /
+60; MIXED 27.5 → 25.0, 28.5 and 26.5 / 30 — against a second old-tree run of the same
+combinations that moved AB +1.0 and MIXED 0, which is the floor. Haiku swings ±3.5 on
+its own and is read as noise. For the four stronger combinations the shared score sat
+2.5, 2.0 and 3.5 points below the old tree in the three samples, consistently on the
+same three questions (the small lodging's desk hours, the calendar file's full action
+list, the priced pair's commentary line), and the graders' notes show why: the new
+tree's answers spend their 120-word cap on the round-2 content that now sits beside
+the old rule and leave an older point out — an abbreviation, not a wrong behaviour,
+and the attributors found every one of those passages byte-identical. Moving the
+round-2 sentences behind the old ones did not change it. It is recorded here as the
+measured cost of adding content next to old rules (a 200-word run is the test of
+whether it is the cap or the text; its result is appended below when it lands). Two
+text gaps were real and are fixed: §After the trip never
 said that the traveller submits the claim themselves, and §Shopping requests pointed the
 "next border" question at a `brief.safety` line that did not carry the home country's
 allowance. The paired Haiku end-to-end run failed on both trees for the same reason as
